@@ -1,7 +1,9 @@
 #include <iostream>
 #include <ompl/base/State.h>
 #include <ompl/base/StateSpace.h>
-#include <ompl/base/spaces/ReedsSheppStateSpace.h>
+#include <ompl/base/spaces/DubinsStateSpace.h>
+#include <ompl/geometric/SimpleSetup.h>
+#include <ompl/geometric/planners/rrt/RRT.h>
 #include <spdlog/spdlog.h>
 
 #include "config.h"
@@ -203,7 +205,10 @@ void Renderer::renderCityGraph(const CityGraph &cityGraph, const sf::View &view)
   std::unordered_set<graphPoint> graphPoints = cityGraph.getGraphPoints();
   std::unordered_map<graphPoint, std::vector<graphPoint>> neighbors = cityGraph.getNeighbors();
 
-  ob::ReedsSheppStateSpace reedsShepp(TURNING_RADIUS);
+  auto space = ob::DubinsStateSpace(TURNING_RADIUS);
+  ob::RealVectorBounds bounds(2);
+  space.setBounds(bounds);
+
   // Draw a line between each point and its neighbors
   for (const auto &point : graphPoints) {
     for (const auto &neighbor : neighbors[point]) {
@@ -220,19 +225,18 @@ void Renderer::renderCityGraph(const CityGraph &cityGraph, const sf::View &view)
         continue;
       }
 
-      // Using Reeds-Shepp curve (OMPL)
-      ob::State *start = reedsShepp.allocState();
-      ob::State *end = reedsShepp.allocState();
+      ob::State *start = space.allocState();
+      ob::State *end = space.allocState();
 
-      start->as<ob::ReedsSheppStateSpace::StateType>()->setXY(point.position.x, point.position.y);
-      start->as<ob::ReedsSheppStateSpace::StateType>()->setYaw(point.angle);
+      start->as<ob::DubinsStateSpace::StateType>()->setXY(point.position.x, point.position.y);
+      start->as<ob::DubinsStateSpace::StateType>()->setYaw(point.angle);
 
-      end->as<ob::ReedsSheppStateSpace::StateType>()->setXY(neighbor.position.x, neighbor.position.y);
-      end->as<ob::ReedsSheppStateSpace::StateType>()->setYaw(neighbor.angle);
+      end->as<ob::DubinsStateSpace::StateType>()->setXY(neighbor.position.x, neighbor.position.y);
+      end->as<ob::DubinsStateSpace::StateType>()->setYaw(neighbor.angle);
 
       // Draw the Reeds-Shepp curve
       float step = CELL_SIZE / 2.0f;
-      float distance = reedsShepp.distance(start, end);
+      float distance = space.distance(start, end);
       int numSteps = distance / step;
       sf::Vector2f lastPosition;
 
@@ -242,11 +246,11 @@ void Renderer::renderCityGraph(const CityGraph &cityGraph, const sf::View &view)
           continue;
         }
 
-        ob::State *state = reedsShepp.allocState();
-        reedsShepp.interpolate(start, end, (float)k / (float)numSteps, state);
+        ob::State *state = space.allocState();
+        space.interpolate(start, end, (float)k / (float)numSteps, state);
 
-        float x = state->as<ob::ReedsSheppStateSpace::StateType>()->getX();
-        float y = state->as<ob::ReedsSheppStateSpace::StateType>()->getY();
+        float x = state->as<ob::DubinsStateSpace::StateType>()->getX();
+        float y = state->as<ob::DubinsStateSpace::StateType>()->getY();
 
         float distance = std::sqrt(std::pow(x - lastPosition.x, 2) + std::pow(y - lastPosition.y, 2));
         float angle = atan2(y - lastPosition.y, x - lastPosition.x) * 180 / M_PI;
@@ -258,10 +262,7 @@ void Renderer::renderCityGraph(const CityGraph &cityGraph, const sf::View &view)
       }
     }
 
-    // Draw a circle at each point
-    sf::CircleShape circle(.5f);
-    circle.setFillColor(sf::Color(255, 0, 0, 50));
-    circle.setPosition(point.position.x - .5f, point.position.y - .5f);
-    window.draw(circle);
+    // Draw an arrow at each points
+    drawArrow(window, point.position, point.angle * 180 / M_PI, 1, 0.3, sf::Color(255, 0, 0, 50), true);
   }
 }

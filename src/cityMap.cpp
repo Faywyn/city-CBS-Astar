@@ -221,26 +221,31 @@ void CityMap::loadFile(const std::string &filename) {
 
   // Merge the intersections that are close to each other
   spdlog::debug("Merging intersections ...");
-  for (int i = 0; i < (int)intersections.size(); i++) {
-    for (int j = i + 1; j < (int)intersections.size(); j++) {
-      bool is_i = intersections[i].roadSegmentIds.size() > intersections[j].roadSegmentIds.size();
+  for (float distCoef = 10; distCoef > 0; distCoef -= 1) {
+    for (int i = 0; i < (int)intersections.size(); i++) {
+      for (int j = i + 1; j < (int)intersections.size(); j++) {
+        bool is_i = intersections[i].roadSegmentIds.size() > intersections[j].roadSegmentIds.size();
 
-      if (intersections[i].roadSegmentIds.size() == intersections[j].roadSegmentIds.size()) {
-        is_i = intersections[i].id < intersections[j].id;
-      }
-
-      if (distance(intersections[i].center, intersections[j].center) < (intersections[is_i ? i : j].radius)) {
-        // Merge the intersections to i or j (depending on is_i)
-        int index_from = is_i ? j : i;
-        int index_to = is_i ? i : j;
-
-        for (auto &r : intersections[index_from].roadSegmentIds) {
-          intersections[index_to].roadSegmentIds.push_back(r);
+        if (intersections[i].roadSegmentIds.size() == intersections[j].roadSegmentIds.size()) {
+          is_i = intersections[i].id < intersections[j].id;
         }
 
-        intersections.erase(intersections.begin() + index_from);
-        i -= 1;
-        break;
+        float minSpace = intersections[i].radius + intersections[j].radius;
+        minSpace /= distCoef;
+
+        if (distance(intersections[i].center, intersections[j].center) < minSpace) {
+          // Merge the intersections to i or j (depending on is_i)
+          int index_from = is_i ? j : i;
+          int index_to = is_i ? i : j;
+
+          for (auto &r : intersections[index_from].roadSegmentIds) {
+            intersections[index_to].roadSegmentIds.push_back(r);
+          }
+
+          intersections.erase(intersections.begin() + index_from);
+          i -= 1;
+          break;
+        }
       }
     }
   }
@@ -258,7 +263,7 @@ void CityMap::loadFile(const std::string &filename) {
       dx /= dd;
       dy /= dd;
 
-      float radius = i.radius * 1.5;
+      float radius = i.radius;
 
       if (distance(roads[roadInfo.first].segments[roadInfo.second].p1, i.center) <
           distance(roads[roadInfo.first].segments[roadInfo.second].p2, i.center)) {
@@ -285,6 +290,7 @@ void CityMap::loadFile(const std::string &filename) {
       i -= 1;
     }
   }
+  spdlog::debug("Intersections removed");
 
   // Log all the intersections and roads
   for (auto i : intersections) {

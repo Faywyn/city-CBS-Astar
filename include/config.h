@@ -17,4 +17,4 @@ constexpr float MOVE_SPEED = 0.01f;
 
 constexpr float CELL_SIZE = 0.5f; // in meters
 
-constexpr float TURNING_RADIUS = 5.0f; // in meters
+constexpr float TURNING_RADIUS = 3.0f; // in meters

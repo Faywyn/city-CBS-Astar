@@ -1,7 +1,10 @@
 #include <iostream>
 #include <ompl/base/State.h>
 #include <ompl/base/StateSpace.h>
+#include <ompl/base/spaces/DubinsStateSpace.h>
 #include <ompl/base/spaces/ReedsSheppStateSpace.h>
+#include <ompl/geometric/SimpleSetup.h>
+#include <ompl/geometric/planners/rrt/RRT.h>
 #include <spdlog/spdlog.h>
 
 #include "cityGraph.h"
@@ -19,31 +22,29 @@ void CityGraph::createGraph(const CityMap &cityMap) {
       continue;
     }
 
-    if (road.segments.size() == 1) {
-      for (int i_lane = 0; i_lane < road.numLanes; i_lane++) {
-        float offset = ((float)i_lane - (float)road.numLanes / 2.0f) * road.width / road.numLanes;
-        offset += road.width / (2 * road.numLanes);
-
-        graphPoint point1;
-        point1.angle = road.segments[0].angle;
-        point1.position = sf::Vector2f(road.segments[0].p1_offset.x + offset * sin(road.segments[0].angle),
-                                       road.segments[0].p1_offset.y + offset * -cos(road.segments[0].angle));
-
-        graphPoint point2;
-        point2.angle = road.segments[0].angle;
-        point2.position = sf::Vector2f(road.segments[0].p2_offset.x + offset * sin(road.segments[0].angle),
-                                       road.segments[0].p2_offset.y + offset * -cos(road.segments[0].angle));
-
-        neighbors[point1].push_back(point2);
-        neighbors[point2].push_back(point1);
-      }
-      continue;
-    }
+    // if (road.segments.size() == 1) {
+    //   for (int i_lane = 0; i_lane < road.numLanes; i_lane++) {
+    //     float offset = ((float)i_lane - (float)road.numLanes / 2.0f) * road.width / road.numLanes;
+    //     offset += road.width / (2 * road.numLanes);
+    //
+    //     graphPoint point1;
+    //     point1.angle = road.segments[0].angle;
+    //     point1.position = sf::Vector2f(road.segments[0].p1_offset.x + offset * sin(road.segments[0].angle),
+    //                                    road.segments[0].p1_offset.y + offset * -cos(road.segments[0].angle));
+    //
+    //     graphPoint point2;
+    //     point2.angle = road.segments[0].angle;
+    //     point2.position = sf::Vector2f(road.segments[0].p2_offset.x + offset * sin(road.segments[0].angle),
+    //                                    road.segments[0].p2_offset.y + offset * -cos(road.segments[0].angle));
+    //
+    //     linkPoints(point1, point2);
+    //   }
+    //   continue;
+    // }
 
     int numSeg = 0;
     for (const auto &segment : road.segments) {
       if (numSeg > 0) { // Link to the previous one
-        std::cout << "Linking road segment " << numSeg - 1 << " to " << numSeg << " for road " << road.id << std::endl;
         for (int i_lane = 0; i_lane < road.numLanes; i_lane++) {
           float offset = ((float)i_lane - (float)road.numLanes / 2.0f) * road.width / road.numLanes;
           offset += road.width / (2 * road.numLanes);
@@ -60,18 +61,15 @@ void CityGraph::createGraph(const CityMap &cityMap) {
               sf::Vector2f(road.segments[numSeg].p1_offset.x + offset * sin(road.segments[numSeg].angle),
                            road.segments[numSeg].p1_offset.y + offset * -cos(road.segments[numSeg].angle));
 
-          neighbors[point1].push_back(point2);
-          neighbors[point2].push_back(point1);
-
-          graphPoints.insert(point1);
-          graphPoints.insert(point2);
+          linkPoints(point1, point2);
         }
       }
       numSeg++;
 
       float segmentLength =
           sqrt(pow(segment.p2_offset.x - segment.p1_offset.x, 2) + pow(segment.p2_offset.y - segment.p1_offset.y, 2));
-      int numPoints = segmentLength / 10; // meters between each point
+      float pointDistance = TURNING_RADIUS < 7 ? 7 : (TURNING_RADIUS > 15 ? 15 : TURNING_RADIUS);
+      int numPoints = segmentLength / pointDistance;
       float dx_s = (segment.p2_offset.x - segment.p1_offset.x) / numPoints;
       float dy_s = (segment.p2_offset.y - segment.p1_offset.y) / numPoints;
       float dx_a = sin(segment.angle);
@@ -86,7 +84,6 @@ void CityGraph::createGraph(const CityMap &cityMap) {
           point.position = sf::Vector2f(segment.p1_offset.x + i * dx_s + offset * dx_a,
                                         segment.p1_offset.y + i * dy_s + offset * dy_a);
           point.angle = segment.angle;
-          graphPoints.insert(point);
 
           bool isLast = i == numPoints;
           if (i == numPoints) {
@@ -104,20 +101,16 @@ void CityGraph::createGraph(const CityMap &cityMap) {
                 point2.position = sf::Vector2f(segment.p1_offset.x + (i - 1) * dx_s + offset2 * dx_a,
                                                segment.p1_offset.y + (i - 1) * dy_s + offset2 * dy_a);
                 point2.angle = segment.angle;
-                graphPoints.insert(point2);
 
-                neighbors[point].push_back(point2);
-                neighbors[point2].push_back(point);
+                linkPoints(point, point2);
               }
             } else { // Or just the previous on the same lane
               graphPoint point2;
               point2.position = sf::Vector2f(segment.p1_offset.x + (i - 1) * dx_s + offset * dx_a,
                                              segment.p1_offset.y + (i - 1) * dy_s + offset * dy_a);
               point2.angle = segment.angle;
-              graphPoints.insert(point2);
 
-              neighbors[point].push_back(point2);
-              neighbors[point2].push_back(point);
+              linkPoints(point, point2);
             }
           }
         }
@@ -165,8 +158,7 @@ void CityGraph::createGraph(const CityMap &cityMap) {
             point2_offset.position = sf::Vector2f(point2.position.x + offset2 * sin(segment2.angle),
                                                   point2.position.y + offset2 * -cos(segment2.angle));
 
-            neighbors[point1_offset].push_back(point2_offset);
-            neighbors[point2_offset].push_back(point1_offset);
+            linkPoints(point1_offset, point2_offset);
           }
         }
       }
@@ -175,45 +167,38 @@ void CityGraph::createGraph(const CityMap &cityMap) {
 
   spdlog::info("Graph created with {} points", graphPoints.size());
 
-  // Remove all the neighbors that need the Reed-Shepp curve to go backwards
-  ob::ReedsSheppStateSpace reedsShepp(TURNING_RADIUS);
+  // Remove all the neighbors that need to turn too much
+  ob::DubinsStateSpace space(TURNING_RADIUS);
   for (auto &point : graphPoints) {
     std::vector<graphPoint> newNeighbors;
     for (const auto &neighbor : neighbors[point]) {
-      // Check if they are to close and the angle is too big
-      if (distance(point.position, neighbor.position) < 10 * CELL_SIZE &&
-          std::abs(normalizeAngle(neighbor.angle - point.angle)) > M_PI / 8) {
-        continue;
-      }
+      ob::State *start = space.allocState();
+      ob::State *end = space.allocState();
 
-      ob::State *start = reedsShepp.allocState();
-      ob::State *end = reedsShepp.allocState();
+      start->as<ob::DubinsStateSpace::StateType>()->setXY(point.position.x, point.position.y);
+      start->as<ob::DubinsStateSpace::StateType>()->setYaw(point.angle);
 
-      start->as<ob::ReedsSheppStateSpace::StateType>()->setXY(point.position.x, point.position.y);
-      start->as<ob::ReedsSheppStateSpace::StateType>()->setYaw(point.angle);
+      end->as<ob::DubinsStateSpace::StateType>()->setXY(neighbor.position.x, neighbor.position.y);
+      end->as<ob::DubinsStateSpace::StateType>()->setYaw(neighbor.angle);
 
-      end->as<ob::ReedsSheppStateSpace::StateType>()->setXY(neighbor.position.x, neighbor.position.y);
-      end->as<ob::ReedsSheppStateSpace::StateType>()->setYaw(neighbor.angle);
+      float leftTurn = 0;
+      float rightTurn = 0;
 
-      ob::ReedsSheppStateSpace::ReedsSheppPath path = reedsShepp.reedsShepp(start, end);
+      // Extract the path
+      ob::DubinsStateSpace::DubinsPath path = space.dubins(start, end);
+      for (unsigned int i = 0; i < 3; ++i) // Dubins path has up to 3 segments
+      {
+        auto type = path.type_[i];
+        double length = path.length_[i]; // Length of the segment
 
-      bool hasBackward = false;
-      for (int i = 0; i < 5; ++i) { // Reeds-Shepp paths have up to 5 segments
-        auto segmentType = path.type_[i];
-
-        if (segmentType == ob::ReedsSheppStateSpace::RS_NOP) {
-          break;
-        }
-
-        if (path.length_[i] < 0) {
-          hasBackward = true;
-          break;
+        if (type == ob::DubinsStateSpace::DubinsPathSegmentType::DUBINS_LEFT) {
+          leftTurn += length;
+        } else if (type == ob::DubinsStateSpace::DubinsPathSegmentType::DUBINS_RIGHT) {
+          rightTurn += length;
         }
       }
 
-      if (hasBackward) {
-        std::cout << "The Reeds-Shepp path involves backward motion." << std::endl;
-      } else {
+      if (leftTurn < M_PI * 0.75 && rightTurn < M_PI * 0.75) {
         newNeighbors.push_back(neighbor);
       }
     }
@@ -221,6 +206,27 @@ void CityGraph::createGraph(const CityMap &cityMap) {
     neighbors[point].clear();
     for (const auto &neighbor : newNeighbors) {
       neighbors[point].push_back(neighbor);
+    }
+  }
+}
+
+void CityGraph::linkPoints(const graphPoint &point, const graphPoint &neighbor) {
+  std::vector<float> anglesPoint = {normalizeAngle(point.angle), normalizeAngle(point.angle + M_PI)};
+  std::vector<float> anglesNeighbor = {normalizeAngle(neighbor.angle), normalizeAngle(neighbor.angle + M_PI)};
+
+  graphPoint copyPoint = point;
+  graphPoint copyNeighbor = neighbor;
+
+  for (const auto &anglePoint : anglesPoint) {
+    for (const auto &angleNeighbor : anglesNeighbor) {
+      copyPoint.angle = anglePoint;
+      copyNeighbor.angle = angleNeighbor;
+
+      neighbors[copyPoint].push_back(copyNeighbor);
+      neighbors[copyNeighbor].push_back(copyPoint);
+
+      graphPoints.insert(copyPoint);
+      graphPoints.insert(copyNeighbor);
     }
   }
 }

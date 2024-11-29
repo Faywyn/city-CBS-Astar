@@ -41,4 +41,6 @@ public:
 private:
   std::unordered_map<graphPoint, std::vector<graphPoint>> neighbors;
   std::unordered_set<graphPoint> graphPoints;
+
+  void linkPoints(const graphPoint &point, const graphPoint &neighbor);
 };
