@@ -21,14 +21,11 @@ int main() {
   CityMap cityMap;
   cityMap.loadFile("assets/map/map03.osm");
 
-  CityGrid cityGrid;
-  cityGrid.createGrid(cityMap);
-
   CityGraph cityGraph;
   cityGraph.createGraph(cityMap);
 
   Renderer renderer;
-  renderer.startRender(cityMap, cityGrid, cityGraph);
+  renderer.startRender(cityMap, cityGraph);
 
   return 0;
 }

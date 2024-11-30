@@ -157,7 +157,7 @@ void CityGraph::createGraph(const CityMap &cityMap) {
   // Remove all the neighbors that need to turn too much
   ob::DubinsStateSpace space(TURNING_RADIUS);
   for (auto &point : graphPoints) {
-    std::vector<graphPoint> newNeighbors;
+    std::vector<neighbor> newNeighbors;
     for (const auto &neighbor : neighbors[point]) {
       ob::State *start = space.allocState();
       ob::State *end = space.allocState();
@@ -165,8 +165,8 @@ void CityGraph::createGraph(const CityMap &cityMap) {
       start->as<ob::DubinsStateSpace::StateType>()->setXY(point.position.x, point.position.y);
       start->as<ob::DubinsStateSpace::StateType>()->setYaw(point.angle);
 
-      end->as<ob::DubinsStateSpace::StateType>()->setXY(neighbor.position.x, neighbor.position.y);
-      end->as<ob::DubinsStateSpace::StateType>()->setYaw(neighbor.angle);
+      end->as<ob::DubinsStateSpace::StateType>()->setXY(neighbor.point.position.x, neighbor.point.position.y);
+      end->as<ob::DubinsStateSpace::StateType>()->setYaw(neighbor.point.angle);
 
       float leftTurn = 0;
       float rightTurn = 0;
@@ -186,6 +186,10 @@ void CityGraph::createGraph(const CityMap &cityMap) {
       }
 
       if (leftTurn < M_PI * 0.75 && rightTurn < M_PI * 0.75) {
+        float totalLength = space.distance(start, end);
+        struct neighbor newNeighbor;
+        newNeighbor.point = neighbor.point;
+        newNeighbor.distance = totalLength;
         newNeighbors.push_back(neighbor);
       }
     }
@@ -209,8 +213,8 @@ void CityGraph::linkPoints(const graphPoint &point, const graphPoint &neighbor) 
       copyPoint.angle = anglePoint;
       copyNeighbor.angle = angleNeighbor;
 
-      neighbors[copyPoint].push_back(copyNeighbor);
-      neighbors[copyNeighbor].push_back(copyPoint);
+      neighbors[copyPoint].push_back({copyNeighbor, 0});
+      neighbors[copyNeighbor].push_back({copyPoint, 0});
 
       graphPoints.insert(copyPoint);
       graphPoints.insert(copyNeighbor);

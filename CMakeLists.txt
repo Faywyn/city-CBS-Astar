@@ -72,7 +72,6 @@ add_executable(${PROJECT_NAME}
   src/main.cpp 
   src/test.cpp
   src/cityMap.cpp
-  src/cityGrid.cpp
   src/cityGraph.cpp
   src/renderer.cpp
 )

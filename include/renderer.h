@@ -3,12 +3,11 @@
 #include <SFML/Graphics.hpp>
 
 #include "cityGraph.h"
-#include "cityGrid.h"
 #include "cityMap.h"
 
 class Renderer {
 public:
-  void startRender(const CityMap &cityMap, const CityGrid &cityGrid, const CityGraph &cityGraph);
+  void startRender(const CityMap &cityMap, const CityGraph &cityGraph);
   void renderCityMap(const CityMap &cityMap);
   void renderCityGraph(const CityGraph &cityGraph, const sf::View &view);
 

@@ -18,6 +18,11 @@ typedef struct graphPoint {
   }
 } graphPoint;
 
+typedef struct neighbor {
+  graphPoint point;
+  float distance;
+} neighbor;
+
 // Hash (rounded)
 namespace std {
 template <> struct hash<graphPoint> {
@@ -35,11 +40,11 @@ public:
   void createGraph(const CityMap &cityMap);
 
   // Getters
-  std::unordered_map<graphPoint, std::vector<graphPoint>> getNeighbors() const { return neighbors; }
+  std::unordered_map<graphPoint, std::vector<neighbor>> getNeighbors() const { return neighbors; }
   std::unordered_set<graphPoint> getGraphPoints() const { return graphPoints; }
 
 private:
-  std::unordered_map<graphPoint, std::vector<graphPoint>> neighbors;
+  std::unordered_map<graphPoint, std::vector<neighbor>> neighbors;
   std::unordered_set<graphPoint> graphPoints;
 
   void linkPoints(const graphPoint &point, const graphPoint &neighbor);

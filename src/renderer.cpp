@@ -11,7 +11,7 @@
 
 namespace ob = ompl::base;
 
-void Renderer::startRender(const CityMap &cityMap, const CityGrid &cityGrid, const CityGraph &cityGraph) {
+void Renderer::startRender(const CityMap &cityMap, const CityGraph &cityGraph) {
   window.create(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "City Map");
   window.setFramerateLimit(60);
 
@@ -178,7 +178,7 @@ void Renderer::renderCityMap(const CityMap &cityMap) {
 
 void Renderer::renderCityGraph(const CityGraph &cityGraph, const sf::View &view) {
   std::unordered_set<graphPoint> graphPoints = cityGraph.getGraphPoints();
-  std::unordered_map<graphPoint, std::vector<graphPoint>> neighbors = cityGraph.getNeighbors();
+  std::unordered_map<graphPoint, std::vector<neighbor>> neighbors = cityGraph.getNeighbors();
 
   auto space = ob::DubinsStateSpace(TURNING_RADIUS);
   ob::RealVectorBounds bounds(2);
@@ -193,10 +193,10 @@ void Renderer::renderCityGraph(const CityGraph &cityGraph, const sf::View &view)
       sf::Vector2f viewMin = viewCenter - viewSize / 2.0f;
       sf::Vector2f viewMax = viewCenter + viewSize / 2.0f;
 
-      if (point.position.x < viewMin.x && neighbor.position.x < viewMin.x) {
+      if (point.position.x < viewMin.x && neighbor.point.position.x < viewMin.x) {
         continue;
       }
-      if (point.position.x > viewMax.x && neighbor.position.x > viewMax.x) {
+      if (point.position.x > viewMax.x && neighbor.point.position.x > viewMax.x) {
         continue;
       }
 
@@ -206,8 +206,8 @@ void Renderer::renderCityGraph(const CityGraph &cityGraph, const sf::View &view)
       start->as<ob::DubinsStateSpace::StateType>()->setXY(point.position.x, point.position.y);
       start->as<ob::DubinsStateSpace::StateType>()->setYaw(point.angle);
 
-      end->as<ob::DubinsStateSpace::StateType>()->setXY(neighbor.position.x, neighbor.position.y);
-      end->as<ob::DubinsStateSpace::StateType>()->setYaw(neighbor.angle);
+      end->as<ob::DubinsStateSpace::StateType>()->setXY(neighbor.point.position.x, neighbor.point.position.y);
+      end->as<ob::DubinsStateSpace::StateType>()->setYaw(neighbor.point.angle);
 
       // Draw the Reeds-Shepp curve
       float step = CELL_SIZE / 2.0f;
