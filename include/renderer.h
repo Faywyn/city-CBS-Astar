@@ -10,11 +10,12 @@ class Renderer {
 public:
   void startRender(const CityMap &cityMap, const CityGrid &cityGrid, const CityGraph &cityGraph);
   void renderCityMap(const CityMap &cityMap);
-  void renderCityGrid(const CityGrid &cityGrid);
   void renderCityGraph(const CityGraph &cityGraph, const sf::View &view);
 
 private:
   sf::RenderWindow window;
+
+  bool debug = false;
 };
 
 inline void drawArrow(sf::RenderWindow &window, sf::Vector2f position, float rotation, float length, float thickness,

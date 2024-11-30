@@ -19,7 +19,7 @@ int main() {
   }
 
   CityMap cityMap;
-  cityMap.loadFile("assets/map/map01.osm");
+  cityMap.loadFile("assets/map/map03.osm");
 
   CityGrid cityGrid;
   cityGrid.createGrid(cityMap);

@@ -293,12 +293,12 @@ void CityMap::loadFile(const std::string &filename) {
   spdlog::debug("Intersections removed");
 
   // Log all the intersections and roads
+  for (auto r : roads) {
+    spdlog::debug("Road: id={}, width={}, numLanes={}, segments={}", r.id, r.width, r.numLanes, r.segments.size());
+  }
   for (auto i : intersections) {
     spdlog::debug("Intersection: id={}, center=({}, {}), radius={}, roadSegmentIds={}", i.id, i.center.x, i.center.y,
                   i.radius, i.roadSegmentIds.size());
-  }
-  for (auto r : roads) {
-    spdlog::debug("Road: id={}, width={}, numLanes={}, segments={}", r.id, r.width, r.numLanes, r.segments.size());
   }
 
   std::chrono::steady_clock::time_point end2 = std::chrono::steady_clock::now();
@@ -309,7 +309,6 @@ void CityMap::loadFile(const std::string &filename) {
   spdlog::info("Number of buildings: {}", buildings.size());
   spdlog::info("Number of intersections: {}", intersections.size());
 
-  spdlog::info("City map loaded");
   spdlog::info("Width: {} m", width);
   spdlog::info("Height: {} m", height);
 

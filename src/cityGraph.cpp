@@ -22,26 +22,6 @@ void CityGraph::createGraph(const CityMap &cityMap) {
       continue;
     }
 
-    // if (road.segments.size() == 1) {
-    //   for (int i_lane = 0; i_lane < road.numLanes; i_lane++) {
-    //     float offset = ((float)i_lane - (float)road.numLanes / 2.0f) * road.width / road.numLanes;
-    //     offset += road.width / (2 * road.numLanes);
-    //
-    //     graphPoint point1;
-    //     point1.angle = road.segments[0].angle;
-    //     point1.position = sf::Vector2f(road.segments[0].p1_offset.x + offset * sin(road.segments[0].angle),
-    //                                    road.segments[0].p1_offset.y + offset * -cos(road.segments[0].angle));
-    //
-    //     graphPoint point2;
-    //     point2.angle = road.segments[0].angle;
-    //     point2.position = sf::Vector2f(road.segments[0].p2_offset.x + offset * sin(road.segments[0].angle),
-    //                                    road.segments[0].p2_offset.y + offset * -cos(road.segments[0].angle));
-    //
-    //     linkPoints(point1, point2);
-    //   }
-    //   continue;
-    // }
-
     int numSeg = 0;
     for (const auto &segment : road.segments) {
       if (numSeg > 0) { // Link to the previous one
@@ -79,20 +59,27 @@ void CityGraph::createGraph(const CityMap &cityMap) {
         float offset = ((float)i_lane - (float)road.numLanes / 2.0f) * road.width / road.numLanes;
         offset += road.width / (2 * road.numLanes);
 
+        if (numPoints == 0) {
+          graphPoint point1;
+          point1.angle = segment.angle;
+          point1.position = sf::Vector2f(segment.p1_offset.x + offset * dx_a, segment.p1_offset.y + offset * dy_a);
+
+          graphPoint point2;
+          point2.angle = segment.angle;
+          point2.position = sf::Vector2f(segment.p2_offset.x + offset * dx_a, segment.p2_offset.y + offset * dy_a);
+
+          linkPoints(point1, point2);
+          continue;
+        }
+
         for (int i = 0; i <= numPoints; i++) {
           graphPoint point;
           point.position = sf::Vector2f(segment.p1_offset.x + i * dx_s + offset * dx_a,
                                         segment.p1_offset.y + i * dy_s + offset * dy_a);
           point.angle = segment.angle;
 
-          bool isLast = i == numPoints;
-          if (i == numPoints) {
-            point.position = sf::Vector2f(segment.p2_offset.x + offset * dx_a, segment.p2_offset.y + offset * dy_a);
-          }
-
-          // Connect to the previous point (even if it's on another lane)
           if (i > 0) {
-            if (i % 3 == 0 && !isLast) { // Connect to the previous on the other lane
+            if (i == 1 || i == numPoints || i % 3 == 0) { // Connect to the previous on the other lane
               for (int i2_lane = 0; i2_lane < road.numLanes; i2_lane++) {
                 float offset2 = ((float)i2_lane - (float)road.numLanes / 2.0f) * road.width / road.numLanes;
                 offset2 += road.width / (2 * road.numLanes);

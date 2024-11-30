@@ -70,8 +70,12 @@ void Renderer::startRender(const CityMap &cityMap, const CityGrid &cityGrid, con
           view.zoom(1.0f + ZOOM_SPEED);
         }
         if (event.key.code == sf::Keyboard::R) {
-          spdlog::debug("Resetting view");
           resetView();
+          spdlog::debug("View reset");
+        }
+        if (event.key.code == sf::Keyboard::D) {
+          debug = !debug;
+          spdlog::debug("Debug mode: {}", debug);
         }
         window.setView(view);
       }
@@ -84,8 +88,9 @@ void Renderer::startRender(const CityMap &cityMap, const CityGrid &cityGrid, con
 
     window.clear(sf::Color(247, 246, 242));
     renderCityMap(cityMap);
-    renderCityGrid(cityGrid);
-    renderCityGraph(cityGraph, view);
+    if (debug) {
+      renderCityGraph(cityGraph, view);
+    }
     // Remove outside the border (draw blank)
     sf::RectangleShape rectangle(sf::Vector2f(width, height));
     rectangle.setFillColor(sf::Color(247, 246, 242));
@@ -156,47 +161,17 @@ void Renderer::renderCityMap(const CityMap &cityMap) {
       window.draw(circle);
       circle.setPosition(basedP2.x - radius, basedP2.y - radius);
       window.draw(circle);
-
-      // Draw the road id in the center of the segment
-      sf::Vector2f center = (basedP1 + basedP2) / 2.0f;
-      sf::Font font;
-      font.loadFromFile("assets/fonts/arial.ttf");
-
-      sf::Text text(std::to_string(road.id), font, 5);
-      text.setFillColor(sf::Color::Red);
-      text.setPosition(center.x, center.y);
-      text.setOrigin(text.getLocalBounds().width / 2, text.getLocalBounds().height / 2);
-      window.draw(text);
     }
   }
 
   // Draw intersections
-  for (const auto &intersection : cityMap.getIntersections()) {
-    float radius = intersection.radius;
-    sf::CircleShape circle(radius);
-    circle.setFillColor(sf::Color(0, 255, 0, 50));
-    circle.setPosition(intersection.center.x - radius, intersection.center.y - radius);
-    window.draw(circle);
-  }
-}
-
-void Renderer::renderCityGrid(const CityGrid &cityGrid) {
-  return;
-  int numCellsX = cityGrid.getNumCellsX();
-  int numCellsY = cityGrid.getNumCellsY();
-  int numCells = cityGrid.getNumCells();
-
-  std::vector<bool> grid = cityGrid.getGrid();
-
-  for (int i = 0; i < numCellsX; i++) {
-    for (int j = 0; j < numCellsY; j++) {
-      int index = i + j * numCellsX;
-      if (grid[index]) {
-        sf::RectangleShape rectangle(sf::Vector2f(CELL_SIZE, CELL_SIZE));
-        rectangle.setPosition(i * CELL_SIZE, j * CELL_SIZE);
-        rectangle.setFillColor(sf::Color(255, 0, 0));
-        window.draw(rectangle);
-      }
+  if (debug) {
+    for (const auto &intersection : cityMap.getIntersections()) {
+      float radius = intersection.radius;
+      sf::CircleShape circle(radius);
+      circle.setFillColor(sf::Color(0, 255, 0, 50));
+      circle.setPosition(intersection.center.x - radius, intersection.center.y - radius);
+      window.draw(circle);
     }
   }
 }
