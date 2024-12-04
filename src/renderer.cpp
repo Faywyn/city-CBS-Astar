@@ -1,17 +1,22 @@
+#include <algorithm>
 #include <iostream>
 #include <ompl/base/State.h>
 #include <ompl/base/StateSpace.h>
 #include <ompl/base/spaces/DubinsStateSpace.h>
 #include <ompl/geometric/SimpleSetup.h>
 #include <ompl/geometric/planners/rrt/RRT.h>
+#include <random>
 #include <spdlog/spdlog.h>
+#include <vector>
 
+#include "aStar.h"
 #include "config.h"
 #include "renderer.h"
+#include "utils.h"
 
 namespace ob = ompl::base;
 
-void Renderer::startRender(const CityMap &cityMap, const CityGraph &cityGraph) {
+void Renderer::startRender(const CityMap &cityMap, const CityGraph &cityGraph, Manager &manager) {
   window.create(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "City Map");
   window.setFramerateLimit(60);
 
@@ -35,6 +40,8 @@ void Renderer::startRender(const CityMap &cityMap, const CityGraph &cityGraph) {
 
   resetView();
 
+  sf::Clock clockCars;
+
   while (true) {
     sf::Event event;
     while (window.pollEvent(event)) {
@@ -43,14 +50,18 @@ void Renderer::startRender(const CityMap &cityMap, const CityGraph &cityGraph) {
         return;
       }
 
+      if (event.type == sf::Event::MouseButtonPressed) {
+        if (event.mouseButton.button == sf::Mouse::Left) {
+          sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+          manager.toggleCarDebug(mousePos);
+        }
+      }
+
       if (event.type == sf::Event::KeyPressed) {
         if (event.key.code == sf::Keyboard::Escape) {
           window.close();
           return;
         }
-      }
-
-      if (event.type == sf::Event::KeyPressed) {
         if (event.key.code == sf::Keyboard::Up) {
           view.move(0, -height * MOVE_SPEED);
         }
@@ -77,7 +88,6 @@ void Renderer::startRender(const CityMap &cityMap, const CityGraph &cityGraph) {
           debug = !debug;
           spdlog::debug("Debug mode: {}", debug);
         }
-        window.setView(view);
       }
 
       // If resizing the window, reset the view
@@ -86,8 +96,14 @@ void Renderer::startRender(const CityMap &cityMap, const CityGraph &cityGraph) {
       }
     }
 
+    window.setView(view);
     window.clear(sf::Color(247, 246, 242));
     renderCityMap(cityMap);
+    renderManager(manager);
+    if (clockCars.getElapsedTime().asMilliseconds() > SIM_STEP_TIME) {
+      manager.moveCars();
+      clockCars.restart();
+    }
     if (debug) {
       renderCityGraph(cityGraph, view);
     }
@@ -180,13 +196,15 @@ void Renderer::renderCityGraph(const CityGraph &cityGraph, const sf::View &view)
   std::unordered_set<graphPoint> graphPoints = cityGraph.getGraphPoints();
   std::unordered_map<graphPoint, std::vector<neighbor>> neighbors = cityGraph.getNeighbors();
 
-  auto space = ob::DubinsStateSpace(TURNING_RADIUS);
-  ob::RealVectorBounds bounds(2);
-  space.setBounds(bounds);
-
   // Draw a line between each point and its neighbors
   for (const auto &point : graphPoints) {
     for (const auto &neighbor : neighbors[point]) {
+
+      float radius = turningRadius(neighbor.maxSpeed);
+      auto space = ob::DubinsStateSpace(radius);
+      ob::RealVectorBounds bounds(2);
+      space.setBounds(bounds);
+
       // Draw only if one of the points is inside the view
       sf::Vector2f viewCenter = view.getCenter();
       sf::Vector2f viewSize = view.getSize();
@@ -209,7 +227,7 @@ void Renderer::renderCityGraph(const CityGraph &cityGraph, const sf::View &view)
       end->as<ob::DubinsStateSpace::StateType>()->setXY(neighbor.point.position.x, neighbor.point.position.y);
       end->as<ob::DubinsStateSpace::StateType>()->setYaw(neighbor.point.angle);
 
-      // Draw the Reeds-Shepp curve
+      // Draw the Dubins curve
       float step = CELL_SIZE / 2.0f;
       float distance = space.distance(start, end);
       int numSteps = distance / step;
@@ -235,9 +253,26 @@ void Renderer::renderCityGraph(const CityGraph &cityGraph, const sf::View &view)
 
         lastPosition = {x, y};
       }
+
+      // Write the speed of the point
+      sf::Text text;
+      sf::Font font;
+      font.loadFromFile("assets/fonts/arial.ttf");
+      text.setFont(font);
+      text.setString(std::to_string((int)(neighbor.maxSpeed * 3.6f)) + " km/h");
+      text.setCharacterSize(24);
+      text.setFillColor(sf::Color::Black);
+      text.setOutlineColor(sf::Color::White);
+      text.setOutlineThickness(1.0f);
+      text.setPosition(point.position * 0.2f + neighbor.point.position * 0.8f);
+      text.setScale(0.02f, 0.02f);
+      text.setOrigin(text.getLocalBounds().width / 2.0f, text.getLocalBounds().height / 2.0f);
+      window.draw(text);
     }
 
     // Draw an arrow at each points
     drawArrow(window, point.position, point.angle * 180 / M_PI, 1, 0.3, sf::Color(255, 0, 0, 50), true);
   }
 }
+
+void Renderer::renderManager(Manager &manager) { manager.renderCars(window); }

@@ -4,12 +4,14 @@
 
 #include "cityGraph.h"
 #include "cityMap.h"
+#include "manager.h"
 
 class Renderer {
 public:
-  void startRender(const CityMap &cityMap, const CityGraph &cityGraph);
+  void startRender(const CityMap &cityMap, const CityGraph &cityGraph, Manager &manager);
   void renderCityMap(const CityMap &cityMap);
   void renderCityGraph(const CityGraph &cityGraph, const sf::View &view);
+  void renderManager(Manager &manager);
 
 private:
   sf::RenderWindow window;

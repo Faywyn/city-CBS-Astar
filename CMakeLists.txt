@@ -18,11 +18,8 @@ if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release)
 endif()
 
-# Set common flags (applies to all build types)
-set(CMAKE_CXX_FLAGS "-Wall -Wextra")
-
 # Debug flags: Include debugging symbols, profiling tools, and sanitizers for memory checks
-set(CMAKE_CXX_FLAGS_DEBUG "-g")
+set(CMAKE_CXX_FLAGS_DEBUG "-g -Wall -Wextra")
 
 # Release flags: Optimize for speed, disable debugging symbols, and prioritize performance
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
@@ -74,6 +71,10 @@ add_executable(${PROJECT_NAME}
   src/cityMap.cpp
   src/cityGraph.cpp
   src/renderer.cpp
+  src/aStar.cpp
+  src/car.cpp
+  src/manager.cpp
+  src/utils.cpp
 )
 
 # Include directories

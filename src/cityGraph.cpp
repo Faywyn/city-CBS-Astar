@@ -2,12 +2,13 @@
 #include <ompl/base/State.h>
 #include <ompl/base/StateSpace.h>
 #include <ompl/base/spaces/DubinsStateSpace.h>
-#include <ompl/base/spaces/ReedsSheppStateSpace.h>
 #include <ompl/geometric/SimpleSetup.h>
 #include <ompl/geometric/planners/rrt/RRT.h>
+#include <random>
 #include <spdlog/spdlog.h>
 
 #include "cityGraph.h"
+#include "config.h"
 #include "utils.h"
 
 namespace ob = ompl::base;
@@ -48,7 +49,7 @@ void CityGraph::createGraph(const CityMap &cityMap) {
 
       float segmentLength =
           sqrt(pow(segment.p2_offset.x - segment.p1_offset.x, 2) + pow(segment.p2_offset.y - segment.p1_offset.y, 2));
-      float pointDistance = TURNING_RADIUS < 7 ? 7 : (TURNING_RADIUS > 15 ? 15 : TURNING_RADIUS);
+      float pointDistance = 10;
       int numPoints = segmentLength / pointDistance;
       float dx_s = (segment.p2_offset.x - segment.p1_offset.x) / numPoints;
       float dy_s = (segment.p2_offset.y - segment.p1_offset.y) / numPoints;
@@ -155,41 +156,27 @@ void CityGraph::createGraph(const CityMap &cityMap) {
   spdlog::info("Graph created with {} points", graphPoints.size());
 
   // Remove all the neighbors that need to turn too much
-  ob::DubinsStateSpace space(TURNING_RADIUS);
   for (auto &point : graphPoints) {
     std::vector<neighbor> newNeighbors;
-    for (const auto &neighbor : neighbors[point]) {
-      ob::State *start = space.allocState();
-      ob::State *end = space.allocState();
+    float distance;
+    for (auto &neighbor : neighbors[point]) {
+      float speed = CAR_MIN_TURNING_RADIUS;
+      bool can = canLink(point, neighbor.point, speed, &distance);
 
-      start->as<ob::DubinsStateSpace::StateType>()->setXY(point.position.x, point.position.y);
-      start->as<ob::DubinsStateSpace::StateType>()->setYaw(point.angle);
+      if (!can)
+        continue;
 
-      end->as<ob::DubinsStateSpace::StateType>()->setXY(neighbor.point.position.x, neighbor.point.position.y);
-      end->as<ob::DubinsStateSpace::StateType>()->setYaw(neighbor.point.angle);
-
-      float leftTurn = 0;
-      float rightTurn = 0;
-
-      // Extract the path
-      ob::DubinsStateSpace::DubinsPath path = space.dubins(start, end);
-      for (unsigned int i = 0; i < 3; ++i) // Dubins path has up to 3 segments
-      {
-        auto type = path.type_[i];
-        double length = path.length_[i]; // Length of the segment
-
-        if (type == ob::DubinsStateSpace::DubinsPathSegmentType::DUBINS_LEFT) {
-          leftTurn += length;
-        } else if (type == ob::DubinsStateSpace::DubinsPathSegmentType::DUBINS_RIGHT) {
-          rightTurn += length;
+      while (canLink(point, neighbor.point, speed + 0.1, &distance)) {
+        speed += 0.1;
+        if (speed >= CAR_MAX_SPEED_MS) {
+          speed = CAR_MAX_SPEED_MS;
+          break;
         }
       }
 
-      if (leftTurn < M_PI * 0.75 && rightTurn < M_PI * 0.75) {
-        float totalLength = space.distance(start, end);
-        struct neighbor newNeighbor;
-        newNeighbor.point = neighbor.point;
-        newNeighbor.distance = totalLength;
+      if (can) {
+        neighbor.maxSpeed = speed;
+        neighbor.distance = distance;
         newNeighbors.push_back(neighbor);
       }
     }
@@ -213,11 +200,55 @@ void CityGraph::linkPoints(const graphPoint &point, const graphPoint &neighbor) 
       copyPoint.angle = anglePoint;
       copyNeighbor.angle = angleNeighbor;
 
-      neighbors[copyPoint].push_back({copyNeighbor, 0});
-      neighbors[copyNeighbor].push_back({copyPoint, 0});
+      neighbors[copyPoint].push_back({copyNeighbor, 0, 0}); // This fields will be updated later
+      neighbors[copyNeighbor].push_back({copyPoint, 0, 0});
 
       graphPoints.insert(copyPoint);
       graphPoints.insert(copyNeighbor);
     }
   }
+}
+
+graphPoint CityGraph::getRandomPoint() const {
+  std::random_device rd;
+  std::mt19937 gen(rd());
+  std::uniform_int_distribution<> dis(0, graphPoints.size() - 1);
+
+  auto it = graphPoints.begin();
+  std::advance(it, dis(gen));
+
+  return *it;
+}
+
+bool CityGraph::canLink(const graphPoint &point1, const graphPoint &point2, float speed, float *distance) const {
+  float radius = turningRadius(speed);
+
+  ob::DubinsStateSpace space(radius);
+
+  ob::State *start = space.allocState();
+  ob::State *end = space.allocState();
+
+  start->as<ob::DubinsStateSpace::StateType>()->setXY(point1.position.x, point1.position.y);
+  start->as<ob::DubinsStateSpace::StateType>()->setYaw(point1.angle);
+
+  end->as<ob::DubinsStateSpace::StateType>()->setXY(point2.position.x, point2.position.y);
+  end->as<ob::DubinsStateSpace::StateType>()->setYaw(point2.angle);
+
+  *distance = space.distance(start, end);
+
+  float total = 0;
+
+  // Extract the path
+  ob::DubinsStateSpace::DubinsPath path = space.dubins(start, end);
+  for (unsigned int i = 0; i < 3; ++i) // Dubins path has up to 3 segments
+  {
+    auto type = path.type_[i];
+    if (type == ob::DubinsStateSpace::DubinsPathSegmentType::DUBINS_LEFT) {
+      total += std::abs(path.length_[i]);
+    } else if (type == ob::DubinsStateSpace::DubinsPathSegmentType::DUBINS_RIGHT) {
+      total += std::abs(path.length_[i]);
+    }
+  }
+
+  return total < M_PI * 0.75f;
 }

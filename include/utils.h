@@ -21,3 +21,7 @@ inline float normalizeAngle(float angle) { // -PI to PI
   }
   return angle;
 }
+
+inline float turningRadius(float speed) { return speed * speed / CAR_MAX_G_FORCE; }
+
+sf::Font loadFont();

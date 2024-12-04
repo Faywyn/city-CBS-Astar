@@ -221,7 +221,7 @@ void CityMap::loadFile(const std::string &filename) {
 
   // Merge the intersections that are close to each other
   spdlog::debug("Merging intersections ...");
-  for (float distCoef = 10; distCoef > 0; distCoef -= 1) {
+  for (int distCoef = 5; distCoef > 0; distCoef -= 1) {
     for (int i = 0; i < (int)intersections.size(); i++) {
       for (int j = i + 1; j < (int)intersections.size(); j++) {
         bool is_i = intersections[i].roadSegmentIds.size() > intersections[j].roadSegmentIds.size();
