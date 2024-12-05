@@ -18,8 +18,8 @@ void Manager::createCars(int numCars) {
     do {
       path.clear();
 
-      graphPoint start = graph.getRandomPoint();
-      graphPoint end = graph.getRandomPoint();
+      CityGraph::point start = graph.getRandomPoint();
+      CityGraph::point end = graph.getRandomPoint();
 
       if (std::sqrt(std::pow(start.position.x - end.position.x, 2) + std::pow(start.position.y - end.position.y, 2)) <
           100)

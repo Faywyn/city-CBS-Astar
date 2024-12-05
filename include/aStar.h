@@ -2,23 +2,58 @@
 
 #include "cityGraph.h"
 
+typedef struct _aStarNode {
+  sf::Vector2f position;
+  float angle;
+  float speed;
+
+  bool operator==(const _aStarNode &other) const {
+    return position == other.position && angle == other.angle && std::abs(speed - other.speed) < 0.5;
+  }
+} _aStarNode;
+
+typedef struct _aStarConflict {
+  sf::Vector2f position;
+  float time;
+
+  bool operator==(const _aStarConflict &other) const {
+    return std::pow(position.x - other.position.x, 2) + std::pow(position.y - other.position.y, 2) <
+               std::pow(CAR_CBS_MIN_SPACING, 2) &&
+           std::abs(time - other.time) < CAR_CBS_TIME_GAP;
+  }
+} _aStarConflict;
+
+namespace std {
+template <> struct hash<_aStarNode> {
+  std::size_t operator()(const _aStarNode &point) const {
+    float x = point.position.x;
+    float y = point.position.y;
+    float angle = point.angle;
+
+    return std::hash<float>()(x) ^ std::hash<float>()(y) ^ std::hash<float>()(angle);
+  }
+};
+template <> struct hash<_aStarConflict> {
+  std::size_t operator()(const _aStarConflict &conflict) const {
+    float x = ((int)conflict.position.x / CAR_CBS_MIN_SPACING) * CAR_CBS_MIN_SPACING;
+    float y = ((int)conflict.position.y / CAR_CBS_MIN_SPACING) * CAR_CBS_MIN_SPACING;
+    float time = ((int)conflict.time / CAR_CBS_TIME_GAP) * CAR_CBS_TIME_GAP;
+
+    return std::hash<float>()(x) ^ std::hash<float>()(y) ^ std::hash<float>()(time);
+  }
+};
+} // namespace std
+
 class AStar {
 public:
-  typedef struct node {
-    sf::Vector2f position;
-    float angle;
-    float speed;
+  using node = _aStarNode;
+  using conflict = _aStarConflict;
 
-    bool operator==(const node &other) const {
-      return position == other.position && angle == other.angle && std::abs(speed - other.speed) < 0.1;
-    }
-  } node;
+  AStar(CityGraph::point start, CityGraph::point end, const CityGraph &cityGraph);
 
-  AStar(graphPoint start, graphPoint end, const CityGraph &cityGraph);
-
-  std::vector<node> findPath() {
+  std::vector<node> findPath(std::unordered_set<conflict> conflicts = {}) {
     if (!processed)
-      process();
+      process(conflicts);
     return path;
   }
 
@@ -29,17 +64,5 @@ private:
   std::vector<node> path;
   CityGraph graph;
 
-  void process();
+  void process(std::unordered_set<conflict> conflicts = {});
 };
-
-namespace std {
-template <> struct hash<AStar::node> {
-  std::size_t operator()(const AStar::node &point) const {
-    float x = point.position.x;
-    float y = point.position.y;
-    float angle = point.angle;
-
-    return std::hash<float>()(x) ^ std::hash<float>()(y) ^ std::hash<float>()(angle);
-  }
-};
-} // namespace std

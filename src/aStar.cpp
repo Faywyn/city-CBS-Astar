@@ -9,23 +9,25 @@
 
 namespace ob = ompl::base;
 
-AStar::AStar(graphPoint start, graphPoint end, const CityGraph &cityGraph) {
+AStar::AStar(CityGraph::point start, CityGraph::point end, const CityGraph &cityGraph) {
   this->start.position = start.position;
   this->start.angle = start.angle;
+  this->start.speed = 0;
   this->end.position = end.position;
   this->end.angle = end.angle;
+  this->end.speed = 0;
   this->graph = cityGraph;
 }
 
-void AStar::process() {
+void AStar::process(std::unordered_set<conflict> conflicts) {
   path.clear();
 
   std::unordered_map<node, node> cameFrom;
   std::unordered_map<node, float> gScore;
   std::unordered_map<node, float> fScore;
 
-  auto distance = [](const node &a, const node &b) {
-    ob::DubinsStateSpace space(turningRadius(std::max(a.speed, b.speed)));
+  auto distance = [](const node &a, const node &b, float turningR = 0) {
+    ob::DubinsStateSpace space(turningR > 0 ? turningR : turningRadius(std::max(a.speed, b.speed)));
     ob::RealVectorBounds bounds(2);
     space.setBounds(bounds);
 
@@ -40,7 +42,7 @@ void AStar::process() {
 
     return space.distance(start, end);
   };
-  auto heuristic = [&](const node &a) { return distance(a, end) / CAR_MAX_SPEED_MS; };
+  auto heuristic = [&](const node &a) { return distance(a, end, CAR_MIN_TURNING_RADIUS) / CAR_MAX_SPEED_MS; };
   auto compare = [&](const node &a, const node &b) { return fScore[a] > fScore[b]; };
 
   std::priority_queue<node, std::vector<node>, decltype(compare)> openSet(compare);
@@ -77,7 +79,7 @@ void AStar::process() {
       return distance / avgSpeed;
     };
 
-    graphPoint currentGraphPoint = {current.position, current.angle};
+    CityGraph::point currentGraphPoint = {current.position, current.angle};
     for (const auto &neighborGraphPoint : neighbors[currentGraphPoint]) {
       if (current.speed > neighborGraphPoint.maxSpeed)
         continue;
@@ -99,6 +101,9 @@ void AStar::process() {
 
         node neighbor = {neighborGraphPoint.point.position, neighborGraphPoint.point.angle, newSpeed};
         float tentativeGScore = gScore[current] + time(distance, current.speed, newSpeed);
+
+        if (conflicts.find({neighbor.position, tentativeGScore}) != conflicts.end())
+          continue;
 
         if (gScore.find(neighbor) == gScore.end() || tentativeGScore < gScore[neighbor]) {
           cameFrom[neighbor] = current;

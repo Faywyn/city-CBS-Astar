@@ -4,34 +4,39 @@
 #include <string>
 #include <vector>
 
+typedef struct {
+  sf::Vector2f p1;
+  sf::Vector2f p2;
+  sf::Vector2f p1_offset; // For intersections radius
+  sf::Vector2f p2_offset; // For intersections radius
+  float angle;
+} _cityMapSegment;
+
+typedef struct {
+  int id;
+  std::vector<_cityMapSegment> segments;
+  float width;
+  int numLanes;
+} _cityMapRoad;
+
+typedef struct {
+  std::vector<sf::Vector2f> points;
+} _cityMapBuilding;
+
+typedef struct {
+  int id;
+  sf::Vector2f center;
+  float radius;
+  std::vector<std::pair<int, int>> roadSegmentIds; // (roadId, segmentId)
+                                                   // so their will be 2 segments per road (for each direction)
+} _cityMapIntersection;
+
 class CityMap {
 public:
-  typedef struct {
-    sf::Vector2f p1;
-    sf::Vector2f p2;
-    sf::Vector2f p1_offset; // For intersections radius
-    sf::Vector2f p2_offset; // For intersections radius
-    float angle;
-  } segment;
-
-  typedef struct {
-    int id;
-    std::vector<segment> segments;
-    float width;
-    int numLanes;
-  } road;
-
-  typedef struct {
-    std::vector<sf::Vector2f> points;
-  } building;
-
-  typedef struct {
-    int id;
-    sf::Vector2f center;
-    float radius;
-    std::vector<std::pair<int, int>> roadSegmentIds; // (roadId, segmentId)
-                                                     // so their will be 2 segments per road (for each direction)
-  } intersection;
+  using segment = _cityMapSegment;
+  using road = _cityMapRoad;
+  using building = _cityMapBuilding;
+  using intersection = _cityMapIntersection;
 
   CityMap();
   ~CityMap();

@@ -30,13 +30,13 @@ void CityGraph::createGraph(const CityMap &cityMap) {
           float offset = ((float)i_lane - (float)road.numLanes / 2.0f) * road.width / road.numLanes;
           offset += road.width / (2 * road.numLanes);
 
-          graphPoint point1;
+          point point1;
           point1.angle = road.segments[numSeg - 1].angle;
           point1.position =
               sf::Vector2f(road.segments[numSeg - 1].p2_offset.x + offset * sin(road.segments[numSeg - 1].angle),
                            road.segments[numSeg - 1].p2_offset.y + offset * -cos(road.segments[numSeg - 1].angle));
 
-          graphPoint point2;
+          point point2;
           point2.angle = road.segments[numSeg].angle;
           point2.position =
               sf::Vector2f(road.segments[numSeg].p1_offset.x + offset * sin(road.segments[numSeg].angle),
@@ -61,11 +61,11 @@ void CityGraph::createGraph(const CityMap &cityMap) {
         offset += road.width / (2 * road.numLanes);
 
         if (numPoints == 0) {
-          graphPoint point1;
+          point point1;
           point1.angle = segment.angle;
           point1.position = sf::Vector2f(segment.p1_offset.x + offset * dx_a, segment.p1_offset.y + offset * dy_a);
 
-          graphPoint point2;
+          point point2;
           point2.angle = segment.angle;
           point2.position = sf::Vector2f(segment.p2_offset.x + offset * dx_a, segment.p2_offset.y + offset * dy_a);
 
@@ -74,10 +74,10 @@ void CityGraph::createGraph(const CityMap &cityMap) {
         }
 
         for (int i = 0; i <= numPoints; i++) {
-          graphPoint point;
-          point.position = sf::Vector2f(segment.p1_offset.x + i * dx_s + offset * dx_a,
-                                        segment.p1_offset.y + i * dy_s + offset * dy_a);
-          point.angle = segment.angle;
+          point point1;
+          point1.position = sf::Vector2f(segment.p1_offset.x + i * dx_s + offset * dx_a,
+                                         segment.p1_offset.y + i * dy_s + offset * dy_a);
+          point1.angle = segment.angle;
 
           if (i > 0) {
             if (i == 1 || i == numPoints || i % 3 == 0) { // Connect to the previous on the other lane
@@ -85,20 +85,20 @@ void CityGraph::createGraph(const CityMap &cityMap) {
                 float offset2 = ((float)i2_lane - (float)road.numLanes / 2.0f) * road.width / road.numLanes;
                 offset2 += road.width / (2 * road.numLanes);
 
-                graphPoint point2;
+                point point2;
                 point2.position = sf::Vector2f(segment.p1_offset.x + (i - 1) * dx_s + offset2 * dx_a,
                                                segment.p1_offset.y + (i - 1) * dy_s + offset2 * dy_a);
                 point2.angle = segment.angle;
 
-                linkPoints(point, point2);
+                linkPoints(point1, point2);
               }
             } else { // Or just the previous on the same lane
-              graphPoint point2;
+              point point2;
               point2.position = sf::Vector2f(segment.p1_offset.x + (i - 1) * dx_s + offset * dx_a,
                                              segment.p1_offset.y + (i - 1) * dy_s + offset * dy_a);
               point2.angle = segment.angle;
 
-              linkPoints(point, point2);
+              linkPoints(point1, point2);
             }
           }
         }
@@ -116,13 +116,13 @@ void CityGraph::createGraph(const CityMap &cityMap) {
         const auto &segment2 = road2.segments[roadSegmentId2.second];
 
         // Find the point of the segment2 closest to the intersection
-        graphPoint point1;
+        point point1;
         point1.angle = segment1.angle;
         point1.position = (distance(segment1.p1, intersection.center) < distance(segment1.p2, intersection.center))
                               ? segment1.p1_offset
                               : segment1.p2_offset;
 
-        graphPoint point2;
+        point point2;
         point2.angle = segment2.angle;
         point2.position = (distance(segment2.p1, intersection.center) < distance(segment2.p2, intersection.center))
                               ? segment2.p1_offset
@@ -136,12 +136,12 @@ void CityGraph::createGraph(const CityMap &cityMap) {
             float offset2 = ((float)iL_2 - (float)road2.numLanes / 2.0f) * road2.width / road2.numLanes;
             offset2 += road2.width / (2 * road2.numLanes);
 
-            graphPoint point1_offset;
+            point point1_offset;
             point1_offset.angle = segment1.angle;
             point1_offset.position = sf::Vector2f(point1.position.x + offset1 * sin(segment1.angle),
                                                   point1.position.y + offset1 * -cos(segment1.angle));
 
-            graphPoint point2_offset;
+            point point2_offset;
             point2_offset.angle = segment2.angle;
             point2_offset.position = sf::Vector2f(point2.position.x + offset2 * sin(segment2.angle),
                                                   point2.position.y + offset2 * -cos(segment2.angle));
@@ -188,12 +188,12 @@ void CityGraph::createGraph(const CityMap &cityMap) {
   }
 }
 
-void CityGraph::linkPoints(const graphPoint &point, const graphPoint &neighbor) {
-  std::vector<float> anglesPoint = {normalizeAngle(point.angle), normalizeAngle(point.angle + M_PI)};
-  std::vector<float> anglesNeighbor = {normalizeAngle(neighbor.angle), normalizeAngle(neighbor.angle + M_PI)};
+void CityGraph::linkPoints(const point &p, const point &n) {
+  std::vector<float> anglesPoint = {normalizeAngle(p.angle), normalizeAngle(p.angle + M_PI)};
+  std::vector<float> anglesNeighbor = {normalizeAngle(n.angle), normalizeAngle(n.angle + M_PI)};
 
-  graphPoint copyPoint = point;
-  graphPoint copyNeighbor = neighbor;
+  point copyPoint = p;
+  point copyNeighbor = n;
 
   for (const auto &anglePoint : anglesPoint) {
     for (const auto &angleNeighbor : anglesNeighbor) {
@@ -209,7 +209,7 @@ void CityGraph::linkPoints(const graphPoint &point, const graphPoint &neighbor) 
   }
 }
 
-graphPoint CityGraph::getRandomPoint() const {
+CityGraph::point CityGraph::getRandomPoint() const {
   std::random_device rd;
   std::mt19937 gen(rd());
   std::uniform_int_distribution<> dis(0, graphPoints.size() - 1);
@@ -220,7 +220,7 @@ graphPoint CityGraph::getRandomPoint() const {
   return *it;
 }
 
-bool CityGraph::canLink(const graphPoint &point1, const graphPoint &point2, float speed, float *distance) const {
+bool CityGraph::canLink(const point &point1, const point &point2, float speed, float *distance) const {
   float radius = turningRadius(speed);
 
   ob::DubinsStateSpace space(radius);

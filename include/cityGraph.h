@@ -4,11 +4,11 @@
 #include "cityMap.h"
 #include "config.h"
 
-typedef struct graphPoint {
+typedef struct _cityGraphPoint {
   sf::Vector2f position;
   float angle;
 
-  bool operator==(const graphPoint &other) const {
+  bool operator==(const _cityGraphPoint &other) const {
     float x = std::round(position.x / CELL_SIZE) * CELL_SIZE;
     float y = std::round(position.y / CELL_SIZE) * CELL_SIZE;
     float oX = std::round(other.position.x / CELL_SIZE) * CELL_SIZE;
@@ -16,18 +16,18 @@ typedef struct graphPoint {
 
     return x == oX && y == oY && angle == other.angle;
   }
-} graphPoint;
+} _cityGraphPoint;
 
-typedef struct neighbor {
-  graphPoint point;
+typedef struct _cityGraphNeighbor {
+  _cityGraphPoint point;
   float maxSpeed;
   float distance;
-} neighbor;
+} _cityGraphNeighbor;
 
 // Hash (rounded)
 namespace std {
-template <> struct hash<graphPoint> {
-  std::size_t operator()(const graphPoint &point) const {
+template <> struct hash<_cityGraphPoint> {
+  std::size_t operator()(const _cityGraphPoint &point) const {
     float x = std::round(point.position.x / CELL_SIZE) * CELL_SIZE;
     float y = std::round(point.position.y / CELL_SIZE) * CELL_SIZE;
 
@@ -38,17 +38,20 @@ template <> struct hash<graphPoint> {
 
 class CityGraph {
 public:
+  using point = _cityGraphPoint;
+  using neighbor = _cityGraphNeighbor;
+
   void createGraph(const CityMap &cityMap);
 
   // Getters
-  std::unordered_map<graphPoint, std::vector<neighbor>> getNeighbors() const { return neighbors; }
-  std::unordered_set<graphPoint> getGraphPoints() const { return graphPoints; }
-  graphPoint getRandomPoint() const;
+  std::unordered_map<point, std::vector<neighbor>> getNeighbors() const { return neighbors; }
+  std::unordered_set<point> getGraphPoints() const { return graphPoints; }
+  point getRandomPoint() const;
 
 private:
-  std::unordered_map<graphPoint, std::vector<neighbor>> neighbors;
-  std::unordered_set<graphPoint> graphPoints;
+  std::unordered_map<point, std::vector<neighbor>> neighbors;
+  std::unordered_set<point> graphPoints;
 
-  void linkPoints(const graphPoint &point, const graphPoint &neighbor);
-  bool canLink(const graphPoint &point1, const graphPoint &point2, float speed, float *distance) const;
+  void linkPoints(const point &point1, const point &point2);
+  bool canLink(const point &point1, const point &point2, float speed, float *distance) const;
 };

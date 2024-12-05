@@ -193,8 +193,8 @@ void Renderer::renderCityMap(const CityMap &cityMap) {
 }
 
 void Renderer::renderCityGraph(const CityGraph &cityGraph, const sf::View &view) {
-  std::unordered_set<graphPoint> graphPoints = cityGraph.getGraphPoints();
-  std::unordered_map<graphPoint, std::vector<neighbor>> neighbors = cityGraph.getNeighbors();
+  std::unordered_set<CityGraph::point> graphPoints = cityGraph.getGraphPoints();
+  std::unordered_map<CityGraph::point, std::vector<CityGraph::neighbor>> neighbors = cityGraph.getNeighbors();
 
   // Draw a line between each point and its neighbors
   for (const auto &point : graphPoints) {

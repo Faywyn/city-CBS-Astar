@@ -25,3 +25,5 @@ constexpr float CAR_MAX_G_FORCE = 9.0f;                     // in m/s^2
 constexpr float CAR_ACCELERATION = 0.1f;                    // in m/s^2
 constexpr float CAR_LENGTH = 4.2f;                          // in meters
 constexpr float CAR_WIDTH = 1.6f;                           // in meters
+constexpr float CAR_CBS_MIN_SPACING = 5.0f;                 // in meters
+constexpr float CAR_CBS_TIME_GAP = 0.5f;                    // in seconds

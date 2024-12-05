@@ -92,8 +92,8 @@ void Car::assignPath(std::vector<AStar::node> path) {
     end->as<ob::DubinsStateSpace::StateType>()->setYaw(current.angle);
 
     float distance = space.distance(start, end);
-    float acc =
-        current.speed == prev.speed ? 0.0f : (current.speed > prev.speed ? CAR_ACCELERATION : -CAR_ACCELERATION);
+    float time = 2 * distance / (prev.speed + current.speed);
+    float acc = (current.speed - prev.speed) / time;
     auto x = [distance, acc, prev](float t) { return (0.5f * acc * t * t + prev.speed * t) / distance; };
 
     float t = 0;

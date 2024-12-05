@@ -25,7 +25,7 @@ int main() {
   cityGraph.createGraph(cityMap);
 
   Manager manager(cityGraph);
-  manager.createCars(20);
+  manager.createCars(10);
 
   Renderer renderer;
   renderer.startRender(cityMap, cityGraph, manager);
