@@ -74,6 +74,8 @@ add_executable(${PROJECT_NAME}
   src/aStar.cpp
   src/car.cpp
   src/manager.cpp
+  src/managerCBS.cpp
+  src/dubins.cpp
   src/utils.cpp
 )
 

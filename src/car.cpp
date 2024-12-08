@@ -1,13 +1,9 @@
 #include "car.h"
 #include "config.h"
+#include "dubins.h"
 #include "utils.h"
 
 #include <iostream>
-#include <ompl/base/State.h>
-#include <ompl/base/StateSpace.h>
-#include <ompl/base/spaces/DubinsStateSpace.h>
-
-namespace ob = ompl::base;
 
 void Car::move() {
   if (currentPoint >= (int)path.size())
@@ -61,56 +57,16 @@ void Car::render(sf::RenderWindow &window) {
     line[0].color = sf::Color(255, 255, 255);
     line[1].color = sf::Color(255, 255, 255);
     window.draw(line, 2, sf::Lines);
-
-    // sf::CircleShape circle(0.5);
-    // circle.setOrigin(0.5, 0.5);
-    // circle.setPosition(path[i]);
-    // circle.setFillColor(sf::Color(255, 255, 255));
-    // window.draw(circle);
   }
 }
 
 void Car::assignPath(std::vector<AStar::node> path) {
   this->path.clear();
-
-  for (int i = 1; i < (int)path.size(); i++) {
-    AStar::node prev = path[i - 1];
-    AStar::node current = path[i];
-
-    float radius = turningRadius(prev.speed);
-    auto space = ob::DubinsStateSpace(radius);
-    ob::RealVectorBounds bounds(2);
-    space.setBounds(bounds);
-
-    ob::State *start = space.allocState();
-    ob::State *end = space.allocState();
-
-    start->as<ob::DubinsStateSpace::StateType>()->setXY(prev.position.x, prev.position.y);
-    start->as<ob::DubinsStateSpace::StateType>()->setYaw(prev.angle);
-
-    end->as<ob::DubinsStateSpace::StateType>()->setXY(current.position.x, current.position.y);
-    end->as<ob::DubinsStateSpace::StateType>()->setYaw(current.angle);
-
-    float distance = space.distance(start, end);
-    float time = 2 * distance / (prev.speed + current.speed);
-    float acc = (current.speed - prev.speed) / time;
-    auto x = [distance, acc, prev](float t) { return (0.5f * acc * t * t + prev.speed * t) / distance; };
-
-    float t = 0;
-    while (x(t) <= 1 && x(t) >= 0) {
-      ob::State *state = space.allocState();
-      space.interpolate(start, end, x(t), state);
-
-      float x = state->as<ob::DubinsStateSpace::StateType>()->getX();
-      float y = state->as<ob::DubinsStateSpace::StateType>()->getY();
-
-      this->path.push_back({x, y});
-
-      t += SIM_STEP_TIME;
-    }
+  DubinsPath dubins(path);
+  std::vector<CityGraph::point> dubinsPath_ = dubins.path();
+  for (CityGraph::point point : dubinsPath_) {
+    this->path.push_back(point.position);
   }
-
-  currentPoint = 0;
 }
 
 float Car::getSpeed() {
@@ -144,5 +100,5 @@ float Car::getElapsedDistance() {
   return dist;
 }
 
-float Car::getRemainingTime() { return (path.size() - currentPoint) * SIM_STEP_TIME; }
+float Car::getRemainingTime(bool fromStart) { return (path.size() - (fromStart ? 0 : currentPoint)) * SIM_STEP_TIME; }
 float Car::getElapsedTime() { return currentPoint * SIM_STEP_TIME; }

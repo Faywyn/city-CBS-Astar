@@ -1,6 +1,12 @@
 #include "cityMap.h"
 #include "config.h"
 
+#include <ompl/base/State.h>
+#include <ompl/base/StateSpace.h>
+#include <ompl/base/spaces/DubinsStateSpace.h>
+
+namespace ob = ompl::base;
+
 inline sf::Vector2f latLonToXY(float lat, float lon) {
   sf::Vector2f xy;
   xy.x = EARTH_RADIUS * lon * M_PI / 180;

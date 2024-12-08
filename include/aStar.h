@@ -15,11 +15,11 @@ typedef struct _aStarNode {
 typedef struct _aStarConflict {
   sf::Vector2f position;
   float time;
+  int car;
 
   bool operator==(const _aStarConflict &other) const {
-    return std::pow(position.x - other.position.x, 2) + std::pow(position.y - other.position.y, 2) <
-               std::pow(CAR_CBS_MIN_SPACING, 2) &&
-           std::abs(time - other.time) < CAR_CBS_TIME_GAP;
+    return std::pow(position.x - other.position.x, 2) + std::pow(position.y - other.position.y, 2) < 0.1 &&
+           std::abs(time - other.time) < 0.1;
   }
 } _aStarConflict;
 
@@ -35,9 +35,9 @@ template <> struct hash<_aStarNode> {
 };
 template <> struct hash<_aStarConflict> {
   std::size_t operator()(const _aStarConflict &conflict) const {
-    float x = ((int)conflict.position.x / CAR_CBS_MIN_SPACING) * CAR_CBS_MIN_SPACING;
-    float y = ((int)conflict.position.y / CAR_CBS_MIN_SPACING) * CAR_CBS_MIN_SPACING;
-    float time = ((int)conflict.time / CAR_CBS_TIME_GAP) * CAR_CBS_TIME_GAP;
+    float x = (int)conflict.position.x;
+    float y = (int)conflict.position.y;
+    float time = (int)conflict.time;
 
     return std::hash<float>()(x) ^ std::hash<float>()(y) ^ std::hash<float>()(time);
   }

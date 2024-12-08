@@ -4,8 +4,8 @@
 #include <iostream>
 #include <spdlog/spdlog.h>
 
-void Manager::createCars(int numCars) {
-  spdlog::info("Creating {} cars", numCars);
+void Manager::createCarsAStar(int numCars) {
+  spdlog::info("Creating {} AStar cars", numCars);
   for (int i = 0; i < numCars; i++) {
     Car car;
     cars.push_back(car);
@@ -15,11 +15,12 @@ void Manager::createCars(int numCars) {
   for (int i = 0; i < numCars; i++) {
     Car &car = cars[i];
     std::vector<AStar::node> path;
+    CityGraph::point start;
+    CityGraph::point end;
     do {
       path.clear();
-
-      CityGraph::point start = graph.getRandomPoint();
-      CityGraph::point end = graph.getRandomPoint();
+      start = graph.getRandomPoint();
+      end = graph.getRandomPoint();
 
       if (std::sqrt(std::pow(start.position.x - end.position.x, 2) + std::pow(start.position.y - end.position.y, 2)) <
           100)
@@ -30,6 +31,7 @@ void Manager::createCars(int numCars) {
     } while (path.empty() || (int)path.size() < 3);
 
     car.assignPath(path);
+    car.assignStartEnd(start, end);
     spdlog::info("Car {} assigned path with {} points", i, path.size());
   }
 }

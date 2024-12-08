@@ -1,5 +1,6 @@
 #include "aStar.h"
 #include "config.h"
+#include "dubins.h"
 #include "utils.h"
 
 #include <ompl/base/State.h>
@@ -26,23 +27,12 @@ void AStar::process(std::unordered_set<conflict> conflicts) {
   std::unordered_map<node, float> gScore;
   std::unordered_map<node, float> fScore;
 
-  auto distance = [](const node &a, const node &b, float turningR = 0) {
-    ob::DubinsStateSpace space(turningR > 0 ? turningR : turningRadius(std::max(a.speed, b.speed)));
-    ob::RealVectorBounds bounds(2);
-    space.setBounds(bounds);
-
-    ob::State *start = space.allocState();
-    ob::State *end = space.allocState();
-
-    start->as<ob::DubinsStateSpace::StateType>()->setXY(a.position.x, a.position.y);
-    start->as<ob::DubinsStateSpace::StateType>()->setYaw(a.angle);
-
-    end->as<ob::DubinsStateSpace::StateType>()->setXY(b.position.x, b.position.y);
-    end->as<ob::DubinsStateSpace::StateType>()->setYaw(b.angle);
-
-    return space.distance(start, end);
+  auto heuristic = [&](const node &a) {
+    AStar::node end_ = end;
+    end_.speed = -1;
+    Dubins dubins(a, end_);
+    return dubins.distance();
   };
-  auto heuristic = [&](const node &a) { return distance(a, end, CAR_MIN_TURNING_RADIUS) / CAR_MAX_SPEED_MS; };
   auto compare = [&](const node &a, const node &b) { return fScore[a] > fScore[b]; };
 
   std::priority_queue<node, std::vector<node>, decltype(compare)> openSet(compare);
@@ -74,11 +64,6 @@ void AStar::process(std::unordered_set<conflict> conflicts) {
     if (gScore[current] > 60 * 60 * 5)
       break;
 
-    auto time = [](float distance, float prevSpeed, float speed) {
-      float avgSpeed = (prevSpeed + speed) / 2;
-      return distance / avgSpeed;
-    };
-
     CityGraph::point currentGraphPoint = {current.position, current.angle};
     for (const auto &neighborGraphPoint : neighbors[currentGraphPoint]) {
       if (current.speed > neighborGraphPoint.maxSpeed)
@@ -91,18 +76,52 @@ void AStar::process(std::unordered_set<conflict> conflicts) {
       if (current.speed + CAR_ACCELERATION > neighborGraphPoint.maxSpeed && current.speed < neighborGraphPoint.maxSpeed)
         speedChanges.push_back(neighborGraphPoint.maxSpeed - current.speed);
 
+      if (distance == 0)
+        speedChanges = {0};
+
       for (const auto &speedChange : speedChanges) {
         float newSpeed = current.speed + speedChange;
-        if (newSpeed > CAR_MAX_SPEED_MS)
+        if (newSpeed > CAR_MAX_SPEED_MS || newSpeed > neighborGraphPoint.maxSpeed)
           continue;
 
-        if (newSpeed < 0.1)
+        if (newSpeed < 0)
           continue;
 
         node neighbor = {neighborGraphPoint.point.position, neighborGraphPoint.point.angle, newSpeed};
-        float tentativeGScore = gScore[current] + time(distance, current.speed, newSpeed);
+        if (distance == 0) {
+          if (gScore.find(neighbor) == gScore.end() || gScore[current] < gScore[neighbor]) {
+            cameFrom[neighbor] = current;
+            gScore[neighbor] = gScore[current];
+            fScore[neighbor] = gScore[neighbor] + heuristic(neighbor);
 
-        if (conflicts.find({neighbor.position, tentativeGScore}) != conflicts.end())
+            if (isInOpenSet.find(neighbor) == isInOpenSet.end()) {
+              openSet.push(neighbor);
+              isInOpenSet.insert(neighbor);
+            }
+          }
+          continue;
+        }
+
+        float time = 2 * distance / (current.speed + newSpeed);
+        float tentativeGScore = gScore[current] + time;
+
+        float t = gScore[current];
+        bool isConflict = false;
+        for (auto conflict : conflicts) {
+          if (conflict.time < t - CAR_CBS_TIME_GAP || conflict.time > t + time + CAR_CBS_TIME_GAP)
+            continue;
+
+          Dubins dubins(current, neighbor);
+          CityGraph::point point = dubins.point(conflict.time - t);
+
+          sf::Vector2f diff = point.position - conflict.position;
+
+          if (std::sqrt(diff.x * diff.x + diff.y * diff.y) < CAR_CBS_MIN_SPACING * 5.0f) {
+            isConflict = true;
+            break;
+          }
+        }
+        if (isConflict)
           continue;
 
         if (gScore.find(neighbor) == gScore.end() || tentativeGScore < gScore[neighbor]) {
