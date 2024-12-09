@@ -4,6 +4,13 @@
 #include "utils.h"
 
 #include <iostream>
+#include <random>
+
+Car::Car() {
+  std::vector<sf::Color> colors = {sf::Color(14, 79, 133), sf::Color(215, 199, 203), sf::Color(105, 101, 89),
+                                   sf::Color(182, 18, 34), sf::Color(24, 25, 24),    sf::Color(17, 86, 122)};
+  color = colors[rand() % colors.size()];
+}
 
 void Car::move() {
   if (currentPoint >= (int)path.size())
@@ -26,7 +33,7 @@ void Car::render(sf::RenderWindow &window) {
   if (debug)
     shape.setFillColor(sf::Color(255, 0, 0));
   else
-    shape.setFillColor(sf::Color(80, 112, 156));
+    shape.setFillColor(color);
   window.draw(shape);
 
   if (!debug)
@@ -67,6 +74,7 @@ void Car::assignPath(std::vector<AStar::node> path) {
   for (CityGraph::point point : dubinsPath_) {
     this->path.push_back(point.position);
   }
+  currentPoint = 0;
 }
 
 float Car::getSpeed() {

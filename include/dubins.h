@@ -11,7 +11,8 @@ namespace ob = ompl::base;
 
 class Dubins {
 public:
-  Dubins(AStar::node start, AStar::node end);
+  Dubins(CityGraph::point start, CityGraph::neighbor end); // Running at max speed
+  Dubins(CityGraph::point start, CityGraph::neighbor end, float startSpeed, float endSpeed);
   ~Dubins();
 
   float distance();
@@ -24,10 +25,11 @@ private:
   ob::State *start;
   ob::State *end;
 
-  AStar::node startNode;
-  AStar::node endNode;
+  CityGraph::point startPoint;
+  CityGraph::neighbor endPoint;
+  float startSpeed;
+  float endSpeed;
   float avgSpeed;
-  float radius;
 };
 
 class DubinsPath {

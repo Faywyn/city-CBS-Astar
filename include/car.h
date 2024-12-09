@@ -8,6 +8,8 @@
 
 class Car {
 public:
+  Car();
+
   void assignStartEnd(CityGraph::point start, CityGraph::point end) {
     this->start = start;
     this->end = end;
@@ -37,4 +39,5 @@ private:
   std::vector<sf::Vector2f> path;
   int currentPoint = 0;
   bool debug = false;
+  sf::Color color;
 };

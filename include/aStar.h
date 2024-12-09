@@ -3,19 +3,18 @@
 #include "cityGraph.h"
 
 typedef struct _aStarNode {
-  sf::Vector2f position;
-  float angle;
+  CityGraph::point point;
   float speed;
 
-  bool operator==(const _aStarNode &other) const {
-    return position == other.position && angle == other.angle && std::abs(speed - other.speed) < 0.5;
-  }
+  std::pair<CityGraph::point, CityGraph::neighbor> arcFrom;
+  bool start = false;
+
+  bool operator==(const _aStarNode &other) const { return point == other.point && std::abs(speed - other.speed) < 0.1; }
 } _aStarNode;
 
 typedef struct _aStarConflict {
   sf::Vector2f position;
   float time;
-  int car;
 
   bool operator==(const _aStarConflict &other) const {
     return std::pow(position.x - other.position.x, 2) + std::pow(position.y - other.position.y, 2) < 0.1 &&
@@ -26,11 +25,7 @@ typedef struct _aStarConflict {
 namespace std {
 template <> struct hash<_aStarNode> {
   std::size_t operator()(const _aStarNode &point) const {
-    float x = point.position.x;
-    float y = point.position.y;
-    float angle = point.angle;
-
-    return std::hash<float>()(x) ^ std::hash<float>()(y) ^ std::hash<float>()(angle);
+    return std::hash<CityGraph::point>()(point.point) ^ std::hash<float>()(point.speed);
   }
 };
 template <> struct hash<_aStarConflict> {
@@ -49,11 +44,12 @@ public:
   using node = _aStarNode;
   using conflict = _aStarConflict;
 
-  AStar(CityGraph::point start, CityGraph::point end, const CityGraph &cityGraph);
+  AStar(CityGraph::point start, CityGraph::point end, const CityGraph &cityGraph,
+        const std::vector<conflict> conflicts = {});
 
-  std::vector<node> findPath(std::unordered_set<conflict> conflicts = {}) {
+  std::vector<node> findPath() {
     if (!processed)
-      process(conflicts);
+      process();
     return path;
   }
 
@@ -62,7 +58,8 @@ private:
   node start;
   node end;
   std::vector<node> path;
+  std::vector<conflict> conflicts;
   CityGraph graph;
 
-  void process(std::unordered_set<conflict> conflicts = {});
+  void process();
 };

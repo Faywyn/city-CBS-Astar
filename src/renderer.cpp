@@ -39,6 +39,7 @@ void Renderer::startRender(const CityMap &cityMap, const CityGraph &cityGraph, M
   };
 
   resetView();
+  time.restart();
 
   sf::Clock clockCars;
 
@@ -118,6 +119,7 @@ void Renderer::startRender(const CityMap &cityMap, const CityGraph &cityGraph, M
       window.draw(rectangle);
     }
 
+    renderTime();
     window.display();
   }
 }
@@ -276,3 +278,21 @@ void Renderer::renderCityGraph(const CityGraph &cityGraph, const sf::View &view)
 }
 
 void Renderer::renderManager(Manager &manager) { manager.renderCars(window); }
+
+void Renderer::renderTime() {
+  // At the top right corner of the view (keep the same size even if the view is resized)
+  sf::Text text;
+  sf::Font font = loadFont();
+  sf::Vector2f viewSize = window.getView().getSize();
+  text.setFont(font);
+  text.setCharacterSize(24);
+  text.setFillColor(sf::Color::White);
+  text.setPosition(window.getView().getCenter() + sf::Vector2f(viewSize.x / 2, -viewSize.y / 2) +
+                   sf::Vector2f(-viewSize.x * 0.01f, viewSize.y * 0.01f));
+  text.setString(std::to_string((int)time.getElapsedTime().asSeconds()) + " s");
+  text.setOutlineColor(sf::Color::Black);
+  text.setOutlineThickness(1.0f);
+  text.scale(viewSize.x * 0.001f, viewSize.x * 0.001f);
+  text.setOrigin(text.getLocalBounds().width, 0);
+  window.draw(text);
+}

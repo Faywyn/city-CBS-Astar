@@ -177,6 +177,7 @@ void CityGraph::createGraph(const CityMap &cityMap) {
       if (can) {
         neighbor.maxSpeed = speed;
         neighbor.distance = distance;
+        neighbor.turningRadius = turningRadius(speed);
         newNeighbors.push_back(neighbor);
       }
     }

@@ -35,7 +35,7 @@ void Manager::createCarsCBS(int numCars) {
     car.assignPath(path);
   }
 
-  std::cout << "Starting CBS" << std::endl;
+  spdlog::info("Initial paths assigned to cars");
 
   std::priority_queue<CBSNode> openSet;
 
@@ -62,45 +62,35 @@ void Manager::createCarsCBS(int numCars) {
     std::vector<std::vector<AStar::conflict>> constraints = node.constraints;
     float cost = node.cost;
     int depth = node.depth;
-    int maxPathLength = 0;
-    for (int i = 0; i < numCars; i++) {
-      maxPathLength = std::max(maxPathLength, (int)paths[i].size());
-    }
 
     int car1, car2;
+    sf::Vector2f p1, p2;
     float time;
-    sf::Vector2f position;
-    bool conflict = hasConflict(paths, &car1, &car2, &time, &position);
+    bool conflict = hasConflict(paths, &car1, &car2, &p1, &p2, &time);
 
     if (!conflict) {
       spdlog::info("Resolved all conflicts");
       break;
     }
 
+    std::cout << "Conflict between cars " << car1 << " and " << car2 << " at " << p1.x << ", " << p1.y << " and "
+              << p2.x << ", " << p2.y << " at time " << time << " | Cost: " << cost << " | Depth: " << depth
+              << std::endl;
+
     // Resolve conflict
     for (int iCar = 0; iCar < 2; iCar++) {
       int car = iCar == 0 ? car1 : car2;
-
       float newCost = cost - cars[car].getRemainingTime(true);
-      std::cout << "New cost: " << newCost << std::endl;
 
       AStar::conflict newConflict;
-      newConflict.car = car;
-      newConflict.position = position;
+      newConflict.position = iCar == 0 ? p2 : p1;
       newConflict.time = time;
 
       std::vector<AStar::conflict> newConstraints = node.constraints[car];
       newConstraints.push_back(newConflict);
 
-      AStar aStar(cars[car].getStart(), cars[car].getEnd(), graph);
-      std::vector<AStar::node> newPath =
-          aStar.findPath(std::unordered_set<AStar::conflict>(newConstraints.begin(), newConstraints.end()));
-
-      std::cout << car << " has " << newConstraints.size() << " constraints" << std::endl;
-      for (auto constraint : newConstraints) {
-        std::cout << "- Constraint: " << constraint.position.x << ", " << constraint.position.y << ", "
-                  << constraint.time << std::endl;
-      }
+      AStar aStar(cars[car].getStart(), cars[car].getEnd(), graph, newConstraints);
+      std::vector<AStar::node> newPath = aStar.findPath();
 
       if (newPath.empty()) {
         continue;
@@ -115,16 +105,13 @@ void Manager::createCarsCBS(int numCars) {
       newNode.cost = newCost + cars[car].getRemainingTime(true);
       newNode.depth = depth + 1;
 
-      std::cout << "New node cost: " << newNode.cost << std::endl;
-
       openSet.push(newNode);
-      std::cout << "Pushed new node with cost " << newNode.cost << " and depth " << newNode.depth << std::endl;
     }
   }
 }
 
-bool Manager::hasConflict(std::vector<std::vector<sf::Vector2f>> paths, int *car1, int *car2, float *time,
-                          sf::Vector2f *position) {
+bool Manager::hasConflict(std::vector<std::vector<sf::Vector2f>> paths, int *car1, int *car2, sf::Vector2f *p1,
+                          sf::Vector2f *p2, float *time) {
   int maxPathLength = 0;
   int numCars = (int)paths.size();
   for (int i = 0; i < numCars; i++) {
@@ -143,8 +130,9 @@ bool Manager::hasConflict(std::vector<std::vector<sf::Vector2f>> paths, int *car
         if (distance < CAR_CBS_MIN_SPACING) {
           *car1 = i;
           *car2 = j;
+          *p1 = paths[i][t];
+          *p2 = paths[j][t];
           *time = t * SIM_STEP_TIME;
-          *position = (paths[i][t] + paths[j][t]) / 2.0f;
           return true;
         }
       }

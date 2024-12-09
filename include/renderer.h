@@ -12,9 +12,11 @@ public:
   void renderCityMap(const CityMap &cityMap);
   void renderCityGraph(const CityGraph &cityGraph, const sf::View &view);
   void renderManager(Manager &manager);
+  void renderTime();
 
 private:
   sf::RenderWindow window;
+  sf::Clock time;
 
   bool debug = false;
 };

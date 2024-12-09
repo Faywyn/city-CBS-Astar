@@ -33,8 +33,8 @@ public:
   void toggleCarDebug(sf::Vector2f mousePos);
 
 private:
-  bool hasConflict(std::vector<std::vector<sf::Vector2f>> paths, int *car1, int *car2, float *time,
-                   sf::Vector2f *position);
+  bool hasConflict(std::vector<std::vector<sf::Vector2f>> paths, int *car1, int *car2, sf::Vector2f *p1,
+                   sf::Vector2f *p2, float *time);
 
   std::vector<Car> cars;
   CityGraph graph;

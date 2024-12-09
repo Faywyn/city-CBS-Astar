@@ -21,6 +21,7 @@ typedef struct _cityGraphPoint {
 typedef struct _cityGraphNeighbor {
   _cityGraphPoint point;
   float maxSpeed;
+  float turningRadius;
   float distance;
 } _cityGraphNeighbor;
 
