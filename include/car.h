@@ -14,19 +14,22 @@ public:
     this->start = start;
     this->end = end;
   }
+  void chooseRandomStartEndPath(CityGraph &graph, CityMap &cityMap);
   void assignPath(std::vector<AStar::node> path);
 
   void move();
   void render(sf::RenderWindow &window);
 
+  bool colidesWith(Car &car, double time);
+
   // Getters
   CityGraph::point getStart() { return start; }
   CityGraph::point getEnd() { return end; }
-  float getSpeed();
-  float getRemainingDistance();
-  float getRemainingTime(bool fromStart = false);
-  float getElapsedTime();
-  float getElapsedDistance();
+  double getSpeed();
+  double getRemainingDistance();
+  double getRemainingTime(bool fromStart = false);
+  double getElapsedTime();
+  double getElapsedDistance();
   sf::Vector2f getPosition() { return path[currentPoint]; }
   std::vector<sf::Vector2f> getPath() { return path; }
 

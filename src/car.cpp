@@ -41,7 +41,7 @@ void Car::render(sf::RenderWindow &window) {
 
   // Render speed, elapsed time, remaining time, and distance
   int speed = (int)(getSpeed() * 3.6f);
-  int dSpeed = (getSpeed() * 3.6f - (float)speed) * 100;
+  int dSpeed = (getSpeed() * 3.6f - (double)speed) * 100;
   sf::Font font = loadFont();
   sf::Text text;
   text.setFont(font);
@@ -77,7 +77,7 @@ void Car::assignPath(std::vector<AStar::node> path) {
   currentPoint = 0;
 }
 
-float Car::getSpeed() {
+double Car::getSpeed() {
   if (currentPoint >= (int)path.size() - 1)
     return 0;
 
@@ -85,11 +85,11 @@ float Car::getSpeed() {
   return sqrt(diff.x * diff.x + diff.y * diff.y) / SIM_STEP_TIME;
 }
 
-float Car::getRemainingDistance() {
+double Car::getRemainingDistance() {
   if (currentPoint >= (int)path.size() - 1)
     return 0;
 
-  float dist = 0;
+  double dist = 0;
   for (int i = currentPoint; i < (int)path.size() - 1; i++) {
     sf::Vector2f diff = path[i + 1] - path[i];
     dist += sqrt(diff.x * diff.x + diff.y * diff.y);
@@ -98,8 +98,8 @@ float Car::getRemainingDistance() {
   return dist;
 }
 
-float Car::getElapsedDistance() {
-  float dist = 0;
+double Car::getElapsedDistance() {
+  double dist = 0;
   for (int i = 0; i < currentPoint; i++) {
     sf::Vector2f diff = path[i + 1] - path[i];
     dist += sqrt(diff.x * diff.x + diff.y * diff.y);
@@ -108,5 +108,79 @@ float Car::getElapsedDistance() {
   return dist;
 }
 
-float Car::getRemainingTime(bool fromStart) { return (path.size() - (fromStart ? 0 : currentPoint)) * SIM_STEP_TIME; }
-float Car::getElapsedTime() { return currentPoint * SIM_STEP_TIME; }
+double Car::getRemainingTime(bool fromStart) {
+  if (fromStart) {
+    return (double)path.size() * SIM_STEP_TIME;
+  }
+  return (double)(path.size() - currentPoint) * SIM_STEP_TIME;
+}
+double Car::getElapsedTime() { return currentPoint * SIM_STEP_TIME; }
+
+void Car::chooseRandomStartEndPath(CityGraph &graph, CityMap &cityMap) {
+  CityGraph::point start;
+  CityGraph::point end;
+
+  std::vector<AStar::node> path;
+
+  do {
+    path.clear();
+    start = graph.getRandomPoint();
+    end = graph.getRandomPoint();
+
+    if (std::sqrt(std::pow(start.position.x - end.position.x, 2) + std::pow(start.position.y - end.position.y, 2)) <
+        100)
+      continue;
+
+    bool valid = true;
+    for (auto i : cityMap.getIntersections()) {
+      sf::Vector2f diff = i.center - start.position;
+      double distance = std::sqrt(diff.x * diff.x + diff.y * diff.y);
+      if (distance < i.radius * 2) {
+        valid = false;
+        break;
+      }
+    }
+    if (!valid)
+      continue;
+
+    AStar aStar(start, end, graph);
+    path = aStar.findPath();
+
+    if (!path.empty() && (int)path.size() >= 3) {
+      TimedAStar timedAStar(start, end, graph);
+      path.clear();
+      path = timedAStar.findPath();
+    }
+  } while (path.empty() || (int)path.size() < 3);
+
+  this->assignStartEnd(start, end);
+  this->assignPath(path);
+}
+
+bool Car::colidesWith(Car &car, double t) {
+  int tIndex = (int)(t / SIM_STEP_TIME);
+
+  std::vector<sf::Vector2f> pathOther = car.getPath();
+  if (tIndex >= (int)path.size() - 1)
+    return false;
+
+  double angle = atan2(path[tIndex + 1].y - path[tIndex].y, path[tIndex + 1].x - path[tIndex].x);
+  double angleOther =
+      atan2(pathOther[tIndex + 1].y - pathOther[tIndex].y, pathOther[tIndex + 1].x - pathOther[tIndex].x);
+
+  sf::Vector2f p1 = path[tIndex] + sf::Vector2f(CAR_LENGTH / 2.0f * cos(angle), CAR_LENGTH / 2.0f * sin(angle));
+  sf::Vector2f p2 = path[tIndex] - sf::Vector2f(CAR_LENGTH / 2.0f * cos(angle), CAR_LENGTH / 2.0f * sin(angle));
+  sf::Vector2f p1O =
+      pathOther[tIndex] + sf::Vector2f(CAR_LENGTH / 2.0f * cos(angleOther), CAR_LENGTH / 2.0f * sin(angleOther));
+  sf::Vector2f p2O =
+      pathOther[tIndex] - sf::Vector2f(CAR_LENGTH / 2.0f * cos(angleOther), CAR_LENGTH / 2.0f * sin(angleOther));
+
+  bool colides = false;
+
+  colides |= std::sqrt(std::pow(p1.x - p1O.x, 2) + std::pow(p1.y - p1O.y, 2)) < CAR_LENGTH / 2.0f;
+  colides |= std::sqrt(std::pow(p1.x - p2O.x, 2) + std::pow(p1.y - p2O.y, 2)) < CAR_LENGTH / 2.0f;
+  colides |= std::sqrt(std::pow(p2.x - p1O.x, 2) + std::pow(p2.y - p1O.y, 2)) < CAR_LENGTH / 2.0f;
+  colides |= std::sqrt(std::pow(p2.x - p2O.x, 2) + std::pow(p2.y - p2O.y, 2)) < CAR_LENGTH / 2.0f;
+
+  return colides;
+}

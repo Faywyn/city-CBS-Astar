@@ -22,7 +22,7 @@ endif()
 set(CMAKE_CXX_FLAGS_DEBUG "-g -Wall -Wextra")
 
 # Release flags: Optimize for speed, disable debugging symbols, and prioritize performance
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
+set(CMAKE_CXX_FLAGS_RELEASE "-Ofast -DNDEBUG")
 
 find_package(Boost REQUIRED)
 
@@ -72,6 +72,7 @@ add_executable(${PROJECT_NAME}
   src/cityGraph.cpp
   src/renderer.cpp
   src/aStar.cpp
+  src/timedAStar.cpp
   src/car.cpp
   src/manager.cpp
   src/managerCBS.cpp

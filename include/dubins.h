@@ -11,13 +11,14 @@ namespace ob = ompl::base;
 
 class Dubins {
 public:
-  Dubins(CityGraph::point start, CityGraph::neighbor end); // Running at max speed
-  Dubins(CityGraph::point start, CityGraph::neighbor end, float startSpeed, float endSpeed);
+  Dubins(CityGraph::point start, CityGraph::neighbor end);                    // Running at max speed
+  Dubins(CityGraph::point start, CityGraph::neighbor end, double startSpeed); // Accelerating
+  Dubins(CityGraph::point start, CityGraph::neighbor end, double startSpeed, double endSpeed);
   ~Dubins();
 
-  float distance();
-  float time();
-  CityGraph::point point(float time);
+  double distance();
+  double time();
+  CityGraph::point point(double time);
   std::vector<CityGraph::point> path();
 
 private:
@@ -27,9 +28,11 @@ private:
 
   CityGraph::point startPoint;
   CityGraph::neighbor endPoint;
-  float startSpeed;
-  float endSpeed;
-  float avgSpeed;
+  double startSpeed;
+  double endSpeed;
+  double avgSpeed;
+
+  double distance_ = -1;
 };
 
 class DubinsPath {

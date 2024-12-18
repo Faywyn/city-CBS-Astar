@@ -4,7 +4,27 @@
 Dubins::Dubins(CityGraph::point start, CityGraph::neighbor end)
     : Dubins(start, end, CAR_MAX_SPEED_MS, CAR_MAX_SPEED_MS) {}
 
-Dubins::Dubins(CityGraph::point start, CityGraph::neighbor end, float startSpeed, float endSpeed) {
+Dubins::Dubins(CityGraph::point start, CityGraph::neighbor end, double startSpeed)
+    : Dubins(start, end, startSpeed, CAR_MAX_SPEED_MS) {
+
+  // // The distance needed to reach the maximum speed
+  // double distanceToMaxSpeed = (std::pow(CAR_MAX_SPEED_MS, 2) - std::pow(startSpeed, 2)) / (2 * CAR_ACCELERATION);
+  //
+  // double dist = distance();
+  // if (dist == 0) {
+  //   this->avgSpeed = CAR_MAX_SPEED_MS;
+  //   return;
+  // }
+  //
+  // if (dist < distanceToMaxSpeed) {
+  //   this->avgSpeed = CAR_MAX_SPEED_MS;
+  // } else {
+  //   double avg = (startSpeed + CAR_MAX_SPEED_MS) / 2;
+  //   this->avgSpeed = (avg * distanceToMaxSpeed + CAR_MAX_SPEED_MS * (dist - distanceToMaxSpeed)) / dist;
+  // }
+}
+
+Dubins::Dubins(CityGraph::point start, CityGraph::neighbor end, double startSpeed, double endSpeed) {
   this->startPoint = start;
   this->endPoint = end;
   this->startSpeed = startSpeed;
@@ -32,25 +52,41 @@ Dubins::~Dubins() {
   delete space;
 }
 
-float Dubins::distance() { return space->distance(start, end); }
-float Dubins::time() { return this->distance() / avgSpeed; }
+double Dubins::distance() {
+  sf::Vector2f diff = endPoint.point.position - startPoint.position;
+  double distance = std::sqrt(diff.x * diff.x + diff.y * diff.y);
+  return distance;
 
-CityGraph::point Dubins::point(float time) {
-  float distance = this->distance();
-  float acc = (endSpeed - startSpeed) / this->time();
-  auto xFun = [distance, acc, this](float t) { return (0.5f * acc * t * t + this->startSpeed * t) / distance; };
+  if (distance_ > 0)
+    return distance_;
+  distance_ = space->distance(start, end);
+  return distance_;
+}
+
+double Dubins::time() { return this->distance() / avgSpeed; }
+
+CityGraph::point Dubins::point(double time) {
+  double distance = this->distance();
+  double acc = (std::pow(endSpeed, 2) - std::pow(startSpeed, 2)) / (2 * distance);
+  auto xFun = [distance, acc, this](double t) { return (0.5 * acc * t * t + this->startSpeed * t) / distance; };
+
+  CityGraph::point pointR;
+  pointR.angle = 0;
+  pointR.position = startPoint.position * (float)(1 - xFun(time)) + endPoint.point.position * (float)xFun(time);
+
+  return pointR;
 
   ob::State *state = space->allocState();
   space->interpolate(start, end, xFun(time), state);
 
-  float x = state->as<ob::DubinsStateSpace::StateType>()->getX();
-  float y = state->as<ob::DubinsStateSpace::StateType>()->getY();
-  float yaw = state->as<ob::DubinsStateSpace::StateType>()->getYaw();
+  double x = state->as<ob::DubinsStateSpace::StateType>()->getX();
+  double y = state->as<ob::DubinsStateSpace::StateType>()->getY();
+  double yaw = state->as<ob::DubinsStateSpace::StateType>()->getYaw();
 
   space->freeState(state);
 
   CityGraph::point point;
-  point.position = {x, y};
+  point.position = {(float)x, (float)y};
   point.angle = yaw;
 
   return point;
@@ -58,8 +94,8 @@ CityGraph::point Dubins::point(float time) {
 
 std::vector<CityGraph::point> Dubins::path() {
   std::vector<CityGraph::point> path;
-  float time = this->time();
-  for (float t = 0; t < time; t += SIM_STEP_TIME) {
+  double time = this->time();
+  for (double t = 0; t < time; t += SIM_STEP_TIME) {
     path.push_back(this->point(t));
   }
 
@@ -77,8 +113,8 @@ std::vector<CityGraph::point> DubinsPath::path() {
 
 void DubinsPath::process() {
   pathProcessed_.clear();
-  float t = 0;
-  float prevTime = 0;
+  double t = 0;
+  double prevTime = 0;
 
   for (int i = 1; i < (int)path_.size(); i++) {
     AStar::node prevNode = path_[i - 1];
@@ -88,7 +124,11 @@ void DubinsPath::process() {
     CityGraph::neighbor end = node.arcFrom.second;
 
     Dubins dubins(start, end, prevNode.speed, node.speed);
-    float time = dubins.time();
+    double time = dubins.time();
+
+    if (t >= prevTime + time) {
+      continue;
+    }
 
     while (t < prevTime + time) {
       pathProcessed_.push_back(dubins.point(t - prevTime));

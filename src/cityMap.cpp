@@ -230,7 +230,7 @@ void CityMap::loadFile(const std::string &filename) {
           is_i = intersections[i].id < intersections[j].id;
         }
 
-        float minSpace = intersections[i].radius + intersections[j].radius;
+        double minSpace = intersections[i].radius + intersections[j].radius;
         minSpace /= distCoef;
 
         if (distance(intersections[i].center, intersections[j].center) < minSpace) {
@@ -255,15 +255,15 @@ void CityMap::loadFile(const std::string &filename) {
   spdlog::debug("Adding offsets to the roads ...");
   for (auto &i : intersections) {
     for (auto &roadInfo : i.roadSegmentIds) {
-      float dx =
+      double dx =
           roads[roadInfo.first].segments[roadInfo.second].p2.x - roads[roadInfo.first].segments[roadInfo.second].p1.x;
-      float dy =
+      double dy =
           roads[roadInfo.first].segments[roadInfo.second].p2.y - roads[roadInfo.first].segments[roadInfo.second].p1.y;
-      float dd = distance({0, 0}, {dx, dy});
+      double dd = distance({0, 0}, {(float)dx, (float)dy});
       dx /= dd;
       dy /= dd;
 
-      float radius = i.radius;
+      double radius = i.radius;
 
       if (distance(roads[roadInfo.first].segments[roadInfo.second].p1, i.center) <
           distance(roads[roadInfo.first].segments[roadInfo.second].p2, i.center)) {

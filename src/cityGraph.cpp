@@ -27,7 +27,7 @@ void CityGraph::createGraph(const CityMap &cityMap) {
     for (const auto &segment : road.segments) {
       if (numSeg > 0) { // Link to the previous one
         for (int i_lane = 0; i_lane < road.numLanes; i_lane++) {
-          float offset = ((float)i_lane - (float)road.numLanes / 2.0f) * road.width / road.numLanes;
+          double offset = ((double)i_lane - (double)road.numLanes / 2.0f) * road.width / road.numLanes;
           offset += road.width / (2 * road.numLanes);
 
           point point1;
@@ -47,17 +47,17 @@ void CityGraph::createGraph(const CityMap &cityMap) {
       }
       numSeg++;
 
-      float segmentLength =
+      double segmentLength =
           sqrt(pow(segment.p2_offset.x - segment.p1_offset.x, 2) + pow(segment.p2_offset.y - segment.p1_offset.y, 2));
-      float pointDistance = 10;
+      double pointDistance = 15;
       int numPoints = segmentLength / pointDistance;
-      float dx_s = (segment.p2_offset.x - segment.p1_offset.x) / numPoints;
-      float dy_s = (segment.p2_offset.y - segment.p1_offset.y) / numPoints;
-      float dx_a = sin(segment.angle);
-      float dy_a = -cos(segment.angle);
+      double dx_s = (segment.p2_offset.x - segment.p1_offset.x) / numPoints;
+      double dy_s = (segment.p2_offset.y - segment.p1_offset.y) / numPoints;
+      double dx_a = sin(segment.angle);
+      double dy_a = -cos(segment.angle);
 
       for (int i_lane = 0; i_lane < road.numLanes; i_lane++) {
-        float offset = ((float)i_lane - (float)road.numLanes / 2.0f) * road.width / road.numLanes;
+        double offset = ((double)i_lane - (double)road.numLanes / 2.0f) * road.width / road.numLanes;
         offset += road.width / (2 * road.numLanes);
 
         if (numPoints == 0) {
@@ -80,9 +80,9 @@ void CityGraph::createGraph(const CityMap &cityMap) {
           point1.angle = segment.angle;
 
           if (i > 0) {
-            if (i == 1 || i == numPoints || i % 3 == 0) { // Connect to the previous on the other lane
+            if (i == 1 || i == numPoints || i % 2 == 0) { // Connect to the previous on the other lane
               for (int i2_lane = 0; i2_lane < road.numLanes; i2_lane++) {
-                float offset2 = ((float)i2_lane - (float)road.numLanes / 2.0f) * road.width / road.numLanes;
+                double offset2 = ((double)i2_lane - (double)road.numLanes / 2.0f) * road.width / road.numLanes;
                 offset2 += road.width / (2 * road.numLanes);
 
                 point point2;
@@ -129,11 +129,11 @@ void CityGraph::createGraph(const CityMap &cityMap) {
                               : segment2.p2_offset;
 
         for (int iL_1 = 0; iL_1 < road1.numLanes; iL_1++) {
-          float offset1 = ((float)iL_1 - (float)road1.numLanes / 2.0f) * road1.width / road1.numLanes;
+          double offset1 = ((double)iL_1 - (double)road1.numLanes / 2.0f) * road1.width / road1.numLanes;
           offset1 += road1.width / (2 * road1.numLanes);
 
           for (int iL_2 = 0; iL_2 < road2.numLanes; iL_2++) {
-            float offset2 = ((float)iL_2 - (float)road2.numLanes / 2.0f) * road2.width / road2.numLanes;
+            double offset2 = ((double)iL_2 - (double)road2.numLanes / 2.0f) * road2.width / road2.numLanes;
             offset2 += road2.width / (2 * road2.numLanes);
 
             point point1_offset;
@@ -158,9 +158,9 @@ void CityGraph::createGraph(const CityMap &cityMap) {
   // Remove all the neighbors that need to turn too much
   for (auto &point : graphPoints) {
     std::vector<neighbor> newNeighbors;
-    float distance;
+    double distance;
     for (auto &neighbor : neighbors[point]) {
-      float speed = CAR_MIN_TURNING_RADIUS;
+      double speed = CAR_MIN_TURNING_RADIUS;
       bool can = canLink(point, neighbor.point, speed, &distance);
 
       if (!can)
@@ -175,8 +175,11 @@ void CityGraph::createGraph(const CityMap &cityMap) {
       }
 
       if (can) {
+        spdlog::warn("In cityGraph.cpp: restore the valid distance calculation");
         neighbor.maxSpeed = speed;
-        neighbor.distance = distance;
+        neighbor.distance = std::sqrt(std::pow(neighbor.point.position.x - point.position.x, 2) +
+                                      std::pow(neighbor.point.position.y - point.position.y, 2));
+
         neighbor.turningRadius = turningRadius(speed);
         newNeighbors.push_back(neighbor);
       }
@@ -190,8 +193,8 @@ void CityGraph::createGraph(const CityMap &cityMap) {
 }
 
 void CityGraph::linkPoints(const point &p, const point &n) {
-  std::vector<float> anglesPoint = {normalizeAngle(p.angle), normalizeAngle(p.angle + M_PI)};
-  std::vector<float> anglesNeighbor = {normalizeAngle(n.angle), normalizeAngle(n.angle + M_PI)};
+  std::vector<double> anglesPoint = {normalizeAngle(p.angle), normalizeAngle(p.angle + M_PI)};
+  std::vector<double> anglesNeighbor = {normalizeAngle(n.angle), normalizeAngle(n.angle + M_PI)};
 
   point copyPoint = p;
   point copyNeighbor = n;
@@ -201,8 +204,8 @@ void CityGraph::linkPoints(const point &p, const point &n) {
       copyPoint.angle = anglePoint;
       copyNeighbor.angle = angleNeighbor;
 
-      neighbors[copyPoint].push_back({copyNeighbor, 0, 0}); // This fields will be updated later
-      neighbors[copyNeighbor].push_back({copyPoint, 0, 0});
+      neighbors[copyPoint].push_back({copyNeighbor, 0, 0, 0}); // This fields will be updated later
+      neighbors[copyNeighbor].push_back({copyPoint, 0, 0, 0});
 
       graphPoints.insert(copyPoint);
       graphPoints.insert(copyNeighbor);
@@ -221,8 +224,8 @@ CityGraph::point CityGraph::getRandomPoint() const {
   return *it;
 }
 
-bool CityGraph::canLink(const point &point1, const point &point2, float speed, float *distance) const {
-  float radius = turningRadius(speed);
+bool CityGraph::canLink(const point &point1, const point &point2, double speed, double *distance) const {
+  double radius = turningRadius(speed);
 
   ob::DubinsStateSpace space(radius);
 
@@ -237,7 +240,7 @@ bool CityGraph::canLink(const point &point1, const point &point2, float speed, f
 
   *distance = space.distance(start, end);
 
-  float total = 0;
+  double total = 0;
 
   // Extract the path
   ob::DubinsStateSpace::DubinsPath path = space.dubins(start, end);

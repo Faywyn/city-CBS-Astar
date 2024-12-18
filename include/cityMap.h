@@ -9,13 +9,13 @@ typedef struct {
   sf::Vector2f p2;
   sf::Vector2f p1_offset; // For intersections radius
   sf::Vector2f p2_offset; // For intersections radius
-  float angle;
+  double angle;
 } _cityMapSegment;
 
 typedef struct {
   int id;
   std::vector<_cityMapSegment> segments;
-  float width;
+  double width;
   int numLanes;
 } _cityMapRoad;
 
@@ -26,7 +26,7 @@ typedef struct {
 typedef struct {
   int id;
   sf::Vector2f center;
-  float radius;
+  double radius;
   std::vector<std::pair<int, int>> roadSegmentIds; // (roadId, segmentId)
                                                    // so their will be 2 segments per road (for each direction)
 } _cityMapIntersection;
@@ -63,6 +63,6 @@ private:
 
   sf::Vector2f minLatLon;
   sf::Vector2f maxLatLon;
-  float width;  // in meters
-  float height; // in meters
+  double width;  // in meters
+  double height; // in meters
 };

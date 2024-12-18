@@ -12,16 +12,21 @@ public:
   void renderCityMap(const CityMap &cityMap);
   void renderCityGraph(const CityGraph &cityGraph, const sf::View &view);
   void renderManager(Manager &manager);
+  void renderConflicts();
   void renderTime();
+
+  void setConflicts(const std::vector<AStar::conflict> &conflicts) { this->conflicts = conflicts; }
 
 private:
   sf::RenderWindow window;
-  sf::Clock time;
+  double time;
+
+  std::vector<AStar::conflict> conflicts;
 
   bool debug = false;
 };
 
-inline void drawArrow(sf::RenderWindow &window, sf::Vector2f position, float rotation, float length, float thickness,
+inline void drawArrow(sf::RenderWindow &window, sf::Vector2f position, double rotation, double length, double thickness,
                       sf::Color color = sf::Color::Red, bool outline = false) {
   sf::ConvexShape arrow;
 

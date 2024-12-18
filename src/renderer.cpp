@@ -18,17 +18,16 @@ namespace ob = ompl::base;
 
 void Renderer::startRender(const CityMap &cityMap, const CityGraph &cityGraph, Manager &manager) {
   window.create(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "City Map");
-  window.setFramerateLimit(60);
 
   // Set the view to the center of the city map, allowing some basic camera movement
   // Arrow to move the camera, + and - to zoom in and out
-  float height = cityMap.getHeight();
-  float width = cityMap.getWidth();
+  double height = cityMap.getHeight();
+  double width = cityMap.getWidth();
   sf::View view(sf::FloatRect(0, 0, width, height));
   // Reset view function
   auto resetView = [&]() {
-    float screenRatio = window.getSize().x / (float)window.getSize().y;
-    float cityRatio = width / height;
+    double screenRatio = window.getSize().x / (double)window.getSize().y;
+    double cityRatio = width / height;
     view.setCenter(width / 2, height / 2);
     if (screenRatio > cityRatio) {
       view.setSize(height * screenRatio, height);
@@ -39,9 +38,11 @@ void Renderer::startRender(const CityMap &cityMap, const CityGraph &cityGraph, M
   };
 
   resetView();
-  time.restart();
+  time = 0;
 
   sf::Clock clockCars;
+  bool speedUp = false;
+  bool pause = true;
 
   while (true) {
     sf::Event event;
@@ -89,6 +90,12 @@ void Renderer::startRender(const CityMap &cityMap, const CityGraph &cityGraph, M
           debug = !debug;
           spdlog::debug("Debug mode: {}", debug);
         }
+        if (event.key.code == sf::Keyboard::S) {
+          speedUp = !speedUp;
+        }
+        if (event.key.code == sf::Keyboard::P) {
+          pause = !pause;
+        }
       }
 
       // If resizing the window, reset the view
@@ -101,9 +108,14 @@ void Renderer::startRender(const CityMap &cityMap, const CityGraph &cityGraph, M
     window.clear(sf::Color(247, 246, 242));
     renderCityMap(cityMap);
     renderManager(manager);
-    if (clockCars.getElapsedTime().asMilliseconds() > SIM_STEP_TIME) {
-      manager.moveCars();
-      clockCars.restart();
+    renderConflicts();
+    if (!pause) {
+      if (clockCars.getElapsedTime().asSeconds() > SIM_STEP_TIME ||
+          (speedUp && clockCars.getElapsedTime().asSeconds() > SIM_STEP_TIME / 5)) {
+        time += SIM_STEP_TIME;
+        manager.moveCars();
+        clockCars.restart();
+      }
     }
     if (debug) {
       renderCityGraph(cityGraph, view);
@@ -112,8 +124,10 @@ void Renderer::startRender(const CityMap &cityMap, const CityGraph &cityGraph, M
     sf::RectangleShape rectangle(sf::Vector2f(width, height));
     rectangle.setFillColor(sf::Color(247, 246, 242));
 
-    std::vector<sf::Vector2f> border = {{-width, -height}, {0, -height}, {width, -height}, {width, 0},
-                                        {width, height},   {0, height},  {-width, height}, {-width, 0}};
+    float w = width;
+    float h = height;
+
+    std::vector<sf::Vector2f> border = {{-w, -h}, {0, -h}, {w, -h}, {w, 0}, {w, h}, {0, h}, {-w, h}, {-w, 0}};
     for (auto b : border) {
       rectangle.setPosition(b);
       window.draw(rectangle);
@@ -150,10 +164,10 @@ void Renderer::renderCityMap(const CityMap &cityMap) {
       sf::Vector2f basedP1(segment.p1.x, segment.p1.y);
       sf::Vector2f basedP2(segment.p2.x, segment.p2.y);
 
-      float angle = segment.angle;
+      double angle = segment.angle;
 
       sf::Vector2f widthVec(sin(angle), -cos(angle));
-      widthVec *= road.width / 2;
+      widthVec *= (float)road.width / 2;
 
       sf::Vector2f p1 = basedP1 + widthVec;
       sf::Vector2f p2 = basedP1 - widthVec;
@@ -172,7 +186,7 @@ void Renderer::renderCityMap(const CityMap &cityMap) {
       window.draw(convex);
 
       // Draw a circle at the start end end of the road (for filling the gap)
-      float radius = road.width / 2;
+      double radius = road.width / 2;
       sf::CircleShape circle(radius);
       circle.setFillColor(sf::Color(155, 162, 163));
       circle.setPosition(basedP1.x - radius, basedP1.y - radius);
@@ -185,7 +199,7 @@ void Renderer::renderCityMap(const CityMap &cityMap) {
   // Draw intersections
   if (debug) {
     for (const auto &intersection : cityMap.getIntersections()) {
-      float radius = intersection.radius;
+      double radius = intersection.radius;
       sf::CircleShape circle(radius);
       circle.setFillColor(sf::Color(0, 255, 0, 50));
       circle.setPosition(intersection.center.x - radius, intersection.center.y - radius);
@@ -202,7 +216,7 @@ void Renderer::renderCityGraph(const CityGraph &cityGraph, const sf::View &view)
   for (const auto &point : graphPoints) {
     for (const auto &neighbor : neighbors[point]) {
 
-      float radius = turningRadius(neighbor.maxSpeed);
+      double radius = turningRadius(neighbor.maxSpeed);
       auto space = ob::DubinsStateSpace(radius);
       ob::RealVectorBounds bounds(2);
       space.setBounds(bounds);
@@ -230,8 +244,8 @@ void Renderer::renderCityGraph(const CityGraph &cityGraph, const sf::View &view)
       end->as<ob::DubinsStateSpace::StateType>()->setYaw(neighbor.point.angle);
 
       // Draw the Dubins curve
-      float step = CELL_SIZE / 2.0f;
-      float distance = space.distance(start, end);
+      double step = CELL_SIZE / 2.0f;
+      double distance = space.distance(start, end);
       int numSteps = distance / step;
       sf::Vector2f lastPosition;
 
@@ -242,18 +256,18 @@ void Renderer::renderCityGraph(const CityGraph &cityGraph, const sf::View &view)
         }
 
         ob::State *state = space.allocState();
-        space.interpolate(start, end, (float)k / (float)numSteps, state);
+        space.interpolate(start, end, (double)k / (double)numSteps, state);
 
-        float x = state->as<ob::DubinsStateSpace::StateType>()->getX();
-        float y = state->as<ob::DubinsStateSpace::StateType>()->getY();
+        double x = state->as<ob::DubinsStateSpace::StateType>()->getX();
+        double y = state->as<ob::DubinsStateSpace::StateType>()->getY();
 
-        float distance = std::sqrt(std::pow(x - lastPosition.x, 2) + std::pow(y - lastPosition.y, 2));
-        float angle = atan2(y - lastPosition.y, x - lastPosition.x) * 180 / M_PI;
+        double distance = std::sqrt(std::pow(x - lastPosition.x, 2) + std::pow(y - lastPosition.y, 2));
+        double angle = atan2(y - lastPosition.y, x - lastPosition.x) * 180 / M_PI;
 
         // Draw an arrow between the points
         drawArrow(window, lastPosition, angle, distance / 2, distance / 4, sf::Color(0, 0, 255, 50), false);
 
-        lastPosition = {x, y};
+        lastPosition = {(float)x, (float)y};
       }
 
       // Write the speed of the point
@@ -289,10 +303,19 @@ void Renderer::renderTime() {
   text.setFillColor(sf::Color::White);
   text.setPosition(window.getView().getCenter() + sf::Vector2f(viewSize.x / 2, -viewSize.y / 2) +
                    sf::Vector2f(-viewSize.x * 0.01f, viewSize.y * 0.01f));
-  text.setString(std::to_string((int)time.getElapsedTime().asSeconds()) + " s");
+  text.setString(std::to_string((int)time) + " s");
   text.setOutlineColor(sf::Color::Black);
   text.setOutlineThickness(1.0f);
   text.scale(viewSize.x * 0.001f, viewSize.x * 0.001f);
   text.setOrigin(text.getLocalBounds().width, 0);
   window.draw(text);
+}
+
+void Renderer::renderConflicts() {
+  for (auto conflict : conflicts) {
+    sf::CircleShape circle(5);
+    circle.setFillColor(sf::Color(255, 0, 0, 50));
+    circle.setPosition(conflict.position.x - 5, conflict.position.y - 5);
+    window.draw(circle);
+  }
 }
