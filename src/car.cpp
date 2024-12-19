@@ -69,6 +69,7 @@ void Car::render(sf::RenderWindow &window) {
 
 void Car::assignPath(std::vector<AStar::node> path) {
   this->path.clear();
+  this->aStarPath = path;
   DubinsPath dubins(path);
   std::vector<CityGraph::point> dubinsPath_ = dubins.path();
   for (CityGraph::point point : dubinsPath_) {
@@ -177,10 +178,10 @@ bool Car::colidesWith(Car &car, double t) {
 
   bool colides = false;
 
-  colides |= std::sqrt(std::pow(p1.x - p1O.x, 2) + std::pow(p1.y - p1O.y, 2)) < CAR_LENGTH / 2.0f;
-  colides |= std::sqrt(std::pow(p1.x - p2O.x, 2) + std::pow(p1.y - p2O.y, 2)) < CAR_LENGTH / 2.0f;
-  colides |= std::sqrt(std::pow(p2.x - p1O.x, 2) + std::pow(p2.y - p1O.y, 2)) < CAR_LENGTH / 2.0f;
-  colides |= std::sqrt(std::pow(p2.x - p2O.x, 2) + std::pow(p2.y - p2O.y, 2)) < CAR_LENGTH / 2.0f;
+  colides |= std::sqrt(std::pow(p1.x - p1O.x, 2) + std::pow(p1.y - p1O.y, 2)) < CAR_LENGTH * 1.1;
+  colides |= std::sqrt(std::pow(p1.x - p2O.x, 2) + std::pow(p1.y - p2O.y, 2)) < CAR_LENGTH * 1.1;
+  colides |= std::sqrt(std::pow(p2.x - p1O.x, 2) + std::pow(p2.y - p1O.y, 2)) < CAR_LENGTH * 1.1;
+  colides |= std::sqrt(std::pow(p2.x - p2O.x, 2) + std::pow(p2.y - p2O.y, 2)) < CAR_LENGTH * 1.1;
 
   return colides;
 }

@@ -17,6 +17,9 @@ void CityGraph::createGraph(const CityMap &cityMap) {
   auto roads = cityMap.getRoads();
   auto intersections = cityMap.getIntersections();
 
+  this->height = cityMap.getHeight();
+  this->width = cityMap.getWidth();
+
   // Graph's points are evenly distributed along a road segment
   for (const auto &road : roads) {
     if (road.segments.empty()) {
@@ -80,22 +83,13 @@ void CityGraph::createGraph(const CityMap &cityMap) {
           point1.angle = segment.angle;
 
           if (i > 0) {
-            if (i == 1 || i == numPoints || i % 2 == 0) { // Connect to the previous on the other lane
-              for (int i2_lane = 0; i2_lane < road.numLanes; i2_lane++) {
-                double offset2 = ((double)i2_lane - (double)road.numLanes / 2.0f) * road.width / road.numLanes;
-                offset2 += road.width / (2 * road.numLanes);
+            for (int i2_lane = 0; i2_lane < road.numLanes; i2_lane++) {
+              double offset2 = ((double)i2_lane - (double)road.numLanes / 2.0f) * road.width / road.numLanes;
+              offset2 += road.width / (2 * road.numLanes);
 
-                point point2;
-                point2.position = sf::Vector2f(segment.p1_offset.x + (i - 1) * dx_s + offset2 * dx_a,
-                                               segment.p1_offset.y + (i - 1) * dy_s + offset2 * dy_a);
-                point2.angle = segment.angle;
-
-                linkPoints(point1, point2);
-              }
-            } else { // Or just the previous on the same lane
               point point2;
-              point2.position = sf::Vector2f(segment.p1_offset.x + (i - 1) * dx_s + offset * dx_a,
-                                             segment.p1_offset.y + (i - 1) * dy_s + offset * dy_a);
+              point2.position = sf::Vector2f(segment.p1_offset.x + (i - 1) * dx_s + offset2 * dx_a,
+                                             segment.p1_offset.y + (i - 1) * dy_s + offset2 * dy_a);
               point2.angle = segment.angle;
 
               linkPoints(point1, point2);
@@ -160,7 +154,7 @@ void CityGraph::createGraph(const CityMap &cityMap) {
     std::vector<neighbor> newNeighbors;
     double distance;
     for (auto &neighbor : neighbors[point]) {
-      double speed = CAR_MIN_TURNING_RADIUS;
+      double speed = turningRadiusToSpeed(CAR_MIN_TURNING_RADIUS);
       bool can = canLink(point, neighbor.point, speed, &distance);
 
       if (!can)
@@ -175,10 +169,14 @@ void CityGraph::createGraph(const CityMap &cityMap) {
       }
 
       if (can) {
-        spdlog::warn("In cityGraph.cpp: restore the valid distance calculation");
         neighbor.maxSpeed = speed;
+        // spdlog::warn("In cityGraph.cpp: restore the valid distance calculation");
         neighbor.distance = std::sqrt(std::pow(neighbor.point.position.x - point.position.x, 2) +
                                       std::pow(neighbor.point.position.y - point.position.y, 2));
+
+        // neighbor.distance = std::min(neighbor.distance * 1.3, distance);
+
+        std::cout << distance << " - " << neighbor.distance << std::endl;
 
         neighbor.turningRadius = turningRadius(speed);
         newNeighbors.push_back(neighbor);
@@ -238,8 +236,6 @@ bool CityGraph::canLink(const point &point1, const point &point2, double speed, 
   end->as<ob::DubinsStateSpace::StateType>()->setXY(point2.position.x, point2.position.y);
   end->as<ob::DubinsStateSpace::StateType>()->setYaw(point2.angle);
 
-  *distance = space.distance(start, end);
-
   double total = 0;
 
   // Extract the path
@@ -254,5 +250,6 @@ bool CityGraph::canLink(const point &point1, const point &point2, double speed, 
     }
   }
 
+  *distance = space.distance(start, end);
   return total < M_PI * 0.75f;
 }

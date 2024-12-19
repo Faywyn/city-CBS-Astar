@@ -25,4 +25,6 @@ inline double normalizeAngle(double angle) { // -PI to PI
 
 inline double turningRadius(double speed) { return speed * speed / CAR_MAX_G_FORCE; }
 
+inline double turningRadiusToSpeed(double radius) { return std::sqrt(radius * CAR_MAX_G_FORCE); }
+
 sf::Font loadFont();

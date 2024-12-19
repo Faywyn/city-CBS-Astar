@@ -67,6 +67,8 @@ public:
   std::unordered_map<point, std::vector<neighbor>> getNeighbors() const { return neighbors; }
   std::unordered_set<point> getGraphPoints() const { return graphPoints; }
   point getRandomPoint() const;
+  double getHeight() const { return height; }
+  double getWidth() const { return width; }
 
 private:
   std::unordered_map<point, std::vector<neighbor>> neighbors;
@@ -74,4 +76,7 @@ private:
 
   void linkPoints(const point &point1, const point &point2);
   bool canLink(const point &point1, const point &point2, double speed, double *distance) const;
+
+  double width;
+  double height;
 };

@@ -26,7 +26,7 @@ int main() {
 
   Manager manager(cityGraph, cityMap);
   // manager.createCarsAStar(20);
-  manager.createCarsCBS(10);
+  manager.createCarsCBS(15);
 
   Renderer renderer;
   renderer.startRender(cityMap, cityGraph, manager);
