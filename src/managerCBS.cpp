@@ -28,8 +28,7 @@ NodeProcessingResult processNode(Manager::CBSNode node, Manager &manager, int nu
   double time;
   bool conflict = manager.hasConflict(paths, &car1, &car2, &p1, &p2, &time);
 
-  std::cout << "Conflict between cars " << car1 << " and " << car2 << " at " << p1.x << ", " << p1.y << " and " << p2.x
-            << ", " << p2.y << " at time " << time << " | Cost: " << cost << " | Depth: " << depth << std::endl;
+  spdlog::debug("Conflict at Time {} | Cost: {} | Depth: {}", time, cost, depth);
 
   if (!conflict) {
     result.solutionFound = true;

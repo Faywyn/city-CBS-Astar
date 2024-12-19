@@ -53,13 +53,8 @@ Dubins::~Dubins() {
 }
 
 double Dubins::distance() {
-  // sf::Vector2f diff = endPoint.point.position - startPoint.position;
-  // double distance = std::sqrt(diff.x * diff.x + diff.y * diff.y);
-  // return distance;
-
   if (distance_ > 0)
     return distance_;
-  // distance_ = space->distance(start, end);
   distance_ = std::sqrt(std::pow(endPoint.point.position.x - startPoint.position.x, 2) +
                         std::pow(endPoint.point.position.y - startPoint.position.y, 2));
   return distance_;
@@ -71,12 +66,6 @@ CityGraph::point Dubins::point(double time) {
   double distance = this->distance();
   double acc = (std::pow(endSpeed, 2) - std::pow(startSpeed, 2)) / (2 * distance);
   auto xFun = [distance, acc, this](double t) { return (0.5 * acc * t * t + this->startSpeed * t) / distance; };
-
-  // CityGraph::point pointR;
-  // pointR.angle = 0;
-  // pointR.position = startPoint.position * (float)(1 - xFun(time)) + endPoint.point.position * (float)xFun(time);
-  //
-  // return pointR;
 
   ob::State *state = space->allocState();
   space->interpolate(start, end, xFun(time), state);

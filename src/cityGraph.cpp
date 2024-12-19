@@ -170,13 +170,8 @@ void CityGraph::createGraph(const CityMap &cityMap) {
 
       if (can) {
         neighbor.maxSpeed = speed;
-        // spdlog::warn("In cityGraph.cpp: restore the valid distance calculation");
         neighbor.distance = std::sqrt(std::pow(neighbor.point.position.x - point.position.x, 2) +
                                       std::pow(neighbor.point.position.y - point.position.y, 2));
-
-        // neighbor.distance = std::min(neighbor.distance * 1.3, distance);
-
-        std::cout << distance << " - " << neighbor.distance << std::endl;
 
         neighbor.turningRadius = turningRadius(speed);
         newNeighbors.push_back(neighbor);
