@@ -77,6 +77,7 @@ add_executable(${PROJECT_NAME}
   src/manager.cpp
   src/managerCBS.cpp
   src/dubins.cpp
+  src/fileSelector.cpp
   src/utils.cpp
 )
 

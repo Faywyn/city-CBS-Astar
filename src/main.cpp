@@ -3,12 +3,21 @@
 
 #include "cityMap.h"
 #include "config.h"
+#include "fileSelector.h"
 #include "manager.h"
 #include "renderer.h"
 #include "test.h"
 
-int main() {
+int main(int nArgs, char **args) {
   spdlog::set_pattern("[%d-%m-%C %H:%M:%S.%e] [%^%l%$] [thread %t] %v");
+
+  int numCars = 5;
+  if (nArgs > 1) {
+    numCars = std::stoi(args[1]);
+  }
+
+  FileSelector fileSelector("assets/map");
+  std::string mapFile = fileSelector.selectFile();
 
   if (ENVIRONMENT == 0) {
     spdlog::set_level(spdlog::level::debug);
@@ -19,14 +28,17 @@ int main() {
   }
 
   CityMap cityMap;
-  cityMap.loadFile("assets/map/map01.osm");
+  cityMap.loadFile("assets/map/" + mapFile);
 
   CityGraph cityGraph;
   cityGraph.createGraph(cityMap);
 
   Manager manager(cityGraph, cityMap);
-  // manager.createCarsAStar(20);
-  manager.createCarsCBS(30);
+  if (nArgs > 2 && std::string(args[2]) == "cbs") {
+    manager.createCarsCBS(numCars);
+  } else {
+    manager.createCarsAStar(numCars);
+  }
 
   Renderer renderer;
   renderer.startRender(cityMap, cityGraph, manager);
