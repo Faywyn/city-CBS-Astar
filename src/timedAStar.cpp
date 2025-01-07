@@ -25,7 +25,6 @@ void TimedAStar::process() {
   std::unordered_map<AStar::node, double> fScore;
 
   auto heuristic = [&](const AStar::node &a) {
-    return 0.0;
     CityGraph::neighbor end_;
     end_.point = end.point;
     end_.maxSpeed = CAR_MAX_SPEED_MS;
@@ -78,15 +77,19 @@ void TimedAStar::process() {
 
       if (nSpeedAcc > neighborGraphPoint.maxSpeed && current.speed < neighborGraphPoint.maxSpeed) {
         newSpeeds.push_back(neighborGraphPoint.maxSpeed);
+        newSpeeds.push_back((current.speed + neighborGraphPoint.maxSpeed) / 2);
       } else if (nSpeedAcc < neighborGraphPoint.maxSpeed) {
         newSpeeds.push_back(nSpeedAcc);
+        newSpeeds.push_back((current.speed + nSpeedAcc) / 2);
       }
 
       if (nSpeedDec == nSpeedDec && std::isfinite(nSpeedDec)) {
         if (nSpeedDec < 0 && current.speed > 0) {
           newSpeeds.push_back(0);
+          newSpeeds.push_back((current.speed + 0) / 2);
         } else if (nSpeedDec >= 0) {
           newSpeeds.push_back(nSpeedDec);
+          newSpeeds.push_back((current.speed + nSpeedDec) / 2);
         }
       }
 

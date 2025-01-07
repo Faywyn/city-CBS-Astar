@@ -7,6 +7,7 @@ typedef struct _aStarNode {
   double speed;
 
   std::pair<CityGraph::point, CityGraph::neighbor> arcFrom;
+  bool notMoving = false;
   bool start = false;
 
   bool operator==(const _aStarNode &other) const {

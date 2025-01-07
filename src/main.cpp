@@ -19,14 +19,14 @@ int main() {
   }
 
   CityMap cityMap;
-  cityMap.loadFile("assets/map/map03.osm");
+  cityMap.loadFile("assets/map/map01.osm");
 
   CityGraph cityGraph;
   cityGraph.createGraph(cityMap);
 
   Manager manager(cityGraph, cityMap);
   // manager.createCarsAStar(20);
-  manager.createCarsCBS(15);
+  manager.createCarsCBS(30);
 
   Renderer renderer;
   renderer.startRender(cityMap, cityGraph, manager);

@@ -7,9 +7,7 @@
 #include "cityGraph.h"
 
 typedef struct _managerCBSNode {
-  std::vector<CityGraph::point> starts;                  // Start points for all agents
-  std::vector<CityGraph::point> ends;                    // End points for all agents
-  std::vector<std::vector<AStar::node>> paths;           // Paths for all agents
+  std::vector<std::vector<sf::Vector2f>> paths;          // Paths for all agents
   std::vector<std::vector<AStar::conflict>> constraints; // Constraints for all agents
   double cost;                                           // Total cost (sum of individual path costs)
   int depth;                                             // Depth in the CBS tree
@@ -34,7 +32,7 @@ public:
 
   void toggleCarDebug(sf::Vector2f mousePos);
 
-  bool hasConflict(std::vector<std::vector<AStar::node>> paths, int *car1, int *car2, sf::Vector2f *p1,
+  bool hasConflict(std::vector<std::vector<sf::Vector2f>> paths, int *car1, int *car2, sf::Vector2f *p1,
                    sf::Vector2f *p2, double *time);
 
 private:

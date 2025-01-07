@@ -21,7 +21,7 @@ void Manager::createCarsAStar(int numCars) {
       for (int j = 0; j < i; j++) {
         sf::Vector2f diffStart = cars[j].getStart().position - cars[i].getStart().position;
         double distanceStart = std::sqrt(std::pow(diffStart.x, 2) + std::pow(diffStart.y, 2));
-        if (distanceStart < 10) {
+        if (distanceStart < 15) {
           cars[i].chooseRandomStartEndPath(graph, map);
           j = 0;
           valid = false;
