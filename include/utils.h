@@ -1,6 +1,8 @@
 #pragma once
-#include "cityMap.h"
 #include "config.h"
+#include <SFML/Graphics.hpp>
+
+class Car;
 
 inline sf::Vector2f latLonToXY(double lat, double lon) {
   sf::Vector2f xy;
@@ -26,5 +28,8 @@ inline double normalizeAngle(double angle) { // -PI to PI
 inline double turningRadius(double speed) { return speed * speed / CAR_MAX_G_FORCE; }
 
 inline double turningRadiusToSpeed(double radius) { return std::sqrt(radius * CAR_MAX_G_FORCE); }
+
+bool carsCollided(Car car1, Car car2, int time);
+bool carConflict(sf::Vector2f carPos, double carAngle, sf::Vector2f confPos, double confAngle);
 
 sf::Font loadFont();

@@ -14,7 +14,6 @@ namespace ob = ompl::base;
 AStar::AStar(CityGraph::point start, CityGraph::point end, const CityGraph &cityGraph) {
   this->start.point = start;
   this->start.speed = 0;
-  this->start.start = true;
   this->end.point = end;
   this->end.speed = 0;
   this->graph = cityGraph;
@@ -55,7 +54,7 @@ void AStar::process() {
     if (current.point == end.point) {
       AStar::node currentCopy = current;
 
-      while (!currentCopy.start) {
+      while (!(currentCopy == start)) {
         path.push_back(currentCopy);
         currentCopy = cameFrom[currentCopy];
       }

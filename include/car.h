@@ -20,8 +20,6 @@ public:
   void move();
   void render(sf::RenderWindow &window);
 
-  bool colidesWith(Car &car, double time);
-
   // Getters
   CityGraph::point getStart() { return start; }
   CityGraph::point getEnd() { return end; }

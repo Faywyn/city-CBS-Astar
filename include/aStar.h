@@ -7,41 +7,42 @@ typedef struct _aStarNode {
   double speed;
 
   std::pair<CityGraph::point, CityGraph::neighbor> arcFrom;
-  bool notMoving = false;
-  bool start = false;
 
   bool operator==(const _aStarNode &other) const {
     double s = std::round(speed / SPEED_RESOLUTION);
     double oS = std::round(other.speed / SPEED_RESOLUTION);
 
-    return point == other.point && arcFrom.first == other.arcFrom.first && arcFrom.second == other.arcFrom.second &&
-           s == oS;
+    return point == other.point && s == oS && arcFrom.first == other.arcFrom.first &&
+           arcFrom.second == other.arcFrom.second;
   }
 } _aStarNode;
 
 typedef struct _aStarConflict {
-  sf::Vector2f position;
+  CityGraph::point point;
   double time;
 
   bool operator==(const _aStarConflict &other) const {
     double t = std::round(time / TIME_RESOLUTION);
     double oT = std::round(other.time / TIME_RESOLUTION);
 
-    return position == other.position && t == oT;
+    return point == other.point && t == oT;
   }
 } _aStarConflict;
 
 namespace std {
 template <> struct hash<_aStarNode> {
-  std::size_t operator()(const _aStarNode &point) const { return std::hash<CityGraph::point>()(point.point); }
+  std::size_t operator()(const _aStarNode &point) const {
+    double s = std::round(point.speed / SPEED_RESOLUTION);
+
+    return std::hash<CityGraph::point>()(point.point) ^ std::hash<double>()(s) ^
+           std::hash<CityGraph::point>()(point.arcFrom.first) ^ std::hash<CityGraph::neighbor>()(point.arcFrom.second);
+  }
 };
 template <> struct hash<_aStarConflict> {
   std::size_t operator()(const _aStarConflict &conflict) const {
     double t = std::round(conflict.time / TIME_RESOLUTION);
-    double x = std::round(conflict.position.x / CELL_SIZE);
-    double y = std::round(conflict.position.y / CELL_SIZE);
 
-    return std::hash<double>()(x) ^ std::hash<double>()(y) ^ std::hash<double>()(t);
+    return std::hash<CityGraph::point>()(conflict.point) ^ std::hash<double>()(t);
   }
 };
 } // namespace std

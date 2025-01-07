@@ -1,5 +1,6 @@
 #include "manager.h"
 #include "renderer.h"
+#include "utils.h"
 
 #include <iostream>
 #include <optional>
@@ -38,8 +39,8 @@ void Manager::createCarsCBS(int numCars) {
 
     int car1, car2;
     sf::Vector2f p1, p2;
-    double time;
-    bool conflict = hasConflict(paths, &car1, &car2, &p1, &p2, &time);
+    double a1, a2, time;
+    bool conflict = hasConflict(paths, &car1, &car2, &p1, &p2, &a1, &a2, &time);
 
     if (!conflict) {
       spdlog::info("Resolved all conflicts");
@@ -57,13 +58,14 @@ void Manager::createCarsCBS(int numCars) {
       int car = iCar == 0 ? car1 : car2;
 
       AStar::conflict newConflict;
-      newConflict.position = iCar == 0 ? p2 : p1;
+      newConflict.point.position = iCar == 0 ? p2 : p1;
+      newConflict.point.angle = iCar == 0 ? a2 : a1;
       newConflict.time = time;
 
       // If already in constraints, skip
       bool alreadyInConstraints = false;
       for (AStar::conflict conflict : node.constraints[car]) {
-        if (conflict.position == newConflict.position && conflict.time == newConflict.time) {
+        if (conflict == newConflict) {
           alreadyInConstraints = true;
           break;
         }
@@ -82,18 +84,20 @@ void Manager::createCarsCBS(int numCars) {
         continue;
       }
 
+      double carOldCost = cars[car].getRemainingTime(true);
       cars[car].assignPath(newPath);
+      double carNewCost = cars[car].getRemainingTime(true);
+
       CBSNode newNode;
       newNode.paths = paths;
       newNode.paths[car] = cars[car].getPath();
       newNode.constraints = constraints;
       newNode.constraints[car] = newConstraints;
-      newNode.cost = 0;
+      newNode.cost = cost - carOldCost + carNewCost;
       newNode.depth = depth + 1;
 
-      // Recalculate cost
-      for (int i = 0; i < numCars; i++) {
-        newNode.cost += cars[i].getRemainingTime(true);
+      if (carOldCost > carNewCost) {
+        spdlog::warn("Car {} old cost is higher than new cost, this is unexpected", car);
       }
 
       openSet.push(newNode);
@@ -105,7 +109,7 @@ void Manager::createCarsCBS(int numCars) {
 }
 
 bool Manager::hasConflict(std::vector<std::vector<sf::Vector2f>> paths, int *car1, int *car2, sf::Vector2f *p1,
-                          sf::Vector2f *p2, double *time) {
+                          sf::Vector2f *p2, double *a1, double *a2, double *time) {
   int maxPathLength = 0;
   int numCars = (int)paths.size();
   for (int i = 0; i < numCars; i++) {
@@ -114,21 +118,22 @@ bool Manager::hasConflict(std::vector<std::vector<sf::Vector2f>> paths, int *car
 
   double width = graph.getWidth();
   double height = graph.getHeight();
-  auto outOfBounds = [&](sf::Vector2f p) { return p.x < 0 || p.y < 0 || p.x >= width || p.y >= height; };
+  auto outOfBounds = [&](sf::Vector2f p) { return p.x < 0 || p.y < 0 || p.x > width || p.y > height; };
 
   for (int t = 0; t < maxPathLength; t++) {
     for (int i = 0; i < numCars; i++) {
-      if (t >= (int)paths[i].size() || outOfBounds(paths[i][t]))
+      if (t >= (int)paths[i].size() - 1 || outOfBounds(paths[i][t]))
         continue;
-
       for (int j = i + 1; j < numCars; j++) {
-        if (t >= (int)paths[j].size() || outOfBounds(paths[j][t]))
+        if (t >= (int)paths[j].size() - 1 || outOfBounds(paths[j][t]))
           continue;
-        if (cars[i].colidesWith(cars[j], double(t) * SIM_STEP_TIME)) {
+        if (carsCollided(cars[i], cars[j], t)) {
           *car1 = i;
           *car2 = j;
           *p1 = paths[i][t];
           *p2 = paths[j][t];
+          *a1 = std::atan2(paths[i][t + 1].y - paths[i][t].y, paths[i][t + 1].x - paths[i][t].x);
+          *a2 = std::atan2(paths[j][t + 1].y - paths[j][t].y, paths[j][t + 1].x - paths[j][t].x);
           *time = (double)t * SIM_STEP_TIME;
           return true;
         }

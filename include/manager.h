@@ -33,7 +33,7 @@ public:
   void toggleCarDebug(sf::Vector2f mousePos);
 
   bool hasConflict(std::vector<std::vector<sf::Vector2f>> paths, int *car1, int *car2, sf::Vector2f *p1,
-                   sf::Vector2f *p2, double *time);
+                   sf::Vector2f *p2, double *a1, double *a2, double *time);
 
 private:
   std::vector<Car> cars;

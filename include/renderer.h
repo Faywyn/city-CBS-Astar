@@ -12,7 +12,6 @@ public:
   void renderCityMap(const CityMap &cityMap);
   void renderCityGraph(const CityGraph &cityGraph, const sf::View &view);
   void renderManager(Manager &manager);
-  void renderConflicts();
   void renderTime();
 
   void setConflicts(const std::vector<AStar::conflict> &conflicts) { this->conflicts = conflicts; }

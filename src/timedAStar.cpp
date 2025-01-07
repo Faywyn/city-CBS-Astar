@@ -10,7 +10,6 @@ TimedAStar::TimedAStar(CityGraph::point start, CityGraph::point end, const CityG
                        const std::vector<AStar::conflict> conflicts) {
   this->start.point = start;
   this->start.speed = 0;
-  this->start.start = true;
   this->end.point = end;
   this->end.speed = 0;
   this->graph = cityGraph;
@@ -25,6 +24,8 @@ void TimedAStar::process() {
   std::unordered_map<AStar::node, double> fScore;
 
   auto heuristic = [&](const AStar::node &a) {
+    return 0.0;
+
     CityGraph::neighbor end_;
     end_.point = end.point;
     end_.maxSpeed = CAR_MAX_SPEED_MS;
@@ -52,7 +53,7 @@ void TimedAStar::process() {
     if (current.point == end.point) {
       AStar::node currentCopy = current;
 
-      while (!currentCopy.start) {
+      while (!(currentCopy == start)) {
         path.push_back(currentCopy);
         currentCopy = cameFrom[currentCopy];
       }
@@ -60,9 +61,6 @@ void TimedAStar::process() {
       std::reverse(path.begin(), path.end());
       break;
     }
-
-    if (gScore[current] > 60 * 60 * 5)
-      break;
 
     for (const auto &neighborGraphPoint : neighbors[current.point]) {
       if (current.speed > neighborGraphPoint.maxSpeed)
@@ -123,24 +121,17 @@ void TimedAStar::process() {
         double t = gScore[current];
         bool isConflict = false;
         for (auto conflict : conflicts) {
-          if (conflict.time < t - CAR_CBS_TIME_GAP || conflict.time > t + duration + CAR_CBS_TIME_GAP)
+          if (tentativeGScore + SIM_STEP_TIME < conflict.time || t - SIM_STEP_TIME > conflict.time)
             continue;
 
           Dubins dubins(current.point, neighborGraphPoint, current.speed, newSpeed);
-          double t = conflict.time - gScore[current];
-          std::vector<double> times = {t - CAR_CBS_TIME_GAP, t, t + CAR_CBS_TIME_GAP};
+          double conflictAtAbs = conflict.time - t;
+          conflictAtAbs = std::max(0.0, conflictAtAbs);
+          conflictAtAbs = std::min(duration, conflictAtAbs);
+          CityGraph::point point = dubins.point(conflictAtAbs);
 
-          for (double t : times) {
-            CityGraph::point point = dubins.point(t);
-            sf::Vector2f diff = conflict.position - point.position;
-            double distance = std::sqrt(diff.x * diff.x + diff.y * diff.y);
-
-            if (distance < CAR_LENGTH * 2) {
-              isConflict = true;
-              break;
-            }
-          }
-          if (isConflict) {
+          if (carConflict(point.position, point.angle, conflict.point.position, conflict.point.angle)) {
+            isConflict = true;
             break;
           }
         }

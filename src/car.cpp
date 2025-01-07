@@ -121,6 +121,7 @@ void Car::chooseRandomStartEndPath(CityGraph &graph, CityMap &cityMap) {
   CityGraph::point start;
   CityGraph::point end;
 
+  double minDistance = std::max(graph.getWidth(), graph.getHeight()) / 2.0;
   std::vector<AStar::node> path;
 
   do {
@@ -129,7 +130,7 @@ void Car::chooseRandomStartEndPath(CityGraph &graph, CityMap &cityMap) {
     end = graph.getRandomPoint();
 
     if (std::sqrt(std::pow(start.position.x - end.position.x, 2) + std::pow(start.position.y - end.position.y, 2)) <
-        100)
+        minDistance)
       continue;
 
     bool valid = true;
@@ -156,32 +157,4 @@ void Car::chooseRandomStartEndPath(CityGraph &graph, CityMap &cityMap) {
 
   this->assignStartEnd(start, end);
   this->assignPath(path);
-}
-
-bool Car::colidesWith(Car &car, double t) {
-  int tIndex = (int)(t / SIM_STEP_TIME);
-
-  std::vector<sf::Vector2f> pathOther = car.getPath();
-  if (tIndex >= (int)path.size() - 1)
-    return false;
-
-  double angle = atan2(path[tIndex + 1].y - path[tIndex].y, path[tIndex + 1].x - path[tIndex].x);
-  double angleOther =
-      atan2(pathOther[tIndex + 1].y - pathOther[tIndex].y, pathOther[tIndex + 1].x - pathOther[tIndex].x);
-
-  sf::Vector2f p1 = path[tIndex] + sf::Vector2f(CAR_LENGTH / 2.0f * cos(angle), CAR_LENGTH / 2.0f * sin(angle));
-  sf::Vector2f p2 = path[tIndex] - sf::Vector2f(CAR_LENGTH / 2.0f * cos(angle), CAR_LENGTH / 2.0f * sin(angle));
-  sf::Vector2f p1O =
-      pathOther[tIndex] + sf::Vector2f(CAR_LENGTH / 2.0f * cos(angleOther), CAR_LENGTH / 2.0f * sin(angleOther));
-  sf::Vector2f p2O =
-      pathOther[tIndex] - sf::Vector2f(CAR_LENGTH / 2.0f * cos(angleOther), CAR_LENGTH / 2.0f * sin(angleOther));
-
-  bool colides = false;
-
-  colides |= std::sqrt(std::pow(p1.x - p1O.x, 2) + std::pow(p1.y - p1O.y, 2)) < CAR_LENGTH * 1.1;
-  colides |= std::sqrt(std::pow(p1.x - p2O.x, 2) + std::pow(p1.y - p2O.y, 2)) < CAR_LENGTH * 1.1;
-  colides |= std::sqrt(std::pow(p2.x - p1O.x, 2) + std::pow(p2.y - p1O.y, 2)) < CAR_LENGTH * 1.1;
-  colides |= std::sqrt(std::pow(p2.x - p2O.x, 2) + std::pow(p2.y - p2O.y, 2)) < CAR_LENGTH * 1.1;
-
-  return colides;
 }

@@ -12,7 +12,7 @@ void Test::runTests() {
 void Test::testSpdlog() {
   try {
     spdlog::debug("Testing spdlog...");
-    spdlog::info("spdlog is working as expected.");
+    spdlog::debug("spdlog is working as expected.");
   } catch (const std::exception &e) {
     throw std::runtime_error("spdlog is not working as expected.");
   }

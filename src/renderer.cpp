@@ -108,7 +108,6 @@ void Renderer::startRender(const CityMap &cityMap, const CityGraph &cityGraph, M
     window.clear(sf::Color(247, 246, 242));
     renderCityMap(cityMap);
     renderManager(manager);
-    renderConflicts();
     if (!pause) {
       if (clockCars.getElapsedTime().asSeconds() > SIM_STEP_TIME ||
           (speedUp && clockCars.getElapsedTime().asSeconds() > SIM_STEP_TIME / 5)) {
@@ -309,13 +308,4 @@ void Renderer::renderTime() {
   text.scale(viewSize.x * 0.001f, viewSize.x * 0.001f);
   text.setOrigin(text.getLocalBounds().width, 0);
   window.draw(text);
-}
-
-void Renderer::renderConflicts() {
-  for (auto conflict : conflicts) {
-    sf::CircleShape circle(5);
-    circle.setFillColor(sf::Color(255, 0, 0, 50));
-    circle.setPosition(conflict.position.x - 5, conflict.position.y - 5);
-    window.draw(circle);
-  }
 }

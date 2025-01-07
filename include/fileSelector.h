@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include <termios.h>
 #include <unistd.h>
 #include <vector>
@@ -17,6 +18,7 @@ private:
 
 public:
   FileSelector(const std::string &path) : folderPath(path), selectedIndex(0) { loadFiles(); }
+  ~FileSelector() { std::cout << "\033[?25h"; }
 
   std::string selectFile();
 };

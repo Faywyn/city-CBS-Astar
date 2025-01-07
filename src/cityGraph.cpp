@@ -207,11 +207,17 @@ void CityGraph::linkPoints(const point &p, const point &n) {
 }
 
 CityGraph::point CityGraph::getRandomPoint() const {
+  std::vector<point> graphPointsOut;
+  for (const auto &point : graphPoints) {
+    if (point.position.x < 0 || point.position.x > width || point.position.y < 0 || point.position.y > height)
+      graphPointsOut.push_back(point);
+  }
+
+  auto it = graphPointsOut.begin();
   std::random_device rd;
   std::mt19937 gen(rd());
-  std::uniform_int_distribution<> dis(0, graphPoints.size() - 1);
+  std::uniform_int_distribution<> dis(0, graphPointsOut.size() - 1);
 
-  auto it = graphPoints.begin();
   std::advance(it, dis(gen));
 
   return *it;
