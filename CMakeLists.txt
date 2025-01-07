@@ -77,7 +77,6 @@ add_executable(${PROJECT_NAME}
   src/manager.cpp
   src/managerCBS.cpp
   src/dubins.cpp
-  src/threadPool.cpp
   src/utils.cpp
 )
 

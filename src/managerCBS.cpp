@@ -1,6 +1,5 @@
 #include "manager.h"
 #include "renderer.h"
-#include "threadPool.h"
 
 #include <iostream>
 #include <optional>
