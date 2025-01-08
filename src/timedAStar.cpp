@@ -24,7 +24,9 @@ void TimedAStar::process() {
   std::unordered_map<AStar::node, double> fScore;
 
   auto heuristic = [&](const AStar::node &a) {
-    return 0.0;
+    sf::Vector2f diff = end.point.position - a.point.position;
+    double distance = std::sqrt(diff.x * diff.x + diff.y * diff.y);
+    return distance / CAR_MAX_SPEED_MS;
 
     CityGraph::neighbor end_;
     end_.point = end.point;

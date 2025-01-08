@@ -15,7 +15,7 @@ constexpr double MIN_ROAD_WIDTH = 4.0f;     // in meters
 constexpr double ZOOM_SPEED = 0.1f;
 constexpr double MOVE_SPEED = 0.01f;
 
-constexpr double SIM_STEP_TIME = 0.1f; // in seconds
+constexpr double SIM_STEP_TIME = 0.03f; // in seconds
 
 // For hash functions (to reduce items that are really close to each other -> so equal)
 constexpr double CELL_SIZE = 0.3f;                // in meters

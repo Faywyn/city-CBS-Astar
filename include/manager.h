@@ -9,6 +9,7 @@
 typedef struct _managerCBSNode {
   std::vector<std::vector<sf::Vector2f>> paths;          // Paths for all agents
   std::vector<std::vector<AStar::conflict>> constraints; // Constraints for all agents
+  std::vector<double> costs;                             // Individual path costs
   double cost;                                           // Total cost (sum of individual path costs)
   int depth;                                             // Depth in the CBS tree
 

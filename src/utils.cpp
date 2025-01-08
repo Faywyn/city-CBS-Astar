@@ -19,6 +19,8 @@ sf::Font loadFont() {
 bool carsCollided(Car car1, Car car2, int time) {
   std::vector<sf::Vector2f> path1 = car1.getPath();
   std::vector<sf::Vector2f> path2 = car2.getPath();
+  sf::Vector2f diff = path1[time] - path2[time];
+  return std::sqrt(diff.x * diff.x + diff.y * diff.y) < CAR_LENGTH * 1.1;
 
   sf::Vector2f pos1 = path1[time];
   sf::Vector2f pos2 = path2[time];
@@ -41,6 +43,9 @@ bool carsCollided(Car car1, Car car2, int time) {
 }
 
 bool carConflict(sf::Vector2f carPos, double carAngle, sf::Vector2f confPos, double confAngle) {
+  sf::Vector2f diff = carPos - confPos;
+  return std::sqrt(diff.x * diff.x + diff.y * diff.y) < CAR_LENGTH * 1.1;
+
   sf::Vector2f p11 = carPos + sf::Vector2f(CAR_LENGTH / 2.0f * cos(carAngle), CAR_LENGTH / 2.0f * sin(carAngle));
   sf::Vector2f p12 = carPos - sf::Vector2f(CAR_LENGTH / 2.0f * cos(carAngle), CAR_LENGTH / 2.0f * sin(carAngle));
   sf::Vector2f p21 = confPos + sf::Vector2f(CAR_LENGTH / 2.0f * cos(confAngle), CAR_LENGTH / 2.0f * sin(confAngle));

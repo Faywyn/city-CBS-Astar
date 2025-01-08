@@ -3,11 +3,13 @@
 #include "utils.h"
 
 #include <iostream>
+#include <numeric>
 #include <optional>
 #include <spdlog/spdlog.h>
 
 void Manager::createCarsCBS(int numCars) {
   this->createCarsAStar(numCars);
+  // std::cout << std::endl;
 
   std::priority_queue<CBSNode> openSet;
 
@@ -15,16 +17,32 @@ void Manager::createCarsCBS(int numCars) {
   startNode.paths.resize(numCars);
   startNode.constraints.clear();
   startNode.constraints.resize(numCars);
+  startNode.costs.clear();
+  startNode.costs.resize(numCars);
   startNode.cost = 0;
   startNode.depth = 0;
+
+  double maxCarCost = 0;
 
   for (int i = 0; i < numCars; i++) {
     startNode.paths[i] = cars[i].getPath();
     startNode.constraints[i] = {};
-    startNode.cost += cars[i].getRemainingTime(true);
+
+    double carCost = cars[i].getRemainingTime(true);
+    startNode.costs[i] = carCost;
+    startNode.cost += carCost;
+
+    maxCarCost = std::max(maxCarCost, carCost);
   }
 
   openSet.push(startNode);
+  int nbIterations = 0;
+  int meanNbIterations = 20;
+
+  std::vector<double> meanCosts;
+  std::vector<double> meanDepths;
+  std::vector<double> meanTimes;
+  std::chrono::time_point<std::chrono::high_resolution_clock> start = std::chrono::high_resolution_clock::now();
 
   // While there are conflicts in the paths, resolve them
   bool resolved = false;
@@ -39,19 +57,42 @@ void Manager::createCarsCBS(int numCars) {
 
     int car1, car2;
     sf::Vector2f p1, p2;
+
     double a1, a2, time;
     bool conflict = hasConflict(paths, &car1, &car2, &p1, &p2, &a1, &a2, &time);
 
     if (!conflict) {
       spdlog::info("Resolved all conflicts");
       resolved = true;
+
+      for (int i = 0; i < numCars; i++) {
+        cars[i].assignExistingPath(paths[i]);
+      }
       break;
     }
 
-    spdlog::debug(
-        "Conflict at Time: {:0>6.5} | Cost: {:0>6.5} | Depth: {:0>3} | Car1: {:0>3} | Car2: {:0>3} | Pos1: ({:0>5.4}, "
-        "{:0>5.4}) | Pos2: ({:0>5.4}, {:0>5.4})",
-        time, cost, depth, car1, car2, p1.x, p1.y, p2.x, p2.y);
+    meanCosts.push_back(cost);
+    meanDepths.push_back(depth);
+    meanTimes.push_back(time);
+
+    if (nbIterations++ % meanNbIterations == 0) {
+      double meanCost = std::accumulate(meanCosts.begin(), meanCosts.end(), 0.0) / meanCosts.size();
+      double meanDepth = std::accumulate(meanDepths.begin(), meanDepths.end(), 0.0) / meanDepths.size();
+      double meanTime = std::accumulate(meanTimes.begin(), meanTimes.end(), 0.0) / meanTimes.size();
+
+      std::chrono::time_point<std::chrono::high_resolution_clock> end = std::chrono::high_resolution_clock::now();
+      double duration = std::chrono::duration<double>(end - start).count();
+      double remainingTime = (maxCarCost - meanTime) * (duration / meanTime);
+
+      spdlog::info("Node cost: {:0>6.5} | Node depth: {:0>6.5} | Node conflic time: {:0>6.5} | Elapsed time: {}s | "
+                   "Remaining time: ~{}s",
+                   meanCost, meanDepth, meanTime, (int)duration, (int)remainingTime);
+      std::cout << "\033[A\033[2K\r";
+
+      meanCosts.clear();
+      meanDepths.clear();
+      meanTimes.clear();
+    }
 
     // Resolve conflict
     for (int iCar = 0; iCar < 2; iCar++) {
@@ -84,8 +125,8 @@ void Manager::createCarsCBS(int numCars) {
         continue;
       }
 
-      double carOldCost = cars[car].getRemainingTime(true);
       cars[car].assignPath(newPath);
+      double carOldCost = node.costs[car];
       double carNewCost = cars[car].getRemainingTime(true);
 
       CBSNode newNode;
@@ -93,12 +134,15 @@ void Manager::createCarsCBS(int numCars) {
       newNode.paths[car] = cars[car].getPath();
       newNode.constraints = constraints;
       newNode.constraints[car] = newConstraints;
+      newNode.costs = node.costs;
+      newNode.costs[car] = carNewCost;
       newNode.cost = cost - carOldCost + carNewCost;
       newNode.depth = depth + 1;
 
-      if (carOldCost > carNewCost) {
-        spdlog::warn("Car {} old cost is higher than new cost, this is unexpected", car);
-      }
+      // if (carOldCost > carNewCost) {
+      //   std::cout << "\033[A\033[2K\r";
+      //   spdlog::warn("Car {} old cost: {:0>6.5} | new cost: {:0>6.5}", car, carOldCost, carNewCost);
+      // }
 
       openSet.push(newNode);
     }
@@ -127,7 +171,9 @@ bool Manager::hasConflict(std::vector<std::vector<sf::Vector2f>> paths, int *car
       for (int j = i + 1; j < numCars; j++) {
         if (t >= (int)paths[j].size() - 1 || outOfBounds(paths[j][t]))
           continue;
-        if (carsCollided(cars[i], cars[j], t)) {
+
+        sf::Vector2f diff = paths[i][t] - paths[j][t];
+        if (std::sqrt(diff.x * diff.x + diff.y * diff.y) < CAR_LENGTH * 1.1) {
           *car1 = i;
           *car2 = j;
           *p1 = paths[i][t];

@@ -16,6 +16,7 @@ public:
   }
   void chooseRandomStartEndPath(CityGraph &graph, CityMap &cityMap);
   void assignPath(std::vector<AStar::node> path);
+  void assignExistingPath(std::vector<sf::Vector2f> path);
 
   void move();
   void render(sf::RenderWindow &window);

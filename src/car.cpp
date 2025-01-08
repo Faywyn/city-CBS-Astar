@@ -78,6 +78,11 @@ void Car::assignPath(std::vector<AStar::node> path) {
   currentPoint = 0;
 }
 
+void Car::assignExistingPath(std::vector<sf::Vector2f> path) {
+  this->path = path;
+  currentPoint = 0;
+}
+
 double Car::getSpeed() {
   if (currentPoint >= (int)path.size() - 1)
     return 0;
