@@ -2,7 +2,7 @@
 <osm version="0.6" generator="Custom-OSM-Generator">
     <meta osm_base="2025-01-07T10:00:00Z"/>
 
-<bounds minlat="51.499202" minlon="-0.124543" maxlat="51.500998" maxlon="-0.121657"/>
+    <bounds minlat="51.49965084441251" minlon="-0.12382151969864098" maxlat="51.5005491555875" maxlon="-0.12237848030135902"/>
 
     <!-- Nodes representing the intersection and surrounding road points -->
     <node id="2001" lat="51.5001" lon="-0.1231" version="1" />
