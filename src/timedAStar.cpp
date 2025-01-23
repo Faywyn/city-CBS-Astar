@@ -7,13 +7,14 @@
 #include <unordered_set>
 
 TimedAStar::TimedAStar(CityGraph::point start, CityGraph::point end, const CityGraph &cityGraph,
-                       const std::vector<AStar::conflict> conflicts) {
+                       ConstraintController *conflicts, int carIndex) {
   this->start.point = start;
   this->start.speed = 0;
   this->end.point = end;
   this->end.speed = 0;
   this->graph = cityGraph;
   this->conflicts = conflicts;
+  this->carIndex = carIndex;
 }
 
 void TimedAStar::process() {
@@ -115,31 +116,19 @@ void TimedAStar::process() {
         if (newSpeed > CAR_MAX_SPEED_MS || newSpeed > neighborGraphPoint.maxSpeed || newSpeed < 0)
           continue;
 
+        if (newSpeed == current.speed && newSpeed == 0)
+          continue;
+
         neighbor.speed = newSpeed;
 
         double duration = 2 * distance / (current.speed + newSpeed);
         double tentativeGScore = gScore[current] + duration;
 
         double t = gScore[current];
-        bool isConflict = false;
-        for (auto conflict : conflicts) {
-          if (tentativeGScore + SIM_STEP_TIME < conflict.time || t - SIM_STEP_TIME > conflict.time)
-            continue;
 
-          Dubins dubins(current.point, neighborGraphPoint, current.speed, newSpeed);
-          double conflictAtAbs = conflict.time - t;
-          conflictAtAbs = std::max(0.0, conflictAtAbs);
-          conflictAtAbs = std::min(duration, conflictAtAbs);
-          CityGraph::point point = dubins.point(conflictAtAbs);
-
-          if (carConflict(point.position, point.angle, conflict.point.position, conflict.point.angle)) {
-            isConflict = true;
-            break;
-          }
-        }
-        if (isConflict) {
+        if (conflicts != nullptr &&
+            conflicts->checkConstraints(carIndex, current.speed, newSpeed, t, current.point, neighborGraphPoint))
           continue;
-        }
 
         if (gScore.find(neighbor) == gScore.end() || tentativeGScore < gScore[neighbor]) {
           cameFrom[neighbor] = current;

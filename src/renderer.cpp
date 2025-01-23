@@ -143,6 +143,38 @@ void Renderer::renderCityMap(const CityMap &cityMap) {
       sf::Color(233, 234, 232), sf::Color(238, 231, 210), sf::Color(230, 229, 226), sf::Color(236, 234, 230),
       sf::Color(230, 223, 216), sf::Color(230, 234, 236), sf::Color(210, 215, 222)};
 
+  std::vector<sf::Color> greenAreaColor = {sf::Color(184, 230, 144), sf::Color(213, 240, 193)};
+
+  sf::Color waterColor(139, 214, 245);
+
+  auto greenAreas = cityMap.getGreenAreas();
+  for (int i = 0; i < (int)greenAreas.size(); i++) {
+    const auto &greenArea = greenAreas[i];
+    auto points = greenArea.points;
+    sf::ConvexShape convex;
+    convex.setPointCount(points.size());
+    for (size_t i = 0; i < points.size(); i++) {
+      convex.setPoint(i, sf::Vector2f(points[i].x, points[i].y));
+    }
+    convex.setFillColor(greenAreaColor[greenArea.type]);
+
+    window.draw(convex);
+  }
+
+  auto waterAreas = cityMap.getWaterAreas();
+  for (int i = 0; i < (int)waterAreas.size(); i++) {
+    const auto &waterArea = waterAreas[i];
+    auto points = waterArea.points;
+    sf::ConvexShape convex;
+    convex.setPointCount(points.size());
+    for (size_t i = 0; i < points.size(); i++) {
+      convex.setPoint(i, sf::Vector2f(points[i].x, points[i].y));
+    }
+    convex.setFillColor(waterColor);
+
+    window.draw(convex);
+  }
+
   auto buildings = cityMap.getBuildings();
   for (int i = 0; i < (int)buildings.size(); i++) {
     const auto &building = buildings[i];
@@ -269,6 +301,7 @@ void Renderer::renderCityGraph(const CityGraph &cityGraph, const sf::View &view)
         lastPosition = {(float)x, (float)y};
       }
 
+      continue;
       // Write the speed of the point
       sf::Text text;
       sf::Font font;

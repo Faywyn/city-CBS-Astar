@@ -13,3 +13,4 @@ CMakeUserPresets.json
 .cache
 build/
 .DS_Store
+Entitlements.plist

@@ -24,6 +24,15 @@ typedef struct {
 } _cityMapBuilding;
 
 typedef struct {
+  std::vector<sf::Vector2f> points;
+  int type;
+} _cityMapGreenArea;
+
+typedef struct {
+  std::vector<sf::Vector2f> points;
+} _cityMapWaterArea;
+
+typedef struct {
   int id;
   sf::Vector2f center;
   double radius;
@@ -36,10 +45,11 @@ public:
   using segment = _cityMapSegment;
   using road = _cityMapRoad;
   using building = _cityMapBuilding;
+  using greenArea = _cityMapGreenArea;
+  using waterArea = _cityMapWaterArea;
   using intersection = _cityMapIntersection;
 
   CityMap();
-  ~CityMap();
 
   void loadFile(const std::string &filename);
   bool isCityMapLoaded() const { return isLoaded; }
@@ -48,6 +58,8 @@ public:
   std::vector<road> getRoads() const { return roads; }
   std::vector<intersection> getIntersections() const { return intersections; }
   std::vector<building> getBuildings() const { return buildings; }
+  std::vector<greenArea> getGreenAreas() const { return greenAreas; }
+  std::vector<waterArea> getWaterAreas() const { return waterAreas; }
   sf::Vector2f getMinLatLon() const { return minLatLon; }
   sf::Vector2f getMaxLatLon() const { return maxLatLon; }
 
@@ -60,6 +72,8 @@ private:
   std::vector<road> roads;
   std::vector<intersection> intersections;
   std::vector<building> buildings;
+  std::vector<greenArea> greenAreas;
+  std::vector<waterArea> waterAreas;
 
   sf::Vector2f minLatLon;
   sf::Vector2f maxLatLon;

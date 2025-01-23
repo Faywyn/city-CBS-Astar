@@ -3,32 +3,35 @@
 #include <string>
 
 constexpr int ENVIRONMENT = 0; // 0 = development, 1 = production
-constexpr int SCREEN_WIDTH = 1920 / 2;
-constexpr int SCREEN_HEIGHT = 1080 / 2;
+constexpr int SCREEN_WIDTH = 1920;
+constexpr int SCREEN_HEIGHT = 1080;
+constexpr double LOG_CBS_REFRESHRATE = 0.3; // in seconds
 
 constexpr int EARTH_RADIUS = 6371000; // in meters
 
-constexpr double DEFAULT_ROAD_WIDTH = 7.0f; // in meters
-constexpr double DEFAULT_LANE_WIDTH = 3.5f; // in meters
-constexpr double MIN_ROAD_WIDTH = 4.0f;     // in meters
+constexpr double DEFAULT_ROAD_WIDTH = 7.0; // in meters
+constexpr double DEFAULT_LANE_WIDTH = 3.5; // in meters
+constexpr double MIN_ROAD_WIDTH = 4.0;     // in meters
 
-constexpr double ZOOM_SPEED = 0.1f;
-constexpr double MOVE_SPEED = 0.01f;
+constexpr double ZOOM_SPEED = 0.1;
+constexpr double MOVE_SPEED = 0.01;
 
-constexpr double SIM_STEP_TIME = 0.03f; // in seconds
+constexpr double SIM_STEP_TIME = 0.03; // in seconds
+constexpr int CBS_PRECISION_FACTOR = 1;
+constexpr double CBS_MAX_SUB_TIME = 60; // in seconds
 
 // For hash functions (to reduce items that are really close to each other -> so equal)
-constexpr double CELL_SIZE = 0.3f;                // in meters
-constexpr double SPEED_RESOLUTION = 0.5f;         // in m/s
-constexpr double ANGLE_RESOLUTION = 0.2f;         // in radians
+constexpr double CELL_SIZE = 0.5;                 // in meters
+constexpr double SPEED_RESOLUTION = 1;            // in m/s
+constexpr double ANGLE_RESOLUTION = 0.2;          // in radians
 constexpr double TIME_RESOLUTION = SIM_STEP_TIME; // in seconds
 
-constexpr double CAR_MIN_TURNING_RADIUS = 4.0f;              // in meters
-constexpr double CAR_MAX_SPEED_KM = 50.0f;                   // in km/h
-constexpr double CAR_MAX_SPEED_MS = CAR_MAX_SPEED_KM / 3.6f; // in m/s
-constexpr double CAR_MAX_G_FORCE = 9.0f;                     // in m/s^2
-constexpr double CAR_ACCELERATION = 5.0f;                    // in m/s^2
-constexpr double CAR_DECELERATION = 3.0f;                    // in m/s^2
-constexpr double CAR_LENGTH = 4.2f;                          // in meters
-constexpr double CAR_WIDTH = 1.6f;                           // in meters
-constexpr double CAR_CBS_MIN_SPACING = 2.0f;                 // in meters
+constexpr double CAR_MIN_TURNING_RADIUS = 1.5;                // in meters
+constexpr double CAR_MAX_SPEED_KM = 50.0;                     // in km/h
+constexpr double CAR_MAX_SPEED_MS = CAR_MAX_SPEED_KM / 3.6;   // in m/s
+constexpr double CAR_MAX_G_FORCE = 5.0;                       // in m/s^2
+constexpr double CAR_ACCELERATION = 3.0;                      // in m/s^2
+constexpr double CAR_DECELERATION = 4.0;                      // in m/s^2
+constexpr double CAR_LENGTH = 4.2;                            // in meters
+constexpr double CAR_WIDTH = 1.6;                             // in meters
+constexpr int CAR_CBS_TIME_RANGE = CBS_PRECISION_FACTOR * 10; // in seconds (at least CBS_PRECISION_FACTOR)

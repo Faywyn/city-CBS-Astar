@@ -52,14 +52,6 @@ Dubins::~Dubins() {
   delete space;
 }
 
-double Dubins::distance() {
-  if (distance_ > 0)
-    return distance_;
-  distance_ = std::sqrt(std::pow(endPoint.point.position.x - startPoint.position.x, 2) +
-                        std::pow(endPoint.point.position.y - startPoint.position.y, 2));
-  return distance_;
-}
-
 double Dubins::time() { return this->distance() / avgSpeed; }
 
 CityGraph::point Dubins::point(double time) {

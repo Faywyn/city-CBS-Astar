@@ -14,8 +14,6 @@ CityMap::CityMap() {
   minLatLon.x = minLatLon.y = maxLatLon.x = maxLatLon.y = 0;
 }
 
-CityMap::~CityMap() { spdlog::debug("Destructor for CityMap to implement"); }
-
 void CityMap::loadFile(const std::string &filename) {
   spdlog::info("Loading file: {}", filename);
 
@@ -62,6 +60,8 @@ void CityMap::loadFile(const std::string &filename) {
   while (way) {
     road r;
     building b;
+    greenArea g;
+    waterArea w;
     r.width = DEFAULT_ROAD_WIDTH;
     r.numLanes = r.width / DEFAULT_LANE_WIDTH;
     r.id = roadId;
@@ -88,6 +88,8 @@ void CityMap::loadFile(const std::string &filename) {
           }
 
           b.points.push_back(p);
+          g.points.push_back(p);
+          w.points.push_back(p);
           break;
         }
         node = node->NextSiblingElement("node");
@@ -102,6 +104,8 @@ void CityMap::loadFile(const std::string &filename) {
     bool isHighway = false;
     bool isBuilding = false;
     bool isUnderground = false;
+    bool isGreenArea = false;
+    bool isWaterArea = false;
     bool widthSet = false;
     bool lanesSet = false;
     tinyxml2::XMLElement *tag = way->FirstChildElement("tag");
@@ -122,6 +126,28 @@ void CityMap::loadFile(const std::string &filename) {
         if (layerValue < 0) {
           isUnderground = true;
         }
+      } else if (strcmp(tag->Attribute("k"), "landuse") == 0) {
+        if (strcmp(tag->Attribute("v"), "forest") == 0 || strcmp(tag->Attribute("v"), "grass") == 0 ||
+            strcmp(tag->Attribute("v"), "meadow") == 0) {
+          isGreenArea = true;
+          g.type = 0;
+        }
+      } else if (strcmp(tag->Attribute("k"), "leisure") == 0) {
+        if (strcmp(tag->Attribute("v"), "park") == 0 || strcmp(tag->Attribute("v"), "garden") == 0) {
+          isGreenArea = true;
+          g.type = 1;
+        }
+      } else if (strcmp(tag->Attribute("k"), "waterway") == 0 &&
+                 (strcmp(tag->Attribute("v"), "river") == 0 || strcmp(tag->Attribute("v"), "stream") == 0 ||
+                  strcmp(tag->Attribute("v"), "canal") == 0)) {
+        isWaterArea = true;
+      } else if (strcmp(tag->Attribute("k"), "natural") == 0 &&
+                 (strcmp(tag->Attribute("v"), "water") == 0 || strcmp(tag->Attribute("v"), "wetland") == 0)) {
+        isWaterArea = true;
+      } else if (strcmp(tag->Attribute("k"), "water") == 0 &&
+                 (strcmp(tag->Attribute("v"), "lake") == 0 || strcmp(tag->Attribute("v"), "pond") == 0 ||
+                  strcmp(tag->Attribute("v"), "river") == 0)) {
+        isWaterArea = true;
       }
       tag = tag->NextSiblingElement("tag");
     }
@@ -142,6 +168,16 @@ void CityMap::loadFile(const std::string &filename) {
     }
     if (isBuilding) {
       buildings.push_back(b);
+      way = way->NextSiblingElement("way");
+      continue;
+    }
+    if (isGreenArea) {
+      greenAreas.push_back(g);
+      way = way->NextSiblingElement("way");
+      continue;
+    }
+    if (isWaterArea) {
+      waterAreas.push_back(w);
       way = way->NextSiblingElement("way");
       continue;
     }
@@ -182,6 +218,28 @@ void CityMap::loadFile(const std::string &filename) {
   }
   for (auto &b : buildings) {
     for (auto &p : b.points) {
+      p = latLonToXY(p.y, p.x);
+
+      p.x -= minXY.x;
+      p.y -= minXY.y;
+
+      // Symetri to the x-axis
+      p.y = maxXY.y - minXY.y - p.y;
+    }
+  }
+  for (auto &g : greenAreas) {
+    for (auto &p : g.points) {
+      p = latLonToXY(p.y, p.x);
+
+      p.x -= minXY.x;
+      p.y -= minXY.y;
+
+      // Symetri to the x-axis
+      p.y = maxXY.y - minXY.y - p.y;
+    }
+  }
+  for (auto &w : waterAreas) {
+    for (auto &p : w.points) {
       p = latLonToXY(p.y, p.x);
 
       p.x -= minXY.x;

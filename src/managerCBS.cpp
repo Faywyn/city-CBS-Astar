@@ -4,29 +4,154 @@
 
 #include <iostream>
 #include <numeric>
-#include <optional>
 #include <spdlog/spdlog.h>
 
 void Manager::createCarsCBS(int numCars) {
   this->createCarsAStar(numCars);
-  // std::cout << std::endl;
+  this->numCars = numCars;
+  bool valid = true;
 
+  ConstraintController constraints;
+
+  spdlog::info("Creating {} CBS cars", numCars);
+
+  CBSNode node = processCBS(constraints, 0);
+  if (!node.hasResolved) {
+    spdlog::error("CBS could not resolve all conflicts");
+    return createCarsCBS(numCars);
+  } else {
+    spdlog::info("CBS resolved all conflicts");
+  }
+
+  // Check if conflicts remain
+  for (int i = 0; i < numCars; i++) {
+    for (int j = i + 1; j < numCars; j++) {
+      int tMin = std::min(cars[i].getPath().size(), cars[j].getPath().size());
+      for (int t = 0; t < tMin; t++) {
+        sf::Vector2f diff = cars[i].getPath()[t] - cars[j].getPath()[t];
+
+        double width = graph.getWidth();
+        double height = graph.getHeight();
+        auto outOfBounds = [&](sf::Vector2f p) { return p.x < 0 || p.y < 0 || p.x > width || p.y > height; };
+
+        if (outOfBounds(cars[i].getPath()[t]) || outOfBounds(cars[j].getPath()[t])) {
+          continue;
+        }
+
+        if (std::sqrt(diff.x * diff.x + diff.y * diff.y) < CAR_LENGTH * 1.1) {
+          spdlog::error("Cars {} and {} still have a conflict at time {}", i, j, t * SIM_STEP_TIME);
+          valid = false;
+        }
+      }
+    }
+  }
+
+  if (!valid) {
+    return createCarsCBS(numCars);
+  }
+}
+
+// Split the node into 2 subnodes
+Manager::CBSNode Manager::createSubCBS(CBSNode &node, int subNodeDepth) {
+  int numCars = (int)node.paths.size();
+  int numCars1 = numCars / 2;
+  int numCars2 = numCars - numCars1;
+
+  std::vector<Car> cars1;
+  std::vector<Car> cars2;
+
+  std::vector<int> cars1Index;
+  std::vector<int> cars2Index;
+
+  for (int i = 0; i < numCars1; i++) {
+    cars1.push_back(cars[i]);
+    cars1Index.push_back(i);
+  }
+  for (int i = numCars1; i < numCars; i++) {
+    cars2.push_back(cars[i]);
+    cars2Index.push_back(i);
+  }
+
+  ConstraintController constraints1 = node.constraints.copy(cars1Index);
+  ConstraintController constraints2 = node.constraints.copy(cars2Index);
+
+  Manager manager1(graph, map, cars1);
+  Manager manager2(graph, map, cars2);
+
+  CBSNode node1 = manager1.processCBS(constraints1, subNodeDepth + 1);
+  if (!node1.hasResolved) {
+    return node1;
+  }
+
+  // Push all manager1 cars pos to manager2 constraints
+  for (int i = 0; i < numCars1; i++) {
+    std::vector<sf::Vector2f> path = node1.paths[i];
+    for (int j = 0; j < (int)path.size(); j += CBS_PRECISION_FACTOR) {
+      AStar::conflict conflict;
+      conflict.point.position = path[j];
+      conflict.point.angle = 0;
+      conflict.time = j;
+
+      if (conflict.point.position.x < -CAR_LENGTH || conflict.point.position.y < -CAR_LENGTH ||
+          conflict.point.position.x > graph.getWidth() + CAR_LENGTH ||
+          conflict.point.position.y > graph.getHeight() + CAR_LENGTH) {
+        continue;
+      }
+
+      for (int k = 0; k < numCars2; k++) {
+        conflict.car = k;
+        constraints2.addConstraint(conflict, false);
+      }
+
+      constraints2.addConstraint(conflict, true);
+    }
+  }
+
+  CBSNode node2 = manager2.processCBS(constraints2, subNodeDepth + 1);
+  if (!node2.hasResolved) {
+    return node2;
+  }
+
+  // Merge the 2 managers
+  for (int i = 0; i < numCars1; i++) {
+    node.costs[i] = node1.costs[i];
+    node.paths[i] = node1.paths[i];
+    cars[i].assignExistingPath(node1.paths[i]);
+  }
+  for (int i = numCars1; i < numCars; i++) {
+    node.costs[i] = node2.costs[i - numCars1];
+    node.paths[i] = node2.paths[i - numCars1];
+    cars[i].assignExistingPath(node2.paths[i - numCars1]);
+  }
+
+  node.cost = node1.cost + node2.cost;
+  node.depth = std::max(node1.depth, node2.depth);
+  node.hasResolved = node1.hasResolved && node2.hasResolved;
+
+  return node;
+}
+
+Manager::CBSNode Manager::processCBS(ConstraintController constraints, int subNodeDepth) {
   std::priority_queue<CBSNode> openSet;
 
   CBSNode startNode;
   startNode.paths.resize(numCars);
-  startNode.constraints.clear();
-  startNode.constraints.resize(numCars);
+  startNode.constraints = constraints;
   startNode.costs.clear();
   startNode.costs.resize(numCars);
   startNode.cost = 0;
   startNode.depth = 0;
+  startNode.hasResolved = false;
 
   double maxCarCost = 0;
 
   for (int i = 0; i < numCars; i++) {
+    TimedAStar aStar(cars[i].getStart(), cars[i].getEnd(), graph, &constraints, i);
+    std::vector<AStar::node> newPath = aStar.findPath();
+
+    cars[i].assignPath(newPath);
+
     startNode.paths[i] = cars[i].getPath();
-    startNode.constraints[i] = {};
 
     double carCost = cars[i].getRemainingTime(true);
     startNode.costs[i] = carCost;
@@ -36,58 +161,68 @@ void Manager::createCarsCBS(int numCars) {
   }
 
   openSet.push(startNode);
-  int nbIterations = 0;
-  int meanNbIterations = 20;
 
+  // For logs
   std::vector<double> meanCosts;
   std::vector<double> meanDepths;
   std::vector<double> meanTimes;
-  std::chrono::time_point<std::chrono::high_resolution_clock> start = std::chrono::high_resolution_clock::now();
+  auto start = std::chrono::system_clock::now();
+  double clockLastRefresh = 0;
+  int numNodeProcessed = 0;
 
   // While there are conflicts in the paths, resolve them
-  bool resolved = false;
   while (!openSet.empty()) {
+    auto duration =
+        std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - start).count() /
+        1000.0;
+
+    numNodeProcessed++;
     CBSNode node = openSet.top();
     openSet.pop();
 
+    if (duration > CBS_MAX_SUB_TIME) {
+      return createSubCBS(node, subNodeDepth);
+    }
+
     std::vector<std::vector<sf::Vector2f>> paths = node.paths;
-    std::vector<std::vector<AStar::conflict>> constraints = node.constraints;
     double cost = node.cost;
     int depth = node.depth;
 
     int car1, car2;
     sf::Vector2f p1, p2;
 
-    double a1, a2, time;
+    double a1, a2;
+    int time;
     bool conflict = hasConflict(paths, &car1, &car2, &p1, &p2, &a1, &a2, &time);
 
     if (!conflict) {
-      spdlog::info("Resolved all conflicts");
-      resolved = true;
-
       for (int i = 0; i < numCars; i++) {
-        cars[i].assignExistingPath(paths[i]);
+        cars[i].assignExistingPath(node.paths[i]);
       }
-      break;
+      node.hasResolved = true;
+      return node;
     }
 
     meanCosts.push_back(cost);
     meanDepths.push_back(depth);
     meanTimes.push_back(time);
 
-    if (nbIterations++ % meanNbIterations == 0) {
+    if (clockLastRefresh + LOG_CBS_REFRESHRATE < duration) {
       double meanCost = std::accumulate(meanCosts.begin(), meanCosts.end(), 0.0) / meanCosts.size();
       double meanDepth = std::accumulate(meanDepths.begin(), meanDepths.end(), 0.0) / meanDepths.size();
       double meanTime = std::accumulate(meanTimes.begin(), meanTimes.end(), 0.0) / meanTimes.size();
+      meanTime = meanTime * SIM_STEP_TIME;
 
-      std::chrono::time_point<std::chrono::high_resolution_clock> end = std::chrono::high_resolution_clock::now();
-      double duration = std::chrono::duration<double>(end - start).count();
       double remainingTime = (maxCarCost - meanTime) * (duration / meanTime);
+      double processPerSecond = numNodeProcessed / (duration - clockLastRefresh);
 
-      spdlog::info("Node cost: {:0>6.5} | Node depth: {:0>6.5} | Node conflic time: {:0>6.5} | Elapsed time: {}s | "
-                   "Remaining time: ~{}s",
-                   meanCost, meanDepth, meanTime, (int)duration, (int)remainingTime);
+      spdlog::info("Node C: {:0>6.5} | D: {:0>6.5} | CT: {:0>6.5} | SD: {} | ET: {}s | "
+                   "ETR: ~{}s | Processed nodes: ~{:0>4.5}/s",
+                   meanCost, meanDepth, meanTime, subNodeDepth, (int)duration, (int)remainingTime, processPerSecond);
       std::cout << "\033[A\033[2K\r";
+
+      clockLastRefresh = duration;
+      numNodeProcessed = 0;
 
       meanCosts.clear();
       meanDepths.clear();
@@ -102,23 +237,17 @@ void Manager::createCarsCBS(int numCars) {
       newConflict.point.position = iCar == 0 ? p2 : p1;
       newConflict.point.angle = iCar == 0 ? a2 : a1;
       newConflict.time = time;
+      newConflict.car = iCar == 0 ? car1 : car2;
 
       // If already in constraints, skip
-      bool alreadyInConstraints = false;
-      for (AStar::conflict conflict : node.constraints[car]) {
-        if (conflict == newConflict) {
-          alreadyInConstraints = true;
-          break;
-        }
-      }
-      if (alreadyInConstraints) {
+      if (node.constraints.hasConstraint(newConflict, false)) {
         continue;
       }
 
-      std::vector<AStar::conflict> newConstraints = node.constraints[car];
-      newConstraints.push_back(newConflict);
+      ConstraintController newConstraints = node.constraints.copy();
+      newConstraints.addConstraint(newConflict, false);
 
-      TimedAStar aStar(cars[car].getStart(), cars[car].getEnd(), graph, newConstraints);
+      TimedAStar aStar(cars[car].getStart(), cars[car].getEnd(), graph, &newConstraints, car);
       std::vector<AStar::node> newPath = aStar.findPath();
 
       if (newPath.empty()) {
@@ -130,30 +259,35 @@ void Manager::createCarsCBS(int numCars) {
       double carNewCost = cars[car].getRemainingTime(true);
 
       CBSNode newNode;
+
       newNode.paths = paths;
       newNode.paths[car] = cars[car].getPath();
-      newNode.constraints = constraints;
-      newNode.constraints[car] = newConstraints;
+      newNode.constraints = newConstraints;
       newNode.costs = node.costs;
       newNode.costs[car] = carNewCost;
       newNode.cost = cost - carOldCost + carNewCost;
       newNode.depth = depth + 1;
+      newNode.hasResolved = false;
 
-      // if (carOldCost > carNewCost) {
-      //   std::cout << "\033[A\033[2K\r";
-      //   spdlog::warn("Car {} old cost: {:0>6.5} | new cost: {:0>6.5}", car, carOldCost, carNewCost);
-      // }
+      newNode.cost = 0;
+      for (int i = 0; i < numCars; i++) {
+        newNode.cost += newNode.costs[i];
+      }
+
+      // hasConflict(newNode.paths, &car1, &car2, &p1, &p2, &a1, &a2, &time);
+      // newNode.cost /= time;
+
+      // newNode.cost = 1 / (double)time;
 
       openSet.push(newNode);
     }
   }
 
-  if (!resolved)
-    spdlog::warn("Could not resolve all conflicts");
+  return startNode;
 }
 
 bool Manager::hasConflict(std::vector<std::vector<sf::Vector2f>> paths, int *car1, int *car2, sf::Vector2f *p1,
-                          sf::Vector2f *p2, double *a1, double *a2, double *time) {
+                          sf::Vector2f *p2, double *a1, double *a2, int *time) {
   int maxPathLength = 0;
   int numCars = (int)paths.size();
   for (int i = 0; i < numCars; i++) {
@@ -162,9 +296,11 @@ bool Manager::hasConflict(std::vector<std::vector<sf::Vector2f>> paths, int *car
 
   double width = graph.getWidth();
   double height = graph.getHeight();
-  auto outOfBounds = [&](sf::Vector2f p) { return p.x < 0 || p.y < 0 || p.x > width || p.y > height; };
+  auto outOfBounds = [&](sf::Vector2f p) {
+    return p.x + CAR_LENGTH < 0 || p.y + CAR_LENGTH < 0 || p.x - CAR_LENGTH > width || p.y - CAR_LENGTH > height;
+  };
 
-  for (int t = 0; t < maxPathLength; t++) {
+  for (int t = 0; t < maxPathLength; t += CBS_PRECISION_FACTOR) {
     for (int i = 0; i < numCars; i++) {
       if (t >= (int)paths[i].size() - 1 || outOfBounds(paths[i][t]))
         continue;
@@ -180,7 +316,7 @@ bool Manager::hasConflict(std::vector<std::vector<sf::Vector2f>> paths, int *car
           *p2 = paths[j][t];
           *a1 = std::atan2(paths[i][t + 1].y - paths[i][t].y, paths[i][t + 1].x - paths[i][t].x);
           *a2 = std::atan2(paths[j][t + 1].y - paths[j][t].y, paths[j][t + 1].x - paths[j][t].x);
-          *time = (double)t * SIM_STEP_TIME;
+          *time = t;
           return true;
         }
       }

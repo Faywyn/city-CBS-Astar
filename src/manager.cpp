@@ -13,7 +13,6 @@ void Manager::createCarsAStar(int numCars) {
 
   // Create a path for each car (random start and end points)
   for (int i = 0; i < numCars; i++) {
-
     bool valid = false;
     cars[i].chooseRandomStartEndPath(graph, map);
 

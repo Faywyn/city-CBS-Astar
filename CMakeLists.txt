@@ -20,6 +20,8 @@ endif()
 
 # Debug flags: Include debugging symbols, profiling tools, and sanitizers for memory checks
 set(CMAKE_CXX_FLAGS_DEBUG "-g -Wall -Wextra")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} -fsanitize=address -g")
+set(CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS} -fsanitize=address")
 
 # Release flags: Optimize for speed, disable debugging symbols, and prioritize performance
 set(CMAKE_CXX_FLAGS_RELEASE "-Ofast -DNDEBUG")
@@ -78,6 +80,7 @@ add_executable(${PROJECT_NAME}
   src/managerCBS.cpp
   src/dubins.cpp
   src/fileSelector.cpp
+  src/constraintController.cpp
   src/utils.cpp
 )
 

@@ -16,7 +16,7 @@ public:
   Dubins(CityGraph::point start, CityGraph::neighbor end, double startSpeed, double endSpeed);
   ~Dubins();
 
-  double distance();
+  double distance() { return endPoint.distance; }
   double time();
   CityGraph::point point(double time);
   std::vector<CityGraph::point> path();
@@ -31,8 +31,6 @@ private:
   double startSpeed;
   double endSpeed;
   double avgSpeed;
-
-  double distance_ = -1;
 };
 
 class DubinsPath {

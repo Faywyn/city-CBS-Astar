@@ -20,6 +20,8 @@ elif [ "$type" == "clean" ]; then
   rm -rf build
 elif [ "$type" == "run" ]; then
   ./build/bin/city-cbs-astar $args
+elif [ "$type" == "sign" ]; then
+  codesign --entitlements Entitlements.plist -s - ./build/bin/city-cbs-astar
 elif [ "$type" == "help" ]; then
   echo "Usage: ./build.sh [debug|release]: Build the project in debug or release mode"
   echo "Usage: ./build.sh [debugRun|releaseRun] [num_agents] [cbs]: Build and run the project in debug or release mode"

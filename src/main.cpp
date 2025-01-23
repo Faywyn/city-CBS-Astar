@@ -11,15 +11,16 @@
 int main(int nArgs, char **args) {
   spdlog::set_pattern("[%d-%m-%C %H:%M:%S.%e] [%^%l%$] [thread %t] %v");
 
-  int numCars = 5;
+  int numCars = 10;
   if (nArgs > 1) {
     numCars = std::stoi(args[1]);
   }
 
   FileSelector fileSelector("assets/map");
   std::string mapFile = fileSelector.selectFile();
+  // std::string mapFile = "small03.osm";
 
-  if (ENVIRONMENT == 0) {
+  if (ENVIRONMENT == 0 && false) {
     spdlog::set_level(spdlog::level::debug);
     Test test;
     test.runTests();
@@ -34,7 +35,7 @@ int main(int nArgs, char **args) {
   cityGraph.createGraph(cityMap);
 
   Manager manager(cityGraph, cityMap);
-  if (nArgs > 2 && std::string(args[2]) == "cbs") {
+  if (nArgs > 2 && std::string(args[2]) == "cbs" || true) {
     manager.createCarsCBS(numCars);
   } else {
     manager.createCarsAStar(numCars);

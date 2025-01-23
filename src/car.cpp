@@ -154,7 +154,7 @@ void Car::chooseRandomStartEndPath(CityGraph &graph, CityMap &cityMap) {
     path = aStar.findPath();
 
     if (!path.empty() && (int)path.size() >= 3) {
-      TimedAStar timedAStar(start, end, graph);
+      TimedAStar timedAStar(start, end, graph, nullptr, 0);
       path.clear();
       path = timedAStar.findPath();
     }

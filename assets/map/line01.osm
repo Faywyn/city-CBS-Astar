@@ -1,27 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<osm version="0.6" generator="Custom-OSM-Generator">
+<osm version="0.6" generator="Custom-OSM-Intersection">
     <meta osm_base="2025-01-07T10:00:00Z"/>
 
-    <bounds minlat="51.49965084441251" minlon="-0.12382151969864098" maxlat="51.5005491555875" maxlon="-0.12237848030135902"/>
-
+    <bounds minlat="51.499875" minlon="-0.123461" maxlat="51.500325" maxlon="-0.122739"/>
     <!-- Nodes representing the intersection and surrounding road points -->
     <node id="2001" lat="51.5001" lon="-0.1231" version="1" />
-    <node id="2002" lat="51.493812" lon="-0.1231" version="1" />
-    <node id="2003" lat="51.502795" lon="-0.1231" version="1" />
-    <node id="2004" lat="51.5001" lon="-0.133201" version="1" />
-    <node id="2005" lat="51.5001" lon="-0.118771" version="1" />
+    <node id="2004" lat="51.5001" lon="-0.12887215758912787" version="1" />
+    <node id="2005" lat="51.5001" lon="-0.11732784241087213" version="1" />
 
-    <!-- Ways representing straight roads going outside the bounds with a common intersection node -->
-    <way id="1001">
-        <nd ref="2002"/>
-        <nd ref="2001"/>
-        <nd ref="2003"/>
-        <tag k="highway" v="primary"/>
-        <tag k="name" v="Main Street"/>
-        <tag k="lanes" v="2"/>
-        <tag k="maxspeed" v="50"/>
-    </way>
-    
     <way id="1002">
         <nd ref="2004"/>
         <nd ref="2001"/>

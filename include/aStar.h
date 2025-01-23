@@ -19,13 +19,11 @@ typedef struct _aStarNode {
 
 typedef struct _aStarConflict {
   CityGraph::point point;
-  double time;
+  int time;
+  int car;
 
   bool operator==(const _aStarConflict &other) const {
-    double t = std::round(time / TIME_RESOLUTION);
-    double oT = std::round(other.time / TIME_RESOLUTION);
-
-    return point == other.point && t == oT;
+    return point == other.point && time == other.time && car == other.car;
   }
 } _aStarConflict;
 
@@ -40,9 +38,8 @@ template <> struct hash<_aStarNode> {
 };
 template <> struct hash<_aStarConflict> {
   std::size_t operator()(const _aStarConflict &conflict) const {
-    double t = std::round(conflict.time / TIME_RESOLUTION);
-
-    return std::hash<CityGraph::point>()(conflict.point) ^ std::hash<double>()(t);
+    return std::hash<CityGraph::point>()(conflict.point) ^ std::hash<int>()(conflict.time) ^
+           std::hash<int>()(conflict.car);
   }
 };
 } // namespace std
@@ -70,10 +67,31 @@ private:
   void process();
 };
 
+class ConstraintController {
+public:
+  ConstraintController() {
+    this->constraints.clear();
+    this->globalConstraints.clear();
+  }
+
+  ConstraintController copy();
+  ConstraintController copy(std::vector<int> cars);
+
+  void addConstraint(AStar::conflict constraints, bool global);
+  bool hasConstraint(AStar::conflict constraint, bool global);
+
+  bool checkConstraints(int car, double speed, double newSpeed, double time, CityGraph::point from,
+                        CityGraph::neighbor to);
+
+private:
+  std::vector<std::vector<std::vector<AStar::conflict>>> constraints; // [car][time][constraints]
+  std::vector<std::vector<AStar::conflict>> globalConstraints;        // [time][constraints]
+};
+
 class TimedAStar {
 public:
   TimedAStar(CityGraph::point start, CityGraph::point end, const CityGraph &cityGraph,
-             const std::vector<AStar::conflict> conflicts = {});
+             ConstraintController *constraints, int carIndex);
 
   std::vector<AStar::node> findPath() {
     if (!processed)
@@ -86,7 +104,8 @@ private:
   AStar::node start;
   AStar::node end;
   std::vector<AStar::node> path;
-  std::vector<AStar::conflict> conflicts;
+  ConstraintController *conflicts;
+  int carIndex;
   CityGraph graph;
 
   void process();
