@@ -5,6 +5,7 @@
 
 #include "car.h"
 #include "cityGraph.h"
+#include "dataManager.h"
 
 typedef struct _managerCBSNode {
   std::vector<std::vector<sf::Vector2f>> paths; // Paths for all agents
@@ -25,17 +26,20 @@ class Manager {
 public:
   using CBSNode = _managerCBSNode;
 
-  Manager(const CityGraph &cityGraph, const CityMap &CityMap) : graph(cityGraph), map(CityMap) {}
-  Manager(const CityGraph &cityGraph, const CityMap &CityMap, std::vector<Car> cars)
+  Manager(const CityGraph &cityGraph, const CityMap &CityMap, bool log) : graph(cityGraph), map(CityMap) {
+    this->log = log;
+  }
+  Manager(const CityGraph &cityGraph, const CityMap &CityMap, std::vector<Car> cars, bool log)
       : graph(cityGraph), map(CityMap), cars(cars) {
     this->numCars = cars.size();
+    this->log = log;
   }
 
   // Simple A* pathfinding (no collision avoidance)
   void createCarsAStar(int numCars);
 
   // CBS pathfinding (collision avoidance)
-  void createCarsCBS(int numCars);
+  DataManager::data createCarsCBS(int numCars);
   CBSNode createSubCBS(CBSNode &node, int subNodeDepth);
   CBSNode processCBS(ConstraintController constraints, int subNodeDepth);
 
@@ -56,4 +60,5 @@ private:
   std::vector<Car> cars;
   CityGraph graph;
   CityMap map;
+  bool log;
 };

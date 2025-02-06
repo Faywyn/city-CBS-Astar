@@ -68,19 +68,20 @@ FetchContent_MakeAvailable(tinyxml2)
 link_directories(${OMPL_LIBRARY_DIRS})
 
 add_executable(${PROJECT_NAME}
-  src/main.cpp 
-  src/test.cpp
-  src/cityMap.cpp
-  src/cityGraph.cpp
-  src/renderer.cpp
   src/aStar.cpp
-  src/timedAStar.cpp
   src/car.cpp
-  src/manager.cpp
-  src/managerCBS.cpp
+  src/cityGraph.cpp
+  src/cityMap.cpp
+  src/constraintController.cpp
+  src/dataManager.cpp
   src/dubins.cpp
   src/fileSelector.cpp
-  src/constraintController.cpp
+  src/main.cpp 
+  src/manager.cpp
+  src/managerCBS.cpp
+  src/renderer.cpp
+  src/test.cpp
+  src/timedAStar.cpp
   src/utils.cpp
 )
 

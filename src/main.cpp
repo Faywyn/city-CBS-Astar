@@ -3,6 +3,7 @@
 
 #include "cityMap.h"
 #include "config.h"
+#include "dataManager.h"
 #include "fileSelector.h"
 #include "manager.h"
 #include "renderer.h"
@@ -28,21 +29,8 @@ int main(int nArgs, char **args) {
     spdlog::set_level(spdlog::level::info);
   }
 
-  CityMap cityMap;
-  cityMap.loadFile("assets/map/" + mapFile);
-
-  CityGraph cityGraph;
-  cityGraph.createGraph(cityMap);
-
-  Manager manager(cityGraph, cityMap);
-  if (nArgs > 2 && std::string(args[2]) == "cbs") {
-    manager.createCarsCBS(numCars);
-  } else {
-    manager.createCarsAStar(numCars);
-  }
-
-  Renderer renderer;
-  renderer.startRender(cityMap, cityGraph, manager);
+  DataManager dataManager(mapFile);
+  dataManager.createData(10, numCars, mapFile);
 
   return 0;
 }

@@ -6,21 +6,24 @@
 #include <numeric>
 #include <spdlog/spdlog.h>
 
-void Manager::createCarsCBS(int numCars) {
+DataManager::data Manager::createCarsCBS(int numCars) {
   this->createCarsAStar(numCars);
   this->numCars = numCars;
   bool valid = true;
 
   ConstraintController constraints;
 
-  spdlog::info("Creating {} CBS cars", numCars);
+  if (log)
+    spdlog::info("Creating {} CBS cars", numCars);
 
   CBSNode node = processCBS(constraints, 0);
   if (!node.hasResolved) {
-    spdlog::error("CBS could not resolve all conflicts");
+    if (log)
+      spdlog::error("CBS could not resolve all conflicts");
     return createCarsCBS(numCars);
   } else {
-    spdlog::info("CBS resolved all conflicts");
+    if (log)
+      spdlog::info("CBS resolved all conflicts");
   }
 
   // Check if conflicts remain
@@ -41,8 +44,9 @@ void Manager::createCarsCBS(int numCars) {
         }
 
         if (std::sqrt(diff.x * diff.x + diff.y * diff.y) < CAR_LENGTH * 1.1) {
-          spdlog::error("Cars {} and {} still have a conflict at time {} ({}, {})", i, j, t * SIM_STEP_TIME,
-                        cars[i].getPath()[t].x, cars[i].getPath()[t].y);
+          if (log)
+            spdlog::error("Cars {} and {} still have a conflict at time {} ({}, {})", i, j, t * SIM_STEP_TIME,
+                          cars[i].getPath()[t].x, cars[i].getPath()[t].y);
           valid = false;
         }
       }
@@ -53,18 +57,22 @@ void Manager::createCarsCBS(int numCars) {
     return createCarsCBS(numCars);
   }
 
-  // Display some stats
-  // Average speed inside the city
-  double avgSpeed = 0;
-  for (int i = 0; i < numCars; i++) {
-    avgSpeed += cars[i].getAverageSpeed(graph);
-  }
-  avgSpeed /= numCars;
-  spdlog::info("Average speed: {:0>6.5} km/h", avgSpeed * 3.6);
+  DataManager::data data;
+  data.numCars = numCars;
+  data.carDensity = 1000000 * numCars / (graph.getWidth() * graph.getHeight());
+  data.carAvgSpeed = 0;
+  data.carMaxSpeed = 0;
+  data.carMinSpeed = CAR_MAX_SPEED_MS;
 
-  // Num cars per km
-  double numCarsPerKm = (double)numCars / (graph.getWidth() * graph.getHeight() / 1000000);
-  spdlog::info("Number of cars per km²: {:0>6.5}", numCarsPerKm);
+  for (int i = 0; i < numCars; i++) {
+    data.carAvgSpeed += cars[i].getAverageSpeed(graph);
+    data.carMaxSpeed = std::max(data.carMaxSpeed, cars[i].getAverageSpeed(graph));
+    data.carMinSpeed = std::min(data.carMinSpeed, cars[i].getAverageSpeed(graph));
+  }
+
+  data.carAvgSpeed /= numCars;
+
+  return data;
 }
 
 // Split the node into 2 subnodes
@@ -91,8 +99,8 @@ Manager::CBSNode Manager::createSubCBS(CBSNode &node, int subNodeDepth) {
   ConstraintController constraints1 = node.constraints.copy(cars1Index);
   ConstraintController constraints2 = node.constraints.copy(cars2Index);
 
-  Manager manager1(graph, map, cars1);
-  Manager manager2(graph, map, cars2);
+  Manager manager1(graph, map, cars1, log);
+  Manager manager2(graph, map, cars2, log);
 
   CBSNode node1 = manager1.processCBS(constraints1, subNodeDepth + 1);
   if (!node1.hasResolved) {
@@ -230,10 +238,12 @@ Manager::CBSNode Manager::processCBS(ConstraintController constraints, int subNo
       double remainingTime = (maxCarCost - meanTime) * (duration / meanTime);
       double processPerSecond = numNodeProcessed / (duration - clockLastRefresh);
 
-      spdlog::info("Node C: {:0>6.5} | D: {:0>6.5} | CT: {:0>6.5} | SD: {} | ET: {}s | "
-                   "ETR: ~{}s | Processed nodes: ~{:0>4.5}/s",
-                   meanCost, meanDepth, meanTime, subNodeDepth, (int)duration, (int)remainingTime, processPerSecond);
-      std::cout << "\033[A\033[2K\r";
+      if (log) {
+        spdlog::info("Node C: {:0>6.5} | D: {:0>6.5} | CT: {:0>6.5} | SD: {} | ET: {}s | "
+                     "ETR: ~{}s | Processed nodes: ~{:0>4.5}/s",
+                     meanCost, meanDepth, meanTime, subNodeDepth, (int)duration, (int)remainingTime, processPerSecond);
+        std::cout << "\033[A\033[2K\r";
+      }
 
       clockLastRefresh = duration;
       numNodeProcessed = 0;

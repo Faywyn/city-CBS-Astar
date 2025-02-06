@@ -5,7 +5,8 @@
 #include <spdlog/spdlog.h>
 
 void Manager::createCarsAStar(int numCars) {
-  spdlog::info("Creating {} AStar cars", numCars);
+  if (log)
+    spdlog::info("Creating {} AStar cars", numCars);
   for (int i = 0; i < numCars; i++) {
     Car car;
     cars.push_back(car);
@@ -16,7 +17,8 @@ void Manager::createCarsAStar(int numCars) {
     bool valid = false;
     cars[i].chooseRandomStartEndPath(graph, map);
 
-    spdlog::info("Car {} assigned path with {} points", i, cars[i].getPath().size());
+    if (log)
+      spdlog::info("Car {} assigned path with {} points", i, cars[i].getPath().size());
   }
 }
 
