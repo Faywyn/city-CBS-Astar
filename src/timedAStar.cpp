@@ -62,11 +62,15 @@ void TimedAStar::process() {
       }
       path.push_back(currentCopy);
       std::reverse(path.begin(), path.end());
+      processed = true;
       break;
     }
 
     for (const auto &neighborGraphPoint : neighbors[current.point]) {
       if (current.speed > neighborGraphPoint.maxSpeed)
+        continue;
+
+      if (!neighborGraphPoint.isRightWay && ROAD_ENABLE_RIGHT_HAND_TRAFFIC)
         continue;
 
       std::vector<double> newSpeeds;
@@ -106,6 +110,7 @@ void TimedAStar::process() {
 
           if (isInOpenSet.find(neighbor) == isInOpenSet.end()) {
             openSet.push(neighbor);
+
             isInOpenSet.insert(neighbor);
           }
         }

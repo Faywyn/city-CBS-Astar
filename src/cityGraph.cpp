@@ -45,7 +45,7 @@ void CityGraph::createGraph(const CityMap &cityMap) {
               sf::Vector2f(road.segments[numSeg].p1_offset.x + offset * sin(road.segments[numSeg].angle),
                            road.segments[numSeg].p1_offset.y + offset * -cos(road.segments[numSeg].angle));
 
-          linkPoints(point1, point2);
+          linkPoints(point1, point2, 2, true);
         }
       }
       numSeg++;
@@ -58,6 +58,11 @@ void CityGraph::createGraph(const CityMap &cityMap) {
       double dy_s = (segment.p2_offset.y - segment.p1_offset.y) / numPoints;
       double dx_a = sin(segment.angle);
       double dy_a = -cos(segment.angle);
+
+      if (dx_a < 0) {
+        dx_a = -dx_a;
+        dy_a = -dy_a;
+      }
 
       for (int i_lane = 0; i_lane < road.numLanes; i_lane++) {
         double offset = ((double)i_lane - (double)road.numLanes / 2.0f) * road.width / road.numLanes;
@@ -72,7 +77,7 @@ void CityGraph::createGraph(const CityMap &cityMap) {
           point2.angle = segment.angle;
           point2.position = sf::Vector2f(segment.p2_offset.x + offset * dx_a, segment.p2_offset.y + offset * dy_a);
 
-          linkPoints(point1, point2);
+          linkPoints(point1, point2, 2, true);
           continue;
         }
 
@@ -92,7 +97,20 @@ void CityGraph::createGraph(const CityMap &cityMap) {
                                              segment.p1_offset.y + (i - 1) * dy_s + offset2 * dy_a);
               point2.angle = segment.angle;
 
-              linkPoints(point1, point2);
+              int direction = 2;
+              double a = normalizeAngle(atan2(dy_a, dx_a));
+              if (offset == offset2 || (offset >= 0 && offset2 >= 0)) {
+                if (dy_s >= 0) {
+                  direction = offset > 0 ? 0 : 1;
+                } else {
+                  direction = offset > 0 ? 1 : 0;
+                }
+                linkPoints(point1, point2, direction, offset == offset2);
+              } else {
+                if (!ROAD_ENABLE_RIGHT_HAND_TRAFFIC) {
+                  linkPoints(point1, point2, 2, true);
+                }
+              }
             }
           }
         }
@@ -140,7 +158,7 @@ void CityGraph::createGraph(const CityMap &cityMap) {
             point2_offset.position = sf::Vector2f(point2.position.x + offset2 * sin(segment2.angle),
                                                   point2.position.y + offset2 * -cos(segment2.angle));
 
-            linkPoints(point1_offset, point2_offset);
+            linkPoints(point1_offset, point2_offset, 2, true);
           }
         }
       }
@@ -169,7 +187,7 @@ void CityGraph::createGraph(const CityMap &cityMap) {
       }
 
       if (can) {
-        neighbor.maxSpeed = speed;
+        neighbor.maxSpeed = speed - 0.1;
         neighbor.distance = std::sqrt(std::pow(neighbor.point.position.x - point.position.x, 2) +
                                       std::pow(neighbor.point.position.y - point.position.y, 2));
 
@@ -185,23 +203,63 @@ void CityGraph::createGraph(const CityMap &cityMap) {
   }
 }
 
-void CityGraph::linkPoints(const point &p, const point &n) {
+void CityGraph::linkPoints(const point &p, const point &n, int direction, bool subPoints) {
   std::vector<double> anglesPoint = {normalizeAngle(p.angle), normalizeAngle(p.angle + M_PI)};
   std::vector<double> anglesNeighbor = {normalizeAngle(n.angle), normalizeAngle(n.angle + M_PI)};
 
   point copyPoint = p;
   point copyNeighbor = n;
 
+  bool isRiP = direction == 2 || direction == 0;
+  bool isRiN = direction == 2 || direction == 1;
+  bool isStraight = direction != 2;
+  isStraight &= (anglesPoint[0] == anglesNeighbor[0] || anglesPoint[0] == anglesNeighbor[1] ||
+                 anglesPoint[1] == anglesNeighbor[0] || anglesPoint[1] == anglesNeighbor[1]);
+  isStraight &= subPoints;
+
+  if (!isStraight || true) {
+    for (const auto &anglePoint : anglesPoint) {
+      for (const auto &angleNeighbor : anglesNeighbor) {
+        copyPoint.angle = anglePoint;
+        copyNeighbor.angle = angleNeighbor;
+
+        neighbors[copyPoint].push_back({copyNeighbor, 0, 0, 0, isRiP}); // This fields will be updated later
+        neighbors[copyNeighbor].push_back({copyPoint, 0, 0, 0, isRiN});
+
+        graphPoints.insert(copyPoint);
+        graphPoints.insert(copyNeighbor);
+      }
+    }
+    return;
+  }
+
+  // Link adding points in the middle
+  double pointDistance = 3;
+  double distance = std::sqrt(std::pow(n.position.x - p.position.x, 2) + std::pow(n.position.y - p.position.y, 2));
+  int numPoints = distance / pointDistance;
+  double dx = (n.position.x - p.position.x) / numPoints;
+  double dy = (n.position.y - p.position.y) / numPoints;
+
   for (const auto &anglePoint : anglesPoint) {
     for (const auto &angleNeighbor : anglesNeighbor) {
-      copyPoint.angle = anglePoint;
-      copyNeighbor.angle = angleNeighbor;
+      point previousPoint = p;
+      previousPoint.angle = anglePoint;
 
-      neighbors[copyPoint].push_back({copyNeighbor, 0, 0, 0}); // This fields will be updated later
-      neighbors[copyNeighbor].push_back({copyPoint, 0, 0, 0});
+      for (int i = 1; i <= numPoints; i++) {
+        point newPoint;
+        newPoint.position = sf::Vector2f(p.position.x + i * dx, p.position.y + i * dy);
+        newPoint.angle = anglePoint;
 
-      graphPoints.insert(copyPoint);
-      graphPoints.insert(copyNeighbor);
+        neighbors[previousPoint].push_back({newPoint, 0, 0, 0, isRiP}); // This fields will be updated later
+        neighbors[newPoint].push_back({previousPoint, 0, 0, 0, isRiN});
+
+        previousPoint = newPoint;
+
+        graphPoints.insert(newPoint);
+      }
+
+      // Add the last point
+      neighbors[previousPoint].push_back({n, 0, 0, 0, isRiP}); // This fields will be updated later
     }
   }
 }

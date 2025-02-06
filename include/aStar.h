@@ -5,7 +5,6 @@
 typedef struct _aStarNode {
   CityGraph::point point;
   double speed;
-
   std::pair<CityGraph::point, CityGraph::neighbor> arcFrom;
 
   bool operator==(const _aStarNode &other) const {
@@ -52,7 +51,7 @@ public:
   AStar(CityGraph::point start, CityGraph::point end, const CityGraph &cityGraph);
 
   std::vector<node> findPath() {
-    if (!processed)
+    if (!processed) // Not processed yet
       process();
     return path;
   }
@@ -69,23 +68,19 @@ private:
 
 class ConstraintController {
 public:
-  ConstraintController() {
-    this->constraints.clear();
-    this->globalConstraints.clear();
-  }
+  ConstraintController() { this->constraints.clear(); }
 
   ConstraintController copy();
   ConstraintController copy(std::vector<int> cars);
 
-  void addConstraint(AStar::conflict constraints, bool global);
-  bool hasConstraint(AStar::conflict constraint, bool global);
+  void addConstraint(AStar::conflict constraints);
+  bool hasConstraint(AStar::conflict constraint);
 
   bool checkConstraints(int car, double speed, double newSpeed, double time, CityGraph::point from,
                         CityGraph::neighbor to);
 
 private:
   std::vector<std::vector<std::vector<AStar::conflict>>> constraints; // [car][time][constraints]
-  std::vector<std::vector<AStar::conflict>> globalConstraints;        // [time][constraints]
 };
 
 class TimedAStar {

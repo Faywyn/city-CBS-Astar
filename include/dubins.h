@@ -12,7 +12,7 @@ namespace ob = ompl::base;
 class Dubins {
 public:
   Dubins(CityGraph::point start, CityGraph::neighbor end);                    // Running at max speed
-  Dubins(CityGraph::point start, CityGraph::neighbor end, double startSpeed); // Accelerating
+  Dubins(CityGraph::point start, CityGraph::neighbor end, double startSpeed); // Accelerating to max speed
   Dubins(CityGraph::point start, CityGraph::neighbor end, double startSpeed, double endSpeed);
   ~Dubins();
 

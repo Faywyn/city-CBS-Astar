@@ -18,7 +18,7 @@ int main(int nArgs, char **args) {
 
   FileSelector fileSelector("assets/map");
   std::string mapFile = fileSelector.selectFile();
-  // std::string mapFile = "small03.osm";
+  // std::string mapFile = "small01.osm";
 
   if (ENVIRONMENT == 0 && false) {
     spdlog::set_level(spdlog::level::debug);
@@ -35,7 +35,7 @@ int main(int nArgs, char **args) {
   cityGraph.createGraph(cityMap);
 
   Manager manager(cityGraph, cityMap);
-  if (nArgs > 2 && std::string(args[2]) == "cbs" || true) {
+  if (nArgs > 2 && std::string(args[2]) == "cbs") {
     manager.createCarsCBS(numCars);
   } else {
     manager.createCarsAStar(numCars);

@@ -32,14 +32,17 @@ void Manager::createCarsCBS(int numCars) {
 
         double width = graph.getWidth();
         double height = graph.getHeight();
-        auto outOfBounds = [&](sf::Vector2f p) { return p.x < 0 || p.y < 0 || p.x > width || p.y > height; };
+        auto outOfBounds = [&](sf::Vector2f p) {
+          return p.x + CAR_LENGTH < 0 || p.y + CAR_LENGTH < 0 || p.x > width + CAR_LENGTH || p.y > height + CAR_LENGTH;
+        };
 
         if (outOfBounds(cars[i].getPath()[t]) || outOfBounds(cars[j].getPath()[t])) {
           continue;
         }
 
         if (std::sqrt(diff.x * diff.x + diff.y * diff.y) < CAR_LENGTH * 1.1) {
-          spdlog::error("Cars {} and {} still have a conflict at time {}", i, j, t * SIM_STEP_TIME);
+          spdlog::error("Cars {} and {} still have a conflict at time {} ({}, {})", i, j, t * SIM_STEP_TIME,
+                        cars[i].getPath()[t].x, cars[i].getPath()[t].y);
           valid = false;
         }
       }
@@ -49,6 +52,19 @@ void Manager::createCarsCBS(int numCars) {
   if (!valid) {
     return createCarsCBS(numCars);
   }
+
+  // Display some stats
+  // Average speed inside the city
+  double avgSpeed = 0;
+  for (int i = 0; i < numCars; i++) {
+    avgSpeed += cars[i].getAverageSpeed(graph);
+  }
+  avgSpeed /= numCars;
+  spdlog::info("Average speed: {:0>6.5} km/h", avgSpeed * 3.6);
+
+  // Num cars per km
+  double numCarsPerKm = (double)numCars / (graph.getWidth() * graph.getHeight() / 1000000);
+  spdlog::info("Number of cars per km²: {:0>6.5}", numCarsPerKm);
 }
 
 // Split the node into 2 subnodes
@@ -100,10 +116,8 @@ Manager::CBSNode Manager::createSubCBS(CBSNode &node, int subNodeDepth) {
 
       for (int k = 0; k < numCars2; k++) {
         conflict.car = k;
-        constraints2.addConstraint(conflict, false);
+        constraints2.addConstraint(conflict);
       }
-
-      constraints2.addConstraint(conflict, true);
     }
   }
 
@@ -153,7 +167,7 @@ Manager::CBSNode Manager::processCBS(ConstraintController constraints, int subNo
 
     startNode.paths[i] = cars[i].getPath();
 
-    double carCost = cars[i].getRemainingTime(true);
+    double carCost = cars[i].getPathTime();
     startNode.costs[i] = carCost;
     startNode.cost += carCost;
 
@@ -240,12 +254,12 @@ Manager::CBSNode Manager::processCBS(ConstraintController constraints, int subNo
       newConflict.car = iCar == 0 ? car1 : car2;
 
       // If already in constraints, skip
-      if (node.constraints.hasConstraint(newConflict, false)) {
+      if (node.constraints.hasConstraint(newConflict)) {
         continue;
       }
 
       ConstraintController newConstraints = node.constraints.copy();
-      newConstraints.addConstraint(newConflict, false);
+      newConstraints.addConstraint(newConflict);
 
       TimedAStar aStar(cars[car].getStart(), cars[car].getEnd(), graph, &newConstraints, car);
       std::vector<AStar::node> newPath = aStar.findPath();
@@ -256,10 +270,9 @@ Manager::CBSNode Manager::processCBS(ConstraintController constraints, int subNo
 
       cars[car].assignPath(newPath);
       double carOldCost = node.costs[car];
-      double carNewCost = cars[car].getRemainingTime(true);
+      double carNewCost = cars[car].getPathTime();
 
       CBSNode newNode;
-
       newNode.paths = paths;
       newNode.paths[car] = cars[car].getPath();
       newNode.constraints = newConstraints;

@@ -25,10 +25,17 @@ public:
   CityGraph::point getStart() { return start; }
   CityGraph::point getEnd() { return end; }
   double getSpeed();
-  double getRemainingDistance();
-  double getRemainingTime(bool fromStart = false);
+  double getSpeedAt(int index);
+  double getAverageSpeed(CityGraph &graph);
+
+  double getRemainingTime();
   double getElapsedTime();
+  double getPathTime();
+
+  double getRemainingDistance();
   double getElapsedDistance();
+  double getPathLength();
+
   sf::Vector2f getPosition() { return path[currentPoint]; }
   std::vector<sf::Vector2f> getPath() { return path; }
   std::vector<AStar::node> getAStarPath() { return aStarPath; }

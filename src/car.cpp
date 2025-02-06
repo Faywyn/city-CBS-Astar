@@ -7,8 +7,8 @@
 #include <random>
 
 Car::Car() {
-  std::vector<sf::Color> colors = {sf::Color(14, 79, 133), sf::Color(215, 199, 203), sf::Color(105, 101, 89),
-                                   sf::Color(182, 18, 34), sf::Color(24, 25, 24),    sf::Color(17, 86, 122)};
+  std::vector<sf::Color> colors = {sf::Color(50, 120, 190), sf::Color(183, 132, 144), sf::Color(105, 101, 89),
+                                   sf::Color(182, 18, 34),  sf::Color(24, 25, 24),    sf::Color(17, 86, 122)};
   color = colors[rand() % colors.size()];
 }
 
@@ -91,10 +91,19 @@ double Car::getSpeed() {
   return sqrt(diff.x * diff.x + diff.y * diff.y) / SIM_STEP_TIME;
 }
 
-double Car::getRemainingDistance() {
-  if (currentPoint >= (int)path.size() - 1)
+double Car::getSpeedAt(int index) {
+  if (index >= (int)path.size() - 1)
     return 0;
 
+  sf::Vector2f diff = path[index + 1] - path[index];
+  return sqrt(diff.x * diff.x + diff.y * diff.y) / SIM_STEP_TIME;
+}
+
+double Car::getRemainingTime() { return (double)(path.size() - currentPoint) * SIM_STEP_TIME; }
+double Car::getElapsedTime() { return (double)currentPoint * SIM_STEP_TIME; }
+double Car::getPathTime() { return (double)path.size() * SIM_STEP_TIME; }
+
+double Car::getRemainingDistance() {
   double dist = 0;
   for (int i = currentPoint; i < (int)path.size() - 1; i++) {
     sf::Vector2f diff = path[i + 1] - path[i];
@@ -114,13 +123,15 @@ double Car::getElapsedDistance() {
   return dist;
 }
 
-double Car::getRemainingTime(bool fromStart) {
-  if (fromStart) {
-    return (double)path.size() * SIM_STEP_TIME;
+double Car::getPathLength() {
+  double dist = 0;
+  for (int i = 0; i < (int)path.size() - 1; i++) {
+    sf::Vector2f diff = path[i + 1] - path[i];
+    dist += sqrt(diff.x * diff.x + diff.y * diff.y);
   }
-  return (double)(path.size() - currentPoint) * SIM_STEP_TIME;
+
+  return dist;
 }
-double Car::getElapsedTime() { return currentPoint * SIM_STEP_TIME; }
 
 void Car::chooseRandomStartEndPath(CityGraph &graph, CityMap &cityMap) {
   CityGraph::point start;
@@ -138,18 +149,6 @@ void Car::chooseRandomStartEndPath(CityGraph &graph, CityMap &cityMap) {
         minDistance)
       continue;
 
-    bool valid = true;
-    for (auto i : cityMap.getIntersections()) {
-      sf::Vector2f diff = i.center - start.position;
-      double distance = std::sqrt(diff.x * diff.x + diff.y * diff.y);
-      if (distance < i.radius * 2) {
-        valid = false;
-        break;
-      }
-    }
-    if (!valid)
-      continue;
-
     AStar aStar(start, end, graph);
     path = aStar.findPath();
 
@@ -162,4 +161,26 @@ void Car::chooseRandomStartEndPath(CityGraph &graph, CityMap &cityMap) {
 
   this->assignStartEnd(start, end);
   this->assignPath(path);
+}
+
+double Car::getAverageSpeed(CityGraph &graph) {
+  double dist = 0;
+  double time = 0;
+  auto outOfBounds = [&](sf::Vector2f p) {
+    return p.x < 0 || p.y < 0 || p.x > graph.getWidth() || p.y > graph.getWidth();
+  };
+
+  for (int i = 0; i < (int)path.size() - 1; i++) {
+    if (outOfBounds(path[i]) || outOfBounds(path[i + 1]))
+      continue;
+
+    sf::Vector2f diff = path[i + 1] - path[i];
+    dist += sqrt(diff.x * diff.x + diff.y * diff.y);
+    time += SIM_STEP_TIME;
+  }
+
+  if (time == 0)
+    return 0;
+
+  return dist / time;
 }

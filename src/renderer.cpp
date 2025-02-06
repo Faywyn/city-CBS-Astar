@@ -1,13 +1,14 @@
 #include <algorithm>
 #include <iostream>
+#include <random>
+#include <vector>
+
 #include <ompl/base/State.h>
 #include <ompl/base/StateSpace.h>
 #include <ompl/base/spaces/DubinsStateSpace.h>
 #include <ompl/geometric/SimpleSetup.h>
 #include <ompl/geometric/planners/rrt/RRT.h>
-#include <random>
 #include <spdlog/spdlog.h>
-#include <vector>
 
 #include "aStar.h"
 #include "config.h"
@@ -190,6 +191,7 @@ void Renderer::renderCityMap(const CityMap &cityMap) {
   }
 
   // Draw roads
+  sf::Color roadColor(194, 201, 202);
   for (const auto &road : cityMap.getRoads()) {
     for (const auto &segment : road.segments) {
       sf::Vector2f basedP1(segment.p1.x, segment.p1.y);
@@ -212,14 +214,14 @@ void Renderer::renderCityMap(const CityMap &cityMap) {
       convex.setPoint(2, p3);
       convex.setPoint(3, p4);
 
-      convex.setFillColor(sf::Color(155, 162, 163));
+      convex.setFillColor(roadColor);
 
       window.draw(convex);
 
       // Draw a circle at the start end end of the road (for filling the gap)
       double radius = road.width / 2;
       sf::CircleShape circle(radius);
-      circle.setFillColor(sf::Color(155, 162, 163));
+      circle.setFillColor(roadColor);
       circle.setPosition(basedP1.x - radius, basedP1.y - radius);
       window.draw(circle);
       circle.setPosition(basedP2.x - radius, basedP2.y - radius);
@@ -246,6 +248,8 @@ void Renderer::renderCityGraph(const CityGraph &cityGraph, const sf::View &view)
   // Draw a line between each point and its neighbors
   for (const auto &point : graphPoints) {
     for (const auto &neighbor : neighbors[point]) {
+      if (!neighbor.isRightWay)
+        continue;
 
       double radius = turningRadius(neighbor.maxSpeed);
       auto space = ob::DubinsStateSpace(radius);
@@ -279,6 +283,7 @@ void Renderer::renderCityGraph(const CityGraph &cityGraph, const sf::View &view)
       double distance = space.distance(start, end);
       int numSteps = distance / step;
       sf::Vector2f lastPosition;
+      sf::Color randomColor = sf::Color(rand() % 255, rand() % 255, rand() % 255, 60);
 
       for (int k = 0; k < numSteps; k++) {
         if (k == 0) {
@@ -296,7 +301,7 @@ void Renderer::renderCityGraph(const CityGraph &cityGraph, const sf::View &view)
         double angle = atan2(y - lastPosition.y, x - lastPosition.x) * 180 / M_PI;
 
         // Draw an arrow between the points
-        drawArrow(window, lastPosition, angle, distance / 2, distance / 4, sf::Color(0, 0, 255, 50), false);
+        drawArrow(window, lastPosition, angle, distance * 0.9, distance * 0.9 / 2, randomColor, false);
 
         lastPosition = {(float)x, (float)y};
       }
@@ -318,8 +323,12 @@ void Renderer::renderCityGraph(const CityGraph &cityGraph, const sf::View &view)
       window.draw(text);
     }
 
-    // Draw an arrow at each points
-    drawArrow(window, point.position, point.angle * 180 / M_PI, 1, 0.3, sf::Color(255, 0, 0, 50), true);
+    // Draw a dot at each points
+    double size = 0.3;
+    sf::CircleShape circle(size);
+    circle.setFillColor(sf::Color(255, 0, 0, 70));
+    circle.setPosition(point.position.x - size, point.position.y - size);
+    window.draw(circle);
   }
 }
 
