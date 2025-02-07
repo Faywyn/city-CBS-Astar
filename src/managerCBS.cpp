@@ -58,20 +58,19 @@ DataManager::data Manager::createCarsCBS(int numCars) {
   }
 
   DataManager::data data;
-  data.numCars = numCars;
-  data.carDensity = 1000000 * numCars / (graph.getWidth() * graph.getHeight());
-  data.carAvgSpeed = 0;
-  data.carMaxSpeed = 0;
-  data.carMinSpeed = CAR_MAX_SPEED_MS;
+  data.numCars = 0;
+  data.carAvgSpeed.clear();
 
   for (int i = 0; i < numCars; i++) {
-    data.carAvgSpeed += cars[i].getAverageSpeed(graph);
-    data.carMaxSpeed = std::max(data.carMaxSpeed, cars[i].getAverageSpeed(graph));
-    data.carMinSpeed = std::min(data.carMinSpeed, cars[i].getAverageSpeed(graph));
+    double avgSpeed = cars[i].getAverageSpeed(graph);
+    if (avgSpeed <= 0.01)
+      continue;
+
+    data.carAvgSpeed.push_back(avgSpeed);
+    data.numCars++;
   }
 
-  data.carAvgSpeed /= numCars;
-
+  data.carDensity = 1000000 * data.numCars / (graph.getWidth() * graph.getHeight());
   return data;
 }
 

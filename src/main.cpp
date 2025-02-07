@@ -10,11 +10,20 @@
 #include "test.h"
 
 int main(int nArgs, char **args) {
+  srand(time(NULL));
   spdlog::set_pattern("[%d-%m-%C %H:%M:%S.%e] [%^%l%$] [thread %t] %v");
 
-  int numCars = 10;
+  int numCarsMin = 10;
+  int numCarsMax = 15;
+  int numData = -1;
   if (nArgs > 1) {
-    numCars = std::stoi(args[1]);
+    numCarsMin = std::stoi(args[1]);
+  }
+  if (nArgs > 2) {
+    numCarsMax = std::stoi(args[2]);
+  }
+  if (nArgs > 3) {
+    numData = std::stoi(args[3]);
   }
 
   FileSelector fileSelector("assets/map");
@@ -30,7 +39,7 @@ int main(int nArgs, char **args) {
   }
 
   DataManager dataManager(mapFile);
-  dataManager.createData(10, numCars, mapFile);
+  dataManager.createData(numData, numCarsMin, numCarsMax, mapFile);
 
   return 0;
 }

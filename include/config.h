@@ -6,6 +6,7 @@ constexpr int ENVIRONMENT = 0; // 0 = development, 1 = production
 constexpr int SCREEN_WIDTH = 2880;
 constexpr int SCREEN_HEIGHT = 1864;
 constexpr double LOG_CBS_REFRESHRATE = 0.3; // in seconds
+constexpr int NUM_THREADS = 12;
 
 constexpr int EARTH_RADIUS = 6371000; // in meters
 

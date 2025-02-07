@@ -24,9 +24,9 @@ elif [ "$type" == "sign" ]; then
   codesign --entitlements Entitlements.plist -s - ./build/bin/city-cbs-astar
 elif [ "$type" == "help" ]; then
   echo "Usage: ./build.sh [debug|release]: Build the project in debug or release mode"
-  echo "Usage: ./build.sh [debugRun|releaseRun] [num_agents] [cbs]: Build and run the project in debug or release mode"
+  echo "Usage: ./build.sh [debugRun|releaseRun] [num_agents_min] [num_agents_max] [num_data]: Build and run the project in debug or release mode"
   echo "Usage: ./build.sh [clean]: Clean the build directory"
-  echo "Usage: ./build.sh [run] [num_agents] [cbs]: Run the project, num_agents and cbs are optional (use cbs to enable CBS)"
+  echo "Usage: ./build.sh [run] [num_agents_min] [num_agents_max] [num_data]"
 else
   echo "Usage: ./build.sh [debug|debugRun|release|releaseRun|clean|run|help]"
 fi
