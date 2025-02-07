@@ -24,39 +24,6 @@ DataManager::DataManager(std::string filename) {
   }
 }
 
-// void DataManager::createData(int numData, int numCarsMin, int numCarsMax, std::string mapName) {
-//   numData = numData < 1 ? INT_MAX : numData;
-//
-//   std::string mapNameNoExt = mapName.substr(0, mapName.find_last_of("."));
-//   std::string filename = "data/" + mapNameNoExt + "_data.csv";
-//
-//   CityMap cityMap;
-//   cityMap.loadFile("assets/map/" + mapName);
-//
-//   CityGraph cityGraph;
-//   cityGraph.createGraph(cityMap);
-//
-//   std::ofstream file;
-//   file.open(filename, std::ios::app);
-//
-//   for (int i = 0; i < numData; i++) {
-//     int numCars = rand() % (numCarsMax - numCarsMin + 1) + numCarsMin;
-//
-//     Manager manager(cityGraph, cityMap, false);
-//     data resData = manager.createCarsCBS(numCars);
-//
-//     file << resData.numCars << ";" << resData.carDensity << ";" << resData.carAvgSpeed << ";" << resData.carMaxSpeed
-//          << ";" << resData.carMinSpeed << std::endl;
-//
-//     spdlog::info("Data {}/{} created: numCars: {}, carDensity: {}, carAvgSpeed: {}, carMaxSpeed: {}, carMinSpeed:
-//     {}",
-//                  i + 1, numData, resData.numCars, resData.carDensity, resData.carAvgSpeed, resData.carMaxSpeed,
-//                  resData.carMinSpeed);
-//   }
-//
-//   file.close();
-// }
-
 void DataManager::createData(int numData, int numCarsMin, int numCarsMax, std::string mapName) {
   int numThread = NUM_THREADS;
 
@@ -97,22 +64,29 @@ void DataManager::createData(int numData, int numCarsMin, int numCarsMax, std::s
         int numCars = dist(rng);
 
         Manager manager(cityGraph, cityMap, false);
-        data resData = manager.createCarsCBS(numCars);
+        auto resData = manager.createCarsCBS(numCars);
+        if (!resData.first) {
+          i--;
+          continue;
+        }
+
+        data validResData = resData.second;
 
         {
           std::lock_guard<std::mutex> lock(fileMutex);
-          file << resData.numCars << ";" << resData.carDensity;
-          for (auto speed : resData.carAvgSpeed) {
+          file << validResData.numCars << ";" << validResData.carDensity;
+          for (auto speed : validResData.carAvgSpeed) {
             file << ";" << speed;
           }
           file << std::endl;
         }
 
         if (numData == INT_MAX) {
-          spdlog::info("Data {}: numCars: {}, carDensity: {:0>6.5}", i + 1, resData.numCars, resData.carDensity);
+          spdlog::info("Data {}: numCars: {}, carDensity: {:0>6.5}", i + 1, validResData.numCars,
+                       validResData.carDensity);
         } else {
-          spdlog::info("Data {}: numCars: {}, carDensity: {:0>6.5}", i + 1, numData, resData.numCars,
-                       resData.carDensity);
+          spdlog::info("Data {}: numCars: {}, carDensity: {:0>6.5}", i + 1, numData, validResData.numCars,
+                       validResData.carDensity);
         }
       }
     });

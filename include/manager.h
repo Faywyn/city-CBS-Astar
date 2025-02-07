@@ -39,7 +39,7 @@ public:
   void createCarsAStar(int numCars);
 
   // CBS pathfinding (collision avoidance)
-  DataManager::data createCarsCBS(int numCars);
+  std::pair<bool, DataManager::data> createCarsCBS(int numCars); // the bool is if the CBS was successful
   CBSNode createSubCBS(CBSNode &node, int subNodeDepth);
   CBSNode processCBS(ConstraintController constraints, int subNodeDepth);
 

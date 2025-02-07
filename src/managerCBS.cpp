@@ -6,7 +6,7 @@
 #include <numeric>
 #include <spdlog/spdlog.h>
 
-DataManager::data Manager::createCarsCBS(int numCars) {
+std::pair<bool, DataManager::data> Manager::createCarsCBS(int numCars) {
   this->createCarsAStar(numCars);
   this->numCars = numCars;
   bool valid = true;
@@ -20,7 +20,7 @@ DataManager::data Manager::createCarsCBS(int numCars) {
   if (!node.hasResolved) {
     if (log)
       spdlog::error("CBS could not resolve all conflicts");
-    return createCarsCBS(numCars);
+    return std::make_pair(false, DataManager::data());
   } else {
     if (log)
       spdlog::info("CBS resolved all conflicts");
@@ -54,7 +54,7 @@ DataManager::data Manager::createCarsCBS(int numCars) {
   }
 
   if (!valid) {
-    return createCarsCBS(numCars);
+    return std::make_pair(false, DataManager::data());
   }
 
   DataManager::data data;
@@ -71,7 +71,7 @@ DataManager::data Manager::createCarsCBS(int numCars) {
   }
 
   data.carDensity = 1000000 * data.numCars / (graph.getWidth() * graph.getHeight());
-  return data;
+  return std::make_pair(true, data);
 }
 
 // Split the node into 2 subnodes
