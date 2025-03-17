@@ -1,3 +1,10 @@
+/**
+ * @file dubins.cpp
+ * @brief Dubins path implementation
+ *
+ * This file contains the implementation of the Dubins class. It is used to calculate the path between two points in the
+ * city graph. It will be used to render cars in the city and check for collisions.
+ */
 #include "dubins.h"
 #include "utils.h"
 

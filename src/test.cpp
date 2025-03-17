@@ -1,3 +1,7 @@
+/**
+ * @file test.cpp
+ * @brief A file for testing the project
+ */
 #include "test.h"
 #include "spdlog/spdlog.h"
 #include "tinyxml2.h"

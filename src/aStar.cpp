@@ -1,3 +1,10 @@
+/**
+ * @file aStar.cpp
+ * @brief A* algorithm implementation
+ *
+ * This file contains the implementation of the A* algorithm. It is used to find the shortest path between two points in
+ * a graph.
+ */
 #include "aStar.h"
 #include "config.h"
 #include "dubins.h"

@@ -1,3 +1,10 @@
+/**
+ * @file cityGraph.cpp
+ * @brief City graph implementation
+ *
+ * This file contains the implementation of the CityGraph class. This class represents the graph of the city. It
+ * contains the points of the graph and the neighbors of each point.
+ */
 #include <iostream>
 #include <ompl/base/State.h>
 #include <ompl/base/StateSpace.h>
@@ -217,7 +224,7 @@ void CityGraph::linkPoints(const point &p, const point &n, int direction, bool s
                  anglesPoint[1] == anglesNeighbor[0] || anglesPoint[1] == anglesNeighbor[1]);
   isStraight &= subPoints;
 
-  if (!isStraight || true) {
+  if (!isStraight) {
     for (const auto &anglePoint : anglesPoint) {
       for (const auto &angleNeighbor : anglesNeighbor) {
         copyPoint.angle = anglePoint;
@@ -267,7 +274,8 @@ void CityGraph::linkPoints(const point &p, const point &n, int direction, bool s
 CityGraph::point CityGraph::getRandomPoint() const {
   std::vector<point> graphPointsOut;
   for (const auto &point : graphPoints) {
-    if (point.position.x < 0 || point.position.x > width || point.position.y < 0 || point.position.y > height)
+    if (point.position.x + CAR_LENGTH < 0 || point.position.x - CAR_LENGTH > width ||
+        point.position.y + CAR_LENGTH < 0 || point.position.y - CAR_LENGTH > height)
       graphPointsOut.push_back(point);
   }
 

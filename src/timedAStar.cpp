@@ -1,3 +1,10 @@
+/**
+ * @file timedAStar.cpp
+ * @brief Timed A* algorithm implementation
+ *
+ * This file contains the implementation of the Timed A* algorithm. It is used to find the shortest path between two
+ * points in a graph with time constraints.
+ */
 #include "aStar.h"
 #include "config.h"
 #include "dubins.h"
@@ -80,21 +87,35 @@ void TimedAStar::process() {
       double nSpeedAcc = std::sqrt(std::pow(current.speed, 2) + 2 * CAR_ACCELERATION * distance);
       double nSpeedDec = std::sqrt(std::pow(current.speed, 2) - 2 * CAR_DECELERATION * distance);
 
+      auto push = [&](double nSpeed) {
+        int numSpeedDiv = 5;
+        for (int i = 1; i < numSpeedDiv + 1; i++) {
+          double s = (current.speed + (nSpeed - current.speed) * i / numSpeedDiv);
+          if (s < SPEED_RESOLUTION)
+            continue;
+          newSpeeds.push_back(s);
+        }
+      };
+
       if (nSpeedAcc > neighborGraphPoint.maxSpeed && current.speed < neighborGraphPoint.maxSpeed) {
-        newSpeeds.push_back(neighborGraphPoint.maxSpeed);
-        newSpeeds.push_back((current.speed + neighborGraphPoint.maxSpeed) / 2);
+        push(neighborGraphPoint.maxSpeed);
+        // newSpeeds.push_back(neighborGraphPoint.maxSpeed);
+        // newSpeeds.push_back((current.speed + neighborGraphPoint.maxSpeed) / 2);
       } else if (nSpeedAcc < neighborGraphPoint.maxSpeed) {
-        newSpeeds.push_back(nSpeedAcc);
-        newSpeeds.push_back((current.speed + nSpeedAcc) / 2);
+        push(nSpeedAcc);
+        // newSpeeds.push_back(nSpeedAcc);
+        // newSpeeds.push_back((current.speed + nSpeedAcc) / 2);
       }
 
       if (nSpeedDec == nSpeedDec && std::isfinite(nSpeedDec)) {
         if (nSpeedDec < 0 && current.speed > 0) {
-          newSpeeds.push_back(0);
-          newSpeeds.push_back((current.speed + 0) / 2);
+          push(0);
+          // newSpeeds.push_back(0);
+          // newSpeeds.push_back((current.speed + 0) / 2);
         } else if (nSpeedDec >= 0) {
-          newSpeeds.push_back(nSpeedDec);
-          newSpeeds.push_back((current.speed + nSpeedDec) / 2);
+          push(nSpeedDec);
+          // newSpeeds.push_back(nSpeedDec);
+          // newSpeeds.push_back((current.speed + nSpeedDec) / 2);
         }
       }
 

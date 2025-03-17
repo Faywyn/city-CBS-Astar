@@ -1,3 +1,9 @@
+/**
+ * @file renderer.cpp
+ * @brief Implementation of the Renderer class
+ *
+ * This file contains the implementation of the Renderer class.
+ */
 #include <algorithm>
 #include <iostream>
 #include <random>

@@ -1,3 +1,11 @@
+/**
+ * @file constraintController.cpp
+ * @brief ConstraintController class implementation
+ *
+ * This file contains the implementation of the ConstraintController class. This class is used to control the
+ * constraints of the A* algorithm. It is used to check if a car can move to a certain point in the graph at a certain
+ * time.
+ */
 #include <iostream>
 #include <spdlog/spdlog.h>
 

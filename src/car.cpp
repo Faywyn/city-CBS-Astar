@@ -1,3 +1,9 @@
+/**
+ * @file car.cpp
+ * @brief Car class implementation
+ *
+ * This file contains the implementation of the Car class.
+ */
 #include "car.h"
 #include "config.h"
 #include "dubins.h"

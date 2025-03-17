@@ -1,6 +1,11 @@
 cmake_minimum_required(VERSION 3.16)
 project(city-cbs-astar LANGUAGES CXX)
 
+# Set C++ standard to C++17
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
 # Ensure arm64
 set(CMAKE_OSX_ARCHITECTURES "arm64")
 

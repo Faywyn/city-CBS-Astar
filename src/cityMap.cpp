@@ -1,3 +1,9 @@
+/**
+ * @file cityMap.cpp
+ * @brief CityMap class implementation
+ *
+ * This file contains the implementation of the CityMap class.
+ */
 #include <iostream>
 #include <math.h>
 #include <set>

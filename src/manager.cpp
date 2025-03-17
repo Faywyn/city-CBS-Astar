@@ -1,3 +1,9 @@
+/**
+ * @file manager.cpp
+ * @brief Implementation of the Manager class
+ *
+ * This file contains the implementation of the Manager class.
+ */
 #include "manager.h"
 #include "aStar.h"
 

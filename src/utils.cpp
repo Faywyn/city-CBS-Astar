@@ -1,3 +1,7 @@
+/**
+ * @file utils.cpp
+ * @brief Utility functions implementation
+ */
 #include <spdlog/spdlog.h>
 
 #include "car.h"

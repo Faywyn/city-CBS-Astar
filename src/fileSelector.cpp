@@ -1,3 +1,9 @@
+/**
+ * @file fileSelector.cpp
+ * @brief File selector implementation
+ *
+ * This file contains the implementation of the FileSelector class. It is used to select a file from a folder.
+ */
 #include "fileSelector.h"
 
 #include <filesystem>

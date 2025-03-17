@@ -1,3 +1,9 @@
+/**
+ * @file managerCBS.cpp
+ * @brief CBS algorithm implementation
+ *
+ * This file contains the implementation of the CBS algorithm. It is used to resolve conflicts between cars.
+ */
 #include "manager.h"
 #include "renderer.h"
 #include "utils.h"
@@ -70,7 +76,12 @@ std::pair<bool, DataManager::data> Manager::createCarsCBS(int numCars) {
     data.numCars++;
   }
 
+  if (data.numCars == 0) {
+    return std::make_pair(false, DataManager::data());
+  }
+
   data.carDensity = 1000000 * data.numCars / (graph.getWidth() * graph.getHeight());
+
   return std::make_pair(true, data);
 }
 
@@ -202,7 +213,10 @@ Manager::CBSNode Manager::processCBS(ConstraintController constraints, int subNo
     openSet.pop();
 
     if (duration > CBS_MAX_SUB_TIME) {
-      return createSubCBS(node, subNodeDepth);
+      CBSNode resSub = createSubCBS(node, subNodeDepth);
+      if (resSub.hasResolved) {
+        return resSub;
+      }
     }
 
     std::vector<std::vector<sf::Vector2f>> paths = node.paths;
