@@ -5,8 +5,6 @@ This project is part of the TIPE 2023-2024 preparatory course. It implements a C
 project integrates OpenStreetMap (OSM) data to load city maps, displays the map using SFML 2, uses
 Reed-Sheep curves to generate smooth trajectories, and constructs a city graph with one edge per road.
 
----
-
 ## Table of Contents
 1. [Overview](#overview)
 2. [Features](#features)
@@ -18,16 +16,11 @@ Reed-Sheep curves to generate smooth trajectories, and constructs a city graph w
 8. [License](#license)
 9. [Acknowledgements](#acknowledgements)
 
----
-
 ## Overview
-
 The goal of this project is to simulate autonomous vehicles navigating through a city environment using
 a CBS-based path planning approach. The city is loaded from OSM data, and the map is rendered in real
 time using SFML 2. The project uses Reed-Sheep curves to compute smooth paths and builds a graph representing
 the city with one edge per road segment.
-
----
 
 ## Features
 - **Autonomous Vehicle Simulation**: Implements path planning for self-driving cars.
@@ -38,8 +31,6 @@ the city with one edge per road segment.
 - **Robust Logging**: Uses spdlog for logging purposes.
 - **XML Parsing**: Uses tinyxml2 for handling XML data.
 - **Flexible Build System**: Managed using CMake with debug and release configurations.
-
----
 
 ## Dependencies
 Before building the project, ensure you have the following dependencies installed:
@@ -52,8 +43,6 @@ Before building the project, ensure you have the following dependencies installe
 - **Doxygen (Optional)**: For generating documentation.
 
 The project fetches SFML, spdlog, and tinyxml2 automatically using CMake's FetchContent module.
-
---- 
 
 ## Building and Running the Project
 The project uses CMake as its build system and includes a convenient shell script (build.sh) to streamline the build and run process.
@@ -109,6 +98,3 @@ This project is licensed under the MIT License. See the [LICENSE](https://github
 - [OMPL](https://ompl.kavrakilab.org/): For motion planning.
 - [spdlog](https://github.com/gabime/spdlog): For logging purposes.
 - [tinyxml2](https://github.com/leethomason/tinyxml2): For XML parsing.
-
-
-
