@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.17)  18 MAR 2025 11:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.17)  18 MAR 2025 11:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1555,7 +1555,7 @@ Package rerunfilecheck Info: File `refman.out' has not changed.
 Here is how much of TeX's memory you used:
  23368 strings out of 474662
  425910 string characters out of 5751109
- 780581 words of memory out of 5000000
+ 780547 words of memory out of 5000000
  41977 multiletter control sequences out of 15000+600000
  612592 words of font info for 112 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
@@ -1575,7 +1575,7 @@ tic/uhvb8a.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/urw/helveti
 c/uhvb8ac.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/urw/helvetic
 /uhvr8a.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/urw/helvetic/u
 hvro8a.pfb>
-Output written on refman.pdf (94 pages, 709852 bytes).
+Output written on refman.pdf (94 pages, 709813 bytes).
 PDF statistics:
  7611 PDF objects out of 8907 (max. 8388607)
  7404 compressed objects within 75 object streams
