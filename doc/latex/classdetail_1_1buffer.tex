@@ -1,0 +1,118 @@
+\doxysubsection{detail\+::buffer\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classdetail_1_1buffer}{}\label{classdetail_1_1buffer}\index{detail::buffer$<$ T $>$@{detail::buffer$<$ T $>$}}
+
+
+{\ttfamily \#include $<$core.\+h$>$}
+
+\doxysubsubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+constexpr auto \mbox{\hyperlink{classdetail_1_1buffer_a8685285932360c284d19003fc4ba3edc}{size}} () const noexcept -\/$>$ size\+\_\+t
+\item 
+constexpr auto \mbox{\hyperlink{classdetail_1_1buffer_ac7ff14268d6b32d3d878291445ff4dd3}{capacity}} () const noexcept -\/$>$ size\+\_\+t
+\item 
+FMT\+\_\+\+CONSTEXPR auto \mbox{\hyperlink{classdetail_1_1buffer_aeb33e0a2d2be2bbca9e0236c148089c8}{data}} () noexcept -\/$>$ T \texorpdfstring{$\ast$}{*}
+\item 
+void \mbox{\hyperlink{classdetail_1_1buffer_a8174757a0d86698229670044730dc59b}{clear}} ()
+\item 
+{\footnotesize template$<$typename U$>$ }\\void \mbox{\hyperlink{classdetail_1_1buffer_a28f51acf32e61f37558f6c7b8d200c05}{append}} (const U \texorpdfstring{$\ast$}{*}begin, const U \texorpdfstring{$\ast$}{*}end)
+\end{DoxyCompactItemize}
+\doxysubsubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+FMT\+\_\+\+CONSTEXPR void \mbox{\hyperlink{classdetail_1_1buffer_a5c82aec716b07079ac88194eb9aa7feb}{set}} (T \texorpdfstring{$\ast$}{*}buf\+\_\+data, size\+\_\+t buf\+\_\+capacity) noexcept
+\item 
+virtual FMT\+\_\+\+CONSTEXPR20 void \mbox{\hyperlink{classdetail_1_1buffer_ae1afeec5148a94656c7deaaad19d7da6}{grow}} (size\+\_\+t \mbox{\hyperlink{classdetail_1_1buffer_ac7ff14268d6b32d3d878291445ff4dd3}{capacity}})=0
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+class detail\+::buffer$<$ T $>$}
+\textbackslash{}rst A contiguous memory buffer with an optional growing ability. It is an internal class and shouldn\textquotesingle{}t be used directly, only via {\ttfamily \texorpdfstring{$\sim$}{\string~}fmt\doxylink{classbasic__memory__buffer}{basic\+\_\+memory\+\_\+buffer}}. \textbackslash{}endrst 
+
+Definition at line \mbox{\hyperlink{core_8h_source_l00816}{816}} of file \mbox{\hyperlink{core_8h_source}{core.\+h}}.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\Hypertarget{classdetail_1_1buffer_a28f51acf32e61f37558f6c7b8d200c05}\index{detail::buffer$<$ T $>$@{detail::buffer$<$ T $>$}!append@{append}}
+\index{append@{append}!detail::buffer$<$ T $>$@{detail::buffer$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{append()}{append()}}
+{\footnotesize\ttfamily \label{classdetail_1_1buffer_a28f51acf32e61f37558f6c7b8d200c05} 
+template$<$typename T$>$ \\
+template$<$typename U$>$ \\
+template FMT\+\_\+\+API void \mbox{\hyperlink{classdetail_1_1buffer}{detail\+::buffer}}$<$ T $>$\+::append (\begin{DoxyParamCaption}\item[{const U \texorpdfstring{$\ast$}{*}}]{begin}{, }\item[{const U \texorpdfstring{$\ast$}{*}}]{end}{}\end{DoxyParamCaption})}
+
+Appends data to the end of the buffer. \Hypertarget{classdetail_1_1buffer_ac7ff14268d6b32d3d878291445ff4dd3}\index{detail::buffer$<$ T $>$@{detail::buffer$<$ T $>$}!capacity@{capacity}}
+\index{capacity@{capacity}!detail::buffer$<$ T $>$@{detail::buffer$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{capacity()}{capacity()}}
+{\footnotesize\ttfamily \label{classdetail_1_1buffer_ac7ff14268d6b32d3d878291445ff4dd3} 
+template$<$typename T$>$ \\
+auto \mbox{\hyperlink{classdetail_1_1buffer}{detail\+::buffer}}$<$ T $>$\+::capacity (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ size\+\_\+t \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+Returns the capacity of this buffer. 
+
+Definition at line \mbox{\hyperlink{core_8h_source_l00860}{860}} of file \mbox{\hyperlink{core_8h_source}{core.\+h}}.
+
+\Hypertarget{classdetail_1_1buffer_a8174757a0d86698229670044730dc59b}\index{detail::buffer$<$ T $>$@{detail::buffer$<$ T $>$}!clear@{clear}}
+\index{clear@{clear}!detail::buffer$<$ T $>$@{detail::buffer$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily \label{classdetail_1_1buffer_a8174757a0d86698229670044730dc59b} 
+template$<$typename T$>$ \\
+void \mbox{\hyperlink{classdetail_1_1buffer}{detail\+::buffer}}$<$ T $>$\+::clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Clears this buffer. 
+
+Definition at line \mbox{\hyperlink{core_8h_source_l00867}{867}} of file \mbox{\hyperlink{core_8h_source}{core.\+h}}.
+
+\Hypertarget{classdetail_1_1buffer_aeb33e0a2d2be2bbca9e0236c148089c8}\index{detail::buffer$<$ T $>$@{detail::buffer$<$ T $>$}!data@{data}}
+\index{data@{data}!detail::buffer$<$ T $>$@{detail::buffer$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{data()}{data()}}
+{\footnotesize\ttfamily \label{classdetail_1_1buffer_aeb33e0a2d2be2bbca9e0236c148089c8} 
+template$<$typename T$>$ \\
+FMT\+\_\+\+CONSTEXPR auto \mbox{\hyperlink{classdetail_1_1buffer}{detail\+::buffer}}$<$ T $>$\+::data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ T\texorpdfstring{$\ast$}{*} \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Returns a pointer to the buffer data (not null-\/terminated). 
+
+Definition at line \mbox{\hyperlink{core_8h_source_l00863}{863}} of file \mbox{\hyperlink{core_8h_source}{core.\+h}}.
+
+\Hypertarget{classdetail_1_1buffer_ae1afeec5148a94656c7deaaad19d7da6}\index{detail::buffer$<$ T $>$@{detail::buffer$<$ T $>$}!grow@{grow}}
+\index{grow@{grow}!detail::buffer$<$ T $>$@{detail::buffer$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{grow()}{grow()}}
+{\footnotesize\ttfamily \label{classdetail_1_1buffer_ae1afeec5148a94656c7deaaad19d7da6} 
+template$<$typename T$>$ \\
+virtual FMT\+\_\+\+CONSTEXPR20 void \mbox{\hyperlink{classdetail_1_1buffer}{detail\+::buffer}}$<$ T $>$\+::grow (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{capacity}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+Increases the buffer capacity to hold at least {\itshape capacity} elements. 
+
+Implemented in \mbox{\hyperlink{classbasic__memory__buffer_aabb68acfbb17a538c83ebdf1b916334c}{basic\+\_\+memory\+\_\+buffer$<$ T, SIZE, Allocator $>$}}, \mbox{\hyperlink{classbasic__memory__buffer_aabb68acfbb17a538c83ebdf1b916334c}{basic\+\_\+memory\+\_\+buffer$<$ bigit, bigits\+\_\+capacity $>$}}, \mbox{\hyperlink{classbasic__memory__buffer_aabb68acfbb17a538c83ebdf1b916334c}{basic\+\_\+memory\+\_\+buffer$<$ char $>$}}, \mbox{\hyperlink{classbasic__memory__buffer_aabb68acfbb17a538c83ebdf1b916334c}{basic\+\_\+memory\+\_\+buffer$<$ char $>$}}, \mbox{\hyperlink{classbasic__memory__buffer_aabb68acfbb17a538c83ebdf1b916334c}{basic\+\_\+memory\+\_\+buffer$<$ wchar\+\_\+t $>$}}, and \mbox{\hyperlink{classbasic__memory__buffer_aabb68acfbb17a538c83ebdf1b916334c}{basic\+\_\+memory\+\_\+buffer$<$ wchar\+\_\+t $>$}}.
+
+\Hypertarget{classdetail_1_1buffer_a5c82aec716b07079ac88194eb9aa7feb}\index{detail::buffer$<$ T $>$@{detail::buffer$<$ T $>$}!set@{set}}
+\index{set@{set}!detail::buffer$<$ T $>$@{detail::buffer$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{set()}{set()}}
+{\footnotesize\ttfamily \label{classdetail_1_1buffer_a5c82aec716b07079ac88194eb9aa7feb} 
+template$<$typename T$>$ \\
+FMT\+\_\+\+CONSTEXPR void \mbox{\hyperlink{classdetail_1_1buffer}{detail\+::buffer}}$<$ T $>$\+::set (\begin{DoxyParamCaption}\item[{T \texorpdfstring{$\ast$}{*}}]{buf\+\_\+data}{, }\item[{size\+\_\+t}]{buf\+\_\+capacity}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [noexcept]}}
+
+Sets the buffer data and capacity. 
+
+Definition at line \mbox{\hyperlink{core_8h_source_l00834}{834}} of file \mbox{\hyperlink{core_8h_source}{core.\+h}}.
+
+\Hypertarget{classdetail_1_1buffer_a8685285932360c284d19003fc4ba3edc}\index{detail::buffer$<$ T $>$@{detail::buffer$<$ T $>$}!size@{size}}
+\index{size@{size}!detail::buffer$<$ T $>$@{detail::buffer$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily \label{classdetail_1_1buffer_a8685285932360c284d19003fc4ba3edc} 
+template$<$typename T$>$ \\
+auto \mbox{\hyperlink{classdetail_1_1buffer}{detail\+::buffer}}$<$ T $>$\+::size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ size\+\_\+t \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+Returns the size of this buffer. 
+
+Definition at line \mbox{\hyperlink{core_8h_source_l00857}{857}} of file \mbox{\hyperlink{core_8h_source}{core.\+h}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+core.\+h\item 
+bundled\+\_\+fmtlib\+\_\+format.\+cpp\end{DoxyCompactItemize}

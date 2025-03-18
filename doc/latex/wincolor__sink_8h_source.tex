@@ -1,0 +1,88 @@
+\doxysubsection{wincolor\+\_\+sink.\+h}
+\hypertarget{wincolor__sink_8h_source}{}\label{wincolor__sink_8h_source}\index{wincolor\_sink.h@{wincolor\_sink.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00001}00001\ \textcolor{comment}{//\ Copyright(c)\ 2015-\/present,\ Gabi\ Melman\ \&\ spdlog\ contributors.}}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00002}00002\ \textcolor{comment}{//\ Distributed\ under\ the\ MIT\ License\ (http://opensource.org/licenses/MIT)}}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00004}00004\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <spdlog/common.h>}}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <spdlog/details/console\_globals.h>}}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <spdlog/details/null\_mutex.h>}}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <spdlog/sinks/sink.h>}}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <array>}}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00015}00015\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00017}00017\ \textcolor{keyword}{namespace\ }spdlog\ \{}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00018}00018\ \textcolor{keyword}{namespace\ }sinks\ \{}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00019}00019\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00020}00020\ \textcolor{comment}{\ *\ Windows\ color\ console\ sink.\ Uses\ WriteConsoleA\ to\ write\ to\ the\ console\ with}}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00021}00021\ \textcolor{comment}{\ *\ colors}}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00022}00022\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00023}00023\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ ConsoleMutex>}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00024}00024\ \textcolor{keyword}{class\ }wincolor\_sink\ :\ \textcolor{keyword}{public}\ sink\ \{}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00025}00025\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00026}00026\ \ \ \ \ wincolor\_sink(\textcolor{keywordtype}{void}\ *out\_handle,\ color\_mode\ mode);}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00027}00027\ \ \ \ \ \string~wincolor\_sink()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00029}00029\ \ \ \ \ wincolor\_sink(\textcolor{keyword}{const}\ wincolor\_sink\ \&other)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00030}00030\ \ \ \ \ wincolor\_sink\ \&operator=(\textcolor{keyword}{const}\ wincolor\_sink\ \&other)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00032}00032\ \ \ \ \ \textcolor{comment}{//\ change\ the\ color\ for\ the\ given\ level}}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00033}00033\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_color(level::level\_enum\ level,\ std::uint16\_t\ color);}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00034}00034\ \ \ \ \ \textcolor{keywordtype}{void}\ log(\textcolor{keyword}{const}\ details::log\_msg\ \&msg)\ \textcolor{keyword}{final}\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00035}00035\ \ \ \ \ \textcolor{keywordtype}{void}\ flush()\ final\ override;}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00036}00036\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_pattern(const\ std::\textcolor{keywordtype}{string}\ \&pattern)\ override\ final;}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00037}00037\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_formatter(std::unique\_ptr<spdlog::formatter>\ sink\_formatter)\ override\ final;}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00038}00038\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_color\_mode(color\_mode\ mode);}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00040}00040\ protected:}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00041}00041\ \ \ \ \ using\ mutex\_t\ =\ typename\ ConsoleMutex::mutex\_t;}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00042}00042\ \ \ \ \ \textcolor{keywordtype}{void}\ *out\_handle\_;}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00043}00043\ \ \ \ \ mutex\_t\ \&mutex\_;}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00044}00044\ \ \ \ \ \textcolor{keywordtype}{bool}\ should\_do\_colors\_;}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00045}00045\ \ \ \ \ std::unique\_ptr<spdlog::formatter>\ formatter\_;}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00046}00046\ \ \ \ \ std::array<std::uint16\_t,\ level::n\_levels>\ colors\_;}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00048}00048\ \ \ \ \ \textcolor{comment}{//\ set\ foreground\ color\ and\ return\ the\ orig\ console\ attributes\ (for\ resetting\ later)}}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00049}00049\ \ \ \ \ std::uint16\_t\ set\_foreground\_color\_(std::uint16\_t\ attribs);}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00051}00051\ \ \ \ \ \textcolor{comment}{//\ print\ a\ range\ of\ formatted\ message\ to\ console}}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00052}00052\ \ \ \ \ \textcolor{keywordtype}{void}\ print\_range\_(const\ memory\_buf\_t\ \&formatted,\ \textcolor{keywordtype}{size\_t}\ start,\ \textcolor{keywordtype}{size\_t}\ end);}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00054}00054\ \ \ \ \ \textcolor{comment}{//\ in\ case\ we\ are\ redirected\ to\ file\ (not\ in\ console\ mode)}}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00055}00055\ \ \ \ \ \textcolor{keywordtype}{void}\ write\_to\_file\_(const\ memory\_buf\_t\ \&formatted);}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00057}00057\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_color\_mode\_impl(color\_mode\ mode);}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00058}00058\ \};}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00060}00060\ template\ <typename\ ConsoleMutex>}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00061}00061\ class\ wincolor\_stdout\_sink\ :\ public\ wincolor\_sink<ConsoleMutex>\ \{}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00062}00062\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00063}00063\ \ \ \ \ \textcolor{keyword}{explicit}\ wincolor\_stdout\_sink(color\_mode\ mode\ =\ color\_mode::automatic);}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00064}00064\ \};}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00066}00066\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ ConsoleMutex>}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00067}00067\ \textcolor{keyword}{class\ }wincolor\_stderr\_sink\ :\ \textcolor{keyword}{public}\ wincolor\_sink<ConsoleMutex>\ \{}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00068}00068\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00069}00069\ \ \ \ \ \textcolor{keyword}{explicit}\ wincolor\_stderr\_sink(color\_mode\ mode\ =\ color\_mode::automatic);}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00070}00070\ \};}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00072}00072\ \textcolor{keyword}{using\ }wincolor\_stdout\_sink\_mt\ =\ wincolor\_stdout\_sink<details::console\_mutex>;}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00073}00073\ \textcolor{keyword}{using\ }wincolor\_stdout\_sink\_st\ =\ wincolor\_stdout\_sink<details::console\_nullmutex>;}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00075}00075\ \textcolor{keyword}{using\ }wincolor\_stderr\_sink\_mt\ =\ wincolor\_stderr\_sink<details::console\_mutex>;}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00076}00076\ \textcolor{keyword}{using\ }wincolor\_stderr\_sink\_st\ =\ wincolor\_stderr\_sink<details::console\_nullmutex>;}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00077}00077\ \}\ \ \textcolor{comment}{//\ namespace\ sinks}}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00078}00078\ \}\ \ \textcolor{comment}{//\ namespace\ spdlog}}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00080}00080\ \textcolor{preprocessor}{\#ifdef\ SPDLOG\_HEADER\_ONLY}}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00081}00081\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}wincolor\_sink-\/inl.h"{}}}
+\DoxyCodeLine{\Hypertarget{wincolor__sink_8h_source_l00082}00082\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

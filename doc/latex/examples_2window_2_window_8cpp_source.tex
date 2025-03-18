@@ -1,0 +1,175 @@
+\doxysubsection{examples/window/\+Window.cpp}
+\hypertarget{examples_2window_2_window_8cpp_source}{}\label{examples_2window_2_window_8cpp_source}\index{Window.cpp@{Window.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00002}00002\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <SFML/Window.hpp>}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00006}00006\ \textcolor{preprocessor}{\#define\ GLAD\_GL\_IMPLEMENTATION}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <gl.h>}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00009}00009\ \textcolor{preprocessor}{\#ifdef\ SFML\_SYSTEM\_IOS}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <SFML/Main.hpp>}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00011}00011\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00019}00019\ \textcolor{keywordtype}{int}\ main()}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00020}00020\ \{}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00021}00021\ \ \ \ \ \textcolor{comment}{//\ Request\ a\ 24-\/bits\ depth\ buffer\ when\ creating\ the\ window}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00022}00022\ \ \ \ \ sf::ContextSettings\ contextSettings;}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00023}00023\ \ \ \ \ contextSettings.depthBits\ =\ 24;}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00025}00025\ \ \ \ \ \textcolor{comment}{//\ Create\ the\ main\ window}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00026}00026\ \ \ \ \ sf::Window\ window(sf::VideoMode(640,\ 480),\ \textcolor{stringliteral}{"{}SFML\ window\ with\ OpenGL"{}},\ sf::Style::Default,\ contextSettings);}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00028}00028\ \ \ \ \ \textcolor{comment}{//\ Make\ it\ the\ active\ window\ for\ OpenGL\ calls}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00029}00029\ \ \ \ \ window.setActive();}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00031}00031\ \ \ \ \ \textcolor{comment}{//\ Load\ OpenGL\ or\ OpenGL\ ES\ entry\ points\ using\ glad}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00032}00032\ \textcolor{preprocessor}{\#ifdef\ SFML\_OPENGL\_ES}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00033}00033\ \ \ \ \ gladLoadGLES1(\textcolor{keyword}{reinterpret\_cast<}GLADloadfunc\textcolor{keyword}{>}(sf::Context::getFunction));}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00034}00034\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00035}00035\ \ \ \ \ gladLoadGL(\textcolor{keyword}{reinterpret\_cast<}GLADloadfunc\textcolor{keyword}{>}(sf::Context::getFunction));}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00036}00036\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00038}00038\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ color\ and\ depth\ clear\ values}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00039}00039\ \textcolor{preprocessor}{\#ifdef\ SFML\_OPENGL\_ES}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00040}00040\ \ \ \ \ glClearDepthf(1.f);}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00041}00041\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00042}00042\ \ \ \ \ glClearDepth(1.f);}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00043}00043\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00044}00044\ \ \ \ \ glClearColor(0.f,\ 0.f,\ 0.f,\ 1.f);}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00046}00046\ \ \ \ \ \textcolor{comment}{//\ Enable\ Z-\/buffer\ read\ and\ write}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00047}00047\ \ \ \ \ glEnable(GL\_DEPTH\_TEST);}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00048}00048\ \ \ \ \ glDepthMask(GL\_TRUE);}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00050}00050\ \ \ \ \ \textcolor{comment}{//\ Disable\ lighting\ and\ texturing}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00051}00051\ \ \ \ \ glDisable(GL\_LIGHTING);}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00052}00052\ \ \ \ \ glDisable(GL\_TEXTURE\_2D);}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00054}00054\ \ \ \ \ \textcolor{comment}{//\ Configure\ the\ viewport\ (the\ same\ size\ as\ the\ window)}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00055}00055\ \ \ \ \ glViewport(0,\ 0,\ \textcolor{keyword}{static\_cast<}GLsizei\textcolor{keyword}{>}(window.getSize().x),\ \textcolor{keyword}{static\_cast<}GLsizei\textcolor{keyword}{>}(window.getSize().y));}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00057}00057\ \ \ \ \ \textcolor{comment}{//\ Setup\ a\ perspective\ projection}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00058}00058\ \ \ \ \ glMatrixMode(GL\_PROJECTION);}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00059}00059\ \ \ \ \ glLoadIdentity();}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00060}00060\ \ \ \ \ GLfloat\ ratio\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(window.getSize().x)\ /\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(window.getSize().y);}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00061}00061\ \textcolor{preprocessor}{\#ifdef\ SFML\_OPENGL\_ES}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00062}00062\ \ \ \ \ glFrustumf(-\/ratio,\ ratio,\ -\/1.f,\ 1.f,\ 1.f,\ 500.f);}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00063}00063\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00064}00064\ \ \ \ \ glFrustum(-\/ratio,\ ratio,\ -\/1.f,\ 1.f,\ 1.f,\ 500.f);}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00065}00065\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00067}00067\ \ \ \ \ \textcolor{comment}{//\ Define\ a\ 3D\ cube\ (6\ faces\ made\ of\ 2\ triangles\ composed\ by\ 3\ vertices)}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00068}00068\ \ \ \ \ GLfloat\ cube[]\ =}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00069}00069\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00070}00070\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ positions\ \ \ \ //\ colors\ (r,\ g,\ b,\ a)}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00071}00071\ \ \ \ \ \ \ \ \ -\/50,\ -\/50,\ -\/50,\ \ 0,\ 0,\ 1,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00072}00072\ \ \ \ \ \ \ \ \ -\/50,\ \ 50,\ -\/50,\ \ 0,\ 0,\ 1,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00073}00073\ \ \ \ \ \ \ \ \ -\/50,\ -\/50,\ \ 50,\ \ 0,\ 0,\ 1,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00074}00074\ \ \ \ \ \ \ \ \ -\/50,\ -\/50,\ \ 50,\ \ 0,\ 0,\ 1,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00075}00075\ \ \ \ \ \ \ \ \ -\/50,\ \ 50,\ -\/50,\ \ 0,\ 0,\ 1,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00076}00076\ \ \ \ \ \ \ \ \ -\/50,\ \ 50,\ \ 50,\ \ 0,\ 0,\ 1,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00078}00078\ \ \ \ \ \ \ \ \ \ 50,\ -\/50,\ -\/50,\ \ 0,\ 1,\ 0,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00079}00079\ \ \ \ \ \ \ \ \ \ 50,\ \ 50,\ -\/50,\ \ 0,\ 1,\ 0,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00080}00080\ \ \ \ \ \ \ \ \ \ 50,\ -\/50,\ \ 50,\ \ 0,\ 1,\ 0,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00081}00081\ \ \ \ \ \ \ \ \ \ 50,\ -\/50,\ \ 50,\ \ 0,\ 1,\ 0,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00082}00082\ \ \ \ \ \ \ \ \ \ 50,\ \ 50,\ -\/50,\ \ 0,\ 1,\ 0,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00083}00083\ \ \ \ \ \ \ \ \ \ 50,\ \ 50,\ \ 50,\ \ 0,\ 1,\ 0,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00085}00085\ \ \ \ \ \ \ \ \ -\/50,\ -\/50,\ -\/50,\ \ 1,\ 0,\ 0,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00086}00086\ \ \ \ \ \ \ \ \ \ 50,\ -\/50,\ -\/50,\ \ 1,\ 0,\ 0,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00087}00087\ \ \ \ \ \ \ \ \ -\/50,\ -\/50,\ \ 50,\ \ 1,\ 0,\ 0,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00088}00088\ \ \ \ \ \ \ \ \ -\/50,\ -\/50,\ \ 50,\ \ 1,\ 0,\ 0,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00089}00089\ \ \ \ \ \ \ \ \ \ 50,\ -\/50,\ -\/50,\ \ 1,\ 0,\ 0,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00090}00090\ \ \ \ \ \ \ \ \ \ 50,\ -\/50,\ \ 50,\ \ 1,\ 0,\ 0,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00092}00092\ \ \ \ \ \ \ \ \ -\/50,\ \ 50,\ -\/50,\ \ 0,\ 1,\ 1,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00093}00093\ \ \ \ \ \ \ \ \ \ 50,\ \ 50,\ -\/50,\ \ 0,\ 1,\ 1,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00094}00094\ \ \ \ \ \ \ \ \ -\/50,\ \ 50,\ \ 50,\ \ 0,\ 1,\ 1,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00095}00095\ \ \ \ \ \ \ \ \ -\/50,\ \ 50,\ \ 50,\ \ 0,\ 1,\ 1,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00096}00096\ \ \ \ \ \ \ \ \ \ 50,\ \ 50,\ -\/50,\ \ 0,\ 1,\ 1,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00097}00097\ \ \ \ \ \ \ \ \ \ 50,\ \ 50,\ \ 50,\ \ 0,\ 1,\ 1,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00099}00099\ \ \ \ \ \ \ \ \ -\/50,\ -\/50,\ -\/50,\ \ 1,\ 0,\ 1,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00100}00100\ \ \ \ \ \ \ \ \ \ 50,\ -\/50,\ -\/50,\ \ 1,\ 0,\ 1,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00101}00101\ \ \ \ \ \ \ \ \ -\/50,\ \ 50,\ -\/50,\ \ 1,\ 0,\ 1,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00102}00102\ \ \ \ \ \ \ \ \ -\/50,\ \ 50,\ -\/50,\ \ 1,\ 0,\ 1,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00103}00103\ \ \ \ \ \ \ \ \ \ 50,\ -\/50,\ -\/50,\ \ 1,\ 0,\ 1,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00104}00104\ \ \ \ \ \ \ \ \ \ 50,\ \ 50,\ -\/50,\ \ 1,\ 0,\ 1,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00106}00106\ \ \ \ \ \ \ \ \ -\/50,\ -\/50,\ \ 50,\ \ 1,\ 1,\ 0,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00107}00107\ \ \ \ \ \ \ \ \ \ 50,\ -\/50,\ \ 50,\ \ 1,\ 1,\ 0,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00108}00108\ \ \ \ \ \ \ \ \ -\/50,\ \ 50,\ \ 50,\ \ 1,\ 1,\ 0,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00109}00109\ \ \ \ \ \ \ \ \ -\/50,\ \ 50,\ \ 50,\ \ 1,\ 1,\ 0,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00110}00110\ \ \ \ \ \ \ \ \ \ 50,\ -\/50,\ \ 50,\ \ 1,\ 1,\ 0,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00111}00111\ \ \ \ \ \ \ \ \ \ 50,\ \ 50,\ \ 50,\ \ 1,\ 1,\ 0,\ 1,}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00112}00112\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00114}00114\ \ \ \ \ \textcolor{comment}{//\ Enable\ position\ and\ color\ vertex\ components}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00115}00115\ \ \ \ \ glEnableClientState(GL\_VERTEX\_ARRAY);}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00116}00116\ \ \ \ \ glEnableClientState(GL\_COLOR\_ARRAY);}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00117}00117\ \ \ \ \ glVertexPointer(3,\ GL\_FLOAT,\ 7\ *\ \textcolor{keyword}{sizeof}(GLfloat),\ cube);}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00118}00118\ \ \ \ \ glColorPointer(4,\ GL\_FLOAT,\ 7\ *\ \textcolor{keyword}{sizeof}(GLfloat),\ cube\ +\ 3);}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00119}00119\ }
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00120}00120\ \ \ \ \ \textcolor{comment}{//\ Disable\ normal\ and\ texture\ coordinates\ vertex\ components}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00121}00121\ \ \ \ \ glDisableClientState(GL\_NORMAL\_ARRAY);}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00122}00122\ \ \ \ \ glDisableClientState(GL\_TEXTURE\_COORD\_ARRAY);}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00124}00124\ \ \ \ \ \textcolor{comment}{//\ Create\ a\ clock\ for\ measuring\ the\ time\ elapsed}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00125}00125\ \ \ \ \ sf::Clock\ clock;}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00127}00127\ \ \ \ \ \textcolor{comment}{//\ Start\ the\ game\ loop}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00128}00128\ \ \ \ \ \textcolor{keywordflow}{while}\ (window.isOpen())}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00129}00129\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00130}00130\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Process\ events}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00131}00131\ \ \ \ \ \ \ \ \ sf::Event\ event;}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00132}00132\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (window.pollEvent(event))}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00133}00133\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Close\ window:\ exit}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (event.type\ ==\ sf::Event::Closed)}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ window.close();}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Escape\ key:\ exit}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((event.type\ ==\ sf::Event::KeyPressed)\ \&\&\ (event.key.code\ ==\ sf::Keyboard::Escape))}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ window.close();}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Resize\ event:\ adjust\ the\ viewport}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (event.type\ ==\ sf::Event::Resized)}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ glViewport(0,\ 0,\ \textcolor{keyword}{static\_cast<}GLsizei\textcolor{keyword}{>}(event.size.width),\ \textcolor{keyword}{static\_cast<}GLsizei\textcolor{keyword}{>}(event.size.height));}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ glMatrixMode(GL\_PROJECTION);}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ glLoadIdentity();}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GLfloat\ newRatio\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(\textcolor{keyword}{event}.size.width)\ /\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(event.size.height);}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00149}00149\ \textcolor{preprocessor}{\#ifdef\ SFML\_OPENGL\_ES}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ glFrustumf(-\/newRatio,\ newRatio,\ -\/1.f,\ 1.f,\ 1.f,\ 500.f);}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00151}00151\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ glFrustum(-\/newRatio,\ newRatio,\ -\/1.f,\ 1.f,\ 1.f,\ 500.f);}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00153}00153\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00155}00155\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00157}00157\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Clear\ the\ color\ and\ depth\ buffers}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00158}00158\ \ \ \ \ \ \ \ \ glClear(GL\_COLOR\_BUFFER\_BIT\ |\ GL\_DEPTH\_BUFFER\_BIT);}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00159}00159\ }
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00160}00160\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Apply\ some\ transformations\ to\ rotate\ the\ cube}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00161}00161\ \ \ \ \ \ \ \ \ glMatrixMode(GL\_MODELVIEW);}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00162}00162\ \ \ \ \ \ \ \ \ glLoadIdentity();}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00163}00163\ \ \ \ \ \ \ \ \ glTranslatef(0.f,\ 0.f,\ -\/200.f);}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00164}00164\ \ \ \ \ \ \ \ \ glRotatef(clock.getElapsedTime().asSeconds()\ *\ 50,\ 1.f,\ 0.f,\ 0.f);}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00165}00165\ \ \ \ \ \ \ \ \ glRotatef(clock.getElapsedTime().asSeconds()\ *\ 30,\ 0.f,\ 1.f,\ 0.f);}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00166}00166\ \ \ \ \ \ \ \ \ glRotatef(clock.getElapsedTime().asSeconds()\ *\ 90,\ 0.f,\ 0.f,\ 1.f);}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00167}00167\ }
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00168}00168\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Draw\ the\ cube}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00169}00169\ \ \ \ \ \ \ \ \ glDrawArrays(GL\_TRIANGLES,\ 0,\ 36);}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00170}00170\ }
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00171}00171\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Finally,\ display\ the\ rendered\ frame\ on\ screen}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00172}00172\ \ \ \ \ \ \ \ \ window.display();}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00173}00173\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00174}00174\ }
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00175}00175\ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_SUCCESS;}
+\DoxyCodeLine{\Hypertarget{examples_2window_2_window_8cpp_source_l00176}00176\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,74 @@
+\doxysubsection{common-\/inl.h}
+\hypertarget{common-inl_8h_source}{}\label{common-inl_8h_source}\index{common-\/inl.h@{common-\/inl.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00001}00001\ \textcolor{comment}{//\ Copyright(c)\ 2015-\/present,\ Gabi\ Melman\ \&\ spdlog\ contributors.}}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00002}00002\ \textcolor{comment}{//\ Distributed\ under\ the\ MIT\ License\ (http://opensource.org/licenses/MIT)}}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00004}00004\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00006}00006\ \textcolor{preprocessor}{\#ifndef\ SPDLOG\_HEADER\_ONLY}}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00007}00007\ \textcolor{preprocessor}{\ \ \ \ \#include\ <spdlog/common.h>}}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00008}00008\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <iterator>}}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00013}00013\ \textcolor{keyword}{namespace\ }spdlog\ \{}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00014}00014\ \textcolor{keyword}{namespace\ }level\ \{}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00016}00016\ \textcolor{preprocessor}{\#if\ \_\_cplusplus\ >=\ 201703L}}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00017}00017\ \textcolor{keyword}{constexpr}}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00018}00018\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00019}00019\ \ \ \ \ \textcolor{keyword}{static}\ string\_view\_t\ level\_string\_views[]\ SPDLOG\_LEVEL\_NAMES;}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00021}00021\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *short\_level\_names[]\ SPDLOG\_SHORT\_LEVEL\_NAMES;}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00023}00023\ SPDLOG\_INLINE\ \textcolor{keyword}{const}\ string\_view\_t\ \&to\_string\_view(spdlog::level::level\_enum\ l)\ SPDLOG\_NOEXCEPT\ \{}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00024}00024\ \ \ \ \ \textcolor{keywordflow}{return}\ level\_string\_views[l];}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00025}00025\ \}}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00027}00027\ SPDLOG\_INLINE\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *to\_short\_c\_str(spdlog::level::level\_enum\ l)\ SPDLOG\_NOEXCEPT\ \{}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00028}00028\ \ \ \ \ \textcolor{keywordflow}{return}\ short\_level\_names[l];}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00029}00029\ \}}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00031}00031\ SPDLOG\_INLINE\ spdlog::level::level\_enum\ from\_str(\textcolor{keyword}{const}\ std::string\ \&name)\ SPDLOG\_NOEXCEPT\ \{}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00032}00032\ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ std::find(std::begin(level\_string\_views),\ std::end(level\_string\_views),\ name);}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00033}00033\ \ \ \ \ \textcolor{keywordflow}{if}\ (it\ !=\ std::end(level\_string\_views))}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00034}00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}level::level\_enum\textcolor{keyword}{>}(std::distance(std::begin(level\_string\_views),\ it));}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00036}00036\ \ \ \ \ \textcolor{comment}{//\ check\ also\ for\ "{}warn"{}\ and\ "{}err"{}\ before\ giving\ up..}}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00037}00037\ \ \ \ \ \textcolor{keywordflow}{if}\ (name\ ==\ \textcolor{stringliteral}{"{}warn"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ level::warn;}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00039}00039\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00040}00040\ \ \ \ \ \textcolor{keywordflow}{if}\ (name\ ==\ \textcolor{stringliteral}{"{}err"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00041}00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ level::err;}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00042}00042\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00043}00043\ \ \ \ \ \textcolor{keywordflow}{return}\ level::off;}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00044}00044\ \}}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00045}00045\ \}\ \ \textcolor{comment}{//\ namespace\ level}}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00047}00047\ SPDLOG\_INLINE\ spdlog\_ex::spdlog\_ex(std::string\ msg)}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00048}00048\ \ \ \ \ :\ msg\_(std::move(msg))\ \{\}}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00050}00050\ SPDLOG\_INLINE\ spdlog\_ex::spdlog\_ex(\textcolor{keyword}{const}\ std::string\ \&msg,\ \textcolor{keywordtype}{int}\ last\_errno)\ \{}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00051}00051\ \textcolor{preprocessor}{\#ifdef\ SPDLOG\_USE\_STD\_FORMAT}}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00052}00052\ \ \ \ \ msg\_\ =\ std::system\_error(std::error\_code(last\_errno,\ std::generic\_category()),\ msg).what();}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00053}00053\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00054}00054\ \ \ \ \ memory\_buf\_t\ outbuf;}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00055}00055\ \ \ \ \ fmt::format\_system\_error(outbuf,\ last\_errno,\ msg.c\_str());}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00056}00056\ \ \ \ \ msg\_\ =\ fmt::to\_string(outbuf);}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00057}00057\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00058}00058\ \}}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00060}00060\ SPDLOG\_INLINE\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *spdlog\_ex::what()\ const\ SPDLOG\_NOEXCEPT\ \{\ \textcolor{keywordflow}{return}\ msg\_.c\_str();\ \}}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00062}00062\ SPDLOG\_INLINE\ \textcolor{keywordtype}{void}\ throw\_spdlog\_ex(\textcolor{keyword}{const}\ std::string\ \&msg,\ \textcolor{keywordtype}{int}\ last\_errno)\ \{}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00063}00063\ \ \ \ \ SPDLOG\_THROW(spdlog\_ex(msg,\ last\_errno));}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00064}00064\ \}}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00066}00066\ SPDLOG\_INLINE\ \textcolor{keywordtype}{void}\ throw\_spdlog\_ex(std::string\ msg)\ \{\ SPDLOG\_THROW(spdlog\_ex(std::move(msg)));\ \}}
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{common-inl_8h_source_l00068}00068\ \}\ \ \textcolor{comment}{//\ namespace\ spdlog}}
+
+\end{DoxyCode}

@@ -1,0 +1,98 @@
+\doxysubsection{vk\+\_\+platform.\+h}
+\hypertarget{vk__platform_8h_source}{}\label{vk__platform_8h_source}\index{vk\_platform.h@{vk\_platform.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00001}00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00002}00002\ \textcolor{comment}{//\ File:\ vk\_platform.h}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00003}00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00004}00004\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00005}00005\ \textcolor{comment}{**\ Copyright\ (c)\ 2014-\/2017\ The\ Khronos\ Group\ Inc.}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00006}00006\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00007}00007\ \textcolor{comment}{**\ Licensed\ under\ the\ Apache\ License,\ Version\ 2.0\ (the\ "{}License"{});}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00008}00008\ \textcolor{comment}{**\ you\ may\ not\ use\ this\ file\ except\ in\ compliance\ with\ the\ License.}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00009}00009\ \textcolor{comment}{**\ You\ may\ obtain\ a\ copy\ of\ the\ License\ at}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00010}00010\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00011}00011\ \textcolor{comment}{**\ \ \ \ \ http://www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00012}00012\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00013}00013\ \textcolor{comment}{**\ Unless\ required\ by\ applicable\ law\ or\ agreed\ to\ in\ writing,\ software}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00014}00014\ \textcolor{comment}{**\ distributed\ under\ the\ License\ is\ distributed\ on\ an\ "{}AS\ IS"{}\ BASIS,}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00015}00015\ \textcolor{comment}{**\ WITHOUT\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ either\ express\ or\ implied.}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00016}00016\ \textcolor{comment}{**\ See\ the\ License\ for\ the\ specific\ language\ governing\ permissions\ and}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00017}00017\ \textcolor{comment}{**\ limitations\ under\ the\ License.}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00018}00018\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00021}00021\ \textcolor{preprocessor}{\#ifndef\ VK\_PLATFORM\_H\_}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00022}00022\ \textcolor{preprocessor}{\#define\ VK\_PLATFORM\_H\_}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00024}00024\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00025}00025\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00026}00026\ \{}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00027}00027\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00029}00029\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00030}00030\ \textcolor{comment}{***************************************************************************************************}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00031}00031\ \textcolor{comment}{*\ \ \ Platform-\/specific\ directives\ and\ type\ declarations}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00032}00032\ \textcolor{comment}{***************************************************************************************************}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00033}00033\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00035}00035\ \textcolor{comment}{/*\ Platform-\/specific\ calling\ convention\ macros.}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00036}00036\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00037}00037\ \textcolor{comment}{\ *\ Platforms\ should\ define\ these\ so\ that\ Vulkan\ clients\ call\ Vulkan\ commands}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00038}00038\ \textcolor{comment}{\ *\ with\ the\ same\ calling\ conventions\ that\ the\ Vulkan\ implementation\ expects.}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00039}00039\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00040}00040\ \textcolor{comment}{\ *\ VKAPI\_ATTR\ -\/\ Placed\ before\ the\ return\ type\ in\ function\ declarations.}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00041}00041\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ Useful\ for\ C++11\ and\ GCC/Clang-\/style\ function\ attribute\ syntax.}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00042}00042\ \textcolor{comment}{\ *\ VKAPI\_CALL\ -\/\ Placed\ after\ the\ return\ type\ in\ function\ declarations.}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00043}00043\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ Useful\ for\ MSVC-\/style\ calling\ convention\ syntax.}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00044}00044\ \textcolor{comment}{\ *\ VKAPI\_PTR\ \ -\/\ Placed\ between\ the\ '('\ and\ '*'\ in\ function\ pointer\ types.}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00045}00045\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00046}00046\ \textcolor{comment}{\ *\ Function\ declaration:\ \ VKAPI\_ATTR\ void\ VKAPI\_CALL\ vkCommand(void);}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00047}00047\ \textcolor{comment}{\ *\ Function\ pointer\ type:\ typedef\ void\ (VKAPI\_PTR\ *PFN\_vkCommand)(void);}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00048}00048\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00049}00049\ \textcolor{preprocessor}{\#if\ defined(\_WIN32)}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00050}00050\ \ \ \ \ \textcolor{comment}{//\ On\ Windows,\ Vulkan\ commands\ use\ the\ stdcall\ convention}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00051}00051\ \textcolor{preprocessor}{\ \ \ \ \#define\ VKAPI\_ATTR}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00052}00052\ \textcolor{preprocessor}{\ \ \ \ \#define\ VKAPI\_CALL\ \_\_stdcall}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00053}00053\ \textcolor{preprocessor}{\ \ \ \ \#define\ VKAPI\_PTR\ \ VKAPI\_CALL}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00054}00054\ \textcolor{preprocessor}{\#elif\ defined(\_\_ANDROID\_\_)\ \&\&\ defined(\_\_ARM\_ARCH)\ \&\&\ \_\_ARM\_ARCH\ <\ 7}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00055}00055\ \textcolor{preprocessor}{\ \ \ \ \#error\ "{}Vulkan\ isn't\ supported\ for\ the\ 'armeabi'\ NDK\ ABI"{}}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00056}00056\ \textcolor{preprocessor}{\#elif\ defined(\_\_ANDROID\_\_)\ \&\&\ defined(\_\_ARM\_ARCH)\ \&\&\ \_\_ARM\_ARCH\ >=\ 7\ \&\&\ defined(\_\_ARM\_32BIT\_STATE)}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00057}00057\ \ \ \ \ \textcolor{comment}{//\ On\ Android\ 32-\/bit\ ARM\ targets,\ Vulkan\ functions\ use\ the\ "{}hardfloat"{}}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00058}00058\ \ \ \ \ \textcolor{comment}{//\ calling\ convention,\ i.e.\ float\ parameters\ are\ passed\ in\ registers.\ This}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00059}00059\ \ \ \ \ \textcolor{comment}{//\ is\ true\ even\ if\ the\ rest\ of\ the\ application\ passes\ floats\ on\ the\ stack,}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00060}00060\ \ \ \ \ \textcolor{comment}{//\ as\ it\ does\ by\ default\ when\ compiling\ for\ the\ armeabi-\/v7a\ NDK\ ABI.}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00061}00061\ \textcolor{preprocessor}{\ \ \ \ \#define\ VKAPI\_ATTR\ \_\_attribute\_\_((pcs("{}aapcs-\/vfp"{})))}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00062}00062\ \textcolor{preprocessor}{\ \ \ \ \#define\ VKAPI\_CALL}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00063}00063\ \textcolor{preprocessor}{\ \ \ \ \#define\ VKAPI\_PTR\ \ VKAPI\_ATTR}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00064}00064\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00065}00065\ \ \ \ \ \textcolor{comment}{//\ On\ other\ platforms,\ use\ the\ default\ calling\ convention}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00066}00066\ \textcolor{preprocessor}{\ \ \ \ \#define\ VKAPI\_ATTR}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00067}00067\ \textcolor{preprocessor}{\ \ \ \ \#define\ VKAPI\_CALL}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00068}00068\ \textcolor{preprocessor}{\ \ \ \ \#define\ VKAPI\_PTR}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00069}00069\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00071}00071\ \textcolor{preprocessor}{\#include\ <stddef.h>}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00073}00073\ \textcolor{preprocessor}{\#if\ !defined(VK\_NO\_STDINT\_H)}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00074}00074\ \textcolor{preprocessor}{\ \ \ \ \#if\ defined(\_MSC\_VER)\ \&\&\ (\_MSC\_VER\ <\ 1600)}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00075}00075\ \ \ \ \ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{signed}\ \ \ \_\_int8\ \ int8\_t;}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \_\_int8\ \ uint8\_t;}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00077}00077\ \ \ \ \ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{signed}\ \ \ \_\_int16\ int16\_t;}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00078}00078\ \ \ \ \ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \_\_int16\ uint16\_t;}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00079}00079\ \ \ \ \ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{signed}\ \ \ \_\_int32\ int32\_t;}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00080}00080\ \ \ \ \ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \_\_int32\ uint32\_t;}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00081}00081\ \ \ \ \ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{signed}\ \ \ \_\_int64\ int64\_t;}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00082}00082\ \ \ \ \ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \_\_int64\ uint64\_t;}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00083}00083\ \textcolor{preprocessor}{\ \ \ \ \#else}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00084}00084\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#include\ <stdint.h>}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00085}00085\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00086}00086\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ !defined(VK\_NO\_STDINT\_H)}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00088}00088\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00089}00089\ \}\ \textcolor{comment}{//\ extern\ "{}C"{}}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00090}00090\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{vk__platform_8h_source_l00092}00092\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,75 @@
+\doxysubsection{TCP.\+cpp}
+\hypertarget{_t_c_p_8cpp_source}{}\label{_t_c_p_8cpp_source}\index{TCP.cpp@{TCP.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00003}00003\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <SFML/Network.hpp>}}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00014}00014\ \textcolor{keywordtype}{void}\ runTcpServer(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ port)}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00015}00015\ \{}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00016}00016\ \ \ \ \ \textcolor{comment}{//\ Create\ a\ server\ socket\ to\ accept\ new\ connections}}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00017}00017\ \ \ \ \ sf::TcpListener\ listener;}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00019}00019\ \ \ \ \ \textcolor{comment}{//\ Listen\ to\ the\ given\ port\ for\ incoming\ connections}}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00020}00020\ \ \ \ \ \textcolor{keywordflow}{if}\ (listener.listen(port)\ !=\ sf::Socket::Done)}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00021}00021\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00022}00022\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Server\ is\ listening\ to\ port\ "{}}\ <<\ port\ <<\ \textcolor{stringliteral}{"{},\ waiting\ for\ connections...\ "{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00024}00024\ \ \ \ \ \textcolor{comment}{//\ Wait\ for\ a\ connection}}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00025}00025\ \ \ \ \ sf::TcpSocket\ socket;}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00026}00026\ \ \ \ \ \textcolor{keywordflow}{if}\ (listener.accept(socket)\ !=\ sf::Socket::Done)}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00027}00027\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00028}00028\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Client\ connected:\ "{}}\ <<\ socket.getRemoteAddress()\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00030}00030\ \ \ \ \ \textcolor{comment}{//\ Send\ a\ message\ to\ the\ connected\ client}}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00031}00031\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ out[]\ =\ \textcolor{stringliteral}{"{}Hi,\ I'm\ the\ server"{}};}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00032}00032\ \ \ \ \ \textcolor{keywordflow}{if}\ (socket.send(out,\ \textcolor{keyword}{sizeof}(out))\ !=\ sf::Socket::Done)}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00033}00033\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00034}00034\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Message\ sent\ to\ the\ client:\ \(\backslash\)"{}"{}}\ <<\ out\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00036}00036\ \ \ \ \ \textcolor{comment}{//\ Receive\ a\ message\ back\ from\ the\ client}}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00037}00037\ \ \ \ \ \textcolor{keywordtype}{char}\ in[128];}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00038}00038\ \ \ \ \ std::size\_t\ received;}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00039}00039\ \ \ \ \ \textcolor{keywordflow}{if}\ (socket.receive(in,\ \textcolor{keyword}{sizeof}(in),\ received)\ !=\ sf::Socket::Done)}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00040}00040\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00041}00041\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Answer\ received\ from\ the\ client:\ \(\backslash\)"{}"{}}\ <<\ in\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00042}00042\ \}}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00050}00050\ \textcolor{keywordtype}{void}\ runTcpClient(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ port)}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00051}00051\ \{}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00052}00052\ \ \ \ \ \textcolor{comment}{//\ Ask\ for\ the\ server\ address}}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00053}00053\ \ \ \ \ sf::IpAddress\ server;}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00054}00054\ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00055}00055\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00056}00056\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Type\ the\ address\ or\ name\ of\ the\ server\ to\ connect\ to:\ "{}};}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00057}00057\ \ \ \ \ \ \ \ \ std::cin\ \ >>\ server;}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00058}00058\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00059}00059\ \ \ \ \ \textcolor{keywordflow}{while}\ (server\ ==\ sf::IpAddress::None);}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00061}00061\ \ \ \ \ \textcolor{comment}{//\ Create\ a\ socket\ for\ communicating\ with\ the\ server}}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00062}00062\ \ \ \ \ sf::TcpSocket\ socket;}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00064}00064\ \ \ \ \ \textcolor{comment}{//\ Connect\ to\ the\ server}}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00065}00065\ \ \ \ \ \textcolor{keywordflow}{if}\ (socket.connect(server,\ port)\ !=\ sf::Socket::Done)}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00067}00067\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Connected\ to\ server\ "{}}\ <<\ server\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00069}00069\ \ \ \ \ \textcolor{comment}{//\ Receive\ a\ message\ from\ the\ server}}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00070}00070\ \ \ \ \ \textcolor{keywordtype}{char}\ in[128];}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00071}00071\ \ \ \ \ std::size\_t\ received;}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00072}00072\ \ \ \ \ \textcolor{keywordflow}{if}\ (socket.receive(in,\ \textcolor{keyword}{sizeof}(in),\ received)\ !=\ sf::Socket::Done)}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00073}00073\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00074}00074\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Message\ received\ from\ the\ server:\ \(\backslash\)"{}"{}}\ <<\ in\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00076}00076\ \ \ \ \ \textcolor{comment}{//\ Send\ an\ answer\ to\ the\ server}}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00077}00077\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ out[]\ =\ \textcolor{stringliteral}{"{}Hi,\ I'm\ a\ client"{}};}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00078}00078\ \ \ \ \ \textcolor{keywordflow}{if}\ (socket.send(out,\ \textcolor{keyword}{sizeof}(out))\ !=\ sf::Socket::Done)}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00079}00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00080}00080\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Message\ sent\ to\ the\ server:\ \(\backslash\)"{}"{}}\ <<\ out\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_t_c_p_8cpp_source_l00081}00081\ \}}
+
+\end{DoxyCode}

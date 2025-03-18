@@ -1,0 +1,122 @@
+\doxysubsection{vorbisenc.\+h}
+\hypertarget{vorbisenc_8h_source}{}\label{vorbisenc_8h_source}\index{vorbisenc.h@{vorbisenc.h}}
+\mbox{\hyperlink{vorbisenc_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00001}00001\ \textcolor{comment}{/********************************************************************}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00002}00002\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00003}00003\ \textcolor{comment}{\ *\ THIS\ FILE\ IS\ PART\ OF\ THE\ OggVorbis\ SOFTWARE\ CODEC\ SOURCE\ CODE.\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00004}00004\ \textcolor{comment}{\ *\ USE,\ DISTRIBUTION\ AND\ REPRODUCTION\ OF\ THIS\ LIBRARY\ SOURCE\ IS\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00005}00005\ \textcolor{comment}{\ *\ GOVERNED\ BY\ A\ BSD-\/STYLE\ SOURCE\ LICENSE\ INCLUDED\ WITH\ THIS\ SOURCE\ *}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00006}00006\ \textcolor{comment}{\ *\ IN\ 'COPYING'.\ PLEASE\ READ\ THESE\ TERMS\ BEFORE\ DISTRIBUTING.\ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00007}00007\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00008}00008\ \textcolor{comment}{\ *\ THE\ OggVorbis\ SOURCE\ CODE\ IS\ (C)\ COPYRIGHT\ 1994-\/2001\ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00009}00009\ \textcolor{comment}{\ *\ by\ the\ Xiph.Org\ Foundation\ http://www.xiph.org/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00010}00010\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00011}00011\ \textcolor{comment}{\ ********************************************************************}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00012}00012\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00013}00013\ \textcolor{comment}{\ function:\ vorbis\ encode-\/engine\ setup}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00014}00014\ \textcolor{comment}{\ last\ mod:\ \$Id:\ vorbisenc.h\ 17021\ 2010-\/03-\/24\ 09:29:41Z\ xiphmont\ \$}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00015}00015\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00016}00016\ \textcolor{comment}{\ ********************************************************************/}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00024}00024\ \textcolor{preprocessor}{\#ifndef\ \_OV\_ENC\_H\_}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00025}00025\ \textcolor{preprocessor}{\#define\ \_OV\_ENC\_H\_}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00027}00027\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00028}00028\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00029}00029\ \{}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00030}00030\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_cplusplus\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00032}00032\ \textcolor{preprocessor}{\#include\ "{}codec.h"{}}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00060}\mbox{\hyperlink{vorbisenc_8h_a6571d9c349c540491256f1083e1ede71}{00060}}\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{vorbisenc_8h_a6571d9c349c540491256f1083e1ede71}{vorbis\_encode\_init}}(vorbis\_info\ *vi,}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{long}\ channels,}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{long}\ rate,}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{long}\ max\_bitrate,}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{long}\ nominal\_bitrate,}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{long}\ min\_bitrate);}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00097}\mbox{\hyperlink{vorbisenc_8h_ac73714f24500e18024e83104e9e09485}{00097}}\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{vorbisenc_8h_ac73714f24500e18024e83104e9e09485}{vorbis\_encode\_setup\_managed}}(vorbis\_info\ *vi,}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{long}\ channels,}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{long}\ rate,}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{long}\ max\_bitrate,}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{long}\ nominal\_bitrate,}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{long}\ min\_bitrate);}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00129}\mbox{\hyperlink{vorbisenc_8h_a0f7677f216936a6cd7fa28ddbccada74}{00129}}\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{vorbisenc_8h_a0f7677f216936a6cd7fa28ddbccada74}{vorbis\_encode\_setup\_vbr}}(vorbis\_info\ *vi,}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{long}\ channels,}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{long}\ rate,}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00132}00132\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ quality}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00135}00135\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00158}\mbox{\hyperlink{vorbisenc_8h_ab4e3d96c3008a29c615271d1f551c2a0}{00158}}\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{vorbisenc_8h_ab4e3d96c3008a29c615271d1f551c2a0}{vorbis\_encode\_init\_vbr}}(vorbis\_info\ *vi,}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{long}\ channels,}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{long}\ rate,}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ base\_quality}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00164}00164\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00192}\mbox{\hyperlink{vorbisenc_8h_ac3953ff69d05864e78d1858a544ed619}{00192}}\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{vorbisenc_8h_ac3953ff69d05864e78d1858a544ed619}{vorbis\_encode\_setup\_init}}(vorbis\_info\ *vi);}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00193}00193\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00220}\mbox{\hyperlink{vorbisenc_8h_a5f398a378e20b8ce5e3341a582e773bd}{00220}}\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{vorbisenc_8h_a5f398a378e20b8ce5e3341a582e773bd}{vorbis\_encode\_ctl}}(vorbis\_info\ *vi,\textcolor{keywordtype}{int}\ number,\textcolor{keywordtype}{void}\ *arg);}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00221}00221\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00233}\mbox{\hyperlink{structovectl__ratemanage__arg}{00233}}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structovectl__ratemanage__arg}{ovectl\_ratemanage\_arg}}\ \{}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00234}\mbox{\hyperlink{structovectl__ratemanage__arg_ad792d1b89a5d07f0f0e90509df4bc606}{00234}}\ \ \ \textcolor{keywordtype}{int}\ \ \ \ \mbox{\hyperlink{structovectl__ratemanage__arg_ad792d1b89a5d07f0f0e90509df4bc606}{management\_active}};\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00237}\mbox{\hyperlink{structovectl__ratemanage__arg_a449d3ea8d0645742af859dd17b41fbfb}{00237}}\ \ \ \textcolor{keywordtype}{long}\ \ \ \mbox{\hyperlink{structovectl__ratemanage__arg_a449d3ea8d0645742af859dd17b41fbfb}{bitrate\_hard\_min}};}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00240}\mbox{\hyperlink{structovectl__ratemanage__arg_a3620024b5a9e4b4df6d20deb6c125c92}{00240}}\ \ \ \textcolor{keywordtype}{long}\ \ \ \mbox{\hyperlink{structovectl__ratemanage__arg_a3620024b5a9e4b4df6d20deb6c125c92}{bitrate\_hard\_max}};}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00243}\mbox{\hyperlink{structovectl__ratemanage__arg_a68caf36fc02a52199705fa331d118446}{00243}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structovectl__ratemanage__arg_a68caf36fc02a52199705fa331d118446}{bitrate\_hard\_window}};}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00246}\mbox{\hyperlink{structovectl__ratemanage__arg_ac241670a3a608f114acaf8f26fe4e913}{00246}}\ \ \ \textcolor{keywordtype}{long}\ \ \ \mbox{\hyperlink{structovectl__ratemanage__arg_ac241670a3a608f114acaf8f26fe4e913}{bitrate\_av\_lo}};}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00249}\mbox{\hyperlink{structovectl__ratemanage__arg_ac1e81b5a2e705022ca895f494718ded7}{00249}}\ \ \ \textcolor{keywordtype}{long}\ \ \ \mbox{\hyperlink{structovectl__ratemanage__arg_ac1e81b5a2e705022ca895f494718ded7}{bitrate\_av\_hi}};}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00252}\mbox{\hyperlink{structovectl__ratemanage__arg_a1232e7296ae5e52f52039bed2560c505}{00252}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structovectl__ratemanage__arg_a1232e7296ae5e52f52039bed2560c505}{bitrate\_av\_window}};}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00258}\mbox{\hyperlink{structovectl__ratemanage__arg_aad317d50fb4d072e2c55f0a60d1a83b2}{00258}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structovectl__ratemanage__arg_aad317d50fb4d072e2c55f0a60d1a83b2}{bitrate\_av\_window\_center}};}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00259}00259\ \};}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00260}00260\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00270}00270\ \textcolor{keyword}{struct\ }ovectl\_ratemanage2\_arg\ \{}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00271}00271\ \ \ \textcolor{keywordtype}{int}\ \ \ \ management\_active;\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00273}00273\ \ \ \textcolor{keywordtype}{long}\ \ \ bitrate\_limit\_min\_kbps;}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00275}00275\ \ \ \textcolor{keywordtype}{long}\ \ \ bitrate\_limit\_max\_kbps;}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00276}00276\ \ \ \textcolor{keywordtype}{long}\ \ \ bitrate\_limit\_reservoir\_bits;\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00282}00282\ \ \ \textcolor{keywordtype}{double}\ bitrate\_limit\_reservoir\_bias;}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00284}00284\ \ \ \textcolor{keywordtype}{long}\ \ \ bitrate\_average\_kbps;}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00289}00289\ \ \ \textcolor{keywordtype}{double}\ bitrate\_average\_damping;}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00290}00290\ \};}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00291}00291\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00292}00292\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00303}00303\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00313}\mbox{\hyperlink{vorbisenc_8h_af95048070bedb467f80ce85e20057126}{00313}}\ \textcolor{preprocessor}{\#define\ OV\_ECTL\_RATEMANAGE2\_GET\ \ \ \ \ \ 0x14}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00314}00314\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00324}\mbox{\hyperlink{vorbisenc_8h_a5075e0acb85fd45398a290594f83d6ba}{00324}}\ \textcolor{preprocessor}{\#define\ OV\_ECTL\_RATEMANAGE2\_SET\ \ \ \ \ \ 0x15}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00325}00325\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00332}\mbox{\hyperlink{vorbisenc_8h_af8614b9ee808ddb88d50d21ea1cdf721}{00332}}\ \textcolor{preprocessor}{\#define\ OV\_ECTL\_LOWPASS\_GET\ \ \ \ \ \ \ \ \ \ 0x20}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00333}00333\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00340}\mbox{\hyperlink{vorbisenc_8h_a1862ca0d88ed0366990da2a4015547c8}{00340}}\ \textcolor{preprocessor}{\#define\ OV\_ECTL\_LOWPASS\_SET\ \ \ \ \ \ \ \ \ \ 0x21}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00341}00341\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00348}\mbox{\hyperlink{vorbisenc_8h_a35ba680b627646bff135673d849e40e8}{00348}}\ \textcolor{preprocessor}{\#define\ OV\_ECTL\_IBLOCK\_GET\ \ \ \ \ \ \ \ \ \ \ 0x30}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00349}00349\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00359}\mbox{\hyperlink{vorbisenc_8h_a080b74cc4d75070376d7d1008bef4cd5}{00359}}\ \textcolor{preprocessor}{\#define\ OV\_ECTL\_IBLOCK\_SET\ \ \ \ \ \ \ \ \ \ \ 0x31}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00360}00360\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00367}\mbox{\hyperlink{vorbisenc_8h_afca9bdb09b83ca6b57018e380583134a}{00367}}\ \textcolor{preprocessor}{\#define\ OV\_ECTL\_COUPLING\_GET\ \ \ \ \ \ \ \ \ 0x40}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00368}00368\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00379}\mbox{\hyperlink{vorbisenc_8h_aa263e0ee8a7343ecb744f4a4b9c96ffd}{00379}}\ \textcolor{preprocessor}{\#define\ OV\_ECTL\_COUPLING\_SET\ \ \ \ \ \ \ \ \ 0x41}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00380}00380\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00381}00381\ \ \ \textcolor{comment}{/*\ deprecated\ rate\ management\ supported\ only\ for\ compatibility\ */}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00382}00382\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00393}\mbox{\hyperlink{vorbisenc_8h_a614481c0d84bdfbb80eed9208b68f779}{00393}}\ \textcolor{preprocessor}{\#define\ OV\_ECTL\_RATEMANAGE\_GET\ \ \ \ \ \ \ 0x10}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00404}\mbox{\hyperlink{vorbisenc_8h_a1daa1fd8ce1064cce01dde3ad447d389}{00404}}\ \textcolor{preprocessor}{\#define\ OV\_ECTL\_RATEMANAGE\_SET\ \ \ \ \ \ \ 0x11}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00415}\mbox{\hyperlink{vorbisenc_8h_a34c3170d227b6368041e59c1dc7ed6e4}{00415}}\ \textcolor{preprocessor}{\#define\ OV\_ECTL\_RATEMANAGE\_AVG\ \ \ \ \ \ \ 0x12}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00426}\mbox{\hyperlink{vorbisenc_8h_af8869980a805f431af57a50dffbf5d33}{00426}}\ \textcolor{preprocessor}{\#define\ OV\_ECTL\_RATEMANAGE\_HARD\ \ \ \ \ \ 0x13}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00427}00427\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00429}00429\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00430}00430\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00431}00431\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00432}00432\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00433}00433\ \}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00434}00434\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_cplusplus\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00435}00435\ }
+\DoxyCodeLine{\Hypertarget{vorbisenc_8h_source_l00436}00436\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

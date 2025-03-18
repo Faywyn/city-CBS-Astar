@@ -1,0 +1,135 @@
+\doxysubsection{ftgasp.\+h}
+\hypertarget{ftgasp_8h_source}{}\label{ftgasp_8h_source}\index{ftgasp.h@{ftgasp.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00001}00001\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00002}00002\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00003}00003\ \textcolor{comment}{/*\ \ ftgasp.h\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00004}00004\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00005}00005\ \textcolor{comment}{/*\ \ \ \ Access\ of\ TrueType's\ \`{}gasp'\ table\ (specification).\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00006}00006\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00007}00007\ \textcolor{comment}{/*\ \ Copyright\ 2007,\ 2008,\ 2011\ by\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00008}00008\ \textcolor{comment}{/*\ \ David\ Turner,\ Robert\ Wilhelm,\ and\ Werner\ Lemberg.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00009}00009\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00010}00010\ \textcolor{comment}{/*\ \ This\ file\ is\ part\ of\ the\ FreeType\ project,\ and\ may\ only\ be\ used,\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00011}00011\ \textcolor{comment}{/*\ \ modified,\ and\ distributed\ under\ the\ terms\ of\ the\ FreeType\ project\ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00012}00012\ \textcolor{comment}{/*\ \ license,\ LICENSE.TXT.\ \ By\ continuing\ to\ use,\ modify,\ or\ distribute\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00013}00013\ \textcolor{comment}{/*\ \ this\ file\ you\ indicate\ that\ you\ have\ read\ the\ license\ and\ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00014}00014\ \textcolor{comment}{/*\ \ understand\ and\ accept\ it\ fully.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00015}00015\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00016}00016\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00019}00019\ \textcolor{preprocessor}{\#ifndef\ \_FT\_GASP\_H\_}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00020}00020\ \textcolor{preprocessor}{\#define\ \_FT\_GASP\_H\_}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00022}00022\ \textcolor{preprocessor}{\#include\ <ft2build.h>}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00023}00023\ \textcolor{preprocessor}{\#include\ FT\_FREETYPE\_H}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00025}00025\ \textcolor{preprocessor}{\#ifdef\ FREETYPE\_H}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00026}00026\ \textcolor{preprocessor}{\#error\ "{}freetype.h\ of\ FreeType\ 1\ has\ been\ loaded!"{}}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00027}00027\ \textcolor{preprocessor}{\#error\ "{}Please\ fix\ the\ directory\ search\ order\ for\ header\ files"{}}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00028}00028\ \textcolor{preprocessor}{\#error\ "{}so\ that\ freetype.h\ of\ FreeType\ 2\ is\ found\ first."{}}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00029}00029\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00032}00032\ \textcolor{comment}{\ \ /***************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00033}00033\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00034}00034\ \textcolor{comment}{\ \ \ *\ @section:}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00035}00035\ \textcolor{comment}{\ \ \ *\ \ \ gasp\_table}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00036}00036\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00037}00037\ \textcolor{comment}{\ \ \ *\ @title:}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00038}00038\ \textcolor{comment}{\ \ \ *\ \ \ Gasp\ Table}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00039}00039\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00040}00040\ \textcolor{comment}{\ \ \ *\ @abstract:}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00041}00041\ \textcolor{comment}{\ \ \ *\ \ \ Retrieving\ TrueType\ \`{}gasp'\ table\ entries.}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00042}00042\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00043}00043\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00044}00044\ \textcolor{comment}{\ \ \ *\ \ \ The\ function\ @FT\_Get\_Gasp\ can\ be\ used\ to\ query\ a\ TrueType\ or\ OpenType}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00045}00045\ \textcolor{comment}{\ \ \ *\ \ \ font\ for\ specific\ entries\ in\ its\ \`{}gasp'\ table,\ if\ any.\ \ This\ is}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00046}00046\ \textcolor{comment}{\ \ \ *\ \ \ mainly\ useful\ when\ implementing\ native\ TrueType\ hinting\ with\ the}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00047}00047\ \textcolor{comment}{\ \ \ *\ \ \ bytecode\ interpreter\ to\ duplicate\ the\ Windows\ text\ rendering\ results.}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00048}00048\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00050}00050\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00051}00051\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00052}00052\ \textcolor{comment}{\ \ \ *\ @enum:}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00053}00053\ \textcolor{comment}{\ \ \ *\ \ \ FT\_GASP\_XXX}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00054}00054\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00055}00055\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00056}00056\ \textcolor{comment}{\ \ \ *\ \ \ A\ list\ of\ values\ and/or\ bit-\/flags\ returned\ by\ the\ @FT\_Get\_Gasp}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00057}00057\ \textcolor{comment}{\ \ \ *\ \ \ function.}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00058}00058\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00059}00059\ \textcolor{comment}{\ \ \ *\ @values:}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00060}00060\ \textcolor{comment}{\ \ \ *\ \ \ FT\_GASP\_NO\_TABLE\ ::}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00061}00061\ \textcolor{comment}{\ \ \ *\ \ \ \ \ This\ special\ value\ means\ that\ there\ is\ no\ GASP\ table\ in\ this\ face.}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00062}00062\ \textcolor{comment}{\ \ \ *\ \ \ \ \ It\ is\ up\ to\ the\ client\ to\ decide\ what\ to\ do.}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00063}00063\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00064}00064\ \textcolor{comment}{\ \ \ *\ \ \ FT\_GASP\_DO\_GRIDFIT\ ::}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00065}00065\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Grid-\/fitting\ and\ hinting\ should\ be\ performed\ at\ the\ specified\ ppem.}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00066}00066\ \textcolor{comment}{\ \ \ *\ \ \ \ \ This\ *really*\ means\ TrueType\ bytecode\ interpretation.\ \ If\ this\ bit}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00067}00067\ \textcolor{comment}{\ \ \ *\ \ \ \ \ is\ not\ set,\ no\ hinting\ gets\ applied.}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00068}00068\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00069}00069\ \textcolor{comment}{\ \ \ *\ \ \ FT\_GASP\_DO\_GRAY\ ::}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00070}00070\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Anti-\/aliased\ rendering\ should\ be\ performed\ at\ the\ specified\ ppem.}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00071}00071\ \textcolor{comment}{\ \ \ *\ \ \ \ \ If\ not\ set,\ do\ monochrome\ rendering.}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00072}00072\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00073}00073\ \textcolor{comment}{\ \ \ *\ \ \ FT\_GASP\_SYMMETRIC\_SMOOTHING\ ::}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00074}00074\ \textcolor{comment}{\ \ \ *\ \ \ \ \ If\ set,\ smoothing\ along\ multiple\ axes\ must\ be\ used\ with\ ClearType.}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00075}00075\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00076}00076\ \textcolor{comment}{\ \ \ *\ \ \ FT\_GASP\_SYMMETRIC\_GRIDFIT\ ::}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00077}00077\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Grid-\/fitting\ must\ be\ used\ with\ ClearType's\ symmetric\ smoothing.}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00078}00078\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00079}00079\ \textcolor{comment}{\ \ \ *\ @note:}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00080}00080\ \textcolor{comment}{\ \ \ *\ \ \ The\ bit-\/flags\ \`{}FT\_GASP\_DO\_GRIDFIT'\ and\ \`{}FT\_GASP\_DO\_GRAY'\ are\ to\ be}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00081}00081\ \textcolor{comment}{\ \ \ *\ \ \ used\ for\ standard\ font\ rasterization\ only.\ \ Independently\ of\ that,}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00082}00082\ \textcolor{comment}{\ \ \ *\ \ \ \`{}FT\_GASP\_SYMMETRIC\_SMOOTHING'\ and\ \`{}FT\_GASP\_SYMMETRIC\_GRIDFIT'\ are\ to}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00083}00083\ \textcolor{comment}{\ \ \ *\ \ \ be\ used\ if\ ClearType\ is\ enabled\ (and\ \`{}FT\_GASP\_DO\_GRIDFIT'\ and}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00084}00084\ \textcolor{comment}{\ \ \ *\ \ \ \`{}FT\_GASP\_DO\_GRAY'\ are\ consequently\ ignored).}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00085}00085\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00086}00086\ \textcolor{comment}{\ \ \ *\ \ \ \`{}ClearType'\ is\ Microsoft's\ implementation\ of\ LCD\ rendering,\ partly}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00087}00087\ \textcolor{comment}{\ \ \ *\ \ \ protected\ by\ patents.}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00088}00088\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00089}00089\ \textcolor{comment}{\ \ \ *\ @since:}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00090}00090\ \textcolor{comment}{\ \ \ *\ \ \ 2.3.0}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00091}00091\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00092}00092\ \textcolor{preprocessor}{\#define\ FT\_GASP\_NO\_TABLE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/1}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00093}00093\ \textcolor{preprocessor}{\#define\ FT\_GASP\_DO\_GRIDFIT\ \ \ \ \ \ \ \ \ \ \ 0x01}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00094}00094\ \textcolor{preprocessor}{\#define\ FT\_GASP\_DO\_GRAY\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x02}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00095}00095\ \textcolor{preprocessor}{\#define\ FT\_GASP\_SYMMETRIC\_SMOOTHING\ \ 0x08}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00096}00096\ \textcolor{preprocessor}{\#define\ FT\_GASP\_SYMMETRIC\_GRIDFIT\ \ \ \ 0x10}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00099}00099\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00100}00100\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00101}00101\ \textcolor{comment}{\ \ \ *\ @func:}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00102}00102\ \textcolor{comment}{\ \ \ *\ \ \ FT\_Get\_Gasp}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00103}00103\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00104}00104\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00105}00105\ \textcolor{comment}{\ \ \ *\ \ \ Read\ the\ \`{}gasp'\ table\ from\ a\ TrueType\ or\ OpenType\ font\ file\ and}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00106}00106\ \textcolor{comment}{\ \ \ *\ \ \ return\ the\ entry\ corresponding\ to\ a\ given\ character\ pixel\ size.}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00107}00107\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00108}00108\ \textcolor{comment}{\ \ \ *\ @input:}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00109}00109\ \textcolor{comment}{\ \ \ *\ \ \ face\ ::\ The\ source\ face\ handle.}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00110}00110\ \textcolor{comment}{\ \ \ *\ \ \ ppem\ ::\ The\ vertical\ character\ pixel\ size.}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00111}00111\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00112}00112\ \textcolor{comment}{\ \ \ *\ @return:}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00113}00113\ \textcolor{comment}{\ \ \ *\ \ \ Bit\ flags\ (see\ @FT\_GASP\_XXX),\ or\ @FT\_GASP\_NO\_TABLE\ if\ there\ is\ no}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00114}00114\ \textcolor{comment}{\ \ \ *\ \ \ \`{}gasp'\ table\ in\ the\ face.}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00115}00115\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00116}00116\ \textcolor{comment}{\ \ \ *\ @since:}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00117}00117\ \textcolor{comment}{\ \ \ *\ \ \ 2.3.0}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00118}00118\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00119}00119\ \ \ FT\_EXPORT(\ FT\_Int\ )}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00120}00120\ \ \ FT\_Get\_Gasp(\ FT\_Face\ \ face,}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_UInt\ \ ppem\ );}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00123}00123\ \ \ \textcolor{comment}{/*\ */}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00126}00126\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_FT\_GASP\_H\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{ftgasp_8h_source_l00129}00129\ \textcolor{comment}{/*\ END\ */}}
+
+\end{DoxyCode}

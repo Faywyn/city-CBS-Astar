@@ -1,0 +1,226 @@
+\doxysubsection{latency.\+cpp}
+\hypertarget{latency_8cpp_source}{}\label{latency_8cpp_source}\index{latency.cpp@{latency.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00001}00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00002}00002\ \textcolor{comment}{//\ Copyright(c)\ 2018\ Gabi\ Melman.}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00003}00003\ \textcolor{comment}{//\ Distributed\ under\ the\ MIT\ License\ (http://opensource.org/licenses/MIT)}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00004}00004\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00006}00006\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00007}00007\ \textcolor{comment}{//\ latency.cpp\ :\ spdlog\ latency\ benchmarks}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00008}00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}benchmark/benchmark.h"{}}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}spdlog/spdlog.h"{}}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}spdlog/async.h"{}}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00014}00014\ \textcolor{preprocessor}{\#include\ "{}spdlog/sinks/basic\_file\_sink.h"{}}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00015}00015\ \textcolor{preprocessor}{\#include\ "{}spdlog/sinks/daily\_file\_sink.h"{}}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00016}00016\ \textcolor{preprocessor}{\#include\ "{}spdlog/sinks/null\_sink.h"{}}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00017}00017\ \textcolor{preprocessor}{\#include\ "{}spdlog/sinks/rotating\_file\_sink.h"{}}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00019}00019\ \textcolor{keywordtype}{void}\ bench\_c\_string(benchmark::State\ \&state,\ std::shared\_ptr<spdlog::logger>\ logger)\ \{}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00020}00020\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *msg\ =}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00021}00021\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Lorem\ ipsum\ dolor\ sit\ amet,\ consectetur\ adipiscing\ elit.\ Vestibulum\ pharetra\ metus\ cursus\ "{}}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00022}00022\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}lacus\ placerat\ congue.\ Nulla\ egestas,\ mauris\ a\ tincidunt\ tempus,\ enim\ lectus\ volutpat\ mi,\ "{}}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00023}00023\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}eu\ consequat\ sem\ "{}}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00024}00024\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}libero\ nec\ massa.\ In\ dapibus\ ipsum\ a\ diam\ rhoncus\ gravida.\ Etiam\ non\ dapibus\ eros.\ Donec\ "{}}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00025}00025\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}fringilla\ dui\ sed\ "{}}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00026}00026\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}augue\ pretium,\ nec\ scelerisque\ est\ maximus.\ Nullam\ convallis,\ sem\ nec\ blandit\ maximus,\ "{}}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00027}00027\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}nisi\ turpis\ ornare\ "{}}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00028}00028\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}nisl,\ sit\ amet\ volutpat\ neque\ massa\ eu\ odio.\ Maecenas\ malesuada\ quam\ ex,\ posuere\ congue\ "{}}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00029}00029\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}nibh\ turpis\ duis."{}};}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00031}00031\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ \_\ :\ state)\ \{}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00032}00032\ \ \ \ \ \ \ \ \ logger-\/>info(msg);}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00033}00033\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00034}00034\ \}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00036}00036\ \textcolor{keywordtype}{void}\ bench\_logger(benchmark::State\ \&state,\ std::shared\_ptr<spdlog::logger>\ logger)\ \{}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00037}00037\ \ \ \ \ \textcolor{keywordtype}{int}\ i\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00038}00038\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ \_\ :\ state)\ \{}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00039}00039\ \ \ \ \ \ \ \ \ logger-\/>info(\textcolor{stringliteral}{"{}Hello\ logger:\ msg\ number\ \{\}..............."{}},\ ++i);}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00040}00040\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00041}00041\ \}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00042}00042\ \textcolor{keywordtype}{void}\ bench\_global\_logger(benchmark::State\ \&state,\ std::shared\_ptr<spdlog::logger>\ logger)\ \{}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00043}00043\ \ \ \ \ spdlog::set\_default\_logger(std::move(logger));}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00044}00044\ \ \ \ \ \textcolor{keywordtype}{int}\ i\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00045}00045\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ \_\ :\ state)\ \{}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00046}00046\ \ \ \ \ \ \ \ \ spdlog::info(\textcolor{stringliteral}{"{}Hello\ logger:\ msg\ number\ \{\}..............."{}},\ ++i);}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00047}00047\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00048}00048\ \}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00050}00050\ \textcolor{keywordtype}{void}\ bench\_disabled\_macro(benchmark::State\ \&state,\ std::shared\_ptr<spdlog::logger>\ logger)\ \{}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00051}00051\ \ \ \ \ \textcolor{keywordtype}{int}\ i\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00052}00052\ \ \ \ \ benchmark::DoNotOptimize(i);\ \ \ \ \ \ \ \textcolor{comment}{//\ prevent\ unused\ warnings}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00053}00053\ \ \ \ \ benchmark::DoNotOptimize(logger);\ \ \textcolor{comment}{//\ prevent\ unused\ warnings}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00054}00054\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ \_\ :\ state)\ \{}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00055}00055\ \ \ \ \ \ \ \ \ SPDLOG\_LOGGER\_DEBUG(logger,\ \textcolor{stringliteral}{"{}Hello\ logger:\ msg\ number\ \{\}..............."{}},\ i++);}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00056}00056\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00057}00057\ \}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00059}00059\ \textcolor{keywordtype}{void}\ bench\_disabled\_macro\_global\_logger(benchmark::State\ \&state,}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<spdlog::logger>\ logger)\ \{}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00061}00061\ \ \ \ \ spdlog::set\_default\_logger(std::move(logger));}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00062}00062\ \ \ \ \ \textcolor{keywordtype}{int}\ i\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00063}00063\ \ \ \ \ benchmark::DoNotOptimize(i);\ \ \ \ \ \ \ \textcolor{comment}{//\ prevent\ unused\ warnings}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00064}00064\ \ \ \ \ benchmark::DoNotOptimize(logger);\ \ \textcolor{comment}{//\ prevent\ unused\ warnings}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00065}00065\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ \_\ :\ state)\ \{}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00066}00066\ \ \ \ \ \ \ \ \ SPDLOG\_DEBUG(\textcolor{stringliteral}{"{}Hello\ logger:\ msg\ number\ \{\}..............."{}},\ i++);}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00067}00067\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00068}00068\ \}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00070}00070\ \textcolor{preprocessor}{\#ifdef\ \_\_linux\_\_}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00071}00071\ \textcolor{keywordtype}{void}\ bench\_dev\_null()\ \{}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00072}00072\ \ \ \ \ \textcolor{keyword}{auto}\ dev\_null\_st\ =\ spdlog::basic\_logger\_st(\textcolor{stringliteral}{"{}/dev/null\_st"{}},\ \textcolor{stringliteral}{"{}/dev/null"{}});}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00073}00073\ \ \ \ \ benchmark::RegisterBenchmark(\textcolor{stringliteral}{"{}/dev/null\_st"{}},\ bench\_logger,\ std::move(dev\_null\_st))}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00074}00074\ \ \ \ \ \ \ \ \ -\/>UseRealTime();}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00075}00075\ \ \ \ \ spdlog::drop(\textcolor{stringliteral}{"{}/dev/null\_st"{}});}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00077}00077\ \ \ \ \ \textcolor{keyword}{auto}\ dev\_null\_mt\ =\ spdlog::basic\_logger\_mt(\textcolor{stringliteral}{"{}/dev/null\_mt"{}},\ \textcolor{stringliteral}{"{}/dev/null"{}});}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00078}00078\ \ \ \ \ benchmark::RegisterBenchmark(\textcolor{stringliteral}{"{}/dev/null\_mt"{}},\ bench\_logger,\ std::move(dev\_null\_mt))}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00079}00079\ \ \ \ \ \ \ \ \ -\/>UseRealTime();}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00080}00080\ \ \ \ \ spdlog::drop(\textcolor{stringliteral}{"{}/dev/null\_mt"{}});}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00081}00081\ \}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00082}00082\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ \_\_linux\_\_}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00084}00084\ \textcolor{keywordtype}{int}\ main(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}\ *argv[])\ \{}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00085}00085\ \ \ \ \ \textcolor{keyword}{using\ }spdlog::sinks::null\_sink\_mt;}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00086}00086\ \ \ \ \ \textcolor{keyword}{using\ }spdlog::sinks::null\_sink\_st;}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00088}00088\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ file\_size\ =\ 30\ *\ 1024\ *\ 1024;}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00089}00089\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ rotating\_files\ =\ 5;}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00090}00090\ \ \ \ \ \textcolor{keywordtype}{int}\ n\_threads\ =\ benchmark::CPUInfo::Get().num\_cpus;}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00092}00092\ \ \ \ \ \textcolor{keyword}{auto}\ full\_bench\ =\ argc\ >\ 1\ \&\&\ std::string(argv[1])\ ==\ \textcolor{stringliteral}{"{}full"{}};}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00094}00094\ \ \ \ \ \textcolor{comment}{//\ disabled\ loggers}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00095}00095\ \ \ \ \ \textcolor{keyword}{auto}\ disabled\_logger\ =}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00096}00096\ \ \ \ \ \ \ \ \ std::make\_shared<spdlog::logger>(\textcolor{stringliteral}{"{}bench"{}},\ std::make\_shared<null\_sink\_mt>());}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00097}00097\ \ \ \ \ disabled\_logger-\/>set\_level(spdlog::level::off);}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00098}00098\ \ \ \ \ benchmark::RegisterBenchmark(\textcolor{stringliteral}{"{}disabled-\/at-\/compile-\/time"{}},\ bench\_disabled\_macro,\ disabled\_logger);}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00099}00099\ \ \ \ \ benchmark::RegisterBenchmark(\textcolor{stringliteral}{"{}disabled-\/at-\/compile-\/time\ (global\ logger)"{}},}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bench\_disabled\_macro\_global\_logger,\ disabled\_logger);}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00101}00101\ \ \ \ \ benchmark::RegisterBenchmark(\textcolor{stringliteral}{"{}disabled-\/at-\/runtime"{}},\ bench\_logger,\ disabled\_logger);}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00102}00102\ \ \ \ \ benchmark::RegisterBenchmark(\textcolor{stringliteral}{"{}disabled-\/at-\/runtime\ (global\ logger)"{}},\ bench\_global\_logger,}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ disabled\_logger);}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00104}00104\ \ \ \ \ \textcolor{comment}{//\ with\ backtrace\ of\ 64}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00105}00105\ \ \ \ \ \textcolor{keyword}{auto}\ tracing\_disabled\_logger\ =}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00106}00106\ \ \ \ \ \ \ \ \ std::make\_shared<spdlog::logger>(\textcolor{stringliteral}{"{}bench"{}},\ std::make\_shared<null\_sink\_mt>());}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00107}00107\ \ \ \ \ tracing\_disabled\_logger-\/>enable\_backtrace(64);}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00108}00108\ \ \ \ \ benchmark::RegisterBenchmark(\textcolor{stringliteral}{"{}disabled-\/at-\/runtime/backtrace"{}},\ bench\_logger,}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tracing\_disabled\_logger);}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00110}00110\ }
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00111}00111\ \ \ \ \ \textcolor{keyword}{auto}\ null\_logger\_st\ =}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00112}00112\ \ \ \ \ \ \ \ \ std::make\_shared<spdlog::logger>(\textcolor{stringliteral}{"{}bench"{}},\ std::make\_shared<null\_sink\_st>());}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00113}00113\ \ \ \ \ benchmark::RegisterBenchmark(\textcolor{stringliteral}{"{}null\_sink\_st\ (500\_bytes\ c\_str)"{}},\ bench\_c\_string,}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::move(null\_logger\_st));}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00115}00115\ \ \ \ \ benchmark::RegisterBenchmark(\textcolor{stringliteral}{"{}null\_sink\_st"{}},\ bench\_logger,\ null\_logger\_st);}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00116}00116\ \ \ \ \ benchmark::RegisterBenchmark(\textcolor{stringliteral}{"{}null\_sink\_st\ (global\ logger)"{}},\ bench\_global\_logger,}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ null\_logger\_st);}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00118}00118\ \ \ \ \ \textcolor{comment}{//\ with\ backtrace\ of\ 64}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00119}00119\ \ \ \ \ \textcolor{keyword}{auto}\ tracing\_null\_logger\_st\ =}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00120}00120\ \ \ \ \ \ \ \ \ std::make\_shared<spdlog::logger>(\textcolor{stringliteral}{"{}bench"{}},\ std::make\_shared<null\_sink\_st>());}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00121}00121\ \ \ \ \ tracing\_null\_logger\_st-\/>enable\_backtrace(64);}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00122}00122\ \ \ \ \ benchmark::RegisterBenchmark(\textcolor{stringliteral}{"{}null\_sink\_st/backtrace"{}},\ bench\_logger,\ tracing\_null\_logger\_st);}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00124}00124\ \textcolor{preprocessor}{\#ifdef\ \_\_linux\_\_}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00125}00125\ \ \ \ \ bench\_dev\_null();}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00126}00126\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ \_\_linux\_\_}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00128}00128\ \ \ \ \ \textcolor{keywordflow}{if}\ (full\_bench)\ \{}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00129}00129\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ basic\_st}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00130}00130\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ basic\_st\ =\ spdlog::basic\_logger\_st(\textcolor{stringliteral}{"{}basic\_st"{}},\ \textcolor{stringliteral}{"{}latency\_logs/basic\_st.log"{}},\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00131}00131\ \ \ \ \ \ \ \ \ benchmark::RegisterBenchmark(\textcolor{stringliteral}{"{}basic\_st"{}},\ bench\_logger,\ std::move(basic\_st))-\/>UseRealTime();}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00132}00132\ \ \ \ \ \ \ \ \ spdlog::drop(\textcolor{stringliteral}{"{}basic\_st"{}});}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00133}00133\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ with\ backtrace\ of\ 64}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00134}00134\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ tracing\_basic\_st\ =}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ spdlog::basic\_logger\_st(\textcolor{stringliteral}{"{}tracing\_basic\_st"{}},\ \textcolor{stringliteral}{"{}latency\_logs/tracing\_basic\_st.log"{}},\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00136}00136\ \ \ \ \ \ \ \ \ tracing\_basic\_st-\/>enable\_backtrace(64);}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00137}00137\ \ \ \ \ \ \ \ \ benchmark::RegisterBenchmark(\textcolor{stringliteral}{"{}basic\_st/backtrace"{}},\ bench\_logger,}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::move(tracing\_basic\_st))}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>UseRealTime();}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00140}00140\ \ \ \ \ \ \ \ \ spdlog::drop(\textcolor{stringliteral}{"{}tracing\_basic\_st"{}});}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00142}00142\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ rotating\ st}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00143}00143\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ rotating\_st\ =\ spdlog::rotating\_logger\_st(\textcolor{stringliteral}{"{}rotating\_st"{}},\ \textcolor{stringliteral}{"{}latency\_logs/rotating\_st.log"{}},}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ file\_size,\ rotating\_files);}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00145}00145\ \ \ \ \ \ \ \ \ benchmark::RegisterBenchmark(\textcolor{stringliteral}{"{}rotating\_st"{}},\ bench\_logger,\ std::move(rotating\_st))}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>UseRealTime();}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00147}00147\ \ \ \ \ \ \ \ \ spdlog::drop(\textcolor{stringliteral}{"{}rotating\_st"{}});}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00148}00148\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ with\ backtrace\ of\ 64}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00149}00149\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ tracing\_rotating\_st\ =\ spdlog::rotating\_logger\_st(}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}tracing\_rotating\_st"{}},\ \textcolor{stringliteral}{"{}latency\_logs/tracing\_rotating\_st.log"{}},\ file\_size,}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ rotating\_files);}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00152}00152\ \ \ \ \ \ \ \ \ benchmark::RegisterBenchmark(\textcolor{stringliteral}{"{}rotating\_st/backtrace"{}},\ bench\_logger,}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::move(tracing\_rotating\_st))}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>UseRealTime();}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00155}00155\ \ \ \ \ \ \ \ \ spdlog::drop(\textcolor{stringliteral}{"{}tracing\_rotating\_st"{}});}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00157}00157\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ daily\ st}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00158}00158\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ daily\_st\ =\ spdlog::daily\_logger\_mt(\textcolor{stringliteral}{"{}daily\_st"{}},\ \textcolor{stringliteral}{"{}latency\_logs/daily\_st.log"{}});}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00159}00159\ \ \ \ \ \ \ \ \ benchmark::RegisterBenchmark(\textcolor{stringliteral}{"{}daily\_st"{}},\ bench\_logger,\ std::move(daily\_st))-\/>UseRealTime();}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00160}00160\ \ \ \ \ \ \ \ \ spdlog::drop(\textcolor{stringliteral}{"{}daily\_st"{}});}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00161}00161\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ tracing\_daily\_st\ =}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ spdlog::daily\_logger\_mt(\textcolor{stringliteral}{"{}tracing\_daily\_st"{}},\ \textcolor{stringliteral}{"{}latency\_logs/daily\_st.log"{}});}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00163}00163\ \ \ \ \ \ \ \ \ benchmark::RegisterBenchmark(\textcolor{stringliteral}{"{}daily\_st/backtrace"{}},\ bench\_logger,}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::move(tracing\_daily\_st))}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>UseRealTime();}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00166}00166\ \ \ \ \ \ \ \ \ spdlog::drop(\textcolor{stringliteral}{"{}tracing\_daily\_st"{}});}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00167}00167\ }
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00168}00168\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00169}00169\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Multi\ threaded\ bench,\ 10\ loggers\ using\ same\ logger\ concurrently}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00170}00170\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00171}00171\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ null\_logger\_mt\ =}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ std::make\_shared<spdlog::logger>(\textcolor{stringliteral}{"{}bench"{}},\ std::make\_shared<null\_sink\_mt>());}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00173}00173\ \ \ \ \ \ \ \ \ benchmark::RegisterBenchmark(\textcolor{stringliteral}{"{}null\_sink\_mt"{}},\ bench\_logger,\ null\_logger\_mt)}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>Threads(n\_threads)}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>UseRealTime();}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00176}00176\ }
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00177}00177\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ basic\_mt}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00178}00178\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ basic\_mt\ =\ spdlog::basic\_logger\_mt(\textcolor{stringliteral}{"{}basic\_mt"{}},\ \textcolor{stringliteral}{"{}latency\_logs/basic\_mt.log"{}},\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00179}00179\ \ \ \ \ \ \ \ \ benchmark::RegisterBenchmark(\textcolor{stringliteral}{"{}basic\_mt"{}},\ bench\_logger,\ std::move(basic\_mt))}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>Threads(n\_threads)}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>UseRealTime();}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00182}00182\ \ \ \ \ \ \ \ \ spdlog::drop(\textcolor{stringliteral}{"{}basic\_mt"{}});}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00183}00183\ }
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00184}00184\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ rotating\ mt}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00185}00185\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ rotating\_mt\ =\ spdlog::rotating\_logger\_mt(\textcolor{stringliteral}{"{}rotating\_mt"{}},\ \textcolor{stringliteral}{"{}latency\_logs/rotating\_mt.log"{}},}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ file\_size,\ rotating\_files);}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00187}00187\ \ \ \ \ \ \ \ \ benchmark::RegisterBenchmark(\textcolor{stringliteral}{"{}rotating\_mt"{}},\ bench\_logger,\ std::move(rotating\_mt))}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>Threads(n\_threads)}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>UseRealTime();}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00190}00190\ \ \ \ \ \ \ \ \ spdlog::drop(\textcolor{stringliteral}{"{}rotating\_mt"{}});}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00191}00191\ }
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00192}00192\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ daily\ mt}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00193}00193\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ daily\_mt\ =\ spdlog::daily\_logger\_mt(\textcolor{stringliteral}{"{}daily\_mt"{}},\ \textcolor{stringliteral}{"{}latency\_logs/daily\_mt.log"{}});}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00194}00194\ \ \ \ \ \ \ \ \ benchmark::RegisterBenchmark(\textcolor{stringliteral}{"{}daily\_mt"{}},\ bench\_logger,\ std::move(daily\_mt))}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>Threads(n\_threads)}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ -\/>UseRealTime();}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00197}00197\ \ \ \ \ \ \ \ \ spdlog::drop(\textcolor{stringliteral}{"{}daily\_mt"{}});}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00198}00198\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00199}00199\ }
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00200}00200\ \ \ \ \ \textcolor{comment}{//\ async}}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00201}00201\ \ \ \ \ \textcolor{keyword}{auto}\ queue\_size\ =\ 1024\ *\ 1024\ *\ 3;}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00202}00202\ \ \ \ \ \textcolor{keyword}{auto}\ tp\ =\ std::make\_shared<spdlog::details::thread\_pool>(queue\_size,\ 1);}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00203}00203\ \ \ \ \ \textcolor{keyword}{auto}\ async\_logger\ =\ std::make\_shared<spdlog::async\_logger>(}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00204}00204\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}async\_logger"{}},\ std::make\_shared<null\_sink\_mt>(),\ std::move(tp),}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00205}00205\ \ \ \ \ \ \ \ \ spdlog::async\_overflow\_policy::overrun\_oldest);}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00206}00206\ \ \ \ \ benchmark::RegisterBenchmark(\textcolor{stringliteral}{"{}async\_logger"{}},\ bench\_logger,\ async\_logger)}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00207}00207\ \ \ \ \ \ \ \ \ -\/>Threads(n\_threads)}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00208}00208\ \ \ \ \ \ \ \ \ -\/>UseRealTime();}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00209}00209\ }
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00210}00210\ \ \ \ \ \textcolor{keyword}{auto}\ async\_logger\_tracing\ =\ std::make\_shared<spdlog::async\_logger>(}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00211}00211\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}async\_logger\_tracing"{}},\ std::make\_shared<null\_sink\_mt>(),\ std::move(tp),}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00212}00212\ \ \ \ \ \ \ \ \ spdlog::async\_overflow\_policy::overrun\_oldest);}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00213}00213\ \ \ \ \ async\_logger\_tracing-\/>enable\_backtrace(32);}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00214}00214\ \ \ \ \ benchmark::RegisterBenchmark(\textcolor{stringliteral}{"{}async\_logger/tracing"{}},\ bench\_logger,\ async\_logger\_tracing)}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00215}00215\ \ \ \ \ \ \ \ \ -\/>Threads(n\_threads)}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00216}00216\ \ \ \ \ \ \ \ \ -\/>UseRealTime();}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00217}00217\ }
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00218}00218\ \ \ \ \ benchmark::Initialize(\&argc,\ argv);}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00219}00219\ \ \ \ \ benchmark::RunSpecifiedBenchmarks();}
+\DoxyCodeLine{\Hypertarget{latency_8cpp_source_l00220}00220\ \}}
+
+\end{DoxyCode}

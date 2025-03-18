@@ -1,0 +1,124 @@
+\doxysubsection{Sensor\+Manager.\+cpp}
+\hypertarget{_sensor_manager_8cpp_source}{}\label{_sensor_manager_8cpp_source}\index{SensorManager.cpp@{SensorManager.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00002}00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00003}00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00004}00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00005}00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00006}00006\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00007}00007\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00008}00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00009}00009\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00010}00010\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00011}00011\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00012}00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00013}00013\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00014}00014\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00015}00015\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00016}00016\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00017}00017\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00018}00018\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00019}00019\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00020}00020\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00021}00021\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00022}00022\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00026}00026\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00028}00028\ \textcolor{preprocessor}{\#include\ <SFML/Window/SensorManager.hpp>}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00029}00029\ \textcolor{preprocessor}{\#include\ <SFML/System/Err.hpp>}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00032}00032\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00033}00033\ \{}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00034}00034\ \textcolor{keyword}{namespace\ }priv}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00035}00035\ \{}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00037}00037\ SensorManager\&\ SensorManager::getInstance()}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00038}00038\ \{}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00039}00039\ \ \ \ \ \textcolor{keyword}{static}\ SensorManager\ instance;}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00040}00040\ \ \ \ \ \textcolor{keywordflow}{return}\ instance;}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00041}00041\ \}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00045}00045\ \textcolor{keywordtype}{bool}\ SensorManager::isAvailable(Sensor::Type\ sensor)}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00046}00046\ \{}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00047}00047\ \ \ \ \ \textcolor{keywordflow}{return}\ m\_sensors[sensor].available;}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00048}00048\ \}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00052}00052\ \textcolor{keywordtype}{void}\ SensorManager::setEnabled(Sensor::Type\ sensor,\ \textcolor{keywordtype}{bool}\ enabled)}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00053}00053\ \{}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00054}00054\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_sensors[sensor].available)}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00055}00055\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00056}00056\ \ \ \ \ \ \ \ \ m\_sensors[sensor].enabled\ =\ enabled;}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00057}00057\ \ \ \ \ \ \ \ \ m\_sensors[sensor].sensor.setEnabled(enabled);}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00058}00058\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00059}00059\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00060}00060\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00061}00061\ \ \ \ \ \ \ \ \ err()\ <<\ \textcolor{stringliteral}{"{}Warning:\ trying\ to\ enable\ a\ sensor\ that\ is\ not\ available\ (call\ Sensor::isAvailable\ to\ check\ it)"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00062}00062\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00063}00063\ \}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00067}00067\ \textcolor{keywordtype}{bool}\ SensorManager::isEnabled(Sensor::Type\ sensor)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00068}00068\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00069}00069\ \ \ \ \ \textcolor{keywordflow}{return}\ m\_sensors[sensor].enabled;}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00070}00070\ \}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00074}00074\ Vector3f\ SensorManager::getValue(Sensor::Type\ sensor)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00075}00075\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00076}00076\ \ \ \ \ \textcolor{keywordflow}{return}\ m\_sensors[sensor].value;}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00077}00077\ \}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00081}00081\ \textcolor{keywordtype}{void}\ SensorManager::update()}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00082}00082\ \{}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00083}00083\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ Sensor::Count;\ ++i)}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00084}00084\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00085}00085\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Only\ process\ available\ sensors}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00086}00086\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_sensors[i].available)}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ m\_sensors[i].value\ =\ m\_sensors[i].sensor.update();}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00088}00088\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00089}00089\ \}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00093}00093\ SensorManager::SensorManager()}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00094}00094\ \{}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00095}00095\ \ \ \ \ \textcolor{comment}{//\ Global\ sensor\ initialization}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00096}00096\ \ \ \ \ SensorImpl::initialize();}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00098}00098\ \ \ \ \ \textcolor{comment}{//\ Per\ sensor\ initialization}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00099}00099\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ Sensor::Count;\ ++i)}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00100}00100\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00101}00101\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ which\ sensors\ are\ available}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00102}00102\ \ \ \ \ \ \ \ \ m\_sensors[i].available\ =\ SensorImpl::isAvailable(\textcolor{keyword}{static\_cast<}Sensor::Type\textcolor{keyword}{>}(i));}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00104}00104\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Open\ the\ available\ sensors}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00105}00105\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_sensors[i].available)}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00106}00106\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ m\_sensors[i].sensor.open(\textcolor{keyword}{static\_cast<}Sensor::Type\textcolor{keyword}{>}(i));}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ m\_sensors[i].sensor.setEnabled(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00109}00109\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00110}00110\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00111}00111\ \}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00114}00114\ SensorManager::\string~SensorManager()}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00115}00115\ \{}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00116}00116\ \ \ \ \ \textcolor{comment}{//\ Per\ sensor\ cleanup}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00117}00117\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ Sensor::Count;\ ++i)}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00118}00118\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00119}00119\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_sensors[i].available)}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ m\_sensors[i].sensor.close();}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00121}00121\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00123}00123\ \ \ \ \ \textcolor{comment}{//\ Global\ sensor\ cleanup}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00124}00124\ \ \ \ \ SensorImpl::cleanup();}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00125}00125\ \}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00127}00127\ \}\ \textcolor{comment}{//\ namespace\ priv}}
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{_sensor_manager_8cpp_source_l00129}00129\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+
+\end{DoxyCode}

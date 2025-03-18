@@ -1,0 +1,172 @@
+\doxysubsection{timed\+AStar.\+cpp}
+\hypertarget{timed_a_star_8cpp_source}{}\label{timed_a_star_8cpp_source}\index{timedAStar.cpp@{timedAStar.cpp}}
+\mbox{\hyperlink{timed_a_star_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00008}00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{a_star_8h}{aStar.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{config_8h}{config.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{dubins_8h}{dubins.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{utils_8h}{utils.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <spdlog/spdlog.h>}}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <unordered\_set>}}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00016}\mbox{\hyperlink{class_timed_a_star_ab5ca3251ec73fb849d4abf98b570d78c}{00016}}\ \mbox{\hyperlink{class_timed_a_star_ab5ca3251ec73fb849d4abf98b570d78c}{TimedAStar::TimedAStar}}(CityGraph::point\ start,\ CityGraph::point\ end,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_city_graph}{CityGraph}}\ \&cityGraph,}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00017}00017\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_constraint_controller}{ConstraintController}}\ *conflicts,\ \textcolor{keywordtype}{int}\ carIndex)\ \{}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00018}00018\ \ \ this-\/>start.point\ =\ start;}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00019}00019\ \ \ this-\/>start.speed\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00020}00020\ \ \ this-\/>end.point\ =\ end;}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00021}00021\ \ \ this-\/>end.speed\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00022}00022\ \ \ this-\/>graph\ =\ cityGraph;}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00023}00023\ \ \ this-\/>conflicts\ =\ conflicts;}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00024}00024\ \ \ this-\/>carIndex\ =\ carIndex;}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00025}00025\ \}}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00027}00027\ \textcolor{keywordtype}{void}\ TimedAStar::process()\ \{}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00028}00028\ \ \ path.clear();}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00030}00030\ \ \ std::unordered\_map<AStar::node,\ AStar::node>\ cameFrom;}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00031}00031\ \ \ std::unordered\_map<AStar::node,\ double>\ gScore;}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00032}00032\ \ \ std::unordered\_map<AStar::node,\ double>\ fScore;}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00034}00034\ \ \ \textcolor{keyword}{auto}\ heuristic\ =\ [\&](\textcolor{keyword}{const}\ AStar::node\ \&a)\ \{}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00035}00035\ \ \ \ \ sf::Vector2f\ diff\ =\ end.\mbox{\hyperlink{struct__a_star_node_a0e80ec891260a6d1cabab4be0d4d1721}{point}}.\mbox{\hyperlink{struct__city_graph_point_a7ab7fa448ec9f76deea0c243f787f564}{position}}\ -\/\ a.point.position;}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00036}00036\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{utils_8h_ac300931459ca910907a0e20cd51d2f1b}{distance}}\ =\ std::sqrt(diff.x\ *\ diff.x\ +\ diff.y\ *\ diff.y);}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00037}00037\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{utils_8h_ac300931459ca910907a0e20cd51d2f1b}{distance}}\ /\ CAR\_MAX\_SPEED\_MS;}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00039}00039\ \ \ \ \ CityGraph::neighbor\ end\_;}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00040}00040\ \ \ \ \ end\_.\mbox{\hyperlink{struct__city_graph_neighbor_af7b516fdb7ff3afc1c6ed6d5fb8a6e9d}{point}}\ =\ end.\mbox{\hyperlink{struct__a_star_node_a0e80ec891260a6d1cabab4be0d4d1721}{point}};}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00041}00041\ \ \ \ \ end\_.\mbox{\hyperlink{struct__city_graph_neighbor_a7b9ccd923ba0d70f3a48296911522929}{maxSpeed}}\ =\ CAR\_MAX\_SPEED\_MS;}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00042}00042\ \ \ \ \ end\_.\mbox{\hyperlink{struct__city_graph_neighbor_a81c78d863dc310a2bb71ee91202c771f}{turningRadius}}\ =\ CAR\_MIN\_TURNING\_RADIUS;}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00043}00043\ \ \ \ \ \mbox{\hyperlink{class_dubins}{Dubins}}\ dubins(a.point,\ end\_,\ CAR\_MAX\_SPEED\_MS,\ CAR\_MAX\_SPEED\_MS);}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00044}00044\ \ \ \ \ \textcolor{keywordflow}{return}\ dubins.time();}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00045}00045\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00046}00046\ \ \ \textcolor{keyword}{auto}\ compare\ =\ [\&](\textcolor{keyword}{const}\ AStar::node\ \&a,\ \textcolor{keyword}{const}\ AStar::node\ \&b)\ \{\ \textcolor{keywordflow}{return}\ fScore[a]\ >\ fScore[b];\ \};}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00048}00048\ \ \ std::priority\_queue<AStar::node,\ std::vector<AStar::node>,\ \textcolor{keyword}{decltype}(compare)>\ openSet(compare);}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00049}00049\ \ \ std::unordered\_set<AStar::node>\ isInOpenSet;}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00051}00051\ \ \ openSet.push(start);}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00052}00052\ \ \ gScore[start]\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00053}00053\ \ \ fScore[start]\ =\ heuristic(start);}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00055}00055\ \ \ \textcolor{keyword}{auto}\ neighbors\ =\ graph.getNeighbors();}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00057}00057\ \ \ \textcolor{keywordtype}{int}\ nbIterations\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00058}00058\ \ \ \textcolor{keywordflow}{while}\ (!openSet.empty()\ \&\&\ nbIterations++\ <\ 1e5)\ \{}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00059}00059\ \ \ \ \ AStar::node\ current\ =\ openSet.top();}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00060}00060\ \ \ \ \ openSet.pop();}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00061}00061\ \ \ \ \ isInOpenSet.erase(current);}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00063}00063\ \ \ \ \ \textcolor{keywordflow}{if}\ (current.\mbox{\hyperlink{struct__a_star_node_a0e80ec891260a6d1cabab4be0d4d1721}{point}}\ ==\ end.point)\ \{}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00064}00064\ \ \ \ \ \ \ AStar::node\ currentCopy\ =\ current;}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00066}00066\ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!(currentCopy\ ==\ start))\ \{}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00067}00067\ \ \ \ \ \ \ \ \ path.push\_back(currentCopy);}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00068}00068\ \ \ \ \ \ \ \ \ currentCopy\ =\ cameFrom[currentCopy];}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00069}00069\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00070}00070\ \ \ \ \ \ \ path.push\_back(currentCopy);}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00071}00071\ \ \ \ \ \ \ std::reverse(path.begin(),\ path.end());}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00072}00072\ \ \ \ \ \ \ processed\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00073}00073\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00074}00074\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00076}00076\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ \&neighborGraphPoint\ :\ neighbors[current.\mbox{\hyperlink{struct__a_star_node_a0e80ec891260a6d1cabab4be0d4d1721}{point}}])\ \{}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00077}00077\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current.\mbox{\hyperlink{struct__a_star_node_a171ceccc5cfc5a42770181648f6605aa}{speed}}\ >\ neighborGraphPoint.maxSpeed)}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00078}00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00080}00080\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!neighborGraphPoint.isRightWay\ \&\&\ ROAD\_ENABLE\_RIGHT\_HAND\_TRAFFIC)}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00081}00081\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00083}00083\ \ \ \ \ \ \ std::vector<double>\ newSpeeds;}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00084}00084\ \ \ \ \ \ \ newSpeeds.push\_back(current.\mbox{\hyperlink{struct__a_star_node_a171ceccc5cfc5a42770181648f6605aa}{speed}});}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00086}00086\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{utils_8h_ac300931459ca910907a0e20cd51d2f1b}{distance}}\ =\ neighborGraphPoint.distance;}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00087}00087\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ nSpeedAcc\ =\ std::sqrt(std::pow(current.\mbox{\hyperlink{struct__a_star_node_a171ceccc5cfc5a42770181648f6605aa}{speed}},\ 2)\ +\ 2\ *\ CAR\_ACCELERATION\ *\ \mbox{\hyperlink{utils_8h_ac300931459ca910907a0e20cd51d2f1b}{distance}});}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00088}00088\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ nSpeedDec\ =\ std::sqrt(std::pow(current.\mbox{\hyperlink{struct__a_star_node_a171ceccc5cfc5a42770181648f6605aa}{speed}},\ 2)\ -\/\ 2\ *\ CAR\_DECELERATION\ *\ \mbox{\hyperlink{utils_8h_ac300931459ca910907a0e20cd51d2f1b}{distance}});}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00090}00090\ \ \ \ \ \ \ \textcolor{keyword}{auto}\ push\ =\ [\&](\textcolor{keywordtype}{double}\ nSpeed)\ \{}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00091}00091\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ numSpeedDiv\ =\ 5;}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00092}00092\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ numSpeedDiv\ +\ 1;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ s\ =\ (current.\mbox{\hyperlink{struct__a_star_node_a171ceccc5cfc5a42770181648f6605aa}{speed}}\ +\ (nSpeed\ -\/\ current.\mbox{\hyperlink{struct__a_star_node_a171ceccc5cfc5a42770181648f6605aa}{speed}})\ *\ i\ /\ numSpeedDiv);}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (s\ <\ SPEED\_RESOLUTION)}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ newSpeeds.push\_back(s);}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00097}00097\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00098}00098\ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00100}00100\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (nSpeedAcc\ >\ neighborGraphPoint.maxSpeed\ \&\&\ current.\mbox{\hyperlink{struct__a_star_node_a171ceccc5cfc5a42770181648f6605aa}{speed}}\ <\ neighborGraphPoint.maxSpeed)\ \{}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00101}00101\ \ \ \ \ \ \ \ \ push(neighborGraphPoint.maxSpeed);}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00102}00102\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ newSpeeds.push\_back(neighborGraphPoint.maxSpeed);}}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00103}00103\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ newSpeeds.push\_back((current.speed\ +\ neighborGraphPoint.maxSpeed)\ /\ 2);}}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00104}00104\ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (nSpeedAcc\ <\ neighborGraphPoint.maxSpeed)\ \{}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00105}00105\ \ \ \ \ \ \ \ \ push(nSpeedAcc);}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00106}00106\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ newSpeeds.push\_back(nSpeedAcc);}}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00107}00107\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ newSpeeds.push\_back((current.speed\ +\ nSpeedAcc)\ /\ 2);}}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00108}00108\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00110}00110\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (nSpeedDec\ ==\ nSpeedDec\ \&\&\ std::isfinite(nSpeedDec))\ \{}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00111}00111\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (nSpeedDec\ <\ 0\ \&\&\ current.speed\ >\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ push(0);}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ newSpeeds.push\_back(0);}}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ newSpeeds.push\_back((current.speed\ +\ 0)\ /\ 2);}}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00115}00115\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (nSpeedDec\ >=\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ push(nSpeedDec);}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ newSpeeds.push\_back(nSpeedDec);}}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ newSpeeds.push\_back((current.speed\ +\ nSpeedDec)\ /\ 2);}}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00119}00119\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00120}00120\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00122}00122\ \ \ \ \ \ \ AStar::node\ neighbor;}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00123}00123\ \ \ \ \ \ \ neighbor.\mbox{\hyperlink{struct__a_star_node_a0e80ec891260a6d1cabab4be0d4d1721}{point}}\ =\ neighborGraphPoint.point;}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00124}00124\ \ \ \ \ \ \ neighbor.\mbox{\hyperlink{struct__a_star_node_a9daa55a2833caafea26678d31f5bc97c}{arcFrom}}\ =\ \{current.\mbox{\hyperlink{struct__a_star_node_a0e80ec891260a6d1cabab4be0d4d1721}{point}},\ neighborGraphPoint\};}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00125}00125\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{utils_8h_ac300931459ca910907a0e20cd51d2f1b}{distance}}\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00126}00126\ \ \ \ \ \ \ \ \ neighbor.\mbox{\hyperlink{struct__a_star_node_a171ceccc5cfc5a42770181648f6605aa}{speed}}\ =\ current.\mbox{\hyperlink{struct__a_star_node_a171ceccc5cfc5a42770181648f6605aa}{speed}};}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00127}00127\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (gScore.find(neighbor)\ ==\ gScore.end()\ ||\ gScore[current]\ <\ gScore[neighbor])\ \{}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ cameFrom[neighbor]\ =\ current;}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ gScore[neighbor]\ =\ gScore[current];}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ fScore[neighbor]\ =\ gScore[neighbor]\ +\ heuristic(neighbor);}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (isInOpenSet.find(neighbor)\ ==\ isInOpenSet.end())\ \{}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ openSet.push(neighbor);}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ isInOpenSet.insert(neighbor);}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00137}00137\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00138}00138\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00139}00139\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00141}00141\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ \&newSpeed\ :\ newSpeeds)\ \{}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00142}00142\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (newSpeed\ >\ CAR\_MAX\_SPEED\_MS\ ||\ newSpeed\ >\ neighborGraphPoint.maxSpeed\ ||\ newSpeed\ <\ 0)}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00144}00144\ }
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00145}00145\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (newSpeed\ ==\ current.\mbox{\hyperlink{struct__a_star_node_a171ceccc5cfc5a42770181648f6605aa}{speed}}\ \&\&\ newSpeed\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00147}00147\ }
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00148}00148\ \ \ \ \ \ \ \ \ neighbor.speed\ =\ newSpeed;}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00149}00149\ }
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00150}00150\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ duration\ =\ 2\ *\ \mbox{\hyperlink{utils_8h_ac300931459ca910907a0e20cd51d2f1b}{distance}}\ /\ (current.\mbox{\hyperlink{struct__a_star_node_a171ceccc5cfc5a42770181648f6605aa}{speed}}\ +\ newSpeed);}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00151}00151\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ tentativeGScore\ =\ gScore[current]\ +\ duration;}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00152}00152\ }
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00153}00153\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ t\ =\ gScore[current];}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00155}00155\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (conflicts\ !=\ \textcolor{keyword}{nullptr}\ \&\&}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ conflicts-\/>checkConstraints(carIndex,\ current.\mbox{\hyperlink{struct__a_star_node_a171ceccc5cfc5a42770181648f6605aa}{speed}},\ newSpeed,\ t,\ current.\mbox{\hyperlink{struct__a_star_node_a0e80ec891260a6d1cabab4be0d4d1721}{point}},\ neighborGraphPoint))}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00159}00159\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (gScore.find(neighbor)\ ==\ gScore.end()\ ||\ tentativeGScore\ <\ gScore[neighbor])\ \{}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ cameFrom[neighbor]\ =\ current;}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ gScore[neighbor]\ =\ tentativeGScore;}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ fScore[neighbor]\ =\ gScore[neighbor]\ +\ heuristic(neighbor);}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00163}00163\ }
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (isInOpenSet.find(neighbor)\ ==\ isInOpenSet.end())\ \{}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ openSet.push(neighbor);}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ isInOpenSet.insert(neighbor);}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00168}00168\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00169}00169\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00170}00170\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00171}00171\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{timed_a_star_8cpp_source_l00172}00172\ \}}
+
+\end{DoxyCode}

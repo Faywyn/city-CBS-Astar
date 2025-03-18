@@ -1,0 +1,238 @@
+\doxysubsection{ftbitmap.\+h}
+\hypertarget{ftbitmap_8h_source}{}\label{ftbitmap_8h_source}\index{ftbitmap.h@{ftbitmap.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00001}00001\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00002}00002\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00003}00003\ \textcolor{comment}{/*\ \ ftbitmap.h\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00004}00004\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00005}00005\ \textcolor{comment}{/*\ \ \ \ FreeType\ utility\ functions\ for\ bitmaps\ (specification).\ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00006}00006\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00007}00007\ \textcolor{comment}{/*\ \ Copyright\ 2004-\/2006,\ 2008,\ 2013,\ 2014\ by\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00008}00008\ \textcolor{comment}{/*\ \ David\ Turner,\ Robert\ Wilhelm,\ and\ Werner\ Lemberg.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00009}00009\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00010}00010\ \textcolor{comment}{/*\ \ This\ file\ is\ part\ of\ the\ FreeType\ project,\ and\ may\ only\ be\ used,\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00011}00011\ \textcolor{comment}{/*\ \ modified,\ and\ distributed\ under\ the\ terms\ of\ the\ FreeType\ project\ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00012}00012\ \textcolor{comment}{/*\ \ license,\ LICENSE.TXT.\ \ By\ continuing\ to\ use,\ modify,\ or\ distribute\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00013}00013\ \textcolor{comment}{/*\ \ this\ file\ you\ indicate\ that\ you\ have\ read\ the\ license\ and\ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00014}00014\ \textcolor{comment}{/*\ \ understand\ and\ accept\ it\ fully.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00015}00015\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00016}00016\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00019}00019\ \textcolor{preprocessor}{\#ifndef\ \_\_FTBITMAP\_H\_\_}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00020}00020\ \textcolor{preprocessor}{\#define\ \_\_FTBITMAP\_H\_\_}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00023}00023\ \textcolor{preprocessor}{\#include\ <ft2build.h>}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00024}00024\ \textcolor{preprocessor}{\#include\ FT\_FREETYPE\_H}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00026}00026\ \textcolor{preprocessor}{\#ifdef\ FREETYPE\_H}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00027}00027\ \textcolor{preprocessor}{\#error\ "{}freetype.h\ of\ FreeType\ 1\ has\ been\ loaded!"{}}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00028}00028\ \textcolor{preprocessor}{\#error\ "{}Please\ fix\ the\ directory\ search\ order\ for\ header\ files"{}}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00029}00029\ \textcolor{preprocessor}{\#error\ "{}so\ that\ freetype.h\ of\ FreeType\ 2\ is\ found\ first."{}}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00030}00030\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00033}00033\ FT\_BEGIN\_HEADER}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00036}00036\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00037}00037\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00038}00038\ \ \ \textcolor{comment}{/*\ <Section>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00039}00039\ \ \ \textcolor{comment}{/*\ \ \ \ bitmap\_handling\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00040}00040\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00041}00041\ \ \ \textcolor{comment}{/*\ <Title>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00042}00042\ \ \ \textcolor{comment}{/*\ \ \ \ Bitmap\ Handling\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00043}00043\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00044}00044\ \ \ \textcolor{comment}{/*\ <Abstract>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00045}00045\ \ \ \textcolor{comment}{/*\ \ \ \ Handling\ FT\_Bitmap\ objects.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00046}00046\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00047}00047\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00048}00048\ \ \ \textcolor{comment}{/*\ \ \ \ This\ section\ contains\ functions\ for\ handling\ @FT\_Bitmap\ objects.\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00049}00049\ \ \ \textcolor{comment}{/*\ \ \ \ Note\ that\ none\ of\ the\ functions\ changes\ the\ bitmap's\ \`{}flow'\ (as\ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00050}00050\ \ \ \textcolor{comment}{/*\ \ \ \ indicated\ by\ the\ sign\ of\ the\ \`{}pitch'\ field\ in\ \`{}FT\_Bitmap').\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00051}00051\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00052}00052\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00055}00055\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00056}00056\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00057}00057\ \ \ \textcolor{comment}{/*\ <Function>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00058}00058\ \ \ \textcolor{comment}{/*\ \ \ \ FT\_Bitmap\_New\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00059}00059\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00060}00060\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00061}00061\ \ \ \textcolor{comment}{/*\ \ \ \ Initialize\ a\ pointer\ to\ an\ @FT\_Bitmap\ structure.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00062}00062\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00063}00063\ \ \ \textcolor{comment}{/*\ <InOut>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00064}00064\ \ \ \textcolor{comment}{/*\ \ \ \ abitmap\ ::\ A\ pointer\ to\ the\ bitmap\ structure.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00065}00065\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00066}00066\ \ \ FT\_EXPORT(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00067}00067\ \ \ FT\_Bitmap\_New(\ FT\_Bitmap\ \ *abitmap\ );}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00070}00070\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00071}00071\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00072}00072\ \ \ \textcolor{comment}{/*\ <Function>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00073}00073\ \ \ \textcolor{comment}{/*\ \ \ \ FT\_Bitmap\_Copy\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00074}00074\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00075}00075\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00076}00076\ \ \ \textcolor{comment}{/*\ \ \ \ Copy\ a\ bitmap\ into\ another\ one.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00077}00077\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00078}00078\ \ \ \textcolor{comment}{/*\ <Input>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00079}00079\ \ \ \textcolor{comment}{/*\ \ \ \ library\ ::\ A\ handle\ to\ a\ library\ object.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00080}00080\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00081}00081\ \ \ \textcolor{comment}{/*\ \ \ \ source\ \ ::\ A\ handle\ to\ the\ source\ bitmap.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00082}00082\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00083}00083\ \ \ \textcolor{comment}{/*\ <Output>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00084}00084\ \ \ \textcolor{comment}{/*\ \ \ \ target\ \ ::\ A\ handle\ to\ the\ target\ bitmap.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00085}00085\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00086}00086\ \ \ \textcolor{comment}{/*\ <Return>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00087}00087\ \ \ \textcolor{comment}{/*\ \ \ \ FreeType\ error\ code.\ \ 0\string~means\ success.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00088}00088\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00089}00089\ \ \ FT\_EXPORT(\ FT\_Error\ )}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00090}00090\ \ \ FT\_Bitmap\_Copy(\ FT\_Library\ \ \ \ \ \ \ \ library,}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ FT\_Bitmap\ \ *source,}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Bitmap\ \ \ \ \ \ \ \ *target);}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00095}00095\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00096}00096\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00097}00097\ \ \ \textcolor{comment}{/*\ <Function>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00098}00098\ \ \ \textcolor{comment}{/*\ \ \ \ FT\_Bitmap\_Embolden\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00099}00099\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00100}00100\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00101}00101\ \ \ \textcolor{comment}{/*\ \ \ \ Embolden\ a\ bitmap.\ \ The\ new\ bitmap\ will\ be\ about\ \`{}xStrength'\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00102}00102\ \ \ \textcolor{comment}{/*\ \ \ \ pixels\ wider\ and\ \`{}yStrength'\ pixels\ higher.\ \ The\ left\ and\ bottom\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00103}00103\ \ \ \textcolor{comment}{/*\ \ \ \ borders\ are\ kept\ unchanged.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00104}00104\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00105}00105\ \ \ \textcolor{comment}{/*\ <Input>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00106}00106\ \ \ \textcolor{comment}{/*\ \ \ \ library\ \ \ ::\ A\ handle\ to\ a\ library\ object.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00107}00107\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00108}00108\ \ \ \textcolor{comment}{/*\ \ \ \ xStrength\ ::\ How\ strong\ the\ glyph\ is\ emboldened\ horizontally.\ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00109}00109\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Expressed\ in\ 26.6\ pixel\ format.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00110}00110\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00111}00111\ \ \ \textcolor{comment}{/*\ \ \ \ yStrength\ ::\ How\ strong\ the\ glyph\ is\ emboldened\ vertically.\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00112}00112\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Expressed\ in\ 26.6\ pixel\ format.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00113}00113\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00114}00114\ \ \ \textcolor{comment}{/*\ <InOut>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00115}00115\ \ \ \textcolor{comment}{/*\ \ \ \ bitmap\ \ \ \ ::\ A\ handle\ to\ the\ target\ bitmap.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00116}00116\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00117}00117\ \ \ \textcolor{comment}{/*\ <Return>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00118}00118\ \ \ \textcolor{comment}{/*\ \ \ \ FreeType\ error\ code.\ \ 0\string~means\ success.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00119}00119\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00120}00120\ \ \ \textcolor{comment}{/*\ <Note>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00121}00121\ \ \ \textcolor{comment}{/*\ \ \ \ The\ current\ implementation\ restricts\ \`{}xStrength'\ to\ be\ less\ than\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00122}00122\ \ \ \textcolor{comment}{/*\ \ \ \ or\ equal\ to\string~8\ if\ bitmap\ is\ of\ pixel\_mode\ @FT\_PIXEL\_MODE\_MONO.\ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00123}00123\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00124}00124\ \ \ \textcolor{comment}{/*\ \ \ \ If\ you\ want\ to\ embolden\ the\ bitmap\ owned\ by\ a\ @FT\_GlyphSlotRec,\ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00125}00125\ \ \ \textcolor{comment}{/*\ \ \ \ you\ should\ call\ @FT\_GlyphSlot\_Own\_Bitmap\ on\ the\ slot\ first.\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00126}00126\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00127}00127\ \ \ \textcolor{comment}{/*\ \ \ \ Bitmaps\ in\ @FT\_PIXEL\_MODE\_GRAY2\ and\ @FT\_PIXEL\_MODE\_GRAY@\ format\ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00128}00128\ \ \ \textcolor{comment}{/*\ \ \ \ are\ converted\ to\ @FT\_PIXEL\_MODE\_GRAY\ format\ (i.e.,\ 8bpp).\ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00129}00129\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00130}00130\ \ \ FT\_EXPORT(\ FT\_Error\ )}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00131}00131\ \ \ FT\_Bitmap\_Embolden(\ FT\_Library\ \ library,}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Bitmap*\ \ bitmap,}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Pos\ \ \ \ \ \ xStrength,}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Pos\ \ \ \ \ \ yStrength\ );}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00135}00135\ }
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00136}00136\ }
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00137}00137\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00138}00138\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00139}00139\ \ \ \textcolor{comment}{/*\ <Function>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00140}00140\ \ \ \textcolor{comment}{/*\ \ \ \ FT\_Bitmap\_Convert\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00141}00141\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00142}00142\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00143}00143\ \ \ \textcolor{comment}{/*\ \ \ \ Convert\ a\ bitmap\ object\ with\ depth\ 1bpp,\ 2bpp,\ 4bpp,\ 8bpp\ or\ 32bpp\ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00144}00144\ \ \ \textcolor{comment}{/*\ \ \ \ to\ a\ bitmap\ object\ with\ depth\ 8bpp,\ making\ the\ number\ of\ used\ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00145}00145\ \ \ \textcolor{comment}{/*\ \ \ \ bytes\ line\ (a.k.a.\ the\ \`{}pitch')\ a\ multiple\ of\ \`{}alignment'.\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00146}00146\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00147}00147\ \ \ \textcolor{comment}{/*\ <Input>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00148}00148\ \ \ \textcolor{comment}{/*\ \ \ \ library\ \ \ ::\ A\ handle\ to\ a\ library\ object.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00149}00149\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00150}00150\ \ \ \textcolor{comment}{/*\ \ \ \ source\ \ \ \ ::\ The\ source\ bitmap.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00151}00151\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00152}00152\ \ \ \textcolor{comment}{/*\ \ \ \ alignment\ ::\ The\ pitch\ of\ the\ bitmap\ is\ a\ multiple\ of\ this\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00153}00153\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ parameter.\ \ Common\ values\ are\ 1,\ 2,\ or\ 4.\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00154}00154\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00155}00155\ \ \ \textcolor{comment}{/*\ <Output>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00156}00156\ \ \ \textcolor{comment}{/*\ \ \ \ target\ \ \ \ ::\ The\ target\ bitmap.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00157}00157\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00158}00158\ \ \ \textcolor{comment}{/*\ <Return>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00159}00159\ \ \ \textcolor{comment}{/*\ \ \ \ FreeType\ error\ code.\ \ 0\string~means\ success.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00160}00160\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00161}00161\ \ \ \textcolor{comment}{/*\ <Note>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00162}00162\ \ \ \textcolor{comment}{/*\ \ \ \ It\ is\ possible\ to\ call\ @FT\_Bitmap\_Convert\ multiple\ times\ without\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00163}00163\ \ \ \textcolor{comment}{/*\ \ \ \ calling\ @FT\_Bitmap\_Done\ (the\ memory\ is\ simply\ reallocated).\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00164}00164\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00165}00165\ \ \ \textcolor{comment}{/*\ \ \ \ Use\ @FT\_Bitmap\_Done\ to\ finally\ remove\ the\ bitmap\ object.\ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00166}00166\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00167}00167\ \ \ \textcolor{comment}{/*\ \ \ \ The\ \`{}library'\ argument\ is\ taken\ to\ have\ access\ to\ FreeType's\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00168}00168\ \ \ \textcolor{comment}{/*\ \ \ \ memory\ handling\ functions.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00169}00169\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00170}00170\ \ \ FT\_EXPORT(\ FT\_Error\ )}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00171}00171\ \ \ FT\_Bitmap\_Convert(\ FT\_Library\ \ \ \ \ \ \ \ library,}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ FT\_Bitmap\ \ *source,}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Bitmap\ \ \ \ \ \ \ \ *target,}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Int\ \ \ \ \ \ \ \ \ \ \ \ alignment\ );}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00175}00175\ }
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00176}00176\ }
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00177}00177\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00178}00178\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00179}00179\ \ \ \textcolor{comment}{/*\ <Function>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00180}00180\ \ \ \textcolor{comment}{/*\ \ \ \ FT\_GlyphSlot\_Own\_Bitmap\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00181}00181\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00182}00182\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00183}00183\ \ \ \textcolor{comment}{/*\ \ \ \ Make\ sure\ that\ a\ glyph\ slot\ owns\ \`{}slot-\/>bitmap'.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00184}00184\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00185}00185\ \ \ \textcolor{comment}{/*\ <Input>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00186}00186\ \ \ \textcolor{comment}{/*\ \ \ \ slot\ ::\ The\ glyph\ slot.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00187}00187\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00188}00188\ \ \ \textcolor{comment}{/*\ <Return>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00189}00189\ \ \ \textcolor{comment}{/*\ \ \ \ FreeType\ error\ code.\ \ 0\string~means\ success.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00190}00190\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00191}00191\ \ \ \textcolor{comment}{/*\ <Note>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00192}00192\ \ \ \textcolor{comment}{/*\ \ \ \ This\ function\ is\ to\ be\ used\ in\ combination\ with\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00193}00193\ \ \ \textcolor{comment}{/*\ \ \ \ @FT\_Bitmap\_Embolden.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00194}00194\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00195}00195\ \ \ FT\_EXPORT(\ FT\_Error\ )}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00196}00196\ \ \ FT\_GlyphSlot\_Own\_Bitmap(\ FT\_GlyphSlot\ \ slot\ );}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00197}00197\ }
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00198}00198\ }
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00199}00199\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00200}00200\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00201}00201\ \ \ \textcolor{comment}{/*\ <Function>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00202}00202\ \ \ \textcolor{comment}{/*\ \ \ \ FT\_Bitmap\_Done\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00203}00203\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00204}00204\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00205}00205\ \ \ \textcolor{comment}{/*\ \ \ \ Destroy\ a\ bitmap\ object\ created\ with\ @FT\_Bitmap\_New.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00206}00206\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00207}00207\ \ \ \textcolor{comment}{/*\ <Input>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00208}00208\ \ \ \textcolor{comment}{/*\ \ \ \ library\ ::\ A\ handle\ to\ a\ library\ object.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00209}00209\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00210}00210\ \ \ \textcolor{comment}{/*\ \ \ \ bitmap\ \ ::\ The\ bitmap\ object\ to\ be\ freed.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00211}00211\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00212}00212\ \ \ \textcolor{comment}{/*\ <Return>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00213}00213\ \ \ \textcolor{comment}{/*\ \ \ \ FreeType\ error\ code.\ \ 0\string~means\ success.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00214}00214\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00215}00215\ \ \ \textcolor{comment}{/*\ <Note>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00216}00216\ \ \ \textcolor{comment}{/*\ \ \ \ The\ \`{}library'\ argument\ is\ taken\ to\ have\ access\ to\ FreeType's\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00217}00217\ \ \ \textcolor{comment}{/*\ \ \ \ memory\ handling\ functions.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00218}00218\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00219}00219\ \ \ FT\_EXPORT(\ FT\_Error\ )}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00220}00220\ \ \ FT\_Bitmap\_Done(\ FT\_Library\ \ library,}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00221}00221\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Bitmap\ \ *bitmap\ );}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00222}00222\ }
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00223}00223\ }
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00224}00224\ \ \ \textcolor{comment}{/*\ */}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00225}00225\ }
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00226}00226\ }
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00227}00227\ FT\_END\_HEADER}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00228}00228\ }
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00229}00229\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_FTBITMAP\_H\_\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00230}00230\ }
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00231}00231\ }
+\DoxyCodeLine{\Hypertarget{ftbitmap_8h_source_l00232}00232\ \textcolor{comment}{/*\ END\ */}}
+
+\end{DoxyCode}

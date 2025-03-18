@@ -1,0 +1,336 @@
+\doxysubsection{Sound\+File\+Reader\+Flac.\+cpp}
+\hypertarget{_sound_file_reader_flac_8cpp_source}{}\label{_sound_file_reader_flac_8cpp_source}\index{SoundFileReaderFlac.cpp@{SoundFileReaderFlac.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00002}00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00003}00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00004}00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00005}00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00006}00006\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00007}00007\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00008}00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00009}00009\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00010}00010\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00011}00011\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00012}00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00013}00013\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00014}00014\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00015}00015\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00016}00016\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00017}00017\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00018}00018\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00019}00019\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00020}00020\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00021}00021\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00022}00022\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00026}00026\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00028}00028\ \textcolor{preprocessor}{\#include\ <SFML/Audio/SoundFileReaderFlac.hpp>}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00029}00029\ \textcolor{preprocessor}{\#include\ <SFML/System/InputStream.hpp>}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00030}00030\ \textcolor{preprocessor}{\#include\ <SFML/System/Err.hpp>}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00031}00031\ \textcolor{preprocessor}{\#include\ <cassert>}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00034}00034\ \textcolor{keyword}{namespace}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00035}00035\ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00036}00036\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__decoder_gad793ead451206c64a91dc0b851027b93}{FLAC\_\_StreamDecoderReadStatus}}\ streamRead(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_f_l_a_c_____stream_decoder}{FLAC\_\_StreamDecoder}}*,\ FLAC\_\_byte\ buffer[],\ std::size\_t*\ bytes,\ \textcolor{keywordtype}{void}*\ clientData)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00037}00037\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00038}00038\ \ \ \ \ \ \ \ \ sf::priv::SoundFileReaderFlac::ClientData*\ data\ =\ \textcolor{keyword}{static\_cast<}sf::priv::SoundFileReaderFlac::ClientData*\textcolor{keyword}{>}(clientData);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00040}00040\ \ \ \ \ \ \ \ \ sf::Int64\ count\ =\ data-\/>stream-\/>read(buffer,\ \textcolor{keyword}{static\_cast<}sf::Int64\textcolor{keyword}{>}(*bytes));}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00041}00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (count\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00042}00042\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ *bytes\ =\ \textcolor{keyword}{static\_cast<}std::size\_t\textcolor{keyword}{>}(count);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{group__flac__stream__decoder_ggad793ead451206c64a91dc0b851027b93a9a5be0fcf0279b98b2fd462bc4871d06}{FLAC\_\_STREAM\_DECODER\_READ\_STATUS\_CONTINUE}};}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00045}00045\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (count\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00047}00047\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{group__flac__stream__decoder_ggad793ead451206c64a91dc0b851027b93a0a0687d25dc9f7163e6e5e294672170f}{FLAC\_\_STREAM\_DECODER\_READ\_STATUS\_END\_OF\_STREAM}};}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00049}00049\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00050}00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00051}00051\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{group__flac__stream__decoder_ggad793ead451206c64a91dc0b851027b93a923123aebb349e35662e35a7621b7535}{FLAC\_\_STREAM\_DECODER\_READ\_STATUS\_ABORT}};}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00053}00053\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00054}00054\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00056}00056\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__decoder_gac8d269e3c7af1a5889d3bd38409ed67d}{FLAC\_\_StreamDecoderSeekStatus}}\ streamSeek(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_f_l_a_c_____stream_decoder}{FLAC\_\_StreamDecoder}}*,\ FLAC\_\_uint64\ absoluteByteOffset,\ \textcolor{keywordtype}{void}*\ clientData)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00057}00057\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00058}00058\ \ \ \ \ \ \ \ \ sf::priv::SoundFileReaderFlac::ClientData*\ data\ =\ \textcolor{keyword}{static\_cast<}sf::priv::SoundFileReaderFlac::ClientData*\textcolor{keyword}{>}(clientData);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00060}00060\ \ \ \ \ \ \ \ \ sf::Int64\ position\ =\ data-\/>stream-\/>seek(\textcolor{keyword}{static\_cast<}sf::Int64\textcolor{keyword}{>}(absoluteByteOffset));}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00061}00061\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (position\ >=\ 0)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{group__flac__stream__decoder_ggac8d269e3c7af1a5889d3bd38409ed67daca58132d896ad7755827d3f2b72488cc}{FLAC\_\_STREAM\_DECODER\_SEEK\_STATUS\_OK}};}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00063}00063\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{group__flac__stream__decoder_ggac8d269e3c7af1a5889d3bd38409ed67da969ce92a42a2a95609452e9cf01fcc09}{FLAC\_\_STREAM\_DECODER\_SEEK\_STATUS\_ERROR}};}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00065}00065\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00067}00067\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__decoder_ga83708207969383bd7b5c1e9148528845}{FLAC\_\_StreamDecoderTellStatus}}\ streamTell(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_f_l_a_c_____stream_decoder}{FLAC\_\_StreamDecoder}}*,\ FLAC\_\_uint64*\ absoluteByteOffset,\ \textcolor{keywordtype}{void}*\ clientData)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00068}00068\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00069}00069\ \ \ \ \ \ \ \ \ sf::priv::SoundFileReaderFlac::ClientData*\ data\ =\ \textcolor{keyword}{static\_cast<}sf::priv::SoundFileReaderFlac::ClientData*\textcolor{keyword}{>}(clientData);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00071}00071\ \ \ \ \ \ \ \ \ sf::Int64\ position\ =\ data-\/>stream-\/>tell();}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00072}00072\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (position\ >=\ 0)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00073}00073\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ *absoluteByteOffset\ =\ \textcolor{keyword}{static\_cast<}FLAC\_\_uint64\textcolor{keyword}{>}(position);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{group__flac__stream__decoder_gga83708207969383bd7b5c1e9148528845a516a202ebf4bb61d4a1fb5b029a104dd}{FLAC\_\_STREAM\_DECODER\_TELL\_STATUS\_OK}};}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00076}00076\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00077}00077\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00078}00078\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{group__flac__stream__decoder_gga83708207969383bd7b5c1e9148528845aceefd3feb853d5e68a149f2bdd1a9db1}{FLAC\_\_STREAM\_DECODER\_TELL\_STATUS\_ERROR}};}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00080}00080\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00081}00081\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00083}00083\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__decoder_gad5860157c2bb34501b8b9370472d727a}{FLAC\_\_StreamDecoderLengthStatus}}\ streamLength(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_f_l_a_c_____stream_decoder}{FLAC\_\_StreamDecoder}}*,\ FLAC\_\_uint64*\ streamLength,\ \textcolor{keywordtype}{void}*\ clientData)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00084}00084\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00085}00085\ \ \ \ \ \ \ \ \ sf::priv::SoundFileReaderFlac::ClientData*\ data\ =\ \textcolor{keyword}{static\_cast<}sf::priv::SoundFileReaderFlac::ClientData*\textcolor{keyword}{>}(clientData);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00087}00087\ \ \ \ \ \ \ \ \ sf::Int64\ count\ =\ data-\/>stream-\/>getSize();}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00088}00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (count\ >=\ 0)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00089}00089\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ *streamLength\ =\ \textcolor{keyword}{static\_cast<}FLAC\_\_uint64\textcolor{keyword}{>}(count);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{group__flac__stream__decoder_ggad5860157c2bb34501b8b9370472d727aaef01bfcdc3099686e106d8f88397653d}{FLAC\_\_STREAM\_DECODER\_LENGTH\_STATUS\_OK}};}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00092}00092\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00093}00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00094}00094\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{group__flac__stream__decoder_ggad5860157c2bb34501b8b9370472d727aab000e31c0c20c0d19df4f2203b01ea23}{FLAC\_\_STREAM\_DECODER\_LENGTH\_STATUS\_ERROR}};}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00096}00096\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00097}00097\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00099}00099\ \ \ \ \ FLAC\_\_bool\ streamEof(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_f_l_a_c_____stream_decoder}{FLAC\_\_StreamDecoder}}*,\ \textcolor{keywordtype}{void}*\ clientData)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00100}00100\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00101}00101\ \ \ \ \ \ \ \ \ sf::priv::SoundFileReaderFlac::ClientData*\ data\ =\ \textcolor{keyword}{static\_cast<}sf::priv::SoundFileReaderFlac::ClientData*\textcolor{keyword}{>}(clientData);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00103}00103\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data-\/>stream-\/>tell()\ ==\ data-\/>stream-\/>getSize();}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00104}00104\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00106}00106\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__decoder_ga73f67eb9e0ab57945afe038751bc62c8}{FLAC\_\_StreamDecoderWriteStatus}}\ streamWrite(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_f_l_a_c_____stream_decoder}{FLAC\_\_StreamDecoder}}*,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_f_l_a_c_____frame}{FLAC\_\_Frame}}*\ frame,\ \textcolor{keyword}{const}\ FLAC\_\_int32*\ \textcolor{keyword}{const}\ buffer[],\ \textcolor{keywordtype}{void}*\ clientData)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00107}00107\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00108}00108\ \ \ \ \ \ \ \ \ sf::priv::SoundFileReaderFlac::ClientData*\ data\ =\ \textcolor{keyword}{static\_cast<}sf::priv::SoundFileReaderFlac::ClientData*\textcolor{keyword}{>}(clientData);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00110}00110\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Reserve\ memory\ if\ we're\ going\ to\ use\ the\ leftovers\ buffer}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00111}00111\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ frameSamples\ =\ frame-\/>header.\mbox{\hyperlink{group__flac__format_gace760def6dcbbde3d9d140e5bfda34b3}{blocksize}}\ *\ frame-\/>header.\mbox{\hyperlink{group__flac__format_ga5950c6e4f03ad81f4a03c8c6188b9bf5}{channels}};}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00112}00112\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data-\/>remaining\ <\ frameSamples)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ data-\/>leftovers.reserve(\textcolor{keyword}{static\_cast<}std::size\_t\textcolor{keyword}{>}(frameSamples\ -\/\ data-\/>remaining));}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00115}00115\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Decode\ the\ samples}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00116}00116\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ i\ =\ 0;\ i\ <\ frame-\/>header.\mbox{\hyperlink{group__flac__format_gace760def6dcbbde3d9d140e5bfda34b3}{blocksize}};\ ++i)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00117}00117\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ frame-\/>header.\mbox{\hyperlink{group__flac__format_ga5950c6e4f03ad81f4a03c8c6188b9bf5}{channels}};\ ++j)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Decode\ the\ current\ sample}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sf::Int16\ sample\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (frame-\/>header.\mbox{\hyperlink{group__flac__format_gae1f4af58cbbb837adf670d12bc4e86f3}{bits\_per\_sample}})}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 8:}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sample\ =\ \textcolor{keyword}{static\_cast<}sf::Int16\textcolor{keyword}{>}(buffer[j][i]\ <<\ 8);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 16:}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sample\ =\ \textcolor{keyword}{static\_cast<}sf::Int16\textcolor{keyword}{>}(buffer[j][i]);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 24:}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sample\ =\ \textcolor{keyword}{static\_cast<}sf::Int16\textcolor{keyword}{>}(buffer[j][i]\ >>\ 8);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 32:}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sample\ =\ \textcolor{keyword}{static\_cast<}sf::Int16\textcolor{keyword}{>}(buffer[j][i]\ >>\ 16);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ assert(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data-\/>buffer\ \&\&\ data-\/>remaining\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ there's\ room\ in\ the\ output\ buffer,\ copy\ the\ sample\ there}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *data-\/>buffer++\ =\ sample;}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ data-\/>remaining-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ We\ are\ either\ seeking\ (null\ buffer)\ or\ have\ decoded\ all\ the\ requested\ samples\ during\ a}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ normal\ read\ (0\ remaining),\ so\ we\ put\ the\ sample\ in\ a\ temporary\ buffer\ until\ next\ call}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ data-\/>leftovers.push\_back(sample);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00154}00154\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00155}00155\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00156}00156\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{group__flac__stream__decoder_gga73f67eb9e0ab57945afe038751bc62c8acea48326e0ab8370d2814f4126fcb84e}{FLAC\_\_STREAM\_DECODER\_WRITE\_STATUS\_CONTINUE}};}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00157}00157\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00159}00159\ \ \ \ \ \textcolor{keywordtype}{void}\ streamMetadata(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_f_l_a_c_____stream_decoder}{FLAC\_\_StreamDecoder}}*,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_f_l_a_c_____stream_metadata}{FLAC\_\_StreamMetadata}}*\ meta,\ \textcolor{keywordtype}{void}*\ clientData)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00160}00160\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00161}00161\ \ \ \ \ \ \ \ \ sf::priv::SoundFileReaderFlac::ClientData*\ data\ =\ \textcolor{keyword}{static\_cast<}sf::priv::SoundFileReaderFlac::ClientData*\textcolor{keyword}{>}(clientData);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00162}00162\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00163}00163\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (meta-\/>\mbox{\hyperlink{group__flac__format_ga39fd0655464f2cc7c9c37ae715088aec}{type}}\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01acffa517e969ba6a868dcf10e5da75c28}{FLAC\_\_METADATA\_TYPE\_STREAMINFO}})}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00164}00164\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ data-\/>info.sampleCount\ =\ meta-\/>\mbox{\hyperlink{group__flac__format_ga0183baef68c84b41d6b1f23d438d3894}{data}}.stream\_info.total\_samples\ *\ meta-\/>\mbox{\hyperlink{group__flac__format_ga0183baef68c84b41d6b1f23d438d3894}{data}}.stream\_info.channels;}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ data-\/>info.sampleRate\ =\ meta-\/>\mbox{\hyperlink{group__flac__format_ga0183baef68c84b41d6b1f23d438d3894}{data}}.stream\_info.sample\_rate;}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ data-\/>info.channelCount\ =\ meta-\/>\mbox{\hyperlink{group__flac__format_ga0183baef68c84b41d6b1f23d438d3894}{data}}.stream\_info.channels;}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00168}00168\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00169}00169\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00170}00170\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00171}00171\ \ \ \ \ \textcolor{keywordtype}{void}\ streamError(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_f_l_a_c_____stream_decoder}{FLAC\_\_StreamDecoder}}*,\ \mbox{\hyperlink{group__flac__stream__decoder_ga130e70bd9a73d3c2416247a3e5132ecf}{FLAC\_\_StreamDecoderErrorStatus}},\ \textcolor{keywordtype}{void}*\ clientData)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00172}00172\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00173}00173\ \ \ \ \ \ \ \ \ sf::priv::SoundFileReaderFlac::ClientData*\ data\ =\ \textcolor{keyword}{static\_cast<}sf::priv::SoundFileReaderFlac::ClientData*\textcolor{keyword}{>}(clientData);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00174}00174\ \ \ \ \ \ \ \ \ data-\/>error\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00175}00175\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00176}00176\ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00177}00177\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00178}00178\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00179}00179\ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00180}00180\ \textcolor{keyword}{namespace\ }priv}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00181}00181\ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00183}00183\ \textcolor{keywordtype}{bool}\ SoundFileReaderFlac::check(InputStream\&\ stream)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00184}00184\ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00185}00185\ \ \ \ \ \textcolor{comment}{//\ Create\ a\ decoder}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00186}00186\ \ \ \ \ FLAC\_\_StreamDecoder*\ decoder\ =\ \mbox{\hyperlink{group__flac__stream__decoder_ga8e25ac9f30480316dcd33f82c5a5812d}{FLAC\_\_stream\_decoder\_new}}();}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00187}00187\ \ \ \ \ \textcolor{keywordflow}{if}\ (!decoder)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00188}00188\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00190}00190\ \ \ \ \ \textcolor{comment}{//\ Initialize\ the\ decoder\ with\ our\ callbacks}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00191}00191\ \ \ \ \ ClientData\ data;}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00192}00192\ \ \ \ \ data.stream\ =\ \&stream;}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00193}00193\ \ \ \ \ data.error\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00194}00194\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__decoder_ga32c28a56a2bdfa2333edbd3d991894d7}{FLAC\_\_stream\_decoder\_init\_stream}}(decoder,\ \&streamRead,\ \&streamSeek,\ \&streamTell,\ \&streamLength,\ \&streamEof,\ \&streamWrite,\ NULL,\ \&streamError,\ \&data);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00195}00195\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00196}00196\ \ \ \ \ \textcolor{comment}{//\ Read\ the\ header}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00197}00197\ \ \ \ \ \textcolor{keywordtype}{bool}\ valid\ =\ \mbox{\hyperlink{group__flac__stream__decoder_ga5e07ca9bf67dabf2521737f63b2156e2}{FLAC\_\_stream\_decoder\_process\_until\_end\_of\_metadata}}(decoder)\ !=\ 0;}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00198}00198\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00199}00199\ \ \ \ \ \textcolor{comment}{//\ Destroy\ the\ decoder}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00200}00200\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__decoder_gaa51bb38f762ee11b320a0839f165c5ce}{FLAC\_\_stream\_decoder\_finish}}(decoder);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00201}00201\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__decoder_gab958ee28b829be37e541946676ad9677}{FLAC\_\_stream\_decoder\_delete}}(decoder);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00202}00202\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00203}00203\ \ \ \ \ \textcolor{keywordflow}{return}\ valid\ \&\&\ !data.error;}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00204}00204\ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00205}00205\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00206}00206\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00208}00208\ SoundFileReaderFlac::SoundFileReaderFlac()\ :}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00209}00209\ m\_decoder(NULL),}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00210}00210\ m\_clientData()}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00211}00211\ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00212}00212\ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00213}00213\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00214}00214\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00216}00216\ SoundFileReaderFlac::\string~SoundFileReaderFlac()}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00217}00217\ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00218}00218\ \ \ \ \ close();}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00219}00219\ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00220}00220\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00221}00221\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00223}00223\ \textcolor{keywordtype}{bool}\ SoundFileReaderFlac::open(InputStream\&\ stream,\ Info\&\ info)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00224}00224\ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00225}00225\ \ \ \ \ \textcolor{comment}{//\ Create\ the\ decoder}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00226}00226\ \ \ \ \ m\_decoder\ =\ \mbox{\hyperlink{group__flac__stream__decoder_ga8e25ac9f30480316dcd33f82c5a5812d}{FLAC\_\_stream\_decoder\_new}}();}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00227}00227\ \ \ \ \ \textcolor{keywordflow}{if}\ (!m\_decoder)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00228}00228\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00229}00229\ \ \ \ \ \ \ \ \ err()\ <<\ \textcolor{stringliteral}{"{}Failed\ to\ open\ FLAC\ file\ (failed\ to\ allocate\ the\ decoder)"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00230}00230\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00231}00231\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00232}00232\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00233}00233\ \ \ \ \ \textcolor{comment}{//\ Initialize\ the\ decoder\ with\ our\ callbacks}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00234}00234\ \ \ \ \ m\_clientData.stream\ =\ \&stream;}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00235}00235\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__decoder_ga32c28a56a2bdfa2333edbd3d991894d7}{FLAC\_\_stream\_decoder\_init\_stream}}(m\_decoder,\ \&streamRead,\ \&streamSeek,\ \&streamTell,\ \&streamLength,\ \&streamEof,\ \&streamWrite,\ \&streamMetadata,\ \&streamError,\ \&m\_clientData);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00236}00236\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00237}00237\ \ \ \ \ \textcolor{comment}{//\ Read\ the\ header}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00238}00238\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{group__flac__stream__decoder_ga5e07ca9bf67dabf2521737f63b2156e2}{FLAC\_\_stream\_decoder\_process\_until\_end\_of\_metadata}}(m\_decoder))}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00239}00239\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00240}00240\ \ \ \ \ \ \ \ \ close();}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00241}00241\ \ \ \ \ \ \ \ \ err()\ <<\ \textcolor{stringliteral}{"{}Failed\ to\ open\ FLAC\ file\ (failed\ to\ read\ metadata)"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00242}00242\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00243}00243\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00244}00244\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00245}00245\ \ \ \ \ \textcolor{comment}{//\ Retrieve\ the\ sound\ properties}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00246}00246\ \ \ \ \ info\ =\ m\_clientData.info;\ \textcolor{comment}{//\ was\ filled\ in\ the\ "{}metadata"{}\ callback}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00247}00247\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00248}00248\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00249}00249\ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00250}00250\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00251}00251\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00253}00253\ \textcolor{keywordtype}{void}\ SoundFileReaderFlac::seek(Uint64\ sampleOffset)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00254}00254\ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00255}00255\ \ \ \ \ assert(m\_decoder);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00256}00256\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00257}00257\ \ \ \ \ \textcolor{comment}{//\ Reset\ the\ callback\ data\ (the\ "{}write"{}\ callback\ will\ be\ called)}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00258}00258\ \ \ \ \ m\_clientData.buffer\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00259}00259\ \ \ \ \ m\_clientData.remaining\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00260}00260\ \ \ \ \ m\_clientData.leftovers.clear();}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00261}00261\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00262}00262\ \ \ \ \ \textcolor{comment}{//\ FLAC\ decoder\ expects\ absolute\ sample\ offset,\ so\ we\ take\ the\ channel\ count\ out}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00263}00263\ \ \ \ \ \textcolor{keywordflow}{if}\ (sampleOffset\ <\ m\_clientData.info.sampleCount)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00264}00264\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00265}00265\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ "{}write"{}\ callback\ will\ populate\ the\ leftovers\ buffer\ with\ the\ first\ batch\ of\ samples\ from\ the}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00266}00266\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ seek\ destination,\ and\ since\ we\ want\ that\ data\ in\ this\ typical\ case,\ we\ don't\ re-\/clear\ it\ afterward}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00267}00267\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{group__flac__stream__decoder_ga5c1c70de72e6ed49db6d61a9131d9117}{FLAC\_\_stream\_decoder\_seek\_absolute}}(m\_decoder,\ sampleOffset\ /\ m\_clientData.info.channelCount);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00268}00268\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00269}00269\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00270}00270\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00271}00271\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ FLAC\ decoder\ can't\ skip\ straight\ to\ EOF,\ so\ we\ short-\/seek\ by\ one\ sample\ and\ skip\ the\ rest}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00272}00272\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{group__flac__stream__decoder_ga5c1c70de72e6ed49db6d61a9131d9117}{FLAC\_\_stream\_decoder\_seek\_absolute}}(m\_decoder,\ (m\_clientData.info.sampleCount\ /\ m\_clientData.info.channelCount)\ -\/\ 1);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00273}00273\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{group__flac__stream__decoder_ga371bc2b4f5571e40c47f4db5a8a745f8}{FLAC\_\_stream\_decoder\_skip\_single\_frame}}(m\_decoder);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00274}00274\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00275}00275\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ was\ re-\/populated\ during\ the\ seek,\ but\ we're\ skipping\ everything\ in\ this,\ so\ we\ need\ it\ emptied}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00276}00276\ \ \ \ \ \ \ \ \ m\_clientData.leftovers.clear();}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00277}00277\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00278}00278\ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00279}00279\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00280}00280\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00282}00282\ Uint64\ SoundFileReaderFlac::read(Int16*\ samples,\ Uint64\ maxCount)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00283}00283\ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00284}00284\ \ \ \ \ assert(m\_decoder);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00285}00285\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00286}00286\ \ \ \ \ \textcolor{comment}{//\ If\ there\ are\ leftovers\ from\ previous\ call,\ use\ it\ first}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00287}00287\ \ \ \ \ std::size\_t\ left\ =\ m\_clientData.leftovers.size();}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00288}00288\ \ \ \ \ \textcolor{keywordflow}{if}\ (left\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00289}00289\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00290}00290\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (left\ >\ maxCount)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00291}00291\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00292}00292\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ There\ are\ more\ leftovers\ than\ needed}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00293}00293\ \ \ \ \ \ \ \ \ \ \ \ \ std::copy(m\_clientData.leftovers.begin(),\ m\_clientData.leftovers.begin()\ +\ \textcolor{keyword}{static\_cast<}std::vector<Int16>::difference\_type\textcolor{keyword}{>}(maxCount),\ samples);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00294}00294\ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<Int16>\ leftovers(m\_clientData.leftovers.begin()\ +\ \textcolor{keyword}{static\_cast<}std::vector<Int16>::difference\_type\textcolor{keyword}{>}(maxCount),\ m\_clientData.leftovers.end());}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00295}00295\ \ \ \ \ \ \ \ \ \ \ \ \ m\_clientData.leftovers.swap(leftovers);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00296}00296\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ maxCount;}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00297}00297\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00298}00298\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00299}00299\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00300}00300\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ We\ can\ use\ all\ the\ leftovers\ and\ decode\ new\ frames}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00301}00301\ \ \ \ \ \ \ \ \ \ \ \ \ std::copy(m\_clientData.leftovers.begin(),\ m\_clientData.leftovers.end(),\ samples);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00302}00302\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00303}00303\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00304}00304\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00305}00305\ \ \ \ \ \textcolor{comment}{//\ Reset\ the\ data\ that\ will\ be\ used\ in\ the\ callback}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00306}00306\ \ \ \ \ m\_clientData.buffer\ =\ samples\ +\ left;}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00307}00307\ \ \ \ \ m\_clientData.remaining\ =\ maxCount\ -\/\ left;}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00308}00308\ \ \ \ \ m\_clientData.leftovers.clear();}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00309}00309\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00310}00310\ \ \ \ \ \textcolor{comment}{//\ Decode\ frames\ one\ by\ one\ until\ we\ reach\ the\ requested\ sample\ count,\ the\ end\ of\ file\ or\ an\ error}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00311}00311\ \ \ \ \ \textcolor{keywordflow}{while}\ (m\_clientData.remaining\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00312}00312\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00313}00313\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Everything\ happens\ in\ the\ "{}write"{}\ callback}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00314}00314\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ will\ break\ on\ any\ fatal\ error\ (does\ not\ include\ EOF)}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00315}00315\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{group__flac__stream__decoder_ga8c4708eb2c5d99595f64dc2473aa2f42}{FLAC\_\_stream\_decoder\_process\_single}}(m\_decoder))}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00316}00316\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00317}00317\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00318}00318\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Break\ on\ EOF}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00319}00319\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{group__flac__stream__decoder_ga5899c204ad7183ec04e41855090c0635}{FLAC\_\_stream\_decoder\_get\_state}}(m\_decoder)\ ==\ \mbox{\hyperlink{group__flac__stream__decoder_gga3adb6891c5871a87cd5bbae6c770ba2da28ce845052d9d1a780f4107e97f4c853}{FLAC\_\_STREAM\_DECODER\_END\_OF\_STREAM}})}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00320}00320\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00321}00321\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00322}00322\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00323}00323\ \ \ \ \ \textcolor{keywordflow}{return}\ maxCount\ -\/\ m\_clientData.remaining;}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00324}00324\ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00325}00325\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00326}00326\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00328}00328\ \textcolor{keywordtype}{void}\ SoundFileReaderFlac::close()}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00329}00329\ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00330}00330\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_decoder)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00331}00331\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00332}00332\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{group__flac__stream__decoder_gaa51bb38f762ee11b320a0839f165c5ce}{FLAC\_\_stream\_decoder\_finish}}(m\_decoder);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00333}00333\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{group__flac__stream__decoder_gab958ee28b829be37e541946676ad9677}{FLAC\_\_stream\_decoder\_delete}}(m\_decoder);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00334}00334\ \ \ \ \ \ \ \ \ m\_decoder\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00335}00335\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00336}00336\ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00337}00337\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00338}00338\ \}\ \textcolor{comment}{//\ namespace\ priv}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00339}00339\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_flac_8cpp_source_l00340}00340\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+
+\end{DoxyCode}

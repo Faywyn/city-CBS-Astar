@@ -1,0 +1,408 @@
+\doxysubsection{efx-\/presets.h}
+\hypertarget{efx-presets_8h_source}{}\label{efx-presets_8h_source}\index{efx-\/presets.h@{efx-\/presets.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00001}00001\ \textcolor{comment}{/*\ Reverb\ presets\ for\ EFX\ */}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00003}00003\ \textcolor{preprocessor}{\#ifndef\ EFX\_PRESETS\_H}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00004}00004\ \textcolor{preprocessor}{\#define\ EFX\_PRESETS\_H}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00006}00006\ \textcolor{preprocessor}{\#ifndef\ EFXEAXREVERBPROPERTIES\_DEFINED}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00007}00007\ \textcolor{preprocessor}{\#define\ EFXEAXREVERBPROPERTIES\_DEFINED}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00008}00008\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00009}00009\ \ \ \ \ \textcolor{keywordtype}{float}\ flDensity;}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00010}00010\ \ \ \ \ \textcolor{keywordtype}{float}\ flDiffusion;}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00011}00011\ \ \ \ \ \textcolor{keywordtype}{float}\ flGain;}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00012}00012\ \ \ \ \ \textcolor{keywordtype}{float}\ flGainHF;}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00013}00013\ \ \ \ \ \textcolor{keywordtype}{float}\ flGainLF;}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00014}00014\ \ \ \ \ \textcolor{keywordtype}{float}\ flDecayTime;}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00015}00015\ \ \ \ \ \textcolor{keywordtype}{float}\ flDecayHFRatio;}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00016}00016\ \ \ \ \ \textcolor{keywordtype}{float}\ flDecayLFRatio;}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00017}00017\ \ \ \ \ \textcolor{keywordtype}{float}\ flReflectionsGain;}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00018}00018\ \ \ \ \ \textcolor{keywordtype}{float}\ flReflectionsDelay;}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00019}00019\ \ \ \ \ \textcolor{keywordtype}{float}\ flReflectionsPan[3];}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00020}00020\ \ \ \ \ \textcolor{keywordtype}{float}\ flLateReverbGain;}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00021}00021\ \ \ \ \ \textcolor{keywordtype}{float}\ flLateReverbDelay;}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00022}00022\ \ \ \ \ \textcolor{keywordtype}{float}\ flLateReverbPan[3];}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00023}00023\ \ \ \ \ \textcolor{keywordtype}{float}\ flEchoTime;}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00024}00024\ \ \ \ \ \textcolor{keywordtype}{float}\ flEchoDepth;}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00025}00025\ \ \ \ \ \textcolor{keywordtype}{float}\ flModulationTime;}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00026}00026\ \ \ \ \ \textcolor{keywordtype}{float}\ flModulationDepth;}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00027}00027\ \ \ \ \ \textcolor{keywordtype}{float}\ flAirAbsorptionGainHF;}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00028}00028\ \ \ \ \ \textcolor{keywordtype}{float}\ flHFReference;}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00029}00029\ \ \ \ \ \textcolor{keywordtype}{float}\ flLFReference;}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00030}00030\ \ \ \ \ \textcolor{keywordtype}{float}\ flRoomRolloffFactor;}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00031}00031\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ iDecayHFLimit;}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00032}00032\ \}\ EFXEAXREVERBPROPERTIES,\ *LPEFXEAXREVERBPROPERTIES;}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00033}00033\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00035}00035\ \textcolor{comment}{/*\ Default\ Presets\ */}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00037}00037\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_GENERIC\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00038}00038\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 1.0000f,\ 0.3162f,\ 0.8913f,\ 1.0000f,\ 1.4900f,\ 0.8300f,\ 1.0000f,\ 0.0500f,\ 0.0070f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.2589f,\ 0.0110f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00040}00040\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_PADDEDCELL\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00041}00041\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.1715f,\ 1.0000f,\ 0.3162f,\ 0.0010f,\ 1.0000f,\ 0.1700f,\ 0.1000f,\ 1.0000f,\ 0.2500f,\ 0.0010f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.2691f,\ 0.0020f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00043}00043\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_ROOM\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00044}00044\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.4287f,\ 1.0000f,\ 0.3162f,\ 0.5929f,\ 1.0000f,\ 0.4000f,\ 0.8300f,\ 1.0000f,\ 0.1503f,\ 0.0020f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.0629f,\ 0.0030f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00046}00046\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_BATHROOM\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00047}00047\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.1715f,\ 1.0000f,\ 0.3162f,\ 0.2512f,\ 1.0000f,\ 1.4900f,\ 0.5400f,\ 1.0000f,\ 0.6531f,\ 0.0070f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 3.2734f,\ 0.0110f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00049}00049\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_LIVINGROOM\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00050}00050\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.9766f,\ 1.0000f,\ 0.3162f,\ 0.0010f,\ 1.0000f,\ 0.5000f,\ 0.1000f,\ 1.0000f,\ 0.2051f,\ 0.0030f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2805f,\ 0.0040f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00052}00052\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_STONEROOM\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00053}00053\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 1.0000f,\ 0.3162f,\ 0.7079f,\ 1.0000f,\ 2.3100f,\ 0.6400f,\ 1.0000f,\ 0.4411f,\ 0.0120f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.1003f,\ 0.0170f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00055}00055\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_AUDITORIUM\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00056}00056\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 1.0000f,\ 0.3162f,\ 0.5781f,\ 1.0000f,\ 4.3200f,\ 0.5900f,\ 1.0000f,\ 0.4032f,\ 0.0200f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.7170f,\ 0.0300f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00058}00058\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_CONCERTHALL\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00059}00059\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 1.0000f,\ 0.3162f,\ 0.5623f,\ 1.0000f,\ 3.9200f,\ 0.7000f,\ 1.0000f,\ 0.2427f,\ 0.0200f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.9977f,\ 0.0290f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00061}00061\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_CAVE\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00062}00062\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 1.0000f,\ 0.3162f,\ 1.0000f,\ 1.0000f,\ 2.9100f,\ 1.3000f,\ 1.0000f,\ 0.5000f,\ 0.0150f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.7063f,\ 0.0220f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x0\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00064}00064\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_ARENA\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00065}00065\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 1.0000f,\ 0.3162f,\ 0.4477f,\ 1.0000f,\ 7.2400f,\ 0.3300f,\ 1.0000f,\ 0.2612f,\ 0.0200f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.0186f,\ 0.0300f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00067}00067\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_HANGAR\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00068}00068\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 1.0000f,\ 0.3162f,\ 0.3162f,\ 1.0000f,\ 10.0500f,\ 0.2300f,\ 1.0000f,\ 0.5000f,\ 0.0200f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.2560f,\ 0.0300f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00070}00070\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_CARPETEDHALLWAY\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00071}00071\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.4287f,\ 1.0000f,\ 0.3162f,\ 0.0100f,\ 1.0000f,\ 0.3000f,\ 0.1000f,\ 1.0000f,\ 0.1215f,\ 0.0020f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1531f,\ 0.0300f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00073}00073\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_HALLWAY\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00074}00074\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.3645f,\ 1.0000f,\ 0.3162f,\ 0.7079f,\ 1.0000f,\ 1.4900f,\ 0.5900f,\ 1.0000f,\ 0.2458f,\ 0.0070f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.6615f,\ 0.0110f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00076}00076\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_STONECORRIDOR\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00077}00077\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 1.0000f,\ 0.3162f,\ 0.7612f,\ 1.0000f,\ 2.7000f,\ 0.7900f,\ 1.0000f,\ 0.2472f,\ 0.0130f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.5758f,\ 0.0200f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00079}00079\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_ALLEY\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00080}00080\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.3000f,\ 0.3162f,\ 0.7328f,\ 1.0000f,\ 1.4900f,\ 0.8600f,\ 1.0000f,\ 0.2500f,\ 0.0070f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.9954f,\ 0.0110f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1250f,\ 0.9500f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00082}00082\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_FOREST\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00083}00083\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.3000f,\ 0.3162f,\ 0.0224f,\ 1.0000f,\ 1.4900f,\ 0.5400f,\ 1.0000f,\ 0.0525f,\ 0.1620f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.7682f,\ 0.0880f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1250f,\ 1.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00085}00085\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_CITY\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00086}00086\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.5000f,\ 0.3162f,\ 0.3981f,\ 1.0000f,\ 1.4900f,\ 0.6700f,\ 1.0000f,\ 0.0730f,\ 0.0070f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1427f,\ 0.0110f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00088}00088\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_MOUNTAINS\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00089}00089\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.2700f,\ 0.3162f,\ 0.0562f,\ 1.0000f,\ 1.4900f,\ 0.2100f,\ 1.0000f,\ 0.0407f,\ 0.3000f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1919f,\ 0.1000f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 1.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x0\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00091}00091\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_QUARRY\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00092}00092\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 1.0000f,\ 0.3162f,\ 0.3162f,\ 1.0000f,\ 1.4900f,\ 0.8300f,\ 1.0000f,\ 0.0000f,\ 0.0610f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.7783f,\ 0.0250f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1250f,\ 0.7000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00094}00094\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_PLAIN\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00095}00095\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.2100f,\ 0.3162f,\ 0.1000f,\ 1.0000f,\ 1.4900f,\ 0.5000f,\ 1.0000f,\ 0.0585f,\ 0.1790f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1089f,\ 0.1000f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 1.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00097}00097\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_PARKINGLOT\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00098}00098\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 1.0000f,\ 0.3162f,\ 1.0000f,\ 1.0000f,\ 1.6500f,\ 1.5000f,\ 1.0000f,\ 0.2082f,\ 0.0080f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2652f,\ 0.0120f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x0\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00100}00100\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_SEWERPIPE\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00101}00101\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.3071f,\ 0.8000f,\ 0.3162f,\ 0.3162f,\ 1.0000f,\ 2.8100f,\ 0.1400f,\ 1.0000f,\ 1.6387f,\ 0.0140f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 3.2471f,\ 0.0210f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00103}00103\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_UNDERWATER\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00104}00104\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.3645f,\ 1.0000f,\ 0.3162f,\ 0.0100f,\ 1.0000f,\ 1.4900f,\ 0.1000f,\ 1.0000f,\ 0.5963f,\ 0.0070f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 7.0795f,\ 0.0110f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 1.1800f,\ 0.3480f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00106}00106\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_DRUGGED\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00107}00107\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.4287f,\ 0.5000f,\ 0.3162f,\ 1.0000f,\ 1.0000f,\ 8.3900f,\ 1.3900f,\ 1.0000f,\ 0.8760f,\ 0.0020f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 3.1081f,\ 0.0300f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 1.0000f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x0\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00109}00109\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_DIZZY\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00110}00110\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.3645f,\ 0.6000f,\ 0.3162f,\ 0.6310f,\ 1.0000f,\ 17.2300f,\ 0.5600f,\ 1.0000f,\ 0.1392f,\ 0.0200f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.4937f,\ 0.0300f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 1.0000f,\ 0.8100f,\ 0.3100f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x0\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00112}00112\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_PSYCHOTIC\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00113}00113\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.0625f,\ 0.5000f,\ 0.3162f,\ 0.8404f,\ 1.0000f,\ 7.5600f,\ 0.9100f,\ 1.0000f,\ 0.4864f,\ 0.0200f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 2.4378f,\ 0.0300f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 4.0000f,\ 1.0000f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x0\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00115}00115\ \textcolor{comment}{/*\ Castle\ Presets\ */}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00117}00117\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_CASTLE\_SMALLROOM\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00118}00118\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.8900f,\ 0.3162f,\ 0.3981f,\ 0.1000f,\ 1.2200f,\ 0.8300f,\ 0.3100f,\ 0.8913f,\ 0.0220f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.9953f,\ 0.0110f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1380f,\ 0.0800f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5168.6001f,\ 139.5000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00119}00119\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00120}00120\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_CASTLE\_SHORTPASSAGE\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00121}00121\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.8900f,\ 0.3162f,\ 0.3162f,\ 0.1000f,\ 2.3200f,\ 0.8300f,\ 0.3100f,\ 0.8913f,\ 0.0070f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.2589f,\ 0.0230f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1380f,\ 0.0800f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5168.6001f,\ 139.5000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00123}00123\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_CASTLE\_MEDIUMROOM\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00124}00124\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.9300f,\ 0.3162f,\ 0.2818f,\ 0.1000f,\ 2.0400f,\ 0.8300f,\ 0.4600f,\ 0.6310f,\ 0.0220f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.5849f,\ 0.0110f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1550f,\ 0.0300f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5168.6001f,\ 139.5000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00126}00126\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_CASTLE\_LARGEROOM\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00127}00127\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.8200f,\ 0.3162f,\ 0.2818f,\ 0.1259f,\ 2.5300f,\ 0.8300f,\ 0.5000f,\ 0.4467f,\ 0.0340f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.2589f,\ 0.0160f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1850f,\ 0.0700f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5168.6001f,\ 139.5000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00129}00129\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_CASTLE\_LONGPASSAGE\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00130}00130\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.8900f,\ 0.3162f,\ 0.3981f,\ 0.1000f,\ 3.4200f,\ 0.8300f,\ 0.3100f,\ 0.8913f,\ 0.0070f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.4125f,\ 0.0230f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1380f,\ 0.0800f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5168.6001f,\ 139.5000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00132}00132\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_CASTLE\_HALL\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00133}00133\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.8100f,\ 0.3162f,\ 0.2818f,\ 0.1778f,\ 3.1400f,\ 0.7900f,\ 0.6200f,\ 0.1778f,\ 0.0560f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.1220f,\ 0.0240f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5168.6001f,\ 139.5000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00135}00135\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_CASTLE\_CUPBOARD\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00136}00136\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.8900f,\ 0.3162f,\ 0.2818f,\ 0.1000f,\ 0.6700f,\ 0.8700f,\ 0.3100f,\ 1.4125f,\ 0.0100f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 3.5481f,\ 0.0070f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1380f,\ 0.0800f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5168.6001f,\ 139.5000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00138}00138\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_CASTLE\_COURTYARD\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00139}00139\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.4200f,\ 0.3162f,\ 0.4467f,\ 0.1995f,\ 2.1300f,\ 0.6100f,\ 0.2300f,\ 0.2239f,\ 0.1600f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.7079f,\ 0.0360f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.3700f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x0\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00141}00141\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_CASTLE\_ALCOVE\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00142}00142\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.8900f,\ 0.3162f,\ 0.5012f,\ 0.1000f,\ 1.6400f,\ 0.8700f,\ 0.3100f,\ 1.0000f,\ 0.0070f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.4125f,\ 0.0340f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1380f,\ 0.0800f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5168.6001f,\ 139.5000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00143}00143\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00144}00144\ \textcolor{comment}{/*\ Factory\ Presets\ */}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00145}00145\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00146}00146\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_FACTORY\_SMALLROOM\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00147}00147\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.3645f,\ 0.8200f,\ 0.3162f,\ 0.7943f,\ 0.5012f,\ 1.7200f,\ 0.6500f,\ 1.3100f,\ 0.7079f,\ 0.0100f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.7783f,\ 0.0240f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1190f,\ 0.0700f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 3762.6001f,\ 362.5000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00149}00149\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_FACTORY\_SHORTPASSAGE\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00150}00150\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.3645f,\ 0.6400f,\ 0.2512f,\ 0.7943f,\ 0.5012f,\ 2.5300f,\ 0.6500f,\ 1.3100f,\ 1.0000f,\ 0.0100f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.2589f,\ 0.0380f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1350f,\ 0.2300f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 3762.6001f,\ 362.5000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00152}00152\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_FACTORY\_MEDIUMROOM\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00153}00153\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.4287f,\ 0.8200f,\ 0.2512f,\ 0.7943f,\ 0.5012f,\ 2.7600f,\ 0.6500f,\ 1.3100f,\ 0.2818f,\ 0.0220f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.4125f,\ 0.0230f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1740f,\ 0.0700f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 3762.6001f,\ 362.5000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00155}00155\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_FACTORY\_LARGEROOM\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00156}00156\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.4287f,\ 0.7500f,\ 0.2512f,\ 0.7079f,\ 0.6310f,\ 4.2400f,\ 0.5100f,\ 1.3100f,\ 0.1778f,\ 0.0390f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.1220f,\ 0.0230f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2310f,\ 0.0700f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 3762.6001f,\ 362.5000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00157}00157\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00158}00158\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_FACTORY\_LONGPASSAGE\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00159}00159\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.3645f,\ 0.6400f,\ 0.2512f,\ 0.7943f,\ 0.5012f,\ 4.0600f,\ 0.6500f,\ 1.3100f,\ 1.0000f,\ 0.0200f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.2589f,\ 0.0370f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1350f,\ 0.2300f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 3762.6001f,\ 362.5000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00160}00160\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00161}00161\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_FACTORY\_HALL\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00162}00162\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.4287f,\ 0.7500f,\ 0.3162f,\ 0.7079f,\ 0.6310f,\ 7.4300f,\ 0.5100f,\ 1.3100f,\ 0.0631f,\ 0.0730f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.8913f,\ 0.0270f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0700f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 3762.6001f,\ 362.5000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00163}00163\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00164}00164\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_FACTORY\_CUPBOARD\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00165}00165\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.3071f,\ 0.6300f,\ 0.2512f,\ 0.7943f,\ 0.5012f,\ 0.4900f,\ 0.6500f,\ 1.3100f,\ 1.2589f,\ 0.0100f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.9953f,\ 0.0320f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1070f,\ 0.0700f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 3762.6001f,\ 362.5000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00166}00166\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00167}00167\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_FACTORY\_COURTYARD\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00168}00168\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.3071f,\ 0.5700f,\ 0.3162f,\ 0.3162f,\ 0.6310f,\ 2.3200f,\ 0.2900f,\ 0.5600f,\ 0.2239f,\ 0.1400f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.3981f,\ 0.0390f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.2900f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 3762.6001f,\ 362.5000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00169}00169\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00170}00170\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_FACTORY\_ALCOVE\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00171}00171\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.3645f,\ 0.5900f,\ 0.2512f,\ 0.7943f,\ 0.5012f,\ 3.1400f,\ 0.6500f,\ 1.3100f,\ 1.4125f,\ 0.0100f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.0000f,\ 0.0380f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1140f,\ 0.1000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 3762.6001f,\ 362.5000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00172}00172\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00173}00173\ \textcolor{comment}{/*\ Ice\ Palace\ Presets\ */}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00174}00174\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00175}00175\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_ICEPALACE\_SMALLROOM\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00176}00176\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.8400f,\ 0.3162f,\ 0.5623f,\ 0.2818f,\ 1.5100f,\ 1.5300f,\ 0.2700f,\ 0.8913f,\ 0.0100f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.4125f,\ 0.0110f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1640f,\ 0.1400f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 12428.5000f,\ 99.6000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00177}00177\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00178}00178\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_ICEPALACE\_SHORTPASSAGE\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00179}00179\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.7500f,\ 0.3162f,\ 0.5623f,\ 0.2818f,\ 1.7900f,\ 1.4600f,\ 0.2800f,\ 0.5012f,\ 0.0100f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.1220f,\ 0.0190f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1770f,\ 0.0900f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 12428.5000f,\ 99.6000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00180}00180\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00181}00181\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_ICEPALACE\_MEDIUMROOM\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00182}00182\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.8700f,\ 0.3162f,\ 0.5623f,\ 0.4467f,\ 2.2200f,\ 1.5300f,\ 0.3200f,\ 0.3981f,\ 0.0390f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.1220f,\ 0.0270f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1860f,\ 0.1200f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 12428.5000f,\ 99.6000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00183}00183\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00184}00184\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_ICEPALACE\_LARGEROOM\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00185}00185\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.8100f,\ 0.3162f,\ 0.5623f,\ 0.4467f,\ 3.1400f,\ 1.5300f,\ 0.3200f,\ 0.2512f,\ 0.0390f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.0000f,\ 0.0270f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2140f,\ 0.1100f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 12428.5000f,\ 99.6000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00186}00186\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00187}00187\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_ICEPALACE\_LONGPASSAGE\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00188}00188\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.7700f,\ 0.3162f,\ 0.5623f,\ 0.3981f,\ 3.0100f,\ 1.4600f,\ 0.2800f,\ 0.7943f,\ 0.0120f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.2589f,\ 0.0250f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1860f,\ 0.0400f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 12428.5000f,\ 99.6000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00190}00190\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_ICEPALACE\_HALL\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00191}00191\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.7600f,\ 0.3162f,\ 0.4467f,\ 0.5623f,\ 5.4900f,\ 1.5300f,\ 0.3800f,\ 0.1122f,\ 0.0540f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.6310f,\ 0.0520f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2260f,\ 0.1100f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 12428.5000f,\ 99.6000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00192}00192\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00193}00193\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_ICEPALACE\_CUPBOARD\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00194}00194\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.8300f,\ 0.3162f,\ 0.5012f,\ 0.2239f,\ 0.7600f,\ 1.5300f,\ 0.2600f,\ 1.1220f,\ 0.0120f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.9953f,\ 0.0160f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1430f,\ 0.0800f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 12428.5000f,\ 99.6000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00195}00195\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00196}00196\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_ICEPALACE\_COURTYARD\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00197}00197\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.5900f,\ 0.3162f,\ 0.2818f,\ 0.3162f,\ 2.0400f,\ 1.2000f,\ 0.3800f,\ 0.3162f,\ 0.1730f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.3162f,\ 0.0430f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2350f,\ 0.4800f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 12428.5000f,\ 99.6000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00198}00198\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00199}00199\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_ICEPALACE\_ALCOVE\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00200}00200\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.8400f,\ 0.3162f,\ 0.5623f,\ 0.2818f,\ 2.7600f,\ 1.4600f,\ 0.2800f,\ 1.1220f,\ 0.0100f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.8913f,\ 0.0300f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1610f,\ 0.0900f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 12428.5000f,\ 99.6000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00201}00201\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00202}00202\ \textcolor{comment}{/*\ Space\ Station\ Presets\ */}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00203}00203\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00204}00204\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_SPACESTATION\_SMALLROOM\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00205}00205\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.2109f,\ 0.7000f,\ 0.3162f,\ 0.7079f,\ 0.8913f,\ 1.7200f,\ 0.8200f,\ 0.5500f,\ 0.7943f,\ 0.0070f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.4125f,\ 0.0130f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1880f,\ 0.2600f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 3316.1001f,\ 458.2000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00206}00206\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00207}00207\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_SPACESTATION\_SHORTPASSAGE\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00208}00208\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.2109f,\ 0.8700f,\ 0.3162f,\ 0.6310f,\ 0.8913f,\ 3.5700f,\ 0.5000f,\ 0.5500f,\ 1.0000f,\ 0.0120f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.1220f,\ 0.0160f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1720f,\ 0.2000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 3316.1001f,\ 458.2000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00209}00209\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00210}00210\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_SPACESTATION\_MEDIUMROOM\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00211}00211\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.2109f,\ 0.7500f,\ 0.3162f,\ 0.6310f,\ 0.8913f,\ 3.0100f,\ 0.5000f,\ 0.5500f,\ 0.3981f,\ 0.0340f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.1220f,\ 0.0350f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2090f,\ 0.3100f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 3316.1001f,\ 458.2000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00212}00212\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00213}00213\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_SPACESTATION\_LARGEROOM\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00214}00214\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.3645f,\ 0.8100f,\ 0.3162f,\ 0.6310f,\ 0.8913f,\ 3.8900f,\ 0.3800f,\ 0.6100f,\ 0.3162f,\ 0.0560f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.8913f,\ 0.0350f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2330f,\ 0.2800f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 3316.1001f,\ 458.2000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00215}00215\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00216}00216\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_SPACESTATION\_LONGPASSAGE\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00217}00217\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.4287f,\ 0.8200f,\ 0.3162f,\ 0.6310f,\ 0.8913f,\ 4.6200f,\ 0.6200f,\ 0.5500f,\ 1.0000f,\ 0.0120f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.2589f,\ 0.0310f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.2300f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 3316.1001f,\ 458.2000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00218}00218\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00219}00219\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_SPACESTATION\_HALL\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00220}00220\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.4287f,\ 0.8700f,\ 0.3162f,\ 0.6310f,\ 0.8913f,\ 7.1100f,\ 0.3800f,\ 0.6100f,\ 0.1778f,\ 0.1000f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.6310f,\ 0.0470f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.2500f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 3316.1001f,\ 458.2000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00221}00221\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00222}00222\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_SPACESTATION\_CUPBOARD\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00223}00223\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.1715f,\ 0.5600f,\ 0.3162f,\ 0.7079f,\ 0.8913f,\ 0.7900f,\ 0.8100f,\ 0.5500f,\ 1.4125f,\ 0.0070f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.7783f,\ 0.0180f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1810f,\ 0.3100f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 3316.1001f,\ 458.2000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00224}00224\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00225}00225\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_SPACESTATION\_ALCOVE\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00226}00226\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.2109f,\ 0.7800f,\ 0.3162f,\ 0.7079f,\ 0.8913f,\ 1.1600f,\ 0.8100f,\ 0.5500f,\ 1.4125f,\ 0.0070f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.0000f,\ 0.0180f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1920f,\ 0.2100f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 3316.1001f,\ 458.2000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00227}00227\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00228}00228\ \textcolor{comment}{/*\ Wooden\ Galleon\ Presets\ */}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00229}00229\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00230}00230\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_WOODEN\_SMALLROOM\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00231}00231\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 1.0000f,\ 0.3162f,\ 0.1122f,\ 0.3162f,\ 0.7900f,\ 0.3200f,\ 0.8700f,\ 1.0000f,\ 0.0320f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.8913f,\ 0.0290f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 4705.0000f,\ 99.6000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00232}00232\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00233}00233\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_WOODEN\_SHORTPASSAGE\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00234}00234\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 1.0000f,\ 0.3162f,\ 0.1259f,\ 0.3162f,\ 1.7500f,\ 0.5000f,\ 0.8700f,\ 0.8913f,\ 0.0120f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.6310f,\ 0.0240f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 4705.0000f,\ 99.6000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00235}00235\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00236}00236\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_WOODEN\_MEDIUMROOM\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00237}00237\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 1.0000f,\ 0.3162f,\ 0.1000f,\ 0.2818f,\ 1.4700f,\ 0.4200f,\ 0.8200f,\ 0.8913f,\ 0.0490f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.8913f,\ 0.0290f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 4705.0000f,\ 99.6000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00238}00238\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00239}00239\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_WOODEN\_LARGEROOM\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00240}00240\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 1.0000f,\ 0.3162f,\ 0.0891f,\ 0.2818f,\ 2.6500f,\ 0.3300f,\ 0.8200f,\ 0.8913f,\ 0.0660f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.7943f,\ 0.0490f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 4705.0000f,\ 99.6000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00241}00241\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00242}00242\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_WOODEN\_LONGPASSAGE\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00243}00243\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 1.0000f,\ 0.3162f,\ 0.1000f,\ 0.3162f,\ 1.9900f,\ 0.4000f,\ 0.7900f,\ 1.0000f,\ 0.0200f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.4467f,\ 0.0360f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 4705.0000f,\ 99.6000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00244}00244\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00245}00245\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_WOODEN\_HALL\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00246}00246\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 1.0000f,\ 0.3162f,\ 0.0794f,\ 0.2818f,\ 3.4500f,\ 0.3000f,\ 0.8200f,\ 0.8913f,\ 0.0880f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.7943f,\ 0.0630f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 4705.0000f,\ 99.6000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00247}00247\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00248}00248\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_WOODEN\_CUPBOARD\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00249}00249\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 1.0000f,\ 0.3162f,\ 0.1413f,\ 0.3162f,\ 0.5600f,\ 0.4600f,\ 0.9100f,\ 1.1220f,\ 0.0120f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.1220f,\ 0.0280f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 4705.0000f,\ 99.6000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00250}00250\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00251}00251\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_WOODEN\_COURTYARD\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00252}00252\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.6500f,\ 0.3162f,\ 0.0794f,\ 0.3162f,\ 1.7900f,\ 0.3500f,\ 0.7900f,\ 0.5623f,\ 0.1230f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1000f,\ 0.0320f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 4705.0000f,\ 99.6000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00253}00253\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00254}00254\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_WOODEN\_ALCOVE\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00255}00255\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 1.0000f,\ 0.3162f,\ 0.1259f,\ 0.3162f,\ 1.2200f,\ 0.6200f,\ 0.9100f,\ 1.1220f,\ 0.0120f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.7079f,\ 0.0240f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 4705.0000f,\ 99.6000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00256}00256\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00257}00257\ \textcolor{comment}{/*\ Sports\ Presets\ */}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00258}00258\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00259}00259\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_SPORT\_EMPTYSTADIUM\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00260}00260\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 1.0000f,\ 0.3162f,\ 0.4467f,\ 0.7943f,\ 6.2600f,\ 0.5100f,\ 1.1000f,\ 0.0631f,\ 0.1830f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.3981f,\ 0.0380f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00261}00261\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00262}00262\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_SPORT\_SQUASHCOURT\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00263}00263\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.7500f,\ 0.3162f,\ 0.3162f,\ 0.7943f,\ 2.2200f,\ 0.9100f,\ 1.1600f,\ 0.4467f,\ 0.0070f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.7943f,\ 0.0110f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1260f,\ 0.1900f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 7176.8999f,\ 211.2000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00264}00264\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00265}00265\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_SPORT\_SMALLSWIMMINGPOOL\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00266}00266\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.7000f,\ 0.3162f,\ 0.7943f,\ 0.8913f,\ 2.7600f,\ 1.2500f,\ 1.1400f,\ 0.6310f,\ 0.0200f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.7943f,\ 0.0300f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1790f,\ 0.1500f,\ 0.8950f,\ 0.1900f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x0\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00267}00267\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00268}00268\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_SPORT\_LARGESWIMMINGPOOL\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00269}00269\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.8200f,\ 0.3162f,\ 0.7943f,\ 1.0000f,\ 5.4900f,\ 1.3100f,\ 1.1400f,\ 0.4467f,\ 0.0390f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.5012f,\ 0.0490f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2220f,\ 0.5500f,\ 1.1590f,\ 0.2100f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x0\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00270}00270\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00271}00271\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_SPORT\_GYMNASIUM\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00272}00272\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.8100f,\ 0.3162f,\ 0.4467f,\ 0.8913f,\ 3.1400f,\ 1.0600f,\ 1.3500f,\ 0.3981f,\ 0.0290f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.5623f,\ 0.0450f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1460f,\ 0.1400f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 7176.8999f,\ 211.2000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00273}00273\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00274}00274\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_SPORT\_FULLSTADIUM\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00275}00275\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 1.0000f,\ 0.3162f,\ 0.0708f,\ 0.7943f,\ 5.2500f,\ 0.1700f,\ 0.8000f,\ 0.1000f,\ 0.1880f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2818f,\ 0.0380f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00276}00276\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00277}00277\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_SPORT\_STADIUMTANNOY\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00278}00278\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.7800f,\ 0.3162f,\ 0.5623f,\ 0.5012f,\ 2.5300f,\ 0.8800f,\ 0.6800f,\ 0.2818f,\ 0.2300f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.5012f,\ 0.0630f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.2000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00279}00279\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00280}00280\ \textcolor{comment}{/*\ Prefab\ Presets\ */}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00281}00281\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00282}00282\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_PREFAB\_WORKSHOP\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00283}00283\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.4287f,\ 1.0000f,\ 0.3162f,\ 0.1413f,\ 0.3981f,\ 0.7600f,\ 1.0000f,\ 1.0000f,\ 1.0000f,\ 0.0120f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.1220f,\ 0.0120f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x0\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00284}00284\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00285}00285\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_PREFAB\_SCHOOLROOM\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00286}00286\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.4022f,\ 0.6900f,\ 0.3162f,\ 0.6310f,\ 0.5012f,\ 0.9800f,\ 0.4500f,\ 0.1800f,\ 1.4125f,\ 0.0170f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.4125f,\ 0.0150f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.0950f,\ 0.1400f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 7176.8999f,\ 211.2000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00287}00287\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00288}00288\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_PREFAB\_PRACTISEROOM\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00289}00289\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.4022f,\ 0.8700f,\ 0.3162f,\ 0.3981f,\ 0.5012f,\ 1.1200f,\ 0.5600f,\ 0.1800f,\ 1.2589f,\ 0.0100f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.4125f,\ 0.0110f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.0950f,\ 0.1400f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 7176.8999f,\ 211.2000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00290}00290\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00291}00291\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_PREFAB\_OUTHOUSE\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00292}00292\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.8200f,\ 0.3162f,\ 0.1122f,\ 0.1585f,\ 1.3800f,\ 0.3800f,\ 0.3500f,\ 0.8913f,\ 0.0240f,\ \{\ 0.0000f,\ 0.0000f,\ -\/0.0000f\ \},\ 0.6310f,\ 0.0440f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1210f,\ 0.1700f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 2854.3999f,\ 107.5000f,\ 0.0000f,\ 0x0\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00293}00293\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00294}00294\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_PREFAB\_CARAVAN\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00295}00295\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 1.0000f,\ 0.3162f,\ 0.0891f,\ 0.1259f,\ 0.4300f,\ 1.5000f,\ 1.0000f,\ 1.0000f,\ 0.0120f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.9953f,\ 0.0120f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x0\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00296}00296\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00297}00297\ \textcolor{comment}{/*\ Dome\ and\ Pipe\ Presets\ */}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00298}00298\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00299}00299\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_DOME\_TOMB\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00300}00300\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.7900f,\ 0.3162f,\ 0.3548f,\ 0.2239f,\ 4.1800f,\ 0.2100f,\ 0.1000f,\ 0.3868f,\ 0.0300f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.6788f,\ 0.0220f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1770f,\ 0.1900f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 2854.3999f,\ 20.0000f,\ 0.0000f,\ 0x0\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00301}00301\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00302}00302\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_PIPE\_SMALL\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00303}00303\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 1.0000f,\ 0.3162f,\ 0.3548f,\ 0.2239f,\ 5.0400f,\ 0.1000f,\ 0.1000f,\ 0.5012f,\ 0.0320f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 2.5119f,\ 0.0150f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 2854.3999f,\ 20.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00304}00304\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00305}00305\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_DOME\_SAINTPAULS\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00306}00306\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.8700f,\ 0.3162f,\ 0.3548f,\ 0.2239f,\ 10.4800f,\ 0.1900f,\ 0.1000f,\ 0.1778f,\ 0.0900f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.2589f,\ 0.0420f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.1200f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 2854.3999f,\ 20.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00307}00307\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00308}00308\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_PIPE\_LONGTHIN\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00309}00309\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.2560f,\ 0.9100f,\ 0.3162f,\ 0.4467f,\ 0.2818f,\ 9.2100f,\ 0.1800f,\ 0.1000f,\ 0.7079f,\ 0.0100f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.7079f,\ 0.0220f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 2854.3999f,\ 20.0000f,\ 0.0000f,\ 0x0\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00310}00310\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00311}00311\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_PIPE\_LARGE\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00312}00312\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 1.0000f,\ 0.3162f,\ 0.3548f,\ 0.2239f,\ 8.4500f,\ 0.1000f,\ 0.1000f,\ 0.3981f,\ 0.0460f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.5849f,\ 0.0320f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 2854.3999f,\ 20.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00313}00313\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00314}00314\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_PIPE\_RESONANT\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00315}00315\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.1373f,\ 0.9100f,\ 0.3162f,\ 0.4467f,\ 0.2818f,\ 6.8100f,\ 0.1800f,\ 0.1000f,\ 0.7079f,\ 0.0100f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.0000f,\ 0.0220f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 2854.3999f,\ 20.0000f,\ 0.0000f,\ 0x0\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00316}00316\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00317}00317\ \textcolor{comment}{/*\ Outdoors\ Presets\ */}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00318}00318\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00319}00319\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_OUTDOORS\_BACKYARD\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00320}00320\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.4500f,\ 0.3162f,\ 0.2512f,\ 0.5012f,\ 1.1200f,\ 0.3400f,\ 0.4600f,\ 0.4467f,\ 0.0690f,\ \{\ 0.0000f,\ 0.0000f,\ -\/0.0000f\ \},\ 0.7079f,\ 0.0230f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2180f,\ 0.3400f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 4399.1001f,\ 242.9000f,\ 0.0000f,\ 0x0\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00321}00321\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00322}00322\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_OUTDOORS\_ROLLINGPLAINS\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00323}00323\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.0000f,\ 0.3162f,\ 0.0112f,\ 0.6310f,\ 2.1300f,\ 0.2100f,\ 0.4600f,\ 0.1778f,\ 0.3000f,\ \{\ 0.0000f,\ 0.0000f,\ -\/0.0000f\ \},\ 0.4467f,\ 0.0190f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 1.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 4399.1001f,\ 242.9000f,\ 0.0000f,\ 0x0\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00324}00324\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00325}00325\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_OUTDOORS\_DEEPCANYON\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00326}00326\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.7400f,\ 0.3162f,\ 0.1778f,\ 0.6310f,\ 3.8900f,\ 0.2100f,\ 0.4600f,\ 0.3162f,\ 0.2230f,\ \{\ 0.0000f,\ 0.0000f,\ -\/0.0000f\ \},\ 0.3548f,\ 0.0190f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 1.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 4399.1001f,\ 242.9000f,\ 0.0000f,\ 0x0\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00327}00327\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00328}00328\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_OUTDOORS\_CREEK\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00329}00329\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.3500f,\ 0.3162f,\ 0.1778f,\ 0.5012f,\ 2.1300f,\ 0.2100f,\ 0.4600f,\ 0.3981f,\ 0.1150f,\ \{\ 0.0000f,\ 0.0000f,\ -\/0.0000f\ \},\ 0.1995f,\ 0.0310f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2180f,\ 0.3400f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 4399.1001f,\ 242.9000f,\ 0.0000f,\ 0x0\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00330}00330\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00331}00331\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_OUTDOORS\_VALLEY\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00332}00332\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.2800f,\ 0.3162f,\ 0.0282f,\ 0.1585f,\ 2.8800f,\ 0.2600f,\ 0.3500f,\ 0.1413f,\ 0.2630f,\ \{\ 0.0000f,\ 0.0000f,\ -\/0.0000f\ \},\ 0.3981f,\ 0.1000f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.3400f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 2854.3999f,\ 107.5000f,\ 0.0000f,\ 0x0\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00333}00333\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00334}00334\ \textcolor{comment}{/*\ Mood\ Presets\ */}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00335}00335\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00336}00336\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_MOOD\_HEAVEN\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00337}00337\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.9400f,\ 0.3162f,\ 0.7943f,\ 0.4467f,\ 5.0400f,\ 1.1200f,\ 0.5600f,\ 0.2427f,\ 0.0200f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.2589f,\ 0.0290f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0800f,\ 2.7420f,\ 0.0500f,\ 0.9977f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00338}00338\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00339}00339\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_MOOD\_HELL\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00340}00340\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.5700f,\ 0.3162f,\ 0.3548f,\ 0.4467f,\ 3.5700f,\ 0.4900f,\ 2.0000f,\ 0.0000f,\ 0.0200f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.4125f,\ 0.0300f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1100f,\ 0.0400f,\ 2.1090f,\ 0.5200f,\ 0.9943f,\ 5000.0000f,\ 139.5000f,\ 0.0000f,\ 0x0\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00341}00341\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00342}00342\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_MOOD\_MEMORY\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00343}00343\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.8500f,\ 0.3162f,\ 0.6310f,\ 0.3548f,\ 4.0600f,\ 0.8200f,\ 0.5600f,\ 0.0398f,\ 0.0000f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.1220f,\ 0.0000f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.4740f,\ 0.4500f,\ 0.9886f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x0\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00344}00344\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00345}00345\ \textcolor{comment}{/*\ Driving\ Presets\ */}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00346}00346\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00347}00347\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_DRIVING\_COMMENTATOR\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00348}00348\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.0000f,\ 3.1623f,\ 0.5623f,\ 0.5012f,\ 2.4200f,\ 0.8800f,\ 0.6800f,\ 0.1995f,\ 0.0930f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2512f,\ 0.0170f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 1.0000f,\ 0.2500f,\ 0.0000f,\ 0.9886f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00349}00349\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00350}00350\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_DRIVING\_PITGARAGE\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00351}00351\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.4287f,\ 0.5900f,\ 0.3162f,\ 0.7079f,\ 0.5623f,\ 1.7200f,\ 0.9300f,\ 0.8700f,\ 0.5623f,\ 0.0000f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.2589f,\ 0.0160f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.1100f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x0\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00352}00352\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00353}00353\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_DRIVING\_INCAR\_RACER\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00354}00354\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.0832f,\ 0.8000f,\ 0.3162f,\ 1.0000f,\ 0.7943f,\ 0.1700f,\ 2.0000f,\ 0.4100f,\ 1.7783f,\ 0.0070f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.7079f,\ 0.0150f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 10268.2002f,\ 251.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00355}00355\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00356}00356\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_DRIVING\_INCAR\_SPORTS\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00357}00357\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.0832f,\ 0.8000f,\ 0.3162f,\ 0.6310f,\ 1.0000f,\ 0.1700f,\ 0.7500f,\ 0.4100f,\ 1.0000f,\ 0.0100f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.5623f,\ 0.0000f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 10268.2002f,\ 251.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00358}00358\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00359}00359\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_DRIVING\_INCAR\_LUXURY\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00360}00360\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.2560f,\ 1.0000f,\ 0.3162f,\ 0.1000f,\ 0.5012f,\ 0.1300f,\ 0.4100f,\ 0.4600f,\ 0.7943f,\ 0.0100f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.5849f,\ 0.0100f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 10268.2002f,\ 251.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00361}00361\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00362}00362\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_DRIVING\_FULLGRANDSTAND\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00363}00363\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 1.0000f,\ 0.3162f,\ 0.2818f,\ 0.6310f,\ 3.0100f,\ 1.3700f,\ 1.2800f,\ 0.3548f,\ 0.0900f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1778f,\ 0.0490f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 10420.2002f,\ 250.0000f,\ 0.0000f,\ 0x0\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00364}00364\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00365}00365\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_DRIVING\_EMPTYGRANDSTAND\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00366}00366\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 1.0000f,\ 0.3162f,\ 1.0000f,\ 0.7943f,\ 4.6200f,\ 1.7500f,\ 1.4000f,\ 0.2082f,\ 0.0900f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2512f,\ 0.0490f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 10420.2002f,\ 250.0000f,\ 0.0000f,\ 0x0\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00367}00367\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00368}00368\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_DRIVING\_TUNNEL\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00369}00369\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.8100f,\ 0.3162f,\ 0.3981f,\ 0.8913f,\ 3.4200f,\ 0.9400f,\ 1.3100f,\ 0.7079f,\ 0.0510f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.7079f,\ 0.0470f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2140f,\ 0.0500f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5000.0000f,\ 155.3000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00370}00370\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00371}00371\ \textcolor{comment}{/*\ City\ Presets\ */}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00372}00372\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00373}00373\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_CITY\_STREETS\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00374}00374\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.7800f,\ 0.3162f,\ 0.7079f,\ 0.8913f,\ 1.7900f,\ 1.1200f,\ 0.9100f,\ 0.2818f,\ 0.0460f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1995f,\ 0.0280f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.2000f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00375}00375\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00376}00376\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_CITY\_SUBWAY\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00377}00377\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.7400f,\ 0.3162f,\ 0.7079f,\ 0.8913f,\ 3.0100f,\ 1.2300f,\ 0.9100f,\ 0.7079f,\ 0.0460f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.2589f,\ 0.0280f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1250f,\ 0.2100f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00378}00378\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00379}00379\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_CITY\_MUSEUM\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00380}00380\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.8200f,\ 0.3162f,\ 0.1778f,\ 0.1778f,\ 3.2800f,\ 1.4000f,\ 0.5700f,\ 0.2512f,\ 0.0390f,\ \{\ 0.0000f,\ 0.0000f,\ -\/0.0000f\ \},\ 0.8913f,\ 0.0340f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1300f,\ 0.1700f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 2854.3999f,\ 107.5000f,\ 0.0000f,\ 0x0\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00381}00381\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00382}00382\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_CITY\_LIBRARY\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00383}00383\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.8200f,\ 0.3162f,\ 0.2818f,\ 0.0891f,\ 2.7600f,\ 0.8900f,\ 0.4100f,\ 0.3548f,\ 0.0290f,\ \{\ 0.0000f,\ 0.0000f,\ -\/0.0000f\ \},\ 0.8913f,\ 0.0200f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1300f,\ 0.1700f,\ 0.2500f,\ 0.0000f,\ 0.9943f,\ 2854.3999f,\ 107.5000f,\ 0.0000f,\ 0x0\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00384}00384\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00385}00385\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_CITY\_UNDERPASS\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00386}00386\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.8200f,\ 0.3162f,\ 0.4467f,\ 0.8913f,\ 3.5700f,\ 1.1200f,\ 0.9100f,\ 0.3981f,\ 0.0590f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.8913f,\ 0.0370f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.1400f,\ 0.2500f,\ 0.0000f,\ 0.9920f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00387}00387\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00388}00388\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_CITY\_ABANDONED\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00389}00389\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.6900f,\ 0.3162f,\ 0.7943f,\ 0.8913f,\ 3.2800f,\ 1.1700f,\ 0.9100f,\ 0.4467f,\ 0.0440f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2818f,\ 0.0240f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.2000f,\ 0.2500f,\ 0.0000f,\ 0.9966f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00390}00390\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00391}00391\ \textcolor{comment}{/*\ Misc.\ Presets\ */}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00392}00392\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00393}00393\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_DUSTYROOM\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00394}00394\ \textcolor{preprocessor}{\ \ \ \ \{\ 0.3645f,\ 0.5600f,\ 0.3162f,\ 0.7943f,\ 0.7079f,\ 1.7900f,\ 0.3800f,\ 0.2100f,\ 0.5012f,\ 0.0020f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.2589f,\ 0.0060f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2020f,\ 0.0500f,\ 0.2500f,\ 0.0000f,\ 0.9886f,\ 13046.0000f,\ 163.3000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00395}00395\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00396}00396\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_CHAPEL\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00397}00397\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.8400f,\ 0.3162f,\ 0.5623f,\ 1.0000f,\ 4.6200f,\ 0.6400f,\ 1.2300f,\ 0.4467f,\ 0.0320f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.7943f,\ 0.0490f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.2500f,\ 0.0000f,\ 0.2500f,\ 0.1100f,\ 0.9943f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x1\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00398}00398\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00399}00399\ \textcolor{preprocessor}{\#define\ EFX\_REVERB\_PRESET\_SMALLWATERROOM\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00400}00400\ \textcolor{preprocessor}{\ \ \ \ \{\ 1.0000f,\ 0.7000f,\ 0.3162f,\ 0.4477f,\ 1.0000f,\ 1.5100f,\ 1.2500f,\ 1.1400f,\ 0.8913f,\ 0.0200f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 1.4125f,\ 0.0300f,\ \{\ 0.0000f,\ 0.0000f,\ 0.0000f\ \},\ 0.1790f,\ 0.1500f,\ 0.8950f,\ 0.1900f,\ 0.9920f,\ 5000.0000f,\ 250.0000f,\ 0.0000f,\ 0x0\ \}}}
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00401}00401\ }
+\DoxyCodeLine{\Hypertarget{efx-presets_8h_source_l00402}00402\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ EFX\_PRESETS\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

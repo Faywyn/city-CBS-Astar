@@ -1,0 +1,176 @@
+\doxysubsection{vk\+\_\+icd.\+h}
+\hypertarget{vk__icd_8h_source}{}\label{vk__icd_8h_source}\index{vk\_icd.h@{vk\_icd.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00001}00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00002}00002\ \textcolor{comment}{//\ File:\ vk\_icd.h}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00003}00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00004}00004\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00005}00005\ \textcolor{comment}{\ *\ Copyright\ (c)\ 2015-\/2016\ The\ Khronos\ Group\ Inc.}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00006}00006\ \textcolor{comment}{\ *\ Copyright\ (c)\ 2015-\/2016\ Valve\ Corporation}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00007}00007\ \textcolor{comment}{\ *\ Copyright\ (c)\ 2015-\/2016\ LunarG,\ Inc.}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00008}00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00009}00009\ \textcolor{comment}{\ *\ Licensed\ under\ the\ Apache\ License,\ Version\ 2.0\ (the\ "{}License"{});}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00010}00010\ \textcolor{comment}{\ *\ you\ may\ not\ use\ this\ file\ except\ in\ compliance\ with\ the\ License.}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00011}00011\ \textcolor{comment}{\ *\ You\ may\ obtain\ a\ copy\ of\ the\ License\ at}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00012}00012\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00013}00013\ \textcolor{comment}{\ *\ \ \ \ \ http://www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00014}00014\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00015}00015\ \textcolor{comment}{\ *\ Unless\ required\ by\ applicable\ law\ or\ agreed\ to\ in\ writing,\ software}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00016}00016\ \textcolor{comment}{\ *\ distributed\ under\ the\ License\ is\ distributed\ on\ an\ "{}AS\ IS"{}\ BASIS,}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00017}00017\ \textcolor{comment}{\ *\ WITHOUT\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ either\ express\ or\ implied.}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00018}00018\ \textcolor{comment}{\ *\ See\ the\ License\ for\ the\ specific\ language\ governing\ permissions\ and}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00019}00019\ \textcolor{comment}{\ *\ limitations\ under\ the\ License.}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00020}00020\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00021}00021\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00023}00023\ \textcolor{preprocessor}{\#ifndef\ VKICD\_H}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00024}00024\ \textcolor{preprocessor}{\#define\ VKICD\_H}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00026}00026\ \textcolor{preprocessor}{\#include\ "{}vulkan.h"{}}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00027}00027\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00029}00029\ \textcolor{comment}{//\ Loader-\/ICD\ version\ negotiation\ API.\ \ Versions\ add\ the\ following\ features:}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00030}00030\ \textcolor{comment}{//\ \ \ Version\ 0\ -\/\ Initial.\ \ Doesn't\ support\ vk\_icdGetInstanceProcAddr}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00031}00031\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ or\ vk\_icdNegotiateLoaderICDInterfaceVersion.}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00032}00032\ \textcolor{comment}{//\ \ \ Version\ 1\ -\/\ Add\ support\ for\ vk\_icdGetInstanceProcAddr.}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00033}00033\ \textcolor{comment}{//\ \ \ Version\ 2\ -\/\ Add\ Loader/ICD\ Interface\ version\ negotiation}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00034}00034\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ via\ vk\_icdNegotiateLoaderICDInterfaceVersion.}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00035}00035\ \textcolor{comment}{//\ \ \ Version\ 3\ -\/\ Add\ ICD\ creation/destruction\ of\ KHR\_surface\ objects.}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00036}00036\ \textcolor{comment}{//\ \ \ Version\ 4\ -\/\ Add\ unknown\ physical\ device\ extension\ qyering\ via}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00037}00037\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vk\_icdGetPhysicalDeviceProcAddr.}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00038}00038\ \textcolor{comment}{//\ \ \ Version\ 5\ -\/\ Tells\ ICDs\ that\ the\ loader\ is\ now\ paying\ attention\ to\ the}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00039}00039\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ application\ version\ of\ Vulkan\ passed\ into\ the\ ApplicationInfo}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00040}00040\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ structure\ during\ vkCreateInstance.\ \ This\ will\ tell\ the\ ICD}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00041}00041\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ that\ if\ the\ loader\ is\ older,\ it\ should\ automatically\ fail\ a}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00042}00042\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ call\ for\ any\ API\ version\ >\ 1.0.\ \ Otherwise,\ the\ loader\ will}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00043}00043\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ manually\ determine\ if\ it\ can\ support\ the\ expected\ version.}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00044}00044\ \textcolor{preprocessor}{\#define\ CURRENT\_LOADER\_ICD\_INTERFACE\_VERSION\ 5}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00045}00045\ \textcolor{preprocessor}{\#define\ MIN\_SUPPORTED\_LOADER\_ICD\_INTERFACE\_VERSION\ 0}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00046}00046\ \textcolor{preprocessor}{\#define\ MIN\_PHYS\_DEV\_EXTENSION\_ICD\_INTERFACE\_VERSION\ 4}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00047}00047\ \textcolor{keyword}{typedef}\ VkResult(VKAPI\_PTR\ *PFN\_vkNegotiateLoaderICDInterfaceVersion)(uint32\_t\ *pVersion);}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00049}00049\ \textcolor{comment}{//\ This\ is\ defined\ in\ vk\_layer.h\ which\ will\ be\ found\ by\ the\ loader,\ but\ if\ an\ ICD\ is\ building\ against\ this}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00050}00050\ \textcolor{comment}{//\ file\ directly,\ it\ won't\ be\ found.}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00051}00051\ \textcolor{preprocessor}{\#ifndef\ PFN\_GetPhysicalDeviceProcAddr}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00052}00052\ \textcolor{keyword}{typedef}\ PFN\_vkVoidFunction(VKAPI\_PTR\ *PFN\_GetPhysicalDeviceProcAddr)(VkInstance\ instance,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *pName);}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00053}00053\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00055}00055\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00056}00056\ \textcolor{comment}{\ *\ The\ ICD\ must\ reserve\ space\ for\ a\ pointer\ for\ the\ loader's\ dispatch}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00057}00057\ \textcolor{comment}{\ *\ table,\ at\ the\ start\ of\ <each\ object>.}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00058}00058\ \textcolor{comment}{\ *\ The\ ICD\ must\ initialize\ this\ variable\ using\ the\ SET\_LOADER\_MAGIC\_VALUE\ macro.}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00059}00059\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00061}00061\ \textcolor{preprocessor}{\#define\ ICD\_LOADER\_MAGIC\ 0x01CDC0DE}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00063}00063\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{union\ }\{}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00064}00064\ \ \ \ \ uintptr\_t\ loaderMagic;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00065}00065\ \ \ \ \ \textcolor{keywordtype}{void}\ *loaderData;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00066}00066\ \}\ VK\_LOADER\_DATA;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00068}00068\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ set\_loader\_magic\_value(\textcolor{keywordtype}{void}\ *pNewObject)\ \{}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00069}00069\ \ \ \ \ VK\_LOADER\_DATA\ *loader\_info\ =\ (VK\_LOADER\_DATA\ *)pNewObject;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00070}00070\ \ \ \ \ loader\_info-\/>loaderMagic\ =\ ICD\_LOADER\_MAGIC;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00071}00071\ \}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00073}00073\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ valid\_loader\_magic\_value(\textcolor{keywordtype}{void}\ *pNewObject)\ \{}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00074}00074\ \ \ \ \ \textcolor{keyword}{const}\ VK\_LOADER\_DATA\ *loader\_info\ =\ (VK\_LOADER\_DATA\ *)pNewObject;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00075}00075\ \ \ \ \ \textcolor{keywordflow}{return}\ (loader\_info-\/>loaderMagic\ \&\ 0xffffffff)\ ==\ ICD\_LOADER\_MAGIC;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00076}00076\ \}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00078}00078\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00079}00079\ \textcolor{comment}{\ *\ Windows\ and\ Linux\ ICDs\ will\ treat\ VkSurfaceKHR\ as\ a\ pointer\ to\ a\ struct\ that}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00080}00080\ \textcolor{comment}{\ *\ contains\ the\ platform-\/specific\ connection\ and\ surface\ information.}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00081}00081\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00082}00082\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00083}00083\ \ \ \ \ VK\_ICD\_WSI\_PLATFORM\_MIR,}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00084}00084\ \ \ \ \ VK\_ICD\_WSI\_PLATFORM\_WAYLAND,}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00085}00085\ \ \ \ \ VK\_ICD\_WSI\_PLATFORM\_WIN32,}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00086}00086\ \ \ \ \ VK\_ICD\_WSI\_PLATFORM\_XCB,}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00087}00087\ \ \ \ \ VK\_ICD\_WSI\_PLATFORM\_XLIB,}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00088}00088\ \ \ \ \ VK\_ICD\_WSI\_PLATFORM\_ANDROID,}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00089}00089\ \ \ \ \ VK\_ICD\_WSI\_PLATFORM\_MACOS,}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00090}00090\ \ \ \ \ VK\_ICD\_WSI\_PLATFORM\_IOS,}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00091}00091\ \ \ \ \ VK\_ICD\_WSI\_PLATFORM\_DISPLAY}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00092}00092\ \}\ VkIcdWsiPlatform;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00094}00094\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00095}00095\ \ \ \ \ VkIcdWsiPlatform\ platform;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00096}00096\ \}\ VkIcdSurfaceBase;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00098}00098\ \textcolor{preprocessor}{\#ifdef\ VK\_USE\_PLATFORM\_MIR\_KHR}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00099}00099\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00100}00100\ \ \ \ \ VkIcdSurfaceBase\ base;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00101}00101\ \ \ \ \ MirConnection\ *connection;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00102}00102\ \ \ \ \ MirSurface\ *mirSurface;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00103}00103\ \}\ VkIcdSurfaceMir;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00104}00104\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ VK\_USE\_PLATFORM\_MIR\_KHR}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00106}00106\ \textcolor{preprocessor}{\#ifdef\ VK\_USE\_PLATFORM\_WAYLAND\_KHR}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00107}00107\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00108}00108\ \ \ \ \ VkIcdSurfaceBase\ base;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00109}00109\ \ \ \ \ \textcolor{keyword}{struct\ }wl\_display\ *display;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00110}00110\ \ \ \ \ \textcolor{keyword}{struct\ }wl\_surface\ *surface;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00111}00111\ \}\ VkIcdSurfaceWayland;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00112}00112\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ VK\_USE\_PLATFORM\_WAYLAND\_KHR}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00114}00114\ \textcolor{preprocessor}{\#ifdef\ VK\_USE\_PLATFORM\_WIN32\_KHR}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00115}00115\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00116}00116\ \ \ \ \ VkIcdSurfaceBase\ base;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00117}00117\ \ \ \ \ HINSTANCE\ hinstance;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00118}00118\ \ \ \ \ HWND\ hwnd;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00119}00119\ \}\ VkIcdSurfaceWin32;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00120}00120\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ VK\_USE\_PLATFORM\_WIN32\_KHR}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00122}00122\ \textcolor{preprocessor}{\#ifdef\ VK\_USE\_PLATFORM\_XCB\_KHR}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00123}00123\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00124}00124\ \ \ \ \ VkIcdSurfaceBase\ base;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00125}00125\ \ \ \ \ xcb\_connection\_t\ *connection;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00126}00126\ \ \ \ \ xcb\_window\_t\ window;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00127}00127\ \}\ VkIcdSurfaceXcb;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00128}00128\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ VK\_USE\_PLATFORM\_XCB\_KHR}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00130}00130\ \textcolor{preprocessor}{\#ifdef\ VK\_USE\_PLATFORM\_XLIB\_KHR}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00131}00131\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00132}00132\ \ \ \ \ VkIcdSurfaceBase\ base;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00133}00133\ \ \ \ \ Display\ *dpy;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00134}00134\ \ \ \ \ Window\ window;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00135}00135\ \}\ VkIcdSurfaceXlib;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00136}00136\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ VK\_USE\_PLATFORM\_XLIB\_KHR}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00138}00138\ \textcolor{preprocessor}{\#ifdef\ VK\_USE\_PLATFORM\_ANDROID\_KHR}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00139}00139\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00140}00140\ \ \ \ \ VkIcdSurfaceBase\ base;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00141}00141\ \ \ \ \ \textcolor{keyword}{struct\ }ANativeWindow\ *window;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00142}00142\ \}\ VkIcdSurfaceAndroid;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00143}00143\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ VK\_USE\_PLATFORM\_ANDROID\_KHR}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00144}00144\ }
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00145}00145\ \textcolor{preprocessor}{\#ifdef\ VK\_USE\_PLATFORM\_MACOS\_MVK}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00146}00146\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00147}00147\ \ \ \ \ VkIcdSurfaceBase\ base;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00148}00148\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *pView;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00149}00149\ \}\ VkIcdSurfaceMacOS;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00150}00150\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ VK\_USE\_PLATFORM\_MACOS\_MVK}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00152}00152\ \textcolor{preprocessor}{\#ifdef\ VK\_USE\_PLATFORM\_IOS\_MVK}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00153}00153\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00154}00154\ \ \ \ \ VkIcdSurfaceBase\ base;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00155}00155\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *pView;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00156}00156\ \}\ VkIcdSurfaceIOS;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00157}00157\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ VK\_USE\_PLATFORM\_IOS\_MVK}}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00159}00159\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00160}00160\ \ \ \ \ VkIcdSurfaceBase\ base;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00161}00161\ \ \ \ \ VkDisplayModeKHR\ displayMode;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00162}00162\ \ \ \ \ uint32\_t\ planeIndex;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00163}00163\ \ \ \ \ uint32\_t\ planeStackIndex;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00164}00164\ \ \ \ \ VkSurfaceTransformFlagBitsKHR\ transform;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00165}00165\ \ \ \ \ \textcolor{keywordtype}{float}\ globalAlpha;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00166}00166\ \ \ \ \ VkDisplayPlaneAlphaFlagBitsKHR\ alphaMode;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00167}00167\ \ \ \ \ VkExtent2D\ imageExtent;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00168}00168\ \}\ VkIcdSurfaceDisplay;}
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00169}00169\ }
+\DoxyCodeLine{\Hypertarget{vk__icd_8h_source_l00170}00170\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ VKICD\_H}}
+
+\end{DoxyCode}

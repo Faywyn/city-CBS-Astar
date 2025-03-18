@@ -1,0 +1,230 @@
+\doxysubsection{bin\+\_\+to\+\_\+hex.\+h}
+\hypertarget{bin__to__hex_8h_source}{}\label{bin__to__hex_8h_source}\index{bin\_to\_hex.h@{bin\_to\_hex.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00001}00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00002}00002\ \textcolor{comment}{//\ Copyright(c)\ 2015\ Gabi\ Melman.}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00003}00003\ \textcolor{comment}{//\ Distributed\ under\ the\ MIT\ License\ (http://opensource.org/licenses/MIT)}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00004}00004\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00006}00006\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <cctype>}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <spdlog/common.h>}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00011}00011\ \textcolor{preprocessor}{\#if\ defined(\_\_has\_include)}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00012}00012\ \textcolor{preprocessor}{\ \ \ \ \#if\ \_\_has\_include(<version>)}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00013}00013\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#include\ <version>}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00014}00014\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00015}00015\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00017}00017\ \textcolor{preprocessor}{\#if\ \_\_cpp\_lib\_span\ >=\ 202002L}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00018}00018\ \textcolor{preprocessor}{\ \ \ \ \#include\ <span>}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00019}00019\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00021}00021\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00022}00022\ \textcolor{comment}{//\ Support\ for\ logging\ binary\ data\ as\ hex}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00023}00023\ \textcolor{comment}{//\ format\ flags,\ any\ combination\ of\ the\ following:}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00024}00024\ \textcolor{comment}{//\ \{:X\}\ -\/\ print\ in\ uppercase.}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00025}00025\ \textcolor{comment}{//\ \{:s\}\ -\/\ don't\ separate\ each\ byte\ with\ space.}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00026}00026\ \textcolor{comment}{//\ \{:p\}\ -\/\ don't\ print\ the\ position\ on\ each\ line\ start.}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00027}00027\ \textcolor{comment}{//\ \{:n\}\ -\/\ don't\ split\ the\ output\ to\ lines.}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00028}00028\ \textcolor{comment}{//\ \{:a\}\ -\/\ show\ ASCII\ if\ :n\ is\ not\ set}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00030}00030\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00031}00031\ \textcolor{comment}{//\ Examples:}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00032}00032\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00033}00033\ \textcolor{comment}{//\ std::vector<char>\ v(200,\ 0x0b);}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00034}00034\ \textcolor{comment}{//\ logger-\/>info("{}Some\ buffer\ \{\}"{},\ spdlog::to\_hex(v));}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00035}00035\ \textcolor{comment}{//\ char\ buf[128];}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00036}00036\ \textcolor{comment}{//\ logger-\/>info("{}Some\ buffer\ \{:X\}"{},\ spdlog::to\_hex(std::begin(buf),\ std::end(buf)));}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00037}00037\ \textcolor{comment}{//\ logger-\/>info("{}Some\ buffer\ \{:X\}"{},\ spdlog::to\_hex(std::begin(buf),\ std::end(buf),\ 16));}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00039}00039\ \textcolor{keyword}{namespace\ }spdlog\ \{}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00040}00040\ \textcolor{keyword}{namespace\ }details\ \{}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00042}00042\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ It>}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00043}00043\ \textcolor{keyword}{class\ }dump\_info\ \{}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00044}00044\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00045}00045\ \ \ \ \ dump\_info(It\ range\_begin,\ It\ range\_end,\ \textcolor{keywordtype}{size\_t}\ size\_per\_line)}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00046}00046\ \ \ \ \ \ \ \ \ :\ begin\_(range\_begin),}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ end\_(range\_end),}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ size\_per\_line\_(size\_per\_line)\ \{\}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00050}00050\ \ \ \ \ \textcolor{comment}{//\ do\ not\ use\ begin()\ and\ end()\ to\ avoid\ collision\ with\ fmt/ranges}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00051}00051\ \ \ \ \ It\ get\_begin()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ begin\_;\ \}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00052}00052\ \ \ \ \ It\ get\_end()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ end\_;\ \}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00053}00053\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ size\_per\_line()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ size\_per\_line\_;\ \}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00055}00055\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00056}00056\ \ \ \ \ It\ begin\_,\ end\_;}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00057}00057\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ size\_per\_line\_;}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00058}00058\ \};}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00059}00059\ \}\ \ \textcolor{comment}{//\ namespace\ details}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00061}00061\ \textcolor{comment}{//\ create\ a\ dump\_info\ that\ wraps\ the\ given\ container}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00062}00062\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Container>}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00063}00063\ \textcolor{keyword}{inline}\ details::dump\_info<typename\ Container::const\_iterator>\ to\_hex(\textcolor{keyword}{const}\ Container\ \&container,}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ size\_per\_line\ =\ 32)\ \{}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00065}00065\ \ \ \ \ \textcolor{keyword}{static\_assert}(\textcolor{keyword}{sizeof}(\textcolor{keyword}{typename}\ Container::value\_type)\ ==\ 1,}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}sizeof(Container::value\_type)\ !=\ 1"{}});}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00067}00067\ \ \ \ \ \textcolor{keyword}{using\ }Iter\ =\ \textcolor{keyword}{typename}\ Container::const\_iterator;}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00068}00068\ \ \ \ \ \textcolor{keywordflow}{return}\ details::dump\_info<Iter>(std::begin(container),\ std::end(container),\ size\_per\_line);}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00069}00069\ \}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00071}00071\ \textcolor{preprocessor}{\#if\ \_\_cpp\_lib\_span\ >=\ 202002L}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00073}00073\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Value,\ \textcolor{keywordtype}{size\_t}\ Extent>}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00074}00074\ \textcolor{keyword}{inline}\ details::dump\_info<typename\ std::span<Value,\ Extent>::iterator>\ to\_hex(}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00075}00075\ \ \ \ \ \textcolor{keyword}{const}\ std::span<Value,\ Extent>\ \&container,\ \textcolor{keywordtype}{size\_t}\ size\_per\_line\ =\ 32)\ \{}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00076}00076\ \ \ \ \ \textcolor{keyword}{using\ }Container\ =\ std::span<Value,\ Extent>;}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00077}00077\ \ \ \ \ \textcolor{keyword}{static\_assert}(\textcolor{keyword}{sizeof}(\textcolor{keyword}{typename}\ Container::value\_type)\ ==\ 1,}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}sizeof(Container::value\_type)\ !=\ 1"{}});}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00079}00079\ \ \ \ \ \textcolor{keyword}{using\ }Iter\ =\ \textcolor{keyword}{typename}\ Container::iterator;}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00080}00080\ \ \ \ \ \textcolor{keywordflow}{return}\ details::dump\_info<Iter>(std::begin(container),\ std::end(container),\ size\_per\_line);}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00081}00081\ \}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00083}00083\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00085}00085\ \textcolor{comment}{//\ create\ dump\_info\ from\ ranges}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00086}00086\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ It>}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00087}00087\ \textcolor{keyword}{inline}\ details::dump\_info<It>\ to\_hex(\textcolor{keyword}{const}\ It\ range\_begin,}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ It\ range\_end,}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ size\_per\_line\ =\ 32)\ \{}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00090}00090\ \ \ \ \ \textcolor{keywordflow}{return}\ details::dump\_info<It>(range\_begin,\ range\_end,\ size\_per\_line);}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00091}00091\ \}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00093}00093\ \}\ \ \textcolor{comment}{//\ namespace\ spdlog}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00095}00095\ \textcolor{keyword}{namespace}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00096}00096\ \textcolor{preprocessor}{\#ifdef\ SPDLOG\_USE\_STD\_FORMAT}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00097}00097\ \ \ \ \ std}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00098}00098\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00099}00099\ \ \ \ \ fmt}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00100}00100\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00101}00101\ \{}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00103}00103\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00104}00104\ \textcolor{keyword}{struct\ }formatter<spdlog::details::dump\_info<T>,\ char>\ \{}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00105}00105\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ delimiter\ =\ \textcolor{charliteral}{'\ '};}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00106}00106\ \ \ \ \ \textcolor{keywordtype}{bool}\ put\_newlines\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00107}00107\ \ \ \ \ \textcolor{keywordtype}{bool}\ put\_delimiters\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00108}00108\ \ \ \ \ \textcolor{keywordtype}{bool}\ use\_uppercase\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00109}00109\ \ \ \ \ \textcolor{keywordtype}{bool}\ put\_positions\ =\ \textcolor{keyword}{true};\ \ \textcolor{comment}{//\ position\ on\ start\ of\ each\ line}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00110}00110\ \ \ \ \ \textcolor{keywordtype}{bool}\ show\_ascii\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00112}00112\ \ \ \ \ \textcolor{comment}{//\ parse\ the\ format\ string\ flags}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00113}00113\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ ParseContext>}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00114}00114\ \ \ \ \ SPDLOG\_CONSTEXPR\_FUNC\ \textcolor{keyword}{auto}\ parse(ParseContext\ \&ctx)\ -\/>\ \textcolor{keyword}{decltype}(ctx.begin())\ \{}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00115}00115\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ ctx.begin();}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00116}00116\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (it\ !=\ ctx.end()\ \&\&\ *it\ !=\ \textcolor{charliteral}{'\}'})\ \{}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (*it)\ \{}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'X'}:}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ use\_uppercase\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'s'}:}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ put\_delimiters\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'p'}:}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ put\_positions\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'n'}:}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ put\_newlines\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ show\_ascii\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'a'}:}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (put\_newlines)\ \{}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ show\_ascii\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ ++it;}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00139}00139\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00140}00140\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ it;}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00141}00141\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00142}00142\ }
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00143}00143\ \ \ \ \ \textcolor{comment}{//\ format\ the\ given\ bytes\ range\ as\ hex}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00144}00144\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ FormatContext,\ \textcolor{keyword}{typename}\ Container>}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00145}00145\ \ \ \ \ \textcolor{keyword}{auto}\ format(\textcolor{keyword}{const}\ spdlog::details::dump\_info<Container>\ \&the\_range,\ FormatContext\ \&ctx)\ \textcolor{keyword}{const}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00146}00146\ \ \ \ \ \ \ \ \ -\/>\ \textcolor{keyword}{decltype}(ctx.out())\ \{}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00147}00147\ \ \ \ \ \ \ \ \ SPDLOG\_CONSTEXPR\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *hex\_upper\ =\ \textcolor{stringliteral}{"{}0123456789ABCDEF"{}};}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00148}00148\ \ \ \ \ \ \ \ \ SPDLOG\_CONSTEXPR\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *hex\_lower\ =\ \textcolor{stringliteral}{"{}0123456789abcdef"{}};}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00149}00149\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *hex\_chars\ =\ use\_uppercase\ ?\ hex\_upper\ :\ hex\_lower;}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00150}00150\ }
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00151}00151\ \textcolor{preprocessor}{\#if\ !defined(SPDLOG\_USE\_STD\_FORMAT)\ \&\&\ FMT\_VERSION\ <\ 60000}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00152}00152\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ inserter\ =\ ctx.begin();}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00153}00153\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00154}00154\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ inserter\ =\ ctx.out();}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00155}00155\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00157}00157\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ size\_per\_line\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(the\_range.size\_per\_line());}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00158}00158\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ start\_of\_line\ =\ the\_range.get\_begin();}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00159}00159\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ i\ =\ the\_range.get\_begin();\ i\ !=\ the\_range.get\_end();\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ ch\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\textcolor{keyword}{>}(*i);}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (put\_newlines\ \&\&}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (i\ ==\ the\_range.get\_begin()\ ||\ i\ -\/\ start\_of\_line\ >=\ size\_per\_line))\ \{}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (show\_ascii\ \&\&\ i\ !=\ the\_range.get\_begin())\ \{}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *inserter++\ =\ delimiter;}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *inserter++\ =\ delimiter;}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ j\ =\ start\_of\_line;\ j\ <\ i;\ j++)\ \{}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ pc\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\textcolor{keyword}{>}(*j);}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *inserter++\ =\ std::isprint(pc)\ ?\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{char}\textcolor{keyword}{>}(*j)\ :\ \textcolor{charliteral}{'.'};}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00172}00172\ }
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ put\_newline(inserter,\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>}(i\ -\/\ the\_range.get\_begin()));}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00174}00174\ }
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ put\ first\ byte\ without\ delimiter\ in\ front\ of\ it}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *inserter++\ =\ hex\_chars[(ch\ >>\ 4)\ \&\ 0x0f];}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *inserter++\ =\ hex\_chars[ch\ \&\ 0x0f];}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ start\_of\_line\ =\ i;}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00181}00181\ }
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (put\_delimiters\ \&\&\ i\ !=\ the\_range.get\_begin())\ \{}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *inserter++\ =\ delimiter;}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00185}00185\ }
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ *inserter++\ =\ hex\_chars[(ch\ >>\ 4)\ \&\ 0x0f];}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ *inserter++\ =\ hex\_chars[ch\ \&\ 0x0f];}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00188}00188\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00189}00189\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (show\_ascii)\ \ \textcolor{comment}{//\ add\ ascii\ to\ last\ line}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00190}00190\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (the\_range.get\_end()\ -\/\ the\_range.get\_begin()\ >\ size\_per\_line)\ \{}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ blank\_num\ =\ size\_per\_line\ -\/\ (the\_range.get\_end()\ -\/\ start\_of\_line);}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00193}00193\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (blank\_num-\/-\/\ >\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00194}00194\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *inserter++\ =\ delimiter;}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *inserter++\ =\ delimiter;}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (put\_delimiters)\ \{}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *inserter++\ =\ delimiter;}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00198}00198\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00199}00199\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00200}00200\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00201}00201\ \ \ \ \ \ \ \ \ \ \ \ \ *inserter++\ =\ delimiter;}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00202}00202\ \ \ \ \ \ \ \ \ \ \ \ \ *inserter++\ =\ delimiter;}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00203}00203\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ j\ =\ start\_of\_line;\ j\ !=\ the\_range.get\_end();\ j++)\ \{}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00204}00204\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ pc\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\textcolor{keyword}{>}(*j);}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00205}00205\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *inserter++\ =\ std::isprint(pc)\ ?\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{char}\textcolor{keyword}{>}(*j)\ :\ \textcolor{charliteral}{'.'};}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00207}00207\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00208}00208\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ inserter;}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00209}00209\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00210}00210\ }
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00211}00211\ \ \ \ \ \textcolor{comment}{//\ put\ newline(and\ position\ header)}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00212}00212\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ It>}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00213}00213\ \ \ \ \ \textcolor{keywordtype}{void}\ put\_newline(It\ inserter,\ std::size\_t\ pos)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00214}00214\ \textcolor{preprocessor}{\#ifdef\ \_WIN32}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00215}00215\ \ \ \ \ \ \ \ \ *inserter++\ =\ \textcolor{charliteral}{'\(\backslash\)r'};}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00216}00216\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00217}00217\ \ \ \ \ \ \ \ \ *inserter++\ =\ \textcolor{charliteral}{'\(\backslash\)n'};}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00218}00218\ }
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00219}00219\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (put\_positions)\ \{}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ spdlog::fmt\_lib::format\_to(inserter,\ SPDLOG\_FMT\_STRING(\textcolor{stringliteral}{"{}\{:04X\}:\ "{}}),\ pos);}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00221}00221\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00222}00222\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00223}00223\ \};}
+\DoxyCodeLine{\Hypertarget{bin__to__hex_8h_source_l00224}00224\ \}\ \ \textcolor{comment}{//\ namespace\ std}}
+
+\end{DoxyCode}

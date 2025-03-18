@@ -1,0 +1,59 @@
+\doxysubsection{test\+\_\+macros.\+cpp}
+\hypertarget{test__macros_8cpp_source}{}\label{test__macros_8cpp_source}\index{test\_macros.cpp@{test\_macros.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00002}00002\ \textcolor{comment}{\ *\ This\ content\ is\ released\ under\ the\ MIT\ License\ as\ specified\ in}}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00003}00003\ \textcolor{comment}{\ *\ https://raw.githubusercontent.com/gabime/spdlog/master/LICENSE}}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00004}00004\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}includes.h"{}}}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00008}00008\ \textcolor{preprocessor}{\#if\ SPDLOG\_ACTIVE\_LEVEL\ !=\ SPDLOG\_LEVEL\_DEBUG}}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00009}00009\ \textcolor{preprocessor}{\ \ \ \ \#error\ "{}Invalid\ SPDLOG\_ACTIVE\_LEVEL\ in\ test.\ Should\ be\ SPDLOG\_LEVEL\_DEBUG"{}}}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00010}00010\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00012}00012\ \textcolor{preprocessor}{\#define\ TEST\_FILENAME\ "{}test\_logs/simple\_log"{}}}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00014}00014\ TEST\_CASE(\textcolor{stringliteral}{"{}debug\ and\ trace\ w/o\ format\ string"{}},\ \textcolor{stringliteral}{"{}[macros]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00015}00015\ \ \ \ \ prepare\_logdir();}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00016}00016\ \ \ \ \ spdlog::filename\_t\ filename\ =\ SPDLOG\_FILENAME\_T(TEST\_FILENAME);}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00018}00018\ \ \ \ \ \textcolor{keyword}{auto}\ logger\ =\ spdlog::create<spdlog::sinks::basic\_file\_sink\_mt>(\textcolor{stringliteral}{"{}logger"{}},\ filename);}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00019}00019\ \ \ \ \ logger-\/>set\_pattern(\textcolor{stringliteral}{"{}\%v"{}});}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00020}00020\ \ \ \ \ logger-\/>set\_level(spdlog::level::trace);}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00022}00022\ \ \ \ \ SPDLOG\_LOGGER\_TRACE(logger,\ \textcolor{stringliteral}{"{}Test\ message\ 1"{}});}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00023}00023\ \ \ \ \ SPDLOG\_LOGGER\_DEBUG(logger,\ \textcolor{stringliteral}{"{}Test\ message\ 2"{}});}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00024}00024\ \ \ \ \ logger-\/>flush();}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00026}00026\ \ \ \ \ \textcolor{keyword}{using\ }spdlog::details::os::default\_eol;}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00027}00027\ \ \ \ \ REQUIRE(ends\_with(file\_contents(TEST\_FILENAME),}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ spdlog::fmt\_lib::format(\textcolor{stringliteral}{"{}Test\ message\ 2\{\}"{}},\ default\_eol)));}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00029}00029\ \ \ \ \ REQUIRE(count\_lines(TEST\_FILENAME)\ ==\ 1);}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00031}00031\ \ \ \ \ \textcolor{keyword}{auto}\ orig\_default\_logger\ =\ spdlog::default\_logger();}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00032}00032\ \ \ \ \ spdlog::set\_default\_logger(logger);}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00034}00034\ \ \ \ \ SPDLOG\_TRACE(\textcolor{stringliteral}{"{}Test\ message\ 3"{}});}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00035}00035\ \ \ \ \ SPDLOG\_DEBUG(\textcolor{stringliteral}{"{}Test\ message\ \{\}"{}},\ 4);}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00036}00036\ \ \ \ \ logger-\/>flush();}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00038}00038\ \ \ \ \ require\_message\_count(TEST\_FILENAME,\ 2);}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00039}00039\ \ \ \ \ REQUIRE(ends\_with(file\_contents(TEST\_FILENAME),}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ spdlog::fmt\_lib::format(\textcolor{stringliteral}{"{}Test\ message\ 4\{\}"{}},\ default\_eol)));}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00041}00041\ \ \ \ \ spdlog::set\_default\_logger(std::move(orig\_default\_logger));}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00042}00042\ \}}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00044}00044\ TEST\_CASE(\textcolor{stringliteral}{"{}disable\ param\ evaluation"{}},\ \textcolor{stringliteral}{"{}[macros]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00045}00045\ \ \ \ \ SPDLOG\_TRACE(\textcolor{stringliteral}{"{}Test\ message\ \{\}"{}},\ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Should\ not\ be\ evaluated"{}}));}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00046}00046\ \}}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00048}00048\ TEST\_CASE(\textcolor{stringliteral}{"{}pass\ logger\ pointer"{}},\ \textcolor{stringliteral}{"{}[macros]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00049}00049\ \ \ \ \ \textcolor{keyword}{auto}\ logger\ =\ spdlog::create<spdlog::sinks::null\_sink\_mt>(\textcolor{stringliteral}{"{}refmacro"{}});}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00050}00050\ \ \ \ \ \textcolor{keyword}{auto}\ \&ref\ =\ *logger;}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00051}00051\ \ \ \ \ SPDLOG\_LOGGER\_TRACE(\&ref,\ \textcolor{stringliteral}{"{}Test\ message\ 1"{}});}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00052}00052\ \ \ \ \ SPDLOG\_LOGGER\_DEBUG(\&ref,\ \textcolor{stringliteral}{"{}Test\ message\ 2"{}});}
+\DoxyCodeLine{\Hypertarget{test__macros_8cpp_source_l00053}00053\ \}}
+
+\end{DoxyCode}

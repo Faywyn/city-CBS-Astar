@@ -1,0 +1,554 @@
+\doxysubsection{Island.\+cpp}
+\hypertarget{_island_8cpp_source}{}\label{_island_8cpp_source}\index{Island.cpp@{Island.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00003}00003\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00005}00005\ \textcolor{preprocessor}{\#define\ STB\_PERLIN\_IMPLEMENTATION}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <stb\_perlin.h>}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <SFML/Graphics.hpp>}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <deque>}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <cstring>}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00016}00016\ \textcolor{keyword}{namespace}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00017}00017\ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00018}00018\ \ \ \ \ \textcolor{comment}{//\ Width\ and\ height\ of\ the\ application\ window}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00019}00019\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ windowWidth\ =\ 800;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00020}00020\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ windowHeight\ =\ 600;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00022}00022\ \ \ \ \ \textcolor{comment}{//\ Resolution\ of\ the\ generated\ terrain}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00023}00023\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ resolutionX\ =\ 800;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00024}00024\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ resolutionY\ =\ 600;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00026}00026\ \ \ \ \ \textcolor{comment}{//\ Thread\ pool\ parameters}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00027}00027\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ threadCount\ =\ 4;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00028}00028\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ blockCount\ =\ 32;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00030}00030\ \ \ \ \ \textcolor{keyword}{struct\ }WorkItem}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00031}00031\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00032}00032\ \ \ \ \ \ \ \ \ sf::Vertex*\ targetBuffer;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00033}00033\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ index;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00034}00034\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00036}00036\ \ \ \ \ std::deque<WorkItem>\ workQueue;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00037}00037\ \ \ \ \ std::vector<sf::Thread*>\ threads;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00038}00038\ \ \ \ \ \textcolor{keywordtype}{int}\ pendingWorkCount\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00039}00039\ \ \ \ \ \textcolor{keywordtype}{bool}\ workPending\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00040}00040\ \ \ \ \ \textcolor{keywordtype}{bool}\ bufferUploadPending\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00041}00041\ \ \ \ \ sf::Mutex\ workQueueMutex;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00043}00043\ \ \ \ \ \textcolor{keyword}{struct\ }Setting}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00044}00044\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00045}00045\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ name;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}*\ value;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00047}00047\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00049}00049\ \ \ \ \ \textcolor{comment}{//\ Terrain\ noise\ parameters}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00050}00050\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ perlinOctaves\ =\ 3;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00052}00052\ \ \ \ \ \textcolor{keywordtype}{float}\ perlinFrequency\ =\ 7.0f;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00053}00053\ \ \ \ \ \textcolor{keywordtype}{float}\ perlinFrequencyBase\ =\ 4.0f;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00055}00055\ \ \ \ \ \textcolor{comment}{//\ Terrain\ generation\ parameters}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00056}00056\ \ \ \ \ \textcolor{keywordtype}{float}\ heightBase\ =\ 0.0f;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00057}00057\ \ \ \ \ \textcolor{keywordtype}{float}\ edgeFactor\ =\ 0.9f;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00058}00058\ \ \ \ \ \textcolor{keywordtype}{float}\ edgeDropoffExponent\ =\ 1.5f;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00060}00060\ \ \ \ \ \textcolor{keywordtype}{float}\ snowcapHeight\ =\ 0.6f;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00062}00062\ \ \ \ \ \textcolor{comment}{//\ Terrain\ lighting\ parameters}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00063}00063\ \ \ \ \ \textcolor{keywordtype}{float}\ heightFactor\ =\ windowHeight\ /\ 2.0f;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00064}00064\ \ \ \ \ \textcolor{keywordtype}{float}\ heightFlatten\ =\ 3.0f;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00065}00065\ \ \ \ \ \textcolor{keywordtype}{float}\ lightFactor\ =\ 0.7f;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00066}00066\ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00069}00069\ \textcolor{comment}{//\ Forward\ declarations\ of\ the\ functions\ we\ define\ further\ down}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00070}00070\ \textcolor{keywordtype}{void}\ threadFunction();}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00071}00071\ \textcolor{keywordtype}{void}\ generateTerrain(sf::Vertex*\ vertexBuffer);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00080}00080\ \textcolor{keywordtype}{int}\ main()}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00081}00081\ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00082}00082\ \ \ \ \ \textcolor{comment}{//\ Create\ the\ window\ of\ the\ application}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00083}00083\ \ \ \ \ sf::RenderWindow\ window(sf::VideoMode(windowWidth,\ windowHeight),\ \textcolor{stringliteral}{"{}SFML\ Island"{}},}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sf::Style::Titlebar\ |\ sf::Style::Close);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00085}00085\ \ \ \ \ window.setVerticalSyncEnabled(\textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00087}00087\ \ \ \ \ sf::Font\ font;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00088}00088\ \ \ \ \ \textcolor{keywordflow}{if}\ (!font.loadFromFile(\textcolor{stringliteral}{"{}resources/tuffy.ttf"{}}))}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00089}00089\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00091}00091\ \ \ \ \ \textcolor{comment}{//\ Create\ all\ of\ our\ graphics\ resources}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00092}00092\ \ \ \ \ sf::Text\ hudText;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00093}00093\ \ \ \ \ sf::Text\ statusText;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00094}00094\ \ \ \ \ sf::Shader\ terrainShader;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00095}00095\ \ \ \ \ sf::RenderStates\ terrainStates(\&terrainShader);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00096}00096\ \ \ \ \ sf::VertexBuffer\ terrain(sf::Triangles,\ sf::VertexBuffer::Static);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00098}00098\ \ \ \ \ \textcolor{comment}{//\ Set\ up\ our\ text\ drawables}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00099}00099\ \ \ \ \ statusText.setFont(font);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00100}00100\ \ \ \ \ statusText.setCharacterSize(28);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00101}00101\ \ \ \ \ statusText.setFillColor(sf::Color::White);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00102}00102\ \ \ \ \ statusText.setOutlineColor(sf::Color::Black);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00103}00103\ \ \ \ \ statusText.setOutlineThickness(2.0f);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00105}00105\ \ \ \ \ hudText.setFont(font);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00106}00106\ \ \ \ \ hudText.setCharacterSize(14);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00107}00107\ \ \ \ \ hudText.setFillColor(sf::Color::White);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00108}00108\ \ \ \ \ hudText.setOutlineColor(sf::Color::Black);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00109}00109\ \ \ \ \ hudText.setOutlineThickness(2.0f);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00110}00110\ \ \ \ \ hudText.setPosition(5.0f,\ 5.0f);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00112}00112\ \ \ \ \ \textcolor{comment}{//\ Staging\ buffer\ for\ our\ terrain\ data\ that\ we\ will\ upload\ to\ our\ VertexBuffer}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00113}00113\ \ \ \ \ std::vector<sf::Vertex>\ terrainStagingBuffer;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00115}00115\ \ \ \ \ \textcolor{comment}{//\ Check\ whether\ the\ prerequisites\ are\ suppprted}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00116}00116\ \ \ \ \ \textcolor{keywordtype}{bool}\ prerequisitesSupported\ =\ sf::VertexBuffer::isAvailable()\ \&\&\ sf::Shader::isAvailable();}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00118}00118\ \ \ \ \ \textcolor{comment}{//\ Set\ up\ our\ graphics\ resources\ and\ set\ the\ status\ text\ accordingly}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00119}00119\ \ \ \ \ \textcolor{keywordflow}{if}\ (!prerequisitesSupported)}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00120}00120\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00121}00121\ \ \ \ \ \ \ \ \ statusText.setString(\textcolor{stringliteral}{"{}Shaders\ and/or\ Vertex\ Buffers\ Unsupported"{}});}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00122}00122\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00123}00123\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (!terrainShader.loadFromFile(\textcolor{stringliteral}{"{}resources/terrain.vert"{}},\ \textcolor{stringliteral}{"{}resources/terrain.frag"{}}))}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00124}00124\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00125}00125\ \ \ \ \ \ \ \ \ prerequisitesSupported\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00127}00127\ \ \ \ \ \ \ \ \ statusText.setString(\textcolor{stringliteral}{"{}Failed\ to\ load\ shader\ program"{}});}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00128}00128\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00129}00129\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00130}00130\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00131}00131\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Start\ up\ our\ thread\ pool}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00132}00132\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ threadCount;\ i++)}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00133}00133\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ threads.push\_back(\textcolor{keyword}{new}\ sf::Thread(threadFunction));}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ threads.back()-\/>launch();}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00136}00136\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00138}00138\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ our\ VertexBuffer\ with\ enough\ space\ to\ hold\ all\ the\ terrain\ geometry}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00139}00139\ \ \ \ \ \ \ \ \ terrain.create(resolutionX\ *\ resolutionY\ *\ 6);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00141}00141\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Resize\ the\ staging\ buffer\ to\ be\ able\ to\ hold\ all\ the\ terrain\ geometry}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00142}00142\ \ \ \ \ \ \ \ \ terrainStagingBuffer.resize(resolutionX\ *\ resolutionY\ *\ 6);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00143}00143\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00144}00144\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Generate\ the\ initial\ terrain}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00145}00145\ \ \ \ \ \ \ \ \ generateTerrain(\&terrainStagingBuffer[0]);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00146}00146\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00147}00147\ \ \ \ \ \ \ \ \ statusText.setString(\textcolor{stringliteral}{"{}Generating\ Terrain..."{}});}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00148}00148\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00149}00149\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00150}00150\ \ \ \ \ \textcolor{comment}{//\ Center\ the\ status\ text}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00151}00151\ \ \ \ \ statusText.setPosition((windowWidth\ -\/\ statusText.getLocalBounds().width)\ /\ 2.f,\ (windowHeight\ -\/\ statusText.getLocalBounds().height)\ /\ 2.f);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00152}00152\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00153}00153\ \ \ \ \ \textcolor{comment}{//\ Set\ up\ an\ array\ of\ pointers\ to\ our\ settings\ for\ arrow\ navigation}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00154}00154\ \ \ \ \ Setting\ settings[]\ =}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00155}00155\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00156}00156\ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}perlinFrequency"{}},\ \ \ \ \ \&perlinFrequency\},}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00157}00157\ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}perlinFrequencyBase"{}},\ \&perlinFrequencyBase\},}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00158}00158\ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}heightBase"{}},\ \ \ \ \ \ \ \ \ \ \&heightBase\},}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00159}00159\ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}edgeFactor"{}},\ \ \ \ \ \ \ \ \ \ \&edgeFactor\},}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00160}00160\ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}edgeDropoffExponent"{}},\ \&edgeDropoffExponent\},}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00161}00161\ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}snowcapHeight"{}},\ \ \ \ \ \ \ \&snowcapHeight\},}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00162}00162\ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}heightFactor"{}},\ \ \ \ \ \ \ \ \&heightFactor\},}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00163}00163\ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}heightFlatten"{}},\ \ \ \ \ \ \ \&heightFlatten\},}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00164}00164\ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}lightFactor"{}},\ \ \ \ \ \ \ \ \ \&lightFactor\}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00165}00165\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00166}00166\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00167}00167\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ settingCount\ =\ 9;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00168}00168\ \ \ \ \ \textcolor{keywordtype}{int}\ currentSetting\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00169}00169\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00170}00170\ \ \ \ \ std::ostringstream\ osstr;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00171}00171\ \ \ \ \ sf::Clock\ clock;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00172}00172\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00173}00173\ \ \ \ \ \textcolor{keywordflow}{while}\ (window.isOpen())}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00174}00174\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00175}00175\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ events}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00176}00176\ \ \ \ \ \ \ \ \ sf::Event\ event;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00177}00177\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (window.pollEvent(event))}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00178}00178\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Window\ closed\ or\ escape\ key\ pressed:\ exit}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((event.type\ ==\ sf::Event::Closed)\ ||}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((event.type\ ==\ sf::Event::KeyPressed)\ \&\&\ (event.key.code\ ==\ sf::Keyboard::Escape)))}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ window.close();}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00186}00186\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Arrow\ key\ pressed:}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (prerequisitesSupported\ \&\&\ (event.type\ ==\ sf::Event::KeyPressed))}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (event.key.code)}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ sf::Keyboard::Return:\ generateTerrain(\&terrainStagingBuffer[0]);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00193}00193\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ sf::Keyboard::Down:\ \ \ currentSetting\ =\ (currentSetting\ +\ 1)\ \%\ settingCount;\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00194}00194\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ sf::Keyboard::Up:\ \ \ \ \ currentSetting\ =\ (currentSetting\ +\ settingCount\ -\/\ 1)\ \%\ settingCount;\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ sf::Keyboard::Left:\ \ \ *(settings[currentSetting].value)\ -\/=\ 0.1f;\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ sf::Keyboard::Right:\ \ *(settings[currentSetting].value)\ +=\ 0.1f;\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00198}00198\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00199}00199\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00200}00200\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00201}00201\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00202}00202\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Clear,\ draw\ graphics\ objects\ and\ display}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00203}00203\ \ \ \ \ \ \ \ \ window.clear();}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00204}00204\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00205}00205\ \ \ \ \ \ \ \ \ window.draw(statusText);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00206}00206\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00207}00207\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (prerequisitesSupported)}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00208}00208\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00209}00209\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sf::Lock\ lock(workQueueMutex);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00211}00211\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Don't\ bother\ updating/drawing\ the\ VertexBuffer\ while\ terrain\ is\ being\ regenerated}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!pendingWorkCount)}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ there\ is\ new\ data\ pending\ to\ be\ uploaded\ to\ the\ VertexBuffer,\ do\ it\ now}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00216}00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (bufferUploadPending)}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00217}00217\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ terrain.update(\&terrainStagingBuffer[0]);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00219}00219\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bufferUploadPending\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00221}00221\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00222}00222\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ terrainShader.setUniform(\textcolor{stringliteral}{"{}lightFactor"{}},\ lightFactor);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00223}00223\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ window.draw(terrain,\ terrainStates);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00224}00224\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00225}00225\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00226}00226\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00227}00227\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Update\ and\ draw\ the\ HUD\ text}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00228}00228\ \ \ \ \ \ \ \ \ \ \ \ \ osstr.str(\textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00229}00229\ \ \ \ \ \ \ \ \ \ \ \ \ osstr\ <<\ \textcolor{stringliteral}{"{}Frame:\ \ "{}}\ <<\ clock.restart().asMilliseconds()\ <<\ \textcolor{stringliteral}{"{}ms\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00230}00230\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}perlinOctaves:\ \ "{}}\ <<\ perlinOctaves\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00231}00231\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}Use\ the\ arrow\ keys\ to\ change\ the\ values.\(\backslash\)nUse\ the\ return\ key\ to\ regenerate\ the\ terrain.\(\backslash\)n\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00232}00232\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ settingCount;\ ++i)}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00234}00234\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ osstr\ <<\ ((i\ ==\ currentSetting)\ ?\ \textcolor{stringliteral}{"{}>>\ \ "{}}\ :\ \textcolor{stringliteral}{"{}\ \ \ \ \ \ \ "{}})\ <<\ settings[i].name\ <<\ \textcolor{stringliteral}{"{}:\ \ "{}}\ <<\ *(settings[i].value)\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00235}00235\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00236}00236\ \ \ \ \ \ \ \ \ \ \ \ \ hudText.setString(osstr.str());}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00237}00237\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00238}00238\ \ \ \ \ \ \ \ \ \ \ \ \ window.draw(hudText);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00239}00239\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00240}00240\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00241}00241\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Display\ things\ on\ screen}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00242}00242\ \ \ \ \ \ \ \ \ window.display();}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00243}00243\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00244}00244\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00245}00245\ \ \ \ \ \textcolor{comment}{//\ Shut\ down\ our\ thread\ pool}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00246}00246\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00247}00247\ \ \ \ \ \ \ \ \ sf::Lock\ lock(workQueueMutex);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00248}00248\ \ \ \ \ \ \ \ \ workPending\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00249}00249\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00250}00250\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00251}00251\ \ \ \ \ \textcolor{keywordflow}{while}\ (!threads.empty())}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00252}00252\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00253}00253\ \ \ \ \ \ \ \ \ threads.back()-\/>wait();}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00254}00254\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ threads.back();}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00255}00255\ \ \ \ \ \ \ \ \ threads.pop\_back();}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00256}00256\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00257}00257\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00258}00258\ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_SUCCESS;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00259}00259\ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00260}00260\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00261}00261\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00266}00266\ \textcolor{keywordtype}{float}\ getElevation(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y)}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00267}00267\ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00268}00268\ \ \ \ \ x\ =\ x\ /\ resolutionX\ -\/\ 0.5f;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00269}00269\ \ \ \ \ y\ =\ y\ /\ resolutionY\ -\/\ 0.5f;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00270}00270\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00271}00271\ \ \ \ \ \textcolor{keywordtype}{float}\ elevation\ =\ 0.0f;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00272}00272\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00273}00273\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ perlinOctaves;\ i++)}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00274}00274\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00275}00275\ \ \ \ \ \ \ \ \ elevation\ +=\ stb\_perlin\_noise3(}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00276}00276\ \ \ \ \ \ \ \ \ \ \ \ \ x\ *\ perlinFrequency\ *\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(std::pow(perlinFrequencyBase,\ i)),}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00277}00277\ \ \ \ \ \ \ \ \ \ \ \ \ y\ *\ perlinFrequency\ *\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(std::pow(perlinFrequencyBase,\ i)),}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00278}00278\ \ \ \ \ \ \ \ \ \ \ \ \ 0,\ 0,\ 0,\ 0}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00279}00279\ \ \ \ \ \ \ \ \ )\ *\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(std::pow(perlinFrequencyBase,\ -\/i));}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00280}00280\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00281}00281\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00282}00282\ \ \ \ \ elevation\ =\ (elevation\ +\ 1.f)\ /\ 2.f;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00283}00283\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00284}00284\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{include_2utils_8h_ac300931459ca910907a0e20cd51d2f1b}{distance}}\ =\ 2.0f\ *\ std::sqrt(x\ *\ x\ +\ y\ *\ y);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00285}00285\ \ \ \ \ elevation\ =\ (elevation\ +\ heightBase)\ *\ (1.0f\ -\/\ edgeFactor\ *\ std::pow(\mbox{\hyperlink{include_2utils_8h_ac300931459ca910907a0e20cd51d2f1b}{distance}},\ edgeDropoffExponent));}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00286}00286\ \ \ \ \ elevation\ =\ std::min(std::max(elevation,\ 0.0f),\ 1.0f);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00287}00287\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00288}00288\ \ \ \ \ \textcolor{keywordflow}{return}\ elevation;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00289}00289\ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00290}00290\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00291}00291\ \textcolor{keywordtype}{float}\ getElevation(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ y)}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00292}00292\ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00293}00293\ \ \ \ \ \textcolor{keywordflow}{return}\ getElevation(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(x),\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(y));}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00294}00294\ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00295}00295\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00296}00296\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00301}00301\ \textcolor{keywordtype}{float}\ getMoisture(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y)}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00302}00302\ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00303}00303\ \ \ \ \ x\ =\ x\ /\ resolutionX\ -\/\ 0.5f;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00304}00304\ \ \ \ \ y\ =\ y\ /\ resolutionY\ -\/\ 0.5f;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00305}00305\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00306}00306\ \ \ \ \ \textcolor{keywordtype}{float}\ moisture\ =\ stb\_perlin\_noise3(}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00307}00307\ \ \ \ \ \ \ \ \ x\ *\ 4.f\ +\ 0.5f,}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00308}00308\ \ \ \ \ \ \ \ \ y\ *\ 4.f\ +\ 0.5f,}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00309}00309\ \ \ \ \ \ \ \ \ 0,\ 0,\ 0,\ 0}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00310}00310\ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00311}00311\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00312}00312\ \ \ \ \ \textcolor{keywordflow}{return}\ (moisture\ +\ 1.f)\ /\ 2.f;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00313}00313\ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00314}00314\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00315}00315\ \textcolor{keywordtype}{float}\ getMoisture(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ y)}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00316}00316\ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00317}00317\ \ \ \ \ \textcolor{keywordflow}{return}\ getMoisture(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(x),\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(y));}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00318}00318\ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00319}00319\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00320}00320\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00325}00325\ sf::Color\ colorFromFloats(\textcolor{keywordtype}{float}\ r,\ \textcolor{keywordtype}{float}\ g,\ \textcolor{keywordtype}{float}\ b)}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00326}00326\ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00327}00327\ \ \ \ \ \textcolor{keywordflow}{return}\ sf::Color(\textcolor{keyword}{static\_cast<}sf::Uint8\textcolor{keyword}{>}(r),}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00328}00328\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_cast<}sf::Uint8\textcolor{keyword}{>}(g),}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00329}00329\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_cast<}sf::Uint8\textcolor{keyword}{>}(b));}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00330}00330\ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00331}00331\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00332}00332\ sf::Color\ getLowlandsTerrainColor(\textcolor{keywordtype}{float}\ moisture)}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00333}00333\ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00334}00334\ \ \ \ \ sf::Color\ color\ =}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00335}00335\ \ \ \ \ \ \ \ \ moisture\ <\ 0.27f\ ?\ colorFromFloats(240,\ 240,\ 180)\ :}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00336}00336\ \ \ \ \ \ \ \ \ moisture\ <\ 0.3f\ ?\ colorFromFloats(240\ -\/\ (240\ *\ (moisture\ -\/\ 0.27f)\ /\ 0.03f),\ 240\ -\/\ (40\ *\ (moisture\ -\/\ 0.27f)\ /\ 0.03f),\ 180\ -\/\ (180\ *\ (moisture\ -\/\ 0.27f)\ /\ 0.03f))\ :}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00337}00337\ \ \ \ \ \ \ \ \ moisture\ <\ 0.4f\ ?\ colorFromFloats(0,\ 200,\ 0)\ :}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00338}00338\ \ \ \ \ \ \ \ \ moisture\ <\ 0.48f\ ?\ colorFromFloats(0,\ 200\ -\/\ (40\ *\ (moisture\ -\/\ 0.4f)\ /\ 0.08f),\ 0)\ :}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00339}00339\ \ \ \ \ \ \ \ \ moisture\ <\ 0.6f\ ?\ colorFromFloats(0,\ 160,\ 0)\ :}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00340}00340\ \ \ \ \ \ \ \ \ moisture\ <\ 0.7f\ ?\ colorFromFloats((34\ *\ (moisture\ -\/\ 0.6f)\ /\ 0.1f),\ 160\ -\/\ (60\ *\ (moisture\ -\/\ 0.6f)\ /\ 0.1f),\ (34\ *\ (moisture\ -\/\ 0.6f)\ /\ 0.1f))\ :}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00341}00341\ \ \ \ \ \ \ \ \ colorFromFloats(34,\ 100,\ 34);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00342}00342\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00343}00343\ \ \ \ \ \textcolor{keywordflow}{return}\ color;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00344}00344\ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00345}00345\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00346}00346\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00352}00352\ sf::Color\ getHighlandsTerrainColor(\textcolor{keywordtype}{float}\ elevation,\ \textcolor{keywordtype}{float}\ moisture)}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00353}00353\ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00354}00354\ \ \ \ \ sf::Color\ lowlandsColor\ =\ getLowlandsTerrainColor(moisture);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00355}00355\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00356}00356\ \ \ \ \ sf::Color\ color\ =}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00357}00357\ \ \ \ \ \ \ \ \ moisture\ <\ 0.6f\ ?\ sf::Color(112,\ 128,\ 144)\ :}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00358}00358\ \ \ \ \ \ \ \ \ colorFromFloats(112\ +\ (110\ *\ (moisture\ -\/\ 0.6f)\ /\ 0.4f),\ 128\ +\ (56\ *\ (moisture\ -\/\ 0.6f)\ /\ 0.4f),\ 144\ -\/\ (9\ *\ (moisture\ -\/\ 0.6f)\ /\ 0.4f));}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00359}00359\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00360}00360\ \ \ \ \ \textcolor{keywordtype}{float}\ factor\ =\ std::min((elevation\ -\/\ 0.4f)\ /\ 0.1f,\ 1.f);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00361}00361\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00362}00362\ \ \ \ \ color.r\ =\ \textcolor{keyword}{static\_cast<}sf::Uint8\textcolor{keyword}{>}(lowlandsColor.r\ *\ (1.f\ -\/\ factor)\ +\ color.r\ *\ factor);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00363}00363\ \ \ \ \ color.g\ =\ \textcolor{keyword}{static\_cast<}sf::Uint8\textcolor{keyword}{>}(lowlandsColor.g\ *\ (1.f\ -\/\ factor)\ +\ color.g\ *\ factor);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00364}00364\ \ \ \ \ color.b\ =\ \textcolor{keyword}{static\_cast<}sf::Uint8\textcolor{keyword}{>}(lowlandsColor.b\ *\ (1.f\ -\/\ factor)\ +\ color.b\ *\ factor);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00365}00365\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00366}00366\ \ \ \ \ \textcolor{keywordflow}{return}\ color;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00367}00367\ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00368}00368\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00369}00369\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00375}00375\ sf::Color\ getSnowcapTerrainColor(\textcolor{keywordtype}{float}\ elevation,\ \textcolor{keywordtype}{float}\ moisture)}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00376}00376\ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00377}00377\ \ \ \ \ sf::Color\ highlandsColor\ =\ getHighlandsTerrainColor(elevation,\ moisture);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00378}00378\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00379}00379\ \ \ \ \ sf::Color\ color\ =\ sf::Color::White;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00380}00380\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00381}00381\ \ \ \ \ \textcolor{keywordtype}{float}\ factor\ =\ std::min((elevation\ -\/\ snowcapHeight)\ /\ 0.05f,\ 1.f);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00382}00382\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00383}00383\ \ \ \ \ color.r\ =\ \textcolor{keyword}{static\_cast<}sf::Uint8\textcolor{keyword}{>}(highlandsColor.r\ *\ (1.f\ -\/\ factor)\ +\ color.r\ *\ factor);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00384}00384\ \ \ \ \ color.g\ =\ \textcolor{keyword}{static\_cast<}sf::Uint8\textcolor{keyword}{>}(highlandsColor.g\ *\ (1.f\ -\/\ factor)\ +\ color.g\ *\ factor);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00385}00385\ \ \ \ \ color.b\ =\ \textcolor{keyword}{static\_cast<}sf::Uint8\textcolor{keyword}{>}(highlandsColor.b\ *\ (1.f\ -\/\ factor)\ +\ color.b\ *\ factor);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00386}00386\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00387}00387\ \ \ \ \ \textcolor{keywordflow}{return}\ color;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00388}00388\ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00389}00389\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00390}00390\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00396}00396\ sf::Color\ getTerrainColor(\textcolor{keywordtype}{float}\ elevation,\ \textcolor{keywordtype}{float}\ moisture)}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00397}00397\ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00398}00398\ \ \ \ \ sf::Color\ color\ =}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00399}00399\ \ \ \ \ \ \ \ \ elevation\ <\ 0.11f\ ?\ sf::Color(0,\ 0,\ \textcolor{keyword}{static\_cast<}sf::Uint8\textcolor{keyword}{>}(elevation\ /\ 0.11f\ *\ 74.f\ +\ 181.0f))\ :}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00400}00400\ \ \ \ \ \ \ \ \ elevation\ <\ 0.14f\ ?\ \mbox{\hyperlink{namespacesf}{sf}}::Color(static\_cast<\mbox{\hyperlink{namespacesf}{sf}}::Uint8>(std::pow((elevation\ -\/\ 0.11f)\ /\ 0.03f,\ 0.3f)\ *\ 48.f),\ static\_cast<\mbox{\hyperlink{namespacesf}{sf}}::Uint8>(std::pow((elevation\ -\/\ 0.11f)\ /\ 0.03f,\ 0.3f)\ *\ 48.f),\ 255)\ :}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00401}00401\ \ \ \ \ \ \ \ \ elevation\ <\ 0.16f\ ?\ \mbox{\hyperlink{namespacesf}{sf}}::Color(static\_cast<\mbox{\hyperlink{namespacesf}{sf}}::Uint8>((elevation\ -\/\ 0.14f)\ *\ 128.f\ /\ 0.02f\ +\ 48.f),\ static\_cast<\mbox{\hyperlink{namespacesf}{sf}}::Uint8>((elevation\ -\/\ 0.14f)\ *\ 128.f\ /\ 0.02f\ +\ 48.f),\ static\_cast<\mbox{\hyperlink{namespacesf}{sf}}::Uint8>(127.0f\ +\ (0.16f\ -\/\ elevation)\ *\ 128.f\ /\ 0.02f))\ :}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00402}00402\ \ \ \ \ \ \ \ \ elevation\ <\ 0.17f\ ?\ \mbox{\hyperlink{namespacesf}{sf}}::Color(240,\ 230,\ 140)\ :}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00403}00403\ \ \ \ \ \ \ \ \ elevation\ <\ 0.4f\ ?\ getLowlandsTerrainColor(moisture)\ :}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00404}00404\ \ \ \ \ \ \ \ \ elevation\ <\ snowcapHeight\ ?\ getHighlandsTerrainColor(elevation,\ moisture)\ :}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00405}00405\ \ \ \ \ \ \ \ \ getSnowcapTerrainColor(elevation,\ moisture);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00406}00406\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00407}00407\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ color;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00408}00408\ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00409}00409\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00410}00410\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00417}00417\ sf::Vector2f\ computeNormal(\textcolor{keywordtype}{float}\ left,\ \textcolor{keywordtype}{float}\ right,\ \textcolor{keywordtype}{float}\ bottom,\ \textcolor{keywordtype}{float}\ top)}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00418}00418\ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00419}00419\ \ \ \ \ sf::Vector3f\ deltaX(1,\ 0,\ (std::pow(right,\ heightFlatten)\ -\/\ std::pow(left,\ heightFlatten))\ *\ heightFactor);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00420}00420\ \ \ \ \ sf::Vector3f\ deltaY(0,\ 1,\ (std::pow(top,\ heightFlatten)\ -\/\ std::pow(bottom,\ heightFlatten))\ *\ heightFactor);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00421}00421\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00422}00422\ \ \ \ \ sf::Vector3f\ crossProduct(}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00423}00423\ \ \ \ \ \ \ \ \ deltaX.y\ *\ deltaY.z\ -\/\ deltaX.z\ *\ deltaY.y,}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00424}00424\ \ \ \ \ \ \ \ \ deltaX.z\ *\ deltaY.x\ -\/\ deltaX.x\ *\ deltaY.z,}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00425}00425\ \ \ \ \ \ \ \ \ deltaX.x\ *\ deltaY.y\ -\/\ deltaX.y\ *\ deltaY.x}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00426}00426\ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00427}00427\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00428}00428\ \ \ \ \ \textcolor{comment}{//\ Scale\ cross\ product\ to\ make\ z\ component\ 1.0f\ so\ we\ can\ drop\ it}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00429}00429\ \ \ \ \ crossProduct\ /=\ crossProduct.z;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00430}00430\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00431}00431\ \ \ \ \ \textcolor{comment}{//\ Return\ "{}compressed"{}\ normal}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00432}00432\ \ \ \ \ \textcolor{keywordflow}{return}\ sf::Vector2f(crossProduct.x,\ crossProduct.y);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00433}00433\ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00434}00434\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00435}00435\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00442}00442\ \textcolor{keywordtype}{void}\ processWorkItem(std::vector<sf::Vertex>\&\ vertices,\ \textcolor{keyword}{const}\ WorkItem\&\ workItem)}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00443}00443\ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00444}00444\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ rowBlockSize\ =\ (resolutionY\ /\ blockCount)\ +\ 1;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00445}00445\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ rowStart\ =\ rowBlockSize\ *\ workItem.index;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00446}00446\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00447}00447\ \ \ \ \ \textcolor{keywordflow}{if}\ (rowStart\ >=\ resolutionY)}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00448}00448\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00449}00449\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00450}00450\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ rowEnd\ =\ std::min(rowStart\ +\ rowBlockSize,\ resolutionY);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00451}00451\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ rowCount\ =\ rowEnd\ -\/\ rowStart;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00452}00452\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00453}00453\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ scalingFactorX\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(windowWidth)\ /\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(resolutionX);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00454}00454\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ scalingFactorY\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(windowHeight)\ /\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(resolutionY);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00455}00455\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00456}00456\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ y\ =\ rowStart;\ y\ <\ rowEnd;\ y++)}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00457}00457\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00458}00458\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ x\ =\ 0;\ x\ <\ resolutionX;\ x++)}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00459}00459\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00460}00460\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ arrayIndexBase\ =\ ((y\ -\/\ rowStart)\ *\ resolutionX\ +\ x)\ *\ 6;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00461}00461\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00462}00462\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Top\ left\ corner\ (first\ triangle)}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00463}00463\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (x\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00464}00464\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00465}00465\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vertices[arrayIndexBase\ +\ 0]\ =\ vertices[arrayIndexBase\ -\/\ 6\ +\ 5];}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00466}00466\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00467}00467\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (y\ >\ rowStart)}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00468}00468\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00469}00469\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vertices[arrayIndexBase\ +\ 0]\ =\ vertices[arrayIndexBase\ -\/\ resolutionX\ *\ 6\ +\ 1];}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00470}00470\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00471}00471\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00472}00472\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00473}00473\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vertices[arrayIndexBase\ +\ 0].position\ =\ sf::Vector2f(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(x)\ *\ scalingFactorX,\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(y)\ *\ scalingFactorY);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00474}00474\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vertices[arrayIndexBase\ +\ 0].color\ =\ getTerrainColor(getElevation(x,\ y),\ getMoisture(x,\ y));}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00475}00475\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vertices[arrayIndexBase\ +\ 0].texCoords\ =\ computeNormal(getElevation(x\ -\/\ 1,\ y),\ getElevation(x\ +\ 1,\ y),\ getElevation(x,\ y\ +\ 1),\ getElevation(x,\ y\ -\/\ 1));}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00476}00476\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00477}00477\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00478}00478\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Bottom\ left\ corner\ (first\ triangle)}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00479}00479\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (x\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00480}00480\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00481}00481\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vertices[arrayIndexBase\ +\ 1]\ =\ vertices[arrayIndexBase\ -\/\ 6\ +\ 2];}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00482}00482\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00483}00483\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00484}00484\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00485}00485\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vertices[arrayIndexBase\ +\ 1].position\ =\ sf::Vector2f(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(x)\ *\ scalingFactorX,\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(y\ +\ 1)\ *\ scalingFactorY);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00486}00486\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vertices[arrayIndexBase\ +\ 1].color\ =\ getTerrainColor(getElevation(x,\ y\ +\ 1),\ getMoisture(x,\ y\ +\ 1));}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00487}00487\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vertices[arrayIndexBase\ +\ 1].texCoords\ =\ computeNormal(getElevation(x\ -\/\ 1,\ y\ +\ 1),\ getElevation(x\ +\ 1,\ y\ +\ 1),\ getElevation(x,\ y\ +\ 2),\ getElevation(x,\ y));}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00488}00488\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00489}00489\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00490}00490\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Bottom\ right\ corner\ (first\ triangle)}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00491}00491\ \ \ \ \ \ \ \ \ \ \ \ \ vertices[arrayIndexBase\ +\ 2].position\ =\ sf::Vector2f(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(x\ +\ 1)\ *\ scalingFactorX,\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(y\ +\ 1)\ *\ scalingFactorY);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00492}00492\ \ \ \ \ \ \ \ \ \ \ \ \ vertices[arrayIndexBase\ +\ 2].color\ =\ getTerrainColor(getElevation(x\ +\ 1,\ y\ +\ 1),\ getMoisture(x\ +\ 1,\ y\ +\ 1));}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00493}00493\ \ \ \ \ \ \ \ \ \ \ \ \ vertices[arrayIndexBase\ +\ 2].texCoords\ =\ computeNormal(getElevation(x,\ y\ +\ 1),\ getElevation(x\ +\ 2,\ y\ +\ 1),\ getElevation(x\ +\ 1,\ y\ +\ 2),\ getElevation(x\ +\ 1,\ y));}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00494}00494\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00495}00495\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Top\ left\ corner\ (second\ triangle)}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00496}00496\ \ \ \ \ \ \ \ \ \ \ \ \ vertices[arrayIndexBase\ +\ 3]\ =\ vertices[arrayIndexBase\ +\ 0];}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00497}00497\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00498}00498\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Bottom\ right\ corner\ (second\ triangle)}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00499}00499\ \ \ \ \ \ \ \ \ \ \ \ \ vertices[arrayIndexBase\ +\ 4]\ =\ vertices[arrayIndexBase\ +\ 2];}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00500}00500\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00501}00501\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Top\ right\ corner\ (second\ triangle)}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00502}00502\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (y\ >\ rowStart)}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00503}00503\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00504}00504\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vertices[arrayIndexBase\ +\ 5]\ =\ vertices[arrayIndexBase\ -\/\ resolutionX\ *\ 6\ +\ 2];}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00505}00505\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00506}00506\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00507}00507\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00508}00508\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vertices[arrayIndexBase\ +\ 5].position\ =\ sf::Vector2f(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(x\ +\ 1)\ *\ scalingFactorX,\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(y)\ *\ scalingFactorY);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00509}00509\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vertices[arrayIndexBase\ +\ 5].color\ =\ getTerrainColor(getElevation(x\ +\ 1,\ y),\ getMoisture(x\ +\ 1,\ y));}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00510}00510\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vertices[arrayIndexBase\ +\ 5].texCoords\ =\ computeNormal(getElevation(x,\ y),\ getElevation(x\ +\ 2,\ y),\ getElevation(x\ +\ 1,\ y\ +\ 1),\ getElevation(x\ +\ 1,\ y\ -\/\ 1));}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00511}00511\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00512}00512\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00513}00513\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00514}00514\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00515}00515\ \ \ \ \ \textcolor{comment}{//\ Copy\ the\ resulting\ geometry\ from\ our\ thread-\/local\ buffer\ into\ the\ target\ buffer}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00516}00516\ \ \ \ \ std::memcpy(workItem.targetBuffer\ +\ (resolutionX\ *\ rowStart\ *\ 6),\ \&vertices[0],\ \textcolor{keyword}{sizeof}(sf::Vertex)\ *\ resolutionX\ *\ rowCount\ *\ 6);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00517}00517\ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00518}00518\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00519}00519\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00526}00526\ \textcolor{keywordtype}{void}\ threadFunction()}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00527}00527\ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00528}00528\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ rowBlockSize\ =\ (resolutionY\ /\ blockCount)\ +\ 1;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00529}00529\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00530}00530\ \ \ \ \ std::vector<sf::Vertex>\ vertices(resolutionX\ *\ rowBlockSize\ *\ 6);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00531}00531\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00532}00532\ \ \ \ \ WorkItem\ workItem\ =\ \{0,\ 0\};}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00533}00533\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00534}00534\ \ \ \ \ \textcolor{comment}{//\ Loop\ until\ the\ application\ exits}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00535}00535\ \ \ \ \ \textcolor{keywordflow}{for}\ (;;)}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00536}00536\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00537}00537\ \ \ \ \ \ \ \ \ workItem.targetBuffer\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00538}00538\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00539}00539\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ there\ are\ new\ work\ items\ in\ the\ queue}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00540}00540\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00541}00541\ \ \ \ \ \ \ \ \ \ \ \ \ sf::Lock\ lock(workQueueMutex);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00542}00542\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00543}00543\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!workPending)}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00544}00544\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00545}00545\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00546}00546\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!workQueue.empty())}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00547}00547\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00548}00548\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ workItem\ =\ workQueue.front();}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00549}00549\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ workQueue.pop\_front();}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00550}00550\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00551}00551\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00552}00552\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00553}00553\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ we\ didn't\ receive\ a\ new\ work\ item,\ keep\ looping}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00554}00554\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!workItem.targetBuffer)}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00555}00555\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00556}00556\ \ \ \ \ \ \ \ \ \ \ \ \ sf::sleep(sf::milliseconds(10));}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00557}00557\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00558}00558\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00559}00559\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00560}00560\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00561}00561\ \ \ \ \ \ \ \ \ processWorkItem(vertices,\ workItem);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00562}00562\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00563}00563\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00564}00564\ \ \ \ \ \ \ \ \ \ \ \ \ sf::Lock\ lock(workQueueMutex);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00565}00565\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00566}00566\ \ \ \ \ \ \ \ \ \ \ \ \ -\/-\/pendingWorkCount;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00567}00567\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00568}00568\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00569}00569\ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00570}00570\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00571}00571\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00578}00578\ \textcolor{keywordtype}{void}\ generateTerrain(sf::Vertex*\ buffer)}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00579}00579\ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00580}00580\ \ \ \ \ bufferUploadPending\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00581}00581\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00582}00582\ \ \ \ \ \textcolor{comment}{//\ Make\ sure\ the\ work\ queue\ is\ empty\ before\ queuing\ new\ work}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00583}00583\ \ \ \ \ \textcolor{keywordflow}{for}\ (;;)}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00584}00584\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00585}00585\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00586}00586\ \ \ \ \ \ \ \ \ \ \ \ \ sf::Lock\ lock(workQueueMutex);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00587}00587\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00588}00588\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (workQueue.empty())}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00589}00589\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00590}00590\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00591}00591\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00592}00592\ \ \ \ \ \ \ \ \ sf::sleep(sf::milliseconds(10));}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00593}00593\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00594}00594\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00595}00595\ \ \ \ \ \textcolor{comment}{//\ Queue\ all\ the\ new\ work\ items}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00596}00596\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00597}00597\ \ \ \ \ \ \ \ \ sf::Lock\ lock(workQueueMutex);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00598}00598\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00599}00599\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ blockCount;\ i++)}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00600}00600\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00601}00601\ \ \ \ \ \ \ \ \ \ \ \ \ WorkItem\ workItem\ =\ \{buffer,\ i\};}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00602}00602\ \ \ \ \ \ \ \ \ \ \ \ \ workQueue.push\_back(workItem);}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00603}00603\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00604}00604\ }
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00605}00605\ \ \ \ \ \ \ \ \ pendingWorkCount\ =\ blockCount;}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00606}00606\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_island_8cpp_source_l00607}00607\ \}}
+
+\end{DoxyCode}

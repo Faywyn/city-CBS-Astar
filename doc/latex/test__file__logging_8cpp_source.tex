@@ -1,0 +1,109 @@
+\doxysubsection{test\+\_\+file\+\_\+logging.\+cpp}
+\hypertarget{test__file__logging_8cpp_source}{}\label{test__file__logging_8cpp_source}\index{test\_file\_logging.cpp@{test\_file\_logging.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00002}00002\ \textcolor{comment}{\ *\ This\ content\ is\ released\ under\ the\ MIT\ License\ as\ specified\ in}}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00003}00003\ \textcolor{comment}{\ *\ https://raw.githubusercontent.com/gabime/spdlog/master/LICENSE}}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00004}00004\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}includes.h"{}}}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00007}00007\ \textcolor{preprocessor}{\#define\ SIMPLE\_LOG\ "{}test\_logs/simple\_log"{}}}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00008}00008\ \textcolor{preprocessor}{\#define\ ROTATING\_LOG\ "{}test\_logs/rotating\_log"{}}}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00010}00010\ TEST\_CASE(\textcolor{stringliteral}{"{}simple\_file\_logger"{}},\ \textcolor{stringliteral}{"{}[simple\_logger]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00011}00011\ \ \ \ \ prepare\_logdir();}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00012}00012\ \ \ \ \ spdlog::filename\_t\ filename\ =\ SPDLOG\_FILENAME\_T(SIMPLE\_LOG);}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00014}00014\ \ \ \ \ \textcolor{keyword}{auto}\ logger\ =\ spdlog::create<spdlog::sinks::basic\_file\_sink\_mt>(\textcolor{stringliteral}{"{}logger"{}},\ filename);}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00015}00015\ \ \ \ \ logger-\/>set\_pattern(\textcolor{stringliteral}{"{}\%v"{}});}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00017}00017\ \ \ \ \ logger-\/>info(\textcolor{stringliteral}{"{}Test\ message\ \{\}"{}},\ 1);}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00018}00018\ \ \ \ \ logger-\/>info(\textcolor{stringliteral}{"{}Test\ message\ \{\}"{}},\ 2);}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00020}00020\ \ \ \ \ logger-\/>flush();}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00021}00021\ \ \ \ \ require\_message\_count(SIMPLE\_LOG,\ 2);}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00022}00022\ \ \ \ \ \textcolor{keyword}{using\ }spdlog::details::os::default\_eol;}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00023}00023\ \ \ \ \ REQUIRE(file\_contents(SIMPLE\_LOG)\ ==}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ spdlog::fmt\_lib::format(\textcolor{stringliteral}{"{}Test\ message\ 1\{\}Test\ message\ 2\{\}"{}},\ default\_eol,\ default\_eol));}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00025}00025\ \}}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00027}00027\ TEST\_CASE(\textcolor{stringliteral}{"{}flush\_on"{}},\ \textcolor{stringliteral}{"{}[flush\_on]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00028}00028\ \ \ \ \ prepare\_logdir();}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00029}00029\ \ \ \ \ spdlog::filename\_t\ filename\ =\ SPDLOG\_FILENAME\_T(SIMPLE\_LOG);}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00031}00031\ \ \ \ \ \textcolor{keyword}{auto}\ logger\ =\ spdlog::create<spdlog::sinks::basic\_file\_sink\_mt>(\textcolor{stringliteral}{"{}logger"{}},\ filename);}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00032}00032\ \ \ \ \ logger-\/>set\_pattern(\textcolor{stringliteral}{"{}\%v"{}});}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00033}00033\ \ \ \ \ logger-\/>set\_level(spdlog::level::trace);}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00034}00034\ \ \ \ \ logger-\/>flush\_on(spdlog::level::info);}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00035}00035\ \ \ \ \ logger-\/>trace(\textcolor{stringliteral}{"{}Should\ not\ be\ flushed"{}});}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00036}00036\ \ \ \ \ REQUIRE(count\_lines(SIMPLE\_LOG)\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00038}00038\ \ \ \ \ logger-\/>info(\textcolor{stringliteral}{"{}Test\ message\ \{\}"{}},\ 1);}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00039}00039\ \ \ \ \ logger-\/>info(\textcolor{stringliteral}{"{}Test\ message\ \{\}"{}},\ 2);}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00041}00041\ \ \ \ \ require\_message\_count(SIMPLE\_LOG,\ 3);}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00042}00042\ \ \ \ \ \textcolor{keyword}{using\ }spdlog::details::os::default\_eol;}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00043}00043\ \ \ \ \ REQUIRE(file\_contents(SIMPLE\_LOG)\ ==}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ spdlog::fmt\_lib::format(\textcolor{stringliteral}{"{}Should\ not\ be\ flushed\{\}Test\ message\ 1\{\}Test\ message\ 2\{\}"{}},}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ default\_eol,\ default\_eol,\ default\_eol));}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00046}00046\ \}}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00048}00048\ TEST\_CASE(\textcolor{stringliteral}{"{}rotating\_file\_logger1"{}},\ \textcolor{stringliteral}{"{}[rotating\_logger]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00049}00049\ \ \ \ \ prepare\_logdir();}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00050}00050\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ max\_size\ =\ 1024\ *\ 10;}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00051}00051\ \ \ \ \ spdlog::filename\_t\ basename\ =\ SPDLOG\_FILENAME\_T(ROTATING\_LOG);}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00052}00052\ \ \ \ \ \textcolor{keyword}{auto}\ logger\ =\ spdlog::rotating\_logger\_mt(\textcolor{stringliteral}{"{}logger"{}},\ basename,\ max\_size,\ 0);}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00054}00054\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 10;\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00055}00055\ \ \ \ \ \ \ \ \ logger-\/>info(\textcolor{stringliteral}{"{}Test\ message\ \{\}"{}},\ i);}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00056}00056\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00058}00058\ \ \ \ \ logger-\/>flush();}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00059}00059\ \ \ \ \ require\_message\_count(ROTATING\_LOG,\ 10);}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00060}00060\ \}}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00062}00062\ TEST\_CASE(\textcolor{stringliteral}{"{}rotating\_file\_logger2"{}},\ \textcolor{stringliteral}{"{}[rotating\_logger]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00063}00063\ \ \ \ \ prepare\_logdir();}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00064}00064\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ max\_size\ =\ 1024\ *\ 10;}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00065}00065\ \ \ \ \ spdlog::filename\_t\ basename\ =\ SPDLOG\_FILENAME\_T(ROTATING\_LOG);}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00067}00067\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ make\ an\ initial\ logger\ to\ create\ the\ first\ output\ file}}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00069}00069\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ logger\ =\ spdlog::rotating\_logger\_mt(\textcolor{stringliteral}{"{}logger"{}},\ basename,\ max\_size,\ 2,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00070}00070\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 10;\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ logger-\/>info(\textcolor{stringliteral}{"{}Test\ message\ \{\}"{}},\ i);}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00072}00072\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00073}00073\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ drop\ causes\ the\ logger\ destructor\ to\ be\ called,\ which\ is\ required\ so\ the}}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00074}00074\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ next\ logger\ can\ rename\ the\ first\ output\ file.}}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00075}00075\ \ \ \ \ \ \ \ \ spdlog::drop(logger-\/>name());}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00076}00076\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00078}00078\ \ \ \ \ \textcolor{keyword}{auto}\ logger\ =\ spdlog::rotating\_logger\_mt(\textcolor{stringliteral}{"{}logger"{}},\ basename,\ max\_size,\ 2,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00079}00079\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 10;\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00080}00080\ \ \ \ \ \ \ \ \ logger-\/>info(\textcolor{stringliteral}{"{}Test\ message\ \{\}"{}},\ i);}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00081}00081\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00083}00083\ \ \ \ \ logger-\/>flush();}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00085}00085\ \ \ \ \ require\_message\_count(ROTATING\_LOG,\ 10);}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00087}00087\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 1000;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00088}00088\ \ \ \ \ \ \ \ \ logger-\/>info(\textcolor{stringliteral}{"{}Test\ message\ \{\}"{}},\ i);}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00089}00089\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00091}00091\ \ \ \ \ logger-\/>flush();}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00092}00092\ \ \ \ \ REQUIRE(get\_filesize(ROTATING\_LOG)\ <=\ max\_size);}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00093}00093\ \ \ \ \ REQUIRE(get\_filesize(ROTATING\_LOG\ \textcolor{stringliteral}{"{}.1"{}})\ <=\ max\_size);}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00094}00094\ \}}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00096}00096\ \textcolor{comment}{//\ test\ that\ passing\ max\_size=0\ throws}}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00097}00097\ TEST\_CASE(\textcolor{stringliteral}{"{}rotating\_file\_logger3"{}},\ \textcolor{stringliteral}{"{}[rotating\_logger]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00098}00098\ \ \ \ \ prepare\_logdir();}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00099}00099\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ max\_size\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00100}00100\ \ \ \ \ spdlog::filename\_t\ basename\ =\ SPDLOG\_FILENAME\_T(ROTATING\_LOG);}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00101}00101\ \ \ \ \ REQUIRE\_THROWS\_AS(spdlog::rotating\_logger\_mt(\textcolor{stringliteral}{"{}logger"{}},\ basename,\ max\_size,\ 0),}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ spdlog::spdlog\_ex);}
+\DoxyCodeLine{\Hypertarget{test__file__logging_8cpp_source_l00103}00103\ \}}
+
+\end{DoxyCode}

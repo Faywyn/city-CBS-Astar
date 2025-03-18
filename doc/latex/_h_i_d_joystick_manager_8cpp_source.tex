@@ -1,0 +1,145 @@
+\doxysubsection{HIDJoystick\+Manager.\+cpp}
+\hypertarget{_h_i_d_joystick_manager_8cpp_source}{}\label{_h_i_d_joystick_manager_8cpp_source}\index{HIDJoystickManager.cpp@{HIDJoystickManager.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00002}00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00003}00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00004}00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Marco\ Antognini\ (antognini.marco@gmail.com),}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00005}00005\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00006}00006\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00007}00007\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00008}00008\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00009}00009\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00010}00010\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00011}00011\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00012}00012\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00013}00013\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00014}00014\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00015}00015\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00016}00016\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00017}00017\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00018}00018\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00019}00019\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00020}00020\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00021}00021\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00022}00022\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00023}00023\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00027}00027\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00029}00029\ \textcolor{preprocessor}{\#include\ <SFML/Window/OSX/HIDInputManager.hpp>}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00030}00030\ \textcolor{preprocessor}{\#include\ <SFML/Window/OSX/HIDJoystickManager.hpp>}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00033}00033\ \textcolor{comment}{//\ Private\ data}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00035}00035\ \textcolor{keyword}{namespace}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00036}00036\ \{}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00037}00037\ \ \ \ \ \textcolor{comment}{//\ Using\ a\ custom\ run\ loop\ mode\ solve\ some\ issues\ that\ appears\ when\ SFML}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00038}00038\ \ \ \ \ \textcolor{comment}{//\ is\ used\ with\ Cocoa.}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00039}00039\ \ \ \ \ \textcolor{keyword}{const}\ CFStringRef\ RunLoopMode\ =\ CFSTR(\textcolor{stringliteral}{"{}SFML\_RUN\_LOOP\_MODE"{}});}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00040}00040\ \}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00043}00043\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00044}00044\ \{}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00045}00045\ \textcolor{keyword}{namespace\ }priv}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00046}00046\ \{}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00048}00048\ HIDJoystickManager\&\ HIDJoystickManager::getInstance()}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00049}00049\ \{}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00050}00050\ \ \ \ \ \textcolor{keyword}{static}\ HIDJoystickManager\ manager;}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00051}00051\ \ \ \ \ \textcolor{keywordflow}{return}\ manager;}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00052}00052\ \}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00056}00056\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ HIDJoystickManager::getJoystickCount()}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00057}00057\ \{}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00058}00058\ \ \ \ \ update();}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00059}00059\ \ \ \ \ \textcolor{keywordflow}{return}\ m\_joystickCount;}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00060}00060\ \}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00064}00064\ CFSetRef\ HIDJoystickManager::copyJoysticks()}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00065}00065\ \{}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00066}00066\ \ \ \ \ CFSetRef\ devices\ =\ IOHIDManagerCopyDevices(m\_manager);}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00067}00067\ \ \ \ \ \textcolor{keywordflow}{return}\ devices;}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00068}00068\ \}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00072}00072\ HIDJoystickManager::HIDJoystickManager()\ :}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00073}00073\ m\_manager(0),}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00074}00074\ m\_joystickCount(0)}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00075}00075\ \{}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00076}00076\ \ \ \ \ m\_manager\ =\ IOHIDManagerCreate(kCFAllocatorDefault,\ kIOHIDOptionsTypeNone);}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00078}00078\ \ \ \ \ CFDictionaryRef\ mask0\ =\ HIDInputManager::copyDevicesMask(kHIDPage\_GenericDesktop,}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ kHIDUsage\_GD\_Joystick);}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00081}00081\ \ \ \ \ CFDictionaryRef\ mask1\ =\ HIDInputManager::copyDevicesMask(kHIDPage\_GenericDesktop,}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ kHIDUsage\_GD\_GamePad);}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00084}00084\ \ \ \ \ CFDictionaryRef\ maskArray[2];}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00085}00085\ \ \ \ \ maskArray[0]\ =\ mask0;}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00086}00086\ \ \ \ \ maskArray[1]\ =\ mask1;}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00088}00088\ \ \ \ \ CFArrayRef\ mask\ =\ CFArrayCreate(NULL,\ \textcolor{keyword}{reinterpret\_cast<}\textcolor{keyword}{const\ }\textcolor{keywordtype}{void}**\textcolor{keyword}{>}(maskArray),\ 2,\ NULL);}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00090}00090\ \ \ \ \ IOHIDManagerSetDeviceMatchingMultiple(m\_manager,\ mask);}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00091}00091\ \ \ \ \ CFRelease(mask);}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00092}00092\ \ \ \ \ CFRelease(mask1);}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00093}00093\ \ \ \ \ CFRelease(mask0);}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00096}00096\ \ \ \ \ IOHIDManagerRegisterDeviceMatchingCallback(m\_manager,\ pluggedIn,\ \textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00097}00097\ \ \ \ \ IOHIDManagerRegisterDeviceRemovalCallback(m\_manager,\ pluggedOut,\ \textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00099}00099\ \ \ \ \ IOHIDManagerScheduleWithRunLoop(m\_manager,}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ CFRunLoopGetCurrent(),}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ RunLoopMode);}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00103}00103\ \ \ \ \ IOHIDManagerOpen(m\_manager,\ kIOHIDOptionsTypeNone);}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00104}00104\ \}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00108}00108\ HIDJoystickManager::\string~HIDJoystickManager()}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00109}00109\ \{}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00110}00110\ \ \ \ \ IOHIDManagerUnscheduleFromRunLoop(m\_manager,}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ CFRunLoopGetCurrent(),}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ RunLoopMode);}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00114}00114\ \ \ \ \ IOHIDManagerRegisterDeviceMatchingCallback(m\_manager,\ NULL,\ 0);}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00115}00115\ \ \ \ \ IOHIDManagerRegisterDeviceRemovalCallback(m\_manager,\ NULL,\ 0);}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00117}00117\ \ \ \ \ IOHIDManagerClose(m\_manager,\ kIOHIDOptionsTypeNone);}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00118}00118\ \}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00119}00119\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00122}00122\ \textcolor{keywordtype}{void}\ HIDJoystickManager::update()}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00123}00123\ \{}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00124}00124\ \ \ \ \ SInt32\ status\ =\ kCFRunLoopRunHandledSource;}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00126}00126\ \ \ \ \ \textcolor{keywordflow}{while}\ (status\ ==\ kCFRunLoopRunHandledSource)}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00127}00127\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00128}00128\ \ \ \ \ \ \ \ \ status\ =\ CFRunLoopRunInMode(RunLoopMode,\ 0,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00129}00129\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00130}00130\ \}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00132}00132\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00134}00134\ \textcolor{keywordtype}{void}\ HIDJoystickManager::pluggedIn(\textcolor{keywordtype}{void}*\ context,\ IOReturn,\ \textcolor{keywordtype}{void}*,\ IOHIDDeviceRef)}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00135}00135\ \{}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00136}00136\ \ \ \ \ HIDJoystickManager*\ manager\ =\ \textcolor{keyword}{static\_cast<}HIDJoystickManager*\textcolor{keyword}{>}(context);}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00137}00137\ \ \ \ \ manager-\/>m\_joystickCount++;}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00138}00138\ \}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00139}00139\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00142}00142\ \textcolor{keywordtype}{void}\ HIDJoystickManager::pluggedOut(\textcolor{keywordtype}{void}*\ context,\ IOReturn,\ \textcolor{keywordtype}{void}*,\ IOHIDDeviceRef)}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00143}00143\ \{}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00144}00144\ \ \ \ \ HIDJoystickManager*\ manager\ =\ \textcolor{keyword}{static\_cast<}HIDJoystickManager*\textcolor{keyword}{>}(context);}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00145}00145\ \ \ \ \ manager-\/>m\_joystickCount-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00146}00146\ \}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00147}00147\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00149}00149\ \}\ \textcolor{comment}{//\ namespace\ priv}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00150}00150\ }
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00151}00151\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+\DoxyCodeLine{\Hypertarget{_h_i_d_joystick_manager_8cpp_source_l00152}00152\ }
+
+\end{DoxyCode}

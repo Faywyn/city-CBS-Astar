@@ -1,0 +1,223 @@
+\doxysubsection{View.\+cpp}
+\hypertarget{_view_8cpp_source}{}\label{_view_8cpp_source}\index{View.cpp@{View.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00002}00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00003}00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00004}00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00005}00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00006}00006\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00007}00007\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00008}00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00009}00009\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00010}00010\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00011}00011\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00012}00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00013}00013\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00014}00014\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00015}00015\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00016}00016\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00017}00017\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00018}00018\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00019}00019\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00020}00020\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00021}00021\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00022}00022\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00026}00026\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00028}00028\ \textcolor{preprocessor}{\#include\ <SFML/Graphics/View.hpp>}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00029}00029\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00032}00032\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00033}00033\ \{}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00035}00035\ View::View()\ :}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00036}00036\ m\_center\ \ \ \ \ \ \ \ \ \ \ \ \ (),}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00037}00037\ m\_size\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (),}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00038}00038\ m\_rotation\ \ \ \ \ \ \ \ \ \ \ (0),}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00039}00039\ m\_viewport\ \ \ \ \ \ \ \ \ \ \ (0,\ 0,\ 1,\ 1),}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00040}00040\ m\_transformUpdated\ \ \ (false),}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00041}00041\ m\_invTransformUpdated(false)}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00042}00042\ \{}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00043}00043\ \ \ \ \ reset(FloatRect(0,\ 0,\ 1000,\ 1000));}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00044}00044\ \}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00048}00048\ View::View(\textcolor{keyword}{const}\ FloatRect\&\ rectangle)\ :}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00049}00049\ m\_center\ \ \ \ \ \ \ \ \ \ \ \ \ (),}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00050}00050\ m\_size\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (),}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00051}00051\ m\_rotation\ \ \ \ \ \ \ \ \ \ \ (0),}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00052}00052\ m\_viewport\ \ \ \ \ \ \ \ \ \ \ (0,\ 0,\ 1,\ 1),}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00053}00053\ m\_transformUpdated\ \ \ (false),}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00054}00054\ m\_invTransformUpdated(false)}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00055}00055\ \{}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00056}00056\ \ \ \ \ reset(rectangle);}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00057}00057\ \}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00061}00061\ View::View(\textcolor{keyword}{const}\ Vector2f\&\ center,\ \textcolor{keyword}{const}\ Vector2f\&\ size)\ :}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00062}00062\ m\_center\ \ \ \ \ \ \ \ \ \ \ \ \ (center),}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00063}00063\ m\_size\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (size),}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00064}00064\ m\_rotation\ \ \ \ \ \ \ \ \ \ \ (0),}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00065}00065\ m\_viewport\ \ \ \ \ \ \ \ \ \ \ (0,\ 0,\ 1,\ 1),}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00066}00066\ m\_transformUpdated\ \ \ (false),}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00067}00067\ m\_invTransformUpdated(false)}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00068}00068\ \{}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00070}00070\ \}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00073}00073\ \textcolor{keywordtype}{void}\ View::setCenter(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y)}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00074}00074\ \{}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00075}00075\ \ \ \ \ m\_center.x\ =\ x;}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00076}00076\ \ \ \ \ m\_center.y\ =\ y;}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00078}00078\ \ \ \ \ m\_transformUpdated\ \ \ \ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00079}00079\ \ \ \ \ m\_invTransformUpdated\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00080}00080\ \}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00084}00084\ \textcolor{keywordtype}{void}\ View::setCenter(\textcolor{keyword}{const}\ Vector2f\&\ center)}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00085}00085\ \{}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00086}00086\ \ \ \ \ setCenter(center.x,\ center.y);}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00087}00087\ \}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00091}00091\ \textcolor{keywordtype}{void}\ View::setSize(\textcolor{keywordtype}{float}\ width,\ \textcolor{keywordtype}{float}\ height)}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00092}00092\ \{}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00093}00093\ \ \ \ \ m\_size.x\ =\ width;}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00094}00094\ \ \ \ \ m\_size.y\ =\ height;}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00096}00096\ \ \ \ \ m\_transformUpdated\ \ \ \ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00097}00097\ \ \ \ \ m\_invTransformUpdated\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00098}00098\ \}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00102}00102\ \textcolor{keywordtype}{void}\ View::setSize(\textcolor{keyword}{const}\ Vector2f\&\ size)}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00103}00103\ \{}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00104}00104\ \ \ \ \ setSize(size.x,\ size.y);}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00105}00105\ \}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00109}00109\ \textcolor{keywordtype}{void}\ View::setRotation(\textcolor{keywordtype}{float}\ angle)}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00110}00110\ \{}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00111}00111\ \ \ \ \ m\_rotation\ =\ std::fmod(angle,\ 360.f);}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00112}00112\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_rotation\ <\ 0)}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00113}00113\ \ \ \ \ \ \ \ \ m\_rotation\ +=\ 360.f;}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00115}00115\ \ \ \ \ m\_transformUpdated\ \ \ \ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00116}00116\ \ \ \ \ m\_invTransformUpdated\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00117}00117\ \}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00119}00119\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00121}00121\ \textcolor{keywordtype}{void}\ View::setViewport(\textcolor{keyword}{const}\ FloatRect\&\ viewport)}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00122}00122\ \{}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00123}00123\ \ \ \ \ m\_viewport\ =\ viewport;}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00124}00124\ \}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00128}00128\ \textcolor{keywordtype}{void}\ View::reset(\textcolor{keyword}{const}\ FloatRect\&\ rectangle)}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00129}00129\ \{}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00130}00130\ \ \ \ \ m\_center.x\ =\ rectangle.left\ +\ rectangle.width\ /\ 2.f;}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00131}00131\ \ \ \ \ m\_center.y\ =\ rectangle.top\ +\ rectangle.height\ /\ 2.f;}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00132}00132\ \ \ \ \ m\_size.x\ \ \ =\ rectangle.width;}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00133}00133\ \ \ \ \ m\_size.y\ \ \ =\ rectangle.height;}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00134}00134\ \ \ \ \ m\_rotation\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00135}00135\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00136}00136\ \ \ \ \ m\_transformUpdated\ \ \ \ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00137}00137\ \ \ \ \ m\_invTransformUpdated\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00138}00138\ \}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00139}00139\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00142}00142\ \textcolor{keyword}{const}\ Vector2f\&\ View::getCenter()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00143}00143\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00144}00144\ \ \ \ \ \textcolor{keywordflow}{return}\ m\_center;}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00145}00145\ \}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00146}00146\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00147}00147\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00149}00149\ \textcolor{keyword}{const}\ Vector2f\&\ View::getSize()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00150}00150\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00151}00151\ \ \ \ \ \textcolor{keywordflow}{return}\ m\_size;}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00152}00152\ \}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00153}00153\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00156}00156\ \textcolor{keywordtype}{float}\ View::getRotation()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00157}00157\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00158}00158\ \ \ \ \ \textcolor{keywordflow}{return}\ m\_rotation;}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00159}00159\ \}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00160}00160\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00163}00163\ \textcolor{keyword}{const}\ FloatRect\&\ View::getViewport()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00164}00164\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00165}00165\ \ \ \ \ \textcolor{keywordflow}{return}\ m\_viewport;}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00166}00166\ \}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00167}00167\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00168}00168\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00170}00170\ \textcolor{keywordtype}{void}\ View::move(\textcolor{keywordtype}{float}\ offsetX,\ \textcolor{keywordtype}{float}\ offsetY)}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00171}00171\ \{}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00172}00172\ \ \ \ \ setCenter(m\_center.x\ +\ offsetX,\ m\_center.y\ +\ offsetY);}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00173}00173\ \}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00174}00174\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00175}00175\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00177}00177\ \textcolor{keywordtype}{void}\ View::move(\textcolor{keyword}{const}\ Vector2f\&\ offset)}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00178}00178\ \{}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00179}00179\ \ \ \ \ setCenter(m\_center\ +\ offset);}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00180}00180\ \}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00181}00181\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00182}00182\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00184}00184\ \textcolor{keywordtype}{void}\ View::rotate(\textcolor{keywordtype}{float}\ angle)}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00185}00185\ \{}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00186}00186\ \ \ \ \ setRotation(m\_rotation\ +\ angle);}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00187}00187\ \}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00188}00188\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00191}00191\ \textcolor{keywordtype}{void}\ View::zoom(\textcolor{keywordtype}{float}\ factor)}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00192}00192\ \{}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00193}00193\ \ \ \ \ setSize(m\_size.x\ *\ factor,\ m\_size.y\ *\ factor);}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00194}00194\ \}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00195}00195\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00196}00196\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00198}00198\ \textcolor{keyword}{const}\ Transform\&\ View::getTransform()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00199}00199\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00200}00200\ \ \ \ \ \textcolor{comment}{//\ Recompute\ the\ matrix\ if\ needed}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00201}00201\ \ \ \ \ \textcolor{keywordflow}{if}\ (!m\_transformUpdated)}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00202}00202\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00203}00203\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Rotation\ components}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00204}00204\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ angle\ \ =\ m\_rotation\ *\ 3.141592654f\ /\ 180.f;}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00205}00205\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ cosine\ =\ std::cos(angle);}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00206}00206\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ sine\ \ \ =\ std::sin(angle);}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00207}00207\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ tx\ \ \ \ \ =\ -\/m\_center.x\ *\ cosine\ -\/\ m\_center.y\ *\ sine\ +\ m\_center.x;}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00208}00208\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ ty\ \ \ \ \ =\ \ m\_center.x\ *\ sine\ -\/\ m\_center.y\ *\ cosine\ +\ m\_center.y;}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00209}00209\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00210}00210\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Projection\ components}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00211}00211\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ a\ =\ \ 2.f\ /\ m\_size.x;}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00212}00212\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ b\ =\ -\/2.f\ /\ m\_size.y;}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00213}00213\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ c\ =\ -\/a\ *\ m\_center.x;}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00214}00214\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ d\ =\ -\/b\ *\ m\_center.y;}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00215}00215\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00216}00216\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Rebuild\ the\ projection\ matrix}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00217}00217\ \ \ \ \ \ \ \ \ m\_transform\ =\ Transform(\ a\ *\ cosine,\ a\ *\ sine,\ \ \ a\ *\ tx\ +\ c,}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/b\ *\ sine,\ \ \ b\ *\ cosine,\ b\ *\ ty\ +\ d,}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00219}00219\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0.f,\ \ \ \ \ \ \ \ 0.f,\ \ \ \ \ \ \ \ 1.f);}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00220}00220\ \ \ \ \ \ \ \ \ m\_transformUpdated\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00221}00221\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00222}00222\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00223}00223\ \ \ \ \ \textcolor{keywordflow}{return}\ m\_transform;}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00224}00224\ \}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00225}00225\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00226}00226\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00228}00228\ \textcolor{keyword}{const}\ Transform\&\ View::getInverseTransform()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00229}00229\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00230}00230\ \ \ \ \ \textcolor{comment}{//\ Recompute\ the\ matrix\ if\ needed}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00231}00231\ \ \ \ \ \textcolor{keywordflow}{if}\ (!m\_invTransformUpdated)}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00232}00232\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00233}00233\ \ \ \ \ \ \ \ \ m\_inverseTransform\ =\ getTransform().getInverse();}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00234}00234\ \ \ \ \ \ \ \ \ m\_invTransformUpdated\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00235}00235\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00236}00236\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00237}00237\ \ \ \ \ \textcolor{keywordflow}{return}\ m\_inverseTransform;}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00238}00238\ \}}
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00239}00239\ }
+\DoxyCodeLine{\Hypertarget{_view_8cpp_source_l00240}00240\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+
+\end{DoxyCode}

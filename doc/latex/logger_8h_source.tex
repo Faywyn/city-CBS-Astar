@@ -1,0 +1,385 @@
+\doxysubsection{logger.\+h}
+\hypertarget{logger_8h_source}{}\label{logger_8h_source}\index{logger.h@{logger.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00001}00001\ \textcolor{comment}{//\ Copyright(c)\ 2015-\/present,\ Gabi\ Melman\ \&\ spdlog\ contributors.}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00002}00002\ \textcolor{comment}{//\ Distributed\ under\ the\ MIT\ License\ (http://opensource.org/licenses/MIT)}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00004}00004\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00006}00006\ \textcolor{comment}{//\ Thread\ safe\ logger\ (except\ for\ set\_error\_handler())}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00007}00007\ \textcolor{comment}{//\ Has\ name,\ log\ level,\ vector\ of\ std::shared\ sink\ pointers\ and\ formatter}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00008}00008\ \textcolor{comment}{//\ Upon\ each\ log\ write\ the\ logger:}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00009}00009\ \textcolor{comment}{//\ 1.\ Checks\ if\ its\ log\ level\ is\ enough\ to\ log\ the\ message\ and\ if\ yes:}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00010}00010\ \textcolor{comment}{//\ 2.\ Call\ the\ underlying\ sinks\ to\ do\ the\ job.}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00011}00011\ \textcolor{comment}{//\ 3.\ Each\ sink\ use\ its\ own\ private\ copy\ of\ a\ formatter\ to\ format\ the\ message}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00012}00012\ \textcolor{comment}{//\ and\ send\ to\ its\ destination.}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00013}00013\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00014}00014\ \textcolor{comment}{//\ The\ use\ of\ private\ formatter\ per\ sink\ provides\ the\ opportunity\ to\ cache\ some}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00015}00015\ \textcolor{comment}{//\ formatted\ data,\ and\ support\ for\ different\ format\ per\ sink.}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00017}00017\ \textcolor{preprocessor}{\#include\ <spdlog/common.h>}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00018}00018\ \textcolor{preprocessor}{\#include\ <spdlog/details/backtracer.h>}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00019}00019\ \textcolor{preprocessor}{\#include\ <spdlog/details/log\_msg.h>}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00021}00021\ \textcolor{preprocessor}{\#ifdef\ SPDLOG\_WCHAR\_TO\_UTF8\_SUPPORT}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00022}00022\ \textcolor{preprocessor}{\ \ \ \ \#ifndef\ \_WIN32}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00023}00023\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#error\ SPDLOG\_WCHAR\_TO\_UTF8\_SUPPORT\ only\ supported\ on\ windows}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00024}00024\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00025}00025\ \textcolor{preprocessor}{\ \ \ \ \#include\ <spdlog/details/os.h>}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00026}00026\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00028}00028\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00030}00030\ \textcolor{preprocessor}{\#ifndef\ SPDLOG\_NO\_EXCEPTIONS}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00031}00031\ \textcolor{preprocessor}{\ \ \ \ \#define\ SPDLOG\_LOGGER\_CATCH(location)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00032}00032\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ catch\ (const\ std::exception\ \&ex)\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00033}00033\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (location.filename)\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00034}00034\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ err\_handler\_(fmt\_lib::format(SPDLOG\_FMT\_STRING("{}\{\}\ [\{\}(\{\})]"{}),\ ex.what(),\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00035}00035\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ location.filename,\ location.line));\ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00036}00036\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \}\ else\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00037}00037\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ err\_handler\_(ex.what());\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00038}00038\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00039}00039\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00040}00040\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ catch\ (...)\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00041}00041\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ err\_handler\_("{}Rethrowing\ unknown\ exception\ in\ logger"{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00042}00042\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ throw;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00043}00043\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00044}00044\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00045}00045\ \textcolor{preprocessor}{\ \ \ \ \#define\ SPDLOG\_LOGGER\_CATCH(location)}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00046}00046\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00048}00048\ \textcolor{keyword}{namespace\ }spdlog\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00050}00050\ \textcolor{keyword}{class\ }SPDLOG\_API\ logger\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00051}00051\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00052}00052\ \ \ \ \ \textcolor{comment}{//\ Empty\ logger}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00053}00053\ \ \ \ \ \textcolor{keyword}{explicit}\ logger(std::string\ name)}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00054}00054\ \ \ \ \ \ \ \ \ :\ name\_(std::move(name)),}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ sinks\_()\ \{\}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00057}00057\ \ \ \ \ \textcolor{comment}{//\ Logger\ with\ range\ on\ sinks}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00058}00058\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ It>}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00059}00059\ \ \ \ \ logger(std::string\ name,\ It\ begin,\ It\ end)}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00060}00060\ \ \ \ \ \ \ \ \ :\ name\_(std::move(name)),}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ sinks\_(begin,\ end)\ \{\}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00063}00063\ \ \ \ \ \textcolor{comment}{//\ Logger\ with\ single\ sink}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00064}00064\ \ \ \ \ logger(std::string\ name,\ sink\_ptr\ single\_sink)}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00065}00065\ \ \ \ \ \ \ \ \ :\ logger(std::move(name),\ \{std::move(single\_sink)\})\ \{\}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00067}00067\ \ \ \ \ \textcolor{comment}{//\ Logger\ with\ sinks\ init\ list}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00068}00068\ \ \ \ \ logger(std::string\ name,\ sinks\_init\_list\ sinks)}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00069}00069\ \ \ \ \ \ \ \ \ :\ logger(std::move(name),\ sinks.begin(),\ sinks.end())\ \{\}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00071}00071\ \ \ \ \ \textcolor{keyword}{virtual}\ \string~logger()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00073}00073\ \ \ \ \ logger(\textcolor{keyword}{const}\ logger\ \&other);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00074}00074\ \ \ \ \ logger(logger\ \&\&other)\ SPDLOG\_NOEXCEPT;}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00075}00075\ \ \ \ \ logger\ \&operator=(logger\ other)\ SPDLOG\_NOEXCEPT;}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00076}00076\ \ \ \ \ \textcolor{keywordtype}{void}\ swap(spdlog::logger\ \&other)\ SPDLOG\_NOEXCEPT;}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00078}00078\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00079}00079\ \ \ \ \ \textcolor{keywordtype}{void}\ log(source\_loc\ loc,\ level::level\_enum\ lvl,\ format\_string\_t<Args...>\ fmt,\ Args\ \&\&...args)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00080}00080\ \ \ \ \ \ \ \ \ log\_(loc,\ lvl,\ details::to\_string\_view(fmt),\ std::forward<Args>(args)...);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00081}00081\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00083}00083\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00084}00084\ \ \ \ \ \textcolor{keywordtype}{void}\ log(level::level\_enum\ lvl,\ format\_string\_t<Args...>\ fmt,\ Args\ \&\&...args)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00085}00085\ \ \ \ \ \ \ \ \ log(source\_loc\{\},\ lvl,\ fmt,\ std::forward<Args>(args)...);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00086}00086\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00088}00088\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00089}00089\ \ \ \ \ \textcolor{keywordtype}{void}\ log(level::level\_enum\ lvl,\ \textcolor{keyword}{const}\ T\ \&msg)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00090}00090\ \ \ \ \ \ \ \ \ log(source\_loc\{\},\ lvl,\ msg);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00091}00091\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00093}00093\ \ \ \ \ \textcolor{comment}{//\ T\ cannot\ be\ statically\ converted\ to\ format\ string\ (including\ string\_view/wstring\_view)}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00094}00094\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class\ }T,}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{typename}\ std::enable\_if<!is\_convertible\_to\_any\_format\_string<const\ T\ \&>::value,}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}>::type\ =\ 0>}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00097}00097\ \ \ \ \ \textcolor{keywordtype}{void}\ log(source\_loc\ loc,\ level::level\_enum\ lvl,\ \textcolor{keyword}{const}\ T\ \&msg)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00098}00098\ \ \ \ \ \ \ \ \ log(loc,\ lvl,\ \textcolor{stringliteral}{"{}\{\}"{}},\ msg);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00099}00099\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00101}00101\ \ \ \ \ \textcolor{keywordtype}{void}\ log(log\_clock::time\_point\ log\_time,}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ source\_loc\ loc,}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ level::level\_enum\ lvl,}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ string\_view\_t\ msg)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00105}00105\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ log\_enabled\ =\ should\_log(lvl);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00106}00106\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ traceback\_enabled\ =\ tracer\_.enabled();}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00107}00107\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!log\_enabled\ \&\&\ !traceback\_enabled)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00109}00109\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00110}00110\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00111}00111\ \ \ \ \ \ \ \ \ details::log\_msg\ log\_msg(log\_time,\ loc,\ name\_,\ lvl,\ msg);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00112}00112\ \ \ \ \ \ \ \ \ log\_it\_(log\_msg,\ log\_enabled,\ traceback\_enabled);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00113}00113\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00115}00115\ \ \ \ \ \textcolor{keywordtype}{void}\ log(source\_loc\ loc,\ level::level\_enum\ lvl,\ string\_view\_t\ msg)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00116}00116\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ log\_enabled\ =\ should\_log(lvl);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00117}00117\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ traceback\_enabled\ =\ tracer\_.enabled();}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00118}00118\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!log\_enabled\ \&\&\ !traceback\_enabled)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00120}00120\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00122}00122\ \ \ \ \ \ \ \ \ details::log\_msg\ log\_msg(loc,\ name\_,\ lvl,\ msg);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00123}00123\ \ \ \ \ \ \ \ \ log\_it\_(log\_msg,\ log\_enabled,\ traceback\_enabled);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00124}00124\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00126}00126\ \ \ \ \ \textcolor{keywordtype}{void}\ log(level::level\_enum\ lvl,\ string\_view\_t\ msg)\ \{\ log(source\_loc\{\},\ lvl,\ msg);\ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00128}00128\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00129}00129\ \ \ \ \ \textcolor{keywordtype}{void}\ trace(format\_string\_t<Args...>\ fmt,\ Args\ \&\&...args)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00130}00130\ \ \ \ \ \ \ \ \ log(level::trace,\ fmt,\ std::forward<Args>(args)...);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00131}00131\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00132}00132\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00133}00133\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00134}00134\ \ \ \ \ \textcolor{keywordtype}{void}\ debug(format\_string\_t<Args...>\ fmt,\ Args\ \&\&...args)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00135}00135\ \ \ \ \ \ \ \ \ log(level::debug,\ fmt,\ std::forward<Args>(args)...);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00136}00136\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00138}00138\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00139}00139\ \ \ \ \ \textcolor{keywordtype}{void}\ info(format\_string\_t<Args...>\ fmt,\ Args\ \&\&...args)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00140}00140\ \ \ \ \ \ \ \ \ log(level::info,\ fmt,\ std::forward<Args>(args)...);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00141}00141\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00142}00142\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00143}00143\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00144}00144\ \ \ \ \ \textcolor{keywordtype}{void}\ warn(format\_string\_t<Args...>\ fmt,\ Args\ \&\&...args)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00145}00145\ \ \ \ \ \ \ \ \ log(level::warn,\ fmt,\ std::forward<Args>(args)...);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00146}00146\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00147}00147\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00148}00148\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00149}00149\ \ \ \ \ \textcolor{keywordtype}{void}\ error(format\_string\_t<Args...>\ fmt,\ Args\ \&\&...args)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00150}00150\ \ \ \ \ \ \ \ \ log(level::err,\ fmt,\ std::forward<Args>(args)...);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00151}00151\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00152}00152\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00153}00153\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00154}00154\ \ \ \ \ \textcolor{keywordtype}{void}\ critical(format\_string\_t<Args...>\ fmt,\ Args\ \&\&...args)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00155}00155\ \ \ \ \ \ \ \ \ log(level::critical,\ fmt,\ std::forward<Args>(args)...);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00156}00156\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00157}00157\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00158}00158\ \textcolor{preprocessor}{\#ifdef\ SPDLOG\_WCHAR\_TO\_UTF8\_SUPPORT}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00159}00159\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00160}00160\ \ \ \ \ \textcolor{keywordtype}{void}\ log(source\_loc\ loc,\ level::level\_enum\ lvl,\ wformat\_string\_t<Args...>\ fmt,\ Args\ \&\&...args)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00161}00161\ \ \ \ \ \ \ \ \ log\_(loc,\ lvl,\ details::to\_string\_view(fmt),\ std::forward<Args>(args)...);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00162}00162\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00163}00163\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00164}00164\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00165}00165\ \ \ \ \ \textcolor{keywordtype}{void}\ log(level::level\_enum\ lvl,\ wformat\_string\_t<Args...>\ fmt,\ Args\ \&\&...args)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00166}00166\ \ \ \ \ \ \ \ \ log(source\_loc\{\},\ lvl,\ fmt,\ std::forward<Args>(args)...);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00167}00167\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00168}00168\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00169}00169\ \ \ \ \ \textcolor{keywordtype}{void}\ log(log\_clock::time\_point\ log\_time,}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ source\_loc\ loc,}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \ level::level\_enum\ lvl,}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ wstring\_view\_t\ msg)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00173}00173\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ log\_enabled\ =\ should\_log(lvl);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00174}00174\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ traceback\_enabled\ =\ tracer\_.enabled();}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00175}00175\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!log\_enabled\ \&\&\ !traceback\_enabled)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00177}00177\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00178}00178\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00179}00179\ \ \ \ \ \ \ \ \ memory\_buf\_t\ buf;}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00180}00180\ \ \ \ \ \ \ \ \ details::os::wstr\_to\_utf8buf(wstring\_view\_t(msg.data(),\ msg.size()),\ buf);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00181}00181\ \ \ \ \ \ \ \ \ details::log\_msg\ log\_msg(log\_time,\ loc,\ name\_,\ lvl,\ string\_view\_t(buf.data(),\ buf.size()));}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00182}00182\ \ \ \ \ \ \ \ \ log\_it\_(log\_msg,\ log\_enabled,\ traceback\_enabled);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00183}00183\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00184}00184\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00185}00185\ \ \ \ \ \textcolor{keywordtype}{void}\ log(source\_loc\ loc,\ level::level\_enum\ lvl,\ wstring\_view\_t\ msg)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00186}00186\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ log\_enabled\ =\ should\_log(lvl);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00187}00187\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ traceback\_enabled\ =\ tracer\_.enabled();}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00188}00188\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!log\_enabled\ \&\&\ !traceback\_enabled)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00190}00190\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00191}00191\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00192}00192\ \ \ \ \ \ \ \ \ memory\_buf\_t\ buf;}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00193}00193\ \ \ \ \ \ \ \ \ details::os::wstr\_to\_utf8buf(wstring\_view\_t(msg.data(),\ msg.size()),\ buf);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00194}00194\ \ \ \ \ \ \ \ \ details::log\_msg\ log\_msg(loc,\ name\_,\ lvl,\ string\_view\_t(buf.data(),\ buf.size()));}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00195}00195\ \ \ \ \ \ \ \ \ log\_it\_(log\_msg,\ log\_enabled,\ traceback\_enabled);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00196}00196\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00197}00197\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00198}00198\ \ \ \ \ \textcolor{keywordtype}{void}\ log(level::level\_enum\ lvl,\ wstring\_view\_t\ msg)\ \{\ log(source\_loc\{\},\ lvl,\ msg);\ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00199}00199\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00200}00200\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00201}00201\ \ \ \ \ \textcolor{keywordtype}{void}\ trace(wformat\_string\_t<Args...>\ fmt,\ Args\ \&\&...args)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00202}00202\ \ \ \ \ \ \ \ \ log(level::trace,\ fmt,\ std::forward<Args>(args)...);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00203}00203\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00204}00204\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00205}00205\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00206}00206\ \ \ \ \ \textcolor{keywordtype}{void}\ debug(wformat\_string\_t<Args...>\ fmt,\ Args\ \&\&...args)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00207}00207\ \ \ \ \ \ \ \ \ log(level::debug,\ fmt,\ std::forward<Args>(args)...);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00208}00208\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00209}00209\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00210}00210\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00211}00211\ \ \ \ \ \textcolor{keywordtype}{void}\ info(wformat\_string\_t<Args...>\ fmt,\ Args\ \&\&...args)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00212}00212\ \ \ \ \ \ \ \ \ log(level::info,\ fmt,\ std::forward<Args>(args)...);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00213}00213\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00214}00214\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00215}00215\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00216}00216\ \ \ \ \ \textcolor{keywordtype}{void}\ warn(wformat\_string\_t<Args...>\ fmt,\ Args\ \&\&...args)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00217}00217\ \ \ \ \ \ \ \ \ log(level::warn,\ fmt,\ std::forward<Args>(args)...);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00218}00218\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00219}00219\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00220}00220\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00221}00221\ \ \ \ \ \textcolor{keywordtype}{void}\ error(wformat\_string\_t<Args...>\ fmt,\ Args\ \&\&...args)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00222}00222\ \ \ \ \ \ \ \ \ log(level::err,\ fmt,\ std::forward<Args>(args)...);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00223}00223\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00224}00224\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00225}00225\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00226}00226\ \ \ \ \ \textcolor{keywordtype}{void}\ critical(wformat\_string\_t<Args...>\ fmt,\ Args\ \&\&...args)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00227}00227\ \ \ \ \ \ \ \ \ log(level::critical,\ fmt,\ std::forward<Args>(args)...);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00228}00228\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00229}00229\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00230}00230\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00231}00231\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00232}00232\ \ \ \ \ \textcolor{keywordtype}{void}\ trace(\textcolor{keyword}{const}\ T\ \&msg)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00233}00233\ \ \ \ \ \ \ \ \ log(level::trace,\ msg);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00234}00234\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00235}00235\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00236}00236\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00237}00237\ \ \ \ \ \textcolor{keywordtype}{void}\ debug(\textcolor{keyword}{const}\ T\ \&msg)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00238}00238\ \ \ \ \ \ \ \ \ log(level::debug,\ msg);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00239}00239\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00240}00240\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00241}00241\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00242}00242\ \ \ \ \ \textcolor{keywordtype}{void}\ info(\textcolor{keyword}{const}\ T\ \&msg)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00243}00243\ \ \ \ \ \ \ \ \ log(level::info,\ msg);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00244}00244\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00245}00245\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00246}00246\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00247}00247\ \ \ \ \ \textcolor{keywordtype}{void}\ warn(\textcolor{keyword}{const}\ T\ \&msg)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00248}00248\ \ \ \ \ \ \ \ \ log(level::warn,\ msg);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00249}00249\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00250}00250\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00251}00251\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00252}00252\ \ \ \ \ \textcolor{keywordtype}{void}\ error(\textcolor{keyword}{const}\ T\ \&msg)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00253}00253\ \ \ \ \ \ \ \ \ log(level::err,\ msg);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00254}00254\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00255}00255\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00256}00256\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00257}00257\ \ \ \ \ \textcolor{keywordtype}{void}\ critical(\textcolor{keyword}{const}\ T\ \&msg)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00258}00258\ \ \ \ \ \ \ \ \ log(level::critical,\ msg);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00259}00259\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00260}00260\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00261}00261\ \ \ \ \ \textcolor{comment}{//\ return\ true\ logging\ is\ enabled\ for\ the\ given\ level.}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00262}00262\ \ \ \ \ \textcolor{keywordtype}{bool}\ should\_log(level::level\_enum\ msg\_level)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00263}00263\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ msg\_level\ >=\ level\_.load(std::memory\_order\_relaxed);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00264}00264\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00265}00265\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00266}00266\ \ \ \ \ \textcolor{comment}{//\ return\ true\ if\ backtrace\ logging\ is\ enabled.}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00267}00267\ \ \ \ \ \textcolor{keywordtype}{bool}\ should\_backtrace()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ tracer\_.enabled();\ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00268}00268\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00269}00269\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_level(level::level\_enum\ log\_level);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00270}00270\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00271}00271\ \ \ \ \ level::level\_enum\ level()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00272}00272\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00273}00273\ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&name()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00274}00274\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00275}00275\ \ \ \ \ \textcolor{comment}{//\ set\ formatting\ for\ the\ sinks\ in\ this\ logger.}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00276}00276\ \ \ \ \ \textcolor{comment}{//\ each\ sink\ will\ get\ a\ separate\ instance\ of\ the\ formatter\ object.}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00277}00277\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_formatter(std::unique\_ptr<formatter>\ f);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00278}00278\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00279}00279\ \ \ \ \ \textcolor{comment}{//\ set\ formatting\ for\ the\ sinks\ in\ this\ logger.}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00280}00280\ \ \ \ \ \textcolor{comment}{//\ equivalent\ to}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00281}00281\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ set\_formatter(make\_unique<pattern\_formatter>(pattern,\ time\_type))}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00282}00282\ \ \ \ \ \textcolor{comment}{//\ Note:\ each\ sink\ will\ get\ a\ new\ instance\ of\ a\ formatter\ object,\ replacing\ the\ old\ one.}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00283}00283\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_pattern(std::string\ pattern,\ pattern\_time\_type\ time\_type\ =\ pattern\_time\_type::local);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00284}00284\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00285}00285\ \ \ \ \ \textcolor{comment}{//\ backtrace\ support.}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00286}00286\ \ \ \ \ \textcolor{comment}{//\ efficiently\ store\ all\ debug/trace\ messages\ in\ a\ circular\ buffer\ until\ needed\ for\ debugging.}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00287}00287\ \ \ \ \ \textcolor{keywordtype}{void}\ enable\_backtrace(\textcolor{keywordtype}{size\_t}\ n\_messages);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00288}00288\ \ \ \ \ \textcolor{keywordtype}{void}\ disable\_backtrace();}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00289}00289\ \ \ \ \ \textcolor{keywordtype}{void}\ dump\_backtrace();}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00290}00290\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00291}00291\ \ \ \ \ \textcolor{comment}{//\ flush\ functions}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00292}00292\ \ \ \ \ \textcolor{keywordtype}{void}\ flush();}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00293}00293\ \ \ \ \ \textcolor{keywordtype}{void}\ flush\_on(level::level\_enum\ log\_level);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00294}00294\ \ \ \ \ level::level\_enum\ flush\_level()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00295}00295\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00296}00296\ \ \ \ \ \textcolor{comment}{//\ sinks}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00297}00297\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<sink\_ptr>\ \&sinks()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00298}00298\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00299}00299\ \ \ \ \ std::vector<sink\_ptr>\ \&sinks();}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00300}00300\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00301}00301\ \ \ \ \ \textcolor{comment}{//\ error\ handler}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00302}00302\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_error\_handler(err\_handler);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00303}00303\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00304}00304\ \ \ \ \ \textcolor{comment}{//\ create\ new\ logger\ with\ same\ sinks\ and\ configuration.}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00305}00305\ \ \ \ \ \textcolor{keyword}{virtual}\ std::shared\_ptr<logger>\ clone(std::string\ logger\_name);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00306}00306\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00307}00307\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00308}00308\ \ \ \ \ std::string\ name\_;}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00309}00309\ \ \ \ \ std::vector<sink\_ptr>\ sinks\_;}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00310}00310\ \ \ \ \ spdlog::level\_t\ level\_\{level::info\};}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00311}00311\ \ \ \ \ spdlog::level\_t\ flush\_level\_\{level::off\};}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00312}00312\ \ \ \ \ err\_handler\ custom\_err\_handler\_\{\textcolor{keyword}{nullptr}\};}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00313}00313\ \ \ \ \ details::backtracer\ tracer\_;}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00314}00314\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00315}00315\ \ \ \ \ \textcolor{comment}{//\ common\ implementation\ for\ after\ templated\ public\ api\ has\ been\ resolved}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00316}00316\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00317}00317\ \ \ \ \ \textcolor{keywordtype}{void}\ log\_(source\_loc\ loc,\ level::level\_enum\ lvl,\ string\_view\_t\ fmt,\ Args\ \&\&...args)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00318}00318\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ log\_enabled\ =\ should\_log(lvl);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00319}00319\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ traceback\_enabled\ =\ tracer\_.enabled();}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00320}00320\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!log\_enabled\ \&\&\ !traceback\_enabled)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00321}00321\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00322}00322\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00323}00323\ \ \ \ \ \ \ \ \ SPDLOG\_TRY\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00324}00324\ \ \ \ \ \ \ \ \ \ \ \ \ memory\_buf\_t\ buf;}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00325}00325\ \textcolor{preprocessor}{\#ifdef\ SPDLOG\_USE\_STD\_FORMAT}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00326}00326\ \ \ \ \ \ \ \ \ \ \ \ \ fmt\_lib::vformat\_to(std::back\_inserter(buf),\ fmt,\ fmt\_lib::make\_format\_args(args...));}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00327}00327\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00328}00328\ \ \ \ \ \ \ \ \ \ \ \ \ fmt::vformat\_to(fmt::appender(buf),\ fmt,\ fmt::make\_format\_args(args...));}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00329}00329\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00330}00330\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00331}00331\ \ \ \ \ \ \ \ \ \ \ \ \ details::log\_msg\ log\_msg(loc,\ name\_,\ lvl,\ string\_view\_t(buf.data(),\ buf.size()));}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00332}00332\ \ \ \ \ \ \ \ \ \ \ \ \ log\_it\_(log\_msg,\ log\_enabled,\ traceback\_enabled);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00333}00333\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00334}00334\ \ \ \ \ \ \ \ \ SPDLOG\_LOGGER\_CATCH(loc)}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00335}00335\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00336}00336\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00337}00337\ \textcolor{preprocessor}{\#ifdef\ SPDLOG\_WCHAR\_TO\_UTF8\_SUPPORT}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00338}00338\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00339}00339\ \ \ \ \ \textcolor{keywordtype}{void}\ log\_(source\_loc\ loc,\ level::level\_enum\ lvl,\ wstring\_view\_t\ fmt,\ Args\ \&\&...args)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00340}00340\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ log\_enabled\ =\ should\_log(lvl);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00341}00341\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ traceback\_enabled\ =\ tracer\_.enabled();}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00342}00342\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!log\_enabled\ \&\&\ !traceback\_enabled)\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00343}00343\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00344}00344\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00345}00345\ \ \ \ \ \ \ \ \ SPDLOG\_TRY\ \{}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00346}00346\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ format\ to\ wmemory\_buffer\ and\ convert\ to\ utf8}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00347}00347\ \ \ \ \ \ \ \ \ \ \ \ \ wmemory\_buf\_t\ wbuf;}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00348}00348\ \ \ \ \ \ \ \ \ \ \ \ \ fmt\_lib::vformat\_to(std::back\_inserter(wbuf),\ fmt,}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00349}00349\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fmt\_lib::make\_format\_args<fmt\_lib::wformat\_context>(args...));}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00350}00350\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00351}00351\ \ \ \ \ \ \ \ \ \ \ \ \ memory\_buf\_t\ buf;}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00352}00352\ \ \ \ \ \ \ \ \ \ \ \ \ details::os::wstr\_to\_utf8buf(wstring\_view\_t(wbuf.data(),\ wbuf.size()),\ buf);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00353}00353\ \ \ \ \ \ \ \ \ \ \ \ \ details::log\_msg\ log\_msg(loc,\ name\_,\ lvl,\ string\_view\_t(buf.data(),\ buf.size()));}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00354}00354\ \ \ \ \ \ \ \ \ \ \ \ \ log\_it\_(log\_msg,\ log\_enabled,\ traceback\_enabled);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00355}00355\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00356}00356\ \ \ \ \ \ \ \ \ SPDLOG\_LOGGER\_CATCH(loc)}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00357}00357\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00358}00358\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ SPDLOG\_WCHAR\_TO\_UTF8\_SUPPORT}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00359}00359\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00360}00360\ \ \ \ \ \textcolor{comment}{//\ log\ the\ given\ message\ (if\ the\ given\ log\ level\ is\ high\ enough),}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00361}00361\ \ \ \ \ \textcolor{comment}{//\ and\ save\ backtrace\ (if\ backtrace\ is\ enabled).}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00362}00362\ \ \ \ \ \textcolor{keywordtype}{void}\ log\_it\_(\textcolor{keyword}{const}\ details::log\_msg\ \&log\_msg,\ \textcolor{keywordtype}{bool}\ log\_enabled,\ \textcolor{keywordtype}{bool}\ traceback\_enabled);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00363}00363\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ sink\_it\_(\textcolor{keyword}{const}\ details::log\_msg\ \&msg);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00364}00364\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ flush\_();}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00365}00365\ \ \ \ \ \textcolor{keywordtype}{void}\ dump\_backtrace\_();}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00366}00366\ \ \ \ \ \textcolor{keywordtype}{bool}\ should\_flush\_(\textcolor{keyword}{const}\ details::log\_msg\ \&msg);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00367}00367\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00368}00368\ \ \ \ \ \textcolor{comment}{//\ handle\ errors\ during\ logging.}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00369}00369\ \ \ \ \ \textcolor{comment}{//\ default\ handler\ prints\ the\ error\ to\ stderr\ at\ max\ rate\ of\ 1\ message/sec.}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00370}00370\ \ \ \ \ \textcolor{keywordtype}{void}\ err\_handler\_(\textcolor{keyword}{const}\ std::string\ \&msg);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00371}00371\ \};}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00372}00372\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00373}00373\ \textcolor{keywordtype}{void}\ swap(logger\ \&a,\ logger\ \&b);}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00374}00374\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00375}00375\ \}\ \ \textcolor{comment}{//\ namespace\ spdlog}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00376}00376\ }
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00377}00377\ \textcolor{preprocessor}{\#ifdef\ SPDLOG\_HEADER\_ONLY}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00378}00378\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}logger-\/inl.h"{}}}
+\DoxyCodeLine{\Hypertarget{logger_8h_source_l00379}00379\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

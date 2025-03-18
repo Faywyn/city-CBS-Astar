@@ -1,0 +1,179 @@
+\doxysubsection{test\+\_\+daily\+\_\+logger.\+cpp}
+\hypertarget{test__daily__logger_8cpp_source}{}\label{test__daily__logger_8cpp_source}\index{test\_daily\_logger.cpp@{test\_daily\_logger.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00002}00002\ \textcolor{comment}{\ *\ This\ content\ is\ released\ under\ the\ MIT\ License\ as\ specified\ in}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00003}00003\ \textcolor{comment}{\ *\ https://raw.githubusercontent.com/gabime/spdlog/master/LICENSE}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00004}00004\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}includes.h"{}}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00007}00007\ \textcolor{preprocessor}{\#ifdef\ SPDLOG\_USE\_STD\_FORMAT}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00008}00008\ \textcolor{keyword}{using\ }filename\_memory\_buf\_t\ =\ std::basic\_string<spdlog::filename\_t::value\_type>;}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00009}00009\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00010}00010\ \textcolor{keyword}{using\ }filename\_memory\_buf\_t\ =\ fmt::basic\_memory\_buffer<spdlog::filename\_t::value\_type,\ 250>;}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00011}00011\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00013}00013\ \textcolor{preprocessor}{\#ifdef\ SPDLOG\_WCHAR\_FILENAMES}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00014}00014\ std::string\ filename\_buf\_to\_utf8string(\textcolor{keyword}{const}\ filename\_memory\_buf\_t\ \&w)\ \{}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00015}00015\ \ \ \ \ spdlog::memory\_buf\_t\ buf;}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00016}00016\ \ \ \ \ spdlog::details::os::wstr\_to\_utf8buf(spdlog::wstring\_view\_t(w.data(),\ w.size()),\ buf);}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00017}00017\ \ \ \ \ \textcolor{keywordflow}{return}\ SPDLOG\_BUF\_TO\_STRING(buf);}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00018}00018\ \}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00019}00019\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00020}00020\ std::string\ filename\_buf\_to\_utf8string(\textcolor{keyword}{const}\ filename\_memory\_buf\_t\ \&w)\ \{}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00021}00021\ \ \ \ \ \textcolor{keywordflow}{return}\ SPDLOG\_BUF\_TO\_STRING(w);}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00022}00022\ \}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00023}00023\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00025}00025\ TEST\_CASE(\textcolor{stringliteral}{"{}daily\_logger\ with\ dateonly\ calculator"{}},\ \textcolor{stringliteral}{"{}[daily\_logger]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00026}00026\ \ \ \ \ \textcolor{keyword}{using\ }sink\_type\ =}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00027}00027\ \ \ \ \ \ \ \ \ spdlog::sinks::daily\_file\_sink<std::mutex,\ spdlog::sinks::daily\_filename\_calculator>;}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00029}00029\ \ \ \ \ prepare\_logdir();}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00031}00031\ \ \ \ \ \textcolor{comment}{//\ calculate\ filename\ (time\ based)}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00032}00032\ \ \ \ \ spdlog::filename\_t\ basename\ =\ SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}test\_logs/daily\_dateonly"{}});}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00033}00033\ \ \ \ \ std::tm\ tm\ =\ spdlog::details::os::localtime();}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00034}00034\ \ \ \ \ filename\_memory\_buf\_t\ w;}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00035}00035\ \ \ \ \ spdlog::fmt\_lib::format\_to(std::back\_inserter(w),\ SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}\{\}\_\{:04d\}-\/\{:02d\}-\/\{:02d\}"{}}),}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ basename,\ tm.tm\_year\ +\ 1900,\ tm.tm\_mon\ +\ 1,\ tm.tm\_mday);}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00038}00038\ \ \ \ \ \textcolor{keyword}{auto}\ logger\ =\ spdlog::create<sink\_type>(\textcolor{stringliteral}{"{}logger"{}},\ basename,\ 0,\ 0);}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00039}00039\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 10;\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00040}00040\ \ \ \ \ \ \ \ \ logger-\/>info(\textcolor{stringliteral}{"{}Test\ message\ \{\}"{}},\ i);}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00041}00041\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00042}00042\ \ \ \ \ logger-\/>flush();}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00044}00044\ \ \ \ \ require\_message\_count(filename\_buf\_to\_utf8string(w),\ 10);}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00045}00045\ \}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00047}00047\ \textcolor{keyword}{struct\ }custom\_daily\_file\_name\_calculator\ \{}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00048}00048\ \ \ \ \ \textcolor{keyword}{static}\ spdlog::filename\_t\ calc\_filename(\textcolor{keyword}{const}\ spdlog::filename\_t\ \&basename,\ \textcolor{keyword}{const}\ tm\ \&now\_tm)\ \{}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00049}00049\ \ \ \ \ \ \ \ \ filename\_memory\_buf\_t\ w;}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00050}00050\ \ \ \ \ \ \ \ \ spdlog::fmt\_lib::format\_to(std::back\_inserter(w),\ SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}\{\}\{:04d\}\{:02d\}\{:02d\}"{}}),}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ basename,\ now\_tm.tm\_year\ +\ 1900,\ now\_tm.tm\_mon\ +\ 1,}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ now\_tm.tm\_mday);}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00054}00054\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ SPDLOG\_BUF\_TO\_STRING(w);}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00055}00055\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00056}00056\ \};}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00058}00058\ TEST\_CASE(\textcolor{stringliteral}{"{}daily\_logger\ with\ custom\ calculator"{}},\ \textcolor{stringliteral}{"{}[daily\_logger]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00059}00059\ \ \ \ \ \textcolor{keyword}{using\ }sink\_type\ =\ spdlog::sinks::daily\_file\_sink<std::mutex,\ custom\_daily\_file\_name\_calculator>;}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00061}00061\ \ \ \ \ prepare\_logdir();}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00063}00063\ \ \ \ \ \textcolor{comment}{//\ calculate\ filename\ (time\ based)}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00064}00064\ \ \ \ \ spdlog::filename\_t\ basename\ =\ SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}test\_logs/daily\_dateonly"{}});}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00065}00065\ \ \ \ \ std::tm\ tm\ =\ spdlog::details::os::localtime();}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00066}00066\ \ \ \ \ filename\_memory\_buf\_t\ w;}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00067}00067\ \ \ \ \ spdlog::fmt\_lib::format\_to(std::back\_inserter(w),\ SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}\{\}\{:04d\}\{:02d\}\{:02d\}"{}}),}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ basename,\ tm.tm\_year\ +\ 1900,\ tm.tm\_mon\ +\ 1,\ tm.tm\_mday);}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00070}00070\ \ \ \ \ \textcolor{keyword}{auto}\ logger\ =\ spdlog::create<sink\_type>(\textcolor{stringliteral}{"{}logger"{}},\ basename,\ 0,\ 0);}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00071}00071\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 10;\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00072}00072\ \ \ \ \ \ \ \ \ logger-\/>info(\textcolor{stringliteral}{"{}Test\ message\ \{\}"{}},\ i);}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00073}00073\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00075}00075\ \ \ \ \ logger-\/>flush();}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00077}00077\ \ \ \ \ require\_message\_count(filename\_buf\_to\_utf8string(w),\ 10);}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00078}00078\ \}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00080}00080\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00081}00081\ \textcolor{comment}{\ *\ File\ name\ calculations}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00082}00082\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00084}00084\ TEST\_CASE(\textcolor{stringliteral}{"{}rotating\_file\_sink::calc\_filename1"{}},\ \textcolor{stringliteral}{"{}[rotating\_file\_sink]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00085}00085\ \ \ \ \ \textcolor{keyword}{auto}\ filename\ =}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00086}00086\ \ \ \ \ \ \ \ \ spdlog::sinks::rotating\_file\_sink\_st::calc\_filename(SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}rotated.txt"{}}),\ 3);}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00087}00087\ \ \ \ \ REQUIRE(filename\ ==\ SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}rotated.3.txt"{}}));}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00088}00088\ \}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00090}00090\ TEST\_CASE(\textcolor{stringliteral}{"{}rotating\_file\_sink::calc\_filename2"{}},\ \textcolor{stringliteral}{"{}[rotating\_file\_sink]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00091}00091\ \ \ \ \ \textcolor{keyword}{auto}\ filename\ =}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00092}00092\ \ \ \ \ \ \ \ \ spdlog::sinks::rotating\_file\_sink\_st::calc\_filename(SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}rotated"{}}),\ 3);}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00093}00093\ \ \ \ \ REQUIRE(filename\ ==\ SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}rotated.3"{}}));}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00094}00094\ \}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00096}00096\ TEST\_CASE(\textcolor{stringliteral}{"{}rotating\_file\_sink::calc\_filename3"{}},\ \textcolor{stringliteral}{"{}[rotating\_file\_sink]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00097}00097\ \ \ \ \ \textcolor{keyword}{auto}\ filename\ =}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00098}00098\ \ \ \ \ \ \ \ \ spdlog::sinks::rotating\_file\_sink\_st::calc\_filename(SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}rotated.txt"{}}),\ 0);}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00099}00099\ \ \ \ \ REQUIRE(filename\ ==\ SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}rotated.txt"{}}));}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00100}00100\ \}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00102}00102\ \textcolor{comment}{//\ regex\ supported\ only\ from\ gcc\ 4.9\ and\ above}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00103}00103\ \textcolor{preprocessor}{\#if\ defined(\_MSC\_VER)\ ||\ !(\_\_GNUC\_\_\ <=\ 4\ \&\&\ \_\_GNUC\_MINOR\_\_\ <\ 9)}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00105}00105\ \textcolor{preprocessor}{\ \ \ \ \#include\ <regex>}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00107}00107\ TEST\_CASE(\textcolor{stringliteral}{"{}daily\_file\_sink::daily\_filename\_calculator"{}},\ \textcolor{stringliteral}{"{}[daily\_file\_sink]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00108}00108\ \ \ \ \ \textcolor{comment}{//\ daily\_YYYY-\/MM-\/DD\_hh-\/mm.txt}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00109}00109\ \ \ \ \ \textcolor{keyword}{auto}\ filename\ =\ spdlog::sinks::daily\_filename\_calculator::calc\_filename(}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00110}00110\ \ \ \ \ \ \ \ \ SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}daily.txt"{}}),\ spdlog::details::os::localtime());}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00111}00111\ \ \ \ \ \textcolor{comment}{//\ date\ regex\ based\ on\ https://www.regular-\/expressions.info/dates.html}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00112}00112\ \ \ \ \ std::basic\_regex<spdlog::filename\_t::value\_type>\ re(}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00113}00113\ \ \ \ \ \ \ \ \ SPDLOG\_FILENAME\_T(R\textcolor{stringliteral}{"{}(\string^daily\_(19|20)\(\backslash\)d\(\backslash\)d-\/(0[1-\/9]|1[012])-\/(0[1-\/9]|[12][0-\/9]|3[01])\(\backslash\).txt\$)"{}));}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00114}00114\ \textcolor{stringliteral}{\ \ \ \ std::match\_results<spdlog::filename\_t::const\_iterator>\ match;}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00115}00115\ \textcolor{stringliteral}{\ \ \ \ REQUIRE(std::regex\_match(filename,\ match,\ re));}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00116}00116\ \textcolor{stringliteral}{\}}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00117}00117\ \textcolor{stringliteral}{}\textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00119}00119\ TEST\_CASE(\textcolor{stringliteral}{"{}daily\_file\_sink::daily\_filename\_format\_calculator"{}},\ \textcolor{stringliteral}{"{}[daily\_file\_sink]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00120}00120\ \ \ \ \ std::tm\ tm\ =\ spdlog::details::os::localtime();}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00121}00121\ \ \ \ \ \textcolor{comment}{//\ example-\/YYYY-\/MM-\/DD.log}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00122}00122\ \ \ \ \ \textcolor{keyword}{auto}\ filename\ =\ spdlog::sinks::daily\_filename\_format\_calculator::calc\_filename(}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00123}00123\ \ \ \ \ \ \ \ \ SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}example-\/\%Y-\/\%m-\/\%d.log"{}}),\ tm);}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00125}00125\ \ \ \ \ REQUIRE(filename\ ==}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ spdlog::fmt\_lib::format(SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}example-\/\{:04d\}-\/\{:02d\}-\/\{:02d\}.log"{}}),}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tm.tm\_year\ +\ 1900,\ tm.tm\_mon\ +\ 1,\ tm.tm\_mday));}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00128}00128\ \}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00130}00130\ \textcolor{comment}{/*\ Test\ removal\ of\ old\ files\ */}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00131}00131\ \textcolor{keyword}{static}\ spdlog::details::log\_msg\ create\_msg(std::chrono::seconds\ offset)\ \{}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00132}00132\ \ \ \ \ \textcolor{keyword}{using\ }spdlog::log\_clock;}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00133}00133\ \ \ \ \ spdlog::details::log\_msg\ msg\{\textcolor{stringliteral}{"{}test"{}},\ spdlog::level::info,\ \textcolor{stringliteral}{"{}Hello\ Message"{}}\};}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00134}00134\ \ \ \ \ msg.time\ =\ log\_clock::now()\ +\ offset;}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00135}00135\ \ \ \ \ \textcolor{keywordflow}{return}\ msg;}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00136}00136\ \}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00138}00138\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ test\_rotate(\textcolor{keywordtype}{int}\ days\_to\_run,\ uint16\_t\ max\_days,\ uint16\_t\ expected\_n\_files)\ \{}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00139}00139\ \ \ \ \ \textcolor{keyword}{using\ }spdlog::log\_clock;}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00140}00140\ \ \ \ \ \textcolor{keyword}{using\ }spdlog::details::log\_msg;}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00141}00141\ \ \ \ \ \textcolor{keyword}{using\ }spdlog::sinks::daily\_file\_sink\_st;}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00142}00142\ }
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00143}00143\ \ \ \ \ prepare\_logdir();}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00144}00144\ }
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00145}00145\ \ \ \ \ spdlog::filename\_t\ basename\ =\ SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}test\_logs/daily\_rotate.txt"{}});}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00146}00146\ \ \ \ \ daily\_file\_sink\_st\ sink\{basename,\ 2,\ 30,\ \textcolor{keyword}{true},\ max\_days\};}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00147}00147\ }
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00148}00148\ \ \ \ \ \textcolor{comment}{//\ simulate\ messages\ with\ 24\ intervals}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00149}00149\ }
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00150}00150\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ days\_to\_run;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00151}00151\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ offset\ =\ std::chrono::seconds\{24\ *\ 3600\ *\ i\};}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00152}00152\ \ \ \ \ \ \ \ \ sink.log(create\_msg(offset));}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00153}00153\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00155}00155\ \ \ \ \ REQUIRE(count\_files(\textcolor{stringliteral}{"{}test\_logs"{}})\ ==\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>}(expected\_n\_files));}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00156}00156\ \}}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00157}00157\ }
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00158}00158\ TEST\_CASE(\textcolor{stringliteral}{"{}daily\_logger\ rotate"{}},\ \textcolor{stringliteral}{"{}[daily\_file\_sink]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00159}00159\ \ \ \ \ \textcolor{keywordtype}{int}\ days\_to\_run\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00160}00160\ \ \ \ \ test\_rotate(days\_to\_run,\ 0,\ 1);}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00161}00161\ \ \ \ \ test\_rotate(days\_to\_run,\ 1,\ 1);}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00162}00162\ \ \ \ \ test\_rotate(days\_to\_run,\ 3,\ 1);}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00163}00163\ \ \ \ \ test\_rotate(days\_to\_run,\ 10,\ 1);}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00164}00164\ }
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00165}00165\ \ \ \ \ days\_to\_run\ =\ 10;}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00166}00166\ \ \ \ \ test\_rotate(days\_to\_run,\ 0,\ 10);}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00167}00167\ \ \ \ \ test\_rotate(days\_to\_run,\ 1,\ 1);}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00168}00168\ \ \ \ \ test\_rotate(days\_to\_run,\ 3,\ 3);}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00169}00169\ \ \ \ \ test\_rotate(days\_to\_run,\ 9,\ 9);}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00170}00170\ \ \ \ \ test\_rotate(days\_to\_run,\ 10,\ 10);}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00171}00171\ \ \ \ \ test\_rotate(days\_to\_run,\ 11,\ 10);}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00172}00172\ \ \ \ \ test\_rotate(days\_to\_run,\ 20,\ 10);}
+\DoxyCodeLine{\Hypertarget{test__daily__logger_8cpp_source_l00173}00173\ \}}
+
+\end{DoxyCode}

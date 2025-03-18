@@ -1,0 +1,76 @@
+\doxysubsection{Cocoa\+App\+Delegate.\+h}
+\hypertarget{_cocoa_app_delegate_8h_source}{}\label{_cocoa_app_delegate_8h_source}\index{CocoaAppDelegate.h@{CocoaAppDelegate.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00002}00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00003}00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00004}00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Marco\ Antognini\ (antognini.marco@gmail.com),}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00005}00005\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00006}00006\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00007}00007\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00008}00008\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00009}00009\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00010}00010\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00011}00011\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00012}00012\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00013}00013\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00014}00014\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00015}00015\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00016}00016\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00017}00017\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00018}00018\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00019}00019\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00020}00020\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00021}00021\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00022}00022\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00023}00023\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00026}00026\ \textcolor{preprocessor}{\#import\ <Cocoa/Cocoa.h>}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00027}00027\ \textcolor{preprocessor}{\#import\ <SFML/Graphics.hpp>}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00029}00029\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00030}00030\ \textcolor{comment}{\ *\ NB:\ We\ need\ pointers\ for\ C++\ objects\ fields\ in\ Obj-\/C\ interface\ !}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00031}00031\ \textcolor{comment}{\ *\ \ \ \ \ The\ recommended\ way\ is\ to\ use\ PIMPL\ idiom.}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00032}00032\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00033}00033\ \textcolor{comment}{\ *\ \ \ \ \ It's\ elegant.\ Moreover,\ we\ do\ no\ constrain}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00034}00034\ \textcolor{comment}{\ *\ \ \ \ \ other\ file\ including\ this\ one\ to\ be\ Obj-\/C++.}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00035}00035\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00037}00037\ \textcolor{keyword}{struct\ }SFMLmainWindow;}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00039}00039\ \textcolor{keyword}{@interface\ }CocoaAppDelegate\ :\ NSObject\ <NSApplicationDelegate>}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00040}00040\ \{}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00041}00041\ \textcolor{keyword}{@private}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00042}00042\ \ \ \ \ NSWindow*\ \ \ \ \ \ \ m\_window;}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00043}00043\ \ \ \ \ NSView*\ \ \ \ \ \ \ \ \ m\_sfmlView;}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00044}00044\ \ \ \ \ NSTextField*\ \ \ \ m\_textField;}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00045}00045\ \ \ \ \ SFMLmainWindow*\ m\_mainWindow;}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00046}00046\ \ \ \ \ NSTimer*\ \ \ \ \ \ \ \ m\_renderTimer;}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00047}00047\ \ \ \ \ BOOL\ \ \ \ \ \ \ \ \ \ \ \ m\_visible;}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00048}00048\ \ \ \ \ BOOL\ \ \ \ \ \ \ \ \ \ \ \ m\_initialized;}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00049}00049\ \}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00051}00051\ \textcolor{keyword}{@property}\ (retain)\ IBOutlet\ NSWindow*\ \ \ \ \ \ \ window;}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00052}00052\ \textcolor{keyword}{@property}\ (assign)\ IBOutlet\ NSView*\ \ \ \ \ \ \ \ \ sfmlView;}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00053}00053\ \textcolor{keyword}{@property}\ (assign)\ IBOutlet\ NSTextField*\ \ \ \ textField;}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00055}00055\ -\/(IBAction)colorChanged:(NSPopUpButton*)sender;}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00056}00056\ -\/(IBAction)rotationChanged:(NSSlider*)sender;}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00057}00057\ -\/(IBAction)visibleChanged:(NSButton*)sender;}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00058}00058\ -\/(IBAction)textChanged:(NSTextField*)sender;}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00059}00059\ -\/(IBAction)updateText:(NSButton*)sender;}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00061}00061\ \textcolor{keyword}{@end}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00063}00063\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00064}00064\ \textcolor{comment}{\ *\ This\ interface\ is\ used\ to\ prevent\ the\ system\ alert\ produced\ when\ the\ SFML\ view}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00065}00065\ \textcolor{comment}{\ *\ has\ the\ focus\ and\ the\ user\ press\ a\ key.}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00066}00066\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00067}00067\ \textcolor{keyword}{@interface\ }SilentWindow\ :\ NSWindow}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00069}00069\ -\/(void)keyDown:(NSEvent*)theEvent;}
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_cocoa_app_delegate_8h_source_l00071}00071\ \textcolor{keyword}{@end}}
+
+\end{DoxyCode}

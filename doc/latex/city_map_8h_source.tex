@@ -1,0 +1,94 @@
+\doxysubsection{city\+Map.\+h}
+\hypertarget{city_map_8h_source}{}\label{city_map_8h_source}\index{cityMap.h@{cityMap.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <SFML/Graphics.hpp>}}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00011}\mbox{\hyperlink{struct__city_map_segment}{00011}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00012}\mbox{\hyperlink{struct__city_map_segment_abead1dc04a3d7cdf1f43794e598d603f}{00012}}\ \ \ sf::Vector2f\ \mbox{\hyperlink{struct__city_map_segment_abead1dc04a3d7cdf1f43794e598d603f}{p1}};\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00013}\mbox{\hyperlink{struct__city_map_segment_a85aee3ae0da921e119d683f51ef25f91}{00013}}\ \ \ sf::Vector2f\ \mbox{\hyperlink{struct__city_map_segment_a85aee3ae0da921e119d683f51ef25f91}{p2}};\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00014}\mbox{\hyperlink{struct__city_map_segment_a6536e8fb41fb07802174d114e7bcb8e1}{00014}}\ \ \ sf::Vector2f\ \mbox{\hyperlink{struct__city_map_segment_a6536e8fb41fb07802174d114e7bcb8e1}{p1\_offset}};\ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00015}\mbox{\hyperlink{struct__city_map_segment_ad3cbc7f951461dcba87637f1d09ae101}{00015}}\ \ \ sf::Vector2f\ \mbox{\hyperlink{struct__city_map_segment_ad3cbc7f951461dcba87637f1d09ae101}{p2\_offset}};\ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00016}\mbox{\hyperlink{struct__city_map_segment_a16e76b3b830a137722f0a8fda2e2cd28}{00016}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{struct__city_map_segment_a16e76b3b830a137722f0a8fda2e2cd28}{angle}};\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00017}00017\ \}\ \mbox{\hyperlink{struct__city_map_segment}{\_cityMapSegment}};}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00023}\mbox{\hyperlink{struct__city_map_road}{00023}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00024}\mbox{\hyperlink{struct__city_map_road_a32588dc9b12286077bf7dfa5ce2f22b0}{00024}}\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct__city_map_road_a32588dc9b12286077bf7dfa5ce2f22b0}{id}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00025}\mbox{\hyperlink{struct__city_map_road_a94ef791afea888d0a8cec48380a268db}{00025}}\ \ \ std::vector<\_cityMapSegment>\ \mbox{\hyperlink{struct__city_map_road_a94ef791afea888d0a8cec48380a268db}{segments}};\ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00026}\mbox{\hyperlink{struct__city_map_road_a690d9bc2c25a49a78efb5e60c2fa1643}{00026}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{struct__city_map_road_a690d9bc2c25a49a78efb5e60c2fa1643}{width}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00027}\mbox{\hyperlink{struct__city_map_road_a639f13fedbe917ca523dcb1773b69d4d}{00027}}\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct__city_map_road_a639f13fedbe917ca523dcb1773b69d4d}{numLanes}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00028}00028\ \}\ \mbox{\hyperlink{struct__city_map_road}{\_cityMapRoad}};}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00034}\mbox{\hyperlink{struct__city_map_building}{00034}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00035}\mbox{\hyperlink{struct__city_map_building_a0cf04423c90a162b61ae5b6616a36464}{00035}}\ \ \ std::vector<sf::Vector2f>\ \mbox{\hyperlink{struct__city_map_building_a0cf04423c90a162b61ae5b6616a36464}{points}};\ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00036}00036\ \}\ \mbox{\hyperlink{struct__city_map_building}{\_cityMapBuilding}};}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00042}\mbox{\hyperlink{struct__city_map_green_area}{00042}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00043}\mbox{\hyperlink{struct__city_map_green_area_a0230fe7db97e98d546fd3d72d2461ab8}{00043}}\ \ \ std::vector<sf::Vector2f>\ \mbox{\hyperlink{struct__city_map_green_area_a0230fe7db97e98d546fd3d72d2461ab8}{points}};\ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00044}\mbox{\hyperlink{struct__city_map_green_area_a777108a1d50601ec1883b17fee6af665}{00044}}\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct__city_map_green_area_a777108a1d50601ec1883b17fee6af665}{type}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00045}00045\ \}\ \mbox{\hyperlink{struct__city_map_green_area}{\_cityMapGreenArea}};}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00051}\mbox{\hyperlink{struct__city_map_water_area}{00051}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00052}\mbox{\hyperlink{struct__city_map_water_area_acdd91f370e4d340b58fcb46de3e22b01}{00052}}\ \ \ std::vector<sf::Vector2f>\ \mbox{\hyperlink{struct__city_map_water_area_acdd91f370e4d340b58fcb46de3e22b01}{points}};\ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00053}00053\ \}\ \mbox{\hyperlink{struct__city_map_water_area}{\_cityMapWaterArea}};}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00059}\mbox{\hyperlink{struct__city_map_intersection}{00059}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00060}\mbox{\hyperlink{struct__city_map_intersection_af9cf028e19013ed5cdd7311a3b42abc5}{00060}}\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct__city_map_intersection_af9cf028e19013ed5cdd7311a3b42abc5}{id}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00061}\mbox{\hyperlink{struct__city_map_intersection_a2071000ce240787c16ebc40e34dea6a5}{00061}}\ \ \ sf::Vector2f\ \mbox{\hyperlink{struct__city_map_intersection_a2071000ce240787c16ebc40e34dea6a5}{center}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00062}\mbox{\hyperlink{struct__city_map_intersection_aba2e1843e3689087deeb8031c5c2a4bf}{00062}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{struct__city_map_intersection_aba2e1843e3689087deeb8031c5c2a4bf}{radius}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00063}\mbox{\hyperlink{struct__city_map_intersection_a3efeb080c50b6ed1e765a2aa2b217c06}{00063}}\ \ \ std::vector<std::pair<int,\ int>>\ \mbox{\hyperlink{struct__city_map_intersection_a3efeb080c50b6ed1e765a2aa2b217c06}{roadSegmentIds}};\ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00065}00065\ \}\ \mbox{\hyperlink{struct__city_map_intersection}{\_cityMapIntersection}};}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00074}\mbox{\hyperlink{class_city_map}{00074}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_city_map_a1a79fe83cb2f0431c2a937c004cb2362}{CityMap}}\ \{}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00075}00075\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00076}00076\ \ \ \textcolor{keyword}{using\ }segment\ =\ \mbox{\hyperlink{struct__city_map_segment}{\_cityMapSegment}};}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00077}00077\ \ \ \textcolor{keyword}{using\ }road\ =\ \mbox{\hyperlink{struct__city_map_road}{\_cityMapRoad}};}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00078}00078\ \ \ \textcolor{keyword}{using\ }building\ =\ \mbox{\hyperlink{struct__city_map_building}{\_cityMapBuilding}};}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00079}00079\ \ \ \textcolor{keyword}{using\ }greenArea\ =\ \mbox{\hyperlink{struct__city_map_green_area}{\_cityMapGreenArea}};}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00080}00080\ \ \ \textcolor{keyword}{using\ }waterArea\ =\ \mbox{\hyperlink{struct__city_map_water_area}{\_cityMapWaterArea}};}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00081}00081\ \ \ \textcolor{keyword}{using\ }intersection\ =\ \mbox{\hyperlink{struct__city_map_intersection}{\_cityMapIntersection}};}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00086}00086\ \ \ \mbox{\hyperlink{class_city_map_a1a79fe83cb2f0431c2a937c004cb2362}{CityMap}}();}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00092}00092\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_city_map_a8c3dca06befcb24a04779fa60d18cf2c}{loadFile}}(\textcolor{keyword}{const}\ std::string\ \&filename);}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00098}\mbox{\hyperlink{class_city_map_acac290f8e840294180acf3e04d781bdb}{00098}}\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_city_map_acac290f8e840294180acf3e04d781bdb}{isCityMapLoaded}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ isLoaded;\ \}}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00104}\mbox{\hyperlink{class_city_map_a38ba76999de4b20429a89f4679354b77}{00104}}\ \ \ std::vector<road>\ \mbox{\hyperlink{class_city_map_a38ba76999de4b20429a89f4679354b77}{getRoads}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ roads;\ \}}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00110}\mbox{\hyperlink{class_city_map_ab9e620e937c7a4b5600ba442185d1a87}{00110}}\ \ \ std::vector<intersection>\ \mbox{\hyperlink{class_city_map_ab9e620e937c7a4b5600ba442185d1a87}{getIntersections}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ intersections;\ \}}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00116}\mbox{\hyperlink{class_city_map_a3fbe1fab6980281997219b9c6b8175d6}{00116}}\ \ \ std::vector<building>\ \mbox{\hyperlink{class_city_map_a3fbe1fab6980281997219b9c6b8175d6}{getBuildings}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ buildings;\ \}}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00122}\mbox{\hyperlink{class_city_map_a9685070a8bdba4401aeebe0d8f928141}{00122}}\ \ \ std::vector<greenArea>\ \mbox{\hyperlink{class_city_map_a9685070a8bdba4401aeebe0d8f928141}{getGreenAreas}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ greenAreas;\ \}}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00128}\mbox{\hyperlink{class_city_map_a132795747904b09b782c8ed93c06f8cf}{00128}}\ \ \ std::vector<waterArea>\ \mbox{\hyperlink{class_city_map_a132795747904b09b782c8ed93c06f8cf}{getWaterAreas}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ waterAreas;\ \}}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00134}\mbox{\hyperlink{class_city_map_a850fd43acc8e2da3ddcfceb94dd56ab3}{00134}}\ \ \ sf::Vector2f\ \mbox{\hyperlink{class_city_map_a850fd43acc8e2da3ddcfceb94dd56ab3}{getMinLatLon}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ minLatLon;\ \}}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00135}00135\ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00140}\mbox{\hyperlink{class_city_map_a624af5d9b8b894551d5454095da5cd02}{00140}}\ \ \ sf::Vector2f\ \mbox{\hyperlink{class_city_map_a624af5d9b8b894551d5454095da5cd02}{getMaxLatLon}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ maxLatLon;\ \}}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00146}\mbox{\hyperlink{class_city_map_a63af4f09ae6213c246f328b58f652f7f}{00146}}\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_city_map_a63af4f09ae6213c246f328b58f652f7f}{getWidth}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ width;\ \}}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00147}00147\ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00152}\mbox{\hyperlink{class_city_map_a9854307cf6b40321c5d394e5b70d19a0}{00152}}\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_city_map_a9854307cf6b40321c5d394e5b70d19a0}{getHeight}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ height;\ \}}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00153}00153\ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00154}00154\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00155}00155\ \ \ \textcolor{keywordtype}{bool}\ isLoaded\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00157}00157\ \ \ std::vector<road>\ roads;}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00158}00158\ \ \ std::vector<intersection>\ intersections;}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00159}00159\ \ \ std::vector<building>\ buildings;}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00160}00160\ \ \ std::vector<greenArea>\ greenAreas;}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00161}00161\ \ \ std::vector<waterArea>\ waterAreas;}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00162}00162\ }
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00163}00163\ \ \ sf::Vector2f\ minLatLon;}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00164}00164\ \ \ sf::Vector2f\ maxLatLon;}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00165}00165\ \ \ \textcolor{keywordtype}{double}\ width;\ \ \textcolor{comment}{//\ in\ meters}}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00166}00166\ \ \ \textcolor{keywordtype}{double}\ height;\ \textcolor{comment}{//\ in\ meters}}
+\DoxyCodeLine{\Hypertarget{city_map_8h_source_l00167}00167\ \};}
+
+\end{DoxyCode}

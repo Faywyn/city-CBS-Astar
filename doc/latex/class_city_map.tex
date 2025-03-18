@@ -1,0 +1,246 @@
+\doxysubsection{City\+Map Class Reference}
+\hypertarget{class_city_map}{}\label{class_city_map}\index{CityMap@{CityMap}}
+
+
+A city map.  
+
+
+
+
+{\ttfamily \#include $<$city\+Map.\+h$>$}
+
+\doxysubsubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_city_map_a1a79fe83cb2f0431c2a937c004cb2362}\label{class_city_map_a1a79fe83cb2f0431c2a937c004cb2362} 
+{\bfseries City\+Map} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_city_map_a8c3dca06befcb24a04779fa60d18cf2c}{load\+File}} (const std\+::string \&filename)
+\begin{DoxyCompactList}\small\item\em Load a city map from a file. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_city_map_acac290f8e840294180acf3e04d781bdb}{is\+City\+Map\+Loaded}} () const
+\begin{DoxyCompactList}\small\item\em Check if the city map is loaded. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{struct__city_map_road}{road}} $>$ \mbox{\hyperlink{class_city_map_a38ba76999de4b20429a89f4679354b77}{get\+Roads}} () const
+\begin{DoxyCompactList}\small\item\em Get the roads. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{struct__city_map_intersection}{intersection}} $>$ \mbox{\hyperlink{class_city_map_ab9e620e937c7a4b5600ba442185d1a87}{get\+Intersections}} () const
+\begin{DoxyCompactList}\small\item\em Get the intersections. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{struct__city_map_building}{building}} $>$ \mbox{\hyperlink{class_city_map_a3fbe1fab6980281997219b9c6b8175d6}{get\+Buildings}} () const
+\begin{DoxyCompactList}\small\item\em Get the buildings. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{struct__city_map_green_area}{green\+Area}} $>$ \mbox{\hyperlink{class_city_map_a9685070a8bdba4401aeebe0d8f928141}{get\+Green\+Areas}} () const
+\begin{DoxyCompactList}\small\item\em Get the green areas. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{struct__city_map_water_area}{water\+Area}} $>$ \mbox{\hyperlink{class_city_map_a132795747904b09b782c8ed93c06f8cf}{get\+Water\+Areas}} () const
+\begin{DoxyCompactList}\small\item\em Get the water areas. \end{DoxyCompactList}\item 
+sf\+::\+Vector2f \mbox{\hyperlink{class_city_map_a850fd43acc8e2da3ddcfceb94dd56ab3}{get\+Min\+Lat\+Lon}} () const
+\begin{DoxyCompactList}\small\item\em Get the minimum latitude and longitude. \end{DoxyCompactList}\item 
+sf\+::\+Vector2f \mbox{\hyperlink{class_city_map_a624af5d9b8b894551d5454095da5cd02}{get\+Max\+Lat\+Lon}} () const
+\begin{DoxyCompactList}\small\item\em Get the maximum latitude and longitude. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_city_map_a63af4f09ae6213c246f328b58f652f7f}{get\+Width}} () const
+\begin{DoxyCompactList}\small\item\em Get the width of the city map. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_city_map_a9854307cf6b40321c5d394e5b70d19a0}{get\+Height}} () const
+\begin{DoxyCompactList}\small\item\em Get the height of the city map. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+A city map. 
+
+This class represents the city map. It contains the roads, intersections, buildings, green areas and water areas of the city. 
+
+Definition at line \mbox{\hyperlink{city_map_8h_source_l00074}{74}} of file \mbox{\hyperlink{city_map_8h_source}{city\+Map.\+h}}.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\Hypertarget{class_city_map_a3fbe1fab6980281997219b9c6b8175d6}\index{CityMap@{CityMap}!getBuildings@{getBuildings}}
+\index{getBuildings@{getBuildings}!CityMap@{CityMap}}
+\doxyparagraph{\texorpdfstring{getBuildings()}{getBuildings()}}
+{\footnotesize\ttfamily \label{class_city_map_a3fbe1fab6980281997219b9c6b8175d6} 
+std\+::vector$<$ \mbox{\hyperlink{struct__city_map_building}{building}} $>$ City\+Map\+::get\+Buildings (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the buildings. 
+
+\begin{DoxyReturn}{Returns}
+The buildings 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{city_map_8h_source_l00116}{116}} of file \mbox{\hyperlink{city_map_8h_source}{city\+Map.\+h}}.
+
+\Hypertarget{class_city_map_a9685070a8bdba4401aeebe0d8f928141}\index{CityMap@{CityMap}!getGreenAreas@{getGreenAreas}}
+\index{getGreenAreas@{getGreenAreas}!CityMap@{CityMap}}
+\doxyparagraph{\texorpdfstring{getGreenAreas()}{getGreenAreas()}}
+{\footnotesize\ttfamily \label{class_city_map_a9685070a8bdba4401aeebe0d8f928141} 
+std\+::vector$<$ \mbox{\hyperlink{struct__city_map_green_area}{green\+Area}} $>$ City\+Map\+::get\+Green\+Areas (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the green areas. 
+
+\begin{DoxyReturn}{Returns}
+The green areas 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{city_map_8h_source_l00122}{122}} of file \mbox{\hyperlink{city_map_8h_source}{city\+Map.\+h}}.
+
+\Hypertarget{class_city_map_a9854307cf6b40321c5d394e5b70d19a0}\index{CityMap@{CityMap}!getHeight@{getHeight}}
+\index{getHeight@{getHeight}!CityMap@{CityMap}}
+\doxyparagraph{\texorpdfstring{getHeight()}{getHeight()}}
+{\footnotesize\ttfamily \label{class_city_map_a9854307cf6b40321c5d394e5b70d19a0} 
+int City\+Map\+::get\+Height (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the height of the city map. 
+
+\begin{DoxyReturn}{Returns}
+The height of the city map 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{city_map_8h_source_l00152}{152}} of file \mbox{\hyperlink{city_map_8h_source}{city\+Map.\+h}}.
+
+\Hypertarget{class_city_map_ab9e620e937c7a4b5600ba442185d1a87}\index{CityMap@{CityMap}!getIntersections@{getIntersections}}
+\index{getIntersections@{getIntersections}!CityMap@{CityMap}}
+\doxyparagraph{\texorpdfstring{getIntersections()}{getIntersections()}}
+{\footnotesize\ttfamily \label{class_city_map_ab9e620e937c7a4b5600ba442185d1a87} 
+std\+::vector$<$ \mbox{\hyperlink{struct__city_map_intersection}{intersection}} $>$ City\+Map\+::get\+Intersections (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the intersections. 
+
+\begin{DoxyReturn}{Returns}
+The intersections 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{city_map_8h_source_l00110}{110}} of file \mbox{\hyperlink{city_map_8h_source}{city\+Map.\+h}}.
+
+\Hypertarget{class_city_map_a624af5d9b8b894551d5454095da5cd02}\index{CityMap@{CityMap}!getMaxLatLon@{getMaxLatLon}}
+\index{getMaxLatLon@{getMaxLatLon}!CityMap@{CityMap}}
+\doxyparagraph{\texorpdfstring{getMaxLatLon()}{getMaxLatLon()}}
+{\footnotesize\ttfamily \label{class_city_map_a624af5d9b8b894551d5454095da5cd02} 
+sf\+::\+Vector2f City\+Map\+::get\+Max\+Lat\+Lon (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the maximum latitude and longitude. 
+
+\begin{DoxyReturn}{Returns}
+The maximum latitude and longitude 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{city_map_8h_source_l00140}{140}} of file \mbox{\hyperlink{city_map_8h_source}{city\+Map.\+h}}.
+
+\Hypertarget{class_city_map_a850fd43acc8e2da3ddcfceb94dd56ab3}\index{CityMap@{CityMap}!getMinLatLon@{getMinLatLon}}
+\index{getMinLatLon@{getMinLatLon}!CityMap@{CityMap}}
+\doxyparagraph{\texorpdfstring{getMinLatLon()}{getMinLatLon()}}
+{\footnotesize\ttfamily \label{class_city_map_a850fd43acc8e2da3ddcfceb94dd56ab3} 
+sf\+::\+Vector2f City\+Map\+::get\+Min\+Lat\+Lon (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the minimum latitude and longitude. 
+
+\begin{DoxyReturn}{Returns}
+The minimum latitude and longitude 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{city_map_8h_source_l00134}{134}} of file \mbox{\hyperlink{city_map_8h_source}{city\+Map.\+h}}.
+
+\Hypertarget{class_city_map_a38ba76999de4b20429a89f4679354b77}\index{CityMap@{CityMap}!getRoads@{getRoads}}
+\index{getRoads@{getRoads}!CityMap@{CityMap}}
+\doxyparagraph{\texorpdfstring{getRoads()}{getRoads()}}
+{\footnotesize\ttfamily \label{class_city_map_a38ba76999de4b20429a89f4679354b77} 
+std\+::vector$<$ \mbox{\hyperlink{struct__city_map_road}{road}} $>$ City\+Map\+::get\+Roads (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the roads. 
+
+\begin{DoxyReturn}{Returns}
+The roads 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{city_map_8h_source_l00104}{104}} of file \mbox{\hyperlink{city_map_8h_source}{city\+Map.\+h}}.
+
+\Hypertarget{class_city_map_a132795747904b09b782c8ed93c06f8cf}\index{CityMap@{CityMap}!getWaterAreas@{getWaterAreas}}
+\index{getWaterAreas@{getWaterAreas}!CityMap@{CityMap}}
+\doxyparagraph{\texorpdfstring{getWaterAreas()}{getWaterAreas()}}
+{\footnotesize\ttfamily \label{class_city_map_a132795747904b09b782c8ed93c06f8cf} 
+std\+::vector$<$ \mbox{\hyperlink{struct__city_map_water_area}{water\+Area}} $>$ City\+Map\+::get\+Water\+Areas (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the water areas. 
+
+\begin{DoxyReturn}{Returns}
+The water areas 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{city_map_8h_source_l00128}{128}} of file \mbox{\hyperlink{city_map_8h_source}{city\+Map.\+h}}.
+
+\Hypertarget{class_city_map_a63af4f09ae6213c246f328b58f652f7f}\index{CityMap@{CityMap}!getWidth@{getWidth}}
+\index{getWidth@{getWidth}!CityMap@{CityMap}}
+\doxyparagraph{\texorpdfstring{getWidth()}{getWidth()}}
+{\footnotesize\ttfamily \label{class_city_map_a63af4f09ae6213c246f328b58f652f7f} 
+int City\+Map\+::get\+Width (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the width of the city map. 
+
+\begin{DoxyReturn}{Returns}
+The width of the city map 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{city_map_8h_source_l00146}{146}} of file \mbox{\hyperlink{city_map_8h_source}{city\+Map.\+h}}.
+
+\Hypertarget{class_city_map_acac290f8e840294180acf3e04d781bdb}\index{CityMap@{CityMap}!isCityMapLoaded@{isCityMapLoaded}}
+\index{isCityMapLoaded@{isCityMapLoaded}!CityMap@{CityMap}}
+\doxyparagraph{\texorpdfstring{isCityMapLoaded()}{isCityMapLoaded()}}
+{\footnotesize\ttfamily \label{class_city_map_acac290f8e840294180acf3e04d781bdb} 
+bool City\+Map\+::is\+City\+Map\+Loaded (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if the city map is loaded. 
+
+\begin{DoxyReturn}{Returns}
+True if the city map is loaded, false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{city_map_8h_source_l00098}{98}} of file \mbox{\hyperlink{city_map_8h_source}{city\+Map.\+h}}.
+
+\Hypertarget{class_city_map_a8c3dca06befcb24a04779fa60d18cf2c}\index{CityMap@{CityMap}!loadFile@{loadFile}}
+\index{loadFile@{loadFile}!CityMap@{CityMap}}
+\doxyparagraph{\texorpdfstring{loadFile()}{loadFile()}}
+{\footnotesize\ttfamily \label{class_city_map_a8c3dca06befcb24a04779fa60d18cf2c} 
+void City\+Map\+::load\+File (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename}{}\end{DoxyParamCaption})}
+
+
+
+Load a city map from a file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & The filename \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{city_map_8cpp_source_l00023}{23}} of file \mbox{\hyperlink{city_map_8cpp_source}{city\+Map.\+cpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+city\+Map.\+h\item 
+\mbox{\hyperlink{city_map_8cpp}{city\+Map.\+cpp}}\end{DoxyCompactItemize}

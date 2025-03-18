@@ -1,0 +1,364 @@
+\doxysubsection{manager\+CBS.\+cpp}
+\hypertarget{manager_c_b_s_8cpp_source}{}\label{manager_c_b_s_8cpp_source}\index{managerCBS.cpp@{managerCBS.cpp}}
+\mbox{\hyperlink{manager_c_b_s_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00007}00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{manager_8h}{manager.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00008}00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{renderer_8h}{renderer.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{utils_8h}{utils.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <numeric>}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <spdlog/spdlog.h>}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00015}\mbox{\hyperlink{class_manager_a59293d51b95ea69c45e88471d1ba01a9}{00015}}\ std::pair<bool,\ DataManager::data>\ \mbox{\hyperlink{class_manager_a59293d51b95ea69c45e88471d1ba01a9}{Manager::createCarsCBS}}(\textcolor{keywordtype}{int}\ numCars)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00016}00016\ \ \ this-\/>\mbox{\hyperlink{class_manager_a3f5de745c06c1dcccbfa14c4db370db8}{createCarsAStar}}(numCars);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00017}00017\ \ \ this-\/>numCars\ =\ numCars;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00018}00018\ \ \ \textcolor{keywordtype}{bool}\ valid\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00020}00020\ \ \ \mbox{\hyperlink{class_constraint_controller}{ConstraintController}}\ constraints;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00022}00022\ \ \ \textcolor{keywordflow}{if}\ (log)}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00023}00023\ \ \ \ \ spdlog::info(\textcolor{stringliteral}{"{}Creating\ \{\}\ CBS\ cars"{}},\ numCars);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00025}00025\ \ \ CBSNode\ node\ =\ \mbox{\hyperlink{class_manager_a075d42cef089b2adb69ac5c08a9fc1e2}{processCBS}}(constraints,\ 0);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00026}00026\ \ \ \textcolor{keywordflow}{if}\ (!node.\mbox{\hyperlink{struct__manager_c_b_s_node_a81627c9b2f757f2062327bf7e78b6893}{hasResolved}})\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00027}00027\ \ \ \ \ \textcolor{keywordflow}{if}\ (log)}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00028}00028\ \ \ \ \ \ \ spdlog::error(\textcolor{stringliteral}{"{}CBS\ could\ not\ resolve\ all\ conflicts"{}});}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00029}00029\ \ \ \ \ \textcolor{keywordflow}{return}\ std::make\_pair(\textcolor{keyword}{false},\ DataManager::data());}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00030}00030\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00031}00031\ \ \ \ \ \textcolor{keywordflow}{if}\ (log)}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00032}00032\ \ \ \ \ \ \ spdlog::info(\textcolor{stringliteral}{"{}CBS\ resolved\ all\ conflicts"{}});}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00033}00033\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00035}00035\ \ \ \textcolor{comment}{//\ Check\ if\ conflicts\ remain}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00036}00036\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ numCars;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00037}00037\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ i\ +\ 1;\ j\ <\ numCars;\ j++)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00038}00038\ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tMin\ =\ std::min(cars[i].getPath().size(),\ cars[j].getPath().size());}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00039}00039\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ t\ =\ 0;\ t\ <\ tMin;\ t++)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00040}00040\ \ \ \ \ \ \ \ \ sf::Vector2f\ diff\ =\ cars[i].getPath()[t]\ -\/\ cars[j].getPath()[t];}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ width\ =\ graph.getWidth();}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00043}00043\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ height\ =\ graph.getHeight();}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ outOfBounds\ =\ [\&](sf::Vector2f\ p)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ p.x\ +\ CAR\_LENGTH\ <\ 0\ ||\ p.y\ +\ CAR\_LENGTH\ <\ 0\ ||\ p.x\ >\ width\ +\ CAR\_LENGTH\ ||\ p.y\ >\ height\ +\ CAR\_LENGTH;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00046}00046\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (outOfBounds(cars[i].getPath()[t])\ ||\ outOfBounds(cars[j].getPath()[t]))\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00050}00050\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00052}00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (std::sqrt(diff.x\ *\ diff.x\ +\ diff.y\ *\ diff.y)\ <\ CAR\_LENGTH\ *\ 1.1)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (log)}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ spdlog::error(\textcolor{stringliteral}{"{}Cars\ \{\}\ and\ \{\}\ still\ have\ a\ conflict\ at\ time\ \{\}\ (\{\},\ \{\})"{}},\ i,\ j,\ t\ *\ SIM\_STEP\_TIME,}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cars[i].getPath()[t].x,\ cars[i].getPath()[t].y);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ valid\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00057}00057\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00058}00058\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00059}00059\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00060}00060\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00062}00062\ \ \ \textcolor{keywordflow}{if}\ (!valid)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00063}00063\ \ \ \ \ \textcolor{keywordflow}{return}\ std::make\_pair(\textcolor{keyword}{false},\ DataManager::data());}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00064}00064\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00066}00066\ \ \ DataManager::data\ data;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00067}00067\ \ \ data.numCars\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00068}00068\ \ \ data.carAvgSpeed.clear();}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00070}00070\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ numCars;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00071}00071\ \ \ \ \ \textcolor{keywordtype}{double}\ avgSpeed\ =\ cars[i].getAverageSpeed(graph);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00072}00072\ \ \ \ \ \textcolor{keywordflow}{if}\ (avgSpeed\ <=\ 0.01)}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00073}00073\ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00075}00075\ \ \ \ \ data.carAvgSpeed.push\_back(avgSpeed);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00076}00076\ \ \ \ \ data.numCars++;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00077}00077\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00079}00079\ \ \ \textcolor{keywordflow}{if}\ (data.numCars\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00080}00080\ \ \ \ \ \textcolor{keywordflow}{return}\ std::make\_pair(\textcolor{keyword}{false},\ DataManager::data());}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00081}00081\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00083}00083\ \ \ data.carDensity\ =\ 1000000\ *\ data.numCars\ /\ (graph.getWidth()\ *\ graph.getHeight());}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00085}00085\ \ \ \textcolor{keywordflow}{return}\ std::make\_pair(\textcolor{keyword}{true},\ data);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00086}00086\ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00088}00088\ \textcolor{comment}{//\ Split\ the\ node\ into\ 2\ subnodes}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00089}\mbox{\hyperlink{class_manager_a5860e9eb7357be033710a25d41bd34a7}{00089}}\ Manager::CBSNode\ \mbox{\hyperlink{class_manager_a5860e9eb7357be033710a25d41bd34a7}{Manager::createSubCBS}}(CBSNode\ \&node,\ \textcolor{keywordtype}{int}\ subNodeDepth)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00090}00090\ \ \ \textcolor{keywordtype}{int}\ numCars\ =\ (int)node.\mbox{\hyperlink{struct__manager_c_b_s_node_a2f34a822054b678d2f120ab7be3d49fb}{paths}}.size();}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00091}00091\ \ \ \textcolor{keywordtype}{int}\ numCars1\ =\ numCars\ /\ 2;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00092}00092\ \ \ \textcolor{keywordtype}{int}\ numCars2\ =\ numCars\ -\/\ numCars1;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00094}00094\ \ \ std::vector<Car>\ cars1;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00095}00095\ \ \ std::vector<Car>\ cars2;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00097}00097\ \ \ std::vector<int>\ cars1Index;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00098}00098\ \ \ std::vector<int>\ cars2Index;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00100}00100\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ numCars1;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00101}00101\ \ \ \ \ cars1.push\_back(cars[i]);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00102}00102\ \ \ \ \ cars1Index.push\_back(i);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00103}00103\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00104}00104\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ numCars1;\ i\ <\ numCars;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00105}00105\ \ \ \ \ cars2.push\_back(cars[i]);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00106}00106\ \ \ \ \ cars2Index.push\_back(i);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00107}00107\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00109}00109\ \ \ \mbox{\hyperlink{class_constraint_controller}{ConstraintController}}\ constraints1\ =\ node.\mbox{\hyperlink{struct__manager_c_b_s_node_aa540c41f8833c71355c2bdebe5f2db42}{constraints}}.\mbox{\hyperlink{class_constraint_controller_a518ba04f19f3b93636480c85710558ae}{copy}}(cars1Index);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00110}00110\ \ \ \mbox{\hyperlink{class_constraint_controller}{ConstraintController}}\ constraints2\ =\ node.\mbox{\hyperlink{struct__manager_c_b_s_node_aa540c41f8833c71355c2bdebe5f2db42}{constraints}}.\mbox{\hyperlink{class_constraint_controller_a518ba04f19f3b93636480c85710558ae}{copy}}(cars2Index);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00112}00112\ \ \ \mbox{\hyperlink{class_manager_af11277a299c0676b1a4d5b943310c2bc}{Manager}}\ manager1(graph,\ map,\ cars1,\ log);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00113}00113\ \ \ \mbox{\hyperlink{class_manager_af11277a299c0676b1a4d5b943310c2bc}{Manager}}\ manager2(graph,\ map,\ cars2,\ log);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00115}00115\ \ \ CBSNode\ node1\ =\ manager1.\mbox{\hyperlink{class_manager_a075d42cef089b2adb69ac5c08a9fc1e2}{processCBS}}(constraints1,\ subNodeDepth\ +\ 1);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00116}00116\ \ \ \textcolor{keywordflow}{if}\ (!node1.\mbox{\hyperlink{struct__manager_c_b_s_node_a81627c9b2f757f2062327bf7e78b6893}{hasResolved}})\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00117}00117\ \ \ \ \ \textcolor{keywordflow}{return}\ node1;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00118}00118\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00119}00119\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00120}00120\ \ \ \textcolor{comment}{//\ Push\ all\ manager1\ cars\ pos\ to\ manager2\ constraints}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00121}00121\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ numCars1;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00122}00122\ \ \ \ \ std::vector<sf::Vector2f>\ path\ =\ node1.\mbox{\hyperlink{struct__manager_c_b_s_node_a2f34a822054b678d2f120ab7be3d49fb}{paths}}[i];}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00123}00123\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ (int)path.size();\ j\ +=\ CBS\_PRECISION\_FACTOR)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00124}00124\ \ \ \ \ \ \ AStar::conflict\ conflict;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00125}00125\ \ \ \ \ \ \ conflict.\mbox{\hyperlink{struct__a_star_conflict_acbd053d9a21abd07bb1fe677476f7488}{point}}.\mbox{\hyperlink{struct__city_graph_point_a7ab7fa448ec9f76deea0c243f787f564}{position}}\ =\ path[j];}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00126}00126\ \ \ \ \ \ \ conflict.\mbox{\hyperlink{struct__a_star_conflict_acbd053d9a21abd07bb1fe677476f7488}{point}}.\mbox{\hyperlink{struct__city_graph_point_abe0c141857553f00de4ac27a7a7a943b}{angle}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00127}00127\ \ \ \ \ \ \ conflict.\mbox{\hyperlink{struct__a_star_conflict_a49a4e31d92cf7f26811e6781fbfa5936}{time}}\ =\ j;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00129}00129\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (conflict.\mbox{\hyperlink{struct__a_star_conflict_acbd053d9a21abd07bb1fe677476f7488}{point}}.\mbox{\hyperlink{struct__city_graph_point_a7ab7fa448ec9f76deea0c243f787f564}{position}}.x\ <\ -\/CAR\_LENGTH\ ||\ conflict.\mbox{\hyperlink{struct__a_star_conflict_acbd053d9a21abd07bb1fe677476f7488}{point}}.\mbox{\hyperlink{struct__city_graph_point_a7ab7fa448ec9f76deea0c243f787f564}{position}}.y\ <\ -\/CAR\_LENGTH\ ||}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ conflict.\mbox{\hyperlink{struct__a_star_conflict_acbd053d9a21abd07bb1fe677476f7488}{point}}.\mbox{\hyperlink{struct__city_graph_point_a7ab7fa448ec9f76deea0c243f787f564}{position}}.x\ >\ graph.getWidth()\ +\ CAR\_LENGTH\ ||}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ conflict.\mbox{\hyperlink{struct__a_star_conflict_acbd053d9a21abd07bb1fe677476f7488}{point}}.\mbox{\hyperlink{struct__city_graph_point_a7ab7fa448ec9f76deea0c243f787f564}{position}}.y\ >\ graph.getHeight()\ +\ CAR\_LENGTH)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00132}00132\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00133}00133\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00135}00135\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ numCars2;\ k++)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00136}00136\ \ \ \ \ \ \ \ \ conflict.\mbox{\hyperlink{struct__a_star_conflict_a0cc69d2515fd5c5ba43bb1d061a9d46b}{car}}\ =\ k;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00137}00137\ \ \ \ \ \ \ \ \ constraints2.\mbox{\hyperlink{class_constraint_controller_a8370eff1be20f92924d357a5fcc77e1b}{addConstraint}}(conflict);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00138}00138\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00139}00139\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00140}00140\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00142}00142\ \ \ CBSNode\ node2\ =\ manager2.\mbox{\hyperlink{class_manager_a075d42cef089b2adb69ac5c08a9fc1e2}{processCBS}}(constraints2,\ subNodeDepth\ +\ 1);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00143}00143\ \ \ \textcolor{keywordflow}{if}\ (!node2.\mbox{\hyperlink{struct__manager_c_b_s_node_a81627c9b2f757f2062327bf7e78b6893}{hasResolved}})\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00144}00144\ \ \ \ \ \textcolor{keywordflow}{return}\ node2;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00145}00145\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00146}00146\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00147}00147\ \ \ \textcolor{comment}{//\ Merge\ the\ 2\ managers}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00148}00148\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ numCars1;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00149}00149\ \ \ \ \ node.\mbox{\hyperlink{struct__manager_c_b_s_node_ad978bf313b5d7fad59aa262ee476d888}{costs}}[i]\ =\ node1.\mbox{\hyperlink{struct__manager_c_b_s_node_ad978bf313b5d7fad59aa262ee476d888}{costs}}[i];}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00150}00150\ \ \ \ \ node.\mbox{\hyperlink{struct__manager_c_b_s_node_a2f34a822054b678d2f120ab7be3d49fb}{paths}}[i]\ =\ node1.\mbox{\hyperlink{struct__manager_c_b_s_node_a2f34a822054b678d2f120ab7be3d49fb}{paths}}[i];}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00151}00151\ \ \ \ \ cars[i].assignExistingPath(node1.\mbox{\hyperlink{struct__manager_c_b_s_node_a2f34a822054b678d2f120ab7be3d49fb}{paths}}[i]);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00152}00152\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00153}00153\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ numCars1;\ i\ <\ numCars;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00154}00154\ \ \ \ \ node.\mbox{\hyperlink{struct__manager_c_b_s_node_ad978bf313b5d7fad59aa262ee476d888}{costs}}[i]\ =\ node2.\mbox{\hyperlink{struct__manager_c_b_s_node_ad978bf313b5d7fad59aa262ee476d888}{costs}}[i\ -\/\ numCars1];}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00155}00155\ \ \ \ \ node.\mbox{\hyperlink{struct__manager_c_b_s_node_a2f34a822054b678d2f120ab7be3d49fb}{paths}}[i]\ =\ node2.\mbox{\hyperlink{struct__manager_c_b_s_node_a2f34a822054b678d2f120ab7be3d49fb}{paths}}[i\ -\/\ numCars1];}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00156}00156\ \ \ \ \ cars[i].assignExistingPath(node2.\mbox{\hyperlink{struct__manager_c_b_s_node_a2f34a822054b678d2f120ab7be3d49fb}{paths}}[i\ -\/\ numCars1]);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00157}00157\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00159}00159\ \ \ node.\mbox{\hyperlink{struct__manager_c_b_s_node_a4ebcf418ce8a932dbf80266b4e46c5c3}{cost}}\ =\ node1.\mbox{\hyperlink{struct__manager_c_b_s_node_a4ebcf418ce8a932dbf80266b4e46c5c3}{cost}}\ +\ node2.\mbox{\hyperlink{struct__manager_c_b_s_node_a4ebcf418ce8a932dbf80266b4e46c5c3}{cost}};}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00160}00160\ \ \ node.\mbox{\hyperlink{struct__manager_c_b_s_node_aea5db81029c09dcea5bf2d0d0d10be46}{depth}}\ =\ std::max(node1.\mbox{\hyperlink{struct__manager_c_b_s_node_aea5db81029c09dcea5bf2d0d0d10be46}{depth}},\ node2.\mbox{\hyperlink{struct__manager_c_b_s_node_aea5db81029c09dcea5bf2d0d0d10be46}{depth}});}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00161}00161\ \ \ node.\mbox{\hyperlink{struct__manager_c_b_s_node_a81627c9b2f757f2062327bf7e78b6893}{hasResolved}}\ =\ node1.\mbox{\hyperlink{struct__manager_c_b_s_node_a81627c9b2f757f2062327bf7e78b6893}{hasResolved}}\ \&\&\ node2.\mbox{\hyperlink{struct__manager_c_b_s_node_a81627c9b2f757f2062327bf7e78b6893}{hasResolved}};}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00162}00162\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00163}00163\ \ \ \textcolor{keywordflow}{return}\ node;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00164}00164\ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00165}00165\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00166}\mbox{\hyperlink{class_manager_a075d42cef089b2adb69ac5c08a9fc1e2}{00166}}\ Manager::CBSNode\ \mbox{\hyperlink{class_manager_a075d42cef089b2adb69ac5c08a9fc1e2}{Manager::processCBS}}(\mbox{\hyperlink{class_constraint_controller}{ConstraintController}}\ constraints,\ \textcolor{keywordtype}{int}\ subNodeDepth)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00167}00167\ \ \ std::priority\_queue<CBSNode>\ openSet;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00168}00168\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00169}00169\ \ \ CBSNode\ startNode;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00170}00170\ \ \ startNode.\mbox{\hyperlink{struct__manager_c_b_s_node_a2f34a822054b678d2f120ab7be3d49fb}{paths}}.resize(numCars);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00171}00171\ \ \ startNode.\mbox{\hyperlink{struct__manager_c_b_s_node_aa540c41f8833c71355c2bdebe5f2db42}{constraints}}\ =\ constraints;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00172}00172\ \ \ startNode.\mbox{\hyperlink{struct__manager_c_b_s_node_ad978bf313b5d7fad59aa262ee476d888}{costs}}.clear();}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00173}00173\ \ \ startNode.\mbox{\hyperlink{struct__manager_c_b_s_node_ad978bf313b5d7fad59aa262ee476d888}{costs}}.resize(numCars);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00174}00174\ \ \ startNode.\mbox{\hyperlink{struct__manager_c_b_s_node_a4ebcf418ce8a932dbf80266b4e46c5c3}{cost}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00175}00175\ \ \ startNode.\mbox{\hyperlink{struct__manager_c_b_s_node_aea5db81029c09dcea5bf2d0d0d10be46}{depth}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00176}00176\ \ \ startNode.\mbox{\hyperlink{struct__manager_c_b_s_node_a81627c9b2f757f2062327bf7e78b6893}{hasResolved}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00177}00177\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00178}00178\ \ \ \textcolor{keywordtype}{double}\ maxCarCost\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00179}00179\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00180}00180\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ numCars;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00181}00181\ \ \ \ \ \mbox{\hyperlink{class_timed_a_star}{TimedAStar}}\ aStar(cars[i].getStart(),\ cars[i].getEnd(),\ graph,\ \&constraints,\ i);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00182}00182\ \ \ \ \ std::vector<AStar::node>\ newPath\ =\ aStar.\mbox{\hyperlink{class_timed_a_star_a8054d124dbc953374a5bfb2ca9bfe3ba}{findPath}}();}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00183}00183\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00184}00184\ \ \ \ \ cars[i].assignPath(newPath);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00185}00185\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00186}00186\ \ \ \ \ startNode.\mbox{\hyperlink{struct__manager_c_b_s_node_a2f34a822054b678d2f120ab7be3d49fb}{paths}}[i]\ =\ cars[i].getPath();}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00187}00187\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00188}00188\ \ \ \ \ \textcolor{keywordtype}{double}\ carCost\ =\ cars[i].getPathTime();}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00189}00189\ \ \ \ \ startNode.\mbox{\hyperlink{struct__manager_c_b_s_node_ad978bf313b5d7fad59aa262ee476d888}{costs}}[i]\ =\ carCost;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00190}00190\ \ \ \ \ startNode.\mbox{\hyperlink{struct__manager_c_b_s_node_a4ebcf418ce8a932dbf80266b4e46c5c3}{cost}}\ +=\ carCost;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00191}00191\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00192}00192\ \ \ \ \ maxCarCost\ =\ std::max(maxCarCost,\ carCost);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00193}00193\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00194}00194\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00195}00195\ \ \ openSet.push(startNode);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00196}00196\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00197}00197\ \ \ \textcolor{comment}{//\ For\ logs}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00198}00198\ \ \ std::vector<double>\ meanCosts;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00199}00199\ \ \ std::vector<double>\ meanDepths;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00200}00200\ \ \ std::vector<double>\ meanTimes;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00201}00201\ \ \ \textcolor{keyword}{auto}\ start\ =\ std::chrono::system\_clock::now();}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00202}00202\ \ \ \textcolor{keywordtype}{double}\ clockLastRefresh\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00203}00203\ \ \ \textcolor{keywordtype}{int}\ numNodeProcessed\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00204}00204\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00205}00205\ \ \ \textcolor{comment}{//\ While\ there\ are\ conflicts\ in\ the\ paths,\ resolve\ them}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00206}00206\ \ \ \textcolor{keywordflow}{while}\ (!openSet.empty())\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00207}00207\ \ \ \ \ \textcolor{keyword}{auto}\ duration\ =}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00208}00208\ \ \ \ \ \ \ \ \ std::chrono::duration\_cast<std::chrono::milliseconds>(std::chrono::system\_clock::now()\ -\/\ start).count()\ /}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00209}00209\ \ \ \ \ \ \ \ \ 1000.0;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00210}00210\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00211}00211\ \ \ \ \ numNodeProcessed++;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00212}00212\ \ \ \ \ CBSNode\ node\ =\ openSet.top();}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00213}00213\ \ \ \ \ openSet.pop();}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00214}00214\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00215}00215\ \ \ \ \ \textcolor{keywordflow}{if}\ (duration\ >\ CBS\_MAX\_SUB\_TIME)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00216}00216\ \ \ \ \ \ \ CBSNode\ resSub\ =\ \mbox{\hyperlink{class_manager_a5860e9eb7357be033710a25d41bd34a7}{createSubCBS}}(node,\ subNodeDepth);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00217}00217\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (resSub.\mbox{\hyperlink{struct__manager_c_b_s_node_a81627c9b2f757f2062327bf7e78b6893}{hasResolved}})\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00218}00218\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ resSub;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00219}00219\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00220}00220\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00221}00221\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00222}00222\ \ \ \ \ std::vector<std::vector<sf::Vector2f>>\ paths\ =\ node.\mbox{\hyperlink{struct__manager_c_b_s_node_a2f34a822054b678d2f120ab7be3d49fb}{paths}};}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00223}00223\ \ \ \ \ \textcolor{keywordtype}{double}\ cost\ =\ node.\mbox{\hyperlink{struct__manager_c_b_s_node_a4ebcf418ce8a932dbf80266b4e46c5c3}{cost}};}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00224}00224\ \ \ \ \ \textcolor{keywordtype}{int}\ depth\ =\ node.\mbox{\hyperlink{struct__manager_c_b_s_node_aea5db81029c09dcea5bf2d0d0d10be46}{depth}};}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00225}00225\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00226}00226\ \ \ \ \ \textcolor{keywordtype}{int}\ car1,\ car2;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00227}00227\ \ \ \ \ sf::Vector2f\ p1,\ p2;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00228}00228\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00229}00229\ \ \ \ \ \textcolor{keywordtype}{double}\ a1,\ a2;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00230}00230\ \ \ \ \ \textcolor{keywordtype}{int}\ time;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00231}00231\ \ \ \ \ \textcolor{keywordtype}{bool}\ conflict\ =\ \mbox{\hyperlink{class_manager_aa83bcd360a4f21ec2a8ff37023721688}{hasConflict}}(paths,\ \&car1,\ \&car2,\ \&p1,\ \&p2,\ \&a1,\ \&a2,\ \&time);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00232}00232\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00233}00233\ \ \ \ \ \textcolor{keywordflow}{if}\ (!conflict)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00234}00234\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ numCars;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00235}00235\ \ \ \ \ \ \ \ \ cars[i].assignExistingPath(node.\mbox{\hyperlink{struct__manager_c_b_s_node_a2f34a822054b678d2f120ab7be3d49fb}{paths}}[i]);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00236}00236\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00237}00237\ \ \ \ \ \ \ node.\mbox{\hyperlink{struct__manager_c_b_s_node_a81627c9b2f757f2062327bf7e78b6893}{hasResolved}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00238}00238\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ node;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00239}00239\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00240}00240\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00241}00241\ \ \ \ \ meanCosts.push\_back(cost);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00242}00242\ \ \ \ \ meanDepths.push\_back(depth);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00243}00243\ \ \ \ \ meanTimes.push\_back(time);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00244}00244\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00245}00245\ \ \ \ \ \textcolor{keywordflow}{if}\ (clockLastRefresh\ +\ LOG\_CBS\_REFRESHRATE\ <\ duration)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00246}00246\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ meanCost\ =\ std::accumulate(meanCosts.begin(),\ meanCosts.end(),\ 0.0)\ /\ meanCosts.size();}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00247}00247\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ meanDepth\ =\ std::accumulate(meanDepths.begin(),\ meanDepths.end(),\ 0.0)\ /\ meanDepths.size();}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00248}00248\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ meanTime\ =\ std::accumulate(meanTimes.begin(),\ meanTimes.end(),\ 0.0)\ /\ meanTimes.size();}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00249}00249\ \ \ \ \ \ \ meanTime\ =\ meanTime\ *\ SIM\_STEP\_TIME;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00250}00250\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00251}00251\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ remainingTime\ =\ (maxCarCost\ -\/\ meanTime)\ *\ (duration\ /\ meanTime);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00252}00252\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ processPerSecond\ =\ numNodeProcessed\ /\ (duration\ -\/\ clockLastRefresh);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00253}00253\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00254}00254\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (log)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00255}00255\ \ \ \ \ \ \ \ \ spdlog::info(\textcolor{stringliteral}{"{}Node\ C:\ \{:0>6.5\}\ |\ D:\ \{:0>6.5\}\ |\ CT:\ \{:0>6.5\}\ |\ SD:\ \{\}\ |\ ET:\ \{\}s\ |\ "{}}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00256}00256\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}ETR:\ \string~\{\}s\ |\ Processed\ nodes:\ \string~\{:0>4.5\}/s"{}},}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00257}00257\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ meanCost,\ meanDepth,\ meanTime,\ subNodeDepth,\ (\textcolor{keywordtype}{int})duration,\ (\textcolor{keywordtype}{int})remainingTime,\ processPerSecond);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00258}00258\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)033[A\(\backslash\)033[2K\(\backslash\)r"{}};}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00259}00259\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00260}00260\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00261}00261\ \ \ \ \ \ \ clockLastRefresh\ =\ duration;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00262}00262\ \ \ \ \ \ \ numNodeProcessed\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00263}00263\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00264}00264\ \ \ \ \ \ \ meanCosts.clear();}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00265}00265\ \ \ \ \ \ \ meanDepths.clear();}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00266}00266\ \ \ \ \ \ \ meanTimes.clear();}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00267}00267\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00268}00268\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00269}00269\ \ \ \ \ \textcolor{comment}{//\ Resolve\ conflict}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00270}00270\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ iCar\ =\ 0;\ iCar\ <\ 2;\ iCar++)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00271}00271\ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ car\ =\ iCar\ ==\ 0\ ?\ car1\ :\ car2;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00272}00272\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00273}00273\ \ \ \ \ \ \ AStar::conflict\ newConflict;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00274}00274\ \ \ \ \ \ \ newConflict.\mbox{\hyperlink{struct__a_star_conflict_acbd053d9a21abd07bb1fe677476f7488}{point}}.\mbox{\hyperlink{struct__city_graph_point_a7ab7fa448ec9f76deea0c243f787f564}{position}}\ =\ iCar\ ==\ 0\ ?\ p2\ :\ p1;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00275}00275\ \ \ \ \ \ \ newConflict.\mbox{\hyperlink{struct__a_star_conflict_acbd053d9a21abd07bb1fe677476f7488}{point}}.\mbox{\hyperlink{struct__city_graph_point_abe0c141857553f00de4ac27a7a7a943b}{angle}}\ =\ iCar\ ==\ 0\ ?\ a2\ :\ a1;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00276}00276\ \ \ \ \ \ \ newConflict.\mbox{\hyperlink{struct__a_star_conflict_a49a4e31d92cf7f26811e6781fbfa5936}{time}}\ =\ time;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00277}00277\ \ \ \ \ \ \ newConflict.\mbox{\hyperlink{struct__a_star_conflict_a0cc69d2515fd5c5ba43bb1d061a9d46b}{car}}\ =\ iCar\ ==\ 0\ ?\ car1\ :\ car2;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00278}00278\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00279}00279\ \ \ \ \ \ \ \textcolor{comment}{//\ If\ already\ in\ constraints,\ skip}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00280}00280\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (node.\mbox{\hyperlink{struct__manager_c_b_s_node_aa540c41f8833c71355c2bdebe5f2db42}{constraints}}.\mbox{\hyperlink{class_constraint_controller_a8718412cdf0f1752ec4f78171488adcb}{hasConstraint}}(newConflict))\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00281}00281\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00282}00282\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00283}00283\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00284}00284\ \ \ \ \ \ \ \mbox{\hyperlink{class_constraint_controller}{ConstraintController}}\ newConstraints\ =\ node.\mbox{\hyperlink{struct__manager_c_b_s_node_aa540c41f8833c71355c2bdebe5f2db42}{constraints}}.\mbox{\hyperlink{class_constraint_controller_a518ba04f19f3b93636480c85710558ae}{copy}}();}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00285}00285\ \ \ \ \ \ \ newConstraints.\mbox{\hyperlink{class_constraint_controller_a8370eff1be20f92924d357a5fcc77e1b}{addConstraint}}(newConflict);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00286}00286\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00287}00287\ \ \ \ \ \ \ \mbox{\hyperlink{class_timed_a_star}{TimedAStar}}\ aStar(cars[car].getStart(),\ cars[car].getEnd(),\ graph,\ \&newConstraints,\ car);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00288}00288\ \ \ \ \ \ \ std::vector<AStar::node>\ newPath\ =\ aStar.\mbox{\hyperlink{class_timed_a_star_a8054d124dbc953374a5bfb2ca9bfe3ba}{findPath}}();}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00289}00289\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00290}00290\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (newPath.empty())\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00291}00291\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00292}00292\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00293}00293\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00294}00294\ \ \ \ \ \ \ cars[car].assignPath(newPath);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00295}00295\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ carOldCost\ =\ node.\mbox{\hyperlink{struct__manager_c_b_s_node_ad978bf313b5d7fad59aa262ee476d888}{costs}}[car];}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00296}00296\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ carNewCost\ =\ cars[car].getPathTime();}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00297}00297\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00298}00298\ \ \ \ \ \ \ CBSNode\ newNode;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00299}00299\ \ \ \ \ \ \ newNode.\mbox{\hyperlink{struct__manager_c_b_s_node_a2f34a822054b678d2f120ab7be3d49fb}{paths}}\ =\ paths;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00300}00300\ \ \ \ \ \ \ newNode.\mbox{\hyperlink{struct__manager_c_b_s_node_a2f34a822054b678d2f120ab7be3d49fb}{paths}}[car]\ =\ cars[car].getPath();}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00301}00301\ \ \ \ \ \ \ newNode.\mbox{\hyperlink{struct__manager_c_b_s_node_aa540c41f8833c71355c2bdebe5f2db42}{constraints}}\ =\ newConstraints;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00302}00302\ \ \ \ \ \ \ newNode.\mbox{\hyperlink{struct__manager_c_b_s_node_ad978bf313b5d7fad59aa262ee476d888}{costs}}\ =\ node.\mbox{\hyperlink{struct__manager_c_b_s_node_ad978bf313b5d7fad59aa262ee476d888}{costs}};}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00303}00303\ \ \ \ \ \ \ newNode.\mbox{\hyperlink{struct__manager_c_b_s_node_ad978bf313b5d7fad59aa262ee476d888}{costs}}[car]\ =\ carNewCost;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00304}00304\ \ \ \ \ \ \ newNode.\mbox{\hyperlink{struct__manager_c_b_s_node_a4ebcf418ce8a932dbf80266b4e46c5c3}{cost}}\ =\ cost\ -\/\ carOldCost\ +\ carNewCost;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00305}00305\ \ \ \ \ \ \ newNode.\mbox{\hyperlink{struct__manager_c_b_s_node_aea5db81029c09dcea5bf2d0d0d10be46}{depth}}\ =\ depth\ +\ 1;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00306}00306\ \ \ \ \ \ \ newNode.\mbox{\hyperlink{struct__manager_c_b_s_node_a81627c9b2f757f2062327bf7e78b6893}{hasResolved}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00307}00307\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00308}00308\ \ \ \ \ \ \ newNode.\mbox{\hyperlink{struct__manager_c_b_s_node_a4ebcf418ce8a932dbf80266b4e46c5c3}{cost}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00309}00309\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ numCars;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00310}00310\ \ \ \ \ \ \ \ \ newNode.\mbox{\hyperlink{struct__manager_c_b_s_node_a4ebcf418ce8a932dbf80266b4e46c5c3}{cost}}\ +=\ newNode.\mbox{\hyperlink{struct__manager_c_b_s_node_ad978bf313b5d7fad59aa262ee476d888}{costs}}[i];}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00311}00311\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00312}00312\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00313}00313\ \ \ \ \ \ \ \textcolor{comment}{//\ hasConflict(newNode.paths,\ \&car1,\ \&car2,\ \&p1,\ \&p2,\ \&a1,\ \&a2,\ \&time);}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00314}00314\ \ \ \ \ \ \ \textcolor{comment}{//\ newNode.cost\ /=\ time;}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00315}00315\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00316}00316\ \ \ \ \ \ \ \textcolor{comment}{//\ newNode.cost\ =\ 1\ /\ (double)time;}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00317}00317\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00318}00318\ \ \ \ \ \ \ openSet.push(newNode);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00319}00319\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00320}00320\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00321}00321\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00322}00322\ \ \ \textcolor{keywordflow}{return}\ startNode;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00323}00323\ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00324}00324\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00325}\mbox{\hyperlink{class_manager_aa83bcd360a4f21ec2a8ff37023721688}{00325}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_manager_aa83bcd360a4f21ec2a8ff37023721688}{Manager::hasConflict}}(std::vector<std::vector<sf::Vector2f>>\ paths,\ \textcolor{keywordtype}{int}\ *car1,\ \textcolor{keywordtype}{int}\ *car2,\ sf::Vector2f\ *p1,}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00326}00326\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sf::Vector2f\ *p2,\ \textcolor{keywordtype}{double}\ *a1,\ \textcolor{keywordtype}{double}\ *a2,\ \textcolor{keywordtype}{int}\ *time)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00327}00327\ \ \ \textcolor{keywordtype}{int}\ maxPathLength\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00328}00328\ \ \ \textcolor{keywordtype}{int}\ numCars\ =\ (int)paths.size();}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00329}00329\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ numCars;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00330}00330\ \ \ \ \ maxPathLength\ =\ std::max(maxPathLength,\ (\textcolor{keywordtype}{int})paths[i].size());}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00331}00331\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00332}00332\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00333}00333\ \ \ \textcolor{keywordtype}{double}\ width\ =\ graph.getWidth();}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00334}00334\ \ \ \textcolor{keywordtype}{double}\ height\ =\ graph.getHeight();}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00335}00335\ \ \ \textcolor{keyword}{auto}\ outOfBounds\ =\ [\&](sf::Vector2f\ p)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00336}00336\ \ \ \ \ \textcolor{keywordflow}{return}\ p.x\ +\ CAR\_LENGTH\ <\ 0\ ||\ p.y\ +\ CAR\_LENGTH\ <\ 0\ ||\ p.x\ -\/\ CAR\_LENGTH\ >\ width\ ||\ p.y\ -\/\ CAR\_LENGTH\ >\ height;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00337}00337\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00338}00338\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00339}00339\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ t\ =\ 0;\ t\ <\ maxPathLength;\ t\ +=\ CBS\_PRECISION\_FACTOR)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00340}00340\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ numCars;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00341}00341\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (t\ >=\ (\textcolor{keywordtype}{int})paths[i].size()\ -\/\ 1\ ||\ outOfBounds(paths[i][t]))}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00342}00342\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00343}00343\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ i\ +\ 1;\ j\ <\ numCars;\ j++)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00344}00344\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (t\ >=\ (\textcolor{keywordtype}{int})paths[j].size()\ -\/\ 1\ ||\ outOfBounds(paths[j][t]))}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00345}00345\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00346}00346\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00347}00347\ \ \ \ \ \ \ \ \ sf::Vector2f\ diff\ =\ paths[i][t]\ -\/\ paths[j][t];}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00348}00348\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (std::sqrt(diff.x\ *\ diff.x\ +\ diff.y\ *\ diff.y)\ <\ CAR\_LENGTH\ *\ 1.1)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00349}00349\ \ \ \ \ \ \ \ \ \ \ *car1\ =\ i;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00350}00350\ \ \ \ \ \ \ \ \ \ \ *car2\ =\ j;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00351}00351\ \ \ \ \ \ \ \ \ \ \ *p1\ =\ paths[i][t];}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00352}00352\ \ \ \ \ \ \ \ \ \ \ *p2\ =\ paths[j][t];}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00353}00353\ \ \ \ \ \ \ \ \ \ \ *a1\ =\ std::atan2(paths[i][t\ +\ 1].y\ -\/\ paths[i][t].y,\ paths[i][t\ +\ 1].x\ -\/\ paths[i][t].x);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00354}00354\ \ \ \ \ \ \ \ \ \ \ *a2\ =\ std::atan2(paths[j][t\ +\ 1].y\ -\/\ paths[j][t].y,\ paths[j][t\ +\ 1].x\ -\/\ paths[j][t].x);}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00355}00355\ \ \ \ \ \ \ \ \ \ \ *time\ =\ t;}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00356}00356\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00357}00357\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00358}00358\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00359}00359\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00360}00360\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00361}00361\ }
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00362}00362\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{manager_c_b_s_8cpp_source_l00363}00363\ \}}
+
+\end{DoxyCode}

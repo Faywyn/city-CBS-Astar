@@ -1,0 +1,150 @@
+\doxysubsection{test\+\_\+create\+\_\+dir.\+cpp}
+\hypertarget{test__create__dir_8cpp_source}{}\label{test__create__dir_8cpp_source}\index{test\_create\_dir.cpp@{test\_create\_dir.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00002}00002\ \textcolor{comment}{\ *\ This\ content\ is\ released\ under\ the\ MIT\ License\ as\ specified\ in}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00003}00003\ \textcolor{comment}{\ *\ https://raw.githubusercontent.com/gabime/spdlog/master/LICENSE}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00004}00004\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}includes.h"{}}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00007}00007\ \textcolor{keyword}{using\ }spdlog::details::os::create\_dir;}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00008}00008\ \textcolor{keyword}{using\ }spdlog::details::os::path\_exists;}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00010}00010\ \textcolor{keywordtype}{bool}\ try\_create\_dir(\textcolor{keyword}{const}\ spdlog::filename\_t\ \&path,\ \textcolor{keyword}{const}\ spdlog::filename\_t\ \&normalized\_path)\ \{}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00011}00011\ \ \ \ \ \textcolor{keyword}{auto}\ rv\ =\ create\_dir(path);}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00012}00012\ \ \ \ \ REQUIRE(rv\ ==\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00013}00013\ \ \ \ \ \textcolor{keywordflow}{return}\ path\_exists(normalized\_path);}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00014}00014\ \}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00016}00016\ TEST\_CASE(\textcolor{stringliteral}{"{}create\_dir"{}},\ \textcolor{stringliteral}{"{}[create\_dir]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00017}00017\ \ \ \ \ prepare\_logdir();}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00019}00019\ \ \ \ \ REQUIRE(try\_create\_dir(SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}test\_logs/dir1/dir1"{}}),}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00020}00020\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}test\_logs/dir1/dir1"{}})));}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00021}00021\ \ \ \ \ REQUIRE(try\_create\_dir(SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}test\_logs/dir1/dir1"{}}),}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00022}00022\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}test\_logs/dir1/dir1"{}})));\ \ \textcolor{comment}{//\ test\ existing}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00023}00023\ \ \ \ \ REQUIRE(try\_create\_dir(SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}test\_logs/dir1///dir2//"{}}),}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}test\_logs/dir1/dir2"{}})));}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00025}00025\ \ \ \ \ REQUIRE(try\_create\_dir(SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}./test\_logs/dir1/dir3"{}}),}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}test\_logs/dir1/dir3"{}})));}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00027}00027\ \ \ \ \ REQUIRE(try\_create\_dir(SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}test\_logs/../test\_logs/dir1/dir4"{}}),}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}test\_logs/dir1/dir4"{}})));}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00030}00030\ \textcolor{preprocessor}{\#ifdef\ WIN32}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00031}00031\ \ \ \ \ \textcolor{comment}{//\ test\ backslash\ folder\ separator}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00032}00032\ \ \ \ \ REQUIRE(try\_create\_dir(SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}test\_logs\(\backslash\)\(\backslash\)dir1\(\backslash\)\(\backslash\)dir222"{}}),}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}test\_logs\(\backslash\)\(\backslash\)dir1\(\backslash\)\(\backslash\)dir222"{}})));}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00034}00034\ \ \ \ \ REQUIRE(try\_create\_dir(SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}test\_logs\(\backslash\)\(\backslash\)dir1\(\backslash\)\(\backslash\)dir223\(\backslash\)\(\backslash\)"{}}),}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}test\_logs\(\backslash\)\(\backslash\)dir1\(\backslash\)\(\backslash\)dir223\(\backslash\)\(\backslash\)"{}})));}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00036}00036\ \ \ \ \ REQUIRE(try\_create\_dir(SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}.\(\backslash\)\(\backslash\)test\_logs\(\backslash\)\(\backslash\)dir1\(\backslash\)\(\backslash\)dir2\(\backslash\)\(\backslash\)dir99\(\backslash\)\(\backslash\)..\(\backslash\)\(\backslash\)dir23"{}}),}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}test\_logs\(\backslash\)\(\backslash\)dir1\(\backslash\)\(\backslash\)dir2\(\backslash\)\(\backslash\)dir23"{}})));}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00038}00038\ \ \ \ \ REQUIRE(try\_create\_dir(SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}test\_logs\(\backslash\)\(\backslash\)..\(\backslash\)\(\backslash\)test\_logs\(\backslash\)\(\backslash\)dir1\(\backslash\)\(\backslash\)dir5"{}}),}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}test\_logs\(\backslash\)\(\backslash\)dir1\(\backslash\)\(\backslash\)dir5"{}})));}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00040}00040\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00041}00041\ \}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00043}00043\ TEST\_CASE(\textcolor{stringliteral}{"{}create\_invalid\_dir"{}},\ \textcolor{stringliteral}{"{}[create\_dir]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00044}00044\ \ \ \ \ REQUIRE(create\_dir(SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}"{}}))\ ==\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00045}00045\ \ \ \ \ REQUIRE(create\_dir(spdlog::filename\_t\{\})\ ==\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00046}00046\ \textcolor{preprocessor}{\#ifdef\ \_\_linux\_\_}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00047}00047\ \ \ \ \ REQUIRE(create\_dir(\textcolor{stringliteral}{"{}/proc/spdlog-\/utest"{}})\ ==\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00048}00048\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00049}00049\ \}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00051}00051\ TEST\_CASE(\textcolor{stringliteral}{"{}dir\_name"{}},\ \textcolor{stringliteral}{"{}[create\_dir]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00052}00052\ \ \ \ \ \textcolor{keyword}{using\ }spdlog::details::os::dir\_name;}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00053}00053\ \ \ \ \ REQUIRE(dir\_name(SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}"{}})).empty());}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00054}00054\ \ \ \ \ REQUIRE(dir\_name(SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}dir"{}})).empty());}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00056}00056\ \textcolor{preprocessor}{\#ifdef\ WIN32}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00057}00057\ \ \ \ \ REQUIRE(dir\_name(SPDLOG\_FILENAME\_T(R\textcolor{stringliteral}{"{}(dir\(\backslash\))"{}))\ ==\ SPDLOG\_FILENAME\_T(}\textcolor{stringliteral}{"{}dir"{}}));}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00058}00058\ \ \ \ \ REQUIRE(dir\_name(SPDLOG\_FILENAME\_T(R\textcolor{stringliteral}{"{}(dir\(\backslash\)\(\backslash\)\(\backslash\))"{}))\ ==\ SPDLOG\_FILENAME\_T(R}\textcolor{stringliteral}{"{}(dir\(\backslash\)\(\backslash\))"{}));}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00059}00059\ \textcolor{stringliteral}{\ \ \ \ REQUIRE(dir\_name(SPDLOG\_FILENAME\_T(R}\textcolor{stringliteral}{"{}(dir\(\backslash\)file)"{}))\ ==\ SPDLOG\_FILENAME\_T(}\textcolor{stringliteral}{"{}dir"{}}));}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00060}00060\ \ \ \ \ REQUIRE(dir\_name(SPDLOG\_FILENAME\_T(R\textcolor{stringliteral}{"{}(dir/file)"{}))\ ==\ SPDLOG\_FILENAME\_T(}\textcolor{stringliteral}{"{}dir"{}}));}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00061}00061\ \ \ \ \ REQUIRE(dir\_name(SPDLOG\_FILENAME\_T(R\textcolor{stringliteral}{"{}(dir\(\backslash\)file.txt)"{}))\ ==\ SPDLOG\_FILENAME\_T(}\textcolor{stringliteral}{"{}dir"{}}));}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00062}00062\ \ \ \ \ REQUIRE(dir\_name(SPDLOG\_FILENAME\_T(R\textcolor{stringliteral}{"{}(dir/file)"{}))\ ==\ SPDLOG\_FILENAME\_T(}\textcolor{stringliteral}{"{}dir"{}}));}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00063}00063\ \ \ \ \ REQUIRE(dir\_name(SPDLOG\_FILENAME\_T(R\textcolor{stringliteral}{"{}(dir\(\backslash\)file.txt\(\backslash\))"{}))\ ==}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00064}00064\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ SPDLOG\_FILENAME\_T(R}\textcolor{stringliteral}{"{}(dir\(\backslash\)file.txt)"{}));}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00065}00065\ \textcolor{stringliteral}{\ \ \ \ REQUIRE(dir\_name(SPDLOG\_FILENAME\_T(R}\textcolor{stringliteral}{"{}(\(\backslash\)dir\(\backslash\)file.txt)"{}))\ ==\ SPDLOG\_FILENAME\_T(R}\textcolor{stringliteral}{"{}(\(\backslash\)dir)"{}));}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00066}00066\ \textcolor{stringliteral}{\ \ \ \ REQUIRE(dir\_name(SPDLOG\_FILENAME\_T(R}\textcolor{stringliteral}{"{}(\(\backslash\)\(\backslash\)dir\(\backslash\)file.txt)"{}))\ ==\ SPDLOG\_FILENAME\_T(R}\textcolor{stringliteral}{"{}(\(\backslash\)\(\backslash\)dir)"{}));}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00067}00067\ \textcolor{stringliteral}{\ \ \ \ REQUIRE(dir\_name(SPDLOG\_FILENAME\_T(R}\textcolor{stringliteral}{"{}(..\(\backslash\)file.txt)"{}))\ ==\ SPDLOG\_FILENAME\_T(}\textcolor{stringliteral}{"{}.."{}}));}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00068}00068\ \ \ \ \ REQUIRE(dir\_name(SPDLOG\_FILENAME\_T(R\textcolor{stringliteral}{"{}(.\(\backslash\)file.txt)"{}))\ ==\ SPDLOG\_FILENAME\_T(}\textcolor{stringliteral}{"{}."{}}));}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00069}00069\ \ \ \ \ REQUIRE(dir\_name(SPDLOG\_FILENAME\_T(R\textcolor{stringliteral}{"{}(c:\(\backslash\)\(\backslash\)a\(\backslash\)b\(\backslash\)c\(\backslash\)d\(\backslash\)file.txt)"{}))\ ==}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00070}00070\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ SPDLOG\_FILENAME\_T(R}\textcolor{stringliteral}{"{}(c:\(\backslash\)\(\backslash\)a\(\backslash\)b\(\backslash\)c\(\backslash\)d)"{}));}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00071}00071\ \textcolor{stringliteral}{\ \ \ \ REQUIRE(dir\_name(SPDLOG\_FILENAME\_T(R}\textcolor{stringliteral}{"{}(c://a/b/c/d/file.txt)"{}))\ ==}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00072}00072\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ SPDLOG\_FILENAME\_T(R}\textcolor{stringliteral}{"{}(c://a/b/c/d)"{}));}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00073}00073\ \textcolor{stringliteral}{}\textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00074}00074\ \ \ \ \ REQUIRE(dir\_name(SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}dir/"{}}))\ ==\ SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}dir"{}}));}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00075}00075\ \ \ \ \ REQUIRE(dir\_name(SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}dir///"{}}))\ ==\ SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}dir//"{}}));}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00076}00076\ \ \ \ \ REQUIRE(dir\_name(SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}dir/file"{}}))\ ==\ SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}dir"{}}));}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00077}00077\ \ \ \ \ REQUIRE(dir\_name(SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}dir/file.txt"{}}))\ ==\ SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}dir"{}}));}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00078}00078\ \ \ \ \ REQUIRE(dir\_name(SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}dir/file.txt/"{}}))\ ==\ SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}dir/file.txt"{}}));}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00079}00079\ \ \ \ \ REQUIRE(dir\_name(SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}/dir/file.txt"{}}))\ ==\ SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}/dir"{}}));}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00080}00080\ \ \ \ \ REQUIRE(dir\_name(SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}//dir/file.txt"{}}))\ ==\ SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}//dir"{}}));}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00081}00081\ \ \ \ \ REQUIRE(dir\_name(SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}../file.txt"{}}))\ ==\ SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}.."{}}));}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00082}00082\ \ \ \ \ REQUIRE(dir\_name(SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}./file.txt"{}}))\ ==\ SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}."{}}));}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00083}00083\ \}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00085}00085\ \textcolor{preprocessor}{\#ifdef\ \_WIN32}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00087}00087\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00088}00088\ \ \ \ \ \textcolor{comment}{//\ test\ windows\ cases\ when\ drive\ letter\ is\ given\ e.g.\ C:\(\backslash\)\(\backslash\)some-\/folder}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00089}00089\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00090}00090\ \textcolor{preprocessor}{\ \ \ \ \#include\ <windows.h>}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00091}00091\ \textcolor{preprocessor}{\ \ \ \ \#include\ <fileapi.h>}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00093}00093\ std::string\ get\_full\_path(\textcolor{keyword}{const}\ std::string\ \&relative\_folder\_path)\ \{}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00094}00094\ \ \ \ \ \textcolor{keywordtype}{char}\ full\_path[MAX\_PATH];}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00096}00096\ \ \ \ \ DWORD\ result\ =\ ::GetFullPathNameA(relative\_folder\_path.c\_str(),\ MAX\_PATH,\ full\_path,\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00097}00097\ \ \ \ \ \textcolor{comment}{//\ Return\ an\ empty\ string\ if\ failed\ to\ get\ full\ path}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00098}00098\ \ \ \ \ \textcolor{keywordflow}{return}\ result\ >\ 0\ \&\&\ result\ <\ MAX\_PATH\ ?\ std::string(full\_path)\ :\ std::string();}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00099}00099\ \}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00101}00101\ std::wstring\ get\_full\_path(\textcolor{keyword}{const}\ std::wstring\ \&relative\_folder\_path)\ \{}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00102}00102\ \ \ \ \ \textcolor{keywordtype}{wchar\_t}\ full\_path[MAX\_PATH];}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00103}00103\ \ \ \ \ DWORD\ result\ =\ ::GetFullPathNameW(relative\_folder\_path.c\_str(),\ MAX\_PATH,\ full\_path,\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00104}00104\ \ \ \ \ \textcolor{keywordflow}{return}\ result\ >\ 0\ \&\&\ result\ <\ MAX\_PATH\ ?\ std::wstring(full\_path)\ :\ std::wstring();}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00105}00105\ \}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00107}00107\ spdlog::filename\_t::value\_type\ find\_non\_existing\_drive()\ \{}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00108}00108\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{char}\ drive\ =\ \textcolor{charliteral}{'A'};\ drive\ <=\ \textcolor{charliteral}{'Z'};\ ++drive)\ \{}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00109}00109\ \ \ \ \ \ \ \ \ std::string\ root\_path\ =\ std::string(1,\ drive)\ +\ \textcolor{stringliteral}{"{}:\(\backslash\)\(\backslash\)"{}};}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00110}00110\ \ \ \ \ \ \ \ \ UINT\ drive\_type\ =\ GetDriveTypeA(root\_path.c\_str());}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00111}00111\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (drive\_type\ ==\ DRIVE\_NO\_ROOT\_DIR)\ \{}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}spdlog::filename\_t::value\_type\textcolor{keyword}{>}(drive);}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00113}00113\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00114}00114\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00115}00115\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{charliteral}{'\(\backslash\)0'};\ \ \textcolor{comment}{//\ No\ available\ drive\ found}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00116}00116\ \}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00118}00118\ TEST\_CASE(\textcolor{stringliteral}{"{}create\_abs\_path1"{}},\ \textcolor{stringliteral}{"{}[create\_dir]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00119}00119\ \ \ \ \ prepare\_logdir();}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00120}00120\ \ \ \ \ \textcolor{keyword}{auto}\ abs\_path\ =\ get\_full\_path(SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}test\_logs\(\backslash\)\(\backslash\)logdir1"{}}));}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00121}00121\ \ \ \ \ REQUIRE(!abs\_path.empty());}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00122}00122\ \ \ \ \ REQUIRE(create\_dir(abs\_path)\ ==\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00123}00123\ \}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00125}00125\ TEST\_CASE(\textcolor{stringliteral}{"{}create\_abs\_path2"{}},\ \textcolor{stringliteral}{"{}[create\_dir]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00126}00126\ \ \ \ \ prepare\_logdir();}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00127}00127\ \ \ \ \ \textcolor{keyword}{auto}\ abs\_path\ =\ get\_full\_path(SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}test\_logs/logdir2"{}}));}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00128}00128\ \ \ \ \ REQUIRE(!abs\_path.empty());}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00129}00129\ \ \ \ \ REQUIRE(create\_dir(abs\_path)\ ==\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00130}00130\ \}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00132}00132\ TEST\_CASE(\textcolor{stringliteral}{"{}non\_existing\_drive"{}},\ \textcolor{stringliteral}{"{}[create\_dir]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00133}00133\ \ \ \ \ prepare\_logdir();}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00134}00134\ \ \ \ \ spdlog::filename\_t\ path;}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00135}00135\ }
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00136}00136\ \ \ \ \ \textcolor{keyword}{auto}\ non\_existing\_drive\ =\ find\_non\_existing\_drive();}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00137}00137\ \ \ \ \ path\ +=\ non\_existing\_drive;}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00138}00138\ \ \ \ \ path\ +=\ SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}:\(\backslash\)\(\backslash\)"{}});}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00139}00139\ \ \ \ \ REQUIRE(create\_dir(path)\ ==\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00140}00140\ \ \ \ \ path\ +=\ SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}subdir"{}});}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00141}00141\ \ \ \ \ REQUIRE(create\_dir(path)\ ==\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00142}00142\ \}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00143}00143\ \textcolor{comment}{//\ \#endif\ \ //\ SPDLOG\_WCHAR\_FILENAMES}}
+\DoxyCodeLine{\Hypertarget{test__create__dir_8cpp_source_l00144}00144\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ \_WIN32}}
+
+\end{DoxyCode}

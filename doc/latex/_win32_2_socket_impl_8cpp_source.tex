@@ -1,0 +1,108 @@
+\doxysubsection{Win32/\+Socket\+Impl.cpp}
+\hypertarget{_win32_2_socket_impl_8cpp_source}{}\label{_win32_2_socket_impl_8cpp_source}\index{SocketImpl.cpp@{SocketImpl.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00002}00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00003}00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00004}00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00005}00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00006}00006\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00007}00007\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00008}00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00009}00009\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00010}00010\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00011}00011\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00012}00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00013}00013\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00014}00014\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00015}00015\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00016}00016\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00017}00017\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00018}00018\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00019}00019\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00020}00020\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00021}00021\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00022}00022\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00026}00026\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00028}00028\ \textcolor{preprocessor}{\#include\ <SFML/Network/Win32/SocketImpl.hpp>}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00029}00029\ \textcolor{preprocessor}{\#include\ <cstring>}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00032}00032\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00033}00033\ \{}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00034}00034\ \textcolor{keyword}{namespace\ }priv}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00035}00035\ \{}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00037}00037\ sockaddr\_in\ SocketImpl::createAddress(Uint32\ address,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ port)}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00038}00038\ \{}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00039}00039\ \ \ \ \ sockaddr\_in\ addr;}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00040}00040\ \ \ \ \ std::memset(\&addr,\ 0,\ \textcolor{keyword}{sizeof}(addr));}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00041}00041\ \ \ \ \ addr.sin\_addr.s\_addr\ =\ htonl(address);}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00042}00042\ \ \ \ \ addr.sin\_family\ \ \ \ \ \ =\ AF\_INET;}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00043}00043\ \ \ \ \ addr.sin\_port\ \ \ \ \ \ \ \ =\ htons(port);}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00045}00045\ \ \ \ \ \textcolor{keywordflow}{return}\ addr;}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00046}00046\ \}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00050}00050\ SocketHandle\ SocketImpl::invalidSocket()}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00051}00051\ \{}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00052}00052\ \ \ \ \ \textcolor{keywordflow}{return}\ INVALID\_SOCKET;}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00053}00053\ \}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00057}00057\ \textcolor{keywordtype}{void}\ SocketImpl::close(SocketHandle\ sock)}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00058}00058\ \{}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00059}00059\ \ \ \ \ closesocket(sock);}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00060}00060\ \}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00064}00064\ \textcolor{keywordtype}{void}\ SocketImpl::setBlocking(SocketHandle\ sock,\ \textcolor{keywordtype}{bool}\ block)}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00065}00065\ \{}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00066}00066\ \ \ \ \ u\_long\ blocking\ =\ block\ ?\ 0\ :\ 1;}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00067}00067\ \ \ \ \ ioctlsocket(sock,\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{long}\textcolor{keyword}{>}(FIONBIO),\ \&blocking);}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00068}00068\ \}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00072}00072\ Socket::Status\ SocketImpl::getErrorStatus()}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00073}00073\ \{}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00074}00074\ \ \ \ \ \textcolor{keywordflow}{switch}\ (WSAGetLastError())}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00075}00075\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ WSAEWOULDBLOCK:\ \ \textcolor{keywordflow}{return}\ Socket::NotReady;}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00077}00077\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ WSAEALREADY:\ \ \ \ \ \textcolor{keywordflow}{return}\ Socket::NotReady;}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00078}00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ WSAECONNABORTED:\ \textcolor{keywordflow}{return}\ Socket::Disconnected;}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00079}00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ WSAECONNRESET:\ \ \ \textcolor{keywordflow}{return}\ Socket::Disconnected;}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00080}00080\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ WSAETIMEDOUT:\ \ \ \ \textcolor{keywordflow}{return}\ Socket::Disconnected;}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00081}00081\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ WSAENETRESET:\ \ \ \ \textcolor{keywordflow}{return}\ Socket::Disconnected;}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00082}00082\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ WSAENOTCONN:\ \ \ \ \ \textcolor{keywordflow}{return}\ Socket::Disconnected;}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00083}00083\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ WSAEISCONN:\ \ \ \ \ \ \textcolor{keywordflow}{return}\ Socket::Done;\ \textcolor{comment}{//\ when\ connecting\ a\ non-\/blocking\ socket}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00084}00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Socket::Error;}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00085}00085\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00086}00086\ \}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00090}00090\ \textcolor{comment}{//\ Windows\ needs\ some\ initialization\ and\ cleanup\ to\ get}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00091}00091\ \textcolor{comment}{//\ sockets\ working\ properly...\ so\ let's\ create\ a\ class\ that\ will}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00092}00092\ \textcolor{comment}{//\ do\ it\ automatically}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00094}00094\ \textcolor{keyword}{struct\ }SocketInitializer}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00095}00095\ \{}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00096}00096\ \ \ \ \ SocketInitializer()}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00097}00097\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00098}00098\ \ \ \ \ \ \ \ \ WSADATA\ init;}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00099}00099\ \ \ \ \ \ \ \ \ WSAStartup(MAKEWORD(2,\ 2),\ \&init);}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00100}00100\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00102}00102\ \ \ \ \ \string~SocketInitializer()}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00103}00103\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00104}00104\ \ \ \ \ \ \ \ \ WSACleanup();}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00105}00105\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00106}00106\ \};}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00108}00108\ SocketInitializer\ globalInitializer;}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00110}00110\ \}\ \textcolor{comment}{//\ namespace\ priv}}
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{_win32_2_socket_impl_8cpp_source_l00112}00112\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+
+\end{DoxyCode}

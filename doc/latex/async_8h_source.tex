@@ -1,0 +1,106 @@
+\doxysubsection{async.\+h}
+\hypertarget{async_8h_source}{}\label{async_8h_source}\index{async.h@{async.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00001}00001\ \textcolor{comment}{//\ Copyright(c)\ 2015-\/present,\ Gabi\ Melman\ \&\ spdlog\ contributors.}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00002}00002\ \textcolor{comment}{//\ Distributed\ under\ the\ MIT\ License\ (http://opensource.org/licenses/MIT)}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00004}00004\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00006}00006\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00007}00007\ \textcolor{comment}{//\ Async\ logging\ using\ global\ thread\ pool}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00008}00008\ \textcolor{comment}{//\ All\ loggers\ created\ here\ share\ same\ global\ thread\ pool.}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00009}00009\ \textcolor{comment}{//\ Each\ log\ message\ is\ pushed\ to\ a\ queue\ along\ with\ a\ shared\ pointer\ to\ the}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00010}00010\ \textcolor{comment}{//\ logger.}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00011}00011\ \textcolor{comment}{//\ If\ a\ logger\ deleted\ while\ having\ pending\ messages\ in\ the\ queue,\ it's\ actual}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00012}00012\ \textcolor{comment}{//\ destruction\ will\ defer}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00013}00013\ \textcolor{comment}{//\ until\ all\ its\ messages\ are\ processed\ by\ the\ thread\ pool.}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00014}00014\ \textcolor{comment}{//\ This\ is\ because\ each\ message\ in\ the\ queue\ holds\ a\ shared\_ptr\ to\ the}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00015}00015\ \textcolor{comment}{//\ originating\ logger.}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00017}00017\ \textcolor{preprocessor}{\#include\ <spdlog/async\_logger.h>}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00018}00018\ \textcolor{preprocessor}{\#include\ <spdlog/details/registry.h>}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00019}00019\ \textcolor{preprocessor}{\#include\ <spdlog/details/thread\_pool.h>}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00021}00021\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00022}00022\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00023}00023\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00025}00025\ \textcolor{keyword}{namespace\ }spdlog\ \{}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00027}00027\ \textcolor{keyword}{namespace\ }details\ \{}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00028}00028\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ default\_async\_q\_size\ =\ 8192;}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00029}00029\ \}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00031}00031\ \textcolor{comment}{//\ async\ logger\ factory\ -\/\ creates\ async\ loggers\ backed\ with\ thread\ pool.}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00032}00032\ \textcolor{comment}{//\ if\ a\ global\ thread\ pool\ doesn't\ already\ exist,\ create\ it\ with\ default\ queue}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00033}00033\ \textcolor{comment}{//\ size\ of\ 8192\ items\ and\ single\ thread.}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00034}00034\ \textcolor{keyword}{template}\ <async\_overflow\_policy\ OverflowPolicy\ =\ async\_overflow\_policy::block>}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00035}00035\ \textcolor{keyword}{struct\ }async\_factory\_impl\ \{}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00036}00036\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Sink,\ \textcolor{keyword}{typename}...\ SinkArgs>}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00037}00037\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<async\_logger>\ create(std::string\ logger\_name,\ SinkArgs\ \&\&...args)\ \{}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \&registry\_inst\ =\ details::registry::instance();}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00040}00040\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ create\ global\ thread\ pool\ if\ not\ already\ exists..}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \&mutex\ =\ registry\_inst.tp\_mutex();}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00043}00043\ \ \ \ \ \ \ \ \ std::lock\_guard<std::recursive\_mutex>\ tp\_lock(mutex);}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ tp\ =\ registry\_inst.get\_tp();}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00045}00045\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tp\ ==\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ tp\ =\ std::make\_shared<details::thread\_pool>(details::default\_async\_q\_size,\ 1U);}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ registry\_inst.set\_tp(tp);}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00048}00048\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00050}00050\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ sink\ =\ std::make\_shared<Sink>(std::forward<SinkArgs>(args)...);}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00051}00051\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ new\_logger\ =\ std::make\_shared<async\_logger>(std::move(logger\_name),\ std::move(sink),}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::move(tp),\ OverflowPolicy);}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00053}00053\ \ \ \ \ \ \ \ \ registry\_inst.initialize\_logger(new\_logger);}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00054}00054\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ new\_logger;}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00055}00055\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00056}00056\ \};}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00058}00058\ \textcolor{keyword}{using\ }async\_factory\ =\ async\_factory\_impl<async\_overflow\_policy::block>;}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00059}00059\ \textcolor{keyword}{using\ }async\_factory\_nonblock\ =\ async\_factory\_impl<async\_overflow\_policy::overrun\_oldest>;}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00061}00061\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Sink,\ \textcolor{keyword}{typename}...\ SinkArgs>}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00062}00062\ \textcolor{keyword}{inline}\ std::shared\_ptr<spdlog::logger>\ create\_async(std::string\ logger\_name,}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SinkArgs\ \&\&...sink\_args)\ \{}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00064}00064\ \ \ \ \ \textcolor{keywordflow}{return}\ async\_factory::create<Sink>(std::move(logger\_name),}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::forward<SinkArgs>(sink\_args)...);}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00066}00066\ \}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00068}00068\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Sink,\ \textcolor{keyword}{typename}...\ SinkArgs>}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00069}00069\ \textcolor{keyword}{inline}\ std::shared\_ptr<spdlog::logger>\ create\_async\_nb(std::string\ logger\_name,}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SinkArgs\ \&\&...sink\_args)\ \{}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00071}00071\ \ \ \ \ \textcolor{keywordflow}{return}\ async\_factory\_nonblock::create<Sink>(std::move(logger\_name),}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::forward<SinkArgs>(sink\_args)...);}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00073}00073\ \}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00075}00075\ \textcolor{comment}{//\ set\ global\ thread\ pool.}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00076}00076\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ init\_thread\_pool(\textcolor{keywordtype}{size\_t}\ q\_size,}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ thread\_count,}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}()>\ on\_thread\_start,}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}()>\ on\_thread\_stop)\ \{}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00080}00080\ \ \ \ \ \textcolor{keyword}{auto}\ tp\ =\ std::make\_shared<details::thread\_pool>(q\_size,\ thread\_count,\ on\_thread\_start,}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ on\_thread\_stop);}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00082}00082\ \ \ \ \ details::registry::instance().set\_tp(std::move(tp));}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00083}00083\ \}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00085}00085\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ init\_thread\_pool(\textcolor{keywordtype}{size\_t}\ q\_size,}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ thread\_count,}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}()>\ on\_thread\_start)\ \{}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00088}00088\ \ \ \ \ init\_thread\_pool(q\_size,\ thread\_count,\ on\_thread\_start,\ []\ \{\});}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00089}00089\ \}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00091}00091\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ init\_thread\_pool(\textcolor{keywordtype}{size\_t}\ q\_size,\ \textcolor{keywordtype}{size\_t}\ thread\_count)\ \{}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00092}00092\ \ \ \ \ init\_thread\_pool(}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00093}00093\ \ \ \ \ \ \ \ \ q\_size,\ thread\_count,\ []\ \{\},\ []\ \{\});}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00094}00094\ \}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00096}00096\ \textcolor{comment}{//\ get\ the\ global\ thread\ pool.}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00097}00097\ \textcolor{keyword}{inline}\ std::shared\_ptr<spdlog::details::thread\_pool>\ thread\_pool()\ \{}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00098}00098\ \ \ \ \ \textcolor{keywordflow}{return}\ details::registry::instance().get\_tp();}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00099}00099\ \}}
+\DoxyCodeLine{\Hypertarget{async_8h_source_l00100}00100\ \}\ \ \textcolor{comment}{//\ namespace\ spdlog}}
+
+\end{DoxyCode}

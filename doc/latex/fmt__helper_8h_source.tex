@@ -1,0 +1,147 @@
+\doxysubsection{fmt\+\_\+helper.\+h}
+\hypertarget{fmt__helper_8h_source}{}\label{fmt__helper_8h_source}\index{fmt\_helper.h@{fmt\_helper.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00001}00001\ \textcolor{comment}{//\ Copyright(c)\ 2015-\/present,\ Gabi\ Melman\ \&\ spdlog\ contributors.}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00002}00002\ \textcolor{comment}{//\ Distributed\ under\ the\ MIT\ License\ (http://opensource.org/licenses/MIT)}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00003}00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <iterator>}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <spdlog/common.h>}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <spdlog/fmt/fmt.h>}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <type\_traits>}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00011}00011\ \textcolor{preprocessor}{\#ifdef\ SPDLOG\_USE\_STD\_FORMAT}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00012}00012\ \textcolor{preprocessor}{\ \ \ \ \#include\ <charconv>}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00013}00013\ \textcolor{preprocessor}{\ \ \ \ \#include\ <limits>}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00014}00014\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00016}00016\ \textcolor{comment}{//\ Some\ fmt\ helpers\ to\ efficiently\ format\ and\ pad\ ints\ and\ strings}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00017}00017\ \textcolor{keyword}{namespace\ }spdlog\ \{}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00018}00018\ \textcolor{keyword}{namespace\ }details\ \{}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00019}00019\ \textcolor{keyword}{namespace\ }fmt\_helper\ \{}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00021}00021\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ append\_string\_view(spdlog::string\_view\_t\ view,\ memory\_buf\_t\ \&dest)\ \{}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00022}00022\ \ \ \ \ \textcolor{keyword}{auto}\ *buf\_ptr\ =\ view.data();}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00023}00023\ \ \ \ \ dest.append(buf\_ptr,\ buf\_ptr\ +\ view.size());}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00024}00024\ \}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00026}00026\ \textcolor{preprocessor}{\#ifdef\ SPDLOG\_USE\_STD\_FORMAT}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00027}00027\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00028}00028\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ append\_int(T\ n,\ memory\_buf\_t\ \&dest)\ \{}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00029}00029\ \ \ \ \ \textcolor{comment}{//\ Buffer\ should\ be\ large\ enough\ to\ hold\ all\ digits\ (digits10\ +\ 1)\ and\ a\ sign}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00030}00030\ \ \ \ \ SPDLOG\_CONSTEXPR\ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ BUF\_SIZE\ =\ std::numeric\_limits<T>::digits10\ +\ 2;}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00031}00031\ \ \ \ \ \textcolor{keywordtype}{char}\ buf[BUF\_SIZE];}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00033}00033\ \ \ \ \ \textcolor{keyword}{auto}\ [ptr,\ ec]\ =\ std::to\_chars(buf,\ buf\ +\ BUF\_SIZE,\ n,\ 10);}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00034}00034\ \ \ \ \ \textcolor{keywordflow}{if}\ (ec\ ==\ std::errc())\ \{}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00035}00035\ \ \ \ \ \ \ \ \ dest.append(buf,\ ptr);}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00036}00036\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00037}00037\ \ \ \ \ \ \ \ \ throw\_spdlog\_ex(\textcolor{stringliteral}{"{}Failed\ to\ format\ int"{}},\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(ec));}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00038}00038\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00039}00039\ \}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00040}00040\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00041}00041\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00042}00042\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ append\_int(T\ n,\ memory\_buf\_t\ \&dest)\ \{}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00043}00043\ \ \ \ \ fmt::format\_int\ i(n);}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00044}00044\ \ \ \ \ dest.append(i.data(),\ i.data()\ +\ i.size());}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00045}00045\ \}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00046}00046\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00048}00048\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00049}00049\ SPDLOG\_CONSTEXPR\_FUNC\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ count\_digits\_fallback(T\ n)\ \{}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00050}00050\ \ \ \ \ \textcolor{comment}{//\ taken\ from\ fmt:\ https://github.com/fmtlib/fmt/blob/8.0.1/include/fmt/format.h\#L899-\/L912}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00051}00051\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ count\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00052}00052\ \ \ \ \ \textcolor{keywordflow}{for}\ (;;)\ \{}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Integer\ division\ is\ slow\ so\ do\ it\ for\ a\ group\ of\ four\ digits\ instead}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00054}00054\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ of\ for\ every\ digit.\ The\ idea\ comes\ from\ the\ talk\ by\ Alexandrescu}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00055}00055\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ "{}Three\ Optimization\ Tips\ for\ C++"{}.\ See\ speed-\/test\ for\ a\ comparison.}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (n\ <\ 10)\ \textcolor{keywordflow}{return}\ count;}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00057}00057\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (n\ <\ 100)\ \textcolor{keywordflow}{return}\ count\ +\ 1;}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00058}00058\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (n\ <\ 1000)\ \textcolor{keywordflow}{return}\ count\ +\ 2;}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00059}00059\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (n\ <\ 10000)\ \textcolor{keywordflow}{return}\ count\ +\ 3;}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00060}00060\ \ \ \ \ \ \ \ \ n\ /=\ 10000u;}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00061}00061\ \ \ \ \ \ \ \ \ count\ +=\ 4;}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00062}00062\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00063}00063\ \}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00065}00065\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00066}00066\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ count\_digits(T\ n)\ \{}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00067}00067\ \ \ \ \ \textcolor{keyword}{using\ }count\_type\ =}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{keyword}{typename}\ std::conditional<(\textcolor{keyword}{sizeof}(T)\ >\ \textcolor{keyword}{sizeof}(uint32\_t)),\ uint64\_t,\ uint32\_t>::type;}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00069}00069\ \textcolor{preprocessor}{\#ifdef\ SPDLOG\_USE\_STD\_FORMAT}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00070}00070\ \ \ \ \ \textcolor{keywordflow}{return}\ count\_digits\_fallback(\textcolor{keyword}{static\_cast<}count\_type\textcolor{keyword}{>}(n));}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00071}00071\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00072}00072\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\textcolor{keyword}{>}(fmt::}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00073}00073\ \ \ \ \ \textcolor{comment}{//\ fmt\ 7.0.0\ renamed\ the\ internal\ namespace\ to\ detail.}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00074}00074\ \ \ \ \ \textcolor{comment}{//\ See:\ https://github.com/fmtlib/fmt/issues/1538}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00075}00075\ \textcolor{preprocessor}{\ \ \ \ \#if\ FMT\_VERSION\ <\ 70000}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ internal}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00077}00077\ \textcolor{preprocessor}{\ \ \ \ \#else}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ detail}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00079}00079\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ::count\_digits(\textcolor{keyword}{static\_cast<}count\_type\textcolor{keyword}{>}(n)));}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00081}00081\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00082}00082\ \}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00084}00084\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ pad2(\textcolor{keywordtype}{int}\ n,\ memory\_buf\_t\ \&dest)\ \{}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00085}00085\ \ \ \ \ \textcolor{keywordflow}{if}\ (n\ >=\ 0\ \&\&\ n\ <\ 100)\ \ \textcolor{comment}{//\ 0-\/99}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00086}00086\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00087}00087\ \ \ \ \ \ \ \ \ dest.push\_back(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{char}\textcolor{keyword}{>}(\textcolor{charliteral}{'0'}\ +\ n\ /\ 10));}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00088}00088\ \ \ \ \ \ \ \ \ dest.push\_back(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{char}\textcolor{keyword}{>}(\textcolor{charliteral}{'0'}\ +\ n\ \%\ 10));}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00089}00089\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \ \textcolor{comment}{//\ unlikely,\ but\ just\ in\ case,\ let\ fmt\ deal\ with\ it}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00090}00090\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00091}00091\ \ \ \ \ \ \ \ \ fmt\_lib::format\_to(std::back\_inserter(dest),\ SPDLOG\_FMT\_STRING(\textcolor{stringliteral}{"{}\{:02\}"{}}),\ n);}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00092}00092\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00093}00093\ \}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00095}00095\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00096}00096\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ pad\_uint(T\ n,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ width,\ memory\_buf\_t\ \&dest)\ \{}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00097}00097\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_unsigned<T>::value,\ \textcolor{stringliteral}{"{}pad\_uint\ must\ get\ unsigned\ T"{}});}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00098}00098\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ digits\ =\ count\_digits(n);\ digits\ <\ width;\ digits++)\ \{}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00099}00099\ \ \ \ \ \ \ \ \ dest.push\_back(\textcolor{charliteral}{'0'});}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00100}00100\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00101}00101\ \ \ \ \ append\_int(n,\ dest);}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00102}00102\ \}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00104}00104\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00105}00105\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ pad3(T\ n,\ memory\_buf\_t\ \&dest)\ \{}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00106}00106\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_unsigned<T>::value,\ \textcolor{stringliteral}{"{}pad3\ must\ get\ unsigned\ T"{}});}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00107}00107\ \ \ \ \ \textcolor{keywordflow}{if}\ (n\ <\ 1000)\ \{}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00108}00108\ \ \ \ \ \ \ \ \ dest.push\_back(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{char}\textcolor{keyword}{>}(n\ /\ 100\ +\ \textcolor{charliteral}{'0'}));}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00109}00109\ \ \ \ \ \ \ \ \ n\ =\ n\ \%\ 100;}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00110}00110\ \ \ \ \ \ \ \ \ dest.push\_back(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{char}\textcolor{keyword}{>}((n\ /\ 10)\ +\ \textcolor{charliteral}{'0'}));}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00111}00111\ \ \ \ \ \ \ \ \ dest.push\_back(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{char}\textcolor{keyword}{>}((n\ \%\ 10)\ +\ \textcolor{charliteral}{'0'}));}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00112}00112\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00113}00113\ \ \ \ \ \ \ \ \ append\_int(n,\ dest);}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00114}00114\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00115}00115\ \}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00117}00117\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00118}00118\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ pad6(T\ n,\ memory\_buf\_t\ \&dest)\ \{}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00119}00119\ \ \ \ \ pad\_uint(n,\ 6,\ dest);}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00120}00120\ \}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00122}00122\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00123}00123\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ pad9(T\ n,\ memory\_buf\_t\ \&dest)\ \{}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00124}00124\ \ \ \ \ pad\_uint(n,\ 9,\ dest);}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00125}00125\ \}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00127}00127\ \textcolor{comment}{//\ return\ fraction\ of\ a\ second\ of\ the\ given\ time\_point.}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00128}00128\ \textcolor{comment}{//\ e.g.}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00129}00129\ \textcolor{comment}{//\ fraction<std::milliseconds>(tp)\ -\/>\ will\ return\ the\ millis\ part\ of\ the\ second}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00130}00130\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ ToDuration>}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00131}00131\ \textcolor{keyword}{inline}\ ToDuration\ time\_fraction(log\_clock::time\_point\ tp)\ \{}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00132}00132\ \ \ \ \ \textcolor{keyword}{using\ }std::chrono::duration\_cast;}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00133}00133\ \ \ \ \ \textcolor{keyword}{using\ }std::chrono::seconds;}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00134}00134\ \ \ \ \ \textcolor{keyword}{auto}\ duration\ =\ tp.time\_since\_epoch();}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00135}00135\ \ \ \ \ \textcolor{keyword}{auto}\ secs\ =\ duration\_cast<seconds>(duration);}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00136}00136\ \ \ \ \ \textcolor{keywordflow}{return}\ duration\_cast<ToDuration>(duration)\ -\/\ duration\_cast<ToDuration>(secs);}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00137}00137\ \}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00139}00139\ \}\ \ \textcolor{comment}{//\ namespace\ fmt\_helper}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00140}00140\ \}\ \ \textcolor{comment}{//\ namespace\ details}}
+\DoxyCodeLine{\Hypertarget{fmt__helper_8h_source_l00141}00141\ \}\ \ \textcolor{comment}{//\ namespace\ spdlog}}
+
+\end{DoxyCode}

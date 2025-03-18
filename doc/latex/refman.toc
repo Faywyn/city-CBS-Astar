@@ -1,0 +1,238 @@
+\@ifundefined {etoctocstyle}{\let \etoc@startlocaltoc \@gobble \let \etoc@settocdepth \@gobble \let \etoc@depthtag \@gobble \let \etoc@setlocaltop \@gobble }{}
+\contentsline {section}{\numberline {1}Class Index}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Class List}{1}{subsection.1.1}%
+\contentsline {section}{\numberline {2}File Index}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}File List}{3}{subsection.2.1}%
+\contentsline {section}{\numberline {3}Class Documentation}{4}{section.3}%
+\contentsline {subsection}{\numberline {3.1}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}a\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Star\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Conflict Struct Reference}{4}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Detailed Description}{4}{subsubsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.2}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}a\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Star\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node Struct Reference}{5}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Detailed Description}{5}{subsubsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.3}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}city\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Graph\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Neighbor Struct Reference}{5}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Detailed Description}{5}{subsubsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.4}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}city\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Graph\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Point Struct Reference}{5}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}Detailed Description}{6}{subsubsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.5}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}city\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Map\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Building Struct Reference}{6}{subsection.3.5}%
+\contentsline {subsubsection}{\numberline {3.5.1}Detailed Description}{6}{subsubsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.6}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}city\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Map\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Green\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Area Struct Reference}{6}{subsection.3.6}%
+\contentsline {subsubsection}{\numberline {3.6.1}Detailed Description}{6}{subsubsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.7}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}city\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Map\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Intersection Struct Reference}{6}{subsection.3.7}%
+\contentsline {subsubsection}{\numberline {3.7.1}Detailed Description}{7}{subsubsection.3.7.1}%
+\contentsline {subsection}{\numberline {3.8}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}city\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Map\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Road Struct Reference}{7}{subsection.3.8}%
+\contentsline {subsubsection}{\numberline {3.8.1}Detailed Description}{7}{subsubsection.3.8.1}%
+\contentsline {subsection}{\numberline {3.9}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}city\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Map\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Segment Struct Reference}{7}{subsection.3.9}%
+\contentsline {subsubsection}{\numberline {3.9.1}Detailed Description}{8}{subsubsection.3.9.1}%
+\contentsline {subsection}{\numberline {3.10}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}city\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Map\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Water\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Area Struct Reference}{8}{subsection.3.10}%
+\contentsline {subsubsection}{\numberline {3.10.1}Detailed Description}{8}{subsubsection.3.10.1}%
+\contentsline {subsection}{\numberline {3.11}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}data Struct Reference}{8}{subsection.3.11}%
+\contentsline {subsubsection}{\numberline {3.11.1}Detailed Description}{8}{subsubsection.3.11.1}%
+\contentsline {subsection}{\numberline {3.12}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}manager\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}CBSNode Struct Reference}{8}{subsection.3.12}%
+\contentsline {subsubsection}{\numberline {3.12.1}Detailed Description}{9}{subsubsection.3.12.1}%
+\contentsline {subsection}{\numberline {3.13}AStar Class Reference}{9}{subsection.3.13}%
+\contentsline {subsubsection}{\numberline {3.13.1}Detailed Description}{9}{subsubsection.3.13.1}%
+\contentsline {subsubsection}{\numberline {3.13.2}Constructor \& Destructor Documentation}{9}{subsubsection.3.13.2}%
+\contentsline {paragraph}{AStar()}{9}{section*.13}%
+\contentsline {subsubsection}{\numberline {3.13.3}Member Function Documentation}{9}{subsubsection.3.13.3}%
+\contentsline {paragraph}{findPath()}{9}{section*.14}%
+\contentsline {subsection}{\numberline {3.14}Car Class Reference}{10}{subsection.3.14}%
+\contentsline {subsubsection}{\numberline {3.14.1}Detailed Description}{11}{subsubsection.3.14.1}%
+\contentsline {subsubsection}{\numberline {3.14.2}Member Function Documentation}{11}{subsubsection.3.14.2}%
+\contentsline {paragraph}{assignExistingPath()}{11}{section*.16}%
+\contentsline {paragraph}{assignPath()}{11}{section*.17}%
+\contentsline {paragraph}{assignStartEnd()}{11}{section*.18}%
+\contentsline {paragraph}{chooseRandomStartEndPath()}{12}{section*.19}%
+\contentsline {paragraph}{getAStarPath()}{12}{section*.20}%
+\contentsline {paragraph}{getAverageSpeed()}{12}{section*.21}%
+\contentsline {paragraph}{getElapsedDistance()}{12}{section*.22}%
+\contentsline {paragraph}{getElapsedTime()}{12}{section*.23}%
+\contentsline {paragraph}{getEnd()}{13}{section*.24}%
+\contentsline {paragraph}{getPath()}{13}{section*.25}%
+\contentsline {paragraph}{getPathLength()}{13}{section*.26}%
+\contentsline {paragraph}{getPathTime()}{13}{section*.27}%
+\contentsline {paragraph}{getPosition()}{13}{section*.28}%
+\contentsline {paragraph}{getRemainingDistance()}{13}{section*.29}%
+\contentsline {paragraph}{getRemainingTime()}{14}{section*.30}%
+\contentsline {paragraph}{getSpeed()}{14}{section*.31}%
+\contentsline {paragraph}{getSpeedAt()}{14}{section*.32}%
+\contentsline {paragraph}{getStart()}{14}{section*.33}%
+\contentsline {paragraph}{render()}{14}{section*.34}%
+\contentsline {subsection}{\numberline {3.15}City\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Graph Class Reference}{15}{subsection.3.15}%
+\contentsline {subsubsection}{\numberline {3.15.1}Detailed Description}{15}{subsubsection.3.15.1}%
+\contentsline {subsubsection}{\numberline {3.15.2}Member Function Documentation}{15}{subsubsection.3.15.2}%
+\contentsline {paragraph}{createGraph()}{15}{section*.36}%
+\contentsline {paragraph}{getGraphPoints()}{15}{section*.37}%
+\contentsline {paragraph}{getHeight()}{15}{section*.38}%
+\contentsline {paragraph}{getNeighbors()}{16}{section*.39}%
+\contentsline {paragraph}{getRandomPoint()}{16}{section*.40}%
+\contentsline {paragraph}{getWidth()}{16}{section*.41}%
+\contentsline {subsection}{\numberline {3.16}City\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Map Class Reference}{16}{subsection.3.16}%
+\contentsline {subsubsection}{\numberline {3.16.1}Detailed Description}{17}{subsubsection.3.16.1}%
+\contentsline {subsubsection}{\numberline {3.16.2}Member Function Documentation}{17}{subsubsection.3.16.2}%
+\contentsline {paragraph}{getBuildings()}{17}{section*.43}%
+\contentsline {paragraph}{getGreenAreas()}{17}{section*.44}%
+\contentsline {paragraph}{getHeight()}{17}{section*.45}%
+\contentsline {paragraph}{getIntersections()}{17}{section*.46}%
+\contentsline {paragraph}{getMaxLatLon()}{18}{section*.47}%
+\contentsline {paragraph}{getMinLatLon()}{18}{section*.48}%
+\contentsline {paragraph}{getRoads()}{18}{section*.49}%
+\contentsline {paragraph}{getWaterAreas()}{18}{section*.50}%
+\contentsline {paragraph}{getWidth()}{18}{section*.51}%
+\contentsline {paragraph}{isCityMapLoaded()}{18}{section*.52}%
+\contentsline {paragraph}{loadFile()}{18}{section*.53}%
+\contentsline {subsection}{\numberline {3.17}Constraint\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller Class Reference}{19}{subsection.3.17}%
+\contentsline {subsubsection}{\numberline {3.17.1}Detailed Description}{19}{subsubsection.3.17.1}%
+\contentsline {subsubsection}{\numberline {3.17.2}Member Function Documentation}{19}{subsubsection.3.17.2}%
+\contentsline {paragraph}{addConstraint()}{19}{section*.55}%
+\contentsline {paragraph}{checkConstraints()}{20}{section*.56}%
+\contentsline {paragraph}{copy()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{20}{section*.57}%
+\contentsline {paragraph}{copy()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{20}{section*.58}%
+\contentsline {paragraph}{hasConstraint()}{20}{section*.59}%
+\contentsline {subsection}{\numberline {3.18}Data\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Manager Class Reference}{21}{subsection.3.18}%
+\contentsline {subsubsection}{\numberline {3.18.1}Detailed Description}{21}{subsubsection.3.18.1}%
+\contentsline {subsubsection}{\numberline {3.18.2}Constructor \& Destructor Documentation}{21}{subsubsection.3.18.2}%
+\contentsline {paragraph}{DataManager()}{21}{section*.61}%
+\contentsline {subsubsection}{\numberline {3.18.3}Member Function Documentation}{21}{subsubsection.3.18.3}%
+\contentsline {paragraph}{createData()}{21}{section*.62}%
+\contentsline {subsection}{\numberline {3.19}Dubins Class Reference}{22}{subsection.3.19}%
+\contentsline {subsubsection}{\numberline {3.19.1}Detailed Description}{22}{subsubsection.3.19.1}%
+\contentsline {subsubsection}{\numberline {3.19.2}Constructor \& Destructor Documentation}{22}{subsubsection.3.19.2}%
+\contentsline {paragraph}{Dubins()\hspace {0.1cm}{\footnotesize \ttfamily [1/3]}}{22}{section*.64}%
+\contentsline {paragraph}{Dubins()\hspace {0.1cm}{\footnotesize \ttfamily [2/3]}}{23}{section*.65}%
+\contentsline {paragraph}{Dubins()\hspace {0.1cm}{\footnotesize \ttfamily [3/3]}}{23}{section*.66}%
+\contentsline {subsubsection}{\numberline {3.19.3}Member Function Documentation}{23}{subsubsection.3.19.3}%
+\contentsline {paragraph}{distance()}{23}{section*.67}%
+\contentsline {paragraph}{path()}{24}{section*.68}%
+\contentsline {paragraph}{point()}{24}{section*.69}%
+\contentsline {paragraph}{time()}{24}{section*.70}%
+\contentsline {subsection}{\numberline {3.20}Dubins\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Path Class Reference}{24}{subsection.3.20}%
+\contentsline {subsubsection}{\numberline {3.20.1}Detailed Description}{24}{subsubsection.3.20.1}%
+\contentsline {subsubsection}{\numberline {3.20.2}Constructor \& Destructor Documentation}{25}{subsubsection.3.20.2}%
+\contentsline {paragraph}{DubinsPath()}{25}{section*.72}%
+\contentsline {subsection}{\numberline {3.21}File\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Selector Class Reference}{25}{subsection.3.21}%
+\contentsline {subsubsection}{\numberline {3.21.1}Detailed Description}{25}{subsubsection.3.21.1}%
+\contentsline {subsection}{\numberline {3.22}Manager Class Reference}{25}{subsection.3.22}%
+\contentsline {subsubsection}{\numberline {3.22.1}Detailed Description}{26}{subsubsection.3.22.1}%
+\contentsline {subsubsection}{\numberline {3.22.2}Constructor \& Destructor Documentation}{26}{subsubsection.3.22.2}%
+\contentsline {paragraph}{Manager()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{26}{section*.74}%
+\contentsline {paragraph}{Manager()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{26}{section*.75}%
+\contentsline {subsubsection}{\numberline {3.22.3}Member Function Documentation}{27}{subsubsection.3.22.3}%
+\contentsline {paragraph}{createCarsAStar()}{27}{section*.76}%
+\contentsline {paragraph}{createCarsCBS()}{27}{section*.77}%
+\contentsline {paragraph}{createSubCBS()}{27}{section*.78}%
+\contentsline {paragraph}{getCars()}{27}{section*.79}%
+\contentsline {paragraph}{getNumCars()}{28}{section*.80}%
+\contentsline {paragraph}{hasConflict()}{28}{section*.81}%
+\contentsline {paragraph}{processCBS()}{28}{section*.82}%
+\contentsline {paragraph}{renderCars()}{29}{section*.83}%
+\contentsline {paragraph}{toggleCarDebug()}{29}{section*.84}%
+\contentsline {subsection}{\numberline {3.23}Renderer Class Reference}{29}{subsection.3.23}%
+\contentsline {subsubsection}{\numberline {3.23.1}Detailed Description}{29}{subsubsection.3.23.1}%
+\contentsline {subsubsection}{\numberline {3.23.2}Member Function Documentation}{30}{subsubsection.3.23.2}%
+\contentsline {paragraph}{renderCityGraph()}{30}{section*.86}%
+\contentsline {paragraph}{renderCityMap()}{30}{section*.87}%
+\contentsline {paragraph}{renderManager()}{30}{section*.88}%
+\contentsline {subsection}{\numberline {3.24}Test Class Reference}{30}{subsection.3.24}%
+\contentsline {subsubsection}{\numberline {3.24.1}Detailed Description}{31}{subsubsection.3.24.1}%
+\contentsline {subsection}{\numberline {3.25}Timed\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}AStar Class Reference}{31}{subsection.3.25}%
+\contentsline {subsubsection}{\numberline {3.25.1}Detailed Description}{31}{subsubsection.3.25.1}%
+\contentsline {subsubsection}{\numberline {3.25.2}Constructor \& Destructor Documentation}{31}{subsubsection.3.25.2}%
+\contentsline {paragraph}{TimedAStar()}{31}{section*.91}%
+\contentsline {subsubsection}{\numberline {3.25.3}Member Function Documentation}{31}{subsubsection.3.25.3}%
+\contentsline {paragraph}{findPath()}{31}{section*.92}%
+\contentsline {section}{\numberline {4}File Documentation}{32}{section.4}%
+\contentsline {subsection}{\numberline {4.1}a\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Star.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h File Reference}{32}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Detailed Description}{32}{subsubsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.2}a\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Star.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{32}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}car.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h File Reference}{34}{subsection.4.3}%
+\contentsline {subsubsection}{\numberline {4.3.1}Detailed Description}{34}{subsubsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.4}car.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{34}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}city\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Graph.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h File Reference}{35}{subsection.4.5}%
+\contentsline {subsubsection}{\numberline {4.5.1}Detailed Description}{35}{subsubsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.6}city\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Graph.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{35}{subsection.4.6}%
+\contentsline {subsection}{\numberline {4.7}city\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Map.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{36}{subsection.4.7}%
+\contentsline {subsection}{\numberline {4.8}config.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h File Reference}{37}{subsection.4.8}%
+\contentsline {subsubsection}{\numberline {4.8.1}Detailed Description}{37}{subsubsection.4.8.1}%
+\contentsline {subsection}{\numberline {4.9}config.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{37}{subsection.4.9}%
+\contentsline {subsection}{\numberline {4.10}data\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Manager.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h File Reference}{38}{subsection.4.10}%
+\contentsline {subsubsection}{\numberline {4.10.1}Detailed Description}{38}{subsubsection.4.10.1}%
+\contentsline {subsection}{\numberline {4.11}data\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Manager.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{38}{subsection.4.11}%
+\contentsline {subsection}{\numberline {4.12}dubins.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h File Reference}{39}{subsection.4.12}%
+\contentsline {subsubsection}{\numberline {4.12.1}Detailed Description}{39}{subsubsection.4.12.1}%
+\contentsline {subsection}{\numberline {4.13}dubins.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{39}{subsection.4.13}%
+\contentsline {subsection}{\numberline {4.14}file\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Selector.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h File Reference}{40}{subsection.4.14}%
+\contentsline {subsubsection}{\numberline {4.14.1}Detailed Description}{40}{subsubsection.4.14.1}%
+\contentsline {subsection}{\numberline {4.15}file\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Selector.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{40}{subsection.4.15}%
+\contentsline {subsection}{\numberline {4.16}manager.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h File Reference}{40}{subsection.4.16}%
+\contentsline {subsubsection}{\numberline {4.16.1}Detailed Description}{41}{subsubsection.4.16.1}%
+\contentsline {subsection}{\numberline {4.17}manager.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{41}{subsection.4.17}%
+\contentsline {subsection}{\numberline {4.18}renderer.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h File Reference}{42}{subsection.4.18}%
+\contentsline {subsubsection}{\numberline {4.18.1}Detailed Description}{42}{subsubsection.4.18.1}%
+\contentsline {subsubsection}{\numberline {4.18.2}Function Documentation}{42}{subsubsection.4.18.2}%
+\contentsline {paragraph}{drawArrow()}{42}{section*.102}%
+\contentsline {subsection}{\numberline {4.19}renderer.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{43}{subsection.4.19}%
+\contentsline {subsection}{\numberline {4.20}test.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h File Reference}{43}{subsection.4.20}%
+\contentsline {subsubsection}{\numberline {4.20.1}Detailed Description}{44}{subsubsection.4.20.1}%
+\contentsline {subsection}{\numberline {4.21}test.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{44}{subsection.4.21}%
+\contentsline {subsection}{\numberline {4.22}utils.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h File Reference}{44}{subsection.4.22}%
+\contentsline {subsubsection}{\numberline {4.22.1}Detailed Description}{44}{subsubsection.4.22.1}%
+\contentsline {subsubsection}{\numberline {4.22.2}Function Documentation}{44}{subsubsection.4.22.2}%
+\contentsline {paragraph}{carConflict()}{44}{section*.105}%
+\contentsline {paragraph}{carsCollided()}{45}{section*.106}%
+\contentsline {paragraph}{distance()}{45}{section*.107}%
+\contentsline {paragraph}{latLonToXY()}{45}{section*.108}%
+\contentsline {paragraph}{loadFont()}{46}{section*.109}%
+\contentsline {paragraph}{normalizeAngle()}{46}{section*.110}%
+\contentsline {paragraph}{turningRadius()}{46}{section*.111}%
+\contentsline {paragraph}{turningRadiusToSpeed()}{46}{section*.112}%
+\contentsline {subsection}{\numberline {4.23}utils.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{47}{subsection.4.23}%
+\contentsline {subsection}{\numberline {4.24}index.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py}{47}{subsection.4.24}%
+\contentsline {subsection}{\numberline {4.25}a\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Star.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{49}{subsection.4.25}%
+\contentsline {subsubsection}{\numberline {4.25.1}Detailed Description}{49}{subsubsection.4.25.1}%
+\contentsline {subsection}{\numberline {4.26}a\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Star.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp}{49}{subsection.4.26}%
+\contentsline {subsection}{\numberline {4.27}car.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{50}{subsection.4.27}%
+\contentsline {subsubsection}{\numberline {4.27.1}Detailed Description}{51}{subsubsection.4.27.1}%
+\contentsline {subsection}{\numberline {4.28}car.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp}{51}{subsection.4.28}%
+\contentsline {subsection}{\numberline {4.29}city\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Graph.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{53}{subsection.4.29}%
+\contentsline {subsubsection}{\numberline {4.29.1}Detailed Description}{53}{subsubsection.4.29.1}%
+\contentsline {subsection}{\numberline {4.30}city\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Graph.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp}{53}{subsection.4.30}%
+\contentsline {subsection}{\numberline {4.31}city\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Map.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{57}{subsection.4.31}%
+\contentsline {subsubsection}{\numberline {4.31.1}Detailed Description}{57}{subsubsection.4.31.1}%
+\contentsline {subsection}{\numberline {4.32}city\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Map.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp}{58}{subsection.4.32}%
+\contentsline {subsection}{\numberline {4.33}constraint\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{62}{subsection.4.33}%
+\contentsline {subsubsection}{\numberline {4.33.1}Detailed Description}{62}{subsubsection.4.33.1}%
+\contentsline {subsection}{\numberline {4.34}constraint\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp}{62}{subsection.4.34}%
+\contentsline {subsection}{\numberline {4.35}data\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Manager.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{64}{subsection.4.35}%
+\contentsline {subsubsection}{\numberline {4.35.1}Detailed Description}{64}{subsubsection.4.35.1}%
+\contentsline {subsection}{\numberline {4.36}data\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Manager.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp}{64}{subsection.4.36}%
+\contentsline {subsection}{\numberline {4.37}dubins.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{65}{subsection.4.37}%
+\contentsline {subsubsection}{\numberline {4.37.1}Detailed Description}{65}{subsubsection.4.37.1}%
+\contentsline {subsection}{\numberline {4.38}dubins.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp}{65}{subsection.4.38}%
+\contentsline {subsection}{\numberline {4.39}file\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Selector.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{67}{subsection.4.39}%
+\contentsline {subsubsection}{\numberline {4.39.1}Detailed Description}{67}{subsubsection.4.39.1}%
+\contentsline {subsection}{\numberline {4.40}file\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Selector.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp}{67}{subsection.4.40}%
+\contentsline {subsection}{\numberline {4.41}main.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{68}{subsection.4.41}%
+\contentsline {subsubsection}{\numberline {4.41.1}Detailed Description}{69}{subsubsection.4.41.1}%
+\contentsline {subsection}{\numberline {4.42}main.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp}{69}{subsection.4.42}%
+\contentsline {subsection}{\numberline {4.43}manager.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{70}{subsection.4.43}%
+\contentsline {subsubsection}{\numberline {4.43.1}Detailed Description}{70}{subsubsection.4.43.1}%
+\contentsline {subsection}{\numberline {4.44}manager.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp}{70}{subsection.4.44}%
+\contentsline {subsection}{\numberline {4.45}manager\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}CBS.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{70}{subsection.4.45}%
+\contentsline {subsubsection}{\numberline {4.45.1}Detailed Description}{71}{subsubsection.4.45.1}%
+\contentsline {subsection}{\numberline {4.46}manager\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}CBS.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp}{71}{subsection.4.46}%
+\contentsline {subsection}{\numberline {4.47}renderer.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{75}{subsection.4.47}%
+\contentsline {subsubsection}{\numberline {4.47.1}Detailed Description}{75}{subsubsection.4.47.1}%
+\contentsline {subsection}{\numberline {4.48}renderer.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp}{75}{subsection.4.48}%
+\contentsline {subsection}{\numberline {4.49}test.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{80}{subsection.4.49}%
+\contentsline {subsubsection}{\numberline {4.49.1}Detailed Description}{80}{subsubsection.4.49.1}%
+\contentsline {subsection}{\numberline {4.50}test.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp}{80}{subsection.4.50}%
+\contentsline {subsection}{\numberline {4.51}timed\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}AStar.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{81}{subsection.4.51}%
+\contentsline {subsubsection}{\numberline {4.51.1}Detailed Description}{81}{subsubsection.4.51.1}%
+\contentsline {subsection}{\numberline {4.52}timed\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}AStar.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp}{81}{subsection.4.52}%
+\contentsline {subsection}{\numberline {4.53}utils.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{83}{subsection.4.53}%
+\contentsline {subsubsection}{\numberline {4.53.1}Detailed Description}{83}{subsubsection.4.53.1}%
+\contentsline {subsubsection}{\numberline {4.53.2}Function Documentation}{83}{subsubsection.4.53.2}%
+\contentsline {paragraph}{carConflict()}{83}{section*.114}%
+\contentsline {paragraph}{carsCollided()}{84}{section*.115}%
+\contentsline {paragraph}{loadFont()}{84}{section*.116}%
+\contentsline {subsection}{\numberline {4.54}utils.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp}{84}{subsection.4.54}%
+\contentsline {section}{Index}{87}{section*.117}%

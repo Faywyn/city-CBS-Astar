@@ -1,0 +1,32 @@
+\doxysubsection{periodic\+\_\+worker-\/inl.h}
+\hypertarget{periodic__worker-inl_8h_source}{}\label{periodic__worker-inl_8h_source}\index{periodic\_worker-\/inl.h@{periodic\_worker-\/inl.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{periodic__worker-inl_8h_source_l00001}00001\ \textcolor{comment}{//\ Copyright(c)\ 2015-\/present,\ Gabi\ Melman\ \&\ spdlog\ contributors.}}
+\DoxyCodeLine{\Hypertarget{periodic__worker-inl_8h_source_l00002}00002\ \textcolor{comment}{//\ Distributed\ under\ the\ MIT\ License\ (http://opensource.org/licenses/MIT)}}
+\DoxyCodeLine{\Hypertarget{periodic__worker-inl_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{periodic__worker-inl_8h_source_l00004}00004\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{periodic__worker-inl_8h_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{periodic__worker-inl_8h_source_l00006}00006\ \textcolor{preprocessor}{\#ifndef\ SPDLOG\_HEADER\_ONLY}}
+\DoxyCodeLine{\Hypertarget{periodic__worker-inl_8h_source_l00007}00007\ \textcolor{preprocessor}{\ \ \ \ \#include\ <spdlog/details/periodic\_worker.h>}}
+\DoxyCodeLine{\Hypertarget{periodic__worker-inl_8h_source_l00008}00008\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{periodic__worker-inl_8h_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{periodic__worker-inl_8h_source_l00010}00010\ \textcolor{keyword}{namespace\ }spdlog\ \{}
+\DoxyCodeLine{\Hypertarget{periodic__worker-inl_8h_source_l00011}00011\ \textcolor{keyword}{namespace\ }details\ \{}
+\DoxyCodeLine{\Hypertarget{periodic__worker-inl_8h_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{periodic__worker-inl_8h_source_l00013}00013\ \textcolor{comment}{//\ stop\ the\ worker\ thread\ and\ join\ it}}
+\DoxyCodeLine{\Hypertarget{periodic__worker-inl_8h_source_l00014}00014\ SPDLOG\_INLINE\ periodic\_worker::\string~periodic\_worker()\ \{}
+\DoxyCodeLine{\Hypertarget{periodic__worker-inl_8h_source_l00015}00015\ \ \ \ \ \textcolor{keywordflow}{if}\ (worker\_thread\_.joinable())\ \{}
+\DoxyCodeLine{\Hypertarget{periodic__worker-inl_8h_source_l00016}00016\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{periodic__worker-inl_8h_source_l00017}00017\ \ \ \ \ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(mutex\_);}
+\DoxyCodeLine{\Hypertarget{periodic__worker-inl_8h_source_l00018}00018\ \ \ \ \ \ \ \ \ \ \ \ \ active\_\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{periodic__worker-inl_8h_source_l00019}00019\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{periodic__worker-inl_8h_source_l00020}00020\ \ \ \ \ \ \ \ \ cv\_.notify\_one();}
+\DoxyCodeLine{\Hypertarget{periodic__worker-inl_8h_source_l00021}00021\ \ \ \ \ \ \ \ \ worker\_thread\_.join();}
+\DoxyCodeLine{\Hypertarget{periodic__worker-inl_8h_source_l00022}00022\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{periodic__worker-inl_8h_source_l00023}00023\ \}}
+\DoxyCodeLine{\Hypertarget{periodic__worker-inl_8h_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{periodic__worker-inl_8h_source_l00025}00025\ \}\ \ \textcolor{comment}{//\ namespace\ details}}
+\DoxyCodeLine{\Hypertarget{periodic__worker-inl_8h_source_l00026}00026\ \}\ \ \textcolor{comment}{//\ namespace\ spdlog}}
+
+\end{DoxyCode}

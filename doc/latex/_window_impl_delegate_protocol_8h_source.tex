@@ -1,0 +1,105 @@
+\doxysubsection{Window\+Impl\+Delegate\+Protocol.\+h}
+\hypertarget{_window_impl_delegate_protocol_8h_source}{}\label{_window_impl_delegate_protocol_8h_source}\index{WindowImplDelegateProtocol.h@{WindowImplDelegateProtocol.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00002}00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00003}00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00004}00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Marco\ Antognini\ (antognini.marco@gmail.com),}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00005}00005\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00006}00006\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00007}00007\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00008}00008\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00009}00009\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00010}00010\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00011}00011\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00012}00012\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00013}00013\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00014}00014\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00015}00015\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00016}00016\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00017}00017\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00018}00018\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00019}00019\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00020}00020\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00021}00021\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00022}00022\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00023}00023\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00027}00027\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00029}00029\ \textcolor{preprocessor}{\#include\ <SFML/Config.hpp>}\ \textcolor{comment}{//\ for\ sf::Uint8}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00030}00030\ \textcolor{preprocessor}{\#include\ <SFML/Window/WindowHandle.hpp>}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00032}00032\ \textcolor{preprocessor}{\#import\ <AppKit/AppKit.h>}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00034}00034\ \textcolor{preprocessor}{\#if\ defined(\_\_APPLE\_\_)}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00035}00035\ \textcolor{preprocessor}{\ \ \ \ \#if\ defined(\_\_clang\_\_)}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00036}00036\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#pragma\ clang\ diagnostic\ push}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00037}00037\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#pragma\ clang\ diagnostic\ ignored\ "{}-\/Wdeprecated-\/declarations"{}}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00038}00038\ \textcolor{preprocessor}{\ \ \ \ \#elif\ defined(\_\_GNUC\_\_)}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00039}00039\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#pragma\ GCC\ diagnostic\ push}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00040}00040\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#pragma\ GCC\ diagnostic\ ignored\ "{}-\/Wdeprecated-\/declarations"{}}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00041}00041\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00042}00042\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00044}00044\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}\ \{}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00045}00045\ \ \ \ \ \textcolor{keyword}{namespace\ }priv\ \{}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }WindowImplCocoa;}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00047}00047\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00048}00048\ \}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00077}\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p}{00077}}\ \textcolor{keyword}{@protocol\ }WindowImplDelegateProtocol}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00085}\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p_a6fa292ac40694fc0b62a1645a2e492aa}{00085}}\ -\/(CGFloat)\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p_a6fa292ac40694fc0b62a1645a2e492aa}{displayScaleFactor}};}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00091}\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p_a92247a9fe376de9b64955b388d7968e7}{00091}}\ -\/(void)setRequesterTo:(\mbox{\hyperlink{namespacesf}{sf}}::priv::WindowImplCocoa*)requester;}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00099}\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p_ae5bc04805392d0e5c6a6e269983401b2}{00099}}\ -\/(\mbox{\hyperlink{namespacesf}{sf}}::WindowHandle)getSystemHandle;}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00107}\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p_a45f5a8c7cfcff1d289e482f68d31ebe5}{00107}}\ -\/(BOOL)\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p_a45f5a8c7cfcff1d289e482f68d31ebe5}{isMouseInside}};}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00115}\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p_aaecb5d3a201ecdd9cd2f84047f051b59}{00115}}\ -\/(void)setCursorGrabbed:(BOOL)grabbed;}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00121}\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p_ad89677fbcdc7a1f03fcd0cbf4dd2c08d}{00121}}\ -\/(void)setCursor:(NSCursor*)cursor;}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00129}\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p_a35887f115df7b03eac8aee9027bd44c2}{00129}}\ -\/(NSPoint)\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p_a35887f115df7b03eac8aee9027bd44c2}{position}};}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00130}00130\ }
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00140}\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p_a1efa82f9aeab48a59b1c8152deb1634f}{00140}}\ -\/(void)setWindowPositionToX:(\textcolor{keywordtype}{int})x\ Y:(\textcolor{keywordtype}{int})y;}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00148}\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p_a1b72596a5eb95604cb3a49dafd2f9381}{00148}}\ -\/(NSSize)\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p_a1b72596a5eb95604cb3a49dafd2f9381}{size}};}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00149}00149\ }
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00157}\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p_a3a088ce7bf3bb6b3feb0ff2429edbd64}{00157}}\ -\/(void)resizeTo:(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int})width\ by:(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int})height;}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00167}\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p_a71ac873643e6110d28a9ee1072e88612}{00167}}\ -\/(void)changeTitle:(NSString*)title;}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00168}00168\ }
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00175}\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p_a52d4c92c98deca0c3d97236a880d53e1}{00175}}\ -\/(void)\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p_a52d4c92c98deca0c3d97236a880d53e1}{hideWindow}};}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00176}00176\ }
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00183}\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p_a140ae5e6735cdfb0cd0b191c3f14eeba}{00183}}\ -\/(void)\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p_a140ae5e6735cdfb0cd0b191c3f14eeba}{showWindow}};}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00184}00184\ }
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00191}\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p_a420aa62c6656363a0a30cdcbe3fe5792}{00191}}\ -\/(void)\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p_a420aa62c6656363a0a30cdcbe3fe5792}{closeWindow}};}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00192}00192\ }
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00198}\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p_a16fd30a7c488b4ba62b71f87f7a89ede}{00198}}\ -\/(void)\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p_a16fd30a7c488b4ba62b71f87f7a89ede}{requestFocus}};}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00199}00199\ }
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00206}\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p_a73f655fc6cb68b817c65cedb32d41dfb}{00206}}\ -\/(BOOL)\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p_a73f655fc6cb68b817c65cedb32d41dfb}{hasFocus}};}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00207}00207\ }
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00212}\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p_a70a85a00baa28a8a45c95758c6d881cc}{00212}}\ -\/(void)\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p_a70a85a00baa28a8a45c95758c6d881cc}{enableKeyRepeat}};}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00213}00213\ }
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00218}\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p_a326fad21e809f843a8177ff860fd984a}{00218}}\ -\/(void)\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p_a326fad21e809f843a8177ff860fd984a}{disableKeyRepeat}};}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00219}00219\ }
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00228}\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p_aff352209c2db16f70199dadfdf73e1b5}{00228}}\ -\/(void)setIconTo:(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int})width\ by:(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int})height\ with:(const\ \mbox{\hyperlink{namespacesf}{sf}}::Uint8*)pixels;}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00229}00229\ }
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00234}\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p_a41eda28671dce9d263ca4506c7b4b0af}{00234}}\ -\/(void)\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p_a41eda28671dce9d263ca4506c7b4b0af}{processEvent}};}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00235}00235\ }
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00242}\mbox{\hyperlink{protocol_window_impl_delegate_protocol-p_aa065fea3c8a9b7262b3343c5a26f5af6}{00242}}\ -\/(void)applyContext:(NSOpenGLContext*)context;}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00243}00243\ }
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00244}00244\ \textcolor{keyword}{@end}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00245}00245\ }
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00246}00246\ \textcolor{preprocessor}{\#if\ defined(\_\_APPLE\_\_)}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00247}00247\ \textcolor{preprocessor}{\ \ \ \ \#if\ defined(\_\_clang\_\_)}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00248}00248\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#pragma\ clang\ diagnostic\ pop}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00249}00249\ \textcolor{preprocessor}{\ \ \ \ \#elif\ defined(\_\_GNUC\_\_)}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00250}00250\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#pragma\ GCC\ diagnostic\ pop}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00251}00251\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_window_impl_delegate_protocol_8h_source_l00252}00252\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,23 @@
+\doxysubsection{index Namespace Reference}
+\hypertarget{namespaceindex}{}\label{namespaceindex}\index{index@{index}}
+
+
+This script reads a CSV file containing data on the number of vehicles and their speeds, and generates a plot with different elements.  
+
+
+
+
+\doxysubsubsection{Detailed Description}
+This script reads a CSV file containing data on the number of vehicles and their speeds, and generates a plot with different elements. 
+
+The script reads a CSV file with the following format\+: num\+Car;density;speed1;speed2;...;speedN
+\begin{DoxyItemize}
+\item num\+Car\+: Number of vehicles (integer)
+\item density\+: Density value (float)
+\item speed1, speed2, ..., speedN\+: Speed values in m/s (float) The script converts the speed values from m/s to km/h and generates a plot with the following elements\+:
+\item Vertical bars representing individual data points (speeds) for each num\+Car
+\item A red line representing the mean speed for each num\+Car
+\item A green line representing the trend line (interpolation) for the mean speed
+\item Purple dashed lines representing the standard deviation bands (±1 standard deviation)
+\item X-\/axis labels showing "{}num\+Car (density)"{} for each num\+Car 
+\end{DoxyItemize}

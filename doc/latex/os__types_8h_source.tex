@@ -1,0 +1,153 @@
+\doxysubsection{os\+\_\+types.\+h}
+\hypertarget{os__types_8h_source}{}\label{os__types_8h_source}\index{os\_types.h@{os\_types.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00001}00001\ \textcolor{comment}{/********************************************************************}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00002}00002\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00003}00003\ \textcolor{comment}{\ *\ THIS\ FILE\ IS\ PART\ OF\ THE\ OggVorbis\ SOFTWARE\ CODEC\ SOURCE\ CODE.\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00004}00004\ \textcolor{comment}{\ *\ USE,\ DISTRIBUTION\ AND\ REPRODUCTION\ OF\ THIS\ LIBRARY\ SOURCE\ IS\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00005}00005\ \textcolor{comment}{\ *\ GOVERNED\ BY\ A\ BSD-\/STYLE\ SOURCE\ LICENSE\ INCLUDED\ WITH\ THIS\ SOURCE\ *}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00006}00006\ \textcolor{comment}{\ *\ IN\ 'COPYING'.\ PLEASE\ READ\ THESE\ TERMS\ BEFORE\ DISTRIBUTING.\ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00007}00007\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00008}00008\ \textcolor{comment}{\ *\ THE\ OggVorbis\ SOURCE\ CODE\ IS\ (C)\ COPYRIGHT\ 1994-\/2002\ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00009}00009\ \textcolor{comment}{\ *\ by\ the\ Xiph.Org\ Foundation\ http://www.xiph.org/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00010}00010\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00011}00011\ \textcolor{comment}{\ ********************************************************************}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00012}00012\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00013}00013\ \textcolor{comment}{\ function:\ \#ifdef\ jail\ to\ whip\ a\ few\ platforms\ into\ the\ UNIX\ ideal.}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00014}00014\ \textcolor{comment}{\ last\ mod:\ \$Id:\ os\_types.h\ 19098\ 2014-\/02-\/26\ 19:06:45Z\ giles\ \$}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00015}00015\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00016}00016\ \textcolor{comment}{\ ********************************************************************/}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00017}00017\ \textcolor{preprocessor}{\#ifndef\ \_OS\_TYPES\_H}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00018}00018\ \textcolor{preprocessor}{\#define\ \_OS\_TYPES\_H}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00020}00020\ \textcolor{comment}{/*\ make\ it\ easy\ on\ the\ folks\ that\ want\ to\ compile\ the\ libs\ with\ a}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00021}00021\ \textcolor{comment}{\ \ \ different\ malloc\ than\ stdlib\ */}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00022}00022\ \textcolor{preprocessor}{\#define\ \_ogg\_malloc\ \ malloc}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00023}00023\ \textcolor{preprocessor}{\#define\ \_ogg\_calloc\ \ calloc}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00024}00024\ \textcolor{preprocessor}{\#define\ \_ogg\_realloc\ realloc}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00025}00025\ \textcolor{preprocessor}{\#define\ \_ogg\_free\ \ \ \ free}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00027}00027\ \textcolor{preprocessor}{\#if\ defined(\_WIN32)}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00029}00029\ \textcolor{preprocessor}{\#\ \ if\ defined(\_\_CYGWIN\_\_)}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00030}00030\ \textcolor{preprocessor}{\#\ \ \ \ include\ <stdint.h>}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00031}00031\ \ \ \ \ \ \textcolor{keyword}{typedef}\ int16\_t\ ogg\_int16\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00032}00032\ \ \ \ \ \ \textcolor{keyword}{typedef}\ uint16\_t\ ogg\_uint16\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00033}00033\ \ \ \ \ \ \textcolor{keyword}{typedef}\ int32\_t\ ogg\_int32\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00034}00034\ \ \ \ \ \ \textcolor{keyword}{typedef}\ uint32\_t\ ogg\_uint32\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00035}00035\ \ \ \ \ \ \textcolor{keyword}{typedef}\ int64\_t\ ogg\_int64\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00036}00036\ \ \ \ \ \ \textcolor{keyword}{typedef}\ uint64\_t\ ogg\_uint64\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00037}00037\ \textcolor{preprocessor}{\#\ \ elif\ defined(\_\_MINGW32\_\_)}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00038}00038\ \textcolor{preprocessor}{\#\ \ \ \ include\ <sys/types.h>}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00039}00039\ \ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{short}\ ogg\_int16\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00040}00040\ \ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ ogg\_uint16\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00041}00041\ \ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{int}\ ogg\_int32\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00042}00042\ \ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ ogg\_uint32\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00043}00043\ \ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ ogg\_int64\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00044}00044\ \ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ ogg\_uint64\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00045}00045\ \textcolor{preprocessor}{\#\ \ elif\ defined(\_\_MWERKS\_\_)}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00046}00046\ \ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ ogg\_int64\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00047}00047\ \ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{int}\ ogg\_int32\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00048}00048\ \ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ ogg\_uint32\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00049}00049\ \ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{short}\ ogg\_int16\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00050}00050\ \ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ ogg\_uint16\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00051}00051\ \textcolor{preprocessor}{\#\ \ else}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00052}00052\ \ \ \ \ \ \textcolor{comment}{/*\ MSVC/Borland\ */}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00053}00053\ \ \ \ \ \ \textcolor{keyword}{typedef}\ \_\_int64\ ogg\_int64\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00054}00054\ \ \ \ \ \ \textcolor{keyword}{typedef}\ \_\_int32\ ogg\_int32\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00055}00055\ \ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \_\_int32\ ogg\_uint32\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00056}00056\ \ \ \ \ \ \textcolor{keyword}{typedef}\ \_\_int16\ ogg\_int16\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00057}00057\ \ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \_\_int16\ ogg\_uint16\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00058}00058\ \textcolor{preprocessor}{\#\ \ endif}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00060}00060\ \textcolor{preprocessor}{\#elif\ defined(\_\_MACOS\_\_)}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00062}00062\ \textcolor{preprocessor}{\#\ \ include\ <sys/types.h>}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00063}00063\ \ \ \ \textcolor{keyword}{typedef}\ SInt16\ ogg\_int16\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00064}00064\ \ \ \ \textcolor{keyword}{typedef}\ UInt16\ ogg\_uint16\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00065}00065\ \ \ \ \textcolor{keyword}{typedef}\ SInt32\ ogg\_int32\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00066}00066\ \ \ \ \textcolor{keyword}{typedef}\ UInt32\ ogg\_uint32\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00067}00067\ \ \ \ \textcolor{keyword}{typedef}\ SInt64\ ogg\_int64\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00069}00069\ \textcolor{preprocessor}{\#elif\ (defined(\_\_APPLE\_\_)\ \&\&\ defined(\_\_MACH\_\_))\ }\textcolor{comment}{/*\ MacOS\ X\ Framework\ build\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00071}00071\ \textcolor{preprocessor}{\#\ \ include\ <inttypes.h>}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00072}00072\ \ \ \ \textcolor{keyword}{typedef}\ int16\_t\ ogg\_int16\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00073}00073\ \ \ \ \textcolor{keyword}{typedef}\ uint16\_t\ ogg\_uint16\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00074}00074\ \ \ \ \textcolor{keyword}{typedef}\ int32\_t\ ogg\_int32\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00075}00075\ \ \ \ \textcolor{keyword}{typedef}\ uint32\_t\ ogg\_uint32\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00076}00076\ \ \ \ \textcolor{keyword}{typedef}\ int64\_t\ ogg\_int64\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00078}00078\ \textcolor{preprocessor}{\#elif\ defined(\_\_HAIKU\_\_)}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00080}00080\ \ \ \textcolor{comment}{/*\ Haiku\ */}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00081}00081\ \textcolor{preprocessor}{\#\ \ include\ <sys/types.h>}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00082}00082\ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{short}\ ogg\_int16\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00083}00083\ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ ogg\_uint16\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00084}00084\ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{int}\ ogg\_int32\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00085}00085\ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ ogg\_uint32\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00086}00086\ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ ogg\_int64\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00088}00088\ \textcolor{preprocessor}{\#elif\ defined(\_\_BEOS\_\_)}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00090}00090\ \ \ \ \textcolor{comment}{/*\ Be\ */}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00091}00091\ \textcolor{preprocessor}{\#\ \ include\ <inttypes.h>}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00092}00092\ \ \ \ \textcolor{keyword}{typedef}\ int16\_t\ ogg\_int16\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00093}00093\ \ \ \ \textcolor{keyword}{typedef}\ uint16\_t\ ogg\_uint16\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00094}00094\ \ \ \ \textcolor{keyword}{typedef}\ int32\_t\ ogg\_int32\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00095}00095\ \ \ \ \textcolor{keyword}{typedef}\ uint32\_t\ ogg\_uint32\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00096}00096\ \ \ \ \textcolor{keyword}{typedef}\ int64\_t\ ogg\_int64\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00098}00098\ \textcolor{preprocessor}{\#elif\ defined\ (\_\_EMX\_\_)}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00100}00100\ \ \ \ \textcolor{comment}{/*\ OS/2\ GCC\ */}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00101}00101\ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{short}\ ogg\_int16\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00102}00102\ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ ogg\_uint16\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00103}00103\ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{int}\ ogg\_int32\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00104}00104\ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ ogg\_uint32\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00105}00105\ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ ogg\_int64\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00107}00107\ \textcolor{preprocessor}{\#elif\ defined\ (DJGPP)}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00109}00109\ \ \ \ \textcolor{comment}{/*\ DJGPP\ */}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00110}00110\ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{short}\ ogg\_int16\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00111}00111\ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{int}\ ogg\_int32\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00112}00112\ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ ogg\_uint32\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00113}00113\ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ ogg\_int64\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00115}00115\ \textcolor{preprocessor}{\#elif\ defined(R5900)}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00117}00117\ \ \ \ \textcolor{comment}{/*\ PS2\ EE\ */}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00118}00118\ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{long}\ ogg\_int64\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00119}00119\ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{int}\ ogg\_int32\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00120}00120\ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ ogg\_uint32\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00121}00121\ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{short}\ ogg\_int16\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00123}00123\ \textcolor{preprocessor}{\#elif\ defined(\_\_SYMBIAN32\_\_)}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00125}00125\ \ \ \ \textcolor{comment}{/*\ Symbian\ GCC\ */}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00126}00126\ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{signed}\ \textcolor{keywordtype}{short}\ ogg\_int16\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00127}00127\ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ ogg\_uint16\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00128}00128\ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{signed}\ \textcolor{keywordtype}{int}\ ogg\_int32\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00129}00129\ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ ogg\_uint32\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00130}00130\ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{int}\ ogg\_int64\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00132}00132\ \textcolor{preprocessor}{\#elif\ defined(\_\_TMS320C6X\_\_)}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00133}00133\ }
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00134}00134\ \ \ \ \textcolor{comment}{/*\ TI\ C64x\ compiler\ */}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00135}00135\ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{signed}\ \textcolor{keywordtype}{short}\ ogg\_int16\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00136}00136\ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ ogg\_uint16\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00137}00137\ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{signed}\ \textcolor{keywordtype}{int}\ ogg\_int32\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00138}00138\ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ ogg\_uint32\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00139}00139\ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{int}\ ogg\_int64\_t;}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00141}00141\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00142}00142\ }
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00143}00143\ \textcolor{preprocessor}{\#\ \ include\ <ogg/config\_types.h>}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00144}00144\ }
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00145}00145\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00146}00146\ }
+\DoxyCodeLine{\Hypertarget{os__types_8h_source_l00147}00147\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{/*\ \_OS\_TYPES\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

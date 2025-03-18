@@ -1,0 +1,83 @@
+\doxysubsection{Timed\+AStar Class Reference}
+\hypertarget{class_timed_a_star}{}\label{class_timed_a_star}\index{TimedAStar@{TimedAStar}}
+
+
+Timed A\texorpdfstring{$\ast$}{*} algorithm.  
+
+
+
+
+{\ttfamily \#include $<$a\+Star.\+h$>$}
+
+\doxysubsubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_timed_a_star_ab5ca3251ec73fb849d4abf98b570d78c}{Timed\+AStar}} (\mbox{\hyperlink{struct__city_graph_point}{City\+Graph\+::point}} start, \mbox{\hyperlink{struct__city_graph_point}{City\+Graph\+::point}} end, const \mbox{\hyperlink{class_city_graph}{City\+Graph}} \&city\+Graph, \mbox{\hyperlink{class_constraint_controller}{Constraint\+Controller}} \texorpdfstring{$\ast$}{*}constraints, int car\+Index)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{struct__a_star_node}{AStar\+::node}} $>$ \mbox{\hyperlink{class_timed_a_star_a8054d124dbc953374a5bfb2ca9bfe3ba}{find\+Path}} ()
+\begin{DoxyCompactList}\small\item\em Find the path. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Timed A\texorpdfstring{$\ast$}{*} algorithm. 
+
+This class represents the timed A\texorpdfstring{$\ast$}{*} algorithm. It is used to find the shortest path between two points in a graph while taking into account the constraints of the cars. 
+
+Definition at line \mbox{\hyperlink{a_star_8h_source_l00171}{171}} of file \mbox{\hyperlink{a_star_8h_source}{a\+Star.\+h}}.
+
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_timed_a_star_ab5ca3251ec73fb849d4abf98b570d78c}\index{TimedAStar@{TimedAStar}!TimedAStar@{TimedAStar}}
+\index{TimedAStar@{TimedAStar}!TimedAStar@{TimedAStar}}
+\doxyparagraph{\texorpdfstring{TimedAStar()}{TimedAStar()}}
+{\footnotesize\ttfamily \label{class_timed_a_star_ab5ca3251ec73fb849d4abf98b570d78c} 
+Timed\+AStar\+::\+Timed\+AStar (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct__city_graph_point}{City\+Graph\+::point}}}]{start}{, }\item[{\mbox{\hyperlink{struct__city_graph_point}{City\+Graph\+::point}}}]{end}{, }\item[{const \mbox{\hyperlink{class_city_graph}{City\+Graph}} \&}]{city\+Graph}{, }\item[{\mbox{\hyperlink{class_constraint_controller}{Constraint\+Controller}} \texorpdfstring{$\ast$}{*}}]{constraints}{, }\item[{int}]{car\+Index}{}\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start} & The start point \\
+\hline
+{\em end} & The end point \\
+\hline
+{\em city\+Graph} & The graph \\
+\hline
+{\em constraints} & The constraints \\
+\hline
+{\em car\+Index} & The car index \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{timed_a_star_8cpp_source_l00016}{16}} of file \mbox{\hyperlink{timed_a_star_8cpp_source}{timed\+AStar.\+cpp}}.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\Hypertarget{class_timed_a_star_a8054d124dbc953374a5bfb2ca9bfe3ba}\index{TimedAStar@{TimedAStar}!findPath@{findPath}}
+\index{findPath@{findPath}!TimedAStar@{TimedAStar}}
+\doxyparagraph{\texorpdfstring{findPath()}{findPath()}}
+{\footnotesize\ttfamily \label{class_timed_a_star_a8054d124dbc953374a5bfb2ca9bfe3ba} 
+std\+::vector$<$ \mbox{\hyperlink{struct__a_star_node}{AStar\+::node}} $>$ Timed\+AStar\+::find\+Path (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Find the path. 
+
+\begin{DoxyReturn}{Returns}
+The path 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{a_star_8h_source_l00188}{188}} of file \mbox{\hyperlink{a_star_8h_source}{a\+Star.\+h}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a_star_8h}{a\+Star.\+h}}\item 
+\mbox{\hyperlink{timed_a_star_8cpp}{timed\+AStar.\+cpp}}\end{DoxyCompactItemize}

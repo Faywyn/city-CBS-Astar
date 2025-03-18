@@ -1,0 +1,72 @@
+\doxysubsection{manager.\+h}
+\hypertarget{manager_8h_source}{}\label{manager_8h_source}\index{manager.h@{manager.h}}
+\mbox{\hyperlink{manager_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00008}00008\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <SFML/Graphics.hpp>}}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{car_8h}{car.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00014}00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{city_graph_8h}{cityGraph.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00015}00015\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{data_manager_8h}{dataManager.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00024}\mbox{\hyperlink{struct__manager_c_b_s_node}{00024}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct__manager_c_b_s_node}{\_managerCBSNode}}\ \{}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00025}\mbox{\hyperlink{struct__manager_c_b_s_node_a2f34a822054b678d2f120ab7be3d49fb}{00025}}\ \ \ std::vector<std::vector<sf::Vector2f>>\ \mbox{\hyperlink{struct__manager_c_b_s_node_a2f34a822054b678d2f120ab7be3d49fb}{paths}};\ }
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00026}\mbox{\hyperlink{struct__manager_c_b_s_node_aa540c41f8833c71355c2bdebe5f2db42}{00026}}\ \ \ \mbox{\hyperlink{class_constraint_controller}{ConstraintController}}\ \mbox{\hyperlink{struct__manager_c_b_s_node_aa540c41f8833c71355c2bdebe5f2db42}{constraints}};\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00027}\mbox{\hyperlink{struct__manager_c_b_s_node_ad978bf313b5d7fad59aa262ee476d888}{00027}}\ \ \ std::vector<double>\ \mbox{\hyperlink{struct__manager_c_b_s_node_ad978bf313b5d7fad59aa262ee476d888}{costs}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00028}\mbox{\hyperlink{struct__manager_c_b_s_node_a4ebcf418ce8a932dbf80266b4e46c5c3}{00028}}\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{struct__manager_c_b_s_node_a4ebcf418ce8a932dbf80266b4e46c5c3}{cost}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00029}\mbox{\hyperlink{struct__manager_c_b_s_node_aea5db81029c09dcea5bf2d0d0d10be46}{00029}}\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct__manager_c_b_s_node_aea5db81029c09dcea5bf2d0d0d10be46}{depth}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00030}\mbox{\hyperlink{struct__manager_c_b_s_node_a81627c9b2f757f2062327bf7e78b6893}{00030}}\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{struct__manager_c_b_s_node_a81627c9b2f757f2062327bf7e78b6893}{hasResolved}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00032}00032\ \ \ \textcolor{keywordtype}{bool}\ operator<(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct__manager_c_b_s_node}{\_managerCBSNode}}\ \&other)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00033}00033\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{struct__manager_c_b_s_node_a4ebcf418ce8a932dbf80266b4e46c5c3}{cost}}\ >\ other.\mbox{\hyperlink{struct__manager_c_b_s_node_a4ebcf418ce8a932dbf80266b4e46c5c3}{cost}}\ ||\ (\mbox{\hyperlink{struct__manager_c_b_s_node_a4ebcf418ce8a932dbf80266b4e46c5c3}{cost}}\ ==\ other.\mbox{\hyperlink{struct__manager_c_b_s_node_a4ebcf418ce8a932dbf80266b4e46c5c3}{cost}}\ \&\&\ \mbox{\hyperlink{struct__manager_c_b_s_node_aea5db81029c09dcea5bf2d0d0d10be46}{depth}}\ >\ other.\mbox{\hyperlink{struct__manager_c_b_s_node_aea5db81029c09dcea5bf2d0d0d10be46}{depth}});}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00034}00034\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00036}00036\ \}\ \mbox{\hyperlink{struct__manager_c_b_s_node}{\_managerCBSNode}};}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00045}\mbox{\hyperlink{class_manager}{00045}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_manager_af11277a299c0676b1a4d5b943310c2bc}{Manager}}\ \{}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00046}00046\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00047}00047\ \ \ \textcolor{keyword}{using\ }CBSNode\ =\ \mbox{\hyperlink{struct__manager_c_b_s_node}{\_managerCBSNode}};}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00055}\mbox{\hyperlink{class_manager_af11277a299c0676b1a4d5b943310c2bc}{00055}}\ \ \ \mbox{\hyperlink{class_manager_af11277a299c0676b1a4d5b943310c2bc}{Manager}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_city_graph}{CityGraph}}\ \&cityGraph,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_city_map}{CityMap}}\ \&\mbox{\hyperlink{class_city_map}{CityMap}},\ \textcolor{keywordtype}{bool}\ log)\ :\ graph(cityGraph),\ map(\mbox{\hyperlink{class_city_map}{CityMap}})\ \{}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00056}00056\ \ \ \ \ this-\/>log\ =\ log;}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00057}00057\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00066}\mbox{\hyperlink{class_manager_a27222adb77fdfc476679e75083512e02}{00066}}\ \ \ \mbox{\hyperlink{class_manager_a27222adb77fdfc476679e75083512e02}{Manager}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_city_graph}{CityGraph}}\ \&cityGraph,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_city_map}{CityMap}}\ \&\mbox{\hyperlink{class_city_map}{CityMap}},\ std::vector<Car>\ cars,\ \textcolor{keywordtype}{bool}\ log)}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00067}00067\ \ \ \ \ \ \ :\ graph(cityGraph),\ map(\mbox{\hyperlink{class_city_map}{CityMap}}),\ cars(cars)\ \{}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00068}00068\ \ \ \ \ this-\/>numCars\ =\ cars.size();}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00069}00069\ \ \ \ \ this-\/>log\ =\ log;}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00070}00070\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00076}00076\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_manager_a3f5de745c06c1dcccbfa14c4db370db8}{createCarsAStar}}(\textcolor{keywordtype}{int}\ numCars);}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00083}00083\ \ \ std::pair<bool,\ DataManager::data>\ \mbox{\hyperlink{class_manager_a59293d51b95ea69c45e88471d1ba01a9}{createCarsCBS}}(\textcolor{keywordtype}{int}\ numCars);}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00094}00094\ \ \ CBSNode\ \mbox{\hyperlink{class_manager_a5860e9eb7357be033710a25d41bd34a7}{createSubCBS}}(CBSNode\ \&node,\ \textcolor{keywordtype}{int}\ subNodeDepth);}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00104}00104\ \ \ CBSNode\ \mbox{\hyperlink{class_manager_a075d42cef089b2adb69ac5c08a9fc1e2}{processCBS}}(\mbox{\hyperlink{class_constraint_controller}{ConstraintController}}\ constraints,\ \textcolor{keywordtype}{int}\ subNodeDepth);}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00118}00118\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_manager_aa83bcd360a4f21ec2a8ff37023721688}{hasConflict}}(std::vector<std::vector<sf::Vector2f>>\ paths,\ \textcolor{keywordtype}{int}\ *car1,\ \textcolor{keywordtype}{int}\ *car2,\ sf::Vector2f\ *p1,}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sf::Vector2f\ *p2,\ \textcolor{keywordtype}{double}\ *a1,\ \textcolor{keywordtype}{double}\ *a2,\ \textcolor{keywordtype}{int}\ *time);}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00124}00124\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_manager_a8a0b38c16f2c83b3719acd42b995d826}{moveCars}}();}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00130}00130\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_manager_af8dc67e9b95ea7f0abb93a9173bc54fc}{renderCars}}(sf::RenderWindow\ \&window);}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00138}00138\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_manager_aaad725a8048073c3f59fd6acb911eccc}{toggleCarDebug}}(sf::Vector2f\ mousePos);}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00139}00139\ }
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00144}\mbox{\hyperlink{class_manager_a630c8491f153fb659dd98b6f04499356}{00144}}\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_manager_a630c8491f153fb659dd98b6f04499356}{getNumCars}}()\ \{\ \textcolor{keywordflow}{return}\ numCars;\ \}}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00145}00145\ }
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00150}\mbox{\hyperlink{class_manager_aab6760fa6fae86599b0fca04c36f5e1d}{00150}}\ \ \ std::vector<Car>\ \mbox{\hyperlink{class_manager_aab6760fa6fae86599b0fca04c36f5e1d}{getCars}}()\ \{\ \textcolor{keywordflow}{return}\ cars;\ \}}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00152}00152\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00153}00153\ \ \ \textcolor{keywordtype}{int}\ numCars;}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00154}00154\ \ \ std::vector<Car>\ cars;}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00155}00155\ \ \ \mbox{\hyperlink{class_city_graph}{CityGraph}}\ graph;}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00156}00156\ \ \ \mbox{\hyperlink{class_city_map}{CityMap}}\ map;}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00157}00157\ \ \ \textcolor{keywordtype}{bool}\ log;}
+\DoxyCodeLine{\Hypertarget{manager_8h_source_l00158}00158\ \};}
+
+\end{DoxyCode}

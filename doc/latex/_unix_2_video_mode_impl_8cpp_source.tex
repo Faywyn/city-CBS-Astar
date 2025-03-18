@@ -1,0 +1,195 @@
+\doxysubsection{Unix/\+Video\+Mode\+Impl.cpp}
+\hypertarget{_unix_2_video_mode_impl_8cpp_source}{}\label{_unix_2_video_mode_impl_8cpp_source}\index{VideoModeImpl.cpp@{VideoModeImpl.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00002}00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00003}00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00004}00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00005}00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00006}00006\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00007}00007\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00008}00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00009}00009\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00010}00010\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00011}00011\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00012}00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00013}00013\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00014}00014\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00015}00015\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00016}00016\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00017}00017\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00018}00018\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00019}00019\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00020}00020\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00021}00021\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00022}00022\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00026}00026\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00028}00028\ \textcolor{preprocessor}{\#include\ <SFML/Window/VideoModeImpl.hpp>}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00029}00029\ \textcolor{preprocessor}{\#include\ <SFML/Window/Unix/Display.hpp>}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00030}00030\ \textcolor{preprocessor}{\#include\ <SFML/System/Err.hpp>}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00031}00031\ \textcolor{preprocessor}{\#include\ <X11/Xlib.h>}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00032}00032\ \textcolor{preprocessor}{\#include\ <X11/extensions/Xrandr.h>}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00033}00033\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00036}00036\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00037}00037\ \{}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00038}00038\ \textcolor{keyword}{namespace\ }priv}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00039}00039\ \{}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00041}00041\ std::vector<VideoMode>\ VideoModeImpl::getFullscreenModes()}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00042}00042\ \{}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00043}00043\ \ \ \ \ std::vector<VideoMode>\ modes;}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00045}00045\ \ \ \ \ \textcolor{comment}{//\ Open\ a\ connection\ with\ the\ X\ server}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00046}00046\ \ \ \ \ Display*\ display\ =\ OpenDisplay();}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00047}00047\ \ \ \ \ \textcolor{keywordflow}{if}\ (display)}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00048}00048\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00049}00049\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Retrieve\ the\ default\ screen\ number}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00050}00050\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ screen\ =\ DefaultScreen(display);}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00052}00052\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ the\ XRandR\ extension\ is\ present}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ version;}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00054}00054\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (XQueryExtension(display,\ \textcolor{stringliteral}{"{}RANDR"{}},\ \&version,\ \&version,\ \&version))}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00055}00055\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ the\ current\ configuration}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ XRRScreenConfiguration*\ config\ =\ XRRGetScreenInfo(display,\ RootWindow(display,\ screen));}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (config)}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ the\ available\ screen\ sizes}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ nbSizes;}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ XRRScreenSize*\ sizes\ =\ XRRConfigSizes(config,\ \&nbSizes);}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (sizes\ \&\&\ (nbSizes\ >\ 0))}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ the\ list\ of\ supported\ depths}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ nbDepths\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}*\ depths\ =\ XListDepths(display,\ screen,\ \&nbDepths);}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (depths\ \&\&\ (nbDepths\ >\ 0))}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Combine\ depths\ and\ sizes\ to\ fill\ the\ array\ of\ supported\ modes}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ nbDepths;\ ++i)}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ nbSizes;\ ++j)}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Convert\ to\ VideoMode}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ VideoMode\ mode(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\textcolor{keyword}{>}(sizes[j].width),}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\textcolor{keyword}{>}(sizes[j].height),}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\textcolor{keyword}{>}(depths[i]));}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Rotation\ currentRotation;}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ XRRConfigRotations(config,\ \&currentRotation);}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (currentRotation\ ==\ RR\_Rotate\_90\ ||\ currentRotation\ ==\ RR\_Rotate\_270)}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::swap(mode.width,\ mode.height);}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ it\ only\ if\ it\ is\ not\ already\ in\ the\ array}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (std::find(modes.begin(),\ modes.end(),\ mode)\ ==\ modes.end())}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ modes.push\_back(mode);}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Free\ the\ array\ of\ depths}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ XFree(depths);}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Free\ the\ configuration\ instance}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ XRRFreeScreenConfigInfo(config);}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Failed\ to\ get\ the\ screen\ configuration}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ err()\ <<\ \textcolor{stringliteral}{"{}Failed\ to\ retrieve\ the\ screen\ configuration\ while\ trying\ to\ get\ the\ supported\ video\ modes"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00105}00105\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00106}00106\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00107}00107\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ XRandr\ extension\ is\ not\ supported:\ we\ cannot\ get\ the\ video\ modes}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ err()\ <<\ \textcolor{stringliteral}{"{}Failed\ to\ use\ the\ XRandR\ extension\ while\ trying\ to\ get\ the\ supported\ video\ modes"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00110}00110\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00112}00112\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Close\ the\ connection\ with\ the\ X\ server}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00113}00113\ \ \ \ \ \ \ \ \ CloseDisplay(display);}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00114}00114\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00115}00115\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00116}00116\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00117}00117\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ We\ couldn't\ connect\ to\ the\ X\ server}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00118}00118\ \ \ \ \ \ \ \ \ err()\ <<\ \textcolor{stringliteral}{"{}Failed\ to\ connect\ to\ the\ X\ server\ while\ trying\ to\ get\ the\ supported\ video\ modes"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00119}00119\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00121}00121\ \ \ \ \ \textcolor{keywordflow}{return}\ modes;}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00122}00122\ \}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00126}00126\ VideoMode\ VideoModeImpl::getDesktopMode()}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00127}00127\ \{}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00128}00128\ \ \ \ \ VideoMode\ desktopMode;}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00130}00130\ \ \ \ \ \textcolor{comment}{//\ Open\ a\ connection\ with\ the\ X\ server}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00131}00131\ \ \ \ \ Display*\ display\ =\ OpenDisplay();}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00132}00132\ \ \ \ \ \textcolor{keywordflow}{if}\ (display)}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00133}00133\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00134}00134\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Retrieve\ the\ default\ screen\ number}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00135}00135\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ screen\ =\ DefaultScreen(display);}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00136}00136\ }
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00137}00137\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ the\ XRandR\ extension\ is\ present}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00138}00138\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ version;}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00139}00139\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (XQueryExtension(display,\ \textcolor{stringliteral}{"{}RANDR"{}},\ \&version,\ \&version,\ \&version))}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00140}00140\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ the\ current\ configuration}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ XRRScreenConfiguration*\ config\ =\ XRRGetScreenInfo(display,\ RootWindow(display,\ screen));}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (config)}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ the\ current\ video\ mode}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Rotation\ currentRotation;}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ currentMode\ =\ XRRConfigCurrentConfiguration(config,\ \&currentRotation);}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ the\ available\ screen\ sizes}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ nbSizes;}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ XRRScreenSize*\ sizes\ =\ XRRConfigSizes(config,\ \&nbSizes);}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (sizes\ \&\&\ (nbSizes\ >\ 0))}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ desktopMode\ =\ VideoMode(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\textcolor{keyword}{>}(sizes[currentMode].width),}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\textcolor{keyword}{>}(sizes[currentMode].height),}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\textcolor{keyword}{>}(DefaultDepth(display,\ screen)));}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00157}00157\ }
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Rotation\ modeRotation;}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ XRRConfigRotations(config,\ \&modeRotation);}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00160}00160\ }
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (modeRotation\ ==\ RR\_Rotate\_90\ ||\ modeRotation\ ==\ RR\_Rotate\_270)}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::swap(desktopMode.width,\ desktopMode.height);}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00164}00164\ }
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Free\ the\ configuration\ instance}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ XRRFreeScreenConfigInfo(config);}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Failed\ to\ get\ the\ screen\ configuration}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ err()\ <<\ \textcolor{stringliteral}{"{}Failed\ to\ retrieve\ the\ screen\ configuration\ while\ trying\ to\ get\ the\ desktop\ video\ modes"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00173}00173\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00174}00174\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00175}00175\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ XRandr\ extension\ is\ not\ supported:\ we\ cannot\ get\ the\ video\ modes}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ err()\ <<\ \textcolor{stringliteral}{"{}Failed\ to\ use\ the\ XRandR\ extension\ while\ trying\ to\ get\ the\ desktop\ video\ modes"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00178}00178\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00179}00179\ }
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00180}00180\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Close\ the\ connection\ with\ the\ X\ server}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00181}00181\ \ \ \ \ \ \ \ \ CloseDisplay(display);}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00182}00182\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00183}00183\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00184}00184\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00185}00185\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ We\ couldn't\ connect\ to\ the\ X\ server}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00186}00186\ \ \ \ \ \ \ \ \ err()\ <<\ \textcolor{stringliteral}{"{}Failed\ to\ connect\ to\ the\ X\ server\ while\ trying\ to\ get\ the\ desktop\ video\ modes"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00187}00187\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00188}00188\ }
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00189}00189\ \ \ \ \ \textcolor{keywordflow}{return}\ desktopMode;}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00190}00190\ \}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00191}00191\ }
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00192}00192\ \}\ \textcolor{comment}{//\ namespace\ priv}}
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00193}00193\ }
+\DoxyCodeLine{\Hypertarget{_unix_2_video_mode_impl_8cpp_source_l00194}00194\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+
+\end{DoxyCode}

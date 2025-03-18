@@ -1,0 +1,51 @@
+\doxysubsection{backtracer.\+h}
+\hypertarget{backtracer_8h_source}{}\label{backtracer_8h_source}\index{backtracer.h@{backtracer.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00001}00001\ \textcolor{comment}{//\ Copyright(c)\ 2015-\/present,\ Gabi\ Melman\ \&\ spdlog\ contributors.}}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00002}00002\ \textcolor{comment}{//\ Distributed\ under\ the\ MIT\ License\ (http://opensource.org/licenses/MIT)}}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00004}00004\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <spdlog/details/circular\_q.h>}}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <spdlog/details/log\_msg\_buffer.h>}}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <atomic>}}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00013}00013\ \textcolor{comment}{//\ Store\ log\ messages\ in\ circular\ buffer.}}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00014}00014\ \textcolor{comment}{//\ Useful\ for\ storing\ debug\ data\ in\ case\ of\ error/warning\ happens.}}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00016}00016\ \textcolor{keyword}{namespace\ }spdlog\ \{}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00017}00017\ \textcolor{keyword}{namespace\ }details\ \{}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00018}00018\ \textcolor{keyword}{class\ }SPDLOG\_API\ backtracer\ \{}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00019}00019\ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ mutex\_;}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00020}00020\ \ \ \ \ std::atomic<bool>\ enabled\_\{\textcolor{keyword}{false}\};}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00021}00021\ \ \ \ \ circular\_q<log\_msg\_buffer>\ messages\_;}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00023}00023\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00024}00024\ \ \ \ \ backtracer()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00025}00025\ \ \ \ \ backtracer(\textcolor{keyword}{const}\ backtracer\ \&other);}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00027}00027\ \ \ \ \ backtracer(backtracer\ \&\&other)\ SPDLOG\_NOEXCEPT;}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00028}00028\ \ \ \ \ backtracer\ \&operator=(backtracer\ other);}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00030}00030\ \ \ \ \ \textcolor{keywordtype}{void}\ enable(\textcolor{keywordtype}{size\_t}\ size);}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00031}00031\ \ \ \ \ \textcolor{keywordtype}{void}\ disable();}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00032}00032\ \ \ \ \ \textcolor{keywordtype}{bool}\ enabled()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00033}00033\ \ \ \ \ \textcolor{keywordtype}{void}\ push\_back(\textcolor{keyword}{const}\ log\_msg\ \&msg);}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00034}00034\ \ \ \ \ \textcolor{keywordtype}{bool}\ empty()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00036}00036\ \ \ \ \ \textcolor{comment}{//\ pop\ all\ items\ in\ the\ q\ and\ apply\ the\ given\ fun\ on\ each\ of\ them.}}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00037}00037\ \ \ \ \ \textcolor{keywordtype}{void}\ foreach\_pop(std::function<\textcolor{keywordtype}{void}(\textcolor{keyword}{const}\ details::log\_msg\ \&)>\ fun);}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00038}00038\ \};}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00040}00040\ \}\ \ \textcolor{comment}{//\ namespace\ details}}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00041}00041\ \}\ \ \textcolor{comment}{//\ namespace\ spdlog}}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00043}00043\ \textcolor{preprocessor}{\#ifdef\ SPDLOG\_HEADER\_ONLY}}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00044}00044\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}backtracer-\/inl.h"{}}}
+\DoxyCodeLine{\Hypertarget{backtracer_8h_source_l00045}00045\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

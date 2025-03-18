@@ -1,0 +1,80 @@
+\doxysubsection{callback.\+h}
+\hypertarget{callback_8h_source}{}\label{callback_8h_source}\index{callback.h@{callback.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00001}00001\ \textcolor{comment}{/*\ libFLAC\ -\/\ Free\ Lossless\ Audio\ Codec\ library}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00002}00002\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2004-\/2009\ \ Josh\ Coalson}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2011-\/2013\ \ Xiph.Org\ Foundation}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00005}00005\ \textcolor{comment}{\ *\ Redistribution\ and\ use\ in\ source\ and\ binary\ forms,\ with\ or\ without}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00006}00006\ \textcolor{comment}{\ *\ modification,\ are\ permitted\ provided\ that\ the\ following\ conditions}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00007}00007\ \textcolor{comment}{\ *\ are\ met:}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00008}00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00009}00009\ \textcolor{comment}{\ *\ -\/\ Redistributions\ of\ source\ code\ must\ retain\ the\ above\ copyright}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00010}00010\ \textcolor{comment}{\ *\ notice,\ this\ list\ of\ conditions\ and\ the\ following\ disclaimer.}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00011}00011\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00012}00012\ \textcolor{comment}{\ *\ -\/\ Redistributions\ in\ binary\ form\ must\ reproduce\ the\ above\ copyright}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00013}00013\ \textcolor{comment}{\ *\ notice,\ this\ list\ of\ conditions\ and\ the\ following\ disclaimer\ in\ the}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00014}00014\ \textcolor{comment}{\ *\ documentation\ and/or\ other\ materials\ provided\ with\ the\ distribution.}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00015}00015\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00016}00016\ \textcolor{comment}{\ *\ -\/\ Neither\ the\ name\ of\ the\ Xiph.org\ Foundation\ nor\ the\ names\ of\ its}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00017}00017\ \textcolor{comment}{\ *\ contributors\ may\ be\ used\ to\ endorse\ or\ promote\ products\ derived\ from}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00018}00018\ \textcolor{comment}{\ *\ this\ software\ without\ specific\ prior\ written\ permission.}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00019}00019\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00020}00020\ \textcolor{comment}{\ *\ THIS\ SOFTWARE\ IS\ PROVIDED\ BY\ THE\ COPYRIGHT\ HOLDERS\ AND\ CONTRIBUTORS}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00021}00021\ \textcolor{comment}{\ *\ \`{}\`{}AS\ IS''\ AND\ ANY\ EXPRESS\ OR\ IMPLIED\ WARRANTIES,\ INCLUDING,\ BUT\ NOT}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00022}00022\ \textcolor{comment}{\ *\ LIMITED\ TO,\ THE\ IMPLIED\ WARRANTIES\ OF\ MERCHANTABILITY\ AND\ FITNESS\ FOR}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00023}00023\ \textcolor{comment}{\ *\ A\ PARTICULAR\ PURPOSE\ ARE\ DISCLAIMED.\ \ IN\ NO\ EVENT\ SHALL\ THE\ FOUNDATION\ OR}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00024}00024\ \textcolor{comment}{\ *\ CONTRIBUTORS\ BE\ LIABLE\ FOR\ ANY\ DIRECT,\ INDIRECT,\ INCIDENTAL,\ SPECIAL,}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00025}00025\ \textcolor{comment}{\ *\ EXEMPLARY,\ OR\ CONSEQUENTIAL\ DAMAGES\ (INCLUDING,\ BUT\ NOT\ LIMITED\ TO,}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00026}00026\ \textcolor{comment}{\ *\ PROCUREMENT\ OF\ SUBSTITUTE\ GOODS\ OR\ SERVICES;\ LOSS\ OF\ USE,\ DATA,\ OR}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00027}00027\ \textcolor{comment}{\ *\ PROFITS;\ OR\ BUSINESS\ INTERRUPTION)\ HOWEVER\ CAUSED\ AND\ ON\ ANY\ THEORY\ OF}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00028}00028\ \textcolor{comment}{\ *\ LIABILITY,\ WHETHER\ IN\ CONTRACT,\ STRICT\ LIABILITY,\ OR\ TORT\ (INCLUDING}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00029}00029\ \textcolor{comment}{\ *\ NEGLIGENCE\ OR\ OTHERWISE)\ ARISING\ IN\ ANY\ WAY\ OUT\ OF\ THE\ USE\ OF\ THIS}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00030}00030\ \textcolor{comment}{\ *\ SOFTWARE,\ EVEN\ IF\ ADVISED\ OF\ THE\ POSSIBILITY\ OF\ SUCH\ DAMAGE.}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00031}00031\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00033}00033\ \textcolor{preprocessor}{\#ifndef\ FLAC\_\_CALLBACK\_H}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00034}00034\ \textcolor{preprocessor}{\#define\ FLAC\_\_CALLBACK\_H}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00036}00036\ \textcolor{preprocessor}{\#include\ "{}ordinals.h"{}}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00037}00037\ \textcolor{preprocessor}{\#include\ <stdlib.h>}\ \textcolor{comment}{/*\ for\ size\_t\ */}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00082}00082\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00083}00083\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00084}00084\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00089}\mbox{\hyperlink{group__flac__callbacks_ga4c329c3168dee6e352384c5e9306260d}{00089}}\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{group__flac__callbacks_ga4c329c3168dee6e352384c5e9306260d}{FLAC\_\_IOHandle}};}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00102}\mbox{\hyperlink{group__flac__callbacks_ga49d95218a6c09b215cd92cc96de71bf9}{00102}}\ \textcolor{keyword}{typedef}\ size\_t\ (*\mbox{\hyperlink{group__flac__callbacks_ga49d95218a6c09b215cd92cc96de71bf9}{FLAC\_\_IOCallback\_Read}})\ (\textcolor{keywordtype}{void}\ *ptr,\ \textcolor{keywordtype}{size\_t}\ size,\ \textcolor{keywordtype}{size\_t}\ nmemb,\ \mbox{\hyperlink{group__flac__callbacks_ga4c329c3168dee6e352384c5e9306260d}{FLAC\_\_IOHandle}}\ handle);}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00115}\mbox{\hyperlink{group__flac__callbacks_gad991792235879aecae289b56a112e1b8}{00115}}\ \textcolor{keyword}{typedef}\ size\_t\ (*\mbox{\hyperlink{group__flac__callbacks_gad991792235879aecae289b56a112e1b8}{FLAC\_\_IOCallback\_Write}})\ (\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *ptr,\ \textcolor{keywordtype}{size\_t}\ size,\ \textcolor{keywordtype}{size\_t}\ nmemb,\ \mbox{\hyperlink{group__flac__callbacks_ga4c329c3168dee6e352384c5e9306260d}{FLAC\_\_IOHandle}}\ handle);}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00128}\mbox{\hyperlink{group__flac__callbacks_gab3942bbbd6ae09bcefe7cb3a0060c49c}{00128}}\ \textcolor{keyword}{typedef}\ int\ (*\mbox{\hyperlink{group__flac__callbacks_gab3942bbbd6ae09bcefe7cb3a0060c49c}{FLAC\_\_IOCallback\_Seek}})\ (\mbox{\hyperlink{group__flac__callbacks_ga4c329c3168dee6e352384c5e9306260d}{FLAC\_\_IOHandle}}\ handle,\ FLAC\_\_int64\ offset,\ \textcolor{keywordtype}{int}\ whence);}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00139}\mbox{\hyperlink{group__flac__callbacks_ga45314930cabc2e9c04867eae6bca309f}{00139}}\ \textcolor{keyword}{typedef}\ FLAC\_\_int64\ (*\mbox{\hyperlink{group__flac__callbacks_ga45314930cabc2e9c04867eae6bca309f}{FLAC\_\_IOCallback\_Tell}})\ (\mbox{\hyperlink{group__flac__callbacks_ga4c329c3168dee6e352384c5e9306260d}{FLAC\_\_IOHandle}}\ handle);}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00150}\mbox{\hyperlink{group__flac__callbacks_ga00ae3b3d373e691908e9539ebf720675}{00150}}\ \textcolor{keyword}{typedef}\ int\ (*\mbox{\hyperlink{group__flac__callbacks_ga00ae3b3d373e691908e9539ebf720675}{FLAC\_\_IOCallback\_Eof}})\ (\mbox{\hyperlink{group__flac__callbacks_ga4c329c3168dee6e352384c5e9306260d}{FLAC\_\_IOHandle}}\ handle);}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00160}\mbox{\hyperlink{group__flac__callbacks_ga0032267fac38220689778833e08f7387}{00160}}\ \textcolor{keyword}{typedef}\ int\ (*\mbox{\hyperlink{group__flac__callbacks_ga0032267fac38220689778833e08f7387}{FLAC\_\_IOCallback\_Close}})\ (\mbox{\hyperlink{group__flac__callbacks_ga4c329c3168dee6e352384c5e9306260d}{FLAC\_\_IOHandle}}\ handle);}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00170}\mbox{\hyperlink{struct_f_l_a_c_____i_o_callbacks}{00170}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00171}00171\ \ \ \mbox{\hyperlink{group__flac__callbacks_ga49d95218a6c09b215cd92cc96de71bf9}{FLAC\_\_IOCallback\_Read}}\ read;}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00172}00172\ \ \ \mbox{\hyperlink{group__flac__callbacks_gad991792235879aecae289b56a112e1b8}{FLAC\_\_IOCallback\_Write}}\ write;}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00173}00173\ \ \ \mbox{\hyperlink{group__flac__callbacks_gab3942bbbd6ae09bcefe7cb3a0060c49c}{FLAC\_\_IOCallback\_Seek}}\ seek;}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00174}00174\ \ \ \mbox{\hyperlink{group__flac__callbacks_ga45314930cabc2e9c04867eae6bca309f}{FLAC\_\_IOCallback\_Tell}}\ tell;}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00175}00175\ \ \ \mbox{\hyperlink{group__flac__callbacks_ga00ae3b3d373e691908e9539ebf720675}{FLAC\_\_IOCallback\_Eof}}\ eof;}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00176}00176\ \ \ \mbox{\hyperlink{group__flac__callbacks_ga0032267fac38220689778833e08f7387}{FLAC\_\_IOCallback\_Close}}\ close;}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00177}00177\ \}\ \mbox{\hyperlink{struct_f_l_a_c_____i_o_callbacks}{FLAC\_\_IOCallbacks}};}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00178}00178\ }
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00179}00179\ \textcolor{comment}{/*\ \(\backslash\)\}\ */}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00180}00180\ }
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00181}00181\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00182}00182\ \}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00183}00183\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00184}00184\ }
+\DoxyCodeLine{\Hypertarget{callback_8h_source_l00185}00185\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

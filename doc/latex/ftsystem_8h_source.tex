@@ -1,0 +1,361 @@
+\doxysubsection{ftsystem.\+h}
+\hypertarget{ftsystem_8h_source}{}\label{ftsystem_8h_source}\index{ftsystem.h@{ftsystem.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00001}00001\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00002}00002\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00003}00003\ \textcolor{comment}{/*\ \ ftsystem.h\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00004}00004\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00005}00005\ \textcolor{comment}{/*\ \ \ \ FreeType\ low-\/level\ system\ interface\ definition\ (specification).\ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00006}00006\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00007}00007\ \textcolor{comment}{/*\ \ Copyright\ 1996-\/2001,\ 2002,\ 2005,\ 2010,\ 2014\ by\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00008}00008\ \textcolor{comment}{/*\ \ David\ Turner,\ Robert\ Wilhelm,\ and\ Werner\ Lemberg.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00009}00009\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00010}00010\ \textcolor{comment}{/*\ \ This\ file\ is\ part\ of\ the\ FreeType\ project,\ and\ may\ only\ be\ used,\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00011}00011\ \textcolor{comment}{/*\ \ modified,\ and\ distributed\ under\ the\ terms\ of\ the\ FreeType\ project\ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00012}00012\ \textcolor{comment}{/*\ \ license,\ LICENSE.TXT.\ \ By\ continuing\ to\ use,\ modify,\ or\ distribute\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00013}00013\ \textcolor{comment}{/*\ \ this\ file\ you\ indicate\ that\ you\ have\ read\ the\ license\ and\ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00014}00014\ \textcolor{comment}{/*\ \ understand\ and\ accept\ it\ fully.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00015}00015\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00016}00016\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00019}00019\ \textcolor{preprocessor}{\#ifndef\ \_\_FTSYSTEM\_H\_\_}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00020}00020\ \textcolor{preprocessor}{\#define\ \_\_FTSYSTEM\_H\_\_}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00023}00023\ \textcolor{preprocessor}{\#include\ <ft2build.h>}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00026}00026\ FT\_BEGIN\_HEADER}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00029}00029\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00030}00030\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00031}00031\ \ \ \textcolor{comment}{/*\ <Section>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00032}00032\ \ \ \textcolor{comment}{/*\ \ \ system\_interface\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00033}00033\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00034}00034\ \ \ \textcolor{comment}{/*\ <Title>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00035}00035\ \ \ \textcolor{comment}{/*\ \ \ System\ Interface\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00036}00036\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00037}00037\ \ \ \textcolor{comment}{/*\ <Abstract>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00038}00038\ \ \ \textcolor{comment}{/*\ \ \ How\ FreeType\ manages\ memory\ and\ i/o.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00039}00039\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00040}00040\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00041}00041\ \ \ \textcolor{comment}{/*\ \ \ This\ section\ contains\ various\ definitions\ related\ to\ memory\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00042}00042\ \ \ \textcolor{comment}{/*\ \ \ management\ and\ i/o\ access.\ \ You\ need\ to\ understand\ this\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00043}00043\ \ \ \textcolor{comment}{/*\ \ \ information\ if\ you\ want\ to\ use\ a\ custom\ memory\ manager\ or\ you\ own\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00044}00044\ \ \ \textcolor{comment}{/*\ \ \ i/o\ streams.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00045}00045\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00046}00046\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00049}00049\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00050}00050\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00051}00051\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ M\ E\ M\ O\ R\ Y\ \ \ M\ A\ N\ A\ G\ E\ M\ E\ N\ T\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00052}00052\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00053}00053\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00056}00056\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00057}00057\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00058}00058\ \textcolor{comment}{\ \ \ *\ @type:}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00059}00059\ \textcolor{comment}{\ \ \ *\ \ \ FT\_Memory}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00060}00060\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00061}00061\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00062}00062\ \textcolor{comment}{\ \ \ *\ \ \ A\ handle\ to\ a\ given\ memory\ manager\ object,\ defined\ with\ an}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00063}00063\ \textcolor{comment}{\ \ \ *\ \ \ @FT\_MemoryRec\ structure.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00064}00064\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00065}00065\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00066}00066\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }FT\_MemoryRec\_*\ \ FT\_Memory;}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00069}00069\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00070}00070\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00071}00071\ \textcolor{comment}{\ \ \ *\ @functype:}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00072}00072\ \textcolor{comment}{\ \ \ *\ \ \ FT\_Alloc\_Func}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00073}00073\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00074}00074\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00075}00075\ \textcolor{comment}{\ \ \ *\ \ \ A\ function\ used\ to\ allocate\ \`{}size'\ bytes\ from\ \`{}memory'.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00076}00076\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00077}00077\ \textcolor{comment}{\ \ \ *\ @input:}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00078}00078\ \textcolor{comment}{\ \ \ *\ \ \ memory\ ::}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00079}00079\ \textcolor{comment}{\ \ \ *\ \ \ \ \ A\ handle\ to\ the\ source\ memory\ manager.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00080}00080\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00081}00081\ \textcolor{comment}{\ \ \ *\ \ \ size\ ::}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00082}00082\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ size\ in\ bytes\ to\ allocate.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00083}00083\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00084}00084\ \textcolor{comment}{\ \ \ *\ @return:}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00085}00085\ \textcolor{comment}{\ \ \ *\ \ \ Address\ of\ new\ memory\ block.\ \ 0\string~in\ case\ of\ failure.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00086}00086\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00087}00087\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00088}00088\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{void}*}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00089}00089\ \ \ (*FT\_Alloc\_Func)(\ FT\_Memory\ \ memory,}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{long}\ \ \ \ \ \ \ size\ );}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00093}00093\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00094}00094\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00095}00095\ \textcolor{comment}{\ \ \ *\ @functype:}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00096}00096\ \textcolor{comment}{\ \ \ *\ \ \ FT\_Free\_Func}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00097}00097\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00098}00098\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00099}00099\ \textcolor{comment}{\ \ \ *\ \ \ A\ function\ used\ to\ release\ a\ given\ block\ of\ memory.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00100}00100\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00101}00101\ \textcolor{comment}{\ \ \ *\ @input:}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00102}00102\ \textcolor{comment}{\ \ \ *\ \ \ memory\ ::}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00103}00103\ \textcolor{comment}{\ \ \ *\ \ \ \ \ A\ handle\ to\ the\ source\ memory\ manager.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00104}00104\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00105}00105\ \textcolor{comment}{\ \ \ *\ \ \ block\ ::}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00106}00106\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ address\ of\ the\ target\ memory\ block.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00107}00107\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00108}00108\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00109}00109\ \ \ \textcolor{keyword}{typedef}\ void}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00110}00110\ \ \ (*FT\_Free\_Func)(\ FT\_Memory\ \ memory,}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}*\ \ \ \ \ \ block\ );}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00114}00114\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00115}00115\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00116}00116\ \textcolor{comment}{\ \ \ *\ @functype:}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00117}00117\ \textcolor{comment}{\ \ \ *\ \ \ FT\_Realloc\_Func}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00118}00118\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00119}00119\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00120}00120\ \textcolor{comment}{\ \ \ *\ \ \ A\ function\ used\ to\ re-\/allocate\ a\ given\ block\ of\ memory.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00121}00121\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00122}00122\ \textcolor{comment}{\ \ \ *\ @input:}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00123}00123\ \textcolor{comment}{\ \ \ *\ \ \ memory\ ::}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00124}00124\ \textcolor{comment}{\ \ \ *\ \ \ \ \ A\ handle\ to\ the\ source\ memory\ manager.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00125}00125\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00126}00126\ \textcolor{comment}{\ \ \ *\ \ \ cur\_size\ ::}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00127}00127\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ block's\ current\ size\ in\ bytes.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00128}00128\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00129}00129\ \textcolor{comment}{\ \ \ *\ \ \ new\_size\ ::}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00130}00130\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ block's\ requested\ new\ size.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00131}00131\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00132}00132\ \textcolor{comment}{\ \ \ *\ \ \ block\ ::}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00133}00133\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ block's\ current\ address.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00134}00134\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00135}00135\ \textcolor{comment}{\ \ \ *\ @return:}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00136}00136\ \textcolor{comment}{\ \ \ *\ \ \ New\ block\ address.\ \ 0\string~in\ case\ of\ memory\ shortage.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00137}00137\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00138}00138\ \textcolor{comment}{\ \ \ *\ @note:}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00139}00139\ \textcolor{comment}{\ \ \ *\ \ \ In\ case\ of\ error,\ the\ old\ block\ must\ still\ be\ available.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00140}00140\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00141}00141\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00142}00142\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{void}*}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00143}00143\ \ \ (*FT\_Realloc\_Func)(\ FT\_Memory\ \ memory,}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{long}\ \ \ \ \ \ \ cur\_size,}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{long}\ \ \ \ \ \ \ new\_size,}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}*\ \ \ \ \ \ block\ );}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00147}00147\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00149}00149\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00150}00150\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00151}00151\ \textcolor{comment}{\ \ \ *\ @struct:}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00152}00152\ \textcolor{comment}{\ \ \ *\ \ \ FT\_MemoryRec}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00153}00153\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00154}00154\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00155}00155\ \textcolor{comment}{\ \ \ *\ \ \ A\ structure\ used\ to\ describe\ a\ given\ memory\ manager\ to\ FreeType\string~2.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00156}00156\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00157}00157\ \textcolor{comment}{\ \ \ *\ @fields:}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00158}00158\ \textcolor{comment}{\ \ \ *\ \ \ user\ ::}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00159}00159\ \textcolor{comment}{\ \ \ *\ \ \ \ \ A\ generic\ typeless\ pointer\ for\ user\ data.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00160}00160\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00161}00161\ \textcolor{comment}{\ \ \ *\ \ \ alloc\ ::}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00162}00162\ \textcolor{comment}{\ \ \ *\ \ \ \ \ A\ pointer\ type\ to\ an\ allocation\ function.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00163}00163\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00164}00164\ \textcolor{comment}{\ \ \ *\ \ \ free\ ::}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00165}00165\ \textcolor{comment}{\ \ \ *\ \ \ \ \ A\ pointer\ type\ to\ an\ memory\ freeing\ function.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00166}00166\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00167}00167\ \textcolor{comment}{\ \ \ *\ \ \ realloc\ ::}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00168}00168\ \textcolor{comment}{\ \ \ *\ \ \ \ \ A\ pointer\ type\ to\ a\ reallocation\ function.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00169}00169\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00170}00170\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00171}00171\ \ \ \textcolor{keyword}{struct\ \ }FT\_MemoryRec\_}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00172}00172\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00173}00173\ \ \ \ \ \textcolor{keywordtype}{void}*\ \ \ \ \ \ \ \ \ \ \ \ user;}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00174}00174\ \ \ \ \ FT\_Alloc\_Func\ \ \ \ alloc;}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00175}00175\ \ \ \ \ FT\_Free\_Func\ \ \ \ \ free;}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00176}00176\ \ \ \ \ FT\_Realloc\_Func\ \ realloc;}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00177}00177\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00178}00178\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00179}00179\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00180}00180\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00181}00181\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00182}00182\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ I\ /\ O\ \ \ M\ A\ N\ A\ G\ E\ M\ E\ N\ T\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00183}00183\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00184}00184\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00185}00185\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00186}00186\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00187}00187\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00188}00188\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00189}00189\ \textcolor{comment}{\ \ \ *\ @type:}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00190}00190\ \textcolor{comment}{\ \ \ *\ \ \ FT\_Stream}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00191}00191\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00192}00192\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00193}00193\ \textcolor{comment}{\ \ \ *\ \ \ A\ handle\ to\ an\ input\ stream.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00194}00194\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00195}00195\ \textcolor{comment}{\ \ \ *\ @also:}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00196}00196\ \textcolor{comment}{\ \ \ *\ \ \ See\ @FT\_StreamRec\ for\ the\ publicly\ accessible\ fields\ of\ a\ given}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00197}00197\ \textcolor{comment}{\ \ \ *\ \ \ stream\ object.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00198}00198\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00199}00199\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00200}00200\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }FT\_StreamRec\_*\ \ FT\_Stream;}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00201}00201\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00202}00202\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00203}00203\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00204}00204\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00205}00205\ \textcolor{comment}{\ \ \ *\ @struct:}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00206}00206\ \textcolor{comment}{\ \ \ *\ \ \ FT\_StreamDesc}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00207}00207\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00208}00208\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00209}00209\ \textcolor{comment}{\ \ \ *\ \ \ A\ union\ type\ used\ to\ store\ either\ a\ long\ or\ a\ pointer.\ \ This\ is\ used}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00210}00210\ \textcolor{comment}{\ \ \ *\ \ \ to\ store\ a\ file\ descriptor\ or\ a\ \`{}FILE*'\ in\ an\ input\ stream.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00211}00211\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00212}00212\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00213}00213\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{union\ \ }FT\_StreamDesc\_}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00214}00214\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00215}00215\ \ \ \ \ \textcolor{keywordtype}{long}\ \ \ value;}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00216}00216\ \ \ \ \ \textcolor{keywordtype}{void}*\ \ pointer;}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00217}00217\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00218}00218\ \ \ \}\ FT\_StreamDesc;}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00219}00219\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00220}00220\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00221}00221\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00222}00222\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00223}00223\ \textcolor{comment}{\ \ \ *\ @functype:}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00224}00224\ \textcolor{comment}{\ \ \ *\ \ \ FT\_Stream\_IoFunc}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00225}00225\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00226}00226\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00227}00227\ \textcolor{comment}{\ \ \ *\ \ \ A\ function\ used\ to\ seek\ and\ read\ data\ from\ a\ given\ input\ stream.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00228}00228\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00229}00229\ \textcolor{comment}{\ \ \ *\ @input:}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00230}00230\ \textcolor{comment}{\ \ \ *\ \ \ stream\ ::}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00231}00231\ \textcolor{comment}{\ \ \ *\ \ \ \ \ A\ handle\ to\ the\ source\ stream.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00232}00232\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00233}00233\ \textcolor{comment}{\ \ \ *\ \ \ offset\ ::}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00234}00234\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ offset\ of\ read\ in\ stream\ (always\ from\ start).}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00235}00235\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00236}00236\ \textcolor{comment}{\ \ \ *\ \ \ buffer\ ::}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00237}00237\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ address\ of\ the\ read\ buffer.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00238}00238\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00239}00239\ \textcolor{comment}{\ \ \ *\ \ \ count\ ::}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00240}00240\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ number\ of\ bytes\ to\ read\ from\ the\ stream.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00241}00241\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00242}00242\ \textcolor{comment}{\ \ \ *\ @return:}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00243}00243\ \textcolor{comment}{\ \ \ *\ \ \ The\ number\ of\ bytes\ effectively\ read\ by\ the\ stream.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00244}00244\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00245}00245\ \textcolor{comment}{\ \ \ *\ @note:}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00246}00246\ \textcolor{comment}{\ \ \ *\ \ \ This\ function\ might\ be\ called\ to\ perform\ a\ seek\ or\ skip\ operation}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00247}00247\ \textcolor{comment}{\ \ \ *\ \ \ with\ a\ \`{}count'\ of\string~0.\ \ A\ non-\/zero\ return\ value\ then\ indicates\ an}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00248}00248\ \textcolor{comment}{\ \ \ *\ \ \ error.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00249}00249\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00250}00250\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00251}00251\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ long}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00252}00252\ \ \ (*FT\_Stream\_IoFunc)(\ FT\_Stream\ \ \ \ \ \ \ stream,}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00253}00253\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \ \ offset,}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00254}00254\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*\ \ buffer,}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00255}00255\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \ \ count\ );}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00256}00256\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00257}00257\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00258}00258\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00259}00259\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00260}00260\ \textcolor{comment}{\ \ \ *\ @functype:}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00261}00261\ \textcolor{comment}{\ \ \ *\ \ \ FT\_Stream\_CloseFunc}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00262}00262\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00263}00263\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00264}00264\ \textcolor{comment}{\ \ \ *\ \ \ A\ function\ used\ to\ close\ a\ given\ input\ stream.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00265}00265\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00266}00266\ \textcolor{comment}{\ \ \ *\ @input:}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00267}00267\ \textcolor{comment}{\ \ \ *\ \ stream\ ::}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00268}00268\ \textcolor{comment}{\ \ \ *\ \ \ \ \ A\ handle\ to\ the\ target\ stream.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00269}00269\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00270}00270\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00271}00271\ \ \ \textcolor{keyword}{typedef}\ void}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00272}00272\ \ \ (*FT\_Stream\_CloseFunc)(\ FT\_Stream\ \ stream\ );}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00273}00273\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00274}00274\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00275}00275\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00276}00276\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00277}00277\ \textcolor{comment}{\ \ \ *\ @struct:}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00278}00278\ \textcolor{comment}{\ \ \ *\ \ \ FT\_StreamRec}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00279}00279\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00280}00280\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00281}00281\ \textcolor{comment}{\ \ \ *\ \ \ A\ structure\ used\ to\ describe\ an\ input\ stream.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00282}00282\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00283}00283\ \textcolor{comment}{\ \ \ *\ @input:}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00284}00284\ \textcolor{comment}{\ \ \ *\ \ \ base\ ::}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00285}00285\ \textcolor{comment}{\ \ \ *\ \ \ \ \ For\ memory-\/based\ streams,\ this\ is\ the\ address\ of\ the\ first\ stream}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00286}00286\ \textcolor{comment}{\ \ \ *\ \ \ \ \ byte\ in\ memory.\ \ This\ field\ should\ always\ be\ set\ to\ NULL\ for}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00287}00287\ \textcolor{comment}{\ \ \ *\ \ \ \ \ disk-\/based\ streams.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00288}00288\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00289}00289\ \textcolor{comment}{\ \ \ *\ \ \ size\ ::}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00290}00290\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ stream\ size\ in\ bytes.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00291}00291\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00292}00292\ \textcolor{comment}{\ \ \ *\ \ \ \ \ In\ case\ of\ compressed\ streams\ where\ the\ size\ is\ unknown\ before}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00293}00293\ \textcolor{comment}{\ \ \ *\ \ \ \ \ actually\ doing\ the\ decompression,\ the\ value\ is\ set\ to\ 0x7FFFFFFF.\ }}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00294}00294\ \textcolor{comment}{\ \ \ *\ \ \ \ \ (Note\ that\ this\ size\ value\ can\ occur\ for\ normal\ streams\ also;\ it\ is}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00295}00295\ \textcolor{comment}{\ \ \ *\ \ \ \ \ thus\ just\ a\ hint.)}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00296}00296\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00297}00297\ \textcolor{comment}{\ \ \ *\ \ \ pos\ ::}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00298}00298\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ current\ position\ within\ the\ stream.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00299}00299\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00300}00300\ \textcolor{comment}{\ \ \ *\ \ \ descriptor\ ::}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00301}00301\ \textcolor{comment}{\ \ \ *\ \ \ \ \ This\ field\ is\ a\ union\ that\ can\ hold\ an\ integer\ or\ a\ pointer.\ \ It\ is}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00302}00302\ \textcolor{comment}{\ \ \ *\ \ \ \ \ used\ by\ stream\ implementations\ to\ store\ file\ descriptors\ or\ \`{}FILE*'}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00303}00303\ \textcolor{comment}{\ \ \ *\ \ \ \ \ pointers.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00304}00304\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00305}00305\ \textcolor{comment}{\ \ \ *\ \ \ pathname\ ::}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00306}00306\ \textcolor{comment}{\ \ \ *\ \ \ \ \ This\ field\ is\ completely\ ignored\ by\ FreeType.\ \ However,\ it\ is\ often}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00307}00307\ \textcolor{comment}{\ \ \ *\ \ \ \ \ useful\ during\ debugging\ to\ use\ it\ to\ store\ the\ stream's\ filename}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00308}00308\ \textcolor{comment}{\ \ \ *\ \ \ \ \ (where\ available).}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00309}00309\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00310}00310\ \textcolor{comment}{\ \ \ *\ \ \ read\ ::}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00311}00311\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ stream's\ input\ function.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00312}00312\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00313}00313\ \textcolor{comment}{\ \ \ *\ \ \ close\ ::}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00314}00314\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ stream's\ close\ function.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00315}00315\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00316}00316\ \textcolor{comment}{\ \ \ *\ \ \ memory\ ::}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00317}00317\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ memory\ manager\ to\ use\ to\ preload\ frames.\ \ This\ is\ set}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00318}00318\ \textcolor{comment}{\ \ \ *\ \ \ \ \ internally\ by\ FreeType\ and\ shouldn't\ be\ touched\ by\ stream}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00319}00319\ \textcolor{comment}{\ \ \ *\ \ \ \ \ implementations.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00320}00320\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00321}00321\ \textcolor{comment}{\ \ \ *\ \ \ cursor\ ::}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00322}00322\ \textcolor{comment}{\ \ \ *\ \ \ \ \ This\ field\ is\ set\ and\ used\ internally\ by\ FreeType\ when\ parsing}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00323}00323\ \textcolor{comment}{\ \ \ *\ \ \ \ \ frames.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00324}00324\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00325}00325\ \textcolor{comment}{\ \ \ *\ \ \ limit\ ::}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00326}00326\ \textcolor{comment}{\ \ \ *\ \ \ \ \ This\ field\ is\ set\ and\ used\ internally\ by\ FreeType\ when\ parsing}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00327}00327\ \textcolor{comment}{\ \ \ *\ \ \ \ \ frames.}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00328}00328\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00329}00329\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00330}00330\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ \ }FT\_StreamRec\_}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00331}00331\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00332}00332\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*\ \ \ \ \ \ \ base;}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00333}00333\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \ \ \ \ \ \ \ size;}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00334}00334\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \ \ \ \ \ \ \ pos;}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00335}00335\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00336}00336\ \ \ \ \ FT\_StreamDesc\ \ \ \ \ \ \ \ descriptor;}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00337}00337\ \ \ \ \ FT\_StreamDesc\ \ \ \ \ \ \ \ pathname;}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00338}00338\ \ \ \ \ FT\_Stream\_IoFunc\ \ \ \ \ read;}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00339}00339\ \ \ \ \ FT\_Stream\_CloseFunc\ \ close;}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00340}00340\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00341}00341\ \ \ \ \ FT\_Memory\ \ \ \ \ \ \ \ \ \ \ \ memory;}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00342}00342\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*\ \ \ \ \ \ \ cursor;}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00343}00343\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*\ \ \ \ \ \ \ limit;}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00344}00344\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00345}00345\ \ \ \}\ FT\_StreamRec;}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00346}00346\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00347}00347\ \ \ \textcolor{comment}{/*\ */}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00348}00348\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00349}00349\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00350}00350\ FT\_END\_HEADER}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00351}00351\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00352}00352\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_FTSYSTEM\_H\_\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00353}00353\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00354}00354\ }
+\DoxyCodeLine{\Hypertarget{ftsystem_8h_source_l00355}00355\ \textcolor{comment}{/*\ END\ */}}
+
+\end{DoxyCode}

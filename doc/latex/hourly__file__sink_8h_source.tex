@@ -1,0 +1,197 @@
+\doxysubsection{hourly\+\_\+file\+\_\+sink.\+h}
+\hypertarget{hourly__file__sink_8h_source}{}\label{hourly__file__sink_8h_source}\index{hourly\_file\_sink.h@{hourly\_file\_sink.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00001}00001\ \textcolor{comment}{//\ Copyright(c)\ 2015-\/present,\ Gabi\ Melman\ \&\ spdlog\ contributors.}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00002}00002\ \textcolor{comment}{//\ Distributed\ under\ the\ MIT\ License\ (http://opensource.org/licenses/MIT)}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00004}00004\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <spdlog/common.h>}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <spdlog/details/circular\_q.h>}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <spdlog/details/file\_helper.h>}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <spdlog/details/null\_mutex.h>}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <spdlog/details/os.h>}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <spdlog/details/synchronous\_factory.h>}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <spdlog/fmt/fmt.h>}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <spdlog/sinks/base\_sink.h>}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00015}00015\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00016}00016\ \textcolor{preprocessor}{\#include\ <cstdio>}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00017}00017\ \textcolor{preprocessor}{\#include\ <ctime>}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00018}00018\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00019}00019\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00021}00021\ \textcolor{keyword}{namespace\ }spdlog\ \{}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00022}00022\ \textcolor{keyword}{namespace\ }sinks\ \{}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00024}00024\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00025}00025\ \textcolor{comment}{\ *\ Generator\ of\ Hourly\ log\ file\ names\ in\ format\ basename.YYYY-\/MM-\/DD-\/HH.ext}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00026}00026\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00027}00027\ \textcolor{keyword}{struct\ }hourly\_filename\_calculator\ \{}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00028}00028\ \ \ \ \ \textcolor{comment}{//\ Create\ filename\ for\ the\ form\ basename.YYYY-\/MM-\/DD-\/H}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00029}00029\ \ \ \ \ \textcolor{keyword}{static}\ filename\_t\ calc\_filename(\textcolor{keyword}{const}\ filename\_t\ \&filename,\ \textcolor{keyword}{const}\ tm\ \&now\_tm)\ \{}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00030}00030\ \ \ \ \ \ \ \ \ filename\_t\ basename,\ ext;}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00031}00031\ \ \ \ \ \ \ \ \ std::tie(basename,\ ext)\ =\ details::file\_helper::split\_by\_extension(filename);}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00032}00032\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ fmt\_lib::format(SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}\{\}\_\{:04d\}-\/\{:02d\}-\/\{:02d\}\_\{:02d\}\{\}"{}}),\ basename,}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ now\_tm.tm\_year\ +\ 1900,\ now\_tm.tm\_mon\ +\ 1,\ now\_tm.tm\_mday,}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ now\_tm.tm\_hour,\ ext);}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00035}00035\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00036}00036\ \};}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00038}00038\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00039}00039\ \textcolor{comment}{\ *\ Rotating\ file\ sink\ based\ on\ time.}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00040}00040\ \textcolor{comment}{\ *\ If\ truncate\ !=\ false\ ,\ the\ created\ file\ will\ be\ truncated.}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00041}00041\ \textcolor{comment}{\ *\ If\ max\_files\ >\ 0,\ retain\ only\ the\ last\ max\_files\ and\ delete\ previous.}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00042}00042\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00043}00043\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Mutex,\ \textcolor{keyword}{typename}\ FileNameCalc\ =\ hourly\_filename\_calculator>}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00044}00044\ \textcolor{keyword}{class\ }hourly\_file\_sink\ final\ :\ \textcolor{keyword}{public}\ base\_sink<Mutex>\ \{}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00045}00045\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00046}00046\ \ \ \ \ \textcolor{comment}{//\ create\ hourly\ file\ sink\ which\ rotates\ on\ given\ time}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00047}00047\ \ \ \ \ hourly\_file\_sink(filename\_t\ base\_filename,}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ truncate\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint16\_t\ max\_files\ =\ 0,}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ file\_event\_handlers\ \&event\_handlers\ =\ \{\})}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00051}00051\ \ \ \ \ \ \ \ \ :\ base\_filename\_(std::move(base\_filename)),}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ file\_helper\_\{event\_handlers\},}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ truncate\_(truncate),}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ max\_files\_(max\_files),}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ filenames\_q\_()\ \{}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ now\ =\ log\_clock::now();}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00057}00057\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ filename\ =\ FileNameCalc::calc\_filename(base\_filename\_,\ now\_tm(now));}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00058}00058\ \ \ \ \ \ \ \ \ file\_helper\_.open(filename,\ truncate\_);}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00059}00059\ \ \ \ \ \ \ \ \ remove\_init\_file\_\ =\ file\_helper\_.size()\ ==\ 0;}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00060}00060\ \ \ \ \ \ \ \ \ rotation\_tp\_\ =\ next\_rotation\_tp\_();}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (max\_files\_\ >\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ init\_filenames\_q\_();}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00064}00064\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00065}00065\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00067}00067\ \ \ \ \ filename\_t\ filename()\ \{}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00068}00068\ \ \ \ \ \ \ \ \ std::lock\_guard<Mutex>\ lock(base\_sink<Mutex>::mutex\_);}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00069}00069\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ file\_helper\_.filename();}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00070}00070\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00072}00072\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00073}00073\ \ \ \ \ \textcolor{keywordtype}{void}\ sink\_it\_(\textcolor{keyword}{const}\ details::log\_msg\ \&msg)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00074}00074\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ time\ =\ msg.time;}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00075}00075\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ should\_rotate\ =\ time\ >=\ rotation\_tp\_;}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (should\_rotate)\ \{}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (remove\_init\_file\_)\ \{}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ file\_helper\_.close();}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ details::os::remove(file\_helper\_.filename());}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ filename\ =\ FileNameCalc::calc\_filename(base\_filename\_,\ now\_tm(time));}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ file\_helper\_.open(filename,\ truncate\_);}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ rotation\_tp\_\ =\ next\_rotation\_tp\_();}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00084}00084\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00085}00085\ \ \ \ \ \ \ \ \ remove\_init\_file\_\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00086}00086\ \ \ \ \ \ \ \ \ memory\_buf\_t\ formatted;}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00087}00087\ \ \ \ \ \ \ \ \ base\_sink<Mutex>::formatter\_-\/>format(msg,\ formatted);}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00088}00088\ \ \ \ \ \ \ \ \ file\_helper\_.write(formatted);}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00090}00090\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Do\ the\ cleaning\ only\ at\ the\ end\ because\ it\ might\ throw\ on\ failure.}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00091}00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (should\_rotate\ \&\&\ max\_files\_\ >\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ delete\_old\_();}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00093}00093\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00094}00094\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00096}00096\ \ \ \ \ \textcolor{keywordtype}{void}\ flush\_()\textcolor{keyword}{\ override\ }\{\ file\_helper\_.flush();\ \}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00098}00098\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00099}00099\ \ \ \ \ \textcolor{keywordtype}{void}\ init\_filenames\_q\_()\ \{}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00100}00100\ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }details::os::path\_exists;}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00102}00102\ \ \ \ \ \ \ \ \ filenames\_q\_\ =\ details::circular\_q<filename\_t>(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>}(max\_files\_));}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00103}00103\ \ \ \ \ \ \ \ \ std::vector<filename\_t>\ filenames;}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00104}00104\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ now\ =\ log\_clock::now();}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00105}00105\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (filenames.size()\ <\ max\_files\_)\ \{}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ filename\ =\ FileNameCalc::calc\_filename(base\_filename\_,\ now\_tm(now));}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!path\_exists(filename))\ \{}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ filenames.emplace\_back(filename);}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ now\ -\/=\ std::chrono::hours(1);}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00112}00112\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00113}00113\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ iter\ =\ filenames.rbegin();\ iter\ !=\ filenames.rend();\ ++iter)\ \{}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ filenames\_q\_.push\_back(std::move(*iter));}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00115}00115\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00116}00116\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00118}00118\ \ \ \ \ tm\ now\_tm(log\_clock::time\_point\ tp)\ \{}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00119}00119\ \ \ \ \ \ \ \ \ time\_t\ tnow\ =\ log\_clock::to\_time\_t(tp);}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00120}00120\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ spdlog::details::os::localtime(tnow);}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00121}00121\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00123}00123\ \ \ \ \ log\_clock::time\_point\ next\_rotation\_tp\_()\ \{}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00124}00124\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ now\ =\ log\_clock::now();}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00125}00125\ \ \ \ \ \ \ \ \ tm\ date\ =\ now\_tm(now);}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00126}00126\ \ \ \ \ \ \ \ \ date.tm\_min\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00127}00127\ \ \ \ \ \ \ \ \ date.tm\_sec\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00128}00128\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ rotation\_time\ =\ log\_clock::from\_time\_t(std::mktime(\&date));}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00129}00129\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (rotation\_time\ >\ now)\ \{}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ rotation\_time;}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00131}00131\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00132}00132\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{rotation\_time\ +\ std::chrono::hours(1)\};}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00133}00133\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00135}00135\ \ \ \ \ \textcolor{comment}{//\ Delete\ the\ file\ N\ rotations\ ago.}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00136}00136\ \ \ \ \ \textcolor{comment}{//\ Throw\ spdlog\_ex\ on\ failure\ to\ delete\ the\ old\ file.}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00137}00137\ \ \ \ \ \textcolor{keywordtype}{void}\ delete\_old\_()\ \{}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00138}00138\ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }details::os::filename\_to\_str;}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00139}00139\ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }details::os::remove\_if\_exists;}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00141}00141\ \ \ \ \ \ \ \ \ filename\_t\ current\_file\ =\ file\_helper\_.filename();}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00142}00142\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (filenames\_q\_.full())\ \{}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ old\_filename\ =\ std::move(filenames\_q\_.front());}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ filenames\_q\_.pop\_front();}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ ok\ =\ remove\_if\_exists(old\_filename)\ ==\ 0;}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!ok)\ \{}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ filenames\_q\_.push\_back(std::move(current\_file));}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SPDLOG\_THROW(spdlog\_ex(}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Failed\ removing\ hourly\ file\ "{}}\ +\ filename\_to\_str(old\_filename),\ errno));}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00151}00151\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00152}00152\ \ \ \ \ \ \ \ \ filenames\_q\_.push\_back(std::move(current\_file));}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00153}00153\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00155}00155\ \ \ \ \ filename\_t\ base\_filename\_;}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00156}00156\ \ \ \ \ log\_clock::time\_point\ rotation\_tp\_;}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00157}00157\ \ \ \ \ details::file\_helper\ file\_helper\_;}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00158}00158\ \ \ \ \ \textcolor{keywordtype}{bool}\ truncate\_;}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00159}00159\ \ \ \ \ uint16\_t\ max\_files\_;}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00160}00160\ \ \ \ \ details::circular\_q<filename\_t>\ filenames\_q\_;}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00161}00161\ \ \ \ \ \textcolor{keywordtype}{bool}\ remove\_init\_file\_;}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00162}00162\ \};}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00163}00163\ }
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00164}00164\ \textcolor{keyword}{using\ }hourly\_file\_sink\_mt\ =\ hourly\_file\_sink<std::mutex>;}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00165}00165\ \textcolor{keyword}{using\ }hourly\_file\_sink\_st\ =\ hourly\_file\_sink<details::null\_mutex>;}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00166}00166\ }
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00167}00167\ \}\ \ \textcolor{comment}{//\ namespace\ sinks}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00168}00168\ }
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00169}00169\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00170}00170\ \textcolor{comment}{//\ factory\ functions}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00171}00171\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00172}00172\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Factory\ =\ spdlog::synchronous\_factory>}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00173}00173\ \textcolor{keyword}{inline}\ std::shared\_ptr<logger>\ hourly\_logger\_mt(\textcolor{keyword}{const}\ std::string\ \&logger\_name,}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ filename\_t\ \&filename,}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ truncate\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint16\_t\ max\_files\ =\ 0,}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ file\_event\_handlers\ \&event\_handlers\ =\ \{\})\ \{}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00178}00178\ \ \ \ \ \textcolor{keywordflow}{return}\ Factory::template\ create<sinks::hourly\_file\_sink\_mt>(logger\_name,\ filename,\ truncate,}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ max\_files,\ event\_handlers);}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00180}00180\ \}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00181}00181\ }
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00182}00182\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Factory\ =\ spdlog::synchronous\_factory>}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00183}00183\ \textcolor{keyword}{inline}\ std::shared\_ptr<logger>\ hourly\_logger\_st(\textcolor{keyword}{const}\ std::string\ \&logger\_name,}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ filename\_t\ \&filename,}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ truncate\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint16\_t\ max\_files\ =\ 0,}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ file\_event\_handlers\ \&event\_handlers\ =\ \{\})\ \{}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00188}00188\ \ \ \ \ \textcolor{keywordflow}{return}\ Factory::template\ create<sinks::hourly\_file\_sink\_st>(logger\_name,\ filename,\ truncate,}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ max\_files,\ event\_handlers);}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00190}00190\ \}}
+\DoxyCodeLine{\Hypertarget{hourly__file__sink_8h_source_l00191}00191\ \}\ \ \textcolor{comment}{//\ namespace\ spdlog}}
+
+\end{DoxyCode}

@@ -1,0 +1,282 @@
+\doxysubsection{vulkan\+\_\+win32.\+h}
+\hypertarget{vulkan__win32_8h_source}{}\label{vulkan__win32_8h_source}\index{vulkan\_win32.h@{vulkan\_win32.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ VULKAN\_WIN32\_H\_}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00002}00002\ \textcolor{preprocessor}{\#define\ VULKAN\_WIN32\_H\_\ 1}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00004}00004\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00005}00005\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00006}00006\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00008}00008\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00009}00009\ \textcolor{comment}{**\ Copyright\ (c)\ 2015-\/2018\ The\ Khronos\ Group\ Inc.}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00010}00010\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00011}00011\ \textcolor{comment}{**\ Licensed\ under\ the\ Apache\ License,\ Version\ 2.0\ (the\ "{}License"{});}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00012}00012\ \textcolor{comment}{**\ you\ may\ not\ use\ this\ file\ except\ in\ compliance\ with\ the\ License.}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00013}00013\ \textcolor{comment}{**\ You\ may\ obtain\ a\ copy\ of\ the\ License\ at}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00014}00014\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00015}00015\ \textcolor{comment}{**\ \ \ \ \ http://www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00016}00016\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00017}00017\ \textcolor{comment}{**\ Unless\ required\ by\ applicable\ law\ or\ agreed\ to\ in\ writing,\ software}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00018}00018\ \textcolor{comment}{**\ distributed\ under\ the\ License\ is\ distributed\ on\ an\ "{}AS\ IS"{}\ BASIS,}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00019}00019\ \textcolor{comment}{**\ WITHOUT\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ either\ express\ or\ implied.}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00020}00020\ \textcolor{comment}{**\ See\ the\ License\ for\ the\ specific\ language\ governing\ permissions\ and}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00021}00021\ \textcolor{comment}{**\ limitations\ under\ the\ License.}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00022}00022\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00024}00024\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00025}00025\ \textcolor{comment}{**\ This\ header\ is\ generated\ from\ the\ Khronos\ Vulkan\ XML\ API\ Registry.}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00026}00026\ \textcolor{comment}{**}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00027}00027\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00030}00030\ \textcolor{preprocessor}{\#define\ VK\_KHR\_win32\_surface\ 1}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00031}00031\ \textcolor{preprocessor}{\#define\ VK\_KHR\_WIN32\_SURFACE\_SPEC\_VERSION\ 6}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00032}00032\ \textcolor{preprocessor}{\#define\ VK\_KHR\_WIN32\_SURFACE\_EXTENSION\_NAME\ "{}VK\_KHR\_win32\_surface"{}}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00034}00034\ \textcolor{keyword}{typedef}\ VkFlags\ VkWin32SurfaceCreateFlagsKHR;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00036}00036\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }VkWin32SurfaceCreateInfoKHR\ \{}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00037}00037\ \ \ \ \ VkStructureType\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sType;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00038}00038\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pNext;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00039}00039\ \ \ \ \ VkWin32SurfaceCreateFlagsKHR\ \ \ \ flags;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00040}00040\ \ \ \ \ HINSTANCE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hinstance;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00041}00041\ \ \ \ \ HWND\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hwnd;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00042}00042\ \}\ VkWin32SurfaceCreateInfoKHR;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00045}00045\ \textcolor{keyword}{typedef}\ VkResult\ (VKAPI\_PTR\ *PFN\_vkCreateWin32SurfaceKHR)(VkInstance\ instance,\ \textcolor{keyword}{const}\ VkWin32SurfaceCreateInfoKHR*\ pCreateInfo,\ \textcolor{keyword}{const}\ VkAllocationCallbacks*\ pAllocator,\ VkSurfaceKHR*\ pSurface);}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00046}00046\ \textcolor{keyword}{typedef}\ VkBool32\ (VKAPI\_PTR\ *PFN\_vkGetPhysicalDeviceWin32PresentationSupportKHR)(VkPhysicalDevice\ physicalDevice,\ uint32\_t\ queueFamilyIndex);}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00048}00048\ \textcolor{preprocessor}{\#ifndef\ VK\_NO\_PROTOTYPES}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00049}00049\ VKAPI\_ATTR\ VkResult\ VKAPI\_CALL\ vkCreateWin32SurfaceKHR(}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00050}00050\ \ \ \ \ VkInstance\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ instance,}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00051}00051\ \ \ \ \ \textcolor{keyword}{const}\ VkWin32SurfaceCreateInfoKHR*\ \ \ \ \ \ \ \ \ \ pCreateInfo,}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00052}00052\ \ \ \ \ \textcolor{keyword}{const}\ VkAllocationCallbacks*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pAllocator,}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00053}00053\ \ \ \ \ VkSurfaceKHR*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pSurface);}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00055}00055\ VKAPI\_ATTR\ VkBool32\ VKAPI\_CALL\ vkGetPhysicalDeviceWin32PresentationSupportKHR(}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00056}00056\ \ \ \ \ VkPhysicalDevice\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ physicalDevice,}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00057}00057\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ queueFamilyIndex);}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00058}00058\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00060}00060\ \textcolor{preprocessor}{\#define\ VK\_KHR\_external\_memory\_win32\ 1}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00061}00061\ \textcolor{preprocessor}{\#define\ VK\_KHR\_EXTERNAL\_MEMORY\_WIN32\_SPEC\_VERSION\ 1}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00062}00062\ \textcolor{preprocessor}{\#define\ VK\_KHR\_EXTERNAL\_MEMORY\_WIN32\_EXTENSION\_NAME\ "{}VK\_KHR\_external\_memory\_win32"{}}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00064}00064\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }VkImportMemoryWin32HandleInfoKHR\ \{}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00065}00065\ \ \ \ \ VkStructureType\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sType;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00066}00066\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pNext;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00067}00067\ \ \ \ \ VkExternalMemoryHandleTypeFlagBits\ \ \ \ handleType;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00068}00068\ \ \ \ \ HANDLE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ handle;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00069}00069\ \ \ \ \ LPCWSTR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ name;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00070}00070\ \}\ VkImportMemoryWin32HandleInfoKHR;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00072}00072\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }VkExportMemoryWin32HandleInfoKHR\ \{}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00073}00073\ \ \ \ \ VkStructureType\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sType;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00074}00074\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pNext;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00075}00075\ \ \ \ \ \textcolor{keyword}{const}\ SECURITY\_ATTRIBUTES*\ \ \ \ pAttributes;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00076}00076\ \ \ \ \ DWORD\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dwAccess;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00077}00077\ \ \ \ \ LPCWSTR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ name;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00078}00078\ \}\ VkExportMemoryWin32HandleInfoKHR;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00080}00080\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }VkMemoryWin32HandlePropertiesKHR\ \{}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00081}00081\ \ \ \ \ VkStructureType\ \ \ \ sType;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00082}00082\ \ \ \ \ \textcolor{keywordtype}{void}*\ \ \ \ \ \ \ \ \ \ \ \ \ \ pNext;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00083}00083\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ memoryTypeBits;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00084}00084\ \}\ VkMemoryWin32HandlePropertiesKHR;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00086}00086\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }VkMemoryGetWin32HandleInfoKHR\ \{}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00087}00087\ \ \ \ \ VkStructureType\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sType;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00088}00088\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pNext;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00089}00089\ \ \ \ \ VkDeviceMemory\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ memory;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00090}00090\ \ \ \ \ VkExternalMemoryHandleTypeFlagBits\ \ \ \ handleType;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00091}00091\ \}\ VkMemoryGetWin32HandleInfoKHR;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00094}00094\ \textcolor{keyword}{typedef}\ VkResult\ (VKAPI\_PTR\ *PFN\_vkGetMemoryWin32HandleKHR)(VkDevice\ device,\ \textcolor{keyword}{const}\ VkMemoryGetWin32HandleInfoKHR*\ pGetWin32HandleInfo,\ HANDLE*\ pHandle);}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00095}00095\ \textcolor{keyword}{typedef}\ VkResult\ (VKAPI\_PTR\ *PFN\_vkGetMemoryWin32HandlePropertiesKHR)(VkDevice\ device,\ VkExternalMemoryHandleTypeFlagBits\ handleType,\ HANDLE\ handle,\ VkMemoryWin32HandlePropertiesKHR*\ pMemoryWin32HandleProperties);}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00097}00097\ \textcolor{preprocessor}{\#ifndef\ VK\_NO\_PROTOTYPES}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00098}00098\ VKAPI\_ATTR\ VkResult\ VKAPI\_CALL\ vkGetMemoryWin32HandleKHR(}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00099}00099\ \ \ \ \ VkDevice\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ device,}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00100}00100\ \ \ \ \ \textcolor{keyword}{const}\ VkMemoryGetWin32HandleInfoKHR*\ \ \ \ \ \ \ \ pGetWin32HandleInfo,}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00101}00101\ \ \ \ \ HANDLE*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pHandle);}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00103}00103\ VKAPI\_ATTR\ VkResult\ VKAPI\_CALL\ vkGetMemoryWin32HandlePropertiesKHR(}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00104}00104\ \ \ \ \ VkDevice\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ device,}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00105}00105\ \ \ \ \ VkExternalMemoryHandleTypeFlagBits\ \ \ \ \ \ \ \ \ \ handleType,}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00106}00106\ \ \ \ \ HANDLE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ handle,}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00107}00107\ \ \ \ \ VkMemoryWin32HandlePropertiesKHR*\ \ \ \ \ \ \ \ \ \ \ pMemoryWin32HandleProperties);}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00108}00108\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00110}00110\ \textcolor{preprocessor}{\#define\ VK\_KHR\_win32\_keyed\_mutex\ 1}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00111}00111\ \textcolor{preprocessor}{\#define\ VK\_KHR\_WIN32\_KEYED\_MUTEX\_SPEC\_VERSION\ 1}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00112}00112\ \textcolor{preprocessor}{\#define\ VK\_KHR\_WIN32\_KEYED\_MUTEX\_EXTENSION\_NAME\ "{}VK\_KHR\_win32\_keyed\_mutex"{}}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00114}00114\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }VkWin32KeyedMutexAcquireReleaseInfoKHR\ \{}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00115}00115\ \ \ \ \ VkStructureType\ \ \ \ \ \ \ \ \ \ sType;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00116}00116\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ \ \ \ \ \ \ \ \ \ \ \ \ \ pNext;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00117}00117\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ acquireCount;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00118}00118\ \ \ \ \ \textcolor{keyword}{const}\ VkDeviceMemory*\ \ \ \ pAcquireSyncs;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00119}00119\ \ \ \ \ \textcolor{keyword}{const}\ uint64\_t*\ \ \ \ \ \ \ \ \ \ pAcquireKeys;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00120}00120\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t*\ \ \ \ \ \ \ \ \ \ pAcquireTimeouts;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00121}00121\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ releaseCount;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00122}00122\ \ \ \ \ \textcolor{keyword}{const}\ VkDeviceMemory*\ \ \ \ pReleaseSyncs;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00123}00123\ \ \ \ \ \textcolor{keyword}{const}\ uint64\_t*\ \ \ \ \ \ \ \ \ \ pReleaseKeys;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00124}00124\ \}\ VkWin32KeyedMutexAcquireReleaseInfoKHR;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00128}00128\ \textcolor{preprocessor}{\#define\ VK\_KHR\_external\_semaphore\_win32\ 1}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00129}00129\ \textcolor{preprocessor}{\#define\ VK\_KHR\_EXTERNAL\_SEMAPHORE\_WIN32\_SPEC\_VERSION\ 1}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00130}00130\ \textcolor{preprocessor}{\#define\ VK\_KHR\_EXTERNAL\_SEMAPHORE\_WIN32\_EXTENSION\_NAME\ "{}VK\_KHR\_external\_semaphore\_win32"{}}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00132}00132\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }VkImportSemaphoreWin32HandleInfoKHR\ \{}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00133}00133\ \ \ \ \ VkStructureType\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sType;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00134}00134\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pNext;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00135}00135\ \ \ \ \ VkSemaphore\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ semaphore;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00136}00136\ \ \ \ \ VkSemaphoreImportFlags\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ flags;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00137}00137\ \ \ \ \ VkExternalSemaphoreHandleTypeFlagBits\ \ \ \ handleType;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00138}00138\ \ \ \ \ HANDLE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ handle;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00139}00139\ \ \ \ \ LPCWSTR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ name;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00140}00140\ \}\ VkImportSemaphoreWin32HandleInfoKHR;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00142}00142\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }VkExportSemaphoreWin32HandleInfoKHR\ \{}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00143}00143\ \ \ \ \ VkStructureType\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sType;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00144}00144\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pNext;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00145}00145\ \ \ \ \ \textcolor{keyword}{const}\ SECURITY\_ATTRIBUTES*\ \ \ \ pAttributes;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00146}00146\ \ \ \ \ DWORD\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dwAccess;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00147}00147\ \ \ \ \ LPCWSTR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ name;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00148}00148\ \}\ VkExportSemaphoreWin32HandleInfoKHR;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00149}00149\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00150}00150\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }VkD3D12FenceSubmitInfoKHR\ \{}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00151}00151\ \ \ \ \ VkStructureType\ \ \ \ sType;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00152}00152\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ \ \ \ \ \ \ \ pNext;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00153}00153\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ waitSemaphoreValuesCount;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00154}00154\ \ \ \ \ \textcolor{keyword}{const}\ uint64\_t*\ \ \ \ pWaitSemaphoreValues;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00155}00155\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ signalSemaphoreValuesCount;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00156}00156\ \ \ \ \ \textcolor{keyword}{const}\ uint64\_t*\ \ \ \ pSignalSemaphoreValues;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00157}00157\ \}\ VkD3D12FenceSubmitInfoKHR;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00159}00159\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }VkSemaphoreGetWin32HandleInfoKHR\ \{}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00160}00160\ \ \ \ \ VkStructureType\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sType;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00161}00161\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pNext;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00162}00162\ \ \ \ \ VkSemaphore\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ semaphore;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00163}00163\ \ \ \ \ VkExternalSemaphoreHandleTypeFlagBits\ \ \ \ handleType;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00164}00164\ \}\ VkSemaphoreGetWin32HandleInfoKHR;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00165}00165\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00166}00166\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00167}00167\ \textcolor{keyword}{typedef}\ VkResult\ (VKAPI\_PTR\ *PFN\_vkImportSemaphoreWin32HandleKHR)(VkDevice\ device,\ \textcolor{keyword}{const}\ VkImportSemaphoreWin32HandleInfoKHR*\ pImportSemaphoreWin32HandleInfo);}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00168}00168\ \textcolor{keyword}{typedef}\ VkResult\ (VKAPI\_PTR\ *PFN\_vkGetSemaphoreWin32HandleKHR)(VkDevice\ device,\ \textcolor{keyword}{const}\ VkSemaphoreGetWin32HandleInfoKHR*\ pGetWin32HandleInfo,\ HANDLE*\ pHandle);}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00169}00169\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00170}00170\ \textcolor{preprocessor}{\#ifndef\ VK\_NO\_PROTOTYPES}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00171}00171\ VKAPI\_ATTR\ VkResult\ VKAPI\_CALL\ vkImportSemaphoreWin32HandleKHR(}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00172}00172\ \ \ \ \ VkDevice\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ device,}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00173}00173\ \ \ \ \ \textcolor{keyword}{const}\ VkImportSemaphoreWin32HandleInfoKHR*\ \ pImportSemaphoreWin32HandleInfo);}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00174}00174\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00175}00175\ VKAPI\_ATTR\ VkResult\ VKAPI\_CALL\ vkGetSemaphoreWin32HandleKHR(}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00176}00176\ \ \ \ \ VkDevice\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ device,}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00177}00177\ \ \ \ \ \textcolor{keyword}{const}\ VkSemaphoreGetWin32HandleInfoKHR*\ \ \ \ \ pGetWin32HandleInfo,}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00178}00178\ \ \ \ \ HANDLE*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pHandle);}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00179}00179\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00180}00180\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00181}00181\ \textcolor{preprocessor}{\#define\ VK\_KHR\_external\_fence\_win32\ 1}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00182}00182\ \textcolor{preprocessor}{\#define\ VK\_KHR\_EXTERNAL\_FENCE\_WIN32\_SPEC\_VERSION\ 1}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00183}00183\ \textcolor{preprocessor}{\#define\ VK\_KHR\_EXTERNAL\_FENCE\_WIN32\_EXTENSION\_NAME\ "{}VK\_KHR\_external\_fence\_win32"{}}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00184}00184\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00185}00185\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }VkImportFenceWin32HandleInfoKHR\ \{}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00186}00186\ \ \ \ \ VkStructureType\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sType;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00187}00187\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pNext;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00188}00188\ \ \ \ \ VkFence\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fence;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00189}00189\ \ \ \ \ VkFenceImportFlags\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ flags;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00190}00190\ \ \ \ \ VkExternalFenceHandleTypeFlagBits\ \ \ \ handleType;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00191}00191\ \ \ \ \ HANDLE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ handle;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00192}00192\ \ \ \ \ LPCWSTR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ name;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00193}00193\ \}\ VkImportFenceWin32HandleInfoKHR;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00194}00194\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00195}00195\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }VkExportFenceWin32HandleInfoKHR\ \{}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00196}00196\ \ \ \ \ VkStructureType\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sType;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00197}00197\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pNext;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00198}00198\ \ \ \ \ \textcolor{keyword}{const}\ SECURITY\_ATTRIBUTES*\ \ \ \ pAttributes;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00199}00199\ \ \ \ \ DWORD\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dwAccess;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00200}00200\ \ \ \ \ LPCWSTR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ name;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00201}00201\ \}\ VkExportFenceWin32HandleInfoKHR;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00202}00202\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00203}00203\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }VkFenceGetWin32HandleInfoKHR\ \{}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00204}00204\ \ \ \ \ VkStructureType\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sType;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00205}00205\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pNext;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00206}00206\ \ \ \ \ VkFence\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fence;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00207}00207\ \ \ \ \ VkExternalFenceHandleTypeFlagBits\ \ \ \ handleType;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00208}00208\ \}\ VkFenceGetWin32HandleInfoKHR;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00209}00209\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00210}00210\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00211}00211\ \textcolor{keyword}{typedef}\ VkResult\ (VKAPI\_PTR\ *PFN\_vkImportFenceWin32HandleKHR)(VkDevice\ device,\ \textcolor{keyword}{const}\ VkImportFenceWin32HandleInfoKHR*\ pImportFenceWin32HandleInfo);}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00212}00212\ \textcolor{keyword}{typedef}\ VkResult\ (VKAPI\_PTR\ *PFN\_vkGetFenceWin32HandleKHR)(VkDevice\ device,\ \textcolor{keyword}{const}\ VkFenceGetWin32HandleInfoKHR*\ pGetWin32HandleInfo,\ HANDLE*\ pHandle);}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00213}00213\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00214}00214\ \textcolor{preprocessor}{\#ifndef\ VK\_NO\_PROTOTYPES}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00215}00215\ VKAPI\_ATTR\ VkResult\ VKAPI\_CALL\ vkImportFenceWin32HandleKHR(}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00216}00216\ \ \ \ \ VkDevice\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ device,}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00217}00217\ \ \ \ \ \textcolor{keyword}{const}\ VkImportFenceWin32HandleInfoKHR*\ \ \ \ \ \ pImportFenceWin32HandleInfo);}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00218}00218\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00219}00219\ VKAPI\_ATTR\ VkResult\ VKAPI\_CALL\ vkGetFenceWin32HandleKHR(}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00220}00220\ \ \ \ \ VkDevice\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ device,}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00221}00221\ \ \ \ \ \textcolor{keyword}{const}\ VkFenceGetWin32HandleInfoKHR*\ \ \ \ \ \ \ \ \ pGetWin32HandleInfo,}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00222}00222\ \ \ \ \ HANDLE*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pHandle);}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00223}00223\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00224}00224\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00225}00225\ \textcolor{preprocessor}{\#define\ VK\_NV\_external\_memory\_win32\ 1}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00226}00226\ \textcolor{preprocessor}{\#define\ VK\_NV\_EXTERNAL\_MEMORY\_WIN32\_SPEC\_VERSION\ 1}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00227}00227\ \textcolor{preprocessor}{\#define\ VK\_NV\_EXTERNAL\_MEMORY\_WIN32\_EXTENSION\_NAME\ "{}VK\_NV\_external\_memory\_win32"{}}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00228}00228\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00229}00229\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }VkImportMemoryWin32HandleInfoNV\ \{}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00230}00230\ \ \ \ \ VkStructureType\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sType;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00231}00231\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pNext;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00232}00232\ \ \ \ \ VkExternalMemoryHandleTypeFlagsNV\ \ \ \ handleType;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00233}00233\ \ \ \ \ HANDLE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ handle;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00234}00234\ \}\ VkImportMemoryWin32HandleInfoNV;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00235}00235\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00236}00236\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }VkExportMemoryWin32HandleInfoNV\ \{}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00237}00237\ \ \ \ \ VkStructureType\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sType;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00238}00238\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pNext;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00239}00239\ \ \ \ \ \textcolor{keyword}{const}\ SECURITY\_ATTRIBUTES*\ \ \ \ pAttributes;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00240}00240\ \ \ \ \ DWORD\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dwAccess;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00241}00241\ \}\ VkExportMemoryWin32HandleInfoNV;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00242}00242\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00243}00243\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00244}00244\ \textcolor{keyword}{typedef}\ VkResult\ (VKAPI\_PTR\ *PFN\_vkGetMemoryWin32HandleNV)(VkDevice\ device,\ VkDeviceMemory\ memory,\ VkExternalMemoryHandleTypeFlagsNV\ handleType,\ HANDLE*\ pHandle);}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00245}00245\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00246}00246\ \textcolor{preprocessor}{\#ifndef\ VK\_NO\_PROTOTYPES}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00247}00247\ VKAPI\_ATTR\ VkResult\ VKAPI\_CALL\ vkGetMemoryWin32HandleNV(}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00248}00248\ \ \ \ \ VkDevice\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ device,}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00249}00249\ \ \ \ \ VkDeviceMemory\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ memory,}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00250}00250\ \ \ \ \ VkExternalMemoryHandleTypeFlagsNV\ \ \ \ \ \ \ \ \ \ \ handleType,}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00251}00251\ \ \ \ \ HANDLE*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pHandle);}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00252}00252\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00253}00253\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00254}00254\ \textcolor{preprocessor}{\#define\ VK\_NV\_win32\_keyed\_mutex\ 1}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00255}00255\ \textcolor{preprocessor}{\#define\ VK\_NV\_WIN32\_KEYED\_MUTEX\_SPEC\_VERSION\ 1}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00256}00256\ \textcolor{preprocessor}{\#define\ VK\_NV\_WIN32\_KEYED\_MUTEX\_EXTENSION\_NAME\ "{}VK\_NV\_win32\_keyed\_mutex"{}}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00257}00257\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00258}00258\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }VkWin32KeyedMutexAcquireReleaseInfoNV\ \{}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00259}00259\ \ \ \ \ VkStructureType\ \ \ \ \ \ \ \ \ \ sType;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00260}00260\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ \ \ \ \ \ \ \ \ \ \ \ \ \ pNext;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00261}00261\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ acquireCount;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00262}00262\ \ \ \ \ \textcolor{keyword}{const}\ VkDeviceMemory*\ \ \ \ pAcquireSyncs;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00263}00263\ \ \ \ \ \textcolor{keyword}{const}\ uint64\_t*\ \ \ \ \ \ \ \ \ \ pAcquireKeys;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00264}00264\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t*\ \ \ \ \ \ \ \ \ \ pAcquireTimeoutMilliseconds;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00265}00265\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ releaseCount;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00266}00266\ \ \ \ \ \textcolor{keyword}{const}\ VkDeviceMemory*\ \ \ \ pReleaseSyncs;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00267}00267\ \ \ \ \ \textcolor{keyword}{const}\ uint64\_t*\ \ \ \ \ \ \ \ \ \ pReleaseKeys;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00268}00268\ \}\ VkWin32KeyedMutexAcquireReleaseInfoNV;}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00269}00269\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00270}00270\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00271}00271\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00272}00272\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00273}00273\ \}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00274}00274\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00275}00275\ }
+\DoxyCodeLine{\Hypertarget{vulkan__win32_8h_source_l00276}00276\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

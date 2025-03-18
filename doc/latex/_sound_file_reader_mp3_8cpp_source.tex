@@ -1,0 +1,161 @@
+\doxysubsection{Sound\+File\+Reader\+Mp3.\+cpp}
+\hypertarget{_sound_file_reader_mp3_8cpp_source}{}\label{_sound_file_reader_mp3_8cpp_source}\index{SoundFileReaderMp3.cpp@{SoundFileReaderMp3.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00002}00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00003}00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00004}00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00005}00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00006}00006\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00007}00007\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00008}00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00009}00009\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00010}00010\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00011}00011\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00012}00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00013}00013\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00014}00014\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00015}00015\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00016}00016\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00017}00017\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00018}00018\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00019}00019\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00020}00020\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00021}00021\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00022}00022\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00026}00026\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00028}00028\ \textcolor{preprocessor}{\#define\ MINIMP3\_IMPLEMENTATION\ }\textcolor{comment}{//\ Minimp3\ control\ define,\ places\ implementation\ in\ this\ file.}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00029}00029\ \textcolor{preprocessor}{\#ifndef\ NOMINMAX}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00030}00030\ \textcolor{preprocessor}{\#define\ NOMINMAX\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{comment}{//\ To\ avoid\ windows.h\ and\ std::min\ issue}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00031}00031\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00032}00032\ \textcolor{preprocessor}{\#define\ MINIMP3\_NO\_STDIO\ \ \ \ \ \ \ }\textcolor{comment}{//\ Minimp3\ control\ define,\ eliminate\ file\ manipulation\ code\ which\ is\ useless\ here}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00034}00034\ \textcolor{preprocessor}{\#ifdef\ \_MSC\_VER}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00035}00035\ \textcolor{preprocessor}{\#pragma\ warning(push)}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00036}00036\ \textcolor{preprocessor}{\#pragma\ warning(disable\ :\ 4242\ 4244\ 4267\ 4456\ 4706)}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00037}00037\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00038}00038\ \textcolor{preprocessor}{\#pragma\ GCC\ diagnostic\ push}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00039}00039\ \textcolor{preprocessor}{\#pragma\ GCC\ diagnostic\ ignored\ "{}-\/Wstringop-\/overflow"{}}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00040}00040\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00042}00042\ \textcolor{preprocessor}{\#include\ <minimp3\_ex.h>}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00044}00044\ \textcolor{preprocessor}{\#ifdef\ \_MSC\_VER}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00045}00045\ \textcolor{preprocessor}{\#pragma\ warning(pop)}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00046}00046\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00047}00047\ \textcolor{preprocessor}{\#pragma\ GCC\ diagnostic\ pop}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00048}00048\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00050}00050\ \textcolor{preprocessor}{\#undef\ NOMINMAX}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00051}00051\ \textcolor{preprocessor}{\#undef\ MINIMP3\_NO\_STDIO}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00053}00053\ \textcolor{preprocessor}{\#include\ <SFML/Audio/SoundFileReaderMp3.hpp>}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00054}00054\ \textcolor{preprocessor}{\#include\ <SFML/System/InputStream.hpp>}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00055}00055\ \textcolor{preprocessor}{\#include\ <SFML/System/Err.hpp>}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00056}00056\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00057}00057\ \textcolor{preprocessor}{\#include\ <cstring>}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00058}00058\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00061}00061\ \textcolor{keyword}{namespace}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00062}00062\ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00063}00063\ std::size\_t\ readCallback(\textcolor{keywordtype}{void}*\ ptr,\ std::size\_t\ size,\ \textcolor{keywordtype}{void}*\ data)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00064}00064\ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00065}00065\ \ \ \ \ sf::InputStream*\ stream\ =\ \textcolor{keyword}{static\_cast<}sf::InputStream*\textcolor{keyword}{>}(data);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00066}00066\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}std::size\_t\textcolor{keyword}{>}(stream-\/>read(ptr,\ \textcolor{keyword}{static\_cast<}sf::Int64\textcolor{keyword}{>}(size)));}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00067}00067\ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00069}00069\ \textcolor{keywordtype}{int}\ seekCallback(uint64\_t\ offset,\ \textcolor{keywordtype}{void}*\ data)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00070}00070\ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00071}00071\ \ \ \ \ sf::InputStream*\ stream\ =\ \textcolor{keyword}{static\_cast<}sf::InputStream*\textcolor{keyword}{>}(data);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00072}00072\ \ \ \ \ sf::Int64\ position\ =\ stream-\/>seek(\textcolor{keyword}{static\_cast<}sf::Int64\textcolor{keyword}{>}(offset));}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00073}00073\ \ \ \ \ \textcolor{keywordflow}{return}\ position\ <\ 0\ ?\ -\/1\ :\ 0;}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00074}00074\ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00076}00076\ \textcolor{keywordtype}{bool}\ hasValidId3Tag(\textcolor{keyword}{const}\ sf::Uint8*\ header)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00077}00077\ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00078}00078\ \ \ \ \ \textcolor{keywordflow}{return}\ std::memcmp(header,\ \textcolor{stringliteral}{"{}ID3"{}},\ 3)\ ==\ 0\ \&\&\ !((header[5]\ \&\ 15)\ ||\ (header[6]\ \&\ 0x80)\ ||\ (header[7]\ \&\ 0x80)\ ||\ (header[8]\ \&\ 0x80)\ ||\ (header[9]\ \&\ 0x80));}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00079}00079\ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00080}00080\ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00082}00082\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00083}00083\ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00084}00084\ \textcolor{keyword}{namespace\ }priv}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00085}00085\ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00087}00087\ \textcolor{keywordtype}{bool}\ SoundFileReaderMp3::check(InputStream\&\ stream)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00088}00088\ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00089}00089\ \ \ \ \ Uint8\ header[10];}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00091}00091\ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{static\_cast<}std::size\_t\textcolor{keyword}{>}(stream.read(header,\ \textcolor{keyword}{static\_cast<}Int64\textcolor{keyword}{>}(\textcolor{keyword}{sizeof}(header))))\ <\ \textcolor{keyword}{sizeof}(header))}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00092}00092\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00094}00094\ \ \ \ \ \textcolor{keywordflow}{if}\ (hasValidId3Tag(header))}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00095}00095\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00097}00097\ \ \ \ \ \textcolor{keywordflow}{if}\ (hdr\_valid(header))}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00098}00098\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00100}00100\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00101}00101\ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00105}00105\ SoundFileReaderMp3::SoundFileReaderMp3()\ :}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00106}00106\ m\_numSamples(0),}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00107}00107\ m\_position(0)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00108}00108\ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00109}00109\ \ \ \ \ std::memset(\&m\_io,\ 0,\ \textcolor{keyword}{sizeof}(m\_io));}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00110}00110\ \ \ \ \ std::memset(\&m\_decoder,\ 0,\ \textcolor{keyword}{sizeof}(m\_decoder));}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00111}00111\ \ \ \ \ m\_io.read\ =\ readCallback;}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00112}00112\ \ \ \ \ m\_io.seek\ =\ seekCallback;}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00113}00113\ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00117}00117\ SoundFileReaderMp3::\string~SoundFileReaderMp3()}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00118}00118\ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00119}00119\ \ \ \ \ mp3dec\_ex\_close(\&m\_decoder);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00120}00120\ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00124}00124\ \textcolor{keywordtype}{bool}\ SoundFileReaderMp3::open(InputStream\&\ stream,\ Info\&\ info)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00125}00125\ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00126}00126\ \ \ \ \ \textcolor{comment}{//\ Init\ IO\ callbacks}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00127}00127\ \ \ \ \ m\_io.read\_data\ =\ \&stream;}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00128}00128\ \ \ \ \ m\_io.seek\_data\ =\ \&stream;}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00130}00130\ \ \ \ \ \textcolor{comment}{//\ Init\ mp3\ decoder}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00131}00131\ \ \ \ \ mp3dec\_ex\_open\_cb(\&m\_decoder,\ \&m\_io,\ MP3D\_SEEK\_TO\_SAMPLE);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00132}00132\ \ \ \ \ \textcolor{keywordflow}{if}\ (!m\_decoder.samples)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00133}00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00135}00135\ \ \ \ \ \textcolor{comment}{//\ Retrieve\ the\ music\ attributes}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00136}00136\ \ \ \ \ info.channelCount\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\textcolor{keyword}{>}(m\_decoder.info.channels);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00137}00137\ \ \ \ \ info.sampleRate\ \ \ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\textcolor{keyword}{>}(m\_decoder.info.hz);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00138}00138\ \ \ \ \ info.sampleCount\ \ =\ m\_decoder.samples;}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00139}00139\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00140}00140\ \ \ \ \ m\_numSamples\ \ \ \ \ \ =\ info.sampleCount;}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00141}00141\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00142}00142\ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00143}00143\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00144}00144\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00146}00146\ \textcolor{keywordtype}{void}\ SoundFileReaderMp3::seek(Uint64\ sampleOffset)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00147}00147\ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00148}00148\ \ \ \ \ m\_position\ =\ std::min(sampleOffset,\ m\_numSamples);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00149}00149\ \ \ \ \ mp3dec\_ex\_seek(\&m\_decoder,\ m\_position);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00150}00150\ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00152}00152\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00154}00154\ Uint64\ SoundFileReaderMp3::read(Int16*\ samples,\ Uint64\ maxCount)}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00155}00155\ \{}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00156}00156\ \ \ \ \ Uint64\ toRead\ =\ std::min(maxCount,\ m\_numSamples\ -\/\ m\_position);}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00157}00157\ \ \ \ \ toRead\ =\ \textcolor{keyword}{static\_cast<}Uint64\textcolor{keyword}{>}(mp3dec\_ex\_read(\&m\_decoder,\ samples,\ \textcolor{keyword}{static\_cast<}std::size\_t\textcolor{keyword}{>}(toRead)));}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00158}00158\ \ \ \ \ m\_position\ +=\ toRead;}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00159}00159\ \ \ \ \ \textcolor{keywordflow}{return}\ toRead;}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00160}00160\ \}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00162}00162\ \}\ \textcolor{comment}{//\ namespace\ priv}}
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00163}00163\ }
+\DoxyCodeLine{\Hypertarget{_sound_file_reader_mp3_8cpp_source_l00164}00164\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+
+\end{DoxyCode}

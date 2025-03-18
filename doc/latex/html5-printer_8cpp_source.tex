@@ -1,0 +1,114 @@
+\doxysubsection{html5-\/printer.cpp}
+\hypertarget{html5-printer_8cpp_source}{}\label{html5-printer_8cpp_source}\index{html5-\/printer.cpp@{html5-\/printer.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00001}00001\ \textcolor{comment}{//\ \ g++\ -\/Wall\ -\/O2\ contrib/html5-\/printer.cpp\ -\/o\ html5-\/printer\ -\/ltinyxml2}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00003}00003\ \textcolor{comment}{//\ \ This\ program\ demonstrates\ how\ to\ use\ "{}tinyxml2"{}\ to\ generate\ conformant\ HTML5}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00004}00004\ \textcolor{comment}{//\ \ by\ deriving\ from\ the\ "{}tinyxml2::XMLPrinter"{}\ class.}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00006}00006\ \textcolor{comment}{//\ \ http://dev.w3.org/html5/markup/syntax.html}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00008}00008\ \textcolor{comment}{//\ \ In\ HTML5,\ there\ are\ 16\ so-\/called\ "{}void"{}\ elements.\ \ "{}void\ elements"{}\ NEVER\ have}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00009}00009\ \textcolor{comment}{//\ \ inner\ content\ (but\ they\ MAY\ have\ attributes),\ and\ are\ assumed\ to\ be\ self-\/closing.}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00010}00010\ \textcolor{comment}{//\ \ An\ example\ of\ a\ self-\/closig\ HTML5\ element\ is\ "{}<br/>"{}\ (line\ break)}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00011}00011\ \textcolor{comment}{//\ \ All\ other\ elements\ are\ called\ "{}non-\/void"{}\ and\ MUST\ never\ self-\/close.}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00012}00012\ \textcolor{comment}{//\ \ Examples:\ "{}<div\ class='lolcats'></div>"{}.}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00014}00014\ \textcolor{comment}{//\ \ tinyxml2::XMLPrinter\ will\ emit\ \_ALL\_\ XML\ elements\ with\ no\ inner\ content\ as}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00015}00015\ \textcolor{comment}{//\ \ self-\/closing.\ \ This\ behavior\ produces\ space-\/effeceint\ XML,\ but\ incorrect\ HTML5.}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00017}00017\ \textcolor{comment}{//\ \ Author:\ Dennis\ Jenkins,\ \ dennis\ (dot)\ jenkins\ (dot)\ 75\ (at)\ gmail\ (dot)\ com.}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00018}00018\ \textcolor{comment}{//\ \ License:\ Same\ as\ tinyxml2\ (zlib,\ see\ below)}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00019}00019\ \textcolor{comment}{//\ \ This\ example\ is\ a\ small\ contribution\ to\ the\ world!\ \ Enjoy\ it!}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00021}00021\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00022}00022\ \textcolor{comment}{This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00023}00023\ \textcolor{comment}{warranty.\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00024}00024\ \textcolor{comment}{damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00025}00025\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00026}00026\ \textcolor{comment}{Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00027}00027\ \textcolor{comment}{purpose,\ including\ commercial\ applications,\ and\ to\ alter\ it\ and}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00028}00028\ \textcolor{comment}{redistribute\ it\ freely,\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00029}00029\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00030}00030\ \textcolor{comment}{1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;\ you\ must}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00031}00031\ \textcolor{comment}{not\ claim\ that\ you\ wrote\ the\ original\ software.\ If\ you\ use\ this}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00032}00032\ \textcolor{comment}{software\ in\ a\ product,\ an\ acknowledgment\ in\ the\ product\ documentation}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00033}00033\ \textcolor{comment}{would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00034}00034\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00035}00035\ \textcolor{comment}{2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,\ and}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00036}00036\ \textcolor{comment}{must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00037}00037\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00038}00038\ \textcolor{comment}{3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00039}00039\ \textcolor{comment}{distribution.}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00040}00040\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00043}00043\ \textcolor{preprocessor}{\#include\ "{}../tinyxml2.h"{}}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00044}00044\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00046}00046\ \textcolor{preprocessor}{\#if\ defined\ (\_MSC\_VER)}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00047}00047\ \textcolor{preprocessor}{\#define\ strcasecmp\ stricmp}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00048}00048\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00050}00050\ \textcolor{keyword}{using\ namespace\ }tinyxml2;}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00052}00052\ \textcolor{comment}{//\ Contrived\ input\ containing\ a\ mix\ of\ void\ and\ non-\/void\ HTML5\ elements.}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00053}00053\ \textcolor{comment}{//\ When\ printed\ via\ XMLPrinter,\ some\ non-\/void\ elements\ will\ self-\/close\ (not\ valid\ HTML5).}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00054}00054\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ input[]\ =}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00055}00055\ \textcolor{stringliteral}{"{}<html><body><p\ style='a'></p><br/>\&copy;<col\ a='1'\ b='2'/><div\ a='1'></div></body></html>"{}};}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00057}00057\ \textcolor{comment}{//\ XMLPrinterHTML5\ is\ small\ enough,\ just\ put\ the\ entire\ implementation\ inline.}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00058}00058\ \textcolor{keyword}{class\ }XMLPrinterHTML5\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classtinyxml2_1_1_x_m_l_printer}{XMLPrinter}}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00059}00059\ \{}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00060}00060\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00061}00061\ \ \ \ \ XMLPrinterHTML5\ (FILE*\ file=0,\ \textcolor{keywordtype}{bool}\ compact\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{int}\ depth\ =\ 0)\ :}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00062}00062\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classtinyxml2_1_1_x_m_l_printer_aa6d3841c069085f5b8a27bc7103c04f7}{XMLPrinter}}\ (file,\ compact,\ depth)}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00063}00063\ \ \ \ \ \{\}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00065}00065\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00066}00066\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ CloseElement\ ()\ \{}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_elementJustOpened\ \&\&\ !isVoidElement\ (\_stack.PeekTop()))\ \{}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ SealElementIfJustOpened();}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00070}00070\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classtinyxml2_1_1_x_m_l_printer_af1fb439e5d800999646f333fa2f0699a}{XMLPrinter::CloseElement}}();}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00071}00071\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00073}00073\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ isVoidElement\ (\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *name)\ \{}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00074}00074\ \textcolor{comment}{//\ Complete\ list\ of\ all\ HTML5\ "{}void\ elements"{},}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00075}00075\ \textcolor{comment}{//\ http://dev.w3.org/html5/markup/syntax.html}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *list[]\ =\ \{}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}area"{}},\ \textcolor{stringliteral}{"{}base"{}},\ \textcolor{stringliteral}{"{}br"{}},\ \textcolor{stringliteral}{"{}col"{}},\ \textcolor{stringliteral}{"{}command"{}},\ \textcolor{stringliteral}{"{}embed"{}},\ \textcolor{stringliteral}{"{}hr"{}},\ \textcolor{stringliteral}{"{}img"{}},}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}input"{}},\ \textcolor{stringliteral}{"{}keygen"{}},\ \textcolor{stringliteral}{"{}link"{}},\ \textcolor{stringliteral}{"{}meta"{}},\ \textcolor{stringliteral}{"{}param"{}},\ \textcolor{stringliteral}{"{}source"{}},\ \textcolor{stringliteral}{"{}track"{}},\ \textcolor{stringliteral}{"{}wbr"{}},}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ NULL}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00080}00080\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00082}00082\ \textcolor{comment}{//\ I\ could\ use\ 'bsearch',\ but\ I\ don't\ have\ MSVC\ to\ test\ on\ (it\ would\ work\ with\ gcc/libc).}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00083}00083\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ **p\ =\ list;\ *p;\ ++p)\ \{}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!strcasecmp\ (name,\ *p))\ \{}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00087}00087\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00089}00089\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00090}00090\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00091}00091\ \};}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00093}00093\ \textcolor{keywordtype}{int}\ main\ (\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00094}00094\ \ \ \ \ \mbox{\hyperlink{classtinyxml2_1_1_x_m_l_document}{XMLDocument}}\ doc\ (\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00095}00095\ \ \ \ \ doc.Parse\ (input);}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00097}00097\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}INPUT:\(\backslash\)n"{}}\ <<\ input\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00099}00099\ \ \ \ \ \mbox{\hyperlink{classtinyxml2_1_1_x_m_l_printer}{XMLPrinter}}\ prn\ (NULL,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00100}00100\ \ \ \ \ doc.Print\ (\&prn);}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00101}00101\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}XMLPrinter\ (not\ valid\ HTML5):\(\backslash\)n"{}}\ <<\ prn.CStr()\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00103}00103\ \ \ \ \ XMLPrinterHTML5\ html5\ (NULL,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00104}00104\ \ \ \ \ doc.Print\ (\&html5);}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00105}00105\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}XMLPrinterHTML5:\(\backslash\)n"{}}\ <<\ html5.CStr()\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00107}00107\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{html5-printer_8cpp_source_l00108}00108\ \}}
+
+\end{DoxyCode}

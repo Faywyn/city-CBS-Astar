@@ -1,0 +1,210 @@
+\doxysubsection{include/utils.h File Reference}
+\hypertarget{include_2utils_8h}{}\label{include_2utils_8h}\index{utils.h@{utils.h}}
+
+
+Utility functions.  
+
+
+{\ttfamily \#include "{}config.\+h"{}}\newline
+{\ttfamily \#include $<$SFML/\+Graphics.\+hpp$>$}\newline
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+sf\+::\+Vector2f \mbox{\hyperlink{include_2utils_8h_aa1a271c5514f3ff3a6c0404bf3a76cb3}{lat\+Lon\+To\+XY}} (double lat, double lon)
+\begin{DoxyCompactList}\small\item\em Convert latitude and longitude to x and y. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{include_2utils_8h_ac300931459ca910907a0e20cd51d2f1b}{distance}} (sf\+::\+Vector2f p1, sf\+::\+Vector2f p2)
+\begin{DoxyCompactList}\small\item\em Get the distance between two points. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{include_2utils_8h_a8b909c7be741a1e355bd0b822df0645e}{normalize\+Angle}} (double angle)
+\begin{DoxyCompactList}\small\item\em Normalize an angle to -\/PI to PI. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{include_2utils_8h_a941b34907fe01466afcd721ab3fa77cd}{turning\+Radius}} (double speed)
+\begin{DoxyCompactList}\small\item\em Get the turning radius from the speed. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{include_2utils_8h_aa42f9f27b5918308adbf2285d205296c}{turning\+Radius\+To\+Speed}} (double radius)
+\begin{DoxyCompactList}\small\item\em Get the speed from the turning radius. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{include_2utils_8h_ad5725470e9dc4a2e1d27d39949dca29e}{cars\+Collided}} (\mbox{\hyperlink{class_car}{Car}} car1, \mbox{\hyperlink{class_car}{Car}} car2, int time)
+\item 
+bool \mbox{\hyperlink{include_2utils_8h_aa430bb0d6bb43f5ce7a711edaaff38f9}{car\+Conflict}} (sf\+::\+Vector2f car\+Pos, double car\+Angle, sf\+::\+Vector2f conf\+Pos, double conf\+Angle)
+\begin{DoxyCompactList}\small\item\em Check if two cars have a conflict. \end{DoxyCompactList}\item 
+sf\+::\+Font \mbox{\hyperlink{include_2utils_8h_a7c48a100843dd2f2e7a93ad06eb1fdc6}{load\+Font}} ()
+\begin{DoxyCompactList}\small\item\em Load a font. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Utility functions. 
+
+
+
+Definition in file \mbox{\hyperlink{include_2utils_8h_source}{include/utils.\+h}}.
+
+
+
+\doxysubsubsection{Function Documentation}
+\Hypertarget{include_2utils_8h_aa430bb0d6bb43f5ce7a711edaaff38f9}\index{utils.h@{utils.h}!carConflict@{carConflict}}
+\index{carConflict@{carConflict}!utils.h@{utils.h}}
+\doxyparagraph{\texorpdfstring{carConflict()}{carConflict()}}
+{\footnotesize\ttfamily \label{include_2utils_8h_aa430bb0d6bb43f5ce7a711edaaff38f9} 
+bool car\+Conflict (\begin{DoxyParamCaption}\item[{sf\+::\+Vector2f}]{car\+Pos}{, }\item[{double}]{car\+Angle}{, }\item[{sf\+::\+Vector2f}]{conf\+Pos}{, }\item[{double}]{conf\+Angle}{}\end{DoxyParamCaption})}
+
+
+
+Check if two cars have a conflict. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em car\+Pos} & The position of the car \\
+\hline
+{\em car\+Angle} & The angle of the car \\
+\hline
+{\em conf\+Pos} & The position of the conflicting car \\
+\hline
+{\em conf\+Angle} & The angle of the conflicting car \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If the cars have a conflict 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{src_2utils_8cpp_source_l00049}{49}} of file \mbox{\hyperlink{src_2utils_8cpp_source}{src/utils.\+cpp}}.
+
+\Hypertarget{include_2utils_8h_ad5725470e9dc4a2e1d27d39949dca29e}\index{utils.h@{utils.h}!carsCollided@{carsCollided}}
+\index{carsCollided@{carsCollided}!utils.h@{utils.h}}
+\doxyparagraph{\texorpdfstring{carsCollided()}{carsCollided()}}
+{\footnotesize\ttfamily \label{include_2utils_8h_ad5725470e9dc4a2e1d27d39949dca29e} 
+bool cars\+Collided (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_car}{Car}}}]{car1}{, }\item[{\mbox{\hyperlink{class_car}{Car}}}]{car2}{, }\item[{int}]{time}{}\end{DoxyParamCaption})}
+
+@bref Check if two cars collided 
+\begin{DoxyParams}{Parameters}
+{\em car1} & The first car \\
+\hline
+{\em car2} & The second car \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{src_2utils_8cpp_source_l00023}{23}} of file \mbox{\hyperlink{src_2utils_8cpp_source}{src/utils.\+cpp}}.
+
+\Hypertarget{include_2utils_8h_ac300931459ca910907a0e20cd51d2f1b}\index{utils.h@{utils.h}!distance@{distance}}
+\index{distance@{distance}!utils.h@{utils.h}}
+\doxyparagraph{\texorpdfstring{distance()}{distance()}}
+{\footnotesize\ttfamily \label{include_2utils_8h_ac300931459ca910907a0e20cd51d2f1b} 
+double distance (\begin{DoxyParamCaption}\item[{sf\+::\+Vector2f}]{p1}{, }\item[{sf\+::\+Vector2f}]{p2}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the distance between two points. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p1} & The first point \\
+\hline
+{\em p2} & The second point \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{include_2utils_8h_source_l00029}{29}} of file \mbox{\hyperlink{include_2utils_8h_source}{include/utils.\+h}}.
+
+\Hypertarget{include_2utils_8h_aa1a271c5514f3ff3a6c0404bf3a76cb3}\index{utils.h@{utils.h}!latLonToXY@{latLonToXY}}
+\index{latLonToXY@{latLonToXY}!utils.h@{utils.h}}
+\doxyparagraph{\texorpdfstring{latLonToXY()}{latLonToXY()}}
+{\footnotesize\ttfamily \label{include_2utils_8h_aa1a271c5514f3ff3a6c0404bf3a76cb3} 
+sf\+::\+Vector2f lat\+Lon\+To\+XY (\begin{DoxyParamCaption}\item[{double}]{lat}{, }\item[{double}]{lon}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Convert latitude and longitude to x and y. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em lat} & The latitude \\
+\hline
+{\em lon} & The longitude \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The x and y 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{include_2utils_8h_source_l00017}{17}} of file \mbox{\hyperlink{include_2utils_8h_source}{include/utils.\+h}}.
+
+\Hypertarget{include_2utils_8h_a7c48a100843dd2f2e7a93ad06eb1fdc6}\index{utils.h@{utils.h}!loadFont@{loadFont}}
+\index{loadFont@{loadFont}!utils.h@{utils.h}}
+\doxyparagraph{\texorpdfstring{loadFont()}{loadFont()}}
+{\footnotesize\ttfamily \label{include_2utils_8h_a7c48a100843dd2f2e7a93ad06eb1fdc6} 
+sf\+::\+Font load\+Font (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Load a font. 
+
+\begin{DoxyReturn}{Returns}
+The font 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{src_2utils_8cpp_source_l00013}{13}} of file \mbox{\hyperlink{src_2utils_8cpp_source}{src/utils.\+cpp}}.
+
+\Hypertarget{include_2utils_8h_a8b909c7be741a1e355bd0b822df0645e}\index{utils.h@{utils.h}!normalizeAngle@{normalizeAngle}}
+\index{normalizeAngle@{normalizeAngle}!utils.h@{utils.h}}
+\doxyparagraph{\texorpdfstring{normalizeAngle()}{normalizeAngle()}}
+{\footnotesize\ttfamily \label{include_2utils_8h_a8b909c7be741a1e355bd0b822df0645e} 
+double normalize\+Angle (\begin{DoxyParamCaption}\item[{double}]{angle}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Normalize an angle to -\/PI to PI. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em angle} & The angle \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{include_2utils_8h_source_l00037}{37}} of file \mbox{\hyperlink{include_2utils_8h_source}{include/utils.\+h}}.
+
+\Hypertarget{include_2utils_8h_a941b34907fe01466afcd721ab3fa77cd}\index{utils.h@{utils.h}!turningRadius@{turningRadius}}
+\index{turningRadius@{turningRadius}!utils.h@{utils.h}}
+\doxyparagraph{\texorpdfstring{turningRadius()}{turningRadius()}}
+{\footnotesize\ttfamily \label{include_2utils_8h_a941b34907fe01466afcd721ab3fa77cd} 
+double turning\+Radius (\begin{DoxyParamCaption}\item[{double}]{speed}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the turning radius from the speed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em speed} & The speed \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The turning radius 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{include_2utils_8h_source_l00052}{52}} of file \mbox{\hyperlink{include_2utils_8h_source}{include/utils.\+h}}.
+
+\Hypertarget{include_2utils_8h_aa42f9f27b5918308adbf2285d205296c}\index{utils.h@{utils.h}!turningRadiusToSpeed@{turningRadiusToSpeed}}
+\index{turningRadiusToSpeed@{turningRadiusToSpeed}!utils.h@{utils.h}}
+\doxyparagraph{\texorpdfstring{turningRadiusToSpeed()}{turningRadiusToSpeed()}}
+{\footnotesize\ttfamily \label{include_2utils_8h_aa42f9f27b5918308adbf2285d205296c} 
+double turning\+Radius\+To\+Speed (\begin{DoxyParamCaption}\item[{double}]{radius}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the speed from the turning radius. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em radius} & The turning radius \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The speed 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{include_2utils_8h_source_l00059}{59}} of file \mbox{\hyperlink{include_2utils_8h_source}{include/utils.\+h}}.
+

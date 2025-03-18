@@ -1,0 +1,31 @@
+\doxysubsection{file\+Selector.\+h}
+\hypertarget{file_selector_8h_source}{}\label{file_selector_8h_source}\index{fileSelector.h@{fileSelector.h}}
+\mbox{\hyperlink{file_selector_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{file_selector_8h_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{file_selector_8h_source_l00007}00007\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{file_selector_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{\Hypertarget{file_selector_8h_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <termios.h>}}
+\DoxyCodeLine{\Hypertarget{file_selector_8h_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <unistd.h>}}
+\DoxyCodeLine{\Hypertarget{file_selector_8h_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{file_selector_8h_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{file_selector_8h_source_l00019}\mbox{\hyperlink{class_file_selector}{00019}}\ \textcolor{keyword}{class\ }FileSelector\ \{}
+\DoxyCodeLine{\Hypertarget{file_selector_8h_source_l00020}00020\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{file_selector_8h_source_l00021}00021\ \ \ std::string\ folderPath;\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{file_selector_8h_source_l00022}00022\ \ \ std::vector<std::string>\ files;\ }
+\DoxyCodeLine{\Hypertarget{file_selector_8h_source_l00023}00023\ \ \ \textcolor{keywordtype}{int}\ selectedIndex;\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{file_selector_8h_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{file_selector_8h_source_l00025}00025\ \ \ \textcolor{keywordtype}{void}\ loadFiles();\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{file_selector_8h_source_l00026}00026\ \ \ \textcolor{keywordtype}{char}\ getKeyPress();\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{file_selector_8h_source_l00027}00027\ \ \ \textcolor{keywordtype}{void}\ moveCursorUp();\ \ \ }
+\DoxyCodeLine{\Hypertarget{file_selector_8h_source_l00028}00028\ \ \ \textcolor{keywordtype}{void}\ moveCursorDown();\ }
+\DoxyCodeLine{\Hypertarget{file_selector_8h_source_l00029}00029\ \ \ \textcolor{keywordtype}{void}\ displayFiles();\ \ \ }
+\DoxyCodeLine{\Hypertarget{file_selector_8h_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{file_selector_8h_source_l00031}00031\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{file_selector_8h_source_l00032}00032\ \ \ FileSelector(\textcolor{keyword}{const}\ std::string\ \&path)\ :\ folderPath(path),\ selectedIndex(0)\ \{\ loadFiles();\ \}}
+\DoxyCodeLine{\Hypertarget{file_selector_8h_source_l00033}00033\ \ \ \string~FileSelector()\ \{\ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)033[?25h"{}};\ \}}
+\DoxyCodeLine{\Hypertarget{file_selector_8h_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{file_selector_8h_source_l00035}00035\ \ \ std::string\ selectFile();}
+\DoxyCodeLine{\Hypertarget{file_selector_8h_source_l00036}00036\ \};}
+
+\end{DoxyCode}

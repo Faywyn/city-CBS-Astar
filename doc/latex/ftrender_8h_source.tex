@@ -1,0 +1,243 @@
+\doxysubsection{ftrender.\+h}
+\hypertarget{ftrender_8h_source}{}\label{ftrender_8h_source}\index{ftrender.h@{ftrender.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00001}00001\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00002}00002\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00003}00003\ \textcolor{comment}{/*\ \ ftrender.h\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00004}00004\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00005}00005\ \textcolor{comment}{/*\ \ \ \ FreeType\ renderer\ modules\ public\ interface\ (specification).\ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00006}00006\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00007}00007\ \textcolor{comment}{/*\ \ Copyright\ 1996-\/2001,\ 2005,\ 2006,\ 2010\ by\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00008}00008\ \textcolor{comment}{/*\ \ David\ Turner,\ Robert\ Wilhelm,\ and\ Werner\ Lemberg.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00009}00009\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00010}00010\ \textcolor{comment}{/*\ \ This\ file\ is\ part\ of\ the\ FreeType\ project,\ and\ may\ only\ be\ used,\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00011}00011\ \textcolor{comment}{/*\ \ modified,\ and\ distributed\ under\ the\ terms\ of\ the\ FreeType\ project\ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00012}00012\ \textcolor{comment}{/*\ \ license,\ LICENSE.TXT.\ \ By\ continuing\ to\ use,\ modify,\ or\ distribute\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00013}00013\ \textcolor{comment}{/*\ \ this\ file\ you\ indicate\ that\ you\ have\ read\ the\ license\ and\ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00014}00014\ \textcolor{comment}{/*\ \ understand\ and\ accept\ it\ fully.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00015}00015\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00016}00016\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00019}00019\ \textcolor{preprocessor}{\#ifndef\ \_\_FTRENDER\_H\_\_}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00020}00020\ \textcolor{preprocessor}{\#define\ \_\_FTRENDER\_H\_\_}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00023}00023\ \textcolor{preprocessor}{\#include\ <ft2build.h>}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00024}00024\ \textcolor{preprocessor}{\#include\ FT\_MODULE\_H}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00025}00025\ \textcolor{preprocessor}{\#include\ FT\_GLYPH\_H}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00028}00028\ FT\_BEGIN\_HEADER}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00031}00031\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00032}00032\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00033}00033\ \ \ \textcolor{comment}{/*\ <Section>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00034}00034\ \ \ \textcolor{comment}{/*\ \ \ \ module\_management\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00035}00035\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00036}00036\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00039}00039\ \ \ \textcolor{comment}{/*\ create\ a\ new\ glyph\ object\ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00040}00040\ \ \ \textcolor{keyword}{typedef}\ FT\_Error}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00041}00041\ \ \ (*FT\_Glyph\_InitFunc)(\ FT\_Glyph\ \ \ \ \ \ glyph,}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_GlyphSlot\ \ slot\ );}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00044}00044\ \ \ \textcolor{comment}{/*\ destroys\ a\ given\ glyph\ object\ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00045}00045\ \ \ \textcolor{keyword}{typedef}\ void}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00046}00046\ \ \ (*FT\_Glyph\_DoneFunc)(\ FT\_Glyph\ \ glyph\ );}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00048}00048\ \ \ \textcolor{keyword}{typedef}\ void}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00049}00049\ \ \ (*FT\_Glyph\_TransformFunc)(\ FT\_Glyph\ \ \ \ \ \ \ \ \ \ glyph,}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ FT\_Matrix*\ \ matrix,}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ FT\_Vector*\ \ delta\ );}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00053}00053\ \ \ \textcolor{keyword}{typedef}\ void}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00054}00054\ \ \ (*FT\_Glyph\_GetBBoxFunc)(\ FT\_Glyph\ \ glyph,}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_BBox*\ \ abbox\ );}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00057}00057\ \ \ \textcolor{keyword}{typedef}\ FT\_Error}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00058}00058\ \ \ (*FT\_Glyph\_CopyFunc)(\ FT\_Glyph\ \ \ source,}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Glyph\ \ \ target\ );}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00061}00061\ \ \ \textcolor{keyword}{typedef}\ FT\_Error}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00062}00062\ \ \ (*FT\_Glyph\_PrepareFunc)(\ FT\_Glyph\ \ \ \ \ \ glyph,}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_GlyphSlot\ \ slot\ );}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00065}00065\ \textcolor{comment}{/*\ deprecated\ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00066}00066\ \textcolor{preprocessor}{\#define\ FT\_Glyph\_Init\_Func\ \ \ \ \ \ \ FT\_Glyph\_InitFunc}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00067}00067\ \textcolor{preprocessor}{\#define\ FT\_Glyph\_Done\_Func\ \ \ \ \ \ \ FT\_Glyph\_DoneFunc}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00068}00068\ \textcolor{preprocessor}{\#define\ FT\_Glyph\_Transform\_Func\ \ FT\_Glyph\_TransformFunc}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00069}00069\ \textcolor{preprocessor}{\#define\ FT\_Glyph\_BBox\_Func\ \ \ \ \ \ \ FT\_Glyph\_GetBBoxFunc}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00070}00070\ \textcolor{preprocessor}{\#define\ FT\_Glyph\_Copy\_Func\ \ \ \ \ \ \ FT\_Glyph\_CopyFunc}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00071}00071\ \textcolor{preprocessor}{\#define\ FT\_Glyph\_Prepare\_Func\ \ \ \ FT\_Glyph\_PrepareFunc}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00074}00074\ \ \ \textcolor{keyword}{struct\ \ }FT\_Glyph\_Class\_}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00075}00075\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00076}00076\ \ \ \ \ FT\_Long\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ glyph\_size;}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00077}00077\ \ \ \ \ FT\_Glyph\_Format\ \ \ \ \ \ \ \ \ glyph\_format;}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00078}00078\ \ \ \ \ FT\_Glyph\_InitFunc\ \ \ \ \ \ \ glyph\_init;}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00079}00079\ \ \ \ \ FT\_Glyph\_DoneFunc\ \ \ \ \ \ \ glyph\_done;}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00080}00080\ \ \ \ \ FT\_Glyph\_CopyFunc\ \ \ \ \ \ \ glyph\_copy;}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00081}00081\ \ \ \ \ FT\_Glyph\_TransformFunc\ \ glyph\_transform;}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00082}00082\ \ \ \ \ FT\_Glyph\_GetBBoxFunc\ \ \ \ glyph\_bbox;}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00083}00083\ \ \ \ \ FT\_Glyph\_PrepareFunc\ \ \ \ glyph\_prepare;}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00084}00084\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00087}00087\ \ \ \textcolor{keyword}{typedef}\ FT\_Error}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00088}00088\ \ \ (*FT\_Renderer\_RenderFunc)(\ FT\_Renderer\ \ \ \ \ \ \ renderer,}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_GlyphSlot\ \ \ \ \ \ slot,}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_UInt\ \ \ \ \ \ \ \ \ \ \ mode,}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ FT\_Vector*\ \ origin\ );}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00093}00093\ \ \ \textcolor{keyword}{typedef}\ FT\_Error}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00094}00094\ \ \ (*FT\_Renderer\_TransformFunc)(\ FT\_Renderer\ \ \ \ \ \ \ renderer,}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_GlyphSlot\ \ \ \ \ \ slot,}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ FT\_Matrix*\ \ matrix,}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ FT\_Vector*\ \ delta\ );}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00100}00100\ \ \ \textcolor{keyword}{typedef}\ void}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00101}00101\ \ \ (*FT\_Renderer\_GetCBoxFunc)(\ FT\_Renderer\ \ \ renderer,}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_GlyphSlot\ \ slot,}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_BBox*\ \ \ \ \ \ cbox\ );}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00106}00106\ \ \ \textcolor{keyword}{typedef}\ FT\_Error}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00107}00107\ \ \ (*FT\_Renderer\_SetModeFunc)(\ FT\_Renderer\ \ renderer,}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_ULong\ \ \ \ \ mode\_tag,}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Pointer\ \ \ mode\_ptr\ );}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00110}00110\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00111}00111\ \textcolor{comment}{/*\ deprecated\ identifiers\ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00112}00112\ \textcolor{preprocessor}{\#define\ FTRenderer\_render\ \ FT\_Renderer\_RenderFunc}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00113}00113\ \textcolor{preprocessor}{\#define\ FTRenderer\_transform\ \ FT\_Renderer\_TransformFunc}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00114}00114\ \textcolor{preprocessor}{\#define\ FTRenderer\_getCBox\ \ FT\_Renderer\_GetCBoxFunc}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00115}00115\ \textcolor{preprocessor}{\#define\ FTRenderer\_setMode\ \ FT\_Renderer\_SetModeFunc}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00118}00118\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00119}00119\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00120}00120\ \ \ \textcolor{comment}{/*\ <Struct>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00121}00121\ \ \ \textcolor{comment}{/*\ \ \ \ FT\_Renderer\_Class\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00122}00122\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00123}00123\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00124}00124\ \ \ \textcolor{comment}{/*\ \ \ \ The\ renderer\ module\ class\ descriptor.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00125}00125\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00126}00126\ \ \ \textcolor{comment}{/*\ <Fields>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00127}00127\ \ \ \textcolor{comment}{/*\ \ \ \ root\ \ \ \ \ \ \ \ \ \ \ \ ::\ The\ root\ @FT\_Module\_Class\ fields.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00128}00128\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00129}00129\ \ \ \textcolor{comment}{/*\ \ \ \ glyph\_format\ \ \ \ ::\ The\ glyph\ image\ format\ this\ renderer\ handles.\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00130}00130\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00131}00131\ \ \ \textcolor{comment}{/*\ \ \ \ render\_glyph\ \ \ \ ::\ A\ method\ used\ to\ render\ the\ image\ that\ is\ in\ a\ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00132}00132\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ given\ glyph\ slot\ into\ a\ bitmap.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00133}00133\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00134}00134\ \ \ \textcolor{comment}{/*\ \ \ \ transform\_glyph\ ::\ A\ method\ used\ to\ transform\ the\ image\ that\ is\ in\ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00135}00135\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ a\ given\ glyph\ slot.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00136}00136\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00137}00137\ \ \ \textcolor{comment}{/*\ \ \ \ get\_glyph\_cbox\ \ ::\ A\ method\ used\ to\ access\ the\ glyph's\ cbox.\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00138}00138\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00139}00139\ \ \ \textcolor{comment}{/*\ \ \ \ set\_mode\ \ \ \ \ \ \ \ ::\ A\ method\ used\ to\ pass\ additional\ parameters.\ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00140}00140\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00141}00141\ \ \ \textcolor{comment}{/*\ \ \ \ raster\_class\ \ \ \ ::\ For\ @FT\_GLYPH\_FORMAT\_OUTLINE\ renderers\ only.\ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00142}00142\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ This\ is\ a\ pointer\ to\ its\ raster's\ class.\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00143}00143\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00144}00144\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ \ }FT\_Renderer\_Class\_}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00145}00145\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00146}00146\ \ \ \ \ FT\_Module\_Class\ \ \ \ \ \ \ \ \ \ \ \ root;}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00147}00147\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00148}00148\ \ \ \ \ FT\_Glyph\_Format\ \ \ \ \ \ \ \ \ \ \ \ glyph\_format;}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00149}00149\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00150}00150\ \ \ \ \ FT\_Renderer\_RenderFunc\ \ \ \ \ render\_glyph;}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00151}00151\ \ \ \ \ FT\_Renderer\_TransformFunc\ \ transform\_glyph;}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00152}00152\ \ \ \ \ FT\_Renderer\_GetCBoxFunc\ \ \ \ get\_glyph\_cbox;}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00153}00153\ \ \ \ \ FT\_Renderer\_SetModeFunc\ \ \ \ set\_mode;}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00155}00155\ \ \ \ \ FT\_Raster\_Funcs*\ \ \ \ \ \ \ \ \ \ \ raster\_class;}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00157}00157\ \ \ \}\ FT\_Renderer\_Class;}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00159}00159\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00160}00160\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00161}00161\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00162}00162\ \ \ \textcolor{comment}{/*\ <Function>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00163}00163\ \ \ \textcolor{comment}{/*\ \ \ \ FT\_Get\_Renderer\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00164}00164\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00165}00165\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00166}00166\ \ \ \textcolor{comment}{/*\ \ \ \ Retrieve\ the\ current\ renderer\ for\ a\ given\ glyph\ format.\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00167}00167\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00168}00168\ \ \ \textcolor{comment}{/*\ <Input>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00169}00169\ \ \ \textcolor{comment}{/*\ \ \ \ library\ ::\ A\ handle\ to\ the\ library\ object.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00170}00170\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00171}00171\ \ \ \textcolor{comment}{/*\ \ \ \ format\ \ ::\ The\ glyph\ format.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00172}00172\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00173}00173\ \ \ \textcolor{comment}{/*\ <Return>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00174}00174\ \ \ \textcolor{comment}{/*\ \ \ \ A\ renderer\ handle.\ \ 0\string~if\ none\ found.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00175}00175\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00176}00176\ \ \ \textcolor{comment}{/*\ <Note>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00177}00177\ \ \ \textcolor{comment}{/*\ \ \ \ An\ error\ will\ be\ returned\ if\ a\ module\ already\ exists\ by\ that\ name,\ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00178}00178\ \ \ \textcolor{comment}{/*\ \ \ \ or\ if\ the\ module\ requires\ a\ version\ of\ FreeType\ that\ is\ too\ great.\ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00179}00179\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00180}00180\ \ \ \textcolor{comment}{/*\ \ \ \ To\ add\ a\ new\ renderer,\ simply\ use\ @FT\_Add\_Module.\ \ To\ retrieve\ a\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00181}00181\ \ \ \textcolor{comment}{/*\ \ \ \ renderer\ by\ its\ name,\ use\ @FT\_Get\_Module.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00182}00182\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00183}00183\ \ \ FT\_EXPORT(\ FT\_Renderer\ )}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00184}00184\ \ \ FT\_Get\_Renderer(\ FT\_Library\ \ \ \ \ \ \ library,}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Glyph\_Format\ \ format\ );}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00186}00186\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00187}00187\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00188}00188\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00189}00189\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00190}00190\ \ \ \textcolor{comment}{/*\ <Function>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00191}00191\ \ \ \textcolor{comment}{/*\ \ \ \ FT\_Set\_Renderer\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00192}00192\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00193}00193\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00194}00194\ \ \ \textcolor{comment}{/*\ \ \ \ Set\ the\ current\ renderer\ to\ use,\ and\ set\ additional\ mode.\ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00195}00195\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00196}00196\ \ \ \textcolor{comment}{/*\ <InOut>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00197}00197\ \ \ \textcolor{comment}{/*\ \ \ \ library\ \ \ \ ::\ A\ handle\ to\ the\ library\ object.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00198}00198\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00199}00199\ \ \ \textcolor{comment}{/*\ <Input>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00200}00200\ \ \ \textcolor{comment}{/*\ \ \ \ renderer\ \ \ ::\ A\ handle\ to\ the\ renderer\ object.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00201}00201\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00202}00202\ \ \ \textcolor{comment}{/*\ \ \ \ num\_params\ ::\ The\ number\ of\ additional\ parameters.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00203}00203\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00204}00204\ \ \ \textcolor{comment}{/*\ \ \ \ parameters\ ::\ Additional\ parameters.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00205}00205\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00206}00206\ \ \ \textcolor{comment}{/*\ <Return>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00207}00207\ \ \ \textcolor{comment}{/*\ \ \ \ FreeType\ error\ code.\ \ 0\string~means\ success.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00208}00208\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00209}00209\ \ \ \textcolor{comment}{/*\ <Note>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00210}00210\ \ \ \textcolor{comment}{/*\ \ \ \ In\ case\ of\ success,\ the\ renderer\ will\ be\ used\ to\ convert\ glyph\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00211}00211\ \ \ \textcolor{comment}{/*\ \ \ \ images\ in\ the\ renderer's\ known\ format\ into\ bitmaps.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00212}00212\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00213}00213\ \ \ \textcolor{comment}{/*\ \ \ \ This\ doesn't\ change\ the\ current\ renderer\ for\ other\ formats.\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00214}00214\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00215}00215\ \ \ \textcolor{comment}{/*\ \ \ \ Currently,\ only\ the\ B/W\ renderer,\ if\ compiled\ with\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00216}00216\ \ \ \textcolor{comment}{/*\ \ \ \ FT\_RASTER\_OPTION\_ANTI\_ALIASING\ (providing\ a\ 5-\/levels\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00217}00217\ \ \ \textcolor{comment}{/*\ \ \ \ anti-\/aliasing\ mode;\ this\ option\ must\ be\ set\ directly\ in\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00218}00218\ \ \ \textcolor{comment}{/*\ \ \ \ \`{}ftraster.c'\ and\ is\ undefined\ by\ default)\ accepts\ a\ single\ tag\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00219}00219\ \ \ \textcolor{comment}{/*\ \ \ \ \`{}pal5'\ to\ set\ its\ gray\ palette\ as\ a\ character\ string\ with\ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00220}00220\ \ \ \textcolor{comment}{/*\ \ \ \ 5\string~elements.\ \ Consequently,\ the\ third\ and\ fourth\ argument\ are\ zero\ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00221}00221\ \ \ \textcolor{comment}{/*\ \ \ \ normally.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00222}00222\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00223}00223\ \ \ FT\_EXPORT(\ FT\_Error\ )}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00224}00224\ \ \ FT\_Set\_Renderer(\ FT\_Library\ \ \ \ \ library,}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00225}00225\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Renderer\ \ \ \ renderer,}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00226}00226\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_UInt\ \ \ \ \ \ \ \ num\_params,}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00227}00227\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Parameter*\ \ parameters\ );}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00228}00228\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00229}00229\ \ \ \textcolor{comment}{/*\ */}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00230}00230\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00231}00231\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00232}00232\ FT\_END\_HEADER}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00233}00233\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00234}00234\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_FTRENDER\_H\_\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00235}00235\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00236}00236\ }
+\DoxyCodeLine{\Hypertarget{ftrender_8h_source_l00237}00237\ \textcolor{comment}{/*\ END\ */}}
+
+\end{DoxyCode}

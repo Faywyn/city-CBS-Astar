@@ -1,0 +1,25 @@
+\doxysubsection{Graphics\+Util.\+cpp}
+\hypertarget{_graphics_util_8cpp_source}{}\label{_graphics_util_8cpp_source}\index{GraphicsUtil.cpp@{GraphicsUtil.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_graphics_util_8cpp_source_l00001}00001\ \textcolor{comment}{//\ Note:\ No\ need\ to\ increase\ compile\ time\ by\ including\ TestUtilities/Graphics.hpp}}
+\DoxyCodeLine{\Hypertarget{_graphics_util_8cpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ <SFML/Graphics/Color.hpp>}}
+\DoxyCodeLine{\Hypertarget{_graphics_util_8cpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{\Hypertarget{_graphics_util_8cpp_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_graphics_util_8cpp_source_l00005}00005\ \textcolor{comment}{//\ String\ conversions\ for\ Catch\ framework}}
+\DoxyCodeLine{\Hypertarget{_graphics_util_8cpp_source_l00006}00006\ \textcolor{keyword}{namespace\ }Catch}
+\DoxyCodeLine{\Hypertarget{_graphics_util_8cpp_source_l00007}00007\ \{}
+\DoxyCodeLine{\Hypertarget{_graphics_util_8cpp_source_l00008}00008\ \ \ \ \ std::string\ toString(\textcolor{keyword}{const}\ sf::Color\&\ color)}
+\DoxyCodeLine{\Hypertarget{_graphics_util_8cpp_source_l00009}00009\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_graphics_util_8cpp_source_l00010}00010\ \ \ \ \ \ \ \ \ std::ostringstream\ stream;}
+\DoxyCodeLine{\Hypertarget{_graphics_util_8cpp_source_l00011}00011\ \ \ \ \ \ \ \ \ stream\ <<\ \textcolor{stringliteral}{"{}0x"{}}\ <<\ std::hex\ <<\ color.toInteger()\ <<\ std::dec}
+\DoxyCodeLine{\Hypertarget{_graphics_util_8cpp_source_l00012}00012\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ (r="{}}\ <<\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(color.r)}
+\DoxyCodeLine{\Hypertarget{_graphics_util_8cpp_source_l00013}00013\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{},\ g="{}}\ <<\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(color.g)}
+\DoxyCodeLine{\Hypertarget{_graphics_util_8cpp_source_l00014}00014\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{},\ b="{}}\ <<\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(color.b)}
+\DoxyCodeLine{\Hypertarget{_graphics_util_8cpp_source_l00015}00015\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{},\ a="{}}\ <<\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(color.a)\ <<\ \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{\Hypertarget{_graphics_util_8cpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_graphics_util_8cpp_source_l00017}00017\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ stream.str();}
+\DoxyCodeLine{\Hypertarget{_graphics_util_8cpp_source_l00018}00018\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_graphics_util_8cpp_source_l00019}00019\ \}}
+
+\end{DoxyCode}

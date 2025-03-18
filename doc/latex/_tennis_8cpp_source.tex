@@ -1,0 +1,289 @@
+\doxysubsection{Tennis.\+cpp}
+\hypertarget{_tennis_8cpp_source}{}\label{_tennis_8cpp_source}\index{Tennis.cpp@{Tennis.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00003}00003\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <SFML/Graphics.hpp>}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <SFML/Audio.hpp>}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <ctime>}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <cstdlib>}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00011}00011\ \textcolor{preprocessor}{\#ifdef\ SFML\_SYSTEM\_IOS}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <SFML/Main.hpp>}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00013}00013\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00015}00015\ std::string\ resourcesDir()}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00016}00016\ \{}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00017}00017\ \textcolor{preprocessor}{\#ifdef\ SFML\_SYSTEM\_IOS}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00018}00018\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00019}00019\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00020}00020\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}resources/"{}};}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00021}00021\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00022}00022\ \}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00030}00030\ \textcolor{keywordtype}{int}\ main()}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00031}00031\ \{}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00032}00032\ \ \ \ \ std::srand(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\textcolor{keyword}{>}(std::time(NULL)));}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00034}00034\ \ \ \ \ \textcolor{comment}{//\ Define\ some\ constants}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00035}00035\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ pi\ =\ 3.14159f;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00036}00036\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ gameWidth\ =\ 800;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00037}00037\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ gameHeight\ =\ 600;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00038}00038\ \ \ \ \ sf::Vector2f\ paddleSize(25,\ 100);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00039}00039\ \ \ \ \ \textcolor{keywordtype}{float}\ ballRadius\ =\ 10.f;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00041}00041\ \ \ \ \ \textcolor{comment}{//\ Create\ the\ window\ of\ the\ application}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00042}00042\ \ \ \ \ sf::RenderWindow\ window(sf::VideoMode(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\textcolor{keyword}{>}(gameWidth),\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\textcolor{keyword}{>}(gameHeight),\ 32),\ \textcolor{stringliteral}{"{}SFML\ Tennis"{}},}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sf::Style::Titlebar\ |\ sf::Style::Close);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00044}00044\ \ \ \ \ window.setVerticalSyncEnabled(\textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00046}00046\ \ \ \ \ \textcolor{comment}{//\ Load\ the\ sounds\ used\ in\ the\ game}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00047}00047\ \ \ \ \ sf::SoundBuffer\ ballSoundBuffer;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00048}00048\ \ \ \ \ \textcolor{keywordflow}{if}\ (!ballSoundBuffer.loadFromFile(resourcesDir()\ +\ \textcolor{stringliteral}{"{}ball.wav"{}}))}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00049}00049\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00050}00050\ \ \ \ \ sf::Sound\ ballSound(ballSoundBuffer);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00052}00052\ \ \ \ \ \textcolor{comment}{//\ Create\ the\ SFML\ logo\ texture:}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00053}00053\ \ \ \ \ sf::Texture\ sfmlLogoTexture;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00054}00054\ \ \ \ \ \textcolor{keywordflow}{if}(!sfmlLogoTexture.loadFromFile(resourcesDir()\ +\ \textcolor{stringliteral}{"{}sfml\_logo.png"{}}))}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00055}00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00056}00056\ \ \ \ \ sf::Sprite\ sfmlLogo;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00057}00057\ \ \ \ \ sfmlLogo.setTexture(sfmlLogoTexture);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00058}00058\ \ \ \ \ sfmlLogo.setPosition(170,\ 50);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00060}00060\ \ \ \ \ \textcolor{comment}{//\ Create\ the\ left\ paddle}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00061}00061\ \ \ \ \ sf::RectangleShape\ leftPaddle;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00062}00062\ \ \ \ \ leftPaddle.setSize(paddleSize\ -\/\ sf::Vector2f(3,\ 3));}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00063}00063\ \ \ \ \ leftPaddle.setOutlineThickness(3);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00064}00064\ \ \ \ \ leftPaddle.setOutlineColor(sf::Color::Black);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00065}00065\ \ \ \ \ leftPaddle.setFillColor(sf::Color(100,\ 100,\ 200));}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00066}00066\ \ \ \ \ leftPaddle.setOrigin(paddleSize\ /\ 2.f);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00068}00068\ \ \ \ \ \textcolor{comment}{//\ Create\ the\ right\ paddle}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00069}00069\ \ \ \ \ sf::RectangleShape\ rightPaddle;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00070}00070\ \ \ \ \ rightPaddle.setSize(paddleSize\ -\/\ sf::Vector2f(3,\ 3));}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00071}00071\ \ \ \ \ rightPaddle.setOutlineThickness(3);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00072}00072\ \ \ \ \ rightPaddle.setOutlineColor(sf::Color::Black);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00073}00073\ \ \ \ \ rightPaddle.setFillColor(sf::Color(200,\ 100,\ 100));}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00074}00074\ \ \ \ \ rightPaddle.setOrigin(paddleSize\ /\ 2.f);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00076}00076\ \ \ \ \ \textcolor{comment}{//\ Create\ the\ ball}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00077}00077\ \ \ \ \ sf::CircleShape\ ball;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00078}00078\ \ \ \ \ ball.setRadius(ballRadius\ -\/\ 3);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00079}00079\ \ \ \ \ ball.setOutlineThickness(2);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00080}00080\ \ \ \ \ ball.setOutlineColor(sf::Color::Black);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00081}00081\ \ \ \ \ ball.setFillColor(sf::Color::White);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00082}00082\ \ \ \ \ ball.setOrigin(ballRadius\ /\ 2,\ ballRadius\ /\ 2);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00084}00084\ \ \ \ \ \textcolor{comment}{//\ Load\ the\ text\ font}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00085}00085\ \ \ \ \ sf::Font\ font;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00086}00086\ \ \ \ \ \textcolor{keywordflow}{if}\ (!font.loadFromFile(resourcesDir()\ +\ \textcolor{stringliteral}{"{}tuffy.ttf"{}}))}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00087}00087\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_FAILURE;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00089}00089\ \ \ \ \ \textcolor{comment}{//\ Initialize\ the\ pause\ message}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00090}00090\ \ \ \ \ sf::Text\ pauseMessage;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00091}00091\ \ \ \ \ pauseMessage.setFont(font);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00092}00092\ \ \ \ \ pauseMessage.setCharacterSize(40);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00093}00093\ \ \ \ \ pauseMessage.setPosition(170.f,\ 200.f);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00094}00094\ \ \ \ \ pauseMessage.setFillColor(sf::Color::White);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00096}00096\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ SFML\_SYSTEM\_IOS}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00097}00097\ \ \ \ \ pauseMessage.setString(\textcolor{stringliteral}{"{}Welcome\ to\ SFML\ Tennis!\(\backslash\)nTouch\ the\ screen\ to\ start\ the\ game."{}});}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00098}00098\ \textcolor{preprocessor}{\ \ \ \ \#else}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00099}00099\ \ \ \ \ pauseMessage.setString(\textcolor{stringliteral}{"{}Welcome\ to\ SFML\ Tennis!\(\backslash\)n\(\backslash\)nPress\ space\ to\ start\ the\ game."{}});}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00100}00100\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00102}00102\ \ \ \ \ \textcolor{comment}{//\ Define\ the\ paddles\ properties}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00103}00103\ \ \ \ \ sf::Clock\ AITimer;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00104}00104\ \ \ \ \ \textcolor{keyword}{const}\ sf::Time\ AITime\ \ \ =\ sf::seconds(0.1f);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00105}00105\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ paddleSpeed\ =\ 400.f;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00106}00106\ \ \ \ \ \textcolor{keywordtype}{float}\ rightPaddleSpeed\ \ =\ 0.f;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00107}00107\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ ballSpeed\ \ \ =\ 400.f;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00108}00108\ \ \ \ \ \textcolor{keywordtype}{float}\ ballAngle\ \ \ \ \ \ \ \ \ =\ 0.f;\ \textcolor{comment}{//\ to\ be\ changed\ later}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00110}00110\ \ \ \ \ sf::Clock\ clock;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00111}00111\ \ \ \ \ \textcolor{keywordtype}{bool}\ isPlaying\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00112}00112\ \ \ \ \ \textcolor{keywordflow}{while}\ (window.isOpen())}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00113}00113\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00114}00114\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ events}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00115}00115\ \ \ \ \ \ \ \ \ sf::Event\ event;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00116}00116\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (window.pollEvent(event))}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00117}00117\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Window\ closed\ or\ escape\ key\ pressed:\ exit}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((event.type\ ==\ sf::Event::Closed)\ ||}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((event.type\ ==\ sf::Event::KeyPressed)\ \&\&\ (event.key.code\ ==\ sf::Keyboard::Escape)))}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ window.close();}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Space\ key\ pressed:\ play}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (((event.type\ ==\ sf::Event::KeyPressed)\ \&\&\ (event.key.code\ ==\ sf::Keyboard::Space))\ ||}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (event.type\ ==\ sf::Event::TouchBegan))}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!isPlaying)}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ (re)start\ the\ game}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ isPlaying\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ clock.restart();}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00135}00135\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Reset\ the\ position\ of\ the\ paddles\ and\ ball}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ leftPaddle.setPosition(10.f\ +\ paddleSize.x\ /\ 2.f,\ gameHeight\ /\ 2.f);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ rightPaddle.setPosition(gameWidth\ -\/\ 10.f\ -\/\ paddleSize.x\ /\ 2.f,\ gameHeight\ /\ 2.f);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ball.setPosition(gameWidth\ /\ 2.f,\ gameHeight\ /\ 2.f);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Reset\ the\ ball\ angle}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Make\ sure\ the\ ball\ initial\ angle\ is\ not\ too\ much\ vertical}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ballAngle\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(std::rand()\ \%\ 360)\ *\ 2.f\ *\ pi\ /\ 360.f;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (std::abs(std::cos(ballAngle))\ <\ 0.7f);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00150}00150\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Window\ size\ changed,\ adjust\ view\ appropriately}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (event.type\ ==\ sf::Event::Resized)}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sf::View\ view;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ view.setSize(gameWidth,\ gameHeight);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ view.setCenter(gameWidth\ /\ 2.f,\ gameHeight\ \ /2.f);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ window.setView(view);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00159}00159\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00160}00160\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00161}00161\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (isPlaying)}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00162}00162\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ deltaTime\ =\ clock.restart().asSeconds();}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00164}00164\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Move\ the\ player's\ paddle}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)\ \&\&}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (leftPaddle.getPosition().y\ -\/\ paddleSize.y\ /\ 2\ >\ 5.f))}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ leftPaddle.move(0.f,\ -\/paddleSpeed\ *\ deltaTime);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)\ \&\&}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (leftPaddle.getPosition().y\ +\ paddleSize.y\ /\ 2\ <\ gameHeight\ -\/\ 5.f))}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ leftPaddle.move(0.f,\ paddleSpeed\ *\ deltaTime);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00176}00176\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (sf::Touch::isDown(0))}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sf::Vector2i\ pos\ =\ sf::Touch::getPosition(0);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sf::Vector2f\ mappedPos\ =\ window.mapPixelToCoords(pos);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ leftPaddle.setPosition(leftPaddle.getPosition().x,\ mappedPos.y);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00183}00183\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Move\ the\ computer's\ paddle}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (((rightPaddleSpeed\ <\ 0.f)\ \&\&\ (rightPaddle.getPosition().y\ -\/\ paddleSize.y\ /\ 2\ >\ 5.f))\ ||}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((rightPaddleSpeed\ >\ 0.f)\ \&\&\ (rightPaddle.getPosition().y\ +\ paddleSize.y\ /\ 2\ <\ gameHeight\ -\/\ 5.f)))}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ rightPaddle.move(0.f,\ rightPaddleSpeed\ *\ deltaTime);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00190}00190\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Update\ the\ computer's\ paddle\ direction\ according\ to\ the\ ball\ position}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (AITimer.getElapsedTime()\ >\ AITime)}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00193}00193\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00194}00194\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ AITimer.restart();}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ball.getPosition().y\ +\ ballRadius\ >\ rightPaddle.getPosition().y\ +\ paddleSize.y\ /\ 2)}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ rightPaddleSpeed\ =\ paddleSpeed;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (ball.getPosition().y\ -\/\ ballRadius\ <\ rightPaddle.getPosition().y\ -\/\ paddleSize.y\ /\ 2)}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00198}00198\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ rightPaddleSpeed\ =\ -\/paddleSpeed;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00199}00199\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00200}00200\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ rightPaddleSpeed\ =\ 0.f;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00201}00201\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00202}00202\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00203}00203\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Move\ the\ ball}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00204}00204\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ factor\ =\ ballSpeed\ *\ deltaTime;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00205}00205\ \ \ \ \ \ \ \ \ \ \ \ \ ball.move(std::cos(ballAngle)\ *\ factor,\ std::sin(ballAngle)\ *\ factor);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00206}00206\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00207}00207\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#ifdef\ SFML\_SYSTEM\_IOS}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ inputString\ =\ \textcolor{stringliteral}{"{}Touch\ the\ screen\ to\ restart."{}};}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00209}00209\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#else}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ inputString\ =\ \textcolor{stringliteral}{"{}Press\ space\ to\ restart\ or\(\backslash\)nescape\ to\ exit."{}};}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00211}00211\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00212}00212\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ collisions\ between\ the\ ball\ and\ the\ screen}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ball.getPosition().x\ -\/\ ballRadius\ <\ 0.f)}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00216}00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ isPlaying\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00217}00217\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pauseMessage.setString(\textcolor{stringliteral}{"{}You\ Lost!\(\backslash\)n\(\backslash\)n"{}}\ +\ inputString);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00219}00219\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ball.getPosition().x\ +\ ballRadius\ >\ gameWidth)}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00221}00221\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ isPlaying\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00222}00222\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pauseMessage.setString(\textcolor{stringliteral}{"{}You\ Won!\(\backslash\)n\(\backslash\)n"{}}\ +\ inputString);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00223}00223\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00224}00224\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ball.getPosition().y\ -\/\ ballRadius\ <\ 0.f)}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00225}00225\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00226}00226\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ballSound.play();}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00227}00227\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ballAngle\ =\ -\/ballAngle;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00228}00228\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ball.setPosition(ball.getPosition().x,\ ballRadius\ +\ 0.1f);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00229}00229\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00230}00230\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ball.getPosition().y\ +\ ballRadius\ >\ gameHeight)}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00231}00231\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00232}00232\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ballSound.play();}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ballAngle\ =\ -\/ballAngle;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00234}00234\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ball.setPosition(ball.getPosition().x,\ gameHeight\ -\/\ ballRadius\ -\/\ 0.1f);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00235}00235\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00236}00236\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00237}00237\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ the\ collisions\ between\ the\ ball\ and\ the\ paddles}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00238}00238\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Left\ Paddle}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00239}00239\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ball.getPosition().x\ -\/\ ballRadius\ <\ leftPaddle.getPosition().x\ +\ paddleSize.x\ /\ 2\ \&\&}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00240}00240\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ball.getPosition().x\ -\/\ ballRadius\ >\ leftPaddle.getPosition().x\ \&\&}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00241}00241\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ball.getPosition().y\ +\ ballRadius\ >=\ leftPaddle.getPosition().y\ -\/\ paddleSize.y\ /\ 2\ \&\&}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00242}00242\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ball.getPosition().y\ -\/\ ballRadius\ <=\ leftPaddle.getPosition().y\ +\ paddleSize.y\ /\ 2)}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00243}00243\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00244}00244\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ball.getPosition().y\ >\ leftPaddle.getPosition().y)}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00245}00245\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ballAngle\ =\ pi\ -\/\ ballAngle\ +\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(std::rand()\ \%\ 20)\ *\ pi\ /\ 180;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00246}00246\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00247}00247\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ballAngle\ =\ pi\ -\/\ ballAngle\ -\/\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(std::rand()\ \%\ 20)\ *\ pi\ /\ 180;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00248}00248\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00249}00249\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ballSound.play();}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00250}00250\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ball.setPosition(leftPaddle.getPosition().x\ +\ ballRadius\ +\ paddleSize.x\ /\ 2\ +\ 0.1f,\ ball.getPosition().y);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00251}00251\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00252}00252\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00253}00253\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Right\ Paddle}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00254}00254\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ball.getPosition().x\ +\ ballRadius\ >\ rightPaddle.getPosition().x\ -\/\ paddleSize.x\ /\ 2\ \&\&}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00255}00255\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ball.getPosition().x\ +\ ballRadius\ <\ rightPaddle.getPosition().x\ \&\&}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00256}00256\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ball.getPosition().y\ +\ ballRadius\ >=\ rightPaddle.getPosition().y\ -\/\ paddleSize.y\ /\ 2\ \&\&}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00257}00257\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ball.getPosition().y\ -\/\ ballRadius\ <=\ rightPaddle.getPosition().y\ +\ paddleSize.y\ /\ 2)}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00258}00258\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00259}00259\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ball.getPosition().y\ >\ rightPaddle.getPosition().y)}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00260}00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ballAngle\ =\ pi\ -\/\ ballAngle\ +\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(std::rand()\ \%\ 20)\ *\ pi\ /\ 180;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00261}00261\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00262}00262\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ballAngle\ =\ pi\ -\/\ ballAngle\ -\/\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(std::rand()\ \%\ 20)\ *\ pi\ /\ 180;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00263}00263\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00264}00264\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ballSound.play();}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00265}00265\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ball.setPosition(rightPaddle.getPosition().x\ -\/\ ballRadius\ -\/\ paddleSize.x\ /\ 2\ -\/\ 0.1f,\ ball.getPosition().y);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00266}00266\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00267}00267\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00268}00268\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00269}00269\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Clear\ the\ window}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00270}00270\ \ \ \ \ \ \ \ \ window.clear(sf::Color(50,\ 50,\ 50));}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00271}00271\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00272}00272\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (isPlaying)}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00273}00273\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00274}00274\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Draw\ the\ paddles\ and\ the\ ball}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00275}00275\ \ \ \ \ \ \ \ \ \ \ \ \ window.draw(leftPaddle);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00276}00276\ \ \ \ \ \ \ \ \ \ \ \ \ window.draw(rightPaddle);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00277}00277\ \ \ \ \ \ \ \ \ \ \ \ \ window.draw(ball);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00278}00278\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00279}00279\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00280}00280\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00281}00281\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Draw\ the\ pause\ message}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00282}00282\ \ \ \ \ \ \ \ \ \ \ \ \ window.draw(pauseMessage);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00283}00283\ \ \ \ \ \ \ \ \ \ \ \ \ window.draw(sfmlLogo);}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00284}00284\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00285}00285\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00286}00286\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Display\ things\ on\ screen}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00287}00287\ \ \ \ \ \ \ \ \ window.display();}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00288}00288\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00289}00289\ }
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00290}00290\ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_SUCCESS;}
+\DoxyCodeLine{\Hypertarget{_tennis_8cpp_source_l00291}00291\ \}}
+
+\end{DoxyCode}

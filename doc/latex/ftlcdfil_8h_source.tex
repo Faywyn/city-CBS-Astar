@@ -1,0 +1,257 @@
+\doxysubsection{ftlcdfil.\+h}
+\hypertarget{ftlcdfil_8h_source}{}\label{ftlcdfil_8h_source}\index{ftlcdfil.h@{ftlcdfil.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00001}00001\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00002}00002\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00003}00003\ \textcolor{comment}{/*\ \ ftlcdfil.h\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00004}00004\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00005}00005\ \textcolor{comment}{/*\ \ \ \ FreeType\ API\ for\ color\ filtering\ of\ subpixel\ bitmap\ glyphs\ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00006}00006\ \textcolor{comment}{/*\ \ \ \ (specification).\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00007}00007\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00008}00008\ \textcolor{comment}{/*\ \ Copyright\ 2006-\/2008,\ 2010,\ 2013,\ 2014\ by\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00009}00009\ \textcolor{comment}{/*\ \ David\ Turner,\ Robert\ Wilhelm,\ and\ Werner\ Lemberg.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00010}00010\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00011}00011\ \textcolor{comment}{/*\ \ This\ file\ is\ part\ of\ the\ FreeType\ project,\ and\ may\ only\ be\ used,\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00012}00012\ \textcolor{comment}{/*\ \ modified,\ and\ distributed\ under\ the\ terms\ of\ the\ FreeType\ project\ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00013}00013\ \textcolor{comment}{/*\ \ license,\ LICENSE.TXT.\ \ By\ continuing\ to\ use,\ modify,\ or\ distribute\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00014}00014\ \textcolor{comment}{/*\ \ this\ file\ you\ indicate\ that\ you\ have\ read\ the\ license\ and\ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00015}00015\ \textcolor{comment}{/*\ \ understand\ and\ accept\ it\ fully.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00016}00016\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00017}00017\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00020}00020\ \textcolor{preprocessor}{\#ifndef\ \_\_FT\_LCD\_FILTER\_H\_\_}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00021}00021\ \textcolor{preprocessor}{\#define\ \_\_FT\_LCD\_FILTER\_H\_\_}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00023}00023\ \textcolor{preprocessor}{\#include\ <ft2build.h>}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00024}00024\ \textcolor{preprocessor}{\#include\ FT\_FREETYPE\_H}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00026}00026\ \textcolor{preprocessor}{\#ifdef\ FREETYPE\_H}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00027}00027\ \textcolor{preprocessor}{\#error\ "{}freetype.h\ of\ FreeType\ 1\ has\ been\ loaded!"{}}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00028}00028\ \textcolor{preprocessor}{\#error\ "{}Please\ fix\ the\ directory\ search\ order\ for\ header\ files"{}}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00029}00029\ \textcolor{preprocessor}{\#error\ "{}so\ that\ freetype.h\ of\ FreeType\ 2\ is\ found\ first."{}}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00030}00030\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00033}00033\ FT\_BEGIN\_HEADER}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00035}00035\ \textcolor{comment}{\ \ /***************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00036}00036\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00037}00037\ \textcolor{comment}{\ \ \ *\ @section:}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00038}00038\ \textcolor{comment}{\ \ \ *\ \ \ lcd\_filtering}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00039}00039\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00040}00040\ \textcolor{comment}{\ \ \ *\ @title:}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00041}00041\ \textcolor{comment}{\ \ \ *\ \ \ LCD\ Filtering}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00042}00042\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00043}00043\ \textcolor{comment}{\ \ \ *\ @abstract:}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00044}00044\ \textcolor{comment}{\ \ \ *\ \ \ Reduce\ color\ fringes\ of\ LCD-\/optimized\ bitmaps.}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00045}00045\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00046}00046\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00047}00047\ \textcolor{comment}{\ \ \ *\ \ \ The\ @FT\_Library\_SetLcdFilter\ API\ can\ be\ used\ to\ specify\ a\ low-\/pass}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00048}00048\ \textcolor{comment}{\ \ \ *\ \ \ filter,\ which\ is\ then\ applied\ to\ LCD-\/optimized\ bitmaps\ generated}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00049}00049\ \textcolor{comment}{\ \ \ *\ \ \ through\ @FT\_Render\_Glyph.\ \ This\ is\ useful\ to\ reduce\ color\ fringes}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00050}00050\ \textcolor{comment}{\ \ \ *\ \ \ that\ would\ occur\ with\ unfiltered\ rendering.}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00051}00051\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00052}00052\ \textcolor{comment}{\ \ \ *\ \ \ Note\ that\ no\ filter\ is\ active\ by\ default,\ and\ that\ this\ function\ is}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00053}00053\ \textcolor{comment}{\ \ \ *\ \ \ *not*\ implemented\ in\ default\ builds\ of\ the\ library.\ \ You\ need\ to}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00054}00054\ \textcolor{comment}{\ \ \ *\ \ \ \#define\ FT\_CONFIG\_OPTION\_SUBPIXEL\_RENDERING\ in\ your\ \`{}ftoption.h'\ file}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00055}00055\ \textcolor{comment}{\ \ \ *\ \ \ in\ order\ to\ activate\ it.}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00056}00056\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00057}00057\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\ generates\ alpha\ coverage\ maps,\ which\ are\ linear\ by\ nature.}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00058}00058\ \textcolor{comment}{\ \ \ *\ \ \ For\ instance,\ the\ value\ 0x80\ in\ bitmap\ representation\ means\ that}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00059}00059\ \textcolor{comment}{\ \ \ *\ \ \ (within\ numerical\ precision)\ 0x80/0xFF\ fraction\ of\ that\ pixel\ is}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00060}00060\ \textcolor{comment}{\ \ \ *\ \ \ covered\ by\ the\ glyph's\ outline.\ \ The\ blending\ function\ for\ placing}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00061}00061\ \textcolor{comment}{\ \ \ *\ \ \ text\ over\ a\ background\ is}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00062}00062\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00063}00063\ \textcolor{comment}{\ \ \ *\ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00064}00064\ \textcolor{comment}{\ \ \ *\ \ \ \ \ dst\ =\ alpha\ *\ src\ +\ (1\ -\/\ alpha)\ *\ dst\ \ \ \ ,}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00065}00065\ \textcolor{comment}{\ \ \ *\ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00066}00066\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00067}00067\ \textcolor{comment}{\ \ \ *\ \ \ which\ is\ known\ as\ OVER.\ \ However,\ when\ calculating\ the\ output\ of\ the}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00068}00068\ \textcolor{comment}{\ \ \ *\ \ \ OVER\ operator,\ the\ source\ colors\ should\ first\ be\ transformed\ to\ a}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00069}00069\ \textcolor{comment}{\ \ \ *\ \ \ linear\ color\ space,\ then\ alpha\ blended\ in\ that\ space,\ and\ transformed}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00070}00070\ \textcolor{comment}{\ \ \ *\ \ \ back\ to\ the\ output\ color\ space.}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00071}00071\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00072}00072\ \textcolor{comment}{\ \ \ *\ \ \ When\ linear\ light\ blending\ is\ used,\ the\ default\ FIR5\ filtering}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00073}00073\ \textcolor{comment}{\ \ \ *\ \ \ weights\ (as\ given\ by\ FT\_LCD\_FILTER\_DEFAULT)\ are\ no\ longer\ optimal,\ as}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00074}00074\ \textcolor{comment}{\ \ \ *\ \ \ they\ have\ been\ designed\ for\ black\ on\ white\ rendering\ while\ lacking}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00075}00075\ \textcolor{comment}{\ \ \ *\ \ \ gamma\ correction.\ \ To\ preserve\ color\ neutrality,\ weights\ for\ a\ FIR5}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00076}00076\ \textcolor{comment}{\ \ \ *\ \ \ filter\ should\ be\ chosen\ according\ to\ two\ free\ parameters\ \`{}a'\ and\ \`{}c',}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00077}00077\ \textcolor{comment}{\ \ \ *\ \ \ and\ the\ FIR\ weights\ should\ be}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00078}00078\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00079}00079\ \textcolor{comment}{\ \ \ *\ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00080}00080\ \textcolor{comment}{\ \ \ *\ \ \ \ \ [a\ -\/\ c,\ a\ +\ c,\ 2\ *\ a,\ a\ +\ c,\ a\ -\/\ c]\ \ \ \ .}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00081}00081\ \textcolor{comment}{\ \ \ *\ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00082}00082\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00083}00083\ \textcolor{comment}{\ \ \ *\ \ \ This\ formula\ generates\ equal\ weights\ for\ all\ the\ color\ primaries}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00084}00084\ \textcolor{comment}{\ \ \ *\ \ \ across\ the\ filter\ kernel,\ which\ makes\ it\ colorless.\ \ One\ suggested}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00085}00085\ \textcolor{comment}{\ \ \ *\ \ \ set\ of\ weights\ is}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00086}00086\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00087}00087\ \textcolor{comment}{\ \ \ *\ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00088}00088\ \textcolor{comment}{\ \ \ *\ \ \ \ \ [0x10,\ 0x50,\ 0x60,\ 0x50,\ 0x10]\ \ \ \ ,}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00089}00089\ \textcolor{comment}{\ \ \ *\ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00090}00090\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00091}00091\ \textcolor{comment}{\ \ \ *\ \ \ where\ \`{}a'\ has\ value\ 0x30\ and\ \`{}b'\ value\ 0x20.\ \ The\ weights\ in\ filter}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00092}00092\ \textcolor{comment}{\ \ \ *\ \ \ may\ have\ a\ sum\ larger\ than\ 0x100,\ which\ increases\ coloration\ slightly}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00093}00093\ \textcolor{comment}{\ \ \ *\ \ \ but\ also\ improves\ contrast.}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00094}00094\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00097}00097\ \textcolor{comment}{\ \ /****************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00098}00098\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00099}00099\ \textcolor{comment}{\ \ \ *\ @enum:}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00100}00100\ \textcolor{comment}{\ \ \ *\ \ \ FT\_LcdFilter}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00101}00101\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00102}00102\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00103}00103\ \textcolor{comment}{\ \ \ *\ \ \ A\ list\ of\ values\ to\ identify\ various\ types\ of\ LCD\ filters.}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00104}00104\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00105}00105\ \textcolor{comment}{\ \ \ *\ @values:}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00106}00106\ \textcolor{comment}{\ \ \ *\ \ \ FT\_LCD\_FILTER\_NONE\ ::}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00107}00107\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Do\ not\ perform\ filtering.\ \ When\ used\ with\ subpixel\ rendering,\ this}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00108}00108\ \textcolor{comment}{\ \ \ *\ \ \ \ \ results\ in\ sometimes\ severe\ color\ fringes.}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00109}00109\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00110}00110\ \textcolor{comment}{\ \ \ *\ \ \ FT\_LCD\_FILTER\_DEFAULT\ ::}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00111}00111\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ default\ filter\ reduces\ color\ fringes\ considerably,\ at\ the\ cost}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00112}00112\ \textcolor{comment}{\ \ \ *\ \ \ \ \ of\ a\ slight\ blurriness\ in\ the\ output.}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00113}00113\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00114}00114\ \textcolor{comment}{\ \ \ *\ \ \ FT\_LCD\_FILTER\_LIGHT\ ::}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00115}00115\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ light\ filter\ is\ a\ variant\ that\ produces\ less\ blurriness\ at\ the}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00116}00116\ \textcolor{comment}{\ \ \ *\ \ \ \ \ cost\ of\ slightly\ more\ color\ fringes\ than\ the\ default\ one.\ \ It\ might}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00117}00117\ \textcolor{comment}{\ \ \ *\ \ \ \ \ be\ better,\ depending\ on\ taste,\ your\ monitor,\ or\ your\ personal\ vision.}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00118}00118\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00119}00119\ \textcolor{comment}{\ \ \ *\ \ \ FT\_LCD\_FILTER\_LEGACY\ ::}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00120}00120\ \textcolor{comment}{\ \ \ *\ \ \ \ \ This\ filter\ corresponds\ to\ the\ original\ libXft\ color\ filter.\ \ It}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00121}00121\ \textcolor{comment}{\ \ \ *\ \ \ \ \ provides\ high\ contrast\ output\ but\ can\ exhibit\ really\ bad\ color}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00122}00122\ \textcolor{comment}{\ \ \ *\ \ \ \ \ fringes\ if\ glyphs\ are\ not\ extremely\ well\ hinted\ to\ the\ pixel\ grid.}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00123}00123\ \textcolor{comment}{\ \ \ *\ \ \ \ \ In\ other\ words,\ it\ only\ works\ well\ if\ the\ TrueType\ bytecode}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00124}00124\ \textcolor{comment}{\ \ \ *\ \ \ \ \ interpreter\ is\ enabled\ *and*\ high-\/quality\ hinted\ fonts\ are\ used.}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00125}00125\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00126}00126\ \textcolor{comment}{\ \ \ *\ \ \ \ \ This\ filter\ is\ only\ provided\ for\ comparison\ purposes,\ and\ might\ be}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00127}00127\ \textcolor{comment}{\ \ \ *\ \ \ \ \ disabled\ or\ stay\ unsupported\ in\ the\ future.}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00128}00128\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00129}00129\ \textcolor{comment}{\ \ \ *\ @since:}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00130}00130\ \textcolor{comment}{\ \ \ *\ \ \ 2.3.0}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00131}00131\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00132}00132\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \ FT\_LcdFilter\_}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00133}00133\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00134}00134\ \ \ \ \ FT\_LCD\_FILTER\_NONE\ \ \ \ =\ 0,}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00135}00135\ \ \ \ \ FT\_LCD\_FILTER\_DEFAULT\ =\ 1,}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00136}00136\ \ \ \ \ FT\_LCD\_FILTER\_LIGHT\ \ \ =\ 2,}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00137}00137\ \ \ \ \ FT\_LCD\_FILTER\_LEGACY\ \ =\ 16,}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00139}00139\ \ \ \ \ FT\_LCD\_FILTER\_MAX\ \ \ \textcolor{comment}{/*\ do\ not\ remove\ */}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00141}00141\ \ \ \}\ FT\_LcdFilter;}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00142}00142\ }
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00143}00143\ }
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00144}00144\ \textcolor{comment}{\ \ /**************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00145}00145\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00146}00146\ \textcolor{comment}{\ \ \ *\ @func:}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00147}00147\ \textcolor{comment}{\ \ \ *\ \ \ FT\_Library\_SetLcdFilter}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00148}00148\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00149}00149\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00150}00150\ \textcolor{comment}{\ \ \ *\ \ \ This\ function\ is\ used\ to\ apply\ color\ filtering\ to\ LCD\ decimated}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00151}00151\ \textcolor{comment}{\ \ \ *\ \ \ bitmaps,\ like\ the\ ones\ used\ when\ calling\ @FT\_Render\_Glyph\ with}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00152}00152\ \textcolor{comment}{\ \ \ *\ \ \ @FT\_RENDER\_MODE\_LCD\ or\ @FT\_RENDER\_MODE\_LCD\_V.}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00153}00153\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00154}00154\ \textcolor{comment}{\ \ \ *\ @input:}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00155}00155\ \textcolor{comment}{\ \ \ *\ \ \ library\ ::}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00156}00156\ \textcolor{comment}{\ \ \ *\ \ \ \ \ A\ handle\ to\ the\ target\ library\ instance.}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00157}00157\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00158}00158\ \textcolor{comment}{\ \ \ *\ \ \ filter\ ::}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00159}00159\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ filter\ type.}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00160}00160\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00161}00161\ \textcolor{comment}{\ \ \ *\ \ \ \ \ You\ can\ use\ @FT\_LCD\_FILTER\_NONE\ here\ to\ disable\ this\ feature,\ or}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00162}00162\ \textcolor{comment}{\ \ \ *\ \ \ \ \ @FT\_LCD\_FILTER\_DEFAULT\ to\ use\ a\ default\ filter\ that\ should\ work}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00163}00163\ \textcolor{comment}{\ \ \ *\ \ \ \ \ well\ on\ most\ LCD\ screens.}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00164}00164\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00165}00165\ \textcolor{comment}{\ \ \ *\ @return:}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00166}00166\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\ error\ code.\ \ 0\string~means\ success.}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00167}00167\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00168}00168\ \textcolor{comment}{\ \ \ *\ @note:}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00169}00169\ \textcolor{comment}{\ \ \ *\ \ \ This\ feature\ is\ always\ disabled\ by\ default.\ \ Clients\ must\ make\ an}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00170}00170\ \textcolor{comment}{\ \ \ *\ \ \ explicit\ call\ to\ this\ function\ with\ a\ \`{}filter'\ value\ other\ than}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00171}00171\ \textcolor{comment}{\ \ \ *\ \ \ @FT\_LCD\_FILTER\_NONE\ in\ order\ to\ enable\ it.}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00172}00172\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00173}00173\ \textcolor{comment}{\ \ \ *\ \ \ Due\ to\ *PATENTS*\ covering\ subpixel\ rendering,\ this\ function\ doesn't}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00174}00174\ \textcolor{comment}{\ \ \ *\ \ \ do\ anything\ except\ returning\ \`{}FT\_Err\_Unimplemented\_Feature'\ if\ the}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00175}00175\ \textcolor{comment}{\ \ \ *\ \ \ configuration\ macro\ FT\_CONFIG\_OPTION\_SUBPIXEL\_RENDERING\ is\ not}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00176}00176\ \textcolor{comment}{\ \ \ *\ \ \ defined\ in\ your\ build\ of\ the\ library,\ which\ should\ correspond\ to\ all}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00177}00177\ \textcolor{comment}{\ \ \ *\ \ \ default\ builds\ of\ FreeType.}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00178}00178\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00179}00179\ \textcolor{comment}{\ \ \ *\ \ \ The\ filter\ affects\ glyph\ bitmaps\ rendered\ through\ @FT\_Render\_Glyph,}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00180}00180\ \textcolor{comment}{\ \ \ *\ \ \ @FT\_Outline\_Get\_Bitmap,\ @FT\_Load\_Glyph,\ and\ @FT\_Load\_Char.}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00181}00181\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00182}00182\ \textcolor{comment}{\ \ \ *\ \ \ It\ does\ \_not\_\ affect\ the\ output\ of\ @FT\_Outline\_Render\ and}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00183}00183\ \textcolor{comment}{\ \ \ *\ \ \ @FT\_Outline\_Get\_Bitmap.}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00184}00184\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00185}00185\ \textcolor{comment}{\ \ \ *\ \ \ If\ this\ feature\ is\ activated,\ the\ dimensions\ of\ LCD\ glyph\ bitmaps\ are}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00186}00186\ \textcolor{comment}{\ \ \ *\ \ \ either\ larger\ or\ taller\ than\ the\ dimensions\ of\ the\ corresponding}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00187}00187\ \textcolor{comment}{\ \ \ *\ \ \ outline\ with\ regards\ to\ the\ pixel\ grid.\ \ For\ example,\ for}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00188}00188\ \textcolor{comment}{\ \ \ *\ \ \ @FT\_RENDER\_MODE\_LCD,\ the\ filter\ adds\ up\ to\ 3\string~pixels\ to\ the\ left,\ and}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00189}00189\ \textcolor{comment}{\ \ \ *\ \ \ up\ to\ 3\string~pixels\ to\ the\ right.}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00190}00190\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00191}00191\ \textcolor{comment}{\ \ \ *\ \ \ The\ bitmap\ offset\ values\ are\ adjusted\ correctly,\ so\ clients\ shouldn't}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00192}00192\ \textcolor{comment}{\ \ \ *\ \ \ need\ to\ modify\ their\ layout\ and\ glyph\ positioning\ code\ when\ enabling}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00193}00193\ \textcolor{comment}{\ \ \ *\ \ \ the\ filter.}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00194}00194\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00195}00195\ \textcolor{comment}{\ \ \ *\ @since:}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00196}00196\ \textcolor{comment}{\ \ \ *\ \ \ 2.3.0}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00197}00197\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00198}00198\ \ \ FT\_EXPORT(\ FT\_Error\ )}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00199}00199\ \ \ FT\_Library\_SetLcdFilter(\ FT\_Library\ \ \ \ library,}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00200}00200\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_LcdFilter\ \ filter\ );}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00201}00201\ }
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00202}00202\ }
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00203}00203\ \textcolor{comment}{\ \ /**************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00204}00204\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00205}00205\ \textcolor{comment}{\ \ \ *\ @func:}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00206}00206\ \textcolor{comment}{\ \ \ *\ \ \ FT\_Library\_SetLcdFilterWeights}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00207}00207\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00208}00208\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00209}00209\ \textcolor{comment}{\ \ \ *\ \ \ Use\ this\ function\ to\ override\ the\ filter\ weights\ selected\ by}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00210}00210\ \textcolor{comment}{\ \ \ *\ \ \ @FT\_Library\_SetLcdFilter.\ \ By\ default,\ FreeType\ uses\ the\ quintuple}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00211}00211\ \textcolor{comment}{\ \ \ *\ \ \ (0x00,\ 0x55,\ 0x56,\ 0x55,\ 0x00)\ for\ FT\_LCD\_FILTER\_LIGHT,\ and\ (0x10,}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00212}00212\ \textcolor{comment}{\ \ \ *\ \ \ 0x40,\ 0x70,\ 0x40,\ 0x10)\ for\ FT\_LCD\_FILTER\_DEFAULT\ and}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00213}00213\ \textcolor{comment}{\ \ \ *\ \ \ FT\_LCD\_FILTER\_LEGACY.}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00214}00214\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00215}00215\ \textcolor{comment}{\ \ \ *\ @input:}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00216}00216\ \textcolor{comment}{\ \ \ *\ \ \ library\ ::}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00217}00217\ \textcolor{comment}{\ \ \ *\ \ \ \ \ A\ handle\ to\ the\ target\ library\ instance.}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00218}00218\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00219}00219\ \textcolor{comment}{\ \ \ *\ \ \ weights\ ::}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00220}00220\ \textcolor{comment}{\ \ \ *\ \ \ \ \ A\ pointer\ to\ an\ array;\ the\ function\ copies\ the\ first\ five\ bytes\ and}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00221}00221\ \textcolor{comment}{\ \ \ *\ \ \ \ \ uses\ them\ to\ specify\ the\ filter\ weights.}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00222}00222\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00223}00223\ \textcolor{comment}{\ \ \ *\ @return:}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00224}00224\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\ error\ code.\ \ 0\string~means\ success.}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00225}00225\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00226}00226\ \textcolor{comment}{\ \ \ *\ @note:}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00227}00227\ \textcolor{comment}{\ \ \ *\ \ \ Due\ to\ *PATENTS*\ covering\ subpixel\ rendering,\ this\ function\ doesn't}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00228}00228\ \textcolor{comment}{\ \ \ *\ \ \ do\ anything\ except\ returning\ \`{}FT\_Err\_Unimplemented\_Feature'\ if\ the}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00229}00229\ \textcolor{comment}{\ \ \ *\ \ \ configuration\ macro\ FT\_CONFIG\_OPTION\_SUBPIXEL\_RENDERING\ is\ not}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00230}00230\ \textcolor{comment}{\ \ \ *\ \ \ defined\ in\ your\ build\ of\ the\ library,\ which\ should\ correspond\ to\ all}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00231}00231\ \textcolor{comment}{\ \ \ *\ \ \ default\ builds\ of\ FreeType.}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00232}00232\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00233}00233\ \textcolor{comment}{\ \ \ *\ \ \ This\ function\ must\ be\ called\ after\ @FT\_Library\_SetLcdFilter\ to\ have}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00234}00234\ \textcolor{comment}{\ \ \ *\ \ \ any\ effect.}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00235}00235\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00236}00236\ \textcolor{comment}{\ \ \ *\ @since:}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00237}00237\ \textcolor{comment}{\ \ \ *\ \ \ 2.4.0}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00238}00238\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00239}00239\ \ \ FT\_EXPORT(\ FT\_Error\ )}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00240}00240\ \ \ FT\_Library\_SetLcdFilterWeights(\ FT\_Library\ \ \ \ \ \ library,}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00241}00241\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ \ *weights\ );}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00242}00242\ }
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00243}00243\ \ \ \textcolor{comment}{/*\ */}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00244}00244\ }
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00245}00245\ }
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00246}00246\ FT\_END\_HEADER}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00247}00247\ }
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00248}00248\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_FT\_LCD\_FILTER\_H\_\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00249}00249\ }
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00250}00250\ }
+\DoxyCodeLine{\Hypertarget{ftlcdfil_8h_source_l00251}00251\ \textcolor{comment}{/*\ END\ */}}
+
+\end{DoxyCode}

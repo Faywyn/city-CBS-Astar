@@ -1,0 +1,30 @@
+\doxysubsection{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Seek\+Table Struct Reference}
+\hypertarget{struct_f_l_a_c_____stream_metadata___seek_table}{}\label{struct_f_l_a_c_____stream_metadata___seek_table}\index{FLAC\_\_StreamMetadata\_SeekTable@{FLAC\_\_StreamMetadata\_SeekTable}}
+
+
+{\ttfamily \#include $<$format.\+h$>$}
+
+
+
+\doxysubsubsection{Detailed Description}
+FLAC SEEKTABLE structure. (c.\+f. \href{../format.html\#metadata_block_seektable}{\texttt{ format specification}})
+
+\begin{DoxyNote}{Note}
+From the format specification\+:
+\begin{DoxyItemize}
+\item The seek points must be sorted by ascending sample number.
+\item Each seek point\textquotesingle{}s sample number must be the first sample of the target frame.
+\item Each seek point\textquotesingle{}s sample number must be unique within the table.
+\item Existence of a SEEKTABLE block implies a correct setting of total\+\_\+samples in the stream\+\_\+info block.
+\item Behavior is undefined when more than one SEEKTABLE block is present in a stream. 
+\end{DoxyItemize}
+\end{DoxyNote}
+
+
+Definition at line \mbox{\hyperlink{sfml-src_2extlibs_2headers_2_f_l_a_c_2format_8h_source_l00610}{610}} of file \mbox{\hyperlink{sfml-src_2extlibs_2headers_2_f_l_a_c_2format_8h_source}{sfml-\/src/extlibs/headers/\+FLAC/format.\+h}}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+sfml-\/src/extlibs/headers/\+FLAC/format.\+h\end{DoxyCompactItemize}

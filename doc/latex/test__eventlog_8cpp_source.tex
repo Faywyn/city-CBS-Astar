@@ -1,0 +1,81 @@
+\doxysubsection{test\+\_\+eventlog.\+cpp}
+\hypertarget{test__eventlog_8cpp_source}{}\label{test__eventlog_8cpp_source}\index{test\_eventlog.cpp@{test\_eventlog.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#if\ \_WIN32}}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00003}00003\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}includes.h"{}}}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00004}00004\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}test\_sink.h"{}}}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00006}00006\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}spdlog/sinks/win\_eventlog\_sink.h"{}}}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00008}00008\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ LPCSTR\ TEST\_SOURCE\ =\ \textcolor{stringliteral}{"{}spdlog\_test"{}};}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00010}00010\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ test\_single\_print(std::function<\textcolor{keywordtype}{void}(std::string\ \textcolor{keyword}{const}\ \&)>\ do\_log,}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00011}00011\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ \textcolor{keyword}{const}\ \&expected\_contents,}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00012}00012\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ WORD\ expected\_ev\_type)\ \{}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00013}00013\ \ \ \ \ \textcolor{keyword}{using\ namespace\ }std::chrono;}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00014}00014\ \ \ \ \ do\_log(expected\_contents);}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00015}00015\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ expected\_time\_generated\ =}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00016}00016\ \ \ \ \ \ \ \ \ duration\_cast<seconds>(system\_clock::now().time\_since\_epoch()).count();}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00018}00018\ \ \ \ \ \textcolor{keyword}{struct\ }handle\_t\ \{}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00019}00019\ \ \ \ \ \ \ \ \ HANDLE\ handle\_;}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00021}00021\ \ \ \ \ \ \ \ \ \string~handle\_t()\ \{}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00022}00022\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\_)\ \{}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ REQUIRE(CloseEventLog(handle\_));}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00025}00025\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00026}00026\ \ \ \ \ \}\ event\_log\{::OpenEventLogA(\textcolor{keyword}{nullptr},\ TEST\_SOURCE)\};}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00028}00028\ \ \ \ \ REQUIRE(event\_log.handle\_);}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00030}00030\ \ \ \ \ DWORD\ read\_bytes\{\},\ size\_needed\{\};}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00031}00031\ \ \ \ \ \textcolor{keyword}{auto}\ ok\ =\ ::ReadEventLogA(event\_log.handle\_,\ EVENTLOG\_SEQUENTIAL\_READ\ |\ EVENTLOG\_BACKWARDS\_READ,}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0,\ \&read\_bytes,\ 0,\ \&read\_bytes,\ \&size\_needed);}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00033}00033\ \ \ \ \ REQUIRE(!ok);}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00034}00034\ \ \ \ \ REQUIRE(::GetLastError()\ ==\ ERROR\_INSUFFICIENT\_BUFFER);}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00036}00036\ \ \ \ \ std::vector<char>\ record\_buffer(size\_needed);}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00037}00037\ \ \ \ \ PEVENTLOGRECORD\ record\ =\ (PEVENTLOGRECORD)record\_buffer.data();}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00039}00039\ \ \ \ \ ok\ =\ ::ReadEventLogA(event\_log.handle\_,\ EVENTLOG\_SEQUENTIAL\_READ\ |\ EVENTLOG\_BACKWARDS\_READ,\ 0,}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ record,\ size\_needed,\ \&read\_bytes,\ \&size\_needed);}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00041}00041\ \ \ \ \ REQUIRE(ok);}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00043}00043\ \ \ \ \ REQUIRE(record-\/>NumStrings\ ==\ 1);}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00044}00044\ \ \ \ \ REQUIRE(record-\/>EventType\ ==\ expected\_ev\_type);}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00045}00045\ \ \ \ \ REQUIRE((expected\_time\_generated\ -\/\ record-\/>TimeGenerated)\ <=\ 3u);}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00047}00047\ \ \ \ \ std::string\ message\_in\_log(((\textcolor{keywordtype}{char}\ *)record\ +\ record-\/>StringOffset));}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00048}00048\ \ \ \ \ REQUIRE(message\_in\_log\ ==\ expected\_contents\ +\ spdlog::details::os::default\_eol);}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00049}00049\ \}}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00051}00051\ TEST\_CASE(\textcolor{stringliteral}{"{}eventlog"{}},\ \textcolor{stringliteral}{"{}[eventlog]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00052}00052\ \ \ \ \ \textcolor{keyword}{using\ namespace\ }spdlog;}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00054}00054\ \ \ \ \ \textcolor{keyword}{auto}\ test\_sink\ =\ std::make\_shared<sinks::win\_eventlog\_sink\_mt>(TEST\_SOURCE);}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00056}00056\ \ \ \ \ spdlog::logger\ test\_logger(\textcolor{stringliteral}{"{}eventlog"{}},\ test\_sink);}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00057}00057\ \ \ \ \ test\_logger.set\_level(level::trace);}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00059}00059\ \ \ \ \ test\_sink-\/>set\_pattern(\textcolor{stringliteral}{"{}\%v"{}});}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00061}00061\ \ \ \ \ test\_single\_print([\&test\_logger](std::string\ \textcolor{keyword}{const}\ \&msg)\ \{\ test\_logger.trace(msg);\ \},}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}my\ trace\ message"{}},\ EVENTLOG\_SUCCESS);}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00063}00063\ \ \ \ \ test\_single\_print([\&test\_logger](std::string\ \textcolor{keyword}{const}\ \&msg)\ \{\ test\_logger.debug(msg);\ \},}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}my\ debug\ message"{}},\ EVENTLOG\_SUCCESS);}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00065}00065\ \ \ \ \ test\_single\_print([\&test\_logger](std::string\ \textcolor{keyword}{const}\ \&msg)\ \{\ test\_logger.info(msg);\ \},}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}my\ info\ message"{}},\ EVENTLOG\_INFORMATION\_TYPE);}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00067}00067\ \ \ \ \ test\_single\_print([\&test\_logger](std::string\ \textcolor{keyword}{const}\ \&msg)\ \{\ test\_logger.warn(msg);\ \},}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}my\ warn\ message"{}},\ EVENTLOG\_WARNING\_TYPE);}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00069}00069\ \ \ \ \ test\_single\_print([\&test\_logger](std::string\ \textcolor{keyword}{const}\ \&msg)\ \{\ test\_logger.error(msg);\ \},}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}my\ error\ message"{}},\ EVENTLOG\_ERROR\_TYPE);}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00071}00071\ \ \ \ \ test\_single\_print([\&test\_logger](std::string\ \textcolor{keyword}{const}\ \&msg)\ \{\ test\_logger.critical(msg);\ \},}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}my\ critical\ message"{}},\ EVENTLOG\_ERROR\_TYPE);}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00073}00073\ \}}
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{test__eventlog_8cpp_source_l00075}00075\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\_WIN32}}
+
+\end{DoxyCode}

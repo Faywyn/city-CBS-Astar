@@ -1,0 +1,57 @@
+\usepackage{geometry}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+
+\AtBeginDocument{%
+  \pagestyle{fancy}
+
+  \fancyfoot[L]{}
+  \fancyfoot[C]{}
+  \fancyfoot[R]{}
+  % \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+
+  \fancypagestyle{plain}{%
+    \fancyhf{}%
+    \fancyfoot[L]{}%
+    \fancyfoot[C]{}
+    \fancyfoot[R]{}%
+    % \renewcommand{\headrulewidth}{0pt}%
+    \renewcommand{\footrulewidth}{0pt}%
+  }
+}
+
+\newcommand{\coverpage}{%
+  \setlength{\parskip}{0em}
+  \setlength{\parindent}{0em}
+
+  \titlespacing*{\section}{0pt}{0pt}{0pt}
+  \titlespacing*{\subsection}{0pt}{0pt}{0pt}
+  \titlespacing*{\subsubsection}{0pt}{0pt}{0pt}
+  \begin{titlepage}
+  \pagestyle{fancy}
+    \centering
+    \vspace*{2cm}
+    \noindent\rule{\textwidth}{0.4pt}
+    {\Huge\bfseries City Based CBS Documentations\par}
+    \noindent\rule{\textwidth}{0.4pt}
+    \vspace{1cm}
+    {\Large 13071 - Alban de La Rochefoucauld\par}
+    \vspace{1cm}
+    \begin{multicols}{2}
+      \includegraphics[width=0.5\textwidth]{../logo1.png}
+
+      \columnbreak
+
+      \includegraphics[width=0.5\textwidth]{../logo2.png}
+    \end{multicols}
+    \vfill
+    {\Large 2024-2025\par}
+    \vspace*{0cm} % bottom space
+  \end{titlepage}
+}
+
+\AtBeginDocument{%
+  \coverpage
+}

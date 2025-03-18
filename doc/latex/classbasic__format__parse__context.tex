@@ -1,0 +1,91 @@
+\doxysubsection{basic\+\_\+format\+\_\+parse\+\_\+context\texorpdfstring{$<$}{<} Char \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classbasic__format__parse__context}{}\label{classbasic__format__parse__context}\index{basic\_format\_parse\_context$<$ Char $>$@{basic\_format\_parse\_context$<$ Char $>$}}
+
+
+{\ttfamily \#include $<$core.\+h$>$}
+
+\doxysubsubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+constexpr auto \mbox{\hyperlink{classbasic__format__parse__context_afb21ddaa0d32b5430f99eed530666ea9}{begin}} () const noexcept -\/$>$ iterator
+\item 
+constexpr auto \mbox{\hyperlink{classbasic__format__parse__context_a6a0fc217fe680a1b23eada2a53870c41}{end}} () const noexcept -\/$>$ iterator
+\item 
+FMT\+\_\+\+CONSTEXPR void \mbox{\hyperlink{classbasic__format__parse__context_ad18dcd3d0fbeb0174569b88da00c87f2}{advance\+\_\+to}} (iterator it)
+\item 
+FMT\+\_\+\+CONSTEXPR auto \mbox{\hyperlink{classbasic__format__parse__context_a152d3961cfbc244624a877d827fc1172}{next\+\_\+arg\+\_\+id}} () -\/$>$ int
+\item 
+FMT\+\_\+\+CONSTEXPR void \mbox{\hyperlink{classbasic__format__parse__context_a83f130644eeb162a932245c95447cf63}{check\+\_\+arg\+\_\+id}} (int id)
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+\subsubsection*{template$<$typename Char$>$\newline
+class basic\+\_\+format\+\_\+parse\+\_\+context$<$ Char $>$}
+\textbackslash{}rst Parsing context consisting of a format string range being parsed and an argument counter for automatic indexing. You can use the {\ttfamily format\+\_\+parse\+\_\+context} type alias for {\ttfamily char} instead. \textbackslash{}endrst 
+
+Definition at line \mbox{\hyperlink{core_8h_source_l00674}{674}} of file \mbox{\hyperlink{core_8h_source}{core.\+h}}.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\Hypertarget{classbasic__format__parse__context_ad18dcd3d0fbeb0174569b88da00c87f2}\index{basic\_format\_parse\_context$<$ Char $>$@{basic\_format\_parse\_context$<$ Char $>$}!advance\_to@{advance\_to}}
+\index{advance\_to@{advance\_to}!basic\_format\_parse\_context$<$ Char $>$@{basic\_format\_parse\_context$<$ Char $>$}}
+\doxyparagraph{\texorpdfstring{advance\_to()}{advance\_to()}}
+{\footnotesize\ttfamily \label{classbasic__format__parse__context_ad18dcd3d0fbeb0174569b88da00c87f2} 
+template$<$typename Char$>$ \\
+FMT\+\_\+\+CONSTEXPR void \mbox{\hyperlink{classbasic__format__parse__context}{basic\+\_\+format\+\_\+parse\+\_\+context}}$<$ Char $>$\+::advance\+\_\+to (\begin{DoxyParamCaption}\item[{iterator}]{it}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Advances the begin iterator to {\ttfamily it}. 
+
+Definition at line \mbox{\hyperlink{core_8h_source_l00703}{703}} of file \mbox{\hyperlink{core_8h_source}{core.\+h}}.
+
+\Hypertarget{classbasic__format__parse__context_afb21ddaa0d32b5430f99eed530666ea9}\index{basic\_format\_parse\_context$<$ Char $>$@{basic\_format\_parse\_context$<$ Char $>$}!begin@{begin}}
+\index{begin@{begin}!basic\_format\_parse\_context$<$ Char $>$@{basic\_format\_parse\_context$<$ Char $>$}}
+\doxyparagraph{\texorpdfstring{begin()}{begin()}}
+{\footnotesize\ttfamily \label{classbasic__format__parse__context_afb21ddaa0d32b5430f99eed530666ea9} 
+template$<$typename Char$>$ \\
+auto \mbox{\hyperlink{classbasic__format__parse__context}{basic\+\_\+format\+\_\+parse\+\_\+context}}$<$ Char $>$\+::begin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ iterator \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+Returns an iterator to the beginning of the format string range being parsed. 
+
+Definition at line \mbox{\hyperlink{core_8h_source_l00693}{693}} of file \mbox{\hyperlink{core_8h_source}{core.\+h}}.
+
+\Hypertarget{classbasic__format__parse__context_a83f130644eeb162a932245c95447cf63}\index{basic\_format\_parse\_context$<$ Char $>$@{basic\_format\_parse\_context$<$ Char $>$}!check\_arg\_id@{check\_arg\_id}}
+\index{check\_arg\_id@{check\_arg\_id}!basic\_format\_parse\_context$<$ Char $>$@{basic\_format\_parse\_context$<$ Char $>$}}
+\doxyparagraph{\texorpdfstring{check\_arg\_id()}{check\_arg\_id()}}
+{\footnotesize\ttfamily \label{classbasic__format__parse__context_a83f130644eeb162a932245c95447cf63} 
+template$<$typename Char$>$ \\
+FMT\+\_\+\+CONSTEXPR void \mbox{\hyperlink{classbasic__format__parse__context}{basic\+\_\+format\+\_\+parse\+\_\+context}}$<$ Char $>$\+::check\+\_\+arg\+\_\+id (\begin{DoxyParamCaption}\item[{int}]{id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Reports an error if using the automatic argument indexing; otherwise switches to the manual indexing. 
+
+Definition at line \mbox{\hyperlink{core_8h_source_l00726}{726}} of file \mbox{\hyperlink{core_8h_source}{core.\+h}}.
+
+\Hypertarget{classbasic__format__parse__context_a6a0fc217fe680a1b23eada2a53870c41}\index{basic\_format\_parse\_context$<$ Char $>$@{basic\_format\_parse\_context$<$ Char $>$}!end@{end}}
+\index{end@{end}!basic\_format\_parse\_context$<$ Char $>$@{basic\_format\_parse\_context$<$ Char $>$}}
+\doxyparagraph{\texorpdfstring{end()}{end()}}
+{\footnotesize\ttfamily \label{classbasic__format__parse__context_a6a0fc217fe680a1b23eada2a53870c41} 
+template$<$typename Char$>$ \\
+auto \mbox{\hyperlink{classbasic__format__parse__context}{basic\+\_\+format\+\_\+parse\+\_\+context}}$<$ Char $>$\+::end (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ iterator \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+Returns an iterator past the end of the format string range being parsed. 
+
+Definition at line \mbox{\hyperlink{core_8h_source_l00700}{700}} of file \mbox{\hyperlink{core_8h_source}{core.\+h}}.
+
+\Hypertarget{classbasic__format__parse__context_a152d3961cfbc244624a877d827fc1172}\index{basic\_format\_parse\_context$<$ Char $>$@{basic\_format\_parse\_context$<$ Char $>$}!next\_arg\_id@{next\_arg\_id}}
+\index{next\_arg\_id@{next\_arg\_id}!basic\_format\_parse\_context$<$ Char $>$@{basic\_format\_parse\_context$<$ Char $>$}}
+\doxyparagraph{\texorpdfstring{next\_arg\_id()}{next\_arg\_id()}}
+{\footnotesize\ttfamily \label{classbasic__format__parse__context_a152d3961cfbc244624a877d827fc1172} 
+template$<$typename Char$>$ \\
+FMT\+\_\+\+CONSTEXPR auto \mbox{\hyperlink{classbasic__format__parse__context}{basic\+\_\+format\+\_\+parse\+\_\+context}}$<$ Char $>$\+::next\+\_\+arg\+\_\+id (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ int \hspace{0.3cm}{\ttfamily [inline]}}
+
+Reports an error if using the manual argument indexing; otherwise returns the next argument index and switches to the automatic indexing. 
+
+Definition at line \mbox{\hyperlink{core_8h_source_l00711}{711}} of file \mbox{\hyperlink{core_8h_source}{core.\+h}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core.\+h\end{DoxyCompactItemize}

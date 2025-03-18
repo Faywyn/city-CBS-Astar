@@ -1,0 +1,354 @@
+\doxysubsection{Window\+Base.\+cpp}
+\hypertarget{_window_base_8cpp_source}{}\label{_window_base_8cpp_source}\index{WindowBase.cpp@{WindowBase.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00002}00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00003}00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00004}00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00005}00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00006}00006\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00007}00007\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00008}00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00009}00009\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00010}00010\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00011}00011\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00012}00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00013}00013\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00014}00014\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00015}00015\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00016}00016\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00017}00017\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00018}00018\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00019}00019\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00020}00020\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00021}00021\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00022}00022\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00026}00026\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00028}00028\ \textcolor{preprocessor}{\#include\ <SFML/Window/WindowBase.hpp>}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00029}00029\ \textcolor{preprocessor}{\#include\ <SFML/Window/ContextSettings.hpp>}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00030}00030\ \textcolor{preprocessor}{\#include\ <SFML/Window/WindowImpl.hpp>}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00031}00031\ \textcolor{preprocessor}{\#include\ <SFML/System/Err.hpp>}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00034}00034\ \textcolor{keyword}{namespace}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00035}00035\ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00036}00036\ \ \ \ \ \textcolor{comment}{//\ A\ nested\ named\ namespace\ is\ used\ here\ to\ allow\ unity\ builds\ of\ SFML.}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00037}00037\ \ \ \ \ \textcolor{keyword}{namespace\ }WindowsBaseImpl}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00038}00038\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00039}00039\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ sf::WindowBase*\ fullscreenWindow\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00040}00040\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00041}00041\ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00044}00044\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00045}00045\ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00047}00047\ WindowBase::WindowBase()\ :}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00048}00048\ m\_impl\ \ \ \ \ \ \ \ \ \ (NULL),}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00049}00049\ m\_size\ \ \ \ \ \ \ \ \ \ (0,\ 0)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00050}00050\ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00052}00052\ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00056}00056\ WindowBase::WindowBase(VideoMode\ mode,\ \textcolor{keyword}{const}\ String\&\ title,\ Uint32\ style)\ :}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00057}00057\ m\_impl\ \ \ \ \ \ \ \ \ \ (NULL),}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00058}00058\ m\_size\ \ \ \ \ \ \ \ \ \ (0,\ 0)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00059}00059\ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00060}00060\ \ \ \ \ WindowBase::create(mode,\ title,\ style);}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00061}00061\ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00065}00065\ WindowBase::WindowBase(WindowHandle\ handle)\ :}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00066}00066\ m\_impl\ \ \ \ \ \ \ \ \ \ (NULL),}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00067}00067\ m\_size\ \ \ \ \ \ \ \ \ \ (0,\ 0)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00068}00068\ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00069}00069\ \ \ \ \ WindowBase::create(handle);}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00070}00070\ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00074}00074\ WindowBase::\string~WindowBase()}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00075}00075\ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00076}00076\ \ \ \ \ close();}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00077}00077\ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00081}00081\ \textcolor{keywordtype}{void}\ WindowBase::create(VideoMode\ mode,\ \textcolor{keyword}{const}\ String\&\ title,\ Uint32\ style)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00082}00082\ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00083}00083\ \ \ \ \ \textcolor{comment}{//\ Destroy\ the\ previous\ window\ implementation}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00084}00084\ \ \ \ \ close();}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00086}00086\ \ \ \ \ \textcolor{comment}{//\ Fullscreen\ style\ requires\ some\ tests}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00087}00087\ \ \ \ \ \textcolor{keywordflow}{if}\ (style\ \&\ Style::Fullscreen)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00088}00088\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00089}00089\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Make\ sure\ there's\ not\ already\ a\ fullscreen\ window\ (only\ one\ is\ allowed)}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00090}00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (getFullscreenWindow())}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00091}00091\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ err()\ <<\ \textcolor{stringliteral}{"{}Creating\ two\ fullscreen\ windows\ is\ not\ allowed,\ switching\ to\ windowed\ mode"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ style\ \&=\ \string~static\_cast<Uint32>(Style::Fullscreen);}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00094}00094\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00095}00095\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00096}00096\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Make\ sure\ that\ the\ chosen\ video\ mode\ is\ compatible}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!mode.isValid())}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ err()\ <<\ \textcolor{stringliteral}{"{}The\ requested\ video\ mode\ is\ not\ available,\ switching\ to\ a\ valid\ mode"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mode\ =\ VideoMode::getFullscreenModes()[0];}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Update\ the\ fullscreen\ window}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ setFullscreenWindow(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00106}00106\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00107}00107\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00109}00109\ \ \ \ \ \textcolor{comment}{//\ Check\ validity\ of\ style\ according\ to\ the\ underlying\ platform}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00110}00110\ \textcolor{preprocessor}{\ \ \ \ \#if\ defined(SFML\_SYSTEM\_IOS)\ ||\ defined(SFML\_SYSTEM\_ANDROID)}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00111}00111\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (style\ \&\ Style::Fullscreen)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ style\ \&=\ \string~static\_cast<Uint32>(Style::Titlebar);}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00113}00113\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ style\ |=\ Style::Titlebar;}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00115}00115\ \textcolor{preprocessor}{\ \ \ \ \#else}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00116}00116\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((style\ \&\ Style::Close)\ ||\ (style\ \&\ Style::Resize))}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ style\ |=\ Style::Titlebar;}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00118}00118\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00119}00119\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00120}00120\ \ \ \ \ \textcolor{comment}{//\ Recreate\ the\ window\ implementation}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00121}00121\ \ \ \ \ m\_impl\ =\ priv::WindowImpl::create(mode,\ title,\ style,\ ContextSettings(0,\ 0,\ 0,\ 0,\ 0,\ 0xFFFFFFFF,\ \textcolor{keyword}{false}));}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00123}00123\ \ \ \ \ \textcolor{comment}{//\ Perform\ common\ initializations}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00124}00124\ \ \ \ \ initialize();}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00125}00125\ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00129}00129\ \textcolor{keywordtype}{void}\ WindowBase::create(WindowHandle\ handle)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00130}00130\ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00131}00131\ \ \ \ \ \textcolor{comment}{//\ Destroy\ the\ previous\ window\ implementation}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00132}00132\ \ \ \ \ close();}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00133}00133\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00134}00134\ \ \ \ \ \textcolor{comment}{//\ Recreate\ the\ window\ implementation}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00135}00135\ \ \ \ \ m\_impl\ =\ priv::WindowImpl::create(handle);}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00136}00136\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00137}00137\ \ \ \ \ \textcolor{comment}{//\ Perform\ common\ initializations}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00138}00138\ \ \ \ \ initialize();}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00139}00139\ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00143}00143\ \textcolor{keywordtype}{void}\ WindowBase::close()}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00144}00144\ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00145}00145\ \ \ \ \ \textcolor{comment}{//\ Delete\ the\ window\ implementation}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00146}00146\ \ \ \ \ \textcolor{keyword}{delete}\ m\_impl;}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00147}00147\ \ \ \ \ m\_impl\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00149}00149\ \ \ \ \ \textcolor{comment}{//\ Update\ the\ fullscreen\ window}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00150}00150\ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{this}\ ==\ getFullscreenWindow())}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00151}00151\ \ \ \ \ \ \ \ \ setFullscreenWindow(NULL);}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00152}00152\ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00153}00153\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00156}00156\ \textcolor{keywordtype}{bool}\ WindowBase::isOpen()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00157}00157\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00158}00158\ \ \ \ \ \textcolor{keywordflow}{return}\ m\_impl\ !=\ NULL;}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00159}00159\ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00160}00160\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00163}00163\ \textcolor{keywordtype}{bool}\ WindowBase::pollEvent(Event\&\ event)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00164}00164\ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00165}00165\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_impl\ \&\&\ m\_impl-\/>popEvent(event,\ \textcolor{keyword}{false}))}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00166}00166\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00167}00167\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ filterEvent(event);}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00168}00168\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00169}00169\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00170}00170\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00171}00171\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00172}00172\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00173}00173\ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00174}00174\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00175}00175\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00177}00177\ \textcolor{keywordtype}{bool}\ WindowBase::waitEvent(Event\&\ event)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00178}00178\ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00179}00179\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_impl\ \&\&\ m\_impl-\/>popEvent(event,\ \textcolor{keyword}{true}))}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00180}00180\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00181}00181\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ filterEvent(event);}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00182}00182\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00183}00183\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00184}00184\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00185}00185\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00186}00186\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00187}00187\ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00188}00188\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00191}00191\ Vector2i\ WindowBase::getPosition()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00192}00192\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00193}00193\ \ \ \ \ \textcolor{keywordflow}{return}\ m\_impl\ ?\ m\_impl-\/>getPosition()\ :\ Vector2i();}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00194}00194\ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00195}00195\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00196}00196\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00198}00198\ \textcolor{keywordtype}{void}\ WindowBase::setPosition(\textcolor{keyword}{const}\ Vector2i\&\ position)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00199}00199\ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00200}00200\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_impl)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00201}00201\ \ \ \ \ \ \ \ \ m\_impl-\/>setPosition(position);}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00202}00202\ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00203}00203\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00204}00204\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00206}00206\ Vector2u\ WindowBase::getSize()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00207}00207\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00208}00208\ \ \ \ \ \textcolor{keywordflow}{return}\ m\_size;}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00209}00209\ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00210}00210\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00211}00211\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00213}00213\ \textcolor{keywordtype}{void}\ WindowBase::setSize(\textcolor{keyword}{const}\ Vector2u\&\ size)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00214}00214\ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00215}00215\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_impl)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00216}00216\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00217}00217\ \ \ \ \ \ \ \ \ m\_impl-\/>setSize(size);}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00218}00218\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00219}00219\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Cache\ the\ new\ size}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00220}00220\ \ \ \ \ \ \ \ \ m\_size.x\ =\ size.x;}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00221}00221\ \ \ \ \ \ \ \ \ m\_size.y\ =\ size.y;}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00222}00222\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00223}00223\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Notify\ the\ derived\ class}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00224}00224\ \ \ \ \ \ \ \ \ onResize();}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00225}00225\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00226}00226\ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00227}00227\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00228}00228\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00230}00230\ \textcolor{keywordtype}{void}\ WindowBase::setTitle(\textcolor{keyword}{const}\ String\&\ title)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00231}00231\ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00232}00232\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_impl)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00233}00233\ \ \ \ \ \ \ \ \ m\_impl-\/>setTitle(title);}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00234}00234\ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00235}00235\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00236}00236\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00238}00238\ \textcolor{keywordtype}{void}\ WindowBase::setIcon(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ height,\ \textcolor{keyword}{const}\ Uint8*\ pixels)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00239}00239\ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00240}00240\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_impl)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00241}00241\ \ \ \ \ \ \ \ \ m\_impl-\/>setIcon(width,\ height,\ pixels);}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00242}00242\ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00243}00243\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00244}00244\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00246}00246\ \textcolor{keywordtype}{void}\ WindowBase::setVisible(\textcolor{keywordtype}{bool}\ visible)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00247}00247\ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00248}00248\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_impl)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00249}00249\ \ \ \ \ \ \ \ \ m\_impl-\/>setVisible(visible);}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00250}00250\ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00251}00251\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00252}00252\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00254}00254\ \textcolor{keywordtype}{void}\ WindowBase::setMouseCursorVisible(\textcolor{keywordtype}{bool}\ visible)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00255}00255\ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00256}00256\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_impl)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00257}00257\ \ \ \ \ \ \ \ \ m\_impl-\/>setMouseCursorVisible(visible);}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00258}00258\ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00259}00259\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00260}00260\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00262}00262\ \textcolor{keywordtype}{void}\ WindowBase::setMouseCursorGrabbed(\textcolor{keywordtype}{bool}\ grabbed)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00263}00263\ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00264}00264\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_impl)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00265}00265\ \ \ \ \ \ \ \ \ m\_impl-\/>setMouseCursorGrabbed(grabbed);}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00266}00266\ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00267}00267\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00268}00268\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00270}00270\ \textcolor{keywordtype}{void}\ WindowBase::setMouseCursor(\textcolor{keyword}{const}\ Cursor\&\ cursor)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00271}00271\ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00272}00272\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_impl)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00273}00273\ \ \ \ \ \ \ \ \ m\_impl-\/>setMouseCursor(cursor.getImpl());}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00274}00274\ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00275}00275\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00276}00276\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00278}00278\ \textcolor{keywordtype}{void}\ WindowBase::setKeyRepeatEnabled(\textcolor{keywordtype}{bool}\ enabled)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00279}00279\ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00280}00280\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_impl)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00281}00281\ \ \ \ \ \ \ \ \ m\_impl-\/>setKeyRepeatEnabled(enabled);}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00282}00282\ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00283}00283\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00284}00284\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00286}00286\ \textcolor{keywordtype}{void}\ WindowBase::setJoystickThreshold(\textcolor{keywordtype}{float}\ threshold)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00287}00287\ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00288}00288\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_impl)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00289}00289\ \ \ \ \ \ \ \ \ m\_impl-\/>setJoystickThreshold(threshold);}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00290}00290\ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00291}00291\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00292}00292\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00294}00294\ \textcolor{keywordtype}{void}\ WindowBase::requestFocus()}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00295}00295\ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00296}00296\ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_impl)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00297}00297\ \ \ \ \ \ \ \ \ m\_impl-\/>requestFocus();}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00298}00298\ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00299}00299\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00300}00300\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00302}00302\ \textcolor{keywordtype}{bool}\ WindowBase::hasFocus()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00303}00303\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00304}00304\ \ \ \ \ \textcolor{keywordflow}{return}\ m\_impl\ \&\&\ m\_impl-\/>hasFocus();}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00305}00305\ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00306}00306\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00307}00307\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00309}00309\ WindowHandle\ WindowBase::getSystemHandle()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00310}00310\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00311}00311\ \ \ \ \ \textcolor{keywordflow}{return}\ m\_impl\ ?\ m\_impl-\/>getSystemHandle()\ :\ 0;}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00312}00312\ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00313}00313\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00314}00314\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00316}00316\ \textcolor{keywordtype}{bool}\ WindowBase::createVulkanSurface(\textcolor{keyword}{const}\ VkInstance\&\ instance,\ VkSurfaceKHR\&\ surface,\ \textcolor{keyword}{const}\ VkAllocationCallbacks*\ allocator)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00317}00317\ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00318}00318\ \ \ \ \ \textcolor{keywordflow}{return}\ m\_impl\ ?\ m\_impl-\/>createVulkanSurface(instance,\ surface,\ allocator)\ :\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00319}00319\ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00320}00320\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00321}00321\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00323}00323\ \textcolor{keywordtype}{void}\ WindowBase::onCreate()}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00324}00324\ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00325}00325\ \ \ \ \ \textcolor{comment}{//\ Nothing\ by\ default}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00326}00326\ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00327}00327\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00328}00328\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00330}00330\ \textcolor{keywordtype}{void}\ WindowBase::onResize()}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00331}00331\ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00332}00332\ \ \ \ \ \textcolor{comment}{//\ Nothing\ by\ default}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00333}00333\ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00334}00334\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00335}00335\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00337}00337\ \textcolor{keywordtype}{bool}\ WindowBase::filterEvent(\textcolor{keyword}{const}\ Event\&\ event)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00338}00338\ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00339}00339\ \ \ \ \ \textcolor{comment}{//\ Notify\ resize\ events\ to\ the\ derived\ class}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00340}00340\ \ \ \ \ \textcolor{keywordflow}{if}\ (event.type\ ==\ Event::Resized)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00341}00341\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00342}00342\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Cache\ the\ new\ size}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00343}00343\ \ \ \ \ \ \ \ \ m\_size.x\ =\ \textcolor{keyword}{event}.size.width;}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00344}00344\ \ \ \ \ \ \ \ \ m\_size.y\ =\ \textcolor{keyword}{event}.size.height;}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00345}00345\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00346}00346\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Notify\ the\ derived\ class}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00347}00347\ \ \ \ \ \ \ \ \ onResize();}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00348}00348\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00349}00349\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00350}00350\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00351}00351\ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00352}00352\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00353}00353\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00355}00355\ \textcolor{keywordtype}{void}\ WindowBase::initialize()}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00356}00356\ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00357}00357\ \ \ \ \ \textcolor{comment}{//\ Setup\ default\ behaviors\ (to\ get\ a\ consistent\ behavior\ across\ different\ implementations)}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00358}00358\ \ \ \ \ setVisible(\textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00359}00359\ \ \ \ \ setMouseCursorVisible(\textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00360}00360\ \ \ \ \ setKeyRepeatEnabled(\textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00361}00361\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00362}00362\ \ \ \ \ \textcolor{comment}{//\ Get\ and\ cache\ the\ initial\ size\ of\ the\ window}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00363}00363\ \ \ \ \ m\_size\ =\ m\_impl-\/>getSize();}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00364}00364\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00365}00365\ \ \ \ \ \textcolor{comment}{//\ Notify\ the\ derived\ class}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00366}00366\ \ \ \ \ onCreate();}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00367}00367\ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00368}00368\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00369}00369\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00371}00371\ \textcolor{keyword}{const}\ WindowBase*\ WindowBase::getFullscreenWindow()}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00372}00372\ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00373}00373\ \ \ \ \ \textcolor{keywordflow}{return}\ WindowsBaseImpl::fullscreenWindow;}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00374}00374\ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00375}00375\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00376}00376\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00378}00378\ \textcolor{keywordtype}{void}\ WindowBase::setFullscreenWindow(\textcolor{keyword}{const}\ WindowBase*\ window)}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00379}00379\ \{}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00380}00380\ \ \ \ \ WindowsBaseImpl::fullscreenWindow\ =\ window;}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00381}00381\ \}}
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00382}00382\ }
+\DoxyCodeLine{\Hypertarget{_window_base_8cpp_source_l00383}00383\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+
+\end{DoxyCode}

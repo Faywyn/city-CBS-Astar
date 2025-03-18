@@ -1,0 +1,109 @@
+\doxysubsection{build/\+\_\+deps/spdlog-\/src/tests/utils.cpp}
+\hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source}{}\label{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source}\index{utils.cpp@{utils.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}includes.h"{}}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00003}00003\ \textcolor{preprocessor}{\#ifdef\ \_WIN32}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00004}00004\ \textcolor{preprocessor}{\ \ \ \ \#include\ <windows.h>}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00005}00005\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00006}00006\ \textcolor{preprocessor}{\ \ \ \ \#include\ <sys/types.h>}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00007}00007\ \textcolor{preprocessor}{\ \ \ \ \#include\ <dirent.h>}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00008}00008\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00010}00010\ \textcolor{keywordtype}{void}\ prepare\_logdir()\ \{}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00011}00011\ \ \ \ \ spdlog::drop\_all();}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00012}00012\ \textcolor{preprocessor}{\#ifdef\ \_WIN32}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00013}00013\ \ \ \ \ system(\textcolor{stringliteral}{"{}rmdir\ /S\ /Q\ test\_logs"{}});}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00014}00014\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00015}00015\ \ \ \ \ \textcolor{keyword}{auto}\ rv\ =\ system(\textcolor{stringliteral}{"{}rm\ -\/rf\ test\_logs"{}});}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00016}00016\ \ \ \ \ \textcolor{keywordflow}{if}\ (rv\ !=\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00017}00017\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Failed\ to\ rm\ -\/rf\ test\_logs"{}});}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00018}00018\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00019}00019\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00020}00020\ \}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00022}00022\ std::string\ file\_contents(\textcolor{keyword}{const}\ std::string\ \&filename)\ \{}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00023}00023\ \ \ \ \ std::ifstream\ ifs(filename,\ std::ios\_base::binary);}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00024}00024\ \ \ \ \ \textcolor{keywordflow}{if}\ (!ifs)\ \{}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00025}00025\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Failed\ open\ file\ "{}});}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00026}00026\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00027}00027\ \ \ \ \ \textcolor{keywordflow}{return}\ std::string((std::istreambuf\_iterator<char>(ifs)),\ (std::istreambuf\_iterator<char>()));}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00028}00028\ \}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00030}00030\ std::size\_t\ count\_lines(\textcolor{keyword}{const}\ std::string\ \&filename)\ \{}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00031}00031\ \ \ \ \ std::ifstream\ ifs(filename);}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00032}00032\ \ \ \ \ \textcolor{keywordflow}{if}\ (!ifs)\ \{}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00033}00033\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Failed\ open\ file\ "{}});}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00034}00034\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00036}00036\ \ \ \ \ std::string\ line;}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00037}00037\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ counter\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00038}00038\ \ \ \ \ \textcolor{keywordflow}{while}\ (std::getline(ifs,\ line))\ counter++;}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00039}00039\ \ \ \ \ \textcolor{keywordflow}{return}\ counter;}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00040}00040\ \}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00042}00042\ \textcolor{keywordtype}{void}\ require\_message\_count(\textcolor{keyword}{const}\ std::string\ \&filename,\ \textcolor{keyword}{const}\ std::size\_t\ messages)\ \{}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00043}00043\ \ \ \ \ \textcolor{keywordflow}{if}\ (strlen(spdlog::details::os::default\_eol)\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00044}00044\ \ \ \ \ \ \ \ \ REQUIRE(count\_lines(filename)\ ==\ 1);}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00045}00045\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00046}00046\ \ \ \ \ \ \ \ \ REQUIRE(count\_lines(filename)\ ==\ messages);}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00047}00047\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00048}00048\ \}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00050}00050\ std::size\_t\ get\_filesize(\textcolor{keyword}{const}\ std::string\ \&filename)\ \{}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00051}00051\ \ \ \ \ std::ifstream\ ifs(filename,\ std::ifstream::ate\ |\ std::ifstream::binary);}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00052}00052\ \ \ \ \ \textcolor{keywordflow}{if}\ (!ifs)\ \{}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Failed\ open\ file\ "{}});}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00054}00054\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00056}00056\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}std::size\_t\textcolor{keyword}{>}(ifs.tellg());}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00057}00057\ \}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00059}00059\ \textcolor{comment}{//\ source:\ https://stackoverflow.com/a/2072890/192001}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00060}00060\ \textcolor{keywordtype}{bool}\ ends\_with(std::string\ \textcolor{keyword}{const}\ \&value,\ std::string\ \textcolor{keyword}{const}\ \&ending)\ \{}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00061}00061\ \ \ \ \ \textcolor{keywordflow}{if}\ (ending.size()\ >\ value.size())\ \{}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00063}00063\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00064}00064\ \ \ \ \ \textcolor{keywordflow}{return}\ std::equal(ending.rbegin(),\ ending.rend(),\ value.rbegin());}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00065}00065\ \}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00067}00067\ \textcolor{preprocessor}{\#ifdef\ \_WIN32}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00068}00068\ \textcolor{comment}{//\ Based\ on:\ https://stackoverflow.com/a/37416569/192001}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00069}00069\ std::size\_t\ count\_files(\textcolor{keyword}{const}\ std::string\ \&folder)\ \{}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00070}00070\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ counter\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00071}00071\ \ \ \ \ WIN32\_FIND\_DATAA\ ffd;}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00073}00073\ \ \ \ \ \textcolor{comment}{//\ Start\ iterating\ over\ the\ files\ in\ the\ folder\ directory.}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00074}00074\ \ \ \ \ HANDLE\ hFind\ =\ ::FindFirstFileA((folder\ +\ \textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)*"{}}).c\_str(),\ \&ffd);}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00075}00075\ \ \ \ \ \textcolor{keywordflow}{if}\ (hFind\ !=\ INVALID\_HANDLE\_VALUE)\ \{}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}\ \ \textcolor{comment}{//\ Managed\ to\ locate\ and\ create\ an\ handle\ to\ that\ folder.}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00077}00077\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ffd.cFileName[0]\ !=\ \textcolor{charliteral}{'.'})\ counter++;}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00079}00079\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (::FindNextFileA(hFind,\ \&ffd)\ !=\ 0);}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00080}00080\ \ \ \ \ \ \ \ \ ::FindClose(hFind);}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00081}00081\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00082}00082\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Failed\ open\ folder\ "{}}\ +\ folder);}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00083}00083\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00085}00085\ \ \ \ \ \textcolor{keywordflow}{return}\ counter;}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00086}00086\ \}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00087}00087\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00088}00088\ \textcolor{comment}{//\ Based\ on:\ https://stackoverflow.com/a/2802255/192001}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00089}00089\ std::size\_t\ count\_files(\textcolor{keyword}{const}\ std::string\ \&folder)\ \{}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00090}00090\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ counter\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00091}00091\ \ \ \ \ DIR\ *dp\ =\ opendir(folder.c\_str());}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00092}00092\ \ \ \ \ \textcolor{keywordflow}{if}\ (dp\ ==\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00093}00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Failed\ open\ folder\ "{}}\ +\ folder);}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00094}00094\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00096}00096\ \ \ \ \ \textcolor{keyword}{struct\ }dirent\ *ep\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00097}00097\ \ \ \ \ \textcolor{keywordflow}{while}\ ((ep\ =\ readdir(dp))\ !=\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00098}00098\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ep-\/>d\_name[0]\ !=\ \textcolor{charliteral}{'.'})\ counter++;}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00099}00099\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00100}00100\ \ \ \ \ (void)closedir(dp);}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00101}00101\ \ \ \ \ \textcolor{keywordflow}{return}\ counter;}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00102}00102\ \}}
+\DoxyCodeLine{\Hypertarget{build_2__deps_2spdlog-src_2tests_2utils_8cpp_source_l00103}00103\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

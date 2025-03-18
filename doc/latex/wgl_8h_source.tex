@@ -1,0 +1,553 @@
+\doxysubsection{wgl.\+h}
+\hypertarget{wgl_8h_source}{}\label{wgl_8h_source}\index{wgl.h@{wgl.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00028}00028\ \textcolor{preprocessor}{\#ifndef\ SF\_GLAD\_WGL\_H\_}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00029}00029\ \textcolor{preprocessor}{\#define\ SF\_GLAD\_WGL\_H\_}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00031}00031\ \textcolor{preprocessor}{\#include\ <windows.h>}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00032}00032\ \textcolor{preprocessor}{\#include\ <glad/gl.h>}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00034}00034\ \textcolor{preprocessor}{\#define\ SF\_GLAD\_WGL}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00035}00035\ \textcolor{preprocessor}{\#define\ GLAD\_OPTION\_WGL\_LOADER}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00036}00036\ \textcolor{preprocessor}{\#define\ GLAD\_OPTION\_WGL\_ALIAS}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00037}00037\ \textcolor{preprocessor}{\#define\ GLAD\_OPTION\_WGL\_HEADER\_ONLY}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00039}00039\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00040}00040\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00041}00041\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00043}00043\ \textcolor{preprocessor}{\#ifndef\ GLAD\_PLATFORM\_H\_}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00044}00044\ \textcolor{preprocessor}{\#define\ GLAD\_PLATFORM\_H\_}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00046}00046\ \textcolor{preprocessor}{\#ifndef\ GLAD\_PLATFORM\_WIN32}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00047}00047\ \textcolor{preprocessor}{\ \ \#if\ defined(\_WIN32)\ ||\ defined(\_\_WIN32\_\_)\ ||\ defined(WIN32)\ ||\ defined(\_\_MINGW32\_\_)}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00048}00048\ \textcolor{preprocessor}{\ \ \ \ \#define\ GLAD\_PLATFORM\_WIN32\ 1}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00049}00049\ \textcolor{preprocessor}{\ \ \#else}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00050}00050\ \textcolor{preprocessor}{\ \ \ \ \#define\ GLAD\_PLATFORM\_WIN32\ 0}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00051}00051\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00052}00052\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00054}00054\ \textcolor{preprocessor}{\#ifndef\ GLAD\_PLATFORM\_APPLE}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00055}00055\ \textcolor{preprocessor}{\ \ \#ifdef\ \_\_APPLE\_\_}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00056}00056\ \textcolor{preprocessor}{\ \ \ \ \#define\ GLAD\_PLATFORM\_APPLE\ 1}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00057}00057\ \textcolor{preprocessor}{\ \ \#else}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00058}00058\ \textcolor{preprocessor}{\ \ \ \ \#define\ GLAD\_PLATFORM\_APPLE\ 0}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00059}00059\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00060}00060\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00062}00062\ \textcolor{preprocessor}{\#ifndef\ GLAD\_PLATFORM\_EMSCRIPTEN}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00063}00063\ \textcolor{preprocessor}{\ \ \#ifdef\ \_\_EMSCRIPTEN\_\_}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00064}00064\ \textcolor{preprocessor}{\ \ \ \ \#define\ GLAD\_PLATFORM\_EMSCRIPTEN\ 1}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00065}00065\ \textcolor{preprocessor}{\ \ \#else}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00066}00066\ \textcolor{preprocessor}{\ \ \ \ \#define\ GLAD\_PLATFORM\_EMSCRIPTEN\ 0}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00067}00067\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00068}00068\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00070}00070\ \textcolor{preprocessor}{\#ifndef\ GLAD\_PLATFORM\_UWP}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00071}00071\ \textcolor{preprocessor}{\ \ \#if\ defined(\_MSC\_VER)\ \&\&\ !defined(GLAD\_INTERNAL\_HAVE\_WINAPIFAMILY)}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00072}00072\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ \_\_has\_include}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00073}00073\ \textcolor{preprocessor}{\ \ \ \ \ \ \#if\ \_\_has\_include(<winapifamily.h>)}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00074}00074\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ GLAD\_INTERNAL\_HAVE\_WINAPIFAMILY\ 1}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00075}00075\ \textcolor{preprocessor}{\ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00076}00076\ \textcolor{preprocessor}{\ \ \ \ \#elif\ \_MSC\_VER\ >=\ 1700\ \&\&\ !\_USING\_V110\_SDK71\_}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00077}00077\ \textcolor{preprocessor}{\ \ \ \ \ \ \#define\ GLAD\_INTERNAL\_HAVE\_WINAPIFAMILY\ 1}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00078}00078\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00079}00079\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00081}00081\ \textcolor{preprocessor}{\ \ \#ifdef\ GLAD\_INTERNAL\_HAVE\_WINAPIFAMILY}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00082}00082\ \textcolor{preprocessor}{\ \ \ \ \#include\ <winapifamily.h>}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00083}00083\ \textcolor{preprocessor}{\ \ \ \ \#if\ !WINAPI\_FAMILY\_PARTITION(WINAPI\_PARTITION\_DESKTOP)\ \&\&\ WINAPI\_FAMILY\_PARTITION(WINAPI\_PARTITION\_APP)}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00084}00084\ \textcolor{preprocessor}{\ \ \ \ \ \ \#define\ GLAD\_PLATFORM\_UWP\ 1}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00085}00085\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00086}00086\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00088}00088\ \textcolor{preprocessor}{\ \ \#ifndef\ GLAD\_PLATFORM\_UWP}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00089}00089\ \textcolor{preprocessor}{\ \ \ \ \#define\ GLAD\_PLATFORM\_UWP\ 0}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00090}00090\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00091}00091\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00093}00093\ \textcolor{preprocessor}{\#ifdef\ \_\_GNUC\_\_}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00094}00094\ \textcolor{preprocessor}{\ \ \#define\ GLAD\_GNUC\_EXTENSION\ \_\_extension\_\_}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00095}00095\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00096}00096\ \textcolor{preprocessor}{\ \ \#define\ GLAD\_GNUC\_EXTENSION}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00097}00097\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00099}00099\ \textcolor{preprocessor}{\#ifndef\ GLAD\_API\_CALL}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00100}00100\ \textcolor{preprocessor}{\ \ \#if\ defined(GLAD\_API\_CALL\_EXPORT)}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00101}00101\ \textcolor{preprocessor}{\ \ \ \ \#if\ GLAD\_PLATFORM\_WIN32\ ||\ defined(\_\_CYGWIN\_\_)}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00102}00102\ \textcolor{preprocessor}{\ \ \ \ \ \ \#if\ defined(GLAD\_API\_CALL\_EXPORT\_BUILD)}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00103}00103\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#if\ defined(\_\_GNUC\_\_)}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00104}00104\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \#define\ GLAD\_API\_CALL\ \_\_attribute\_\_\ ((dllexport))\ extern}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00105}00105\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#else}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00106}00106\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \#define\ GLAD\_API\_CALL\ \_\_declspec(dllexport)\ extern}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00107}00107\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00108}00108\ \textcolor{preprocessor}{\ \ \ \ \ \ \#else}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00109}00109\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#if\ defined(\_\_GNUC\_\_)}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00110}00110\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \#define\ GLAD\_API\_CALL\ \_\_attribute\_\_\ ((dllimport))\ extern}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00111}00111\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#else}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00112}00112\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \#define\ GLAD\_API\_CALL\ \_\_declspec(dllimport)\ extern}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00113}00113\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00114}00114\ \textcolor{preprocessor}{\ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00115}00115\ \textcolor{preprocessor}{\ \ \ \ \#elif\ defined(\_\_GNUC\_\_)\ \&\&\ defined(GLAD\_API\_CALL\_EXPORT\_BUILD)}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00116}00116\ \textcolor{preprocessor}{\ \ \ \ \ \ \#define\ GLAD\_API\_CALL\ \_\_attribute\_\_\ ((visibility\ ("{}default"{})))\ extern}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00117}00117\ \textcolor{preprocessor}{\ \ \ \ \#else}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00118}00118\ \textcolor{preprocessor}{\ \ \ \ \ \ \#define\ GLAD\_API\_CALL\ extern}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00119}00119\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00120}00120\ \textcolor{preprocessor}{\ \ \#else}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00121}00121\ \textcolor{preprocessor}{\ \ \ \ \#define\ GLAD\_API\_CALL\ extern}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00122}00122\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00123}00123\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00125}00125\ \textcolor{preprocessor}{\#ifdef\ APIENTRY}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00126}00126\ \textcolor{preprocessor}{\ \ \#define\ GLAD\_API\_PTR\ APIENTRY}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00127}00127\ \textcolor{preprocessor}{\#elif\ GLAD\_PLATFORM\_WIN32}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00128}00128\ \textcolor{preprocessor}{\ \ \#define\ GLAD\_API\_PTR\ \_\_stdcall}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00129}00129\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00130}00130\ \textcolor{preprocessor}{\ \ \#define\ GLAD\_API\_PTR}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00131}00131\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00132}00132\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00133}00133\ \textcolor{preprocessor}{\#ifndef\ GLAPI}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00134}00134\ \textcolor{preprocessor}{\#define\ GLAPI\ GLAD\_API\_CALL}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00135}00135\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00136}00136\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00137}00137\ \textcolor{preprocessor}{\#ifndef\ GLAPIENTRY}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00138}00138\ \textcolor{preprocessor}{\#define\ GLAPIENTRY\ GLAD\_API\_PTR}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00139}00139\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00141}00141\ \textcolor{preprocessor}{\#define\ GLAD\_MAKE\_VERSION(major,\ minor)\ (major\ *\ 10000\ +\ minor)}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00142}00142\ \textcolor{preprocessor}{\#define\ GLAD\_VERSION\_MAJOR(version)\ (version\ /\ 10000)}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00143}00143\ \textcolor{preprocessor}{\#define\ GLAD\_VERSION\_MINOR(version)\ (version\ \%\ 10000)}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00144}00144\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00145}00145\ \textcolor{preprocessor}{\#define\ GLAD\_GENERATOR\_VERSION\ "{}2.0.0-\/beta"{}}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00146}00146\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00147}00147\ \textcolor{keyword}{typedef}\ void\ (*GLADapiproc)(void);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00149}00149\ \textcolor{keyword}{typedef}\ GLADapiproc\ (*GLADloadfunc)(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *name);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00150}00150\ \textcolor{keyword}{typedef}\ GLADapiproc\ (*GLADuserptrloadfunc)(\textcolor{keywordtype}{void}\ *userptr,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *name);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00152}00152\ \textcolor{keyword}{typedef}\ void\ (*GLADprecallback)(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *name,\ GLADapiproc\ apiproc,\ \textcolor{keywordtype}{int}\ len\_args,\ ...);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00153}00153\ \textcolor{keyword}{typedef}\ void\ (*GLADpostcallback)(\textcolor{keywordtype}{void}\ *ret,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *name,\ GLADapiproc\ apiproc,\ \textcolor{keywordtype}{int}\ len\_args,\ ...);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00155}00155\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ GLAD\_PLATFORM\_H\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00157}00157\ \textcolor{preprocessor}{\#define\ ERROR\_INVALID\_PROFILE\_ARB\ 0x2096}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00158}00158\ \textcolor{preprocessor}{\#define\ ERROR\_INVALID\_VERSION\_ARB\ 0x2095}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00159}00159\ \textcolor{preprocessor}{\#define\ WGL\_ACCELERATION\_ARB\ 0x2003}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00160}00160\ \textcolor{preprocessor}{\#define\ WGL\_ACCUM\_ALPHA\_BITS\_ARB\ 0x2021}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00161}00161\ \textcolor{preprocessor}{\#define\ WGL\_ACCUM\_BITS\_ARB\ 0x201D}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00162}00162\ \textcolor{preprocessor}{\#define\ WGL\_ACCUM\_BLUE\_BITS\_ARB\ 0x2020}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00163}00163\ \textcolor{preprocessor}{\#define\ WGL\_ACCUM\_GREEN\_BITS\_ARB\ 0x201F}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00164}00164\ \textcolor{preprocessor}{\#define\ WGL\_ACCUM\_RED\_BITS\_ARB\ 0x201E}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00165}00165\ \textcolor{preprocessor}{\#define\ WGL\_ALPHA\_BITS\_ARB\ 0x201B}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00166}00166\ \textcolor{preprocessor}{\#define\ WGL\_ALPHA\_SHIFT\_ARB\ 0x201C}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00167}00167\ \textcolor{preprocessor}{\#define\ WGL\_AUX\_BUFFERS\_ARB\ 0x2024}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00168}00168\ \textcolor{preprocessor}{\#define\ WGL\_BLUE\_BITS\_ARB\ 0x2019}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00169}00169\ \textcolor{preprocessor}{\#define\ WGL\_BLUE\_SHIFT\_ARB\ 0x201A}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00170}00170\ \textcolor{preprocessor}{\#define\ WGL\_COLOR\_BITS\_ARB\ 0x2014}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00171}00171\ \textcolor{preprocessor}{\#define\ WGL\_CONTEXT\_COMPATIBILITY\_PROFILE\_BIT\_ARB\ 0x00000002}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00172}00172\ \textcolor{preprocessor}{\#define\ WGL\_CONTEXT\_CORE\_PROFILE\_BIT\_ARB\ 0x00000001}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00173}00173\ \textcolor{preprocessor}{\#define\ WGL\_CONTEXT\_DEBUG\_BIT\_ARB\ 0x00000001}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00174}00174\ \textcolor{preprocessor}{\#define\ WGL\_CONTEXT\_FLAGS\_ARB\ 0x2094}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00175}00175\ \textcolor{preprocessor}{\#define\ WGL\_CONTEXT\_FORWARD\_COMPATIBLE\_BIT\_ARB\ 0x00000002}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00176}00176\ \textcolor{preprocessor}{\#define\ WGL\_CONTEXT\_LAYER\_PLANE\_ARB\ 0x2093}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00177}00177\ \textcolor{preprocessor}{\#define\ WGL\_CONTEXT\_MAJOR\_VERSION\_ARB\ 0x2091}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00178}00178\ \textcolor{preprocessor}{\#define\ WGL\_CONTEXT\_MINOR\_VERSION\_ARB\ 0x2092}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00179}00179\ \textcolor{preprocessor}{\#define\ WGL\_CONTEXT\_PROFILE\_MASK\_ARB\ 0x9126}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00180}00180\ \textcolor{preprocessor}{\#define\ WGL\_DEPTH\_BITS\_ARB\ 0x2022}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00181}00181\ \textcolor{preprocessor}{\#define\ WGL\_DOUBLE\_BUFFER\_ARB\ 0x2011}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00182}00182\ \textcolor{preprocessor}{\#define\ WGL\_DRAW\_TO\_BITMAP\_ARB\ 0x2002}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00183}00183\ \textcolor{preprocessor}{\#define\ WGL\_DRAW\_TO\_PBUFFER\_ARB\ 0x202D}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00184}00184\ \textcolor{preprocessor}{\#define\ WGL\_DRAW\_TO\_WINDOW\_ARB\ 0x2001}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00185}00185\ \textcolor{preprocessor}{\#define\ WGL\_FONT\_LINES\ 0}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00186}00186\ \textcolor{preprocessor}{\#define\ WGL\_FONT\_POLYGONS\ 1}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00187}00187\ \textcolor{preprocessor}{\#define\ WGL\_FRAMEBUFFER\_SRGB\_CAPABLE\_ARB\ 0x20A9}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00188}00188\ \textcolor{preprocessor}{\#define\ WGL\_FRAMEBUFFER\_SRGB\_CAPABLE\_EXT\ 0x20A9}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00189}00189\ \textcolor{preprocessor}{\#define\ WGL\_FULL\_ACCELERATION\_ARB\ 0x2027}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00190}00190\ \textcolor{preprocessor}{\#define\ WGL\_GENERIC\_ACCELERATION\_ARB\ 0x2026}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00191}00191\ \textcolor{preprocessor}{\#define\ WGL\_GREEN\_BITS\_ARB\ 0x2017}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00192}00192\ \textcolor{preprocessor}{\#define\ WGL\_GREEN\_SHIFT\_ARB\ 0x2018}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00193}00193\ \textcolor{preprocessor}{\#define\ WGL\_MAX\_PBUFFER\_HEIGHT\_ARB\ 0x2030}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00194}00194\ \textcolor{preprocessor}{\#define\ WGL\_MAX\_PBUFFER\_PIXELS\_ARB\ 0x202E}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00195}00195\ \textcolor{preprocessor}{\#define\ WGL\_MAX\_PBUFFER\_WIDTH\_ARB\ 0x202F}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00196}00196\ \textcolor{preprocessor}{\#define\ WGL\_NEED\_PALETTE\_ARB\ 0x2004}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00197}00197\ \textcolor{preprocessor}{\#define\ WGL\_NEED\_SYSTEM\_PALETTE\_ARB\ 0x2005}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00198}00198\ \textcolor{preprocessor}{\#define\ WGL\_NO\_ACCELERATION\_ARB\ 0x2025}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00199}00199\ \textcolor{preprocessor}{\#define\ WGL\_NUMBER\_OVERLAYS\_ARB\ 0x2008}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00200}00200\ \textcolor{preprocessor}{\#define\ WGL\_NUMBER\_PIXEL\_FORMATS\_ARB\ 0x2000}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00201}00201\ \textcolor{preprocessor}{\#define\ WGL\_NUMBER\_UNDERLAYS\_ARB\ 0x2009}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00202}00202\ \textcolor{preprocessor}{\#define\ WGL\_PBUFFER\_HEIGHT\_ARB\ 0x2035}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00203}00203\ \textcolor{preprocessor}{\#define\ WGL\_PBUFFER\_LARGEST\_ARB\ 0x2033}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00204}00204\ \textcolor{preprocessor}{\#define\ WGL\_PBUFFER\_LOST\_ARB\ 0x2036}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00205}00205\ \textcolor{preprocessor}{\#define\ WGL\_PBUFFER\_WIDTH\_ARB\ 0x2034}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00206}00206\ \textcolor{preprocessor}{\#define\ WGL\_PIXEL\_TYPE\_ARB\ 0x2013}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00207}00207\ \textcolor{preprocessor}{\#define\ WGL\_RED\_BITS\_ARB\ 0x2015}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00208}00208\ \textcolor{preprocessor}{\#define\ WGL\_RED\_SHIFT\_ARB\ 0x2016}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00209}00209\ \textcolor{preprocessor}{\#define\ WGL\_SAMPLES\_ARB\ 0x2042}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00210}00210\ \textcolor{preprocessor}{\#define\ WGL\_SAMPLE\_BUFFERS\_ARB\ 0x2041}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00211}00211\ \textcolor{preprocessor}{\#define\ WGL\_SHARE\_ACCUM\_ARB\ 0x200E}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00212}00212\ \textcolor{preprocessor}{\#define\ WGL\_SHARE\_DEPTH\_ARB\ 0x200C}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00213}00213\ \textcolor{preprocessor}{\#define\ WGL\_SHARE\_STENCIL\_ARB\ 0x200D}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00214}00214\ \textcolor{preprocessor}{\#define\ WGL\_STENCIL\_BITS\_ARB\ 0x2023}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00215}00215\ \textcolor{preprocessor}{\#define\ WGL\_STEREO\_ARB\ 0x2012}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00216}00216\ \textcolor{preprocessor}{\#define\ WGL\_SUPPORT\_GDI\_ARB\ 0x200F}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00217}00217\ \textcolor{preprocessor}{\#define\ WGL\_SUPPORT\_OPENGL\_ARB\ 0x2010}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00218}00218\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_COPY\_ARB\ 0x2029}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00219}00219\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_EXCHANGE\_ARB\ 0x2028}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00220}00220\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_LAYER\_BUFFERS\_ARB\ 0x2006}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00221}00221\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_MAIN\_PLANE\ 0x00000001}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00222}00222\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_METHOD\_ARB\ 0x2007}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00223}00223\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_OVERLAY1\ 0x00000002}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00224}00224\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_OVERLAY10\ 0x00000400}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00225}00225\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_OVERLAY11\ 0x00000800}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00226}00226\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_OVERLAY12\ 0x00001000}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00227}00227\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_OVERLAY13\ 0x00002000}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00228}00228\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_OVERLAY14\ 0x00004000}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00229}00229\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_OVERLAY15\ 0x00008000}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00230}00230\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_OVERLAY2\ 0x00000004}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00231}00231\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_OVERLAY3\ 0x00000008}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00232}00232\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_OVERLAY4\ 0x00000010}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00233}00233\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_OVERLAY5\ 0x00000020}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00234}00234\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_OVERLAY6\ 0x00000040}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00235}00235\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_OVERLAY7\ 0x00000080}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00236}00236\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_OVERLAY8\ 0x00000100}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00237}00237\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_OVERLAY9\ 0x00000200}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00238}00238\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_UNDEFINED\_ARB\ 0x202A}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00239}00239\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_UNDERLAY1\ 0x00010000}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00240}00240\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_UNDERLAY10\ 0x02000000}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00241}00241\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_UNDERLAY11\ 0x04000000}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00242}00242\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_UNDERLAY12\ 0x08000000}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00243}00243\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_UNDERLAY13\ 0x10000000}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00244}00244\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_UNDERLAY14\ 0x20000000}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00245}00245\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_UNDERLAY15\ 0x40000000}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00246}00246\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_UNDERLAY2\ 0x00020000}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00247}00247\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_UNDERLAY3\ 0x00040000}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00248}00248\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_UNDERLAY4\ 0x00080000}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00249}00249\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_UNDERLAY5\ 0x00100000}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00250}00250\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_UNDERLAY6\ 0x00200000}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00251}00251\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_UNDERLAY7\ 0x00400000}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00252}00252\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_UNDERLAY8\ 0x00800000}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00253}00253\ \textcolor{preprocessor}{\#define\ WGL\_SWAP\_UNDERLAY9\ 0x01000000}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00254}00254\ \textcolor{preprocessor}{\#define\ WGL\_TRANSPARENT\_ALPHA\_VALUE\_ARB\ 0x203A}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00255}00255\ \textcolor{preprocessor}{\#define\ WGL\_TRANSPARENT\_ARB\ 0x200A}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00256}00256\ \textcolor{preprocessor}{\#define\ WGL\_TRANSPARENT\_BLUE\_VALUE\_ARB\ 0x2039}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00257}00257\ \textcolor{preprocessor}{\#define\ WGL\_TRANSPARENT\_GREEN\_VALUE\_ARB\ 0x2038}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00258}00258\ \textcolor{preprocessor}{\#define\ WGL\_TRANSPARENT\_INDEX\_VALUE\_ARB\ 0x203B}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00259}00259\ \textcolor{preprocessor}{\#define\ WGL\_TRANSPARENT\_RED\_VALUE\_ARB\ 0x2037}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00260}00260\ \textcolor{preprocessor}{\#define\ WGL\_TYPE\_COLORINDEX\_ARB\ 0x202C}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00261}00261\ \textcolor{preprocessor}{\#define\ WGL\_TYPE\_RGBA\_ARB\ 0x202B}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00262}00262\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00263}00263\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00264}00264\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00265}00265\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00266}00266\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00267}00267\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00268}00268\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00269}00269\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00270}00270\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00271}00271\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00272}00272\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00273}00273\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00274}00274\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00275}00275\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00276}00276\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00277}00277\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00278}00278\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00279}00279\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00280}00280\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00281}00281\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00282}00282\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00283}00283\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00284}00284\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00285}00285\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00286}00286\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00287}00287\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00288}00288\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00289}00289\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00290}00290\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00291}00291\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00292}00292\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00293}00293\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00294}00294\ \textcolor{keyword}{struct\ }\_GPU\_DEVICE\ \{}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00295}00295\ \ \ \ \ DWORD\ \ cb;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00296}00296\ \ \ \ \ CHAR\ \ \ DeviceName[32];}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00297}00297\ \ \ \ \ CHAR\ \ \ DeviceString[128];}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00298}00298\ \ \ \ \ DWORD\ \ Flags;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00299}00299\ \ \ \ \ RECT\ \ \ rcVirtualScreen;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00300}00300\ \};}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00301}00301\ DECLARE\_HANDLE(HPBUFFERARB);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00302}00302\ DECLARE\_HANDLE(HPBUFFEREXT);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00303}00303\ DECLARE\_HANDLE(HVIDEOOUTPUTDEVICENV);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00304}00304\ DECLARE\_HANDLE(HPVIDEODEV);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00305}00305\ DECLARE\_HANDLE(HPGPUNV);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00306}00306\ DECLARE\_HANDLE(HGPUNV);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00307}00307\ DECLARE\_HANDLE(HVIDEOINPUTDEVICENV);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00308}00308\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\_GPU\_DEVICE\ GPU\_DEVICE;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00309}00309\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\_GPU\_DEVICE\ *PGPU\_DEVICE;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00310}00310\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00311}00311\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00312}00312\ \textcolor{preprocessor}{\#define\ WGL\_VERSION\_1\_0\ 1}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00313}00313\ GLAD\_API\_CALL\ \textcolor{keywordtype}{int}\ SF\_GLAD\_WGL\_VERSION\_1\_0;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00314}00314\ \textcolor{preprocessor}{\#define\ WGL\_ARB\_create\_context\ 1}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00315}00315\ GLAD\_API\_CALL\ \textcolor{keywordtype}{int}\ SF\_GLAD\_WGL\_ARB\_create\_context;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00316}00316\ \textcolor{preprocessor}{\#define\ WGL\_ARB\_create\_context\_profile\ 1}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00317}00317\ GLAD\_API\_CALL\ \textcolor{keywordtype}{int}\ SF\_GLAD\_WGL\_ARB\_create\_context\_profile;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00318}00318\ \textcolor{preprocessor}{\#define\ WGL\_ARB\_extensions\_string\ 1}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00319}00319\ GLAD\_API\_CALL\ \textcolor{keywordtype}{int}\ SF\_GLAD\_WGL\_ARB\_extensions\_string;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00320}00320\ \textcolor{preprocessor}{\#define\ WGL\_ARB\_framebuffer\_sRGB\ 1}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00321}00321\ GLAD\_API\_CALL\ \textcolor{keywordtype}{int}\ SF\_GLAD\_WGL\_ARB\_framebuffer\_sRGB;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00322}00322\ \textcolor{preprocessor}{\#define\ WGL\_ARB\_multisample\ 1}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00323}00323\ GLAD\_API\_CALL\ \textcolor{keywordtype}{int}\ SF\_GLAD\_WGL\_ARB\_multisample;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00324}00324\ \textcolor{preprocessor}{\#define\ WGL\_ARB\_pbuffer\ 1}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00325}00325\ GLAD\_API\_CALL\ \textcolor{keywordtype}{int}\ SF\_GLAD\_WGL\_ARB\_pbuffer;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00326}00326\ \textcolor{preprocessor}{\#define\ WGL\_ARB\_pixel\_format\ 1}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00327}00327\ GLAD\_API\_CALL\ \textcolor{keywordtype}{int}\ SF\_GLAD\_WGL\_ARB\_pixel\_format;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00328}00328\ \textcolor{preprocessor}{\#define\ WGL\_EXT\_extensions\_string\ 1}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00329}00329\ GLAD\_API\_CALL\ \textcolor{keywordtype}{int}\ SF\_GLAD\_WGL\_EXT\_extensions\_string;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00330}00330\ \textcolor{preprocessor}{\#define\ WGL\_EXT\_framebuffer\_sRGB\ 1}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00331}00331\ GLAD\_API\_CALL\ \textcolor{keywordtype}{int}\ SF\_GLAD\_WGL\_EXT\_framebuffer\_sRGB;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00332}00332\ \textcolor{preprocessor}{\#define\ WGL\_EXT\_swap\_control\ 1}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00333}00333\ GLAD\_API\_CALL\ \textcolor{keywordtype}{int}\ SF\_GLAD\_WGL\_EXT\_swap\_control;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00334}00334\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00335}00335\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00336}00336\ \textcolor{keyword}{typedef}\ int\ (GLAD\_API\_PTR\ *PFNCHOOSEPIXELFORMATPROC)(HDC\ hDc,\ \textcolor{keyword}{const}\ PIXELFORMATDESCRIPTOR\ *\ pPfd);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00337}00337\ \textcolor{keyword}{typedef}\ int\ (GLAD\_API\_PTR\ *PFNDESCRIBEPIXELFORMATPROC)(HDC\ hdc,\ \textcolor{keywordtype}{int}\ ipfd,\ UINT\ cjpfd,\ \textcolor{keyword}{const}\ PIXELFORMATDESCRIPTOR\ *\ ppfd);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00338}00338\ \textcolor{keyword}{typedef}\ UINT\ (GLAD\_API\_PTR\ *PFNGETENHMETAFILEPIXELFORMATPROC)(HENHMETAFILE\ hemf,\ \textcolor{keyword}{const}\ PIXELFORMATDESCRIPTOR\ *\ ppfd);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00339}00339\ \textcolor{keyword}{typedef}\ int\ (GLAD\_API\_PTR\ *PFNGETPIXELFORMATPROC)(HDC\ hdc);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00340}00340\ \textcolor{keyword}{typedef}\ BOOL\ (GLAD\_API\_PTR\ *PFNSETPIXELFORMATPROC)(HDC\ hdc,\ \textcolor{keywordtype}{int}\ ipfd,\ \textcolor{keyword}{const}\ PIXELFORMATDESCRIPTOR\ *\ ppfd);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00341}00341\ \textcolor{keyword}{typedef}\ BOOL\ (GLAD\_API\_PTR\ *PFNSWAPBUFFERSPROC)(HDC\ hdc);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00342}00342\ \textcolor{keyword}{typedef}\ BOOL\ (GLAD\_API\_PTR\ *PFNWGLCHOOSEPIXELFORMATARBPROC)(HDC\ hdc,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ *\ piAttribIList,\ \textcolor{keyword}{const}\ FLOAT\ *\ pfAttribFList,\ UINT\ nMaxFormats,\ \textcolor{keywordtype}{int}\ *\ piFormats,\ UINT\ *\ nNumFormats);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00343}00343\ \textcolor{keyword}{typedef}\ BOOL\ (GLAD\_API\_PTR\ *PFNWGLCOPYCONTEXTPROC)(HGLRC\ hglrcSrc,\ HGLRC\ hglrcDst,\ UINT\ mask);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00344}00344\ \textcolor{keyword}{typedef}\ HGLRC\ (GLAD\_API\_PTR\ *PFNWGLCREATECONTEXTPROC)(HDC\ hDc);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00345}00345\ \textcolor{keyword}{typedef}\ HGLRC\ (GLAD\_API\_PTR\ *PFNWGLCREATECONTEXTATTRIBSARBPROC)(HDC\ hDC,\ HGLRC\ hShareContext,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ *\ attribList);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00346}00346\ \textcolor{keyword}{typedef}\ HGLRC\ (GLAD\_API\_PTR\ *PFNWGLCREATELAYERCONTEXTPROC)(HDC\ hDc,\ \textcolor{keywordtype}{int}\ level);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00347}00347\ \textcolor{keyword}{typedef}\ HPBUFFERARB\ (GLAD\_API\_PTR\ *PFNWGLCREATEPBUFFERARBPROC)(HDC\ hDC,\ \textcolor{keywordtype}{int}\ iPixelFormat,\ \textcolor{keywordtype}{int}\ iWidth,\ \textcolor{keywordtype}{int}\ iHeight,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ *\ piAttribList);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00348}00348\ \textcolor{keyword}{typedef}\ BOOL\ (GLAD\_API\_PTR\ *PFNWGLDELETECONTEXTPROC)(HGLRC\ oldContext);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00349}00349\ \textcolor{keyword}{typedef}\ BOOL\ (GLAD\_API\_PTR\ *PFNWGLDESCRIBELAYERPLANEPROC)(HDC\ hDc,\ \textcolor{keywordtype}{int}\ pixelFormat,\ \textcolor{keywordtype}{int}\ layerPlane,\ UINT\ nBytes,\ \textcolor{keyword}{const}\ LAYERPLANEDESCRIPTOR\ *\ plpd);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00350}00350\ \textcolor{keyword}{typedef}\ BOOL\ (GLAD\_API\_PTR\ *PFNWGLDESTROYPBUFFERARBPROC)(HPBUFFERARB\ hPbuffer);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00351}00351\ \textcolor{keyword}{typedef}\ HGLRC\ (GLAD\_API\_PTR\ *PFNWGLGETCURRENTCONTEXTPROC)(void);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00352}00352\ \textcolor{keyword}{typedef}\ HDC\ (GLAD\_API\_PTR\ *PFNWGLGETCURRENTDCPROC)(void);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00353}00353\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ (GLAD\_API\_PTR\ *PFNWGLGETEXTENSIONSSTRINGARBPROC)(HDC\ hdc);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00354}00354\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ (GLAD\_API\_PTR\ *PFNWGLGETEXTENSIONSSTRINGEXTPROC)(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00355}00355\ \textcolor{keyword}{typedef}\ int\ (GLAD\_API\_PTR\ *PFNWGLGETLAYERPALETTEENTRIESPROC)(HDC\ hdc,\ \textcolor{keywordtype}{int}\ iLayerPlane,\ \textcolor{keywordtype}{int}\ iStart,\ \textcolor{keywordtype}{int}\ cEntries,\ \textcolor{keyword}{const}\ COLORREF\ *\ pcr);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00356}00356\ \textcolor{keyword}{typedef}\ HDC\ (GLAD\_API\_PTR\ *PFNWGLGETPBUFFERDCARBPROC)(HPBUFFERARB\ hPbuffer);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00357}00357\ \textcolor{keyword}{typedef}\ BOOL\ (GLAD\_API\_PTR\ *PFNWGLGETPIXELFORMATATTRIBFVARBPROC)(HDC\ hdc,\ \textcolor{keywordtype}{int}\ iPixelFormat,\ \textcolor{keywordtype}{int}\ iLayerPlane,\ UINT\ nAttributes,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ *\ piAttributes,\ FLOAT\ *\ pfValues);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00358}00358\ \textcolor{keyword}{typedef}\ BOOL\ (GLAD\_API\_PTR\ *PFNWGLGETPIXELFORMATATTRIBIVARBPROC)(HDC\ hdc,\ \textcolor{keywordtype}{int}\ iPixelFormat,\ \textcolor{keywordtype}{int}\ iLayerPlane,\ UINT\ nAttributes,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ *\ piAttributes,\ \textcolor{keywordtype}{int}\ *\ piValues);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00359}00359\ \textcolor{keyword}{typedef}\ PROC\ (GLAD\_API\_PTR\ *PFNWGLGETPROCADDRESSPROC)(LPCSTR\ lpszProc);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00360}00360\ \textcolor{keyword}{typedef}\ int\ (GLAD\_API\_PTR\ *PFNWGLGETSWAPINTERVALEXTPROC)(void);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00361}00361\ \textcolor{keyword}{typedef}\ BOOL\ (GLAD\_API\_PTR\ *PFNWGLMAKECURRENTPROC)(HDC\ hDc,\ HGLRC\ newContext);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00362}00362\ \textcolor{keyword}{typedef}\ BOOL\ (GLAD\_API\_PTR\ *PFNWGLQUERYPBUFFERARBPROC)(HPBUFFERARB\ hPbuffer,\ \textcolor{keywordtype}{int}\ iAttribute,\ \textcolor{keywordtype}{int}\ *\ piValue);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00363}00363\ \textcolor{keyword}{typedef}\ BOOL\ (GLAD\_API\_PTR\ *PFNWGLREALIZELAYERPALETTEPROC)(HDC\ hdc,\ \textcolor{keywordtype}{int}\ iLayerPlane,\ BOOL\ bRealize);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00364}00364\ \textcolor{keyword}{typedef}\ int\ (GLAD\_API\_PTR\ *PFNWGLRELEASEPBUFFERDCARBPROC)(HPBUFFERARB\ hPbuffer,\ HDC\ hDC);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00365}00365\ \textcolor{keyword}{typedef}\ int\ (GLAD\_API\_PTR\ *PFNWGLSETLAYERPALETTEENTRIESPROC)(HDC\ hdc,\ \textcolor{keywordtype}{int}\ iLayerPlane,\ \textcolor{keywordtype}{int}\ iStart,\ \textcolor{keywordtype}{int}\ cEntries,\ \textcolor{keyword}{const}\ COLORREF\ *\ pcr);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00366}00366\ \textcolor{keyword}{typedef}\ BOOL\ (GLAD\_API\_PTR\ *PFNWGLSHARELISTSPROC)(HGLRC\ hrcSrvShare,\ HGLRC\ hrcSrvSource);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00367}00367\ \textcolor{keyword}{typedef}\ BOOL\ (GLAD\_API\_PTR\ *PFNWGLSWAPINTERVALEXTPROC)(\textcolor{keywordtype}{int}\ interval);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00368}00368\ \textcolor{keyword}{typedef}\ BOOL\ (GLAD\_API\_PTR\ *PFNWGLSWAPLAYERBUFFERSPROC)(HDC\ hdc,\ UINT\ fuFlags);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00369}00369\ \textcolor{keyword}{typedef}\ BOOL\ (GLAD\_API\_PTR\ *PFNWGLUSEFONTBITMAPSPROC)(HDC\ hDC,\ DWORD\ first,\ DWORD\ count,\ DWORD\ listBase);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00370}00370\ \textcolor{keyword}{typedef}\ BOOL\ (GLAD\_API\_PTR\ *PFNWGLUSEFONTBITMAPSAPROC)(HDC\ hDC,\ DWORD\ first,\ DWORD\ count,\ DWORD\ listBase);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00371}00371\ \textcolor{keyword}{typedef}\ BOOL\ (GLAD\_API\_PTR\ *PFNWGLUSEFONTBITMAPSWPROC)(HDC\ hDC,\ DWORD\ first,\ DWORD\ count,\ DWORD\ listBase);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00372}00372\ \textcolor{keyword}{typedef}\ BOOL\ (GLAD\_API\_PTR\ *PFNWGLUSEFONTOUTLINESPROC)(HDC\ hDC,\ DWORD\ first,\ DWORD\ count,\ DWORD\ listBase,\ FLOAT\ deviation,\ FLOAT\ extrusion,\ \textcolor{keywordtype}{int}\ format,\ LPGLYPHMETRICSFLOAT\ lpgmf);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00373}00373\ \textcolor{keyword}{typedef}\ BOOL\ (GLAD\_API\_PTR\ *PFNWGLUSEFONTOUTLINESAPROC)(HDC\ hDC,\ DWORD\ first,\ DWORD\ count,\ DWORD\ listBase,\ FLOAT\ deviation,\ FLOAT\ extrusion,\ \textcolor{keywordtype}{int}\ format,\ LPGLYPHMETRICSFLOAT\ lpgmf);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00374}00374\ \textcolor{keyword}{typedef}\ BOOL\ (GLAD\_API\_PTR\ *PFNWGLUSEFONTOUTLINESWPROC)(HDC\ hDC,\ DWORD\ first,\ DWORD\ count,\ DWORD\ listBase,\ FLOAT\ deviation,\ FLOAT\ extrusion,\ \textcolor{keywordtype}{int}\ format,\ LPGLYPHMETRICSFLOAT\ lpgmf);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00375}00375\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00376}00376\ GLAD\_API\_CALL\ PFNWGLCHOOSEPIXELFORMATARBPROC\ sf\_glad\_wglChoosePixelFormatARB;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00377}00377\ \textcolor{preprocessor}{\#define\ wglChoosePixelFormatARB\ sf\_glad\_wglChoosePixelFormatARB}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00378}00378\ GLAD\_API\_CALL\ PFNWGLCREATECONTEXTATTRIBSARBPROC\ sf\_glad\_wglCreateContextAttribsARB;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00379}00379\ \textcolor{preprocessor}{\#define\ wglCreateContextAttribsARB\ sf\_glad\_wglCreateContextAttribsARB}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00380}00380\ GLAD\_API\_CALL\ PFNWGLCREATEPBUFFERARBPROC\ sf\_glad\_wglCreatePbufferARB;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00381}00381\ \textcolor{preprocessor}{\#define\ wglCreatePbufferARB\ sf\_glad\_wglCreatePbufferARB}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00382}00382\ GLAD\_API\_CALL\ PFNWGLDESTROYPBUFFERARBPROC\ sf\_glad\_wglDestroyPbufferARB;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00383}00383\ \textcolor{preprocessor}{\#define\ wglDestroyPbufferARB\ sf\_glad\_wglDestroyPbufferARB}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00384}00384\ GLAD\_API\_CALL\ PFNWGLGETEXTENSIONSSTRINGARBPROC\ sf\_glad\_wglGetExtensionsStringARB;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00385}00385\ \textcolor{preprocessor}{\#define\ wglGetExtensionsStringARB\ sf\_glad\_wglGetExtensionsStringARB}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00386}00386\ GLAD\_API\_CALL\ PFNWGLGETEXTENSIONSSTRINGEXTPROC\ sf\_glad\_wglGetExtensionsStringEXT;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00387}00387\ \textcolor{preprocessor}{\#define\ wglGetExtensionsStringEXT\ sf\_glad\_wglGetExtensionsStringEXT}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00388}00388\ GLAD\_API\_CALL\ PFNWGLGETPBUFFERDCARBPROC\ sf\_glad\_wglGetPbufferDCARB;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00389}00389\ \textcolor{preprocessor}{\#define\ wglGetPbufferDCARB\ sf\_glad\_wglGetPbufferDCARB}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00390}00390\ GLAD\_API\_CALL\ PFNWGLGETPIXELFORMATATTRIBFVARBPROC\ sf\_glad\_wglGetPixelFormatAttribfvARB;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00391}00391\ \textcolor{preprocessor}{\#define\ wglGetPixelFormatAttribfvARB\ sf\_glad\_wglGetPixelFormatAttribfvARB}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00392}00392\ GLAD\_API\_CALL\ PFNWGLGETPIXELFORMATATTRIBIVARBPROC\ sf\_glad\_wglGetPixelFormatAttribivARB;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00393}00393\ \textcolor{preprocessor}{\#define\ wglGetPixelFormatAttribivARB\ sf\_glad\_wglGetPixelFormatAttribivARB}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00394}00394\ GLAD\_API\_CALL\ PFNWGLGETSWAPINTERVALEXTPROC\ sf\_glad\_wglGetSwapIntervalEXT;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00395}00395\ \textcolor{preprocessor}{\#define\ wglGetSwapIntervalEXT\ sf\_glad\_wglGetSwapIntervalEXT}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00396}00396\ GLAD\_API\_CALL\ PFNWGLQUERYPBUFFERARBPROC\ sf\_glad\_wglQueryPbufferARB;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00397}00397\ \textcolor{preprocessor}{\#define\ wglQueryPbufferARB\ sf\_glad\_wglQueryPbufferARB}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00398}00398\ GLAD\_API\_CALL\ PFNWGLRELEASEPBUFFERDCARBPROC\ sf\_glad\_wglReleasePbufferDCARB;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00399}00399\ \textcolor{preprocessor}{\#define\ wglReleasePbufferDCARB\ sf\_glad\_wglReleasePbufferDCARB}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00400}00400\ GLAD\_API\_CALL\ PFNWGLSWAPINTERVALEXTPROC\ sf\_glad\_wglSwapIntervalEXT;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00401}00401\ \textcolor{preprocessor}{\#define\ wglSwapIntervalEXT\ sf\_glad\_wglSwapIntervalEXT}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00402}00402\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00403}00403\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00404}00404\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00405}00405\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00406}00406\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00407}00407\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00408}00408\ \}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00409}00409\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00410}00410\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00411}00411\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00412}00412\ \textcolor{comment}{/*\ Source\ */}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00413}00413\ \textcolor{preprocessor}{\#ifdef\ SF\_GLAD\_WGL\_IMPLEMENTATION}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00414}00414\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00415}00415\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00416}00416\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00417}00417\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00418}00418\ \textcolor{preprocessor}{\#ifndef\ GLAD\_IMPL\_UTIL\_C\_}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00419}00419\ \textcolor{preprocessor}{\#define\ GLAD\_IMPL\_UTIL\_C\_}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00420}00420\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00421}00421\ \textcolor{preprocessor}{\#ifdef\ \_MSC\_VER}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00422}00422\ \textcolor{preprocessor}{\#define\ GLAD\_IMPL\_UTIL\_SSCANF\ sscanf\_s}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00423}00423\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00424}00424\ \textcolor{preprocessor}{\#define\ GLAD\_IMPL\_UTIL\_SSCANF\ sscanf}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00425}00425\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00426}00426\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00427}00427\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ GLAD\_IMPL\_UTIL\_C\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00428}00428\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00429}00429\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00430}00430\ \textcolor{keywordtype}{int}\ SF\_GLAD\_WGL\_VERSION\_1\_0\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00431}00431\ \textcolor{keywordtype}{int}\ SF\_GLAD\_WGL\_ARB\_create\_context\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00432}00432\ \textcolor{keywordtype}{int}\ SF\_GLAD\_WGL\_ARB\_create\_context\_profile\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00433}00433\ \textcolor{keywordtype}{int}\ SF\_GLAD\_WGL\_ARB\_extensions\_string\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00434}00434\ \textcolor{keywordtype}{int}\ SF\_GLAD\_WGL\_ARB\_framebuffer\_sRGB\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00435}00435\ \textcolor{keywordtype}{int}\ SF\_GLAD\_WGL\_ARB\_multisample\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00436}00436\ \textcolor{keywordtype}{int}\ SF\_GLAD\_WGL\_ARB\_pbuffer\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00437}00437\ \textcolor{keywordtype}{int}\ SF\_GLAD\_WGL\_ARB\_pixel\_format\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00438}00438\ \textcolor{keywordtype}{int}\ SF\_GLAD\_WGL\_EXT\_extensions\_string\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00439}00439\ \textcolor{keywordtype}{int}\ SF\_GLAD\_WGL\_EXT\_framebuffer\_sRGB\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00440}00440\ \textcolor{keywordtype}{int}\ SF\_GLAD\_WGL\_EXT\_swap\_control\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00441}00441\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00442}00442\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00443}00443\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00444}00444\ PFNWGLCHOOSEPIXELFORMATARBPROC\ sf\_glad\_wglChoosePixelFormatARB\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00445}00445\ PFNWGLCREATECONTEXTATTRIBSARBPROC\ sf\_glad\_wglCreateContextAttribsARB\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00446}00446\ PFNWGLCREATEPBUFFERARBPROC\ sf\_glad\_wglCreatePbufferARB\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00447}00447\ PFNWGLDESTROYPBUFFERARBPROC\ sf\_glad\_wglDestroyPbufferARB\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00448}00448\ PFNWGLGETEXTENSIONSSTRINGARBPROC\ sf\_glad\_wglGetExtensionsStringARB\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00449}00449\ PFNWGLGETEXTENSIONSSTRINGEXTPROC\ sf\_glad\_wglGetExtensionsStringEXT\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00450}00450\ PFNWGLGETPBUFFERDCARBPROC\ sf\_glad\_wglGetPbufferDCARB\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00451}00451\ PFNWGLGETPIXELFORMATATTRIBFVARBPROC\ sf\_glad\_wglGetPixelFormatAttribfvARB\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00452}00452\ PFNWGLGETPIXELFORMATATTRIBIVARBPROC\ sf\_glad\_wglGetPixelFormatAttribivARB\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00453}00453\ PFNWGLGETSWAPINTERVALEXTPROC\ sf\_glad\_wglGetSwapIntervalEXT\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00454}00454\ PFNWGLQUERYPBUFFERARBPROC\ sf\_glad\_wglQueryPbufferARB\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00455}00455\ PFNWGLRELEASEPBUFFERDCARBPROC\ sf\_glad\_wglReleasePbufferDCARB\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00456}00456\ PFNWGLSWAPINTERVALEXTPROC\ sf\_glad\_wglSwapIntervalEXT\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00457}00457\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00458}00458\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00459}00459\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ sf\_glad\_wgl\_load\_WGL\_ARB\_create\_context(GLADuserptrloadfunc\ load,\ \textcolor{keywordtype}{void}\ *userptr)\ \{}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00460}00460\ \ \ \ \ \textcolor{keywordflow}{if}(!SF\_GLAD\_WGL\_ARB\_create\_context)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00461}00461\ \ \ \ \ sf\_glad\_wglCreateContextAttribsARB\ =\ (PFNWGLCREATECONTEXTATTRIBSARBPROC)\ load(userptr,\ \textcolor{stringliteral}{"{}wglCreateContextAttribsARB"{}});}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00462}00462\ \}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00463}00463\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ sf\_glad\_wgl\_load\_WGL\_ARB\_extensions\_string(GLADuserptrloadfunc\ load,\ \textcolor{keywordtype}{void}\ *userptr)\ \{}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00464}00464\ \ \ \ \ \textcolor{keywordflow}{if}(!SF\_GLAD\_WGL\_ARB\_extensions\_string)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00465}00465\ \ \ \ \ sf\_glad\_wglGetExtensionsStringARB\ =\ (PFNWGLGETEXTENSIONSSTRINGARBPROC)\ load(userptr,\ \textcolor{stringliteral}{"{}wglGetExtensionsStringARB"{}});}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00466}00466\ \}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00467}00467\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ sf\_glad\_wgl\_load\_WGL\_ARB\_pbuffer(GLADuserptrloadfunc\ load,\ \textcolor{keywordtype}{void}\ *userptr)\ \{}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00468}00468\ \ \ \ \ \textcolor{keywordflow}{if}(!SF\_GLAD\_WGL\_ARB\_pbuffer)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00469}00469\ \ \ \ \ sf\_glad\_wglCreatePbufferARB\ =\ (PFNWGLCREATEPBUFFERARBPROC)\ load(userptr,\ \textcolor{stringliteral}{"{}wglCreatePbufferARB"{}});}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00470}00470\ \ \ \ \ sf\_glad\_wglDestroyPbufferARB\ =\ (PFNWGLDESTROYPBUFFERARBPROC)\ load(userptr,\ \textcolor{stringliteral}{"{}wglDestroyPbufferARB"{}});}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00471}00471\ \ \ \ \ sf\_glad\_wglGetPbufferDCARB\ =\ (PFNWGLGETPBUFFERDCARBPROC)\ load(userptr,\ \textcolor{stringliteral}{"{}wglGetPbufferDCARB"{}});}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00472}00472\ \ \ \ \ sf\_glad\_wglQueryPbufferARB\ =\ (PFNWGLQUERYPBUFFERARBPROC)\ load(userptr,\ \textcolor{stringliteral}{"{}wglQueryPbufferARB"{}});}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00473}00473\ \ \ \ \ sf\_glad\_wglReleasePbufferDCARB\ =\ (PFNWGLRELEASEPBUFFERDCARBPROC)\ load(userptr,\ \textcolor{stringliteral}{"{}wglReleasePbufferDCARB"{}});}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00474}00474\ \}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00475}00475\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ sf\_glad\_wgl\_load\_WGL\_ARB\_pixel\_format(GLADuserptrloadfunc\ load,\ \textcolor{keywordtype}{void}\ *userptr)\ \{}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00476}00476\ \ \ \ \ \textcolor{keywordflow}{if}(!SF\_GLAD\_WGL\_ARB\_pixel\_format)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00477}00477\ \ \ \ \ sf\_glad\_wglChoosePixelFormatARB\ =\ (PFNWGLCHOOSEPIXELFORMATARBPROC)\ load(userptr,\ \textcolor{stringliteral}{"{}wglChoosePixelFormatARB"{}});}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00478}00478\ \ \ \ \ sf\_glad\_wglGetPixelFormatAttribfvARB\ =\ (PFNWGLGETPIXELFORMATATTRIBFVARBPROC)\ load(userptr,\ \textcolor{stringliteral}{"{}wglGetPixelFormatAttribfvARB"{}});}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00479}00479\ \ \ \ \ sf\_glad\_wglGetPixelFormatAttribivARB\ =\ (PFNWGLGETPIXELFORMATATTRIBIVARBPROC)\ load(userptr,\ \textcolor{stringliteral}{"{}wglGetPixelFormatAttribivARB"{}});}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00480}00480\ \}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00481}00481\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ sf\_glad\_wgl\_load\_WGL\_EXT\_extensions\_string(GLADuserptrloadfunc\ load,\ \textcolor{keywordtype}{void}\ *userptr)\ \{}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00482}00482\ \ \ \ \ \textcolor{keywordflow}{if}(!SF\_GLAD\_WGL\_EXT\_extensions\_string)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00483}00483\ \ \ \ \ sf\_glad\_wglGetExtensionsStringEXT\ =\ (PFNWGLGETEXTENSIONSSTRINGEXTPROC)\ load(userptr,\ \textcolor{stringliteral}{"{}wglGetExtensionsStringEXT"{}});}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00484}00484\ \}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00485}00485\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ sf\_glad\_wgl\_load\_WGL\_EXT\_swap\_control(GLADuserptrloadfunc\ load,\ \textcolor{keywordtype}{void}\ *userptr)\ \{}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00486}00486\ \ \ \ \ \textcolor{keywordflow}{if}(!SF\_GLAD\_WGL\_EXT\_swap\_control)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00487}00487\ \ \ \ \ sf\_glad\_wglGetSwapIntervalEXT\ =\ (PFNWGLGETSWAPINTERVALEXTPROC)\ load(userptr,\ \textcolor{stringliteral}{"{}wglGetSwapIntervalEXT"{}});}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00488}00488\ \ \ \ \ sf\_glad\_wglSwapIntervalEXT\ =\ (PFNWGLSWAPINTERVALEXTPROC)\ load(userptr,\ \textcolor{stringliteral}{"{}wglSwapIntervalEXT"{}});}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00489}00489\ \}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00490}00490\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00491}00491\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ sf\_glad\_wgl\_has\_extension(HDC\ hdc,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *ext)\ \{}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00492}00492\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *terminator;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00493}00493\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *loc;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00494}00494\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *extensions;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00495}00495\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00496}00496\ \ \ \ \ \textcolor{keywordflow}{if}(wglGetExtensionsStringEXT\ ==\ NULL\ \&\&\ wglGetExtensionsStringARB\ ==\ NULL)}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00497}00497\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00498}00498\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00499}00499\ \ \ \ \ \textcolor{keywordflow}{if}(wglGetExtensionsStringARB\ ==\ NULL\ ||\ hdc\ ==\ INVALID\_HANDLE\_VALUE)}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00500}00500\ \ \ \ \ \ \ \ \ extensions\ =\ wglGetExtensionsStringEXT();}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00501}00501\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00502}00502\ \ \ \ \ \ \ \ \ extensions\ =\ wglGetExtensionsStringARB(hdc);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00503}00503\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00504}00504\ \ \ \ \ \textcolor{keywordflow}{if}(extensions\ ==\ NULL\ ||\ ext\ ==\ NULL)}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00505}00505\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00506}00506\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00507}00507\ \ \ \ \ \textcolor{keywordflow}{while}(1)\ \{}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00508}00508\ \ \ \ \ \ \ \ \ loc\ =\ strstr(extensions,\ ext);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00509}00509\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(loc\ ==\ NULL)}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00510}00510\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00511}00511\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00512}00512\ \ \ \ \ \ \ \ \ terminator\ =\ loc\ +\ strlen(ext);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00513}00513\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}((loc\ ==\ extensions\ ||\ *(loc\ -\/\ 1)\ ==\ \textcolor{charliteral}{'\ '})\ \&\&}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00514}00514\ \ \ \ \ \ \ \ \ \ \ \ \ (*terminator\ ==\ \textcolor{charliteral}{'\ '}\ ||\ *terminator\ ==\ \textcolor{charliteral}{'\(\backslash\)0'}))}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00515}00515\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00516}00516\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00517}00517\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00518}00518\ \ \ \ \ \ \ \ \ extensions\ =\ terminator;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00519}00519\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00520}00520\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00521}00521\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00522}00522\ \}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00523}00523\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00524}00524\ \textcolor{keyword}{static}\ GLADapiproc\ sf\_glad\_wgl\_get\_proc\_from\_userptr(\textcolor{keywordtype}{void}\ *userptr,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ name)\ \{}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00525}00525\ \ \ \ \ \textcolor{keywordflow}{return}\ (GLAD\_GNUC\_EXTENSION\ (GLADapiproc\ (*)(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *name))\ userptr)(name);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00526}00526\ \}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00527}00527\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00528}00528\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ sf\_glad\_wgl\_find\_extensions\_wgl(HDC\ hdc)\ \{}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00529}00529\ \ \ \ \ SF\_GLAD\_WGL\_ARB\_create\_context\ =\ sf\_glad\_wgl\_has\_extension(hdc,\ \textcolor{stringliteral}{"{}WGL\_ARB\_create\_context"{}});}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00530}00530\ \ \ \ \ SF\_GLAD\_WGL\_ARB\_create\_context\_profile\ =\ sf\_glad\_wgl\_has\_extension(hdc,\ \textcolor{stringliteral}{"{}WGL\_ARB\_create\_context\_profile"{}});}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00531}00531\ \ \ \ \ SF\_GLAD\_WGL\_ARB\_extensions\_string\ =\ sf\_glad\_wgl\_has\_extension(hdc,\ \textcolor{stringliteral}{"{}WGL\_ARB\_extensions\_string"{}});}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00532}00532\ \ \ \ \ SF\_GLAD\_WGL\_ARB\_framebuffer\_sRGB\ =\ sf\_glad\_wgl\_has\_extension(hdc,\ \textcolor{stringliteral}{"{}WGL\_ARB\_framebuffer\_sRGB"{}});}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00533}00533\ \ \ \ \ SF\_GLAD\_WGL\_ARB\_multisample\ =\ sf\_glad\_wgl\_has\_extension(hdc,\ \textcolor{stringliteral}{"{}WGL\_ARB\_multisample"{}});}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00534}00534\ \ \ \ \ SF\_GLAD\_WGL\_ARB\_pbuffer\ =\ sf\_glad\_wgl\_has\_extension(hdc,\ \textcolor{stringliteral}{"{}WGL\_ARB\_pbuffer"{}});}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00535}00535\ \ \ \ \ SF\_GLAD\_WGL\_ARB\_pixel\_format\ =\ sf\_glad\_wgl\_has\_extension(hdc,\ \textcolor{stringliteral}{"{}WGL\_ARB\_pixel\_format"{}});}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00536}00536\ \ \ \ \ SF\_GLAD\_WGL\_EXT\_extensions\_string\ =\ sf\_glad\_wgl\_has\_extension(hdc,\ \textcolor{stringliteral}{"{}WGL\_EXT\_extensions\_string"{}});}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00537}00537\ \ \ \ \ SF\_GLAD\_WGL\_EXT\_framebuffer\_sRGB\ =\ sf\_glad\_wgl\_has\_extension(hdc,\ \textcolor{stringliteral}{"{}WGL\_EXT\_framebuffer\_sRGB"{}});}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00538}00538\ \ \ \ \ SF\_GLAD\_WGL\_EXT\_swap\_control\ =\ sf\_glad\_wgl\_has\_extension(hdc,\ \textcolor{stringliteral}{"{}WGL\_EXT\_swap\_control"{}});}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00539}00539\ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00540}00540\ \}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00541}00541\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00542}00542\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ sf\_glad\_wgl\_find\_core\_wgl(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00543}00543\ \ \ \ \ \textcolor{keywordtype}{int}\ major\ =\ 1,\ minor\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00544}00544\ \ \ \ \ SF\_GLAD\_WGL\_VERSION\_1\_0\ =\ (major\ ==\ 1\ \&\&\ minor\ >=\ 0)\ ||\ major\ >\ 1;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00545}00545\ \ \ \ \ \textcolor{keywordflow}{return}\ GLAD\_MAKE\_VERSION(major,\ minor);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00546}00546\ \}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00547}00547\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00548}00548\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ gladLoadWGLUserPtr(HDC\ hdc,\ GLADuserptrloadfunc\ load,\ \textcolor{keywordtype}{void}\ *userptr)\ \{}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00549}00549\ \ \ \ \ \textcolor{keywordtype}{int}\ version;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00550}00550\ \ \ \ \ wglGetExtensionsStringARB\ =\ (PFNWGLGETEXTENSIONSSTRINGARBPROC)\ load(userptr,\ \textcolor{stringliteral}{"{}wglGetExtensionsStringARB"{}});}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00551}00551\ \ \ \ \ wglGetExtensionsStringEXT\ =\ (PFNWGLGETEXTENSIONSSTRINGEXTPROC)\ load(userptr,\ \textcolor{stringliteral}{"{}wglGetExtensionsStringEXT"{}});}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00552}00552\ \ \ \ \ \textcolor{keywordflow}{if}(wglGetExtensionsStringARB\ ==\ NULL\ \&\&\ wglGetExtensionsStringEXT\ ==\ NULL)\ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00553}00553\ \ \ \ \ version\ =\ sf\_glad\_wgl\_find\_core\_wgl();}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00554}00554\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00555}00555\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00556}00556\ \ \ \ \ \textcolor{keywordflow}{if}\ (!sf\_glad\_wgl\_find\_extensions\_wgl(hdc))\ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00557}00557\ \ \ \ \ sf\_glad\_wgl\_load\_WGL\_ARB\_create\_context(load,\ userptr);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00558}00558\ \ \ \ \ sf\_glad\_wgl\_load\_WGL\_ARB\_extensions\_string(load,\ userptr);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00559}00559\ \ \ \ \ sf\_glad\_wgl\_load\_WGL\_ARB\_pbuffer(load,\ userptr);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00560}00560\ \ \ \ \ sf\_glad\_wgl\_load\_WGL\_ARB\_pixel\_format(load,\ userptr);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00561}00561\ \ \ \ \ sf\_glad\_wgl\_load\_WGL\_EXT\_extensions\_string(load,\ userptr);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00562}00562\ \ \ \ \ sf\_glad\_wgl\_load\_WGL\_EXT\_swap\_control(load,\ userptr);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00563}00563\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00564}00564\ \ \ \ \ \textcolor{keywordflow}{return}\ version;}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00565}00565\ \}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00566}00566\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00567}00567\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ gladLoadWGL(HDC\ hdc,\ GLADloadfunc\ load)\ \{}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00568}00568\ \ \ \ \ \textcolor{keywordflow}{return}\ gladLoadWGLUserPtr(hdc,\ sf\_glad\_wgl\_get\_proc\_from\_userptr,\ GLAD\_GNUC\_EXTENSION\ (\textcolor{keywordtype}{void}*)\ load);}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00569}00569\ \}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00570}00570\ }
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00571}00571\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ SF\_GLAD\_WGL\_IMPLEMENTATION\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{wgl_8h_source_l00572}00572\ }
+
+\end{DoxyCode}

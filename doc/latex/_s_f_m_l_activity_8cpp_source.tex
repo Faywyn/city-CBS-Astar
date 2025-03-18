@@ -1,0 +1,211 @@
+\doxysubsection{SFMLActivity.\+cpp}
+\hypertarget{_s_f_m_l_activity_8cpp_source}{}\label{_s_f_m_l_activity_8cpp_source}\index{SFMLActivity.cpp@{SFMLActivity.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00002}00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00003}00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00004}00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2013\ Jonathan\ De\ Wachter\ (dewachter.jonathan@gmail.com)}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00005}00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00006}00006\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00007}00007\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00008}00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00009}00009\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00010}00010\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00011}00011\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00012}00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00013}00013\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00014}00014\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00015}00015\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00016}00016\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00017}00017\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00018}00018\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00019}00019\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00020}00020\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00021}00021\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00022}00022\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00025}00025\ \textcolor{preprocessor}{\#include\ <SFML/Config.hpp>}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00026}00026\ \textcolor{preprocessor}{\#include\ <android/native\_activity.h>}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00027}00027\ \textcolor{preprocessor}{\#include\ <android/log.h>}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00028}00028\ \textcolor{preprocessor}{\#include\ <dlfcn.h>}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00029}00029\ \textcolor{preprocessor}{\#include\ <errno.h>}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00030}00030\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00031}00031\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00032}00032\ \textcolor{preprocessor}{\#include\ <jni.h>}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00033}00033\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00035}00035\ \textcolor{preprocessor}{\#define\ LOGE(...)\ ((void)\_\_android\_log\_print(ANDROID\_LOG\_INFO,\ "{}sfml-\/activity"{},\ \_\_VA\_ARGS\_\_))}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00037}00037\ \textcolor{keyword}{namespace\ }\{}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00038}00038\ \ \ \ \ \textcolor{keyword}{typedef}\ void\ (*activityOnCreatePointer)(ANativeActivity*,\ \textcolor{keywordtype}{void}*,\ size\_t);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00039}00039\ \}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00041}00041\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *getLibraryName(JNIEnv*\ lJNIEnv,\ jobject\&\ objectActivityInfo)}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00042}00042\ \{}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00043}00043\ \ \ \ \ \textcolor{comment}{//\ This\ function\ reads\ the\ value\ of\ meta-\/data\ "{}sfml.app.lib\_name"{}}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00044}00044\ \ \ \ \ \textcolor{comment}{//\ found\ in\ the\ Android\ Manifest\ file\ and\ returns\ it.\ It\ performs\ the}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00045}00045\ \ \ \ \ \textcolor{comment}{//\ following\ Java\ code\ using\ the\ JNI\ interface:}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00046}00046\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00047}00047\ \ \ \ \ \textcolor{comment}{//\ ai.metaData.getString("{}sfml.app.lib\_name"{});}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00048}00048\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ name[256];}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00050}00050\ \ \ \ \ \textcolor{comment}{//\ Get\ metaData\ instance\ from\ the\ ActivityInfo\ object}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00051}00051\ \ \ \ \ jclass\ classActivityInfo\ =\ lJNIEnv-\/>FindClass(\textcolor{stringliteral}{"{}android/content/pm/ActivityInfo"{}});}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00052}00052\ \ \ \ \ jfieldID\ fieldMetaData\ =\ lJNIEnv-\/>GetFieldID(classActivityInfo,\ \textcolor{stringliteral}{"{}metaData"{}},\ \textcolor{stringliteral}{"{}Landroid/os/Bundle;"{}});}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00053}00053\ \ \ \ \ jobject\ objectMetaData\ =\ lJNIEnv-\/>GetObjectField(objectActivityInfo,\ fieldMetaData);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00055}00055\ \ \ \ \ \textcolor{comment}{//\ Create\ a\ java\ string\ object\ containing\ "{}sfml.app.lib\_name"{}}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00056}00056\ \ \ \ \ jobject\ objectName\ =\ lJNIEnv-\/>NewStringUTF(\textcolor{stringliteral}{"{}sfml.app.lib\_name"{}});}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00058}00058\ \ \ \ \ \textcolor{comment}{//\ Get\ the\ value\ of\ meta-\/data\ named\ "{}sfml.app.lib\_name"{}}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00059}00059\ \ \ \ \ jclass\ classBundle\ =\ lJNIEnv-\/>FindClass(\textcolor{stringliteral}{"{}android/os/Bundle"{}});}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00060}00060\ \ \ \ \ jmethodID\ methodGetString\ =\ lJNIEnv-\/>GetMethodID(classBundle,\ \textcolor{stringliteral}{"{}getString"{}},\ \textcolor{stringliteral}{"{}(Ljava/lang/String;)Ljava/lang/String;"{}});}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00061}00061\ \ \ \ \ jstring\ valueString\ =\ (jstring)lJNIEnv-\/>CallObjectMethod(objectMetaData,\ methodGetString,\ objectName);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00063}00063\ \ \ \ \ \textcolor{comment}{//\ No\ meta-\/data\ "{}sfml.app.lib\_name"{}\ was\ found\ so\ we\ abort\ and\ inform\ the\ user}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00064}00064\ \ \ \ \ \textcolor{keywordflow}{if}\ (valueString\ ==\ NULL)}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00065}00065\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00066}00066\ \ \ \ \ \ \ \ \ LOGE(\textcolor{stringliteral}{"{}No\ meta-\/data\ 'sfml.app.lib\_name'\ found\ in\ AndroidManifest.xml\ file"{}});}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00067}00067\ \ \ \ \ \ \ \ \ exit(1);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00068}00068\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00070}00070\ \ \ \ \ \textcolor{comment}{//\ Convert\ the\ application\ name\ to\ a\ C++\ string\ and\ return\ it}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00071}00071\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ applicationNameLength\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>}(lJNIEnv-\/>GetStringUTFLength(valueString));}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00072}00072\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ applicationName\ =\ lJNIEnv-\/>GetStringUTFChars(valueString,\ NULL);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00074}00074\ \ \ \ \ \textcolor{keywordflow}{if}\ (applicationNameLength\ >=\ 256)}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00075}00075\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00076}00076\ \ \ \ \ \ \ \ \ LOGE(\textcolor{stringliteral}{"{}The\ value\ of\ 'sfml.app.lib\_name'\ must\ not\ be\ longer\ than\ 255\ characters."{}});}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00077}00077\ \ \ \ \ \ \ \ \ exit(1);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00078}00078\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00080}00080\ \ \ \ \ strncpy(name,\ applicationName,\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>}(applicationNameLength));}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00081}00081\ \ \ \ \ name[applicationNameLength]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00082}00082\ \ \ \ \ lJNIEnv-\/>ReleaseStringUTFChars(valueString,\ applicationName);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00084}00084\ \ \ \ \ \textcolor{keywordflow}{return}\ name;}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00085}00085\ \}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00087}00087\ \textcolor{keywordtype}{void}*\ loadLibrary(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ libraryName,\ JNIEnv*\ lJNIEnv,\ jobject\&\ ObjectActivityInfo)}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00088}00088\ \{}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00089}00089\ \ \ \ \ \textcolor{comment}{//\ Find\ out\ the\ absolute\ path\ of\ the\ library}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00090}00090\ \ \ \ \ jclass\ ClassActivityInfo\ =\ lJNIEnv-\/>FindClass(\textcolor{stringliteral}{"{}android/content/pm/ActivityInfo"{}});}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00091}00091\ \ \ \ \ jfieldID\ FieldApplicationInfo\ =\ lJNIEnv-\/>GetFieldID(ClassActivityInfo,\ \textcolor{stringliteral}{"{}applicationInfo"{}},\ \textcolor{stringliteral}{"{}Landroid/content/pm/ApplicationInfo;"{}});}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00092}00092\ \ \ \ \ jobject\ ObjectApplicationInfo\ =\ lJNIEnv-\/>GetObjectField(ObjectActivityInfo,\ FieldApplicationInfo);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00094}00094\ \ \ \ \ jclass\ ClassApplicationInfo\ =\ lJNIEnv-\/>FindClass(\textcolor{stringliteral}{"{}android/content/pm/ApplicationInfo"{}});}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00095}00095\ \ \ \ \ jfieldID\ FieldNativeLibraryDir\ =\ lJNIEnv-\/>GetFieldID(ClassApplicationInfo,\ \textcolor{stringliteral}{"{}nativeLibraryDir"{}},\ \textcolor{stringliteral}{"{}Ljava/lang/String;"{}});}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00097}00097\ \ \ \ \ jobject\ ObjectDirPath\ =\ lJNIEnv-\/>GetObjectField(ObjectApplicationInfo,\ FieldNativeLibraryDir);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00099}00099\ \ \ \ \ jclass\ ClassSystem\ =\ lJNIEnv-\/>FindClass(\textcolor{stringliteral}{"{}java/lang/System"{}});}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00100}00100\ \ \ \ \ jmethodID\ StaticMethodMapLibraryName\ =\ lJNIEnv-\/>GetStaticMethodID(ClassSystem,\ \textcolor{stringliteral}{"{}mapLibraryName"{}},\ \textcolor{stringliteral}{"{}(Ljava/lang/String;)Ljava/lang/String;"{}});}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00102}00102\ \ \ \ \ jstring\ LibNameObject\ =\ lJNIEnv-\/>NewStringUTF(libraryName);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00103}00103\ \ \ \ \ jobject\ ObjectName\ =\ lJNIEnv-\/>CallStaticObjectMethod(ClassSystem,\ StaticMethodMapLibraryName,\ LibNameObject);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00105}00105\ \ \ \ \ jclass\ ClassFile\ =\ lJNIEnv-\/>FindClass(\textcolor{stringliteral}{"{}java/io/File"{}});}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00106}00106\ \ \ \ \ jmethodID\ FileConstructor\ =\ lJNIEnv-\/>GetMethodID(ClassFile,\ \textcolor{stringliteral}{"{}<init>"{}},\ \textcolor{stringliteral}{"{}(Ljava/lang/String;Ljava/lang/String;)V"{}});}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00107}00107\ \ \ \ \ jobject\ ObjectFile\ =\ lJNIEnv-\/>NewObject(ClassFile,\ FileConstructor,\ ObjectDirPath,\ ObjectName);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00109}00109\ \ \ \ \ \textcolor{comment}{//\ Get\ the\ library\ absolute\ path\ and\ convert\ it}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00110}00110\ \ \ \ \ jmethodID\ MethodGetPath\ =\ lJNIEnv-\/>GetMethodID(ClassFile,\ \textcolor{stringliteral}{"{}getPath"{}},\ \textcolor{stringliteral}{"{}()Ljava/lang/String;"{}});}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00111}00111\ \ \ \ \ jstring\ javaLibraryPath\ =\ \textcolor{keyword}{static\_cast<}jstring\textcolor{keyword}{>}(lJNIEnv-\/>CallObjectMethod(ObjectFile,\ MethodGetPath));}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00112}00112\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ libraryPath\ =\ lJNIEnv-\/>GetStringUTFChars(javaLibraryPath,\ NULL);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00114}00114\ \ \ \ \ \textcolor{comment}{//\ Manually\ load\ the\ library}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00115}00115\ \ \ \ \ \textcolor{keywordtype}{void}\ *\ handle\ =\ dlopen(libraryPath,\ RTLD\_NOW\ |\ RTLD\_GLOBAL);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00116}00116\ \ \ \ \ \textcolor{keywordflow}{if}\ (!handle)}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00117}00117\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00118}00118\ \ \ \ \ \ \ \ \ LOGE(\textcolor{stringliteral}{"{}dlopen(\(\backslash\)"{}\%s\(\backslash\)"{}):\ \%s"{}},\ libraryPath,\ dlerror());}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00119}00119\ \ \ \ \ \ \ \ \ exit(1);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00120}00120\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00122}00122\ \ \ \ \ \textcolor{comment}{//\ Release\ the\ Java\ string}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00123}00123\ \ \ \ \ lJNIEnv-\/>ReleaseStringUTFChars(javaLibraryPath,\ libraryPath);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00125}00125\ \ \ \ \ \textcolor{keywordflow}{return}\ handle;}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00126}00126\ \}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00128}00128\ \textcolor{keywordtype}{void}\ ANativeActivity\_onCreate(ANativeActivity*\ activity,\ \textcolor{keywordtype}{void}*\ savedState,\ \textcolor{keywordtype}{size\_t}\ savedStateSize)}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00129}00129\ \{}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00130}00130\ \ \ \ \ \textcolor{comment}{//\ Before\ we\ can\ load\ a\ library,\ we\ need\ to\ find\ out\ its\ location.\ As}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00131}00131\ \ \ \ \ \textcolor{comment}{//\ we're\ powerless\ here\ in\ C/C++,\ we\ need\ the\ JNI\ interface\ to\ communicate}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00132}00132\ \ \ \ \ \textcolor{comment}{//\ with\ the\ attached\ Java\ virtual\ machine\ and\ perform\ some\ Java\ calls\ in}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00133}00133\ \ \ \ \ \textcolor{comment}{//\ order\ to\ retrieve\ the\ absolute\ path\ of\ our\ libraries.}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00134}00134\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00135}00135\ \ \ \ \ \textcolor{comment}{//\ Here's\ the\ snippet\ of\ Java\ code\ it\ performs:}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00136}00136\ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00137}00137\ \ \ \ \ \textcolor{comment}{//\ ai\ =\ getPackageManager().getActivityInfo(getIntent().getComponent(),\ PackageManager.GET\_META\_DATA);}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00138}00138\ \ \ \ \ \textcolor{comment}{//\ File\ libraryFile\ =\ new\ File(ai.applicationInfo.nativeLibraryDir,\ System.mapLibraryName(libname));}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00139}00139\ \ \ \ \ \textcolor{comment}{//\ String\ path\ =\ libraryFile.getPath();}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00140}00140\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00141}00141\ \ \ \ \ \textcolor{comment}{//\ With\ libname\ being\ the\ library\ name\ such\ as\ "{}jpeg"{}.}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00142}00142\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00143}00143\ \ \ \ \ \textcolor{comment}{//\ Retrieve\ JNI\ environment\ and\ JVM\ instance}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00144}00144\ \ \ \ \ JNIEnv*\ lJNIEnv\ =\ activity-\/>env;}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00145}00145\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00146}00146\ \ \ \ \ \textcolor{comment}{//\ Retrieve\ the\ NativeActivity}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00147}00147\ \ \ \ \ jobject\ ObjectNativeActivity\ =\ activity-\/>clazz;}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00148}00148\ \ \ \ \ jclass\ ClassNativeActivity\ =\ lJNIEnv-\/>GetObjectClass(ObjectNativeActivity);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00149}00149\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00150}00150\ \ \ \ \ \textcolor{comment}{//\ Retrieve\ the\ ActivityInfo}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00151}00151\ \ \ \ \ jmethodID\ MethodGetPackageManager\ =\ lJNIEnv-\/>GetMethodID(ClassNativeActivity,\ \textcolor{stringliteral}{"{}getPackageManager"{}},\ \textcolor{stringliteral}{"{}()Landroid/content/pm/PackageManager;"{}});}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00152}00152\ \ \ \ \ jobject\ ObjectPackageManager\ =\ lJNIEnv-\/>CallObjectMethod(ObjectNativeActivity,\ MethodGetPackageManager);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00153}00153\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00154}00154\ \ \ \ \ jmethodID\ MethodGetIndent\ =\ lJNIEnv-\/>GetMethodID(ClassNativeActivity,\ \textcolor{stringliteral}{"{}getIntent"{}},\ \textcolor{stringliteral}{"{}()Landroid/content/Intent;"{}});}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00155}00155\ \ \ \ \ jobject\ ObjectIntent\ =\ lJNIEnv-\/>CallObjectMethod(ObjectNativeActivity,\ MethodGetIndent);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00157}00157\ \ \ \ \ jclass\ ClassIntent\ =\ lJNIEnv-\/>FindClass(\textcolor{stringliteral}{"{}android/content/Intent"{}});}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00158}00158\ \ \ \ \ jmethodID\ MethodGetComponent\ =\ lJNIEnv-\/>GetMethodID(ClassIntent,\ \textcolor{stringliteral}{"{}getComponent"{}},\ \textcolor{stringliteral}{"{}()Landroid/content/ComponentName;"{}});}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00159}00159\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00160}00160\ \ \ \ \ jobject\ ObjectComponentName\ =\ lJNIEnv-\/>CallObjectMethod(ObjectIntent,\ MethodGetComponent);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00162}00162\ \ \ \ \ jclass\ ClassPackageManager\ =\ lJNIEnv-\/>FindClass(\textcolor{stringliteral}{"{}android/content/pm/PackageManager"{}});}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00163}00163\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00164}00164\ \ \ \ \ jfieldID\ FieldGET\_META\_DATA\ =\ lJNIEnv-\/>GetStaticFieldID(ClassPackageManager,\ \textcolor{stringliteral}{"{}GET\_META\_DATA"{}},\ \textcolor{stringliteral}{"{}I"{}});}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00165}00165\ \ \ \ \ jint\ GET\_META\_DATA\ =\ lJNIEnv-\/>GetStaticIntField(ClassPackageManager,\ FieldGET\_META\_DATA);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00166}00166\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00167}00167\ \ \ \ \ jmethodID\ MethodGetActivityInfo\ =\ lJNIEnv-\/>GetMethodID(ClassPackageManager,\ \textcolor{stringliteral}{"{}getActivityInfo"{}},\ \textcolor{stringliteral}{"{}(Landroid/content/ComponentName;I)Landroid/content/pm/ActivityInfo;"{}});}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00168}00168\ \ \ \ \ jobject\ ObjectActivityInfo\ =\ lJNIEnv-\/>CallObjectMethod(ObjectPackageManager,\ MethodGetActivityInfo,\ ObjectComponentName,\ GET\_META\_DATA);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00169}00169\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00170}00170\ \ \ \ \ \textcolor{comment}{//\ Load\ our\ libraries\ in\ reverse\ order}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00171}00171\ \textcolor{preprocessor}{\#if\ defined(STL\_LIBRARY)}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00172}00172\ \textcolor{preprocessor}{\#define\ \_SFML\_QS(s)\ \_SFML\_S(s)}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00173}00173\ \textcolor{preprocessor}{\#define\ \_SFML\_S(s)\ \#s}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00174}00174\ \ \ \ \ loadLibrary(\_SFML\_QS(STL\_LIBRARY),\ lJNIEnv,\ ObjectActivityInfo);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00175}00175\ \textcolor{preprocessor}{\#undef\ \_SFML\_S}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00176}00176\ \textcolor{preprocessor}{\#undef\ \_SFML\_QS}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00177}00177\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00178}00178\ \ \ \ \ loadLibrary(\textcolor{stringliteral}{"{}openal"{}},\ lJNIEnv,\ ObjectActivityInfo);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00179}00179\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00180}00180\ \textcolor{preprocessor}{\#if\ !defined(SFML\_DEBUG)}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00181}00181\ \ \ \ \ loadLibrary(\textcolor{stringliteral}{"{}sfml-\/system"{}},\ lJNIEnv,\ ObjectActivityInfo);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00182}00182\ \ \ \ \ loadLibrary(\textcolor{stringliteral}{"{}sfml-\/window"{}},\ lJNIEnv,\ ObjectActivityInfo);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00183}00183\ \ \ \ \ loadLibrary(\textcolor{stringliteral}{"{}sfml-\/graphics"{}},\ lJNIEnv,\ ObjectActivityInfo);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00184}00184\ \ \ \ \ loadLibrary(\textcolor{stringliteral}{"{}sfml-\/audio"{}},\ lJNIEnv,\ ObjectActivityInfo);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00185}00185\ \ \ \ \ loadLibrary(\textcolor{stringliteral}{"{}sfml-\/network"{}},\ lJNIEnv,\ ObjectActivityInfo);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00186}00186\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00187}00187\ \ \ \ \ loadLibrary(\textcolor{stringliteral}{"{}sfml-\/system-\/d"{}},\ lJNIEnv,\ ObjectActivityInfo);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00188}00188\ \ \ \ \ loadLibrary(\textcolor{stringliteral}{"{}sfml-\/window-\/d"{}},\ lJNIEnv,\ ObjectActivityInfo);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00189}00189\ \ \ \ \ loadLibrary(\textcolor{stringliteral}{"{}sfml-\/graphics-\/d"{}},\ lJNIEnv,\ ObjectActivityInfo);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00190}00190\ \ \ \ \ loadLibrary(\textcolor{stringliteral}{"{}sfml-\/audio-\/d"{}},\ lJNIEnv,\ ObjectActivityInfo);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00191}00191\ \ \ \ \ loadLibrary(\textcolor{stringliteral}{"{}sfml-\/network-\/d"{}},\ lJNIEnv,\ ObjectActivityInfo);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00192}00192\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00193}00193\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00194}00194\ \ \ \ \ \textcolor{keywordtype}{void}*\ handle\ =\ loadLibrary(getLibraryName(lJNIEnv,\ ObjectActivityInfo),\ lJNIEnv,\ ObjectActivityInfo);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00195}00195\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00196}00196\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ original\ ANativeActivity\_onCreate\ function}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00197}00197\ \ \ \ \ activityOnCreatePointer\ ANativeActivity\_onCreate\ =\ (activityOnCreatePointer)dlsym(handle,\ \textcolor{stringliteral}{"{}ANativeActivity\_onCreate"{}});}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00198}00198\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00199}00199\ \ \ \ \ \textcolor{keywordflow}{if}\ (!ANativeActivity\_onCreate)}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00200}00200\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00201}00201\ \ \ \ \ \ \ \ \ LOGE(\textcolor{stringliteral}{"{}sfml-\/activity:\ Undefined\ symbol\ ANativeActivity\_onCreate"{}});}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00202}00202\ \ \ \ \ \ \ \ \ exit(1);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00203}00203\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00204}00204\ }
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00205}00205\ \ \ \ \ ANativeActivity\_onCreate(activity,\ savedState,\ savedStateSize);}
+\DoxyCodeLine{\Hypertarget{_s_f_m_l_activity_8cpp_source_l00206}00206\ \}}
+
+\end{DoxyCode}

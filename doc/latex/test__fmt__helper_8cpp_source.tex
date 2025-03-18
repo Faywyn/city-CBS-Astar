@@ -1,0 +1,88 @@
+\doxysubsection{test\+\_\+fmt\+\_\+helper.\+cpp}
+\hypertarget{test__fmt__helper_8cpp_source}{}\label{test__fmt__helper_8cpp_source}\index{test\_fmt\_helper.cpp@{test\_fmt\_helper.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}includes.h"{}}}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00004}00004\ \textcolor{keyword}{using\ }spdlog::memory\_buf\_t;}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00005}00005\ \textcolor{keyword}{using\ }spdlog::details::to\_string\_view;}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00007}00007\ \textcolor{keywordtype}{void}\ test\_pad2(\textcolor{keywordtype}{int}\ n,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *expected)\ \{}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00008}00008\ \ \ \ \ memory\_buf\_t\ buf;}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00009}00009\ \ \ \ \ spdlog::details::fmt\_helper::pad2(n,\ buf);}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00011}00011\ \ \ \ \ REQUIRE(to\_string\_view(buf)\ ==\ expected);}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00012}00012\ \}}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00014}00014\ \textcolor{keywordtype}{void}\ test\_pad3(uint32\_t\ n,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *expected)\ \{}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00015}00015\ \ \ \ \ memory\_buf\_t\ buf;}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00016}00016\ \ \ \ \ spdlog::details::fmt\_helper::pad3(n,\ buf);}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00018}00018\ \ \ \ \ REQUIRE(to\_string\_view(buf)\ ==\ expected);}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00019}00019\ \}}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00021}00021\ \textcolor{keywordtype}{void}\ test\_pad6(std::size\_t\ n,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *expected)\ \{}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00022}00022\ \ \ \ \ memory\_buf\_t\ buf;}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00023}00023\ \ \ \ \ spdlog::details::fmt\_helper::pad6(n,\ buf);}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00025}00025\ \ \ \ \ REQUIRE(to\_string\_view(buf)\ ==\ expected);}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00026}00026\ \}}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00028}00028\ \textcolor{keywordtype}{void}\ test\_pad9(std::size\_t\ n,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *expected)\ \{}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00029}00029\ \ \ \ \ memory\_buf\_t\ buf;}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00030}00030\ \ \ \ \ spdlog::details::fmt\_helper::pad9(n,\ buf);}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00032}00032\ \ \ \ \ REQUIRE(to\_string\_view(buf)\ ==\ expected);}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00033}00033\ \}}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00035}00035\ TEST\_CASE(\textcolor{stringliteral}{"{}pad2"{}},\ \textcolor{stringliteral}{"{}[fmt\_helper]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00036}00036\ \ \ \ \ test\_pad2(0,\ \textcolor{stringliteral}{"{}00"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00037}00037\ \ \ \ \ test\_pad2(3,\ \textcolor{stringliteral}{"{}03"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00038}00038\ \ \ \ \ test\_pad2(10,\ \textcolor{stringliteral}{"{}10"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00039}00039\ \ \ \ \ test\_pad2(23,\ \textcolor{stringliteral}{"{}23"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00040}00040\ \ \ \ \ test\_pad2(99,\ \textcolor{stringliteral}{"{}99"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00041}00041\ \ \ \ \ test\_pad2(100,\ \textcolor{stringliteral}{"{}100"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00042}00042\ \ \ \ \ test\_pad2(123,\ \textcolor{stringliteral}{"{}123"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00043}00043\ \ \ \ \ test\_pad2(1234,\ \textcolor{stringliteral}{"{}1234"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00044}00044\ \ \ \ \ test\_pad2(-\/5,\ \textcolor{stringliteral}{"{}-\/5"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00045}00045\ \}}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00047}00047\ TEST\_CASE(\textcolor{stringliteral}{"{}pad3"{}},\ \textcolor{stringliteral}{"{}[fmt\_helper]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00048}00048\ \ \ \ \ test\_pad3(0,\ \textcolor{stringliteral}{"{}000"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00049}00049\ \ \ \ \ test\_pad3(3,\ \textcolor{stringliteral}{"{}003"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00050}00050\ \ \ \ \ test\_pad3(10,\ \textcolor{stringliteral}{"{}010"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00051}00051\ \ \ \ \ test\_pad3(23,\ \textcolor{stringliteral}{"{}023"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00052}00052\ \ \ \ \ test\_pad3(99,\ \textcolor{stringliteral}{"{}099"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00053}00053\ \ \ \ \ test\_pad3(100,\ \textcolor{stringliteral}{"{}100"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00054}00054\ \ \ \ \ test\_pad3(123,\ \textcolor{stringliteral}{"{}123"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00055}00055\ \ \ \ \ test\_pad3(999,\ \textcolor{stringliteral}{"{}999"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00056}00056\ \ \ \ \ test\_pad3(1000,\ \textcolor{stringliteral}{"{}1000"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00057}00057\ \ \ \ \ test\_pad3(1234,\ \textcolor{stringliteral}{"{}1234"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00058}00058\ \}}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00060}00060\ TEST\_CASE(\textcolor{stringliteral}{"{}pad6"{}},\ \textcolor{stringliteral}{"{}[fmt\_helper]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00061}00061\ \ \ \ \ test\_pad6(0,\ \textcolor{stringliteral}{"{}000000"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00062}00062\ \ \ \ \ test\_pad6(3,\ \textcolor{stringliteral}{"{}000003"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00063}00063\ \ \ \ \ test\_pad6(23,\ \textcolor{stringliteral}{"{}000023"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00064}00064\ \ \ \ \ test\_pad6(123,\ \textcolor{stringliteral}{"{}000123"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00065}00065\ \ \ \ \ test\_pad6(1234,\ \textcolor{stringliteral}{"{}001234"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00066}00066\ \ \ \ \ test\_pad6(12345,\ \textcolor{stringliteral}{"{}012345"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00067}00067\ \ \ \ \ test\_pad6(123456,\ \textcolor{stringliteral}{"{}123456"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00068}00068\ \}}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00070}00070\ TEST\_CASE(\textcolor{stringliteral}{"{}pad9"{}},\ \textcolor{stringliteral}{"{}[fmt\_helper]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00071}00071\ \ \ \ \ test\_pad9(0,\ \textcolor{stringliteral}{"{}000000000"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00072}00072\ \ \ \ \ test\_pad9(3,\ \textcolor{stringliteral}{"{}000000003"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00073}00073\ \ \ \ \ test\_pad9(23,\ \textcolor{stringliteral}{"{}000000023"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00074}00074\ \ \ \ \ test\_pad9(123,\ \textcolor{stringliteral}{"{}000000123"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00075}00075\ \ \ \ \ test\_pad9(1234,\ \textcolor{stringliteral}{"{}000001234"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00076}00076\ \ \ \ \ test\_pad9(12345,\ \textcolor{stringliteral}{"{}000012345"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00077}00077\ \ \ \ \ test\_pad9(123456,\ \textcolor{stringliteral}{"{}000123456"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00078}00078\ \ \ \ \ test\_pad9(1234567,\ \textcolor{stringliteral}{"{}001234567"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00079}00079\ \ \ \ \ test\_pad9(12345678,\ \textcolor{stringliteral}{"{}012345678"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00080}00080\ \ \ \ \ test\_pad9(123456789,\ \textcolor{stringliteral}{"{}123456789"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00081}00081\ \ \ \ \ test\_pad9(1234567891,\ \textcolor{stringliteral}{"{}1234567891"{}});}
+\DoxyCodeLine{\Hypertarget{test__fmt__helper_8cpp_source_l00082}00082\ \}}
+
+\end{DoxyCode}

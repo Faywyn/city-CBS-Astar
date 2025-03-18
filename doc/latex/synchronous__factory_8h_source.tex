@@ -1,0 +1,28 @@
+\doxysubsection{synchronous\+\_\+factory.\+h}
+\hypertarget{synchronous__factory_8h_source}{}\label{synchronous__factory_8h_source}\index{synchronous\_factory.h@{synchronous\_factory.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{synchronous__factory_8h_source_l00001}00001\ \textcolor{comment}{//\ Copyright(c)\ 2015-\/present,\ Gabi\ Melman\ \&\ spdlog\ contributors.}}
+\DoxyCodeLine{\Hypertarget{synchronous__factory_8h_source_l00002}00002\ \textcolor{comment}{//\ Distributed\ under\ the\ MIT\ License\ (http://opensource.org/licenses/MIT)}}
+\DoxyCodeLine{\Hypertarget{synchronous__factory_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{synchronous__factory_8h_source_l00004}00004\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{synchronous__factory_8h_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{synchronous__factory_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}registry.h"{}}}
+\DoxyCodeLine{\Hypertarget{synchronous__factory_8h_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{synchronous__factory_8h_source_l00008}00008\ \textcolor{keyword}{namespace\ }spdlog\ \{}
+\DoxyCodeLine{\Hypertarget{synchronous__factory_8h_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{synchronous__factory_8h_source_l00010}00010\ \textcolor{comment}{//\ Default\ logger\ factory-\/\ \ creates\ synchronous\ loggers}}
+\DoxyCodeLine{\Hypertarget{synchronous__factory_8h_source_l00011}00011\ \textcolor{keyword}{class\ }logger;}
+\DoxyCodeLine{\Hypertarget{synchronous__factory_8h_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{synchronous__factory_8h_source_l00013}00013\ \textcolor{keyword}{struct\ }synchronous\_factory\ \{}
+\DoxyCodeLine{\Hypertarget{synchronous__factory_8h_source_l00014}00014\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Sink,\ \textcolor{keyword}{typename}...\ SinkArgs>}
+\DoxyCodeLine{\Hypertarget{synchronous__factory_8h_source_l00015}00015\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<spdlog::logger>\ create(std::string\ logger\_name,\ SinkArgs\ \&\&...args)\ \{}
+\DoxyCodeLine{\Hypertarget{synchronous__factory_8h_source_l00016}00016\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ sink\ =\ std::make\_shared<Sink>(std::forward<SinkArgs>(args)...);}
+\DoxyCodeLine{\Hypertarget{synchronous__factory_8h_source_l00017}00017\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ new\_logger\ =\ std::make\_shared<spdlog::logger>(std::move(logger\_name),\ std::move(sink));}
+\DoxyCodeLine{\Hypertarget{synchronous__factory_8h_source_l00018}00018\ \ \ \ \ \ \ \ \ details::registry::instance().initialize\_logger(new\_logger);}
+\DoxyCodeLine{\Hypertarget{synchronous__factory_8h_source_l00019}00019\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ new\_logger;}
+\DoxyCodeLine{\Hypertarget{synchronous__factory_8h_source_l00020}00020\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{synchronous__factory_8h_source_l00021}00021\ \};}
+\DoxyCodeLine{\Hypertarget{synchronous__factory_8h_source_l00022}00022\ \}\ \ \textcolor{comment}{//\ namespace\ spdlog}}
+
+\end{DoxyCode}

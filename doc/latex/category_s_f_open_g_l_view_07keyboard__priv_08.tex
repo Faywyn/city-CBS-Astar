@@ -1,0 +1,76 @@
+\doxysubsection{SFOpen\+GLView(keyboard\+\_\+priv) Category Reference}
+\hypertarget{category_s_f_open_g_l_view_07keyboard__priv_08}{}\label{category_s_f_open_g_l_view_07keyboard__priv_08}\index{SFOpenGLView(keyboard\_priv)@{SFOpenGLView(keyboard\_priv)}}
+
+
+{\ttfamily \#include $<$SFOpen\+GLView+keyboard\+\_\+priv.\+h$>$}
+
+\doxysubsubsubsection*{Class Methods}
+\begin{DoxyCompactItemize}
+\item 
+(sf\+::\+Event\+::\+Key\+Event) + \mbox{\hyperlink{category_s_f_open_g_l_view_07keyboard__priv_08_ad4a61933f54e2eb4996b22a1f2ebef6e}{convert\+NSKey\+Event\+To\+SFMLEvent\+:}}
+\begin{DoxyCompactList}\small\item\em Convert a key down/up NSEvent into an SFML key event. \end{DoxyCompactList}\item 
+(BOOL) + \mbox{\hyperlink{category_s_f_open_g_l_view_07keyboard__priv_08_aa8a67ba6c9faab468fbdf9b3f794c2dd}{is\+Valid\+Text\+Unicode\+:}}
+\begin{DoxyCompactList}\small\item\em Check if the event represent some Unicode text. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Here are defined a few private messages for keyboard handling in \doxylink{interface_s_f_open_g_l_view}{SFOpen\+GLView}. 
+
+Definition at line \mbox{\hyperlink{_s_f_open_g_l_view_09keyboard__priv_8h_source_l00041}{41}} of file \mbox{\hyperlink{_s_f_open_g_l_view_09keyboard__priv_8h_source}{SFOpen\+GLView+keyboard\+\_\+priv.\+h}}.
+
+
+
+\doxysubsubsection{Method Documentation}
+\Hypertarget{category_s_f_open_g_l_view_07keyboard__priv_08_ad4a61933f54e2eb4996b22a1f2ebef6e}\index{SFOpenGLView(keyboard\_priv)@{SFOpenGLView(keyboard\_priv)}!convertNSKeyEventToSFMLEvent:@{convertNSKeyEventToSFMLEvent:}}
+\index{convertNSKeyEventToSFMLEvent:@{convertNSKeyEventToSFMLEvent:}!SFOpenGLView(keyboard\_priv)@{SFOpenGLView(keyboard\_priv)}}
+\doxyparagraph{\texorpdfstring{convertNSKeyEventToSFMLEvent:}{convertNSKeyEventToSFMLEvent:}}
+{\footnotesize\ttfamily \label{category_s_f_open_g_l_view_07keyboard__priv_08_ad4a61933f54e2eb4996b22a1f2ebef6e} 
++ Event\+: \begin{DoxyParamCaption}\item[{(NSEvent \texorpdfstring{$\ast$}{*})}]{event}{}\end{DoxyParamCaption}}
+
+
+
+Convert a key down/up NSEvent into an SFML key event. 
+
+The conversion is based on localized\+Keys and non\+Localized\+Keys functions.
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & a key event\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+sf\+::\+Keyboard\+::\+Unknown as Code if the key is unknown 
+\end{DoxyReturn}
+
+
+Extends class \mbox{\hyperlink{interface_s_f_open_g_l_view_ad4a61933f54e2eb4996b22a1f2ebef6e}{SFOpen\+GLView}}.
+
+\Hypertarget{category_s_f_open_g_l_view_07keyboard__priv_08_aa8a67ba6c9faab468fbdf9b3f794c2dd}\index{SFOpenGLView(keyboard\_priv)@{SFOpenGLView(keyboard\_priv)}!isValidTextUnicode:@{isValidTextUnicode:}}
+\index{isValidTextUnicode:@{isValidTextUnicode:}!SFOpenGLView(keyboard\_priv)@{SFOpenGLView(keyboard\_priv)}}
+\doxyparagraph{\texorpdfstring{isValidTextUnicode:}{isValidTextUnicode:}}
+{\footnotesize\ttfamily \label{category_s_f_open_g_l_view_07keyboard__priv_08_aa8a67ba6c9faab468fbdf9b3f794c2dd} 
++ (BOOL) is\+Valid\+Text\+Unicode\+: \begin{DoxyParamCaption}\item[{(NSEvent \texorpdfstring{$\ast$}{*})}]{event}{}\end{DoxyParamCaption}}
+
+
+
+Check if the event represent some Unicode text. 
+
+The event is assumed to be a key down event. False is returned if the event is either escape or a non text Unicode.
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & a key down event\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if event represents a Unicode character, false otherwise 
+\end{DoxyReturn}
+
+
+Extends class \mbox{\hyperlink{interface_s_f_open_g_l_view_aa8a67ba6c9faab468fbdf9b3f794c2dd}{SFOpen\+GLView}}.
+
+
+
+The documentation for this category was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+SFOpen\+GLView+keyboard\+\_\+priv.\+h\end{DoxyCompactItemize}

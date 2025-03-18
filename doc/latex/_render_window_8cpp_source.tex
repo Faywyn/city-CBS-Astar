@@ -1,0 +1,133 @@
+\doxysubsection{Render\+Window.\+cpp}
+\hypertarget{_render_window_8cpp_source}{}\label{_render_window_8cpp_source}\index{RenderWindow.cpp@{RenderWindow.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00002}00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00003}00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00004}00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00005}00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00006}00006\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00007}00007\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00008}00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00009}00009\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00010}00010\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00011}00011\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00012}00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00013}00013\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00014}00014\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00015}00015\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00016}00016\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00017}00017\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00018}00018\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00019}00019\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00020}00020\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00021}00021\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00022}00022\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00026}00026\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00028}00028\ \textcolor{preprocessor}{\#include\ <SFML/Graphics/RenderWindow.hpp>}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00029}00029\ \textcolor{preprocessor}{\#include\ <SFML/Graphics/Texture.hpp>}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00030}00030\ \textcolor{preprocessor}{\#include\ <SFML/Graphics/GLCheck.hpp>}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00031}00031\ \textcolor{preprocessor}{\#include\ <SFML/Graphics/RenderTextureImplFBO.hpp>}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00034}00034\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00035}00035\ \{}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00037}00037\ RenderWindow::RenderWindow()\ :}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00038}00038\ m\_defaultFrameBuffer(0)}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00039}00039\ \{}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00040}00040\ \ \ \ \ \textcolor{comment}{//\ Nothing\ to\ do}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00041}00041\ \}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00045}00045\ RenderWindow::RenderWindow(VideoMode\ mode,\ \textcolor{keyword}{const}\ String\&\ title,\ Uint32\ style,\ \textcolor{keyword}{const}\ ContextSettings\&\ settings)\ :}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00046}00046\ m\_defaultFrameBuffer(0)}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00047}00047\ \{}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00048}00048\ \ \ \ \ \textcolor{comment}{//\ Don't\ call\ the\ base\ class\ constructor\ because\ it\ contains\ virtual\ function\ calls}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00049}00049\ \ \ \ \ Window::create(mode,\ title,\ style,\ settings);}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00050}00050\ \}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00054}00054\ RenderWindow::RenderWindow(WindowHandle\ handle,\ \textcolor{keyword}{const}\ ContextSettings\&\ settings)\ :}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00055}00055\ m\_defaultFrameBuffer(0)}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00056}00056\ \{}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00057}00057\ \ \ \ \ \textcolor{comment}{//\ Don't\ call\ the\ base\ class\ constructor\ because\ it\ contains\ virtual\ function\ calls}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00058}00058\ \ \ \ \ Window::create(handle,\ settings);}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00059}00059\ \}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00063}00063\ RenderWindow::\string~RenderWindow()}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00064}00064\ \{}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00065}00065\ \ \ \ \ \textcolor{comment}{//\ Nothing\ to\ do}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00066}00066\ \}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00070}00070\ Vector2u\ RenderWindow::getSize()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00071}00071\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00072}00072\ \ \ \ \ \textcolor{keywordflow}{return}\ Window::getSize();}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00073}00073\ \}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00077}00077\ \textcolor{keywordtype}{bool}\ RenderWindow::isSrgb()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00078}00078\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00079}00079\ \ \ \ \ \textcolor{keywordflow}{return}\ getSettings().sRgbCapable;}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00080}00080\ \}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00084}00084\ \textcolor{keywordtype}{bool}\ RenderWindow::setActive(\textcolor{keywordtype}{bool}\ active)}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00085}00085\ \{}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00086}00086\ \ \ \ \ \textcolor{keywordtype}{bool}\ result\ =\ Window::setActive(active);}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00088}00088\ \ \ \ \ \textcolor{comment}{//\ Update\ RenderTarget\ tracking}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00089}00089\ \ \ \ \ \textcolor{keywordflow}{if}\ (result)}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00090}00090\ \ \ \ \ \ \ \ \ RenderTarget::setActive(active);}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00092}00092\ \ \ \ \ \textcolor{comment}{//\ If\ FBOs\ are\ available,\ make\ sure\ none\ are\ bound\ when\ we}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00093}00093\ \ \ \ \ \textcolor{comment}{//\ try\ to\ draw\ to\ the\ default\ framebuffer\ of\ the\ RenderWindow}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00094}00094\ \ \ \ \ \textcolor{keywordflow}{if}\ (active\ \&\&\ result\ \&\&\ priv::RenderTextureImplFBO::isAvailable())}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00095}00095\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00096}00096\ \ \ \ \ \ \ \ \ glCheck(GLEXT\_glBindFramebuffer(GLEXT\_GL\_FRAMEBUFFER,\ m\_defaultFrameBuffer));}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00098}00098\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00099}00099\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00101}00101\ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00102}00102\ \}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00106}00106\ Image\ RenderWindow::capture()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00107}00107\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00108}00108\ \ \ \ \ Vector2u\ windowSize\ =\ getSize();}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00110}00110\ \ \ \ \ Texture\ texture;}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00111}00111\ \ \ \ \ texture.create(windowSize.x,\ windowSize.y);}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00112}00112\ \ \ \ \ texture.update(*\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00114}00114\ \ \ \ \ \textcolor{keywordflow}{return}\ texture.copyToImage();}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00115}00115\ \}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00119}00119\ \textcolor{keywordtype}{void}\ RenderWindow::onCreate()}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00120}00120\ \{}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00121}00121\ \ \ \ \ \textcolor{keywordflow}{if}\ (priv::RenderTextureImplFBO::isAvailable())}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00122}00122\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00123}00123\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Retrieve\ the\ framebuffer\ ID\ we\ have\ to\ bind\ when\ targeting\ the\ window\ for\ rendering}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00124}00124\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ We\ assume\ that\ this\ window's\ context\ is\ still\ active\ at\ this\ point}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00125}00125\ \ \ \ \ \ \ \ \ glCheck(glGetIntegerv(GLEXT\_GL\_FRAMEBUFFER\_BINDING,\ \textcolor{keyword}{reinterpret\_cast<}GLint*\textcolor{keyword}{>}(\&m\_defaultFrameBuffer)));}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00126}00126\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00128}00128\ \ \ \ \ \textcolor{comment}{//\ Just\ initialize\ the\ render\ target\ part}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00129}00129\ \ \ \ \ RenderTarget::initialize();}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00130}00130\ \}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00132}00132\ }
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00134}00134\ \textcolor{keywordtype}{void}\ RenderWindow::onResize()}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00135}00135\ \{}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00136}00136\ \ \ \ \ \textcolor{comment}{//\ Update\ the\ current\ view\ (recompute\ the\ viewport,\ which\ is\ stored\ in\ relative\ coordinates)}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00137}00137\ \ \ \ \ setView(getView());}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00138}00138\ \}}
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00139}00139\ }
+\DoxyCodeLine{\Hypertarget{_render_window_8cpp_source_l00140}00140\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+
+\end{DoxyCode}

@@ -1,0 +1,341 @@
+\doxysubsection{Net\+BSD/\+Joystick\+Impl.cpp}
+\hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source}{}\label{_net_b_s_d_2_joystick_impl_8cpp_source}\index{JoystickImpl.cpp@{JoystickImpl.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00002}00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00003}00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00004}00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00005}00005\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 2013-\/2013\ David\ Demelier\ (demelier.david@gmail.com)}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00006}00006\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00007}00007\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00008}00008\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00009}00009\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00010}00010\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00011}00011\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00012}00012\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00013}00013\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00014}00014\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00015}00015\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00016}00016\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00017}00017\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00018}00018\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00019}00019\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00020}00020\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00021}00021\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00022}00022\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00023}00023\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00027}00027\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00029}00029\ \textcolor{preprocessor}{\#include\ <SFML/Window/JoystickImpl.hpp>}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00030}00030\ \textcolor{preprocessor}{\#include\ <sys/stat.h>}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00031}00031\ \textcolor{preprocessor}{\#include\ <dirent.h>}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00032}00032\ \textcolor{preprocessor}{\#include\ <fcntl.h>}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00033}00033\ \textcolor{preprocessor}{\#include\ <unistd.h>}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00034}00034\ \textcolor{preprocessor}{\#include\ <cstring>}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00035}00035\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00036}00036\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00037}00037\ \textcolor{preprocessor}{\#include\ <utility>}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00045}00045\ \textcolor{keyword}{namespace}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00046}00046\ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00047}00047\ \ \ \ \ std::map<unsigned\ int,\ std::string>\ plugged;}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00048}00048\ \ \ \ \ std::map<int,\ std::pair<int,\ int>\ >\ hatValueMap;}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00050}00050\ \ \ \ \ \textcolor{keywordtype}{bool}\ isJoystick(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *name)}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00051}00051\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00052}00052\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ file\ =\ ::open(name,\ O\_RDONLY\ |\ O\_NONBLOCK);}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ id;}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00055}00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (file\ <\ 0)}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00058}00058\ \ \ \ \ \ \ \ \ report\_desc\_t\ desc\ =\ hid\_get\_report\_desc(file);}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!desc)}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00061}00061\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ ::close(file);}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00064}00064\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ioctl(file,\ USB\_GET\_REPORT\_ID,\ \&\textcolor{keywordtype}{id})\ <\ 0)}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00067}00067\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ ::close(file);}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00070}00070\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00072}00072\ \ \ \ \ \ \ \ \ hid\_data\_t\ data\ =\ hid\_start\_parse(desc,\ 1\ <<\ hid\_input,\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00074}00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!data)}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00075}00075\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ hid\_dispose\_report\_desc(desc);}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ ::close(file);}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00079}00079\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00081}00081\ \ \ \ \ \ \ \ \ hid\_item\_t\ item;}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00083}00083\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Assume\ it\ isn't}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00084}00084\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ result\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00086}00086\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (hid\_get\_item(data,\ \&item)\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00087}00087\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((item.kind\ ==\ hid\_collection)\ \&\&\ (HID\_PAGE(item.usage)\ ==\ HUP\_GENERIC\_DESKTOP))}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((HID\_USAGE(item.usage)\ ==\ HUG\_JOYSTICK)\ ||\ (HID\_USAGE(item.usage)\ ==\ HUG\_GAME\_PAD))}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00095}00095\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00097}00097\ \ \ \ \ \ \ \ \ hid\_end\_parse(data);}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00098}00098\ \ \ \ \ \ \ \ \ hid\_dispose\_report\_desc(desc);}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00099}00099\ \ \ \ \ \ \ \ \ ::close(file);}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00101}00101\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00102}00102\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00104}00104\ \ \ \ \ \textcolor{keywordtype}{void}\ updatePluggedList()}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00105}00105\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00106}00106\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00107}00107\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ Devices\ /dev/uhid<x>\ are\ shared\ between\ joystick\ and\ any\ other}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00108}00108\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ human\ interface\ device.\ We\ need\ to\ iterate\ over\ all\ found\ devices}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00109}00109\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ and\ check\ if\ they\ are\ joysticks.\ The\ index\ of\ JoystickImpl::open}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00110}00110\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ does\ not\ match\ the\ /dev/uhid<index>\ device!}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00111}00111\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00112}00112\ \ \ \ \ \ \ \ \ DIR*\ directory\ =\ opendir(\textcolor{stringliteral}{"{}/dev"{}});}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00114}00114\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (directory)}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00115}00115\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ joystickCount\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }dirent*\ directoryEntry\ =\ readdir(directory);}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (directoryEntry\ \&\&\ joystickCount\ <\ sf::Joystick::Count)}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!std::strncmp(directoryEntry-\/>d\_name,\ \textcolor{stringliteral}{"{}uhid"{}},\ 4))}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ name(\textcolor{stringliteral}{"{}/dev/"{}});}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ name\ +=\ directoryEntry-\/>d\_name;}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (isJoystick(name.c\_str()))}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ plugged[joystickCount++]\ =\ name;}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ directoryEntry\ =\ readdir(directory);}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00132}00132\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ closedir(directory);}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00134}00134\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00135}00135\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00136}00136\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00137}00137\ \ \ \ \ \textcolor{keywordtype}{int}\ usageToAxis(\textcolor{keywordtype}{int}\ usage)}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00138}00138\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00139}00139\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (usage)}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00140}00140\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ HUG\_X:\ \ \textcolor{keywordflow}{return}\ sf::Joystick::X;}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ HUG\_Y:\ \ \textcolor{keywordflow}{return}\ sf::Joystick::Y;}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ HUG\_Z:\ \ \textcolor{keywordflow}{return}\ sf::Joystick::Z;}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ HUG\_RZ:\ \textcolor{keywordflow}{return}\ sf::Joystick::R;}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ HUG\_RX:\ \textcolor{keywordflow}{return}\ sf::Joystick::U;}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ HUG\_RY:\ \textcolor{keywordflow}{return}\ sf::Joystick::V;}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:\ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00148}00148\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00149}00149\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00150}00150\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00151}00151\ \ \ \ \ \textcolor{keywordtype}{void}\ hatValueToSfml(\textcolor{keywordtype}{int}\ value,\ sf::priv::JoystickState\&\ state)}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00152}00152\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00153}00153\ \ \ \ \ \ \ \ \ state.axes[sf::Joystick::PovX]\ =\ hatValueMap[value].first;}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00154}00154\ \ \ \ \ \ \ \ \ state.axes[sf::Joystick::PovY]\ =\ hatValueMap[value].second;}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00155}00155\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00156}00156\ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00157}00157\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00159}00159\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00160}00160\ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00161}00161\ \textcolor{keyword}{namespace\ }priv}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00162}00162\ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00164}00164\ \textcolor{keywordtype}{void}\ JoystickImpl::initialize()}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00165}00165\ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00166}00166\ \ \ \ \ hid\_init(NULL);}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00167}00167\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00168}00168\ \ \ \ \ \textcolor{comment}{//\ Do\ an\ initial\ scan}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00169}00169\ \ \ \ \ updatePluggedList();}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00170}00170\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00171}00171\ \ \ \ \ \textcolor{comment}{//\ Map\ of\ hat\ values}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00172}00172\ \ \ \ \ hatValueMap[0]\ =\ std::make\_pair(\ \ \ 0,\ \ \ \ 0);\ \textcolor{comment}{//\ center}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00173}00173\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00174}00174\ \ \ \ \ hatValueMap[1]\ =\ std::make\_pair(\ \ \ 0,\ -\/100);\ \textcolor{comment}{//\ top}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00175}00175\ \ \ \ \ hatValueMap[3]\ =\ std::make\_pair(\ 100,\ \ \ \ 0);\ \textcolor{comment}{//\ right}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00176}00176\ \ \ \ \ hatValueMap[5]\ =\ std::make\_pair(\ \ \ 0,\ \ 100);\ \textcolor{comment}{//\ bottom}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00177}00177\ \ \ \ \ hatValueMap[7]\ =\ std::make\_pair(-\/100,\ \ \ \ 0);\ \textcolor{comment}{//\ left}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00178}00178\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00179}00179\ \ \ \ \ hatValueMap[2]\ =\ std::make\_pair(\ 100,\ -\/100);\ \textcolor{comment}{//\ top-\/right}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00180}00180\ \ \ \ \ hatValueMap[4]\ =\ std::make\_pair(\ 100,\ \ 100);\ \textcolor{comment}{//\ bottom-\/right}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00181}00181\ \ \ \ \ hatValueMap[6]\ =\ std::make\_pair(-\/100,\ \ 100);\ \textcolor{comment}{//\ bottom-\/left}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00182}00182\ \ \ \ \ hatValueMap[8]\ =\ std::make\_pair(-\/100,\ -\/100);\ \textcolor{comment}{//\ top-\/left}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00183}00183\ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00184}00184\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00185}00185\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00187}00187\ \textcolor{keywordtype}{void}\ JoystickImpl::cleanup()}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00188}00188\ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00189}00189\ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00190}00190\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00191}00191\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00193}00193\ \textcolor{keywordtype}{bool}\ JoystickImpl::isConnected(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ index)}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00194}00194\ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00195}00195\ \ \ \ \ \textcolor{keywordflow}{return}\ plugged.find(index)\ !=\ plugged.end();}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00196}00196\ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00197}00197\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00198}00198\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00200}00200\ \textcolor{keywordtype}{bool}\ JoystickImpl::open(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ index)}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00201}00201\ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00202}00202\ \ \ \ \ \textcolor{keywordflow}{if}\ (isConnected(index))}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00203}00203\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00204}00204\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Open\ the\ joystick's\ file\ descriptor\ (read-\/only\ and\ non-\/blocking)}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00205}00205\ \ \ \ \ \ \ \ \ m\_file\ =\ ::open(plugged[index].c\_str(),\ O\_RDONLY\ |\ O\_NONBLOCK);}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00206}00206\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_file\ >=\ 0)}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00207}00207\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Reset\ the\ joystick\ state}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00209}00209\ \ \ \ \ \ \ \ \ \ \ \ \ m\_state\ =\ JoystickState();}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00210}00210\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ the\ report\ descriptor}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ m\_desc\ =\ hid\_get\_report\_desc(m\_file);}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!m\_desc)}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ::close(m\_file);}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00216}00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00217}00217\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00218}00218\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00219}00219\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ And\ the\ id}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ioctl(m\_file,\ USB\_GET\_REPORT\_ID,\ \&m\_id)\ <\ 0)}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00221}00221\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00222}00222\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ::close(m\_file);}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00223}00223\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00224}00224\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00225}00225\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00226}00226\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Then\ allocate\ a\ buffer\ for\ data\ retrieval}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00227}00227\ \ \ \ \ \ \ \ \ \ \ \ \ m\_length\ =\ hid\_report\_size(m\_desc,\ hid\_input,\ m\_id);}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00228}00228\ \ \ \ \ \ \ \ \ \ \ \ \ m\_buffer.resize(m\_length);}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00229}00229\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00230}00230\ \ \ \ \ \ \ \ \ \ \ \ \ m\_state.connected\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00231}00231\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00232}00232\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00233}00233\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00234}00234\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00235}00235\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00236}00236\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00237}00237\ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00238}00238\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00239}00239\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00241}00241\ \textcolor{keywordtype}{void}\ JoystickImpl::close()}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00242}00242\ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00243}00243\ \ \ \ \ ::close(m\_file);}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00244}00244\ \ \ \ \ hid\_dispose\_report\_desc(m\_desc);}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00245}00245\ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00246}00246\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00247}00247\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00249}00249\ JoystickCaps\ JoystickImpl::getCapabilities()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00250}00250\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00251}00251\ \ \ \ \ JoystickCaps\ caps;}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00252}00252\ \ \ \ \ hid\_item\_t\ item;}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00253}00253\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00254}00254\ \ \ \ \ hid\_data\_t\ data\ =\ hid\_start\_parse(m\_desc,\ 1\ <<\ hid\_input,\ m\_id);}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00255}00255\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00256}00256\ \ \ \ \ \textcolor{keywordflow}{while}\ (hid\_get\_item(data,\ \&item))}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00257}00257\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00258}00258\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (item.kind\ ==\ hid\_input)}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00259}00259\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00260}00260\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ usage\ =\ HID\_USAGE(item.usage);}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00261}00261\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00262}00262\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (usage\ ==\ HUP\_BUTTON)}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00263}00263\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00264}00264\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ caps.buttonCount++;}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00265}00265\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00266}00266\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00267}00267\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (usage\ ==\ HUP\_GENERIC\_DESKTOP)}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00268}00268\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00269}00269\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ axis\ =\ usageToAxis(usage);}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00270}00270\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00271}00271\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (usage\ ==\ HUG\_HAT\_SWITCH)}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00272}00272\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00273}00273\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ caps.axes[Joystick::PovX]\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00274}00274\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ caps.axes[Joystick::PovY]\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00275}00275\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00276}00276\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (axis\ !=\ -\/1)}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00277}00277\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00278}00278\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ caps.axes[axis]\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00279}00279\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00280}00280\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00281}00281\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00282}00282\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00283}00283\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00284}00284\ \ \ \ \ hid\_end\_parse(data);}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00285}00285\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00286}00286\ \ \ \ \ \textcolor{keywordflow}{return}\ caps;}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00287}00287\ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00288}00288\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00289}00289\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00291}00291\ Joystick::Identification\ JoystickImpl::getIdentification()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00292}00292\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00293}00293\ \ \ \ \ \textcolor{keywordflow}{return}\ m\_identification;}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00294}00294\ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00295}00295\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00296}00296\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00298}00298\ JoystickState\ JoystickImpl::JoystickImpl::update()}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00299}00299\ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00300}00300\ \ \ \ \ \textcolor{keywordflow}{while}\ (read(m\_file,\ \&m\_buffer[0],\ m\_length)\ ==\ m\_length)}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00301}00301\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00302}00302\ \ \ \ \ \ \ \ \ hid\_data\_t\ data\ =\ hid\_start\_parse(m\_desc,\ 1\ <<\ hid\_input,\ m\_id);}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00303}00303\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00304}00304\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ No\ memory?}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00305}00305\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!data)}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00306}00306\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00307}00307\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00308}00308\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ buttonIndex\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00309}00309\ \ \ \ \ \ \ \ \ hid\_item\_t\ item;}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00310}00310\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00311}00311\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (hid\_get\_item(data,\ \&item))}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00312}00312\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00313}00313\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (item.kind\ ==\ hid\_input)}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00314}00314\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00315}00315\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ usage\ =\ HID\_USAGE(item.usage);}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00316}00316\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00317}00317\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (usage\ ==\ HUP\_BUTTON)}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00318}00318\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00319}00319\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_state.buttons[buttonIndex++]\ =\ hid\_get\_data(\&m\_buffer[0],\ \&item);}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00320}00320\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00321}00321\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (usage\ ==\ HUP\_GENERIC\_DESKTOP)}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00322}00322\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00323}00323\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ value\ =\ hid\_get\_data(\&m\_buffer[0],\ \&item);}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00324}00324\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ axis\ =\ usageToAxis(usage);}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00325}00325\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00326}00326\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (usage\ ==\ HUG\_HAT\_SWITCH)}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00327}00327\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00328}00328\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hatValueToSfml(value,\ m\_state);}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00329}00329\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00330}00330\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (axis\ !=\ -\/1)}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00331}00331\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00332}00332\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ minimum\ =\ item.logical\_minimum;}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00333}00333\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ maximum\ =\ item.logical\_maximum;}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00334}00334\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00335}00335\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ value\ =\ (value\ -\/\ minimum)\ *\ 200\ /\ (maximum\ -\/\ minimum)\ -\/\ 100;}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00336}00336\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_state.axes[axis]\ =\ value;}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00337}00337\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00338}00338\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00339}00339\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00340}00340\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00341}00341\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00342}00342\ \ \ \ \ \ \ \ \ hid\_end\_parse(data);}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00343}00343\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00344}00344\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00345}00345\ \ \ \ \ \textcolor{keywordflow}{return}\ m\_state;}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00346}00346\ \}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00347}00347\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00348}00348\ \}\ \textcolor{comment}{//\ namespace\ priv}}
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00349}00349\ }
+\DoxyCodeLine{\Hypertarget{_net_b_s_d_2_joystick_impl_8cpp_source_l00350}00350\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+
+\end{DoxyCode}

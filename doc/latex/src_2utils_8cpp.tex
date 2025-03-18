@@ -1,0 +1,93 @@
+\doxysubsection{src/utils.cpp File Reference}
+\hypertarget{src_2utils_8cpp}{}\label{src_2utils_8cpp}\index{utils.cpp@{utils.cpp}}
+
+
+Utility functions implementation.  
+
+
+{\ttfamily \#include $<$spdlog/spdlog.\+h$>$}\newline
+{\ttfamily \#include "{}car.\+h"{}}\newline
+{\ttfamily \#include "{}utils.\+h"{}}\newline
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+sf\+::\+Font \mbox{\hyperlink{src_2utils_8cpp_a7c48a100843dd2f2e7a93ad06eb1fdc6}{load\+Font}} ()
+\begin{DoxyCompactList}\small\item\em Load a font. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{src_2utils_8cpp_ad5725470e9dc4a2e1d27d39949dca29e}{cars\+Collided}} (\mbox{\hyperlink{class_car}{Car}} car1, \mbox{\hyperlink{class_car}{Car}} car2, int time)
+\item 
+bool \mbox{\hyperlink{src_2utils_8cpp_aa430bb0d6bb43f5ce7a711edaaff38f9}{car\+Conflict}} (sf\+::\+Vector2f car\+Pos, double car\+Angle, sf\+::\+Vector2f conf\+Pos, double conf\+Angle)
+\begin{DoxyCompactList}\small\item\em Check if two cars have a conflict. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Utility functions implementation. 
+
+
+
+Definition in file \mbox{\hyperlink{src_2utils_8cpp_source}{src/utils.\+cpp}}.
+
+
+
+\doxysubsubsection{Function Documentation}
+\Hypertarget{src_2utils_8cpp_aa430bb0d6bb43f5ce7a711edaaff38f9}\index{utils.cpp@{utils.cpp}!carConflict@{carConflict}}
+\index{carConflict@{carConflict}!utils.cpp@{utils.cpp}}
+\doxyparagraph{\texorpdfstring{carConflict()}{carConflict()}}
+{\footnotesize\ttfamily \label{src_2utils_8cpp_aa430bb0d6bb43f5ce7a711edaaff38f9} 
+bool car\+Conflict (\begin{DoxyParamCaption}\item[{sf\+::\+Vector2f}]{car\+Pos}{, }\item[{double}]{car\+Angle}{, }\item[{sf\+::\+Vector2f}]{conf\+Pos}{, }\item[{double}]{conf\+Angle}{}\end{DoxyParamCaption})}
+
+
+
+Check if two cars have a conflict. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em car\+Pos} & The position of the car \\
+\hline
+{\em car\+Angle} & The angle of the car \\
+\hline
+{\em conf\+Pos} & The position of the conflicting car \\
+\hline
+{\em conf\+Angle} & The angle of the conflicting car \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If the cars have a conflict 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{src_2utils_8cpp_source_l00049}{49}} of file \mbox{\hyperlink{src_2utils_8cpp_source}{src/utils.\+cpp}}.
+
+\Hypertarget{src_2utils_8cpp_ad5725470e9dc4a2e1d27d39949dca29e}\index{utils.cpp@{utils.cpp}!carsCollided@{carsCollided}}
+\index{carsCollided@{carsCollided}!utils.cpp@{utils.cpp}}
+\doxyparagraph{\texorpdfstring{carsCollided()}{carsCollided()}}
+{\footnotesize\ttfamily \label{src_2utils_8cpp_ad5725470e9dc4a2e1d27d39949dca29e} 
+bool cars\+Collided (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_car}{Car}}}]{car1}{, }\item[{\mbox{\hyperlink{class_car}{Car}}}]{car2}{, }\item[{int}]{time}{}\end{DoxyParamCaption})}
+
+@bref Check if two cars collided 
+\begin{DoxyParams}{Parameters}
+{\em car1} & The first car \\
+\hline
+{\em car2} & The second car \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{src_2utils_8cpp_source_l00023}{23}} of file \mbox{\hyperlink{src_2utils_8cpp_source}{src/utils.\+cpp}}.
+
+\Hypertarget{src_2utils_8cpp_a7c48a100843dd2f2e7a93ad06eb1fdc6}\index{utils.cpp@{utils.cpp}!loadFont@{loadFont}}
+\index{loadFont@{loadFont}!utils.cpp@{utils.cpp}}
+\doxyparagraph{\texorpdfstring{loadFont()}{loadFont()}}
+{\footnotesize\ttfamily \label{src_2utils_8cpp_a7c48a100843dd2f2e7a93ad06eb1fdc6} 
+sf\+::\+Font load\+Font (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Load a font. 
+
+\begin{DoxyReturn}{Returns}
+The font 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{src_2utils_8cpp_source_l00013}{13}} of file \mbox{\hyperlink{src_2utils_8cpp_source}{src/utils.\+cpp}}.
+

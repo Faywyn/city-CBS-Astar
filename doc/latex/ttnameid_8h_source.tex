@@ -1,0 +1,1243 @@
+\doxysubsection{ttnameid.\+h}
+\hypertarget{ttnameid_8h_source}{}\label{ttnameid_8h_source}\index{ttnameid.h@{ttnameid.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00001}00001\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00002}00002\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00003}00003\ \textcolor{comment}{/*\ \ ttnameid.h\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00004}00004\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00005}00005\ \textcolor{comment}{/*\ \ \ \ TrueType\ name\ ID\ definitions\ (specification\ only).\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00006}00006\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00007}00007\ \textcolor{comment}{/*\ \ Copyright\ 1996-\/2004,\ 2006-\/2008,\ 2012-\/2014\ by\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00008}00008\ \textcolor{comment}{/*\ \ David\ Turner,\ Robert\ Wilhelm,\ and\ Werner\ Lemberg.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00009}00009\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00010}00010\ \textcolor{comment}{/*\ \ This\ file\ is\ part\ of\ the\ FreeType\ project,\ and\ may\ only\ be\ used,\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00011}00011\ \textcolor{comment}{/*\ \ modified,\ and\ distributed\ under\ the\ terms\ of\ the\ FreeType\ project\ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00012}00012\ \textcolor{comment}{/*\ \ license,\ LICENSE.TXT.\ \ By\ continuing\ to\ use,\ modify,\ or\ distribute\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00013}00013\ \textcolor{comment}{/*\ \ this\ file\ you\ indicate\ that\ you\ have\ read\ the\ license\ and\ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00014}00014\ \textcolor{comment}{/*\ \ understand\ and\ accept\ it\ fully.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00015}00015\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00016}00016\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00019}00019\ \textcolor{preprocessor}{\#ifndef\ \_\_TTNAMEID\_H\_\_}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00020}00020\ \textcolor{preprocessor}{\#define\ \_\_TTNAMEID\_H\_\_}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00023}00023\ \textcolor{preprocessor}{\#include\ <ft2build.h>}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00026}00026\ FT\_BEGIN\_HEADER}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00029}00029\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00030}00030\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00031}00031\ \ \ \textcolor{comment}{/*\ <Section>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00032}00032\ \ \ \textcolor{comment}{/*\ \ \ \ truetype\_tables\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00033}00033\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00036}00036\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00037}00037\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00038}00038\ \ \ \textcolor{comment}{/*\ Possible\ values\ for\ the\ \`{}platform'\ identifier\ code\ in\ the\ name\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00039}00039\ \ \ \textcolor{comment}{/*\ records\ of\ the\ TTF\ \`{}name'\ table.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00040}00040\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00041}00041\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00044}00044\ \textcolor{comment}{\ \ /***********************************************************************}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00045}00045\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00046}00046\ \textcolor{comment}{\ \ \ *\ @enum:}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00047}00047\ \textcolor{comment}{\ \ \ *\ \ \ TT\_PLATFORM\_XXX}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00048}00048\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00049}00049\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00050}00050\ \textcolor{comment}{\ \ \ *\ \ \ A\ list\ of\ valid\ values\ for\ the\ \`{}platform\_id'\ identifier\ code\ in}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00051}00051\ \textcolor{comment}{\ \ \ *\ \ \ @FT\_CharMapRec\ and\ @FT\_SfntName\ structures.}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00052}00052\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00053}00053\ \textcolor{comment}{\ \ \ *\ @values:}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00054}00054\ \textcolor{comment}{\ \ \ *\ \ \ TT\_PLATFORM\_APPLE\_UNICODE\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00055}00055\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Used\ by\ Apple\ to\ indicate\ a\ Unicode\ character\ map\ and/or\ name\ entry.}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00056}00056\ \textcolor{comment}{\ \ \ *\ \ \ \ \ See\ @TT\_APPLE\_ID\_XXX\ for\ corresponding\ \`{}encoding\_id'\ values.\ \ Note}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00057}00057\ \textcolor{comment}{\ \ \ *\ \ \ \ \ that\ name\ entries\ in\ this\ format\ are\ coded\ as\ big-\/endian\ UCS-\/2}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00058}00058\ \textcolor{comment}{\ \ \ *\ \ \ \ \ character\ codes\ \_only\_.}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00059}00059\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00060}00060\ \textcolor{comment}{\ \ \ *\ \ \ TT\_PLATFORM\_MACINTOSH\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00061}00061\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Used\ by\ Apple\ to\ indicate\ a\ MacOS-\/specific\ charmap\ and/or\ name\ entry.}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00062}00062\ \textcolor{comment}{\ \ \ *\ \ \ \ \ See\ @TT\_MAC\_ID\_XXX\ for\ corresponding\ \`{}encoding\_id'\ values.\ \ Note\ that}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00063}00063\ \textcolor{comment}{\ \ \ *\ \ \ \ \ most\ TrueType\ fonts\ contain\ an\ Apple\ roman\ charmap\ to\ be\ usable\ on}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00064}00064\ \textcolor{comment}{\ \ \ *\ \ \ \ \ MacOS\ systems\ (even\ if\ they\ contain\ a\ Microsoft\ charmap\ as\ well).}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00065}00065\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00066}00066\ \textcolor{comment}{\ \ \ *\ \ \ TT\_PLATFORM\_ISO\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00067}00067\ \textcolor{comment}{\ \ \ *\ \ \ \ \ This\ value\ was\ used\ to\ specify\ ISO/IEC\ 10646\ charmaps.\ \ It\ is\ however}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00068}00068\ \textcolor{comment}{\ \ \ *\ \ \ \ \ now\ deprecated.\ \ See\ @TT\_ISO\_ID\_XXX\ for\ a\ list\ of\ corresponding}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00069}00069\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \`{}encoding\_id'\ values.}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00070}00070\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00071}00071\ \textcolor{comment}{\ \ \ *\ \ \ TT\_PLATFORM\_MICROSOFT\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00072}00072\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Used\ by\ Microsoft\ to\ indicate\ Windows-\/specific\ charmaps.\ \ See}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00073}00073\ \textcolor{comment}{\ \ \ *\ \ \ \ \ @TT\_MS\_ID\_XXX\ for\ a\ list\ of\ corresponding\ \`{}encoding\_id'\ values.}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00074}00074\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Note\ that\ most\ fonts\ contain\ a\ Unicode\ charmap\ using}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00075}00075\ \textcolor{comment}{\ \ \ *\ \ \ \ \ (TT\_PLATFORM\_MICROSOFT,\ @TT\_MS\_ID\_UNICODE\_CS).}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00076}00076\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00077}00077\ \textcolor{comment}{\ \ \ *\ \ \ TT\_PLATFORM\_CUSTOM\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00078}00078\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Used\ to\ indicate\ application-\/specific\ charmaps.}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00079}00079\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00080}00080\ \textcolor{comment}{\ \ \ *\ \ \ TT\_PLATFORM\_ADOBE\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00081}00081\ \textcolor{comment}{\ \ \ *\ \ \ \ \ This\ value\ isn't\ part\ of\ any\ font\ format\ specification,\ but\ is\ used}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00082}00082\ \textcolor{comment}{\ \ \ *\ \ \ \ \ by\ FreeType\ to\ report\ Adobe-\/specific\ charmaps\ in\ an\ @FT\_CharMapRec}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00083}00083\ \textcolor{comment}{\ \ \ *\ \ \ \ \ structure.\ \ See\ @TT\_ADOBE\_ID\_XXX.}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00084}00084\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00086}00086\ \textcolor{preprocessor}{\#define\ TT\_PLATFORM\_APPLE\_UNICODE\ \ 0}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00087}00087\ \textcolor{preprocessor}{\#define\ TT\_PLATFORM\_MACINTOSH\ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00088}00088\ \textcolor{preprocessor}{\#define\ TT\_PLATFORM\_ISO\ \ \ \ \ \ \ \ \ \ \ \ 2\ }\textcolor{comment}{/*\ deprecated\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00089}00089\ \textcolor{preprocessor}{\#define\ TT\_PLATFORM\_MICROSOFT\ \ \ \ \ \ 3}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00090}00090\ \textcolor{preprocessor}{\#define\ TT\_PLATFORM\_CUSTOM\ \ \ \ \ \ \ \ \ 4}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00091}00091\ \textcolor{preprocessor}{\#define\ TT\_PLATFORM\_ADOBE\ \ \ \ \ \ \ \ \ \ 7\ }\textcolor{comment}{/*\ artificial\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00094}00094\ \textcolor{comment}{\ \ /***********************************************************************}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00095}00095\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00096}00096\ \textcolor{comment}{\ \ \ *\ @enum:}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00097}00097\ \textcolor{comment}{\ \ \ *\ \ \ TT\_APPLE\_ID\_XXX}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00098}00098\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00099}00099\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00100}00100\ \textcolor{comment}{\ \ \ *\ \ \ A\ list\ of\ valid\ values\ for\ the\ \`{}encoding\_id'\ for}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00101}00101\ \textcolor{comment}{\ \ \ *\ \ \ @TT\_PLATFORM\_APPLE\_UNICODE\ charmaps\ and\ name\ entries.}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00102}00102\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00103}00103\ \textcolor{comment}{\ \ \ *\ @values:}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00104}00104\ \textcolor{comment}{\ \ \ *\ \ \ TT\_APPLE\_ID\_DEFAULT\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00105}00105\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Unicode\ version\ 1.0.}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00106}00106\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00107}00107\ \textcolor{comment}{\ \ \ *\ \ \ TT\_APPLE\_ID\_UNICODE\_1\_1\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00108}00108\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Unicode\ 1.1;\ specifies\ Hangul\ characters\ starting\ at\ U+34xx.}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00109}00109\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00110}00110\ \textcolor{comment}{\ \ \ *\ \ \ TT\_APPLE\_ID\_ISO\_10646\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00111}00111\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Deprecated\ (identical\ to\ preceding).}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00112}00112\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00113}00113\ \textcolor{comment}{\ \ \ *\ \ \ TT\_APPLE\_ID\_UNICODE\_2\_0\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00114}00114\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Unicode\ 2.0\ and\ beyond\ (UTF-\/16\ BMP\ only).}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00115}00115\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00116}00116\ \textcolor{comment}{\ \ \ *\ \ \ TT\_APPLE\_ID\_UNICODE\_32\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00117}00117\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Unicode\ 3.1\ and\ beyond,\ using\ UTF-\/32.}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00118}00118\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00119}00119\ \textcolor{comment}{\ \ \ *\ \ \ TT\_APPLE\_ID\_VARIANT\_SELECTOR\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00120}00120\ \textcolor{comment}{\ \ \ *\ \ \ \ \ From\ Adobe,\ not\ Apple.\ \ Not\ a\ normal\ cmap.\ \ Specifies\ variations}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00121}00121\ \textcolor{comment}{\ \ \ *\ \ \ \ \ on\ a\ real\ cmap.}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00122}00122\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00124}00124\ \textcolor{preprocessor}{\#define\ TT\_APPLE\_ID\_DEFAULT\ \ \ \ \ \ \ \ \ \ \ 0\ }\textcolor{comment}{/*\ Unicode\ 1.0\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00125}00125\ \textcolor{preprocessor}{\#define\ TT\_APPLE\_ID\_UNICODE\_1\_1\ \ \ \ \ \ \ 1\ }\textcolor{comment}{/*\ specify\ Hangul\ at\ U+34xx\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00126}00126\ \textcolor{preprocessor}{\#define\ TT\_APPLE\_ID\_ISO\_10646\ \ \ \ \ \ \ \ \ 2\ }\textcolor{comment}{/*\ deprecated\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00127}00127\ \textcolor{preprocessor}{\#define\ TT\_APPLE\_ID\_UNICODE\_2\_0\ \ \ \ \ \ \ 3\ }\textcolor{comment}{/*\ or\ later\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00128}00128\ \textcolor{preprocessor}{\#define\ TT\_APPLE\_ID\_UNICODE\_32\ \ \ \ \ \ \ \ 4\ }\textcolor{comment}{/*\ 2.0\ or\ later,\ full\ repertoire\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00129}00129\ \textcolor{preprocessor}{\#define\ TT\_APPLE\_ID\_VARIANT\_SELECTOR\ \ 5\ }\textcolor{comment}{/*\ variation\ selector\ data\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00130}00130\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00132}00132\ \textcolor{comment}{\ \ /***********************************************************************}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00133}00133\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00134}00134\ \textcolor{comment}{\ \ \ *\ @enum:}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00135}00135\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_XXX}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00136}00136\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00137}00137\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00138}00138\ \textcolor{comment}{\ \ \ *\ \ \ A\ list\ of\ valid\ values\ for\ the\ \`{}encoding\_id'\ for}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00139}00139\ \textcolor{comment}{\ \ \ *\ \ \ @TT\_PLATFORM\_MACINTOSH\ charmaps\ and\ name\ entries.}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00140}00140\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00141}00141\ \textcolor{comment}{\ \ \ *\ @values:}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00142}00142\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_ROMAN\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00143}00143\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_JAPANESE\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00144}00144\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_TRADITIONAL\_CHINESE\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00145}00145\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_KOREAN\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00146}00146\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_ARABIC\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00147}00147\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_HEBREW\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00148}00148\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_GREEK\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00149}00149\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_RUSSIAN\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00150}00150\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_RSYMBOL\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00151}00151\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_DEVANAGARI\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00152}00152\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_GURMUKHI\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00153}00153\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_GUJARATI\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00154}00154\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_ORIYA\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00155}00155\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_BENGALI\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00156}00156\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_TAMIL\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00157}00157\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_TELUGU\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00158}00158\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_KANNADA\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00159}00159\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_MALAYALAM\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00160}00160\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_SINHALESE\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00161}00161\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_BURMESE\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00162}00162\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_KHMER\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00163}00163\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_THAI\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00164}00164\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_LAOTIAN\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00165}00165\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_GEORGIAN\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00166}00166\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_ARMENIAN\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00167}00167\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_MALDIVIAN\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00168}00168\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_SIMPLIFIED\_CHINESE\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00169}00169\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_TIBETAN\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00170}00170\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_MONGOLIAN\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00171}00171\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_GEEZ\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00172}00172\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_SLAVIC\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00173}00173\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_VIETNAMESE\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00174}00174\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_SINDHI\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00175}00175\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MAC\_ID\_UNINTERP\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00176}00176\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00177}00177\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00178}00178\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_ROMAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00179}00179\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_JAPANESE\ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00180}00180\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_TRADITIONAL\_CHINESE\ \ \ 2}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00181}00181\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_KOREAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 3}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00182}00182\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_ARABIC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 4}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00183}00183\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_HEBREW\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 5}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00184}00184\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_GREEK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 6}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00185}00185\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_RUSSIAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 7}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00186}00186\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_RSYMBOL\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 8}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00187}00187\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_DEVANAGARI\ \ \ \ \ \ \ \ \ \ \ \ 9}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00188}00188\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_GURMUKHI\ \ \ \ \ \ \ \ \ \ \ \ \ 10}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00189}00189\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_GUJARATI\ \ \ \ \ \ \ \ \ \ \ \ \ 11}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00190}00190\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_ORIYA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 12}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00191}00191\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_BENGALI\ \ \ \ \ \ \ \ \ \ \ \ \ \ 13}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00192}00192\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_TAMIL\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 14}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00193}00193\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_TELUGU\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 15}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00194}00194\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_KANNADA\ \ \ \ \ \ \ \ \ \ \ \ \ \ 16}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00195}00195\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_MALAYALAM\ \ \ \ \ \ \ \ \ \ \ \ 17}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00196}00196\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_SINHALESE\ \ \ \ \ \ \ \ \ \ \ \ 18}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00197}00197\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_BURMESE\ \ \ \ \ \ \ \ \ \ \ \ \ \ 19}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00198}00198\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_KHMER\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 20}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00199}00199\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_THAI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 21}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00200}00200\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_LAOTIAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ 22}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00201}00201\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_GEORGIAN\ \ \ \ \ \ \ \ \ \ \ \ \ 23}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00202}00202\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_ARMENIAN\ \ \ \ \ \ \ \ \ \ \ \ \ 24}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00203}00203\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_MALDIVIAN\ \ \ \ \ \ \ \ \ \ \ \ 25}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00204}00204\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_SIMPLIFIED\_CHINESE\ \ \ 25}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00205}00205\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_TIBETAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ 26}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00206}00206\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_MONGOLIAN\ \ \ \ \ \ \ \ \ \ \ \ 27}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00207}00207\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_GEEZ\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 28}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00208}00208\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_SLAVIC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 29}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00209}00209\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_VIETNAMESE\ \ \ \ \ \ \ \ \ \ \ 30}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00210}00210\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_SINDHI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 31}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00211}00211\ \textcolor{preprocessor}{\#define\ TT\_MAC\_ID\_UNINTERP\ \ \ \ \ \ \ \ \ \ \ \ \ 32}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00212}00212\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00213}00213\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00214}00214\ \textcolor{comment}{\ \ /***********************************************************************}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00215}00215\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00216}00216\ \textcolor{comment}{\ \ \ *\ @enum:}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00217}00217\ \textcolor{comment}{\ \ \ *\ \ \ TT\_ISO\_ID\_XXX}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00218}00218\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00219}00219\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00220}00220\ \textcolor{comment}{\ \ \ *\ \ \ A\ list\ of\ valid\ values\ for\ the\ \`{}encoding\_id'\ for}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00221}00221\ \textcolor{comment}{\ \ \ *\ \ \ @TT\_PLATFORM\_ISO\ charmaps\ and\ name\ entries.}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00222}00222\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00223}00223\ \textcolor{comment}{\ \ \ *\ \ \ Their\ use\ is\ now\ deprecated.}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00224}00224\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00225}00225\ \textcolor{comment}{\ \ \ *\ @values:}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00226}00226\ \textcolor{comment}{\ \ \ *\ \ \ TT\_ISO\_ID\_7BIT\_ASCII\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00227}00227\ \textcolor{comment}{\ \ \ *\ \ \ \ \ ASCII.}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00228}00228\ \textcolor{comment}{\ \ \ *\ \ \ TT\_ISO\_ID\_10646\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00229}00229\ \textcolor{comment}{\ \ \ *\ \ \ \ \ ISO/10646.}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00230}00230\ \textcolor{comment}{\ \ \ *\ \ \ TT\_ISO\_ID\_8859\_1\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00231}00231\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Also\ known\ as\ Latin-\/1.}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00232}00232\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00233}00233\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00234}00234\ \textcolor{preprocessor}{\#define\ TT\_ISO\_ID\_7BIT\_ASCII\ \ 0}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00235}00235\ \textcolor{preprocessor}{\#define\ TT\_ISO\_ID\_10646\ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00236}00236\ \textcolor{preprocessor}{\#define\ TT\_ISO\_ID\_8859\_1\ \ \ \ \ \ 2}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00237}00237\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00238}00238\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00239}00239\ \textcolor{comment}{\ \ /***********************************************************************}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00240}00240\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00241}00241\ \textcolor{comment}{\ \ \ *\ @enum:}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00242}00242\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MS\_ID\_XXX}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00243}00243\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00244}00244\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00245}00245\ \textcolor{comment}{\ \ \ *\ \ \ A\ list\ of\ valid\ values\ for\ the\ \`{}encoding\_id'\ for}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00246}00246\ \textcolor{comment}{\ \ \ *\ \ \ @TT\_PLATFORM\_MICROSOFT\ charmaps\ and\ name\ entries.}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00247}00247\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00248}00248\ \textcolor{comment}{\ \ \ *\ @values:}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00249}00249\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MS\_ID\_SYMBOL\_CS\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00250}00250\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Corresponds\ to\ Microsoft\ symbol\ encoding.\ See}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00251}00251\ \textcolor{comment}{\ \ \ *\ \ \ \ \ @FT\_ENCODING\_MS\_SYMBOL.}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00252}00252\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00253}00253\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MS\_ID\_UNICODE\_CS\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00254}00254\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Corresponds\ to\ a\ Microsoft\ WGL4\ charmap,\ matching\ Unicode.\ \ See}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00255}00255\ \textcolor{comment}{\ \ \ *\ \ \ \ \ @FT\_ENCODING\_UNICODE.}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00256}00256\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00257}00257\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MS\_ID\_SJIS\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00258}00258\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Corresponds\ to\ SJIS\ Japanese\ encoding.\ \ See\ @FT\_ENCODING\_SJIS.}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00259}00259\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00260}00260\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MS\_ID\_GB2312\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00261}00261\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Corresponds\ to\ Simplified\ Chinese\ as\ used\ in\ Mainland\ China.\ \ See}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00262}00262\ \textcolor{comment}{\ \ \ *\ \ \ \ \ @FT\_ENCODING\_GB2312.}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00263}00263\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00264}00264\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MS\_ID\_BIG\_5\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00265}00265\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Corresponds\ to\ Traditional\ Chinese\ as\ used\ in\ Taiwan\ and\ Hong\ Kong.}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00266}00266\ \textcolor{comment}{\ \ \ *\ \ \ \ \ See\ @FT\_ENCODING\_BIG5.}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00267}00267\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00268}00268\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MS\_ID\_WANSUNG\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00269}00269\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Corresponds\ to\ Korean\ Wansung\ encoding.\ \ See\ @FT\_ENCODING\_WANSUNG.}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00270}00270\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00271}00271\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MS\_ID\_JOHAB\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00272}00272\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Corresponds\ to\ Johab\ encoding.\ \ See\ @FT\_ENCODING\_JOHAB.}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00273}00273\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00274}00274\ \textcolor{comment}{\ \ \ *\ \ \ TT\_MS\_ID\_UCS\_4\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00275}00275\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Corresponds\ to\ UCS-\/4\ or\ UTF-\/32\ charmaps.\ \ This\ has\ been\ added\ to}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00276}00276\ \textcolor{comment}{\ \ \ *\ \ \ \ \ the\ OpenType\ specification\ version\ 1.4\ (mid-\/2001.)}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00277}00277\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00278}00278\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00279}00279\ \textcolor{preprocessor}{\#define\ TT\_MS\_ID\_SYMBOL\_CS\ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00280}00280\ \textcolor{preprocessor}{\#define\ TT\_MS\_ID\_UNICODE\_CS\ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00281}00281\ \textcolor{preprocessor}{\#define\ TT\_MS\_ID\_SJIS\ \ \ \ \ \ \ \ \ 2}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00282}00282\ \textcolor{preprocessor}{\#define\ TT\_MS\_ID\_GB2312\ \ \ \ \ \ \ 3}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00283}00283\ \textcolor{preprocessor}{\#define\ TT\_MS\_ID\_BIG\_5\ \ \ \ \ \ \ \ 4}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00284}00284\ \textcolor{preprocessor}{\#define\ TT\_MS\_ID\_WANSUNG\ \ \ \ \ \ 5}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00285}00285\ \textcolor{preprocessor}{\#define\ TT\_MS\_ID\_JOHAB\ \ \ \ \ \ \ \ 6}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00286}00286\ \textcolor{preprocessor}{\#define\ TT\_MS\_ID\_UCS\_4\ \ \ \ \ \ \ 10}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00287}00287\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00288}00288\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00289}00289\ \textcolor{comment}{\ \ /***********************************************************************}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00290}00290\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00291}00291\ \textcolor{comment}{\ \ \ *\ @enum:}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00292}00292\ \textcolor{comment}{\ \ \ *\ \ \ TT\_ADOBE\_ID\_XXX}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00293}00293\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00294}00294\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00295}00295\ \textcolor{comment}{\ \ \ *\ \ \ A\ list\ of\ valid\ values\ for\ the\ \`{}encoding\_id'\ for}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00296}00296\ \textcolor{comment}{\ \ \ *\ \ \ @TT\_PLATFORM\_ADOBE\ charmaps.\ \ This\ is\ a\ FreeType-\/specific\ extension!}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00297}00297\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00298}00298\ \textcolor{comment}{\ \ \ *\ @values:}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00299}00299\ \textcolor{comment}{\ \ \ *\ \ \ TT\_ADOBE\_ID\_STANDARD\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00300}00300\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Adobe\ standard\ encoding.}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00301}00301\ \textcolor{comment}{\ \ \ *\ \ \ TT\_ADOBE\_ID\_EXPERT\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00302}00302\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Adobe\ expert\ encoding.}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00303}00303\ \textcolor{comment}{\ \ \ *\ \ \ TT\_ADOBE\_ID\_CUSTOM\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00304}00304\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Adobe\ custom\ encoding.}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00305}00305\ \textcolor{comment}{\ \ \ *\ \ \ TT\_ADOBE\_ID\_LATIN\_1\ ::}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00306}00306\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Adobe\ Latin\string~1\ encoding.}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00307}00307\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00308}00308\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00309}00309\ \textcolor{preprocessor}{\#define\ TT\_ADOBE\_ID\_STANDARD\ \ 0}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00310}00310\ \textcolor{preprocessor}{\#define\ TT\_ADOBE\_ID\_EXPERT\ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00311}00311\ \textcolor{preprocessor}{\#define\ TT\_ADOBE\_ID\_CUSTOM\ \ \ \ 2}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00312}00312\ \textcolor{preprocessor}{\#define\ TT\_ADOBE\_ID\_LATIN\_1\ \ \ 3}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00313}00313\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00314}00314\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00315}00315\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00316}00316\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00317}00317\ \ \ \textcolor{comment}{/*\ Possible\ values\ of\ the\ language\ identifier\ field\ in\ the\ name\ records\ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00318}00318\ \ \ \textcolor{comment}{/*\ of\ the\ TTF\ \`{}name'\ table\ if\ the\ \`{}platform'\ identifier\ code\ is\ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00319}00319\ \ \ \textcolor{comment}{/*\ TT\_PLATFORM\_MACINTOSH.\ \ These\ values\ are\ also\ used\ as\ return\ values\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00320}00320\ \ \ \textcolor{comment}{/*\ for\ function\ @FT\_Get\_CMap\_Language\_ID.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00321}00321\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00322}00322\ \ \ \textcolor{comment}{/*\ The\ canonical\ source\ for\ the\ Apple\ assigned\ Language\ ID's\ is\ at\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00323}00323\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00324}00324\ \ \ \textcolor{comment}{/*\ \ \ https://developer.apple.com/fonts/TTRefMan/RM06/Chap6name.html\ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00325}00325\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00326}00326\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_ENGLISH\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00327}00327\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_FRENCH\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00328}00328\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_GERMAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 2}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00329}00329\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_ITALIAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 3}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00330}00330\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_DUTCH\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 4}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00331}00331\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_SWEDISH\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 5}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00332}00332\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_SPANISH\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 6}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00333}00333\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_DANISH\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 7}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00334}00334\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_PORTUGUESE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 8}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00335}00335\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_NORWEGIAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 9}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00336}00336\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_HEBREW\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 10}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00337}00337\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_JAPANESE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 11}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00338}00338\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_ARABIC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 12}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00339}00339\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_FINNISH\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 13}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00340}00340\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_GREEK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 14}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00341}00341\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_ICELANDIC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 15}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00342}00342\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_MALTESE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 16}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00343}00343\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_TURKISH\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 17}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00344}00344\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_CROATIAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 18}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00345}00345\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_CHINESE\_TRADITIONAL\ \ \ \ \ \ \ \ \ \ 19}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00346}00346\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_URDU\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 20}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00347}00347\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_HINDI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 21}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00348}00348\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_THAI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 22}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00349}00349\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_KOREAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 23}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00350}00350\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_LITHUANIAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 24}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00351}00351\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_POLISH\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 25}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00352}00352\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_HUNGARIAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 26}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00353}00353\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_ESTONIAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 27}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00354}00354\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_LETTISH\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 28}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00355}00355\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_SAAMISK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 29}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00356}00356\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_FAEROESE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 30}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00357}00357\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_FARSI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 31}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00358}00358\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_RUSSIAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 32}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00359}00359\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_CHINESE\_SIMPLIFIED\ \ \ \ \ \ \ \ \ \ \ 33}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00360}00360\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_FLEMISH\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 34}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00361}00361\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_IRISH\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 35}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00362}00362\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_ALBANIAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 36}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00363}00363\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_ROMANIAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 37}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00364}00364\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_CZECH\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 38}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00365}00365\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_SLOVAK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 39}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00366}00366\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_SLOVENIAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 40}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00367}00367\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_YIDDISH\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 41}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00368}00368\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_SERBIAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 42}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00369}00369\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_MACEDONIAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 43}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00370}00370\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_BULGARIAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 44}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00371}00371\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_UKRAINIAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 45}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00372}00372\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_BYELORUSSIAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 46}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00373}00373\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_UZBEK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 47}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00374}00374\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_KAZAKH\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 48}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00375}00375\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_AZERBAIJANI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 49}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00376}00376\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_AZERBAIJANI\_CYRILLIC\_SCRIPT\ \ 49}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00377}00377\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_AZERBAIJANI\_ARABIC\_SCRIPT\ \ \ \ 50}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00378}00378\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_ARMENIAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 51}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00379}00379\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_GEORGIAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 52}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00380}00380\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_MOLDAVIAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 53}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00381}00381\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_KIRGHIZ\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 54}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00382}00382\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_TAJIKI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 55}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00383}00383\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_TURKMEN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 56}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00384}00384\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_MONGOLIAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 57}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00385}00385\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_MONGOLIAN\_MONGOLIAN\_SCRIPT\ \ \ 57}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00386}00386\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_MONGOLIAN\_CYRILLIC\_SCRIPT\ \ \ \ 58}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00387}00387\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_PASHTO\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 59}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00388}00388\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_KURDISH\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 60}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00389}00389\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_KASHMIRI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 61}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00390}00390\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_SINDHI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 62}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00391}00391\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_TIBETAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 63}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00392}00392\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_NEPALI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 64}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00393}00393\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_SANSKRIT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 65}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00394}00394\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_MARATHI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 66}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00395}00395\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_BENGALI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 67}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00396}00396\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_ASSAMESE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 68}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00397}00397\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_GUJARATI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 69}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00398}00398\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_PUNJABI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 70}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00399}00399\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_ORIYA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 71}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00400}00400\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_MALAYALAM\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 72}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00401}00401\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_KANNADA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 73}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00402}00402\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_TAMIL\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 74}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00403}00403\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_TELUGU\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 75}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00404}00404\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_SINHALESE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 76}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00405}00405\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_BURMESE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 77}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00406}00406\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_KHMER\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 78}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00407}00407\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_LAO\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 79}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00408}00408\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_VIETNAMESE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 80}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00409}00409\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_INDONESIAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 81}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00410}00410\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_TAGALOG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 82}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00411}00411\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_MALAY\_ROMAN\_SCRIPT\ \ \ \ \ \ \ \ \ \ \ 83}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00412}00412\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_MALAY\_ARABIC\_SCRIPT\ \ \ \ \ \ \ \ \ \ 84}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00413}00413\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_AMHARIC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 85}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00414}00414\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_TIGRINYA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 86}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00415}00415\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_GALLA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 87}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00416}00416\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_SOMALI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 88}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00417}00417\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_SWAHILI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 89}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00418}00418\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_RUANDA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 90}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00419}00419\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_RUNDI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 91}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00420}00420\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_CHEWA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 92}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00421}00421\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_MALAGASY\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 93}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00422}00422\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_ESPERANTO\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 94}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00423}00423\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_WELSH\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 128}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00424}00424\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_BASQUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 129}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00425}00425\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_CATALAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 130}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00426}00426\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_LATIN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 131}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00427}00427\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_QUECHUA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 132}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00428}00428\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_GUARANI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 133}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00429}00429\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_AYMARA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 134}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00430}00430\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_TATAR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 135}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00431}00431\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_UIGHUR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 136}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00432}00432\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_DZONGKHA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 137}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00433}00433\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_JAVANESE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 138}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00434}00434\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_SUNDANESE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 139}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00435}00435\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00436}00436\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00437}00437\ \textcolor{preprocessor}{\#if\ 0\ \ }\textcolor{comment}{/*\ these\ seem\ to\ be\ errors\ that\ have\ been\ dropped\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00438}00438\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00439}00439\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_SCOTTISH\_GAELIC\ \ \ \ \ \ \ \ \ \ \ \ \ 140}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00440}00440\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_IRISH\_GAELIC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 141}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00441}00441\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00442}00442\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00443}00443\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00444}00444\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00445}00445\ \ \ \textcolor{comment}{/*\ The\ following\ codes\ are\ new\ as\ of\ 2000-\/03-\/10\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00446}00446\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_GALICIAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 140}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00447}00447\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_AFRIKAANS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 141}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00448}00448\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_BRETON\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 142}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00449}00449\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_INUKTITUT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 143}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00450}00450\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_SCOTTISH\_GAELIC\ \ \ \ \ \ \ \ \ \ \ \ \ 144}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00451}00451\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_MANX\_GAELIC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 145}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00452}00452\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_IRISH\_GAELIC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 146}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00453}00453\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_TONGAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 147}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00454}00454\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_GREEK\_POLYTONIC\ \ \ \ \ \ \ \ \ \ \ \ \ 148}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00455}00455\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_GREELANDIC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 149}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00456}00456\ \textcolor{preprocessor}{\#define\ TT\_MAC\_LANGID\_AZERBAIJANI\_ROMAN\_SCRIPT\ \ \ \ 150}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00457}00457\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00458}00458\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00459}00459\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00460}00460\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00461}00461\ \ \ \textcolor{comment}{/*\ Possible\ values\ of\ the\ language\ identifier\ field\ in\ the\ name\ records\ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00462}00462\ \ \ \textcolor{comment}{/*\ of\ the\ TTF\ \`{}name'\ table\ if\ the\ \`{}platform'\ identifier\ code\ is\ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00463}00463\ \ \ \textcolor{comment}{/*\ TT\_PLATFORM\_MICROSOFT.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00464}00464\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00465}00465\ \ \ \textcolor{comment}{/*\ The\ canonical\ source\ for\ the\ MS\ assigned\ LCIDs\ is\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00466}00466\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00467}00467\ \ \ \textcolor{comment}{/*\ \ \ http://www.microsoft.com/globaldev/reference/lcid-\/all.mspx\ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00468}00468\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00469}00469\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00470}00470\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ARABIC\_GENERAL\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0001}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00471}00471\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ARABIC\_SAUDI\_ARABIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0401}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00472}00472\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ARABIC\_IRAQ\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0801}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00473}00473\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ARABIC\_EGYPT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0C01}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00474}00474\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ARABIC\_LIBYA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x1001}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00475}00475\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ARABIC\_ALGERIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x1401}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00476}00476\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ARABIC\_MOROCCO\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x1801}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00477}00477\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ARABIC\_TUNISIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x1C01}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00478}00478\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ARABIC\_OMAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x2001}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00479}00479\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ARABIC\_YEMEN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x2401}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00480}00480\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ARABIC\_SYRIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x2801}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00481}00481\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ARABIC\_JORDAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x2C01}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00482}00482\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ARABIC\_LEBANON\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x3001}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00483}00483\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ARABIC\_KUWAIT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x3401}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00484}00484\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ARABIC\_UAE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x3801}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00485}00485\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ARABIC\_BAHRAIN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x3C01}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00486}00486\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ARABIC\_QATAR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x4001}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00487}00487\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_BULGARIAN\_BULGARIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0402}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00488}00488\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_CATALAN\_SPAIN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0403}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00489}00489\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_CHINESE\_GENERAL\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0004}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00490}00490\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_CHINESE\_TAIWAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0404}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00491}00491\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_CHINESE\_PRC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0804}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00492}00492\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_CHINESE\_HONG\_KONG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0C04}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00493}00493\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_CHINESE\_SINGAPORE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x1004}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00494}00494\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00495}00495\ \textcolor{preprocessor}{\#if\ 1\ \ }\textcolor{comment}{/*\ this\ looks\ like\ the\ correct\ value\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00496}00496\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_CHINESE\_MACAU\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x1404}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00497}00497\ \textcolor{preprocessor}{\#else\ \ }\textcolor{comment}{/*\ but\ beware,\ Microsoft\ may\ change\ its\ mind...}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00498}00498\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ the\ most\ recent\ Word\ reference\ has\ the\ following:\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00499}00499\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_CHINESE\_MACAU\ \ TT\_MS\_LANGID\_CHINESE\_HONG\_KONG}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00500}00500\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00501}00501\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00502}00502\ \textcolor{preprocessor}{\#if\ 0\ \ }\textcolor{comment}{/*\ used\ only\ with\ .NET\ \`{}cultures';\ commented\ out\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00503}00503\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_CHINESE\_TRADITIONAL\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x7C04}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00504}00504\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00505}00505\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00506}00506\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_CZECH\_CZECH\_REPUBLIC\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0405}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00507}00507\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_DANISH\_DENMARK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0406}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00508}00508\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_GERMAN\_GERMANY\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0407}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00509}00509\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_GERMAN\_SWITZERLAND\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0807}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00510}00510\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_GERMAN\_AUSTRIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0C07}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00511}00511\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_GERMAN\_LUXEMBOURG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x1007}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00512}00512\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_GERMAN\_LIECHTENSTEI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x1407}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00513}00513\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_GREEK\_GREECE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0408}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00514}00514\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00515}00515\ \ \ \textcolor{comment}{/*\ don't\ ask\ what\ this\ one\ means...\ It\ is\ commented\ out\ currently.\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00516}00516\ \textcolor{preprocessor}{\#if\ 0}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00517}00517\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_GREEK\_GREECE2\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x2008}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00518}00518\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00519}00519\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00520}00520\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ENGLISH\_GENERAL\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0009}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00521}00521\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ENGLISH\_UNITED\_STATES\ \ \ \ \ \ \ \ \ \ \ \ \ 0x0409}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00522}00522\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ENGLISH\_UNITED\_KINGDOM\ \ \ \ \ \ \ \ \ \ \ \ 0x0809}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00523}00523\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ENGLISH\_AUSTRALIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0C09}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00524}00524\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ENGLISH\_CANADA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x1009}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00525}00525\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ENGLISH\_NEW\_ZEALAND\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x1409}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00526}00526\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ENGLISH\_IRELAND\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x1809}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00527}00527\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ENGLISH\_SOUTH\_AFRICA\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x1C09}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00528}00528\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ENGLISH\_JAMAICA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x2009}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00529}00529\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ENGLISH\_CARIBBEAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x2409}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00530}00530\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ENGLISH\_BELIZE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x2809}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00531}00531\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ENGLISH\_TRINIDAD\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x2C09}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00532}00532\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ENGLISH\_ZIMBABWE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x3009}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00533}00533\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ENGLISH\_PHILIPPINES\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x3409}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00534}00534\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ENGLISH\_INDONESIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x3809}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00535}00535\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ENGLISH\_HONG\_KONG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x3C09}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00536}00536\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ENGLISH\_INDIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x4009}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00537}00537\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ENGLISH\_MALAYSIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x4409}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00538}00538\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ENGLISH\_SINGAPORE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x4809}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00539}00539\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SPANISH\_SPAIN\_TRADITIONAL\_SORT\ \ \ \ 0x040A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00540}00540\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SPANISH\_MEXICO\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x080A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00541}00541\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SPANISH\_SPAIN\_INTERNATIONAL\_SORT\ \ 0x0C0A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00542}00542\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SPANISH\_GUATEMALA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x100A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00543}00543\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SPANISH\_COSTA\_RICA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x140A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00544}00544\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SPANISH\_PANAMA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x180A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00545}00545\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SPANISH\_DOMINICAN\_REPUBLIC\ \ \ \ \ \ \ \ 0x1C0A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00546}00546\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SPANISH\_VENEZUELA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x200A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00547}00547\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SPANISH\_COLOMBIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x240A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00548}00548\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SPANISH\_PERU\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x280A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00549}00549\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SPANISH\_ARGENTINA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x2C0A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00550}00550\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SPANISH\_ECUADOR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x300A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00551}00551\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SPANISH\_CHILE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x340A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00552}00552\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SPANISH\_URUGUAY\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x380A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00553}00553\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SPANISH\_PARAGUAY\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x3C0A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00554}00554\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SPANISH\_BOLIVIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x400A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00555}00555\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SPANISH\_EL\_SALVADOR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x440A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00556}00556\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SPANISH\_HONDURAS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x480A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00557}00557\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SPANISH\_NICARAGUA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x4C0A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00558}00558\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SPANISH\_PUERTO\_RICO\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x500A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00559}00559\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SPANISH\_UNITED\_STATES\ \ \ \ \ \ \ \ \ \ \ \ \ 0x540A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00560}00560\ \ \ \textcolor{comment}{/*\ The\ following\ ID\ blatantly\ violate\ MS\ specs\ by\ using\ a\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00561}00561\ \ \ \textcolor{comment}{/*\ sublanguage\ >\ 0x1F.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00562}00562\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SPANISH\_LATIN\_AMERICA\ \ \ \ \ \ \ \ \ \ \ \ \ 0xE40AU}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00563}00563\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_FINNISH\_FINLAND\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x040B}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00564}00564\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_FRENCH\_FRANCE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x040C}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00565}00565\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_FRENCH\_BELGIUM\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x080C}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00566}00566\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_FRENCH\_CANADA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0C0C}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00567}00567\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_FRENCH\_SWITZERLAND\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x100C}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00568}00568\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_FRENCH\_LUXEMBOURG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x140C}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00569}00569\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_FRENCH\_MONACO\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x180C}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00570}00570\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_FRENCH\_WEST\_INDIES\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x1C0C}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00571}00571\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_FRENCH\_REUNION\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x200C}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00572}00572\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_FRENCH\_CONGO\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x240C}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00573}00573\ \ \ \textcolor{comment}{/*\ which\ was\ formerly:\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00574}00574\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_FRENCH\_ZAIRE\ \ TT\_MS\_LANGID\_FRENCH\_CONGO}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00575}00575\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_FRENCH\_SENEGAL\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x280C}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00576}00576\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_FRENCH\_CAMEROON\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x2C0C}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00577}00577\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_FRENCH\_COTE\_D\_IVOIRE\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x300C}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00578}00578\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_FRENCH\_MALI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x340C}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00579}00579\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_FRENCH\_MOROCCO\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x380C}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00580}00580\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_FRENCH\_HAITI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x3C0C}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00581}00581\ \ \ \textcolor{comment}{/*\ and\ another\ violation\ of\ the\ spec\ (see\ 0xE40AU)\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00582}00582\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_FRENCH\_NORTH\_AFRICA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0xE40CU}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00583}00583\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_HEBREW\_ISRAEL\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x040D}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00584}00584\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_HUNGARIAN\_HUNGARY\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x040E}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00585}00585\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ICELANDIC\_ICELAND\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x040F}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00586}00586\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ITALIAN\_ITALY\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0410}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00587}00587\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ITALIAN\_SWITZERLAND\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0810}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00588}00588\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_JAPANESE\_JAPAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0411}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00589}00589\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_KOREAN\_EXTENDED\_WANSUNG\_KOREA\ \ \ \ \ 0x0412}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00590}00590\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_KOREAN\_JOHAB\_KOREA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0812}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00591}00591\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_DUTCH\_NETHERLANDS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0413}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00592}00592\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_DUTCH\_BELGIUM\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0813}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00593}00593\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_NORWEGIAN\_NORWAY\_BOKMAL\ \ \ \ \ \ \ \ \ \ \ 0x0414}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00594}00594\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_NORWEGIAN\_NORWAY\_NYNORSK\ \ \ \ \ \ \ \ \ \ 0x0814}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00595}00595\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_POLISH\_POLAND\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0415}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00596}00596\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_PORTUGUESE\_BRAZIL\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0416}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00597}00597\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_PORTUGUESE\_PORTUGAL\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0816}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00598}00598\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_RHAETO\_ROMANIC\_SWITZERLAND\ \ \ \ \ \ \ \ 0x0417}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00599}00599\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ROMANIAN\_ROMANIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0418}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00600}00600\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_MOLDAVIAN\_MOLDAVIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0818}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00601}00601\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_RUSSIAN\_RUSSIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0419}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00602}00602\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_RUSSIAN\_MOLDAVIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0819}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00603}00603\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_CROATIAN\_CROATIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x041A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00604}00604\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SERBIAN\_SERBIA\_LATIN\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x081A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00605}00605\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SERBIAN\_SERBIA\_CYRILLIC\ \ \ \ \ \ \ \ \ \ \ 0x0C1A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00606}00606\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00607}00607\ \textcolor{preprocessor}{\#if\ 0\ \ }\textcolor{comment}{/*\ this\ used\ to\ be\ this\ value,\ but\ it\ looks\ like\ we\ were\ wrong\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00608}00608\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_BOSNIAN\_BOSNIA\_HERZEGOVINA\ \ \ \ \ \ \ \ 0x101A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00609}00609\ \textcolor{preprocessor}{\#else\ \ }\textcolor{comment}{/*\ current\ sources\ say\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00610}00610\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_CROATIAN\_BOSNIA\_HERZEGOVINA\ \ \ \ \ \ \ 0x101A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00611}00611\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_BOSNIAN\_BOSNIA\_HERZEGOVINA\ \ \ \ \ \ \ \ 0x141A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00612}00612\ \ \ \ \ \ \ \ \textcolor{comment}{/*\ and\ XPsp2\ Platform\ SDK\ added\ (2004-\/07-\/26)\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00613}00613\ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Names\ are\ shortened\ to\ be\ significant\ within\ 40\ chars.\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00614}00614\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SERBIAN\_BOSNIA\_HERZ\_LATIN\ \ \ \ \ \ \ \ \ 0x181A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00615}00615\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SERBIAN\_BOSNIA\_HERZ\_CYRILLIC\ \ \ \ \ \ 0x181A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00616}00616\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00617}00617\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00618}00618\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SLOVAK\_SLOVAKIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x041B}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00619}00619\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ALBANIAN\_ALBANIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x041C}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00620}00620\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SWEDISH\_SWEDEN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x041D}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00621}00621\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SWEDISH\_FINLAND\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x081D}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00622}00622\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_THAI\_THAILAND\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x041E}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00623}00623\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_TURKISH\_TURKEY\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x041F}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00624}00624\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_URDU\_PAKISTAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0420}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00625}00625\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_URDU\_INDIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0820}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00626}00626\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_INDONESIAN\_INDONESIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0421}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00627}00627\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_UKRAINIAN\_UKRAINE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0422}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00628}00628\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_BELARUSIAN\_BELARUS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0423}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00629}00629\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SLOVENE\_SLOVENIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0424}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00630}00630\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ESTONIAN\_ESTONIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0425}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00631}00631\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_LATVIAN\_LATVIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0426}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00632}00632\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_LITHUANIAN\_LITHUANIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0427}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00633}00633\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_CLASSIC\_LITHUANIAN\_LITHUANIA\ \ \ \ \ \ 0x0827}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00634}00634\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_TAJIK\_TAJIKISTAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0428}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00635}00635\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_FARSI\_IRAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0429}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00636}00636\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_VIETNAMESE\_VIET\_NAM\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x042A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00637}00637\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ARMENIAN\_ARMENIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x042B}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00638}00638\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_AZERI\_AZERBAIJAN\_LATIN\ \ \ \ \ \ \ \ \ \ \ \ 0x042C}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00639}00639\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_AZERI\_AZERBAIJAN\_CYRILLIC\ \ \ \ \ \ \ \ \ 0x082C}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00640}00640\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_BASQUE\_SPAIN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x042D}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00641}00641\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SORBIAN\_GERMANY\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x042E}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00642}00642\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_MACEDONIAN\_MACEDONIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x042F}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00643}00643\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SUTU\_SOUTH\_AFRICA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0430}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00644}00644\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_TSONGA\_SOUTH\_AFRICA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0431}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00645}00645\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_TSWANA\_SOUTH\_AFRICA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0432}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00646}00646\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_VENDA\_SOUTH\_AFRICA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0433}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00647}00647\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_XHOSA\_SOUTH\_AFRICA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0434}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00648}00648\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ZULU\_SOUTH\_AFRICA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0435}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00649}00649\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_AFRIKAANS\_SOUTH\_AFRICA\ \ \ \ \ \ \ \ \ \ \ \ 0x0436}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00650}00650\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_GEORGIAN\_GEORGIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0437}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00651}00651\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_FAEROESE\_FAEROE\_ISLANDS\ \ \ \ \ \ \ \ \ \ \ 0x0438}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00652}00652\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_HINDI\_INDIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0439}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00653}00653\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_MALTESE\_MALTA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x043A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00654}00654\ \ \ \textcolor{comment}{/*\ Added\ by\ XPsp2\ Platform\ SDK\ (2004-\/07-\/26)\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00655}00655\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SAMI\_NORTHERN\_NORWAY\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x043B}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00656}00656\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SAMI\_NORTHERN\_SWEDEN\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x083B}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00657}00657\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SAMI\_NORTHERN\_FINLAND\ \ \ \ \ \ \ \ \ \ \ \ \ 0x0C3B}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00658}00658\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SAMI\_LULE\_NORWAY\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x103B}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00659}00659\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SAMI\_LULE\_SWEDEN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x143B}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00660}00660\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SAMI\_SOUTHERN\_NORWAY\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x183B}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00661}00661\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SAMI\_SOUTHERN\_SWEDEN\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x1C3B}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00662}00662\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SAMI\_SKOLT\_FINLAND\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x203B}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00663}00663\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SAMI\_INARI\_FINLAND\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x243B}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00664}00664\ \ \ \textcolor{comment}{/*\ ...\ and\ we\ also\ keep\ our\ old\ identifier...\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00665}00665\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SAAMI\_LAPONIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x043B}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00666}00666\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00667}00667\ \textcolor{preprocessor}{\#if\ 0\ }\textcolor{comment}{/*\ this\ seems\ to\ be\ a\ previous\ inversion\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00668}00668\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_IRISH\_GAELIC\_IRELAND\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x043C}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00669}00669\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SCOTTISH\_GAELIC\_UNITED\_KINGDOM\ \ \ \ 0x083C}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00670}00670\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00671}00671\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SCOTTISH\_GAELIC\_UNITED\_KINGDOM\ \ \ \ 0x083C}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00672}00672\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_IRISH\_GAELIC\_IRELAND\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x043C}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00673}00673\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00674}00674\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00675}00675\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_YIDDISH\_GERMANY\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x043D}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00676}00676\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_MALAY\_MALAYSIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x043E}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00677}00677\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_MALAY\_BRUNEI\_DARUSSALAM\ \ \ \ \ \ \ \ \ \ \ 0x083E}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00678}00678\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_KAZAK\_KAZAKSTAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x043F}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00679}00679\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_KIRGHIZ\_KIRGHIZSTAN\ }\textcolor{comment}{/*\ Cyrillic*/}\textcolor{preprocessor}{\ 0x0440}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00680}00680\ \ \ \textcolor{comment}{/*\ alias\ declared\ in\ Windows\ 2000\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00681}00681\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_KIRGHIZ\_KIRGHIZ\_REPUBLIC\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00682}00682\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ TT\_MS\_LANGID\_KIRGHIZ\_KIRGHIZSTAN}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00683}00683\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00684}00684\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SWAHILI\_KENYA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0441}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00685}00685\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_TURKMEN\_TURKMENISTAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0442}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00686}00686\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_UZBEK\_UZBEKISTAN\_LATIN\ \ \ \ \ \ \ \ \ \ \ \ 0x0443}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00687}00687\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_UZBEK\_UZBEKISTAN\_CYRILLIC\ \ \ \ \ \ \ \ \ 0x0843}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00688}00688\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_TATAR\_TATARSTAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0444}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00689}00689\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_BENGALI\_INDIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0445}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00690}00690\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_BENGALI\_BANGLADESH\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0845}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00691}00691\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_PUNJABI\_INDIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0446}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00692}00692\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_PUNJABI\_ARABIC\_PAKISTAN\ \ \ \ \ \ \ \ \ \ \ 0x0846}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00693}00693\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_GUJARATI\_INDIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0447}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00694}00694\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ORIYA\_INDIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0448}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00695}00695\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_TAMIL\_INDIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0449}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00696}00696\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_TELUGU\_INDIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x044A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00697}00697\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_KANNADA\_INDIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x044B}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00698}00698\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_MALAYALAM\_INDIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x044C}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00699}00699\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_ASSAMESE\_INDIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x044D}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00700}00700\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_MARATHI\_INDIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x044E}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00701}00701\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SANSKRIT\_INDIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x044F}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00702}00702\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_MONGOLIAN\_MONGOLIA\ }\textcolor{comment}{/*\ Cyrillic\ */}\textcolor{preprocessor}{\ 0x0450}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00703}00703\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_MONGOLIAN\_MONGOLIA\_MONGOLIAN\ \ \ \ \ \ 0x0850}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00704}00704\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_TIBETAN\_CHINA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0451}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00705}00705\ \ \ \textcolor{comment}{/*\ Don't\ use\ the\ next\ constant!\ \ It\ has\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00706}00706\ \ \ \textcolor{comment}{/*\ \ \ (1)\ the\ wrong\ spelling\ (Dzonghka)\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00707}00707\ \ \ \textcolor{comment}{/*\ \ \ (2)\ Microsoft\ doesn't\ officially\ define\ it\ -\/-\/\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00708}00708\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ at\ least\ it\ is\ not\ in\ the\ List\ of\ Local\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00709}00709\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ ID\ Values.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00710}00710\ \ \ \textcolor{comment}{/*\ \ \ (3)\ Dzongkha\ is\ not\ the\ same\ language\ as\ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00711}00711\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ Tibetan,\ so\ merging\ it\ is\ wrong\ anyway.\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00712}00712\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00713}00713\ \ \ \textcolor{comment}{/*\ TT\_MS\_LANGID\_TIBETAN\_BHUTAN\ is\ correct,\ BTW.\ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00714}00714\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_DZONGHKA\_BHUTAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0851}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00715}00715\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00716}00716\ \textcolor{preprocessor}{\#if\ 0}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00717}00717\ \ \ \textcolor{comment}{/*\ the\ following\ used\ to\ be\ defined\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00718}00718\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_TIBETAN\_BHUTAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0451}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00719}00719\ \ \ \textcolor{comment}{/*\ ...\ but\ it\ was\ changed;\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00720}00720\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00721}00721\ \ \ \textcolor{comment}{/*\ So\ we\ will\ continue\ to\ \#define\ it,\ but\ with\ the\ correct\ value\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00722}00722\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_TIBETAN\_BHUTAN\ \ \ TT\_MS\_LANGID\_DZONGHKA\_BHUTAN}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00723}00723\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00724}00724\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00725}00725\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_WELSH\_WALES\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0452}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00726}00726\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_KHMER\_CAMBODIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0453}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00727}00727\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_LAO\_LAOS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0454}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00728}00728\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_BURMESE\_MYANMAR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0455}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00729}00729\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_GALICIAN\_SPAIN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0456}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00730}00730\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_KONKANI\_INDIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0457}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00731}00731\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_MANIPURI\_INDIA\ \ }\textcolor{comment}{/*\ Bengali\ */}\textcolor{preprocessor}{\ \ \ \ \ 0x0458}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00732}00732\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SINDHI\_INDIA\ }\textcolor{comment}{/*\ Arabic\ */}\textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ 0x0459}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00733}00733\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SINDHI\_PAKISTAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0859}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00734}00734\ \ \ \textcolor{comment}{/*\ Missing\ a\ LCID\ for\ Sindhi\ in\ Devanagari\ script\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00735}00735\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SYRIAC\_SYRIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x045A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00736}00736\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SINHALESE\_SRI\_LANKA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x045B}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00737}00737\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_CHEROKEE\_UNITED\_STATES\ \ \ \ \ \ \ \ \ \ \ \ 0x045C}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00738}00738\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_INUKTITUT\_CANADA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x045D}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00739}00739\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_AMHARIC\_ETHIOPIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x045E}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00740}00740\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_TAMAZIGHT\_MOROCCO\ }\textcolor{comment}{/*\ Arabic\ */}\textcolor{preprocessor}{\ \ \ \ 0x045F}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00741}00741\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_TAMAZIGHT\_MOROCCO\_LATIN\ \ \ \ \ \ \ \ \ \ \ 0x085F}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00742}00742\ \ \ \textcolor{comment}{/*\ Missing\ a\ LCID\ for\ Tifinagh\ script\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00743}00743\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_KASHMIRI\_PAKISTAN\ }\textcolor{comment}{/*\ Arabic\ */}\textcolor{preprocessor}{\ \ \ \ 0x0460}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00744}00744\ \ \ \textcolor{comment}{/*\ Spelled\ this\ way\ by\ XPsp2\ Platform\ SDK\ (2004-\/07-\/26)\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00745}00745\ \ \ \textcolor{comment}{/*\ script\ is\ yet\ unclear...\ might\ be\ Arabic,\ Nagari\ or\ Sharada\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00746}00746\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_KASHMIRI\_SASIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0860}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00747}00747\ \ \ \textcolor{comment}{/*\ ...\ and\ aliased\ (by\ MS)\ for\ compatibility\ reasons.\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00748}00748\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_KASHMIRI\_INDIA\ TT\_MS\_LANGID\_KASHMIRI\_SASIA}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00749}00749\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_NEPALI\_NEPAL\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0461}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00750}00750\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_NEPALI\_INDIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0861}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00751}00751\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_FRISIAN\_NETHERLANDS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0462}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00752}00752\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_PASHTO\_AFGHANISTAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0463}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00753}00753\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_FILIPINO\_PHILIPPINES\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0464}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00754}00754\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_DHIVEHI\_MALDIVES\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0465}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00755}00755\ \ \ \textcolor{comment}{/*\ alias\ declared\ in\ Windows\ 2000\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00756}00756\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_DIVEHI\_MALDIVES\ \ TT\_MS\_LANGID\_DHIVEHI\_MALDIVES}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00757}00757\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_EDO\_NIGERIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0466}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00758}00758\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_FULFULDE\_NIGERIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0467}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00759}00759\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_HAUSA\_NIGERIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0468}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00760}00760\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_IBIBIO\_NIGERIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0469}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00761}00761\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_YORUBA\_NIGERIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x046A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00762}00762\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_QUECHUA\_BOLIVIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x046B}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00763}00763\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_QUECHUA\_ECUADOR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x086B}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00764}00764\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_QUECHUA\_PERU\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0C6B}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00765}00765\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SEPEDI\_SOUTH\_AFRICA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x046C}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00766}00766\ \ \ \textcolor{comment}{/*\ Also\ spelled\ by\ XPsp2\ Platform\ SDK\ (2004-\/07-\/26)\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00767}00767\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SOTHO\_SOUTHERN\_SOUTH\_AFRICA\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00768}00768\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ TT\_MS\_LANGID\_SEPEDI\_SOUTH\_AFRICA}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00769}00769\ \ \ \textcolor{comment}{/*\ language\ codes\ 0x046D,\ 0x046E\ and\ 0x046F\ are\ (still)\ unknown.\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00770}00770\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_IGBO\_NIGERIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0470}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00771}00771\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_KANURI\_NIGERIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0471}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00772}00772\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_OROMO\_ETHIOPIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0472}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00773}00773\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_TIGRIGNA\_ETHIOPIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0473}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00774}00774\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_TIGRIGNA\_ERYTHREA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0873}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00775}00775\ \ \ \textcolor{comment}{/*\ also\ spelled\ in\ the\ \`{}Passport\ SDK'\ list\ as:\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00776}00776\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_TIGRIGNA\_ERYTREA\ \ TT\_MS\_LANGID\_TIGRIGNA\_ERYTHREA}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00777}00777\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_GUARANI\_PARAGUAY\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0474}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00778}00778\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_HAWAIIAN\_UNITED\_STATES\ \ \ \ \ \ \ \ \ \ \ \ 0x0475}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00779}00779\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_LATIN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0476}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00780}00780\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_SOMALI\_SOMALIA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0477}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00781}00781\ \ \ \textcolor{comment}{/*\ Note:\ Yi\ does\ not\ have\ a\ (proper)\ ISO\ 639-\/2\ code,\ since\ it\ is\ mostly\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00782}00782\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ not\ written\ (but\ OTOH\ the\ peculiar\ writing\ system\ is\ worth\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00783}00783\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ studying).\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00784}00784\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_YI\_CHINA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0478}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00785}00785\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_PAPIAMENTU\_NETHERLANDS\_ANTILLES\ \ \ 0x0479}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00786}00786\ \ \ \textcolor{comment}{/*\ language\ codes\ from\ 0x047A\ to\ 0x047F\ are\ (still)\ unknown.\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00787}00787\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_UIGHUR\_CHINA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0480}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00788}00788\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_MAORI\_NEW\_ZEALAND\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0481}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00789}00789\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00790}00790\ \textcolor{preprocessor}{\#if\ 0\ \ }\textcolor{comment}{/*\ not\ deemed\ useful\ for\ fonts\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00791}00791\ \textcolor{preprocessor}{\#define\ TT\_MS\_LANGID\_HUMAN\_INTERFACE\_DEVICE\ \ \ \ \ \ \ \ \ \ \ \ 0x04FF}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00792}00792\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00793}00793\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00794}00794\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00795}00795\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00796}00796\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00797}00797\ \ \ \textcolor{comment}{/*\ Possible\ values\ of\ the\ \`{}name'\ identifier\ field\ in\ the\ name\ records\ of\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00798}00798\ \ \ \textcolor{comment}{/*\ the\ TTF\ \`{}name'\ table.\ \ These\ values\ are\ platform\ independent.\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00799}00799\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00800}00800\ \textcolor{preprocessor}{\#define\ TT\_NAME\_ID\_COPYRIGHT\ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00801}00801\ \textcolor{preprocessor}{\#define\ TT\_NAME\_ID\_FONT\_FAMILY\ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00802}00802\ \textcolor{preprocessor}{\#define\ TT\_NAME\_ID\_FONT\_SUBFAMILY\ \ \ \ \ \ \ 2}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00803}00803\ \textcolor{preprocessor}{\#define\ TT\_NAME\_ID\_UNIQUE\_ID\ \ \ \ \ \ \ \ \ \ \ \ 3}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00804}00804\ \textcolor{preprocessor}{\#define\ TT\_NAME\_ID\_FULL\_NAME\ \ \ \ \ \ \ \ \ \ \ \ 4}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00805}00805\ \textcolor{preprocessor}{\#define\ TT\_NAME\_ID\_VERSION\_STRING\ \ \ \ \ \ \ 5}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00806}00806\ \textcolor{preprocessor}{\#define\ TT\_NAME\_ID\_PS\_NAME\ \ \ \ \ \ \ \ \ \ \ \ \ \ 6}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00807}00807\ \textcolor{preprocessor}{\#define\ TT\_NAME\_ID\_TRADEMARK\ \ \ \ \ \ \ \ \ \ \ \ 7}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00808}00808\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00809}00809\ \ \ \textcolor{comment}{/*\ the\ following\ values\ are\ from\ the\ OpenType\ spec\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00810}00810\ \textcolor{preprocessor}{\#define\ TT\_NAME\_ID\_MANUFACTURER\ \ \ \ \ \ \ \ \ 8}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00811}00811\ \textcolor{preprocessor}{\#define\ TT\_NAME\_ID\_DESIGNER\ \ \ \ \ \ \ \ \ \ \ \ \ 9}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00812}00812\ \textcolor{preprocessor}{\#define\ TT\_NAME\_ID\_DESCRIPTION\ \ \ \ \ \ \ \ \ \ 10}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00813}00813\ \textcolor{preprocessor}{\#define\ TT\_NAME\_ID\_VENDOR\_URL\ \ \ \ \ \ \ \ \ \ \ 11}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00814}00814\ \textcolor{preprocessor}{\#define\ TT\_NAME\_ID\_DESIGNER\_URL\ \ \ \ \ \ \ \ \ 12}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00815}00815\ \textcolor{preprocessor}{\#define\ TT\_NAME\_ID\_LICENSE\ \ \ \ \ \ \ \ \ \ \ \ \ \ 13}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00816}00816\ \textcolor{preprocessor}{\#define\ TT\_NAME\_ID\_LICENSE\_URL\ \ \ \ \ \ \ \ \ \ 14}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00817}00817\ \ \ \textcolor{comment}{/*\ number\ 15\ is\ reserved\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00818}00818\ \textcolor{preprocessor}{\#define\ TT\_NAME\_ID\_PREFERRED\_FAMILY\ \ \ \ \ 16}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00819}00819\ \textcolor{preprocessor}{\#define\ TT\_NAME\_ID\_PREFERRED\_SUBFAMILY\ \ 17}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00820}00820\ \textcolor{preprocessor}{\#define\ TT\_NAME\_ID\_MAC\_FULL\_NAME\ \ \ \ \ \ \ \ 18}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00821}00821\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00822}00822\ \ \ \textcolor{comment}{/*\ The\ following\ code\ is\ new\ as\ of\ 2000-\/01-\/21\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00823}00823\ \textcolor{preprocessor}{\#define\ TT\_NAME\_ID\_SAMPLE\_TEXT\ \ \ \ \ \ \ \ \ \ 19}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00824}00824\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00825}00825\ \ \ \textcolor{comment}{/*\ This\ is\ new\ in\ OpenType\ 1.3\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00826}00826\ \textcolor{preprocessor}{\#define\ TT\_NAME\_ID\_CID\_FINDFONT\_NAME\ \ \ \ 20}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00827}00827\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00828}00828\ \ \ \textcolor{comment}{/*\ This\ is\ new\ in\ OpenType\ 1.5\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00829}00829\ \textcolor{preprocessor}{\#define\ TT\_NAME\_ID\_WWS\_FAMILY\ \ \ \ \ \ \ \ \ \ \ 21}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00830}00830\ \textcolor{preprocessor}{\#define\ TT\_NAME\_ID\_WWS\_SUBFAMILY\ \ \ \ \ \ \ \ 22}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00831}00831\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00832}00832\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00833}00833\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00834}00834\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00835}00835\ \ \ \textcolor{comment}{/*\ Bit\ mask\ values\ for\ the\ Unicode\ Ranges\ from\ the\ TTF\ \`{}OS2\ '\ table.\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00836}00836\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00837}00837\ \ \ \textcolor{comment}{/*\ Updated\ 08-\/Nov-\/2008.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00838}00838\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00839}00839\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00840}00840\ \ \ \textcolor{comment}{/*\ Bit\ \ 0\ \ \ Basic\ Latin\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00841}00841\ \textcolor{preprocessor}{\#define\ TT\_UCR\_BASIC\_LATIN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 0)\ }\textcolor{comment}{/*\ U+0020-\/U+007E\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00842}00842\ \ \ \textcolor{comment}{/*\ Bit\ \ 1\ \ \ C1\ Controls\ and\ Latin-\/1\ Supplement\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00843}00843\ \textcolor{preprocessor}{\#define\ TT\_UCR\_LATIN1\_SUPPLEMENT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 1)\ }\textcolor{comment}{/*\ U+0080-\/U+00FF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00844}00844\ \ \ \textcolor{comment}{/*\ Bit\ \ 2\ \ \ Latin\ Extended-\/A\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00845}00845\ \textcolor{preprocessor}{\#define\ TT\_UCR\_LATIN\_EXTENDED\_A\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 2)\ }\textcolor{comment}{/*\ U+0100-\/U+017F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00846}00846\ \ \ \textcolor{comment}{/*\ Bit\ \ 3\ \ \ Latin\ Extended-\/B\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00847}00847\ \textcolor{preprocessor}{\#define\ TT\_UCR\_LATIN\_EXTENDED\_B\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 3)\ }\textcolor{comment}{/*\ U+0180-\/U+024F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00848}00848\ \ \ \textcolor{comment}{/*\ Bit\ \ 4\ \ \ IPA\ Extensions\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00849}00849\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Phonetic\ Extensions\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00850}00850\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Phonetic\ Extensions\ Supplement\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00851}00851\ \textcolor{preprocessor}{\#define\ TT\_UCR\_IPA\_EXTENSIONS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 4)\ }\textcolor{comment}{/*\ U+0250-\/U+02AF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00852}00852\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+1D00-\/U+1D7F\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00853}00853\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+1D80-\/U+1DBF\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00854}00854\ \ \ \textcolor{comment}{/*\ Bit\ \ 5\ \ \ Spacing\ Modifier\ Letters\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00855}00855\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Modifier\ Tone\ Letters\ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00856}00856\ \textcolor{preprocessor}{\#define\ TT\_UCR\_SPACING\_MODIFIER\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 5)\ }\textcolor{comment}{/*\ U+02B0-\/U+02FF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00857}00857\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+A700-\/U+A71F\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00858}00858\ \ \ \textcolor{comment}{/*\ Bit\ \ 6\ \ \ Combining\ Diacritical\ Marks\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00859}00859\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Combining\ Diacritical\ Marks\ Supplement\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00860}00860\ \textcolor{preprocessor}{\#define\ TT\_UCR\_COMBINING\_DIACRITICS\ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 6)\ }\textcolor{comment}{/*\ U+0300-\/U+036F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00861}00861\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+1DC0-\/U+1DFF\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00862}00862\ \ \ \textcolor{comment}{/*\ Bit\ \ 7\ \ \ Greek\ and\ Coptic\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00863}00863\ \textcolor{preprocessor}{\#define\ TT\_UCR\_GREEK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 7)\ }\textcolor{comment}{/*\ U+0370-\/U+03FF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00864}00864\ \ \ \textcolor{comment}{/*\ Bit\ \ 8\ \ \ Coptic\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00865}00865\ \textcolor{preprocessor}{\#define\ TT\_UCR\_COPTIC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 8)\ }\textcolor{comment}{/*\ U+2C80-\/U+2CFF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00866}00866\ \ \ \textcolor{comment}{/*\ Bit\ \ 9\ \ \ Cyrillic\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00867}00867\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Cyrillic\ Supplement\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00868}00868\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Cyrillic\ Extended-\/A\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00869}00869\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Cyrillic\ Extended-\/B\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00870}00870\ \textcolor{preprocessor}{\#define\ TT\_UCR\_CYRILLIC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 9)\ }\textcolor{comment}{/*\ U+0400-\/U+04FF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00871}00871\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+0500-\/U+052F\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00872}00872\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+2DE0-\/U+2DFF\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00873}00873\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+A640-\/U+A69F\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00874}00874\ \ \ \textcolor{comment}{/*\ Bit\ 10\ \ \ Armenian\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00875}00875\ \textcolor{preprocessor}{\#define\ TT\_UCR\_ARMENIAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 10)\ }\textcolor{comment}{/*\ U+0530-\/U+058F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00876}00876\ \ \ \textcolor{comment}{/*\ Bit\ 11\ \ \ Hebrew\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00877}00877\ \textcolor{preprocessor}{\#define\ TT\_UCR\_HEBREW\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 11)\ }\textcolor{comment}{/*\ U+0590-\/U+05FF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00878}00878\ \ \ \textcolor{comment}{/*\ Bit\ 12\ \ \ Vai\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00879}00879\ \textcolor{preprocessor}{\#define\ TT\_UCR\_VAI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 12)\ }\textcolor{comment}{/*\ U+A500-\/U+A63F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00880}00880\ \ \ \textcolor{comment}{/*\ Bit\ 13\ \ \ Arabic\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00881}00881\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Arabic\ Supplement\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00882}00882\ \textcolor{preprocessor}{\#define\ TT\_UCR\_ARABIC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 13)\ }\textcolor{comment}{/*\ U+0600-\/U+06FF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00883}00883\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+0750-\/U+077F\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00884}00884\ \ \ \textcolor{comment}{/*\ Bit\ 14\ \ \ NKo\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00885}00885\ \textcolor{preprocessor}{\#define\ TT\_UCR\_NKO\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 14)\ }\textcolor{comment}{/*\ U+07C0-\/U+07FF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00886}00886\ \ \ \textcolor{comment}{/*\ Bit\ 15\ \ \ Devanagari\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00887}00887\ \textcolor{preprocessor}{\#define\ TT\_UCR\_DEVANAGARI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 15)\ }\textcolor{comment}{/*\ U+0900-\/U+097F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00888}00888\ \ \ \textcolor{comment}{/*\ Bit\ 16\ \ \ Bengali\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00889}00889\ \textcolor{preprocessor}{\#define\ TT\_UCR\_BENGALI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 16)\ }\textcolor{comment}{/*\ U+0980-\/U+09FF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00890}00890\ \ \ \textcolor{comment}{/*\ Bit\ 17\ \ \ Gurmukhi\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00891}00891\ \textcolor{preprocessor}{\#define\ TT\_UCR\_GURMUKHI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 17)\ }\textcolor{comment}{/*\ U+0A00-\/U+0A7F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00892}00892\ \ \ \textcolor{comment}{/*\ Bit\ 18\ \ \ Gujarati\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00893}00893\ \textcolor{preprocessor}{\#define\ TT\_UCR\_GUJARATI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 18)\ }\textcolor{comment}{/*\ U+0A80-\/U+0AFF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00894}00894\ \ \ \textcolor{comment}{/*\ Bit\ 19\ \ \ Oriya\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00895}00895\ \textcolor{preprocessor}{\#define\ TT\_UCR\_ORIYA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 19)\ }\textcolor{comment}{/*\ U+0B00-\/U+0B7F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00896}00896\ \ \ \textcolor{comment}{/*\ Bit\ 20\ \ \ Tamil\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00897}00897\ \textcolor{preprocessor}{\#define\ TT\_UCR\_TAMIL\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 20)\ }\textcolor{comment}{/*\ U+0B80-\/U+0BFF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00898}00898\ \ \ \textcolor{comment}{/*\ Bit\ 21\ \ \ Telugu\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00899}00899\ \textcolor{preprocessor}{\#define\ TT\_UCR\_TELUGU\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 21)\ }\textcolor{comment}{/*\ U+0C00-\/U+0C7F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00900}00900\ \ \ \textcolor{comment}{/*\ Bit\ 22\ \ \ Kannada\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00901}00901\ \textcolor{preprocessor}{\#define\ TT\_UCR\_KANNADA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 22)\ }\textcolor{comment}{/*\ U+0C80-\/U+0CFF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00902}00902\ \ \ \textcolor{comment}{/*\ Bit\ 23\ \ \ Malayalam\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00903}00903\ \textcolor{preprocessor}{\#define\ TT\_UCR\_MALAYALAM\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 23)\ }\textcolor{comment}{/*\ U+0D00-\/U+0D7F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00904}00904\ \ \ \textcolor{comment}{/*\ Bit\ 24\ \ \ Thai\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00905}00905\ \textcolor{preprocessor}{\#define\ TT\_UCR\_THAI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 24)\ }\textcolor{comment}{/*\ U+0E00-\/U+0E7F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00906}00906\ \ \ \textcolor{comment}{/*\ Bit\ 25\ \ \ Lao\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00907}00907\ \textcolor{preprocessor}{\#define\ TT\_UCR\_LAO\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 25)\ }\textcolor{comment}{/*\ U+0E80-\/U+0EFF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00908}00908\ \ \ \textcolor{comment}{/*\ Bit\ 26\ \ \ Georgian\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00909}00909\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Georgian\ Supplement\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00910}00910\ \textcolor{preprocessor}{\#define\ TT\_UCR\_GEORGIAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 26)\ }\textcolor{comment}{/*\ U+10A0-\/U+10FF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00911}00911\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+2D00-\/U+2D2F\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00912}00912\ \ \ \textcolor{comment}{/*\ Bit\ 27\ \ \ Balinese\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00913}00913\ \textcolor{preprocessor}{\#define\ TT\_UCR\_BALINESE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 27)\ }\textcolor{comment}{/*\ U+1B00-\/U+1B7F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00914}00914\ \ \ \textcolor{comment}{/*\ Bit\ 28\ \ \ Hangul\ Jamo\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00915}00915\ \textcolor{preprocessor}{\#define\ TT\_UCR\_HANGUL\_JAMO\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 28)\ }\textcolor{comment}{/*\ U+1100-\/U+11FF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00916}00916\ \ \ \textcolor{comment}{/*\ Bit\ 29\ \ \ Latin\ Extended\ Additional\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00917}00917\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Latin\ Extended-\/C\ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00918}00918\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Latin\ Extended-\/D\ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00919}00919\ \textcolor{preprocessor}{\#define\ TT\_UCR\_LATIN\_EXTENDED\_ADDITIONAL\ \ \ \ \ \ \ (1L\ <<\ 29)\ }\textcolor{comment}{/*\ U+1E00-\/U+1EFF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00920}00920\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+2C60-\/U+2C7F\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00921}00921\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+A720-\/U+A7FF\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00922}00922\ \ \ \textcolor{comment}{/*\ Bit\ 30\ \ \ Greek\ Extended\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00923}00923\ \textcolor{preprocessor}{\#define\ TT\_UCR\_GREEK\_EXTENDED\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 30)\ }\textcolor{comment}{/*\ U+1F00-\/U+1FFF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00924}00924\ \ \ \textcolor{comment}{/*\ Bit\ 31\ \ \ General\ Punctuation\ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00925}00925\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Supplemental\ Punctuation\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00926}00926\ \textcolor{preprocessor}{\#define\ TT\_UCR\_GENERAL\_PUNCTUATION\ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 31)\ }\textcolor{comment}{/*\ U+2000-\/U+206F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00927}00927\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+2E00-\/U+2E7F\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00928}00928\ \ \ \textcolor{comment}{/*\ Bit\ 32\ \ \ Superscripts\ And\ Subscripts\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00929}00929\ \textcolor{preprocessor}{\#define\ TT\_UCR\_SUPERSCRIPTS\_SUBSCRIPTS\ \ \ \ \ \ \ \ \ (1L\ <<\ \ 0)\ }\textcolor{comment}{/*\ U+2070-\/U+209F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00930}00930\ \ \ \textcolor{comment}{/*\ Bit\ 33\ \ \ Currency\ Symbols\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00931}00931\ \textcolor{preprocessor}{\#define\ TT\_UCR\_CURRENCY\_SYMBOLS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 1)\ }\textcolor{comment}{/*\ U+20A0-\/U+20CF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00932}00932\ \ \ \textcolor{comment}{/*\ Bit\ 34\ \ \ Combining\ Diacritical\ Marks\ For\ Symbols\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00933}00933\ \textcolor{preprocessor}{\#define\ TT\_UCR\_COMBINING\_DIACRITICS\_SYMB\ \ \ \ \ \ \ (1L\ <<\ \ 2)\ }\textcolor{comment}{/*\ U+20D0-\/U+20FF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00934}00934\ \ \ \textcolor{comment}{/*\ Bit\ 35\ \ \ Letterlike\ Symbols\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00935}00935\ \textcolor{preprocessor}{\#define\ TT\_UCR\_LETTERLIKE\_SYMBOLS\ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 3)\ }\textcolor{comment}{/*\ U+2100-\/U+214F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00936}00936\ \ \ \textcolor{comment}{/*\ Bit\ 36\ \ \ Number\ Forms\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00937}00937\ \textcolor{preprocessor}{\#define\ TT\_UCR\_NUMBER\_FORMS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 4)\ }\textcolor{comment}{/*\ U+2150-\/U+218F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00938}00938\ \ \ \textcolor{comment}{/*\ Bit\ 37\ \ \ Arrows\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00939}00939\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Supplemental\ Arrows-\/A\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00940}00940\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Supplemental\ Arrows-\/B\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00941}00941\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Miscellaneous\ Symbols\ and\ Arrows\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00942}00942\ \textcolor{preprocessor}{\#define\ TT\_UCR\_ARROWS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 5)\ }\textcolor{comment}{/*\ U+2190-\/U+21FF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00943}00943\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+27F0-\/U+27FF\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00944}00944\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+2900-\/U+297F\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00945}00945\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+2B00-\/U+2BFF\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00946}00946\ \ \ \textcolor{comment}{/*\ Bit\ 38\ \ \ Mathematical\ Operators\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00947}00947\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Supplemental\ Mathematical\ Operators\ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00948}00948\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Miscellaneous\ Mathematical\ Symbols-\/A\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00949}00949\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Miscellaneous\ Mathematical\ Symbols-\/B\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00950}00950\ \textcolor{preprocessor}{\#define\ TT\_UCR\_MATHEMATICAL\_OPERATORS\ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 6)\ }\textcolor{comment}{/*\ U+2200-\/U+22FF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00951}00951\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+2A00-\/U+2AFF\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00952}00952\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+27C0-\/U+27EF\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00953}00953\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+2980-\/U+29FF\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00954}00954\ \ \ \textcolor{comment}{/*\ Bit\ 39\ Miscellaneous\ Technical\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00955}00955\ \textcolor{preprocessor}{\#define\ TT\_UCR\_MISCELLANEOUS\_TECHNICAL\ \ \ \ \ \ \ \ \ (1L\ <<\ \ 7)\ }\textcolor{comment}{/*\ U+2300-\/U+23FF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00956}00956\ \ \ \textcolor{comment}{/*\ Bit\ 40\ \ \ Control\ Pictures\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00957}00957\ \textcolor{preprocessor}{\#define\ TT\_UCR\_CONTROL\_PICTURES\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 8)\ }\textcolor{comment}{/*\ U+2400-\/U+243F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00958}00958\ \ \ \textcolor{comment}{/*\ Bit\ 41\ \ \ Optical\ Character\ Recognition\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00959}00959\ \textcolor{preprocessor}{\#define\ TT\_UCR\_OCR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 9)\ }\textcolor{comment}{/*\ U+2440-\/U+245F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00960}00960\ \ \ \textcolor{comment}{/*\ Bit\ 42\ \ \ Enclosed\ Alphanumerics\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00961}00961\ \textcolor{preprocessor}{\#define\ TT\_UCR\_ENCLOSED\_ALPHANUMERICS\ \ \ \ \ \ \ \ \ \ (1L\ <<\ 10)\ }\textcolor{comment}{/*\ U+2460-\/U+24FF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00962}00962\ \ \ \textcolor{comment}{/*\ Bit\ 43\ \ \ Box\ Drawing\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00963}00963\ \textcolor{preprocessor}{\#define\ TT\_UCR\_BOX\_DRAWING\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 11)\ }\textcolor{comment}{/*\ U+2500-\/U+257F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00964}00964\ \ \ \textcolor{comment}{/*\ Bit\ 44\ \ \ Block\ Elements\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00965}00965\ \textcolor{preprocessor}{\#define\ TT\_UCR\_BLOCK\_ELEMENTS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 12)\ }\textcolor{comment}{/*\ U+2580-\/U+259F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00966}00966\ \ \ \textcolor{comment}{/*\ Bit\ 45\ \ \ Geometric\ Shapes\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00967}00967\ \textcolor{preprocessor}{\#define\ TT\_UCR\_GEOMETRIC\_SHAPES\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 13)\ }\textcolor{comment}{/*\ U+25A0-\/U+25FF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00968}00968\ \ \ \textcolor{comment}{/*\ Bit\ 46\ \ \ Miscellaneous\ Symbols\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00969}00969\ \textcolor{preprocessor}{\#define\ TT\_UCR\_MISCELLANEOUS\_SYMBOLS\ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 14)\ }\textcolor{comment}{/*\ U+2600-\/U+26FF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00970}00970\ \ \ \textcolor{comment}{/*\ Bit\ 47\ \ \ Dingbats\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00971}00971\ \textcolor{preprocessor}{\#define\ TT\_UCR\_DINGBATS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 15)\ }\textcolor{comment}{/*\ U+2700-\/U+27BF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00972}00972\ \ \ \textcolor{comment}{/*\ Bit\ 48\ \ \ CJK\ Symbols\ and\ Punctuation\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00973}00973\ \textcolor{preprocessor}{\#define\ TT\_UCR\_CJK\_SYMBOLS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 16)\ }\textcolor{comment}{/*\ U+3000-\/U+303F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00974}00974\ \ \ \textcolor{comment}{/*\ Bit\ 49\ \ \ Hiragana\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00975}00975\ \textcolor{preprocessor}{\#define\ TT\_UCR\_HIRAGANA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 17)\ }\textcolor{comment}{/*\ U+3040-\/U+309F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00976}00976\ \ \ \textcolor{comment}{/*\ Bit\ 50\ \ \ Katakana\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00977}00977\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Katakana\ Phonetic\ Extensions\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00978}00978\ \textcolor{preprocessor}{\#define\ TT\_UCR\_KATAKANA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 18)\ }\textcolor{comment}{/*\ U+30A0-\/U+30FF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00979}00979\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+31F0-\/U+31FF\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00980}00980\ \ \ \textcolor{comment}{/*\ Bit\ 51\ \ \ Bopomofo\ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00981}00981\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Bopomofo\ Extended\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00982}00982\ \textcolor{preprocessor}{\#define\ TT\_UCR\_BOPOMOFO\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 19)\ }\textcolor{comment}{/*\ U+3100-\/U+312F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00983}00983\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+31A0-\/U+31BF\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00984}00984\ \ \ \textcolor{comment}{/*\ Bit\ 52\ \ \ Hangul\ Compatibility\ Jamo\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00985}00985\ \textcolor{preprocessor}{\#define\ TT\_UCR\_HANGUL\_COMPATIBILITY\_JAMO\ \ \ \ \ \ \ (1L\ <<\ 20)\ }\textcolor{comment}{/*\ U+3130-\/U+318F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00986}00986\ \ \ \textcolor{comment}{/*\ Bit\ 53\ \ \ Phags-\/Pa\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00987}00987\ \textcolor{preprocessor}{\#define\ TT\_UCR\_CJK\_MISC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 21)\ }\textcolor{comment}{/*\ U+A840-\/U+A87F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00988}00988\ \textcolor{preprocessor}{\#define\ TT\_UCR\_KANBUN\ \ TT\_UCR\_CJK\_MISC\ }\textcolor{comment}{/*\ deprecated\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00989}00989\ \textcolor{preprocessor}{\#define\ TT\_UCR\_PHAGSPA}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00990}00990\ \ \ \textcolor{comment}{/*\ Bit\ 54\ \ \ Enclosed\ CJK\ Letters\ and\ Months\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00991}00991\ \textcolor{preprocessor}{\#define\ TT\_UCR\_ENCLOSED\_CJK\_LETTERS\_MONTHS\ \ \ \ \ (1L\ <<\ 22)\ }\textcolor{comment}{/*\ U+3200-\/U+32FF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00992}00992\ \ \ \textcolor{comment}{/*\ Bit\ 55\ \ \ CJK\ Compatibility\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00993}00993\ \textcolor{preprocessor}{\#define\ TT\_UCR\_CJK\_COMPATIBILITY\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 23)\ }\textcolor{comment}{/*\ U+3300-\/U+33FF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00994}00994\ \ \ \textcolor{comment}{/*\ Bit\ 56\ \ \ Hangul\ Syllables\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00995}00995\ \textcolor{preprocessor}{\#define\ TT\_UCR\_HANGUL\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 24)\ }\textcolor{comment}{/*\ U+AC00-\/U+D7A3\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00996}00996\ \ \ \textcolor{comment}{/*\ Bit\ 57\ \ \ High\ Surrogates\ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00997}00997\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ High\ Private\ Use\ Surrogates\ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00998}00998\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Low\ Surrogates\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l00999}00999\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01000}01000\ \ \ \textcolor{comment}{/*\ According\ to\ OpenType\ specs\ v.1.3+,\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01001}01001\ \ \ \textcolor{comment}{/*\ setting\ bit\ 57\ implies\ that\ there\ is\ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01002}01002\ \ \ \textcolor{comment}{/*\ at\ least\ one\ codepoint\ beyond\ the\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01003}01003\ \ \ \textcolor{comment}{/*\ Basic\ Multilingual\ Plane\ that\ is\ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01004}01004\ \ \ \textcolor{comment}{/*\ supported\ by\ this\ font.\ \ So\ it\ really\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01005}01005\ \ \ \textcolor{comment}{/*\ means\ >=\ U+10000\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01006}01006\ \textcolor{preprocessor}{\#define\ TT\_UCR\_SURROGATES\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 25)\ }\textcolor{comment}{/*\ U+D800-\/U+DB7F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01007}01007\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+DB80-\/U+DBFF\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01008}01008\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+DC00-\/U+DFFF\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01009}01009\ \textcolor{preprocessor}{\#define\ TT\_UCR\_NON\_PLANE\_0\ \ TT\_UCR\_SURROGATES}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01010}01010\ \ \ \textcolor{comment}{/*\ Bit\ 58\ \ Phoenician\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01011}01011\ \textcolor{preprocessor}{\#define\ TT\_UCR\_PHOENICIAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 26)\ }\textcolor{comment}{/*U+10900-\/U+1091F*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01012}01012\ \ \ \textcolor{comment}{/*\ Bit\ 59\ \ \ CJK\ Unified\ Ideographs\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01013}01013\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ CJK\ Radicals\ Supplement\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01014}01014\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Kangxi\ Radicals\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01015}01015\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Ideographic\ Description\ Characters\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01016}01016\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ CJK\ Unified\ Ideographs\ Extension\ A\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01017}01017\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ CJK\ Unified\ Ideographs\ Extension\ B\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01018}01018\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Kanbun\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01019}01019\ \textcolor{preprocessor}{\#define\ TT\_UCR\_CJK\_UNIFIED\_IDEOGRAPHS\ \ \ \ \ \ \ \ \ \ (1L\ <<\ 27)\ }\textcolor{comment}{/*\ U+4E00-\/U+9FFF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01020}01020\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+2E80-\/U+2EFF\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01021}01021\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+2F00-\/U+2FDF\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01022}01022\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+2FF0-\/U+2FFF\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01023}01023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+3400-\/U+4DB5\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01024}01024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*U+20000-\/U+2A6DF*/}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01025}01025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+3190-\/U+319F\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01026}01026\ \ \ \textcolor{comment}{/*\ Bit\ 60\ \ \ Private\ Use\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01027}01027\ \textcolor{preprocessor}{\#define\ TT\_UCR\_PRIVATE\_USE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 28)\ }\textcolor{comment}{/*\ U+E000-\/U+F8FF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01028}01028\ \ \ \textcolor{comment}{/*\ Bit\ 61\ \ \ CJK\ Strokes\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01029}01029\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ CJK\ Compatibility\ Ideographs\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01030}01030\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ CJK\ Compatibility\ Ideographs\ Supplement\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01031}01031\ \textcolor{preprocessor}{\#define\ TT\_UCR\_CJK\_COMPATIBILITY\_IDEOGRAPHS\ \ \ \ (1L\ <<\ 29)\ }\textcolor{comment}{/*\ U+31C0-\/U+31EF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01032}01032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+F900-\/U+FAFF\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01033}01033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*U+2F800-\/U+2FA1F*/}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01034}01034\ \ \ \textcolor{comment}{/*\ Bit\ 62\ \ \ Alphabetic\ Presentation\ Forms\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01035}01035\ \textcolor{preprocessor}{\#define\ TT\_UCR\_ALPHABETIC\_PRESENTATION\_FORMS\ \ \ (1L\ <<\ 30)\ }\textcolor{comment}{/*\ U+FB00-\/U+FB4F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01036}01036\ \ \ \textcolor{comment}{/*\ Bit\ 63\ \ \ Arabic\ Presentation\ Forms-\/A\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01037}01037\ \textcolor{preprocessor}{\#define\ TT\_UCR\_ARABIC\_PRESENTATIONS\_A\ \ \ \ \ \ \ \ \ \ (1L\ <<\ 31)\ }\textcolor{comment}{/*\ U+FB50-\/U+FDFF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01038}01038\ \ \ \textcolor{comment}{/*\ Bit\ 64\ \ \ Combining\ Half\ Marks\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01039}01039\ \textcolor{preprocessor}{\#define\ TT\_UCR\_COMBINING\_HALF\_MARKS\ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 0)\ }\textcolor{comment}{/*\ U+FE20-\/U+FE2F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01040}01040\ \ \ \textcolor{comment}{/*\ Bit\ 65\ \ \ Vertical\ forms\ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01041}01041\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ CJK\ Compatibility\ Forms\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01042}01042\ \textcolor{preprocessor}{\#define\ TT\_UCR\_CJK\_COMPATIBILITY\_FORMS\ \ \ \ \ \ \ \ \ (1L\ <<\ \ 1)\ }\textcolor{comment}{/*\ U+FE10-\/U+FE1F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01043}01043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+FE30-\/U+FE4F\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01044}01044\ \ \ \textcolor{comment}{/*\ Bit\ 66\ \ \ Small\ Form\ Variants\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01045}01045\ \textcolor{preprocessor}{\#define\ TT\_UCR\_SMALL\_FORM\_VARIANTS\ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 2)\ }\textcolor{comment}{/*\ U+FE50-\/U+FE6F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01046}01046\ \ \ \textcolor{comment}{/*\ Bit\ 67\ \ \ Arabic\ Presentation\ Forms-\/B\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01047}01047\ \textcolor{preprocessor}{\#define\ TT\_UCR\_ARABIC\_PRESENTATIONS\_B\ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 3)\ }\textcolor{comment}{/*\ U+FE70-\/U+FEFE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01048}01048\ \ \ \textcolor{comment}{/*\ Bit\ 68\ \ \ Halfwidth\ and\ Fullwidth\ Forms\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01049}01049\ \textcolor{preprocessor}{\#define\ TT\_UCR\_HALFWIDTH\_FULLWIDTH\_FORMS\ \ \ \ \ \ \ (1L\ <<\ \ 4)\ }\textcolor{comment}{/*\ U+FF00-\/U+FFEF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01050}01050\ \ \ \textcolor{comment}{/*\ Bit\ 69\ \ \ Specials\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01051}01051\ \textcolor{preprocessor}{\#define\ TT\_UCR\_SPECIALS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 5)\ }\textcolor{comment}{/*\ U+FFF0-\/U+FFFD\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01052}01052\ \ \ \textcolor{comment}{/*\ Bit\ 70\ \ \ Tibetan\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01053}01053\ \textcolor{preprocessor}{\#define\ TT\_UCR\_TIBETAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 6)\ }\textcolor{comment}{/*\ U+0F00-\/U+0FFF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01054}01054\ \ \ \textcolor{comment}{/*\ Bit\ 71\ \ \ Syriac\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01055}01055\ \textcolor{preprocessor}{\#define\ TT\_UCR\_SYRIAC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 7)\ }\textcolor{comment}{/*\ U+0700-\/U+074F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01056}01056\ \ \ \textcolor{comment}{/*\ Bit\ 72\ \ \ Thaana\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01057}01057\ \textcolor{preprocessor}{\#define\ TT\_UCR\_THAANA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 8)\ }\textcolor{comment}{/*\ U+0780-\/U+07BF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01058}01058\ \ \ \textcolor{comment}{/*\ Bit\ 73\ \ \ Sinhala\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01059}01059\ \textcolor{preprocessor}{\#define\ TT\_UCR\_SINHALA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 9)\ }\textcolor{comment}{/*\ U+0D80-\/U+0DFF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01060}01060\ \ \ \textcolor{comment}{/*\ Bit\ 74\ \ \ Myanmar\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01061}01061\ \textcolor{preprocessor}{\#define\ TT\_UCR\_MYANMAR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 10)\ }\textcolor{comment}{/*\ U+1000-\/U+109F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01062}01062\ \ \ \textcolor{comment}{/*\ Bit\ 75\ \ \ Ethiopic\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01063}01063\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Ethiopic\ Supplement\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01064}01064\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Ethiopic\ Extended\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01065}01065\ \textcolor{preprocessor}{\#define\ TT\_UCR\_ETHIOPIC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 11)\ }\textcolor{comment}{/*\ U+1200-\/U+137F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01066}01066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+1380-\/U+139F\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01067}01067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+2D80-\/U+2DDF\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01068}01068\ \ \ \textcolor{comment}{/*\ Bit\ 76\ \ \ Cherokee\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01069}01069\ \textcolor{preprocessor}{\#define\ TT\_UCR\_CHEROKEE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 12)\ }\textcolor{comment}{/*\ U+13A0-\/U+13FF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01070}01070\ \ \ \textcolor{comment}{/*\ Bit\ 77\ \ \ Unified\ Canadian\ Aboriginal\ Syllabics\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01071}01071\ \textcolor{preprocessor}{\#define\ TT\_UCR\_CANADIAN\_ABORIGINAL\_SYLLABICS\ \ \ (1L\ <<\ 13)\ }\textcolor{comment}{/*\ U+1400-\/U+167F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01072}01072\ \ \ \textcolor{comment}{/*\ Bit\ 78\ \ \ Ogham\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01073}01073\ \textcolor{preprocessor}{\#define\ TT\_UCR\_OGHAM\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 14)\ }\textcolor{comment}{/*\ U+1680-\/U+169F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01074}01074\ \ \ \textcolor{comment}{/*\ Bit\ 79\ \ \ Runic\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01075}01075\ \textcolor{preprocessor}{\#define\ TT\_UCR\_RUNIC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 15)\ }\textcolor{comment}{/*\ U+16A0-\/U+16FF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01076}01076\ \ \ \textcolor{comment}{/*\ Bit\ 80\ \ \ Khmer\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01077}01077\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Khmer\ Symbols\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01078}01078\ \textcolor{preprocessor}{\#define\ TT\_UCR\_KHMER\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 16)\ }\textcolor{comment}{/*\ U+1780-\/U+17FF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01079}01079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+19E0-\/U+19FF\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01080}01080\ \ \ \textcolor{comment}{/*\ Bit\ 81\ \ \ Mongolian\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01081}01081\ \textcolor{preprocessor}{\#define\ TT\_UCR\_MONGOLIAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 17)\ }\textcolor{comment}{/*\ U+1800-\/U+18AF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01082}01082\ \ \ \textcolor{comment}{/*\ Bit\ 82\ \ \ Braille\ Patterns\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01083}01083\ \textcolor{preprocessor}{\#define\ TT\_UCR\_BRAILLE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 18)\ }\textcolor{comment}{/*\ U+2800-\/U+28FF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01084}01084\ \ \ \textcolor{comment}{/*\ Bit\ 83\ \ \ Yi\ Syllables\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01085}01085\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Yi\ Radicals\ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01086}01086\ \textcolor{preprocessor}{\#define\ TT\_UCR\_YI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 19)\ }\textcolor{comment}{/*\ U+A000-\/U+A48F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01087}01087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+A490-\/U+A4CF\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01088}01088\ \ \ \textcolor{comment}{/*\ Bit\ 84\ \ \ Tagalog\ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01089}01089\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Hanunoo\ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01090}01090\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Buhid\ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01091}01091\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Tagbanwa\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01092}01092\ \textcolor{preprocessor}{\#define\ TT\_UCR\_PHILIPPINE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 20)\ }\textcolor{comment}{/*\ U+1700-\/U+171F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01093}01093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+1720-\/U+173F\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01094}01094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+1740-\/U+175F\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01095}01095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ U+1760-\/U+177F\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01096}01096\ \ \ \textcolor{comment}{/*\ Bit\ 85\ \ \ Old\ Italic\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01097}01097\ \textcolor{preprocessor}{\#define\ TT\_UCR\_OLD\_ITALIC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 21)\ }\textcolor{comment}{/*U+10300-\/U+1032F*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01098}01098\ \ \ \textcolor{comment}{/*\ Bit\ 86\ \ \ Gothic\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01099}01099\ \textcolor{preprocessor}{\#define\ TT\_UCR\_GOTHIC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 22)\ }\textcolor{comment}{/*U+10330-\/U+1034F*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01100}01100\ \ \ \textcolor{comment}{/*\ Bit\ 87\ \ \ Deseret\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01101}01101\ \textcolor{preprocessor}{\#define\ TT\_UCR\_DESERET\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 23)\ }\textcolor{comment}{/*U+10400-\/U+1044F*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01102}01102\ \ \ \textcolor{comment}{/*\ Bit\ 88\ \ \ Byzantine\ Musical\ Symbols\ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01103}01103\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Musical\ Symbols\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01104}01104\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Ancient\ Greek\ Musical\ Notation\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01105}01105\ \textcolor{preprocessor}{\#define\ TT\_UCR\_MUSICAL\_SYMBOLS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 24)\ }\textcolor{comment}{/*U+1D000-\/U+1D0FF*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01106}01106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*U+1D100-\/U+1D1FF*/}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01107}01107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*U+1D200-\/U+1D24F*/}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01108}01108\ \ \ \textcolor{comment}{/*\ Bit\ 89\ \ \ Mathematical\ Alphanumeric\ Symbols\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01109}01109\ \textcolor{preprocessor}{\#define\ TT\_UCR\_MATH\_ALPHANUMERIC\_SYMBOLS\ \ \ \ \ \ \ (1L\ <<\ 25)\ }\textcolor{comment}{/*U+1D400-\/U+1D7FF*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01110}01110\ \ \ \textcolor{comment}{/*\ Bit\ 90\ \ \ Private\ Use\ (plane\ 15)\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01111}01111\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Private\ Use\ (plane\ 16)\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01112}01112\ \textcolor{preprocessor}{\#define\ TT\_UCR\_PRIVATE\_USE\_SUPPLEMENTARY\ \ \ \ \ \ \ (1L\ <<\ 26)\ }\textcolor{comment}{/*U+F0000-\/U+FFFFD*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01113}01113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*U+100000-\/U+10FFFD*/}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01114}01114\ \ \ \textcolor{comment}{/*\ Bit\ 91\ \ \ Variation\ Selectors\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01115}01115\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Variation\ Selectors\ Supplement\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01116}01116\ \textcolor{preprocessor}{\#define\ TT\_UCR\_VARIATION\_SELECTORS\ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 27)\ }\textcolor{comment}{/*\ U+FE00-\/U+FE0F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01117}01117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*U+E0100-\/U+E01EF*/}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01118}01118\ \ \ \textcolor{comment}{/*\ Bit\ 92\ \ \ Tags\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01119}01119\ \textcolor{preprocessor}{\#define\ TT\_UCR\_TAGS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 28)\ }\textcolor{comment}{/*U+E0000-\/U+E007F*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01120}01120\ \ \ \textcolor{comment}{/*\ Bit\ 93\ \ \ Limbu\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01121}01121\ \textcolor{preprocessor}{\#define\ TT\_UCR\_LIMBU\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 29)\ }\textcolor{comment}{/*\ U+1900-\/U+194F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01122}01122\ \ \ \textcolor{comment}{/*\ Bit\ 94\ \ \ Tai\ Le\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01123}01123\ \textcolor{preprocessor}{\#define\ TT\_UCR\_TAI\_LE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 30)\ }\textcolor{comment}{/*\ U+1950-\/U+197F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01124}01124\ \ \ \textcolor{comment}{/*\ Bit\ 95\ \ \ New\ Tai\ Lue\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01125}01125\ \textcolor{preprocessor}{\#define\ TT\_UCR\_NEW\_TAI\_LUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 31)\ }\textcolor{comment}{/*\ U+1980-\/U+19DF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01126}01126\ \ \ \textcolor{comment}{/*\ Bit\ 96\ \ \ Buginese\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01127}01127\ \textcolor{preprocessor}{\#define\ TT\_UCR\_BUGINESE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 0)\ }\textcolor{comment}{/*\ U+1A00-\/U+1A1F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01128}01128\ \ \ \textcolor{comment}{/*\ Bit\ 97\ \ \ Glagolitic\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01129}01129\ \textcolor{preprocessor}{\#define\ TT\_UCR\_GLAGOLITIC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 1)\ }\textcolor{comment}{/*\ U+2C00-\/U+2C5F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01130}01130\ \ \ \textcolor{comment}{/*\ Bit\ 98\ \ \ Tifinagh\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01131}01131\ \textcolor{preprocessor}{\#define\ TT\_UCR\_TIFINAGH\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 2)\ }\textcolor{comment}{/*\ U+2D30-\/U+2D7F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01132}01132\ \ \ \textcolor{comment}{/*\ Bit\ 99\ \ \ Yijing\ Hexagram\ Symbols\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01133}01133\ \textcolor{preprocessor}{\#define\ TT\_UCR\_YIJING\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 3)\ }\textcolor{comment}{/*\ U+4DC0-\/U+4DFF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01134}01134\ \ \ \textcolor{comment}{/*\ Bit\ 100\ \ Syloti\ Nagri\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01135}01135\ \textcolor{preprocessor}{\#define\ TT\_UCR\_SYLOTI\_NAGRI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 4)\ }\textcolor{comment}{/*\ U+A800-\/U+A82F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01136}01136\ \ \ \textcolor{comment}{/*\ Bit\ 101\ \ Linear\ B\ Syllabary\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01137}01137\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Linear\ B\ Ideograms\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01138}01138\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Aegean\ Numbers\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01139}01139\ \textcolor{preprocessor}{\#define\ TT\_UCR\_LINEAR\_B\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 5)\ }\textcolor{comment}{/*U+10000-\/U+1007F*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01140}01140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*U+10080-\/U+100FF*/}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01141}01141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*U+10100-\/U+1013F*/}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01142}01142\ \ \ \textcolor{comment}{/*\ Bit\ 102\ \ Ancient\ Greek\ Numbers\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01143}01143\ \textcolor{preprocessor}{\#define\ TT\_UCR\_ANCIENT\_GREEK\_NUMBERS\ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 6)\ }\textcolor{comment}{/*U+10140-\/U+1018F*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01144}01144\ \ \ \textcolor{comment}{/*\ Bit\ 103\ \ Ugaritic\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01145}01145\ \textcolor{preprocessor}{\#define\ TT\_UCR\_UGARITIC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 7)\ }\textcolor{comment}{/*U+10380-\/U+1039F*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01146}01146\ \ \ \textcolor{comment}{/*\ Bit\ 104\ \ Old\ Persian\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01147}01147\ \textcolor{preprocessor}{\#define\ TT\_UCR\_OLD\_PERSIAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 8)\ }\textcolor{comment}{/*U+103A0-\/U+103DF*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01148}01148\ \ \ \textcolor{comment}{/*\ Bit\ 105\ \ Shavian\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01149}01149\ \textcolor{preprocessor}{\#define\ TT\_UCR\_SHAVIAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ \ 9)\ }\textcolor{comment}{/*U+10450-\/U+1047F*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01150}01150\ \ \ \textcolor{comment}{/*\ Bit\ 106\ \ Osmanya\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01151}01151\ \textcolor{preprocessor}{\#define\ TT\_UCR\_OSMANYA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 10)\ }\textcolor{comment}{/*U+10480-\/U+104AF*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01152}01152\ \ \ \textcolor{comment}{/*\ Bit\ 107\ \ Cypriot\ Syllabary\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01153}01153\ \textcolor{preprocessor}{\#define\ TT\_UCR\_CYPRIOT\_SYLLABARY\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 11)\ }\textcolor{comment}{/*U+10800-\/U+1083F*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01154}01154\ \ \ \textcolor{comment}{/*\ Bit\ 108\ \ Kharoshthi\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01155}01155\ \textcolor{preprocessor}{\#define\ TT\_UCR\_KHAROSHTHI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 12)\ }\textcolor{comment}{/*U+10A00-\/U+10A5F*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01156}01156\ \ \ \textcolor{comment}{/*\ Bit\ 109\ \ Tai\ Xuan\ Jing\ Symbols\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01157}01157\ \textcolor{preprocessor}{\#define\ TT\_UCR\_TAI\_XUAN\_JING\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 13)\ }\textcolor{comment}{/*U+1D300-\/U+1D35F*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01158}01158\ \ \ \textcolor{comment}{/*\ Bit\ 110\ \ Cuneiform\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01159}01159\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Cuneiform\ Numbers\ and\ Punctuation\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01160}01160\ \textcolor{preprocessor}{\#define\ TT\_UCR\_CUNEIFORM\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 14)\ }\textcolor{comment}{/*U+12000-\/U+123FF*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01161}01161\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*U+12400-\/U+1247F*/}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01162}01162\ \ \ \textcolor{comment}{/*\ Bit\ 111\ \ Counting\ Rod\ Numerals\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01163}01163\ \textcolor{preprocessor}{\#define\ TT\_UCR\_COUNTING\_ROD\_NUMERALS\ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 15)\ }\textcolor{comment}{/*U+1D360-\/U+1D37F*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01164}01164\ \ \ \textcolor{comment}{/*\ Bit\ 112\ \ Sundanese\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01165}01165\ \textcolor{preprocessor}{\#define\ TT\_UCR\_SUNDANESE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 16)\ }\textcolor{comment}{/*\ U+1B80-\/U+1BBF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01166}01166\ \ \ \textcolor{comment}{/*\ Bit\ 113\ \ Lepcha\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01167}01167\ \textcolor{preprocessor}{\#define\ TT\_UCR\_LEPCHA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 17)\ }\textcolor{comment}{/*\ U+1C00-\/U+1C4F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01168}01168\ \ \ \textcolor{comment}{/*\ Bit\ 114\ \ Ol\ Chiki\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01169}01169\ \textcolor{preprocessor}{\#define\ TT\_UCR\_OL\_CHIKI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 18)\ }\textcolor{comment}{/*\ U+1C50-\/U+1C7F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01170}01170\ \ \ \textcolor{comment}{/*\ Bit\ 115\ \ Saurashtra\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01171}01171\ \textcolor{preprocessor}{\#define\ TT\_UCR\_SAURASHTRA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 19)\ }\textcolor{comment}{/*\ U+A880-\/U+A8DF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01172}01172\ \ \ \textcolor{comment}{/*\ Bit\ 116\ \ Kayah\ Li\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01173}01173\ \textcolor{preprocessor}{\#define\ TT\_UCR\_KAYAH\_LI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 20)\ }\textcolor{comment}{/*\ U+A900-\/U+A92F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01174}01174\ \ \ \textcolor{comment}{/*\ Bit\ 117\ \ Rejang\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01175}01175\ \textcolor{preprocessor}{\#define\ TT\_UCR\_REJANG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 21)\ }\textcolor{comment}{/*\ U+A930-\/U+A95F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01176}01176\ \ \ \textcolor{comment}{/*\ Bit\ 118\ \ Cham\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01177}01177\ \textcolor{preprocessor}{\#define\ TT\_UCR\_CHAM\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 22)\ }\textcolor{comment}{/*\ U+AA00-\/U+AA5F\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01178}01178\ \ \ \textcolor{comment}{/*\ Bit\ 119\ \ Ancient\ Symbols\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01179}01179\ \textcolor{preprocessor}{\#define\ TT\_UCR\_ANCIENT\_SYMBOLS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 23)\ }\textcolor{comment}{/*U+10190-\/U+101CF*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01180}01180\ \ \ \textcolor{comment}{/*\ Bit\ 120\ \ Phaistos\ Disc\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01181}01181\ \textcolor{preprocessor}{\#define\ TT\_UCR\_PHAISTOS\_DISC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 24)\ }\textcolor{comment}{/*U+101D0-\/U+101FF*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01182}01182\ \ \ \textcolor{comment}{/*\ Bit\ 121\ \ Carian\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01183}01183\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Lycian\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01184}01184\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Lydian\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01185}01185\ \textcolor{preprocessor}{\#define\ TT\_UCR\_OLD\_ANATOLIAN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 25)\ }\textcolor{comment}{/*U+102A0-\/U+102DF*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01186}01186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*U+10280-\/U+1029F*/}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01187}01187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*U+10920-\/U+1093F*/}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01188}01188\ \ \ \textcolor{comment}{/*\ Bit\ 122\ \ Domino\ Tiles\ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01189}01189\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ Mahjong\ Tiles\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01190}01190\ \textcolor{preprocessor}{\#define\ TT\_UCR\_GAME\_TILES\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1L\ <<\ 26)\ }\textcolor{comment}{/*U+1F030-\/U+1F09F*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01191}01191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*U+1F000-\/U+1F02F*/}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01192}01192\ \ \ \textcolor{comment}{/*\ Bit\ 123-\/127\ Reserved\ for\ process-\/internal\ usage\ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01193}01193\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01194}01194\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01195}01195\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01196}01196\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01197}01197\ \ \ \textcolor{comment}{/*\ Some\ compilers\ have\ a\ very\ limited\ length\ of\ identifiers.\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01198}01198\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01199}01199\ \textcolor{preprocessor}{\#if\ defined(\ \_\_TURBOC\_\_\ )\ \&\&\ \_\_TURBOC\_\_\ <\ 0x0410\ ||\ defined(\ \_\_PACIFIC\_\_\ )}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01200}01200\ \textcolor{preprocessor}{\#define\ HAVE\_LIMIT\_ON\_IDENTS}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01201}01201\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01202}01202\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01203}01203\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01204}01204\ \textcolor{preprocessor}{\#ifndef\ HAVE\_LIMIT\_ON\_IDENTS}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01205}01205\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01206}01206\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01207}01207\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01208}01208\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01209}01209\ \ \ \textcolor{comment}{/*\ Here\ some\ alias\ \#defines\ in\ order\ to\ be\ clearer.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01210}01210\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01211}01211\ \ \ \textcolor{comment}{/*\ These\ are\ not\ always\ \#defined\ to\ stay\ within\ the\ 31\string~character\ limit,\ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01212}01212\ \ \ \textcolor{comment}{/*\ which\ some\ compilers\ have.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01213}01213\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01214}01214\ \ \ \textcolor{comment}{/*\ Credits\ go\ to\ Dave\ Hoo\ <dhoo@flash.net>\ for\ pointing\ out\ that\ modern\ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01215}01215\ \ \ \textcolor{comment}{/*\ Borland\ compilers\ (read:\ from\ BC++\ 3.1\ on)\ can\ increase\ this\ limit.\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01216}01216\ \ \ \textcolor{comment}{/*\ If\ you\ get\ a\ warning\ with\ such\ a\ compiler,\ use\ the\ -\/i40\ switch.\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01217}01217\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01218}01218\ \textcolor{preprocessor}{\#define\ TT\_UCR\_ARABIC\_PRESENTATION\_FORMS\_A\ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01219}01219\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ TT\_UCR\_ARABIC\_PRESENTATIONS\_A}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01220}01220\ \textcolor{preprocessor}{\#define\ TT\_UCR\_ARABIC\_PRESENTATION\_FORMS\_B\ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01221}01221\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ TT\_UCR\_ARABIC\_PRESENTATIONS\_B}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01222}01222\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01223}01223\ \textcolor{preprocessor}{\#define\ TT\_UCR\_COMBINING\_DIACRITICAL\_MARKS\ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01224}01224\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ TT\_UCR\_COMBINING\_DIACRITICS}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01225}01225\ \textcolor{preprocessor}{\#define\ TT\_UCR\_COMBINING\_DIACRITICAL\_MARKS\_SYMB\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01226}01226\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ TT\_UCR\_COMBINING\_DIACRITICS\_SYMB}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01227}01227\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01228}01228\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01229}01229\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ !HAVE\_LIMIT\_ON\_IDENTS\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01230}01230\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01231}01231\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01232}01232\ FT\_END\_HEADER}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01233}01233\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01234}01234\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_TTNAMEID\_H\_\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01235}01235\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01236}01236\ }
+\DoxyCodeLine{\Hypertarget{ttnameid_8h_source_l01237}01237\ \textcolor{comment}{/*\ END\ */}}
+
+\end{DoxyCode}

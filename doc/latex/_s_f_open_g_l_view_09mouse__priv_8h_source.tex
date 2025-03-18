@@ -1,0 +1,59 @@
+\doxysubsection{SFOpen\+GLView+mouse\+\_\+priv.h}
+\hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source}{}\label{_s_f_open_g_l_view_09mouse__priv_8h_source}\index{SFOpenGLView+mouse\_priv.h@{SFOpenGLView+mouse\_priv.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00002}00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00003}00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00004}00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Marco\ Antognini\ (antognini.marco@gmail.com),}}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00005}00005\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00006}00006\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00007}00007\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00008}00008\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00009}00009\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00010}00010\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00011}00011\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00012}00012\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00013}00013\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00014}00014\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00015}00015\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00016}00016\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00017}00017\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00018}00018\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00019}00019\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00020}00020\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00021}00021\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00022}00022\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00023}00023\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00027}00027\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00029}00029\ \textcolor{preprocessor}{\#include\ <SFML/Window/Mouse.hpp>}}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00031}00031\ \textcolor{preprocessor}{\#import\ <AppKit/AppKit.h>}}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00041}\mbox{\hyperlink{category_s_f_open_g_l_view_07mouse__priv_08}{00041}}\ \textcolor{keyword}{@interface\ }SFOpenGLView\ (mouse\_priv)}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00049}\mbox{\hyperlink{category_s_f_open_g_l_view_07mouse__priv_08_a66fb2d1dedaa56ed04f1240932d31dce}{00049}}\ -\/(void)\mbox{\hyperlink{category_s_f_open_g_l_view_07mouse__priv_08_a66fb2d1dedaa56ed04f1240932d31dce}{updateMouseState}};}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00055}\mbox{\hyperlink{category_s_f_open_g_l_view_07mouse__priv_08_a8c7467ff60bd2784b35bd1371aa4d500}{00055}}\ -\/(void)handleMouseDown:(NSEvent*)theEvent;}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00061}\mbox{\hyperlink{category_s_f_open_g_l_view_07mouse__priv_08_aad813422f30f09fe4e1dc34e4ab60721}{00061}}\ -\/(void)handleMouseUp:(NSEvent*)theEvent;}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00067}\mbox{\hyperlink{category_s_f_open_g_l_view_07mouse__priv_08_a5b0e047a3d55ea0b4286ca0e25a4ce3b}{00067}}\ -\/(void)handleMouseMove:(NSEvent*)theEvent;}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00076}\mbox{\hyperlink{category_s_f_open_g_l_view_07mouse__priv_08_a490a37c2df13608342527d638bc50f8c}{00076}}\ -\/(BOOL)\mbox{\hyperlink{category_s_f_open_g_l_view_07mouse__priv_08_a490a37c2df13608342527d638bc50f8c}{isCursorCurrentlyGrabbed}};}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00083}\mbox{\hyperlink{category_s_f_open_g_l_view_07mouse__priv_08_af86825f25efeefa82e2ce670ee57e78c}{00083}}\ -\/(void)\mbox{\hyperlink{category_s_f_open_g_l_view_07mouse__priv_08_af86825f25efeefa82e2ce670ee57e78c}{updateCursorGrabbed}};}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00091}\mbox{\hyperlink{category_s_f_open_g_l_view_07mouse__priv_08_a3588e074ef8e16a79f00380adea0b8bd}{00091}}\ -\/(void)moveCursorTo:(NSPoint)loc;}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00097}\mbox{\hyperlink{category_s_f_open_g_l_view_07mouse__priv_08_a1b65d848db7e6948524bf2582b980074}{00097}}\ -\/(CGDirectDisplayID)\mbox{\hyperlink{category_s_f_open_g_l_view_07mouse__priv_08_a1b65d848db7e6948524bf2582b980074}{displayId}};}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00107}\mbox{\hyperlink{category_s_f_open_g_l_view_07mouse__priv_08_a8b502cc62d1f541edd5796e6fb03c744}{00107}}\ +(\mbox{\hyperlink{namespacesf}{sf}}::Mouse::Button)mouseButtonFromEvent:(NSEvent*)event;}
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{_s_f_open_g_l_view_09mouse__priv_8h_source_l00109}00109\ \textcolor{keyword}{@end}}
+
+\end{DoxyCode}

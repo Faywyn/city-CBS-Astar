@@ -1,0 +1,98 @@
+\doxysubsection{spdlog-\/inl.h}
+\hypertarget{spdlog-inl_8h_source}{}\label{spdlog-inl_8h_source}\index{spdlog-\/inl.h@{spdlog-\/inl.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00001}00001\ \textcolor{comment}{//\ Copyright(c)\ 2015-\/present,\ Gabi\ Melman\ \&\ spdlog\ contributors.}}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00002}00002\ \textcolor{comment}{//\ Distributed\ under\ the\ MIT\ License\ (http://opensource.org/licenses/MIT)}}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00004}00004\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00006}00006\ \textcolor{preprocessor}{\#ifndef\ SPDLOG\_HEADER\_ONLY}}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00007}00007\ \textcolor{preprocessor}{\ \ \ \ \#include\ <spdlog/spdlog.h>}}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00008}00008\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <spdlog/common.h>}}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <spdlog/pattern\_formatter.h>}}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00013}00013\ \textcolor{keyword}{namespace\ }spdlog\ \{}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00015}00015\ SPDLOG\_INLINE\ \textcolor{keywordtype}{void}\ initialize\_logger(std::shared\_ptr<logger>\ logger)\ \{}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00016}00016\ \ \ \ \ details::registry::instance().initialize\_logger(std::move(logger));}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00017}00017\ \}}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00019}00019\ SPDLOG\_INLINE\ std::shared\_ptr<logger>\ get(\textcolor{keyword}{const}\ std::string\ \&name)\ \{}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00020}00020\ \ \ \ \ \textcolor{keywordflow}{return}\ details::registry::instance().get(name);}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00021}00021\ \}}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00023}00023\ SPDLOG\_INLINE\ \textcolor{keywordtype}{void}\ set\_formatter(std::unique\_ptr<spdlog::formatter>\ formatter)\ \{}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00024}00024\ \ \ \ \ details::registry::instance().set\_formatter(std::move(formatter));}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00025}00025\ \}}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00027}00027\ SPDLOG\_INLINE\ \textcolor{keywordtype}{void}\ set\_pattern(std::string\ pattern,\ pattern\_time\_type\ time\_type)\ \{}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00028}00028\ \ \ \ \ set\_formatter(}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00029}00029\ \ \ \ \ \ \ \ \ std::unique\_ptr<spdlog::formatter>(\textcolor{keyword}{new}\ pattern\_formatter(std::move(pattern),\ time\_type)));}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00030}00030\ \}}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00032}00032\ SPDLOG\_INLINE\ \textcolor{keywordtype}{void}\ enable\_backtrace(\textcolor{keywordtype}{size\_t}\ n\_messages)\ \{}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00033}00033\ \ \ \ \ details::registry::instance().enable\_backtrace(n\_messages);}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00034}00034\ \}}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00036}00036\ SPDLOG\_INLINE\ \textcolor{keywordtype}{void}\ disable\_backtrace()\ \{\ details::registry::instance().disable\_backtrace();\ \}}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00038}00038\ SPDLOG\_INLINE\ \textcolor{keywordtype}{void}\ dump\_backtrace()\ \{\ default\_logger\_raw()-\/>dump\_backtrace();\ \}}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00040}00040\ SPDLOG\_INLINE\ level::level\_enum\ get\_level()\ \{\ \textcolor{keywordflow}{return}\ default\_logger\_raw()-\/>level();\ \}}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00042}00042\ SPDLOG\_INLINE\ \textcolor{keywordtype}{bool}\ should\_log(level::level\_enum\ log\_level)\ \{}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00043}00043\ \ \ \ \ \textcolor{keywordflow}{return}\ default\_logger\_raw()-\/>should\_log(log\_level);}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00044}00044\ \}}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00046}00046\ SPDLOG\_INLINE\ \textcolor{keywordtype}{void}\ set\_level(level::level\_enum\ log\_level)\ \{}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00047}00047\ \ \ \ \ details::registry::instance().set\_level(log\_level);}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00048}00048\ \}}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00050}00050\ SPDLOG\_INLINE\ \textcolor{keywordtype}{void}\ flush\_on(level::level\_enum\ log\_level)\ \{}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00051}00051\ \ \ \ \ details::registry::instance().flush\_on(log\_level);}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00052}00052\ \}}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00054}00054\ SPDLOG\_INLINE\ \textcolor{keywordtype}{void}\ set\_error\_handler(\textcolor{keywordtype}{void}\ (*handler)(\textcolor{keyword}{const}\ std::string\ \&msg))\ \{}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00055}00055\ \ \ \ \ details::registry::instance().set\_error\_handler(handler);}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00056}00056\ \}}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00058}00058\ SPDLOG\_INLINE\ \textcolor{keywordtype}{void}\ register\_logger(std::shared\_ptr<logger>\ logger)\ \{}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00059}00059\ \ \ \ \ details::registry::instance().register\_logger(std::move(logger));}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00060}00060\ \}}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00062}00062\ SPDLOG\_INLINE\ \textcolor{keywordtype}{void}\ apply\_all(\textcolor{keyword}{const}\ std::function<\textcolor{keywordtype}{void}(std::shared\_ptr<logger>)>\ \&fun)\ \{}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00063}00063\ \ \ \ \ details::registry::instance().apply\_all(fun);}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00064}00064\ \}}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00066}00066\ SPDLOG\_INLINE\ \textcolor{keywordtype}{void}\ drop(\textcolor{keyword}{const}\ std::string\ \&name)\ \{\ details::registry::instance().drop(name);\ \}}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00068}00068\ SPDLOG\_INLINE\ \textcolor{keywordtype}{void}\ drop\_all()\ \{\ details::registry::instance().drop\_all();\ \}}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00070}00070\ SPDLOG\_INLINE\ \textcolor{keywordtype}{void}\ shutdown()\ \{\ details::registry::instance().shutdown();\ \}}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00072}00072\ SPDLOG\_INLINE\ \textcolor{keywordtype}{void}\ set\_automatic\_registration(\textcolor{keywordtype}{bool}\ automatic\_registration)\ \{}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00073}00073\ \ \ \ \ details::registry::instance().set\_automatic\_registration(automatic\_registration);}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00074}00074\ \}}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00076}00076\ SPDLOG\_INLINE\ std::shared\_ptr<spdlog::logger>\ default\_logger()\ \{}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00077}00077\ \ \ \ \ \textcolor{keywordflow}{return}\ details::registry::instance().default\_logger();}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00078}00078\ \}}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00080}00080\ SPDLOG\_INLINE\ spdlog::logger\ *default\_logger\_raw()\ \{}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00081}00081\ \ \ \ \ \textcolor{keywordflow}{return}\ details::registry::instance().get\_default\_raw();}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00082}00082\ \}}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00084}00084\ SPDLOG\_INLINE\ \textcolor{keywordtype}{void}\ set\_default\_logger(std::shared\_ptr<spdlog::logger>\ default\_logger)\ \{}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00085}00085\ \ \ \ \ details::registry::instance().set\_default\_logger(std::move(default\_logger));}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00086}00086\ \}}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00088}00088\ SPDLOG\_INLINE\ \textcolor{keywordtype}{void}\ apply\_logger\_env\_levels(std::shared\_ptr<logger>\ logger)\ \{}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00089}00089\ \ \ \ \ details::registry::instance().apply\_logger\_env\_levels(std::move(logger));}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00090}00090\ \}}
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{spdlog-inl_8h_source_l00092}00092\ \}\ \ \textcolor{comment}{//\ namespace\ spdlog}}
+
+\end{DoxyCode}

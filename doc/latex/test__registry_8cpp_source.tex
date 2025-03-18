@@ -1,0 +1,118 @@
+\doxysubsection{test\+\_\+registry.\+cpp}
+\hypertarget{test__registry_8cpp_source}{}\label{test__registry_8cpp_source}\index{test\_registry.cpp@{test\_registry.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}includes.h"{}}}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00003}00003\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\textcolor{keyword}{const}\ tested\_logger\_name\ =\ \textcolor{stringliteral}{"{}null\_logger"{}};}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00004}00004\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\textcolor{keyword}{const}\ tested\_logger\_name2\ =\ \textcolor{stringliteral}{"{}null\_logger2"{}};}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00006}00006\ \textcolor{preprocessor}{\#ifndef\ SPDLOG\_NO\_EXCEPTIONS}}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00007}00007\ TEST\_CASE(\textcolor{stringliteral}{"{}register\_drop"{}},\ \textcolor{stringliteral}{"{}[registry]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00008}00008\ \ \ \ \ spdlog::drop\_all();}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00009}00009\ \ \ \ \ spdlog::create<spdlog::sinks::null\_sink\_mt>(tested\_logger\_name);}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00010}00010\ \ \ \ \ REQUIRE(spdlog::get(tested\_logger\_name)\ !=\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00011}00011\ \ \ \ \ \textcolor{comment}{//\ Throw\ if\ registering\ existing\ name}}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00012}00012\ \ \ \ \ REQUIRE\_THROWS\_AS(spdlog::create<spdlog::sinks::null\_sink\_mt>(tested\_logger\_name),}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00013}00013\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ spdlog::spdlog\_ex);}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00014}00014\ \}}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00016}00016\ TEST\_CASE(\textcolor{stringliteral}{"{}explicit\ register"{}},\ \textcolor{stringliteral}{"{}[registry]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00017}00017\ \ \ \ \ spdlog::drop\_all();}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00018}00018\ \ \ \ \ \textcolor{keyword}{auto}\ logger\ =\ std::make\_shared<spdlog::logger>(tested\_logger\_name,}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00019}00019\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::make\_shared<spdlog::sinks::null\_sink\_st>());}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00020}00020\ \ \ \ \ spdlog::register\_logger(logger);}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00021}00021\ \ \ \ \ REQUIRE(spdlog::get(tested\_logger\_name)\ !=\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00022}00022\ \ \ \ \ \textcolor{comment}{//\ Throw\ if\ registering\ existing\ name}}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00023}00023\ \ \ \ \ REQUIRE\_THROWS\_AS(spdlog::create<spdlog::sinks::null\_sink\_mt>(tested\_logger\_name),}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ spdlog::spdlog\_ex);}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00025}00025\ \}}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00026}00026\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00028}00028\ TEST\_CASE(\textcolor{stringliteral}{"{}apply\_all"{}},\ \textcolor{stringliteral}{"{}[registry]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00029}00029\ \ \ \ \ spdlog::drop\_all();}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00030}00030\ \ \ \ \ \textcolor{keyword}{auto}\ logger\ =\ std::make\_shared<spdlog::logger>(tested\_logger\_name,}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::make\_shared<spdlog::sinks::null\_sink\_st>());}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00032}00032\ \ \ \ \ spdlog::register\_logger(logger);}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00033}00033\ \ \ \ \ \textcolor{keyword}{auto}\ logger2\ =\ std::make\_shared<spdlog::logger>(}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00034}00034\ \ \ \ \ \ \ \ \ tested\_logger\_name2,\ std::make\_shared<spdlog::sinks::null\_sink\_st>());}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00035}00035\ \ \ \ \ spdlog::register\_logger(logger2);}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00037}00037\ \ \ \ \ \textcolor{keywordtype}{int}\ counter\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00038}00038\ \ \ \ \ spdlog::apply\_all([\&counter](std::shared\_ptr<spdlog::logger>)\ \{\ counter++;\ \});}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00039}00039\ \ \ \ \ REQUIRE(counter\ ==\ 2);}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00041}00041\ \ \ \ \ counter\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00042}00042\ \ \ \ \ spdlog::drop(tested\_logger\_name2);}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00043}00043\ \ \ \ \ spdlog::apply\_all([\&counter](std::shared\_ptr<spdlog::logger>\ l)\ \{}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00044}00044\ \ \ \ \ \ \ \ \ REQUIRE(l-\/>name()\ ==\ tested\_logger\_name);}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00045}00045\ \ \ \ \ \ \ \ \ counter++;}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00046}00046\ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00047}00047\ \ \ \ \ REQUIRE(counter\ ==\ 1);}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00048}00048\ \}}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00050}00050\ TEST\_CASE(\textcolor{stringliteral}{"{}drop"{}},\ \textcolor{stringliteral}{"{}[registry]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00051}00051\ \ \ \ \ spdlog::drop\_all();}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00052}00052\ \ \ \ \ spdlog::create<spdlog::sinks::null\_sink\_mt>(tested\_logger\_name);}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00053}00053\ \ \ \ \ spdlog::drop(tested\_logger\_name);}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00054}00054\ \ \ \ \ REQUIRE\_FALSE(spdlog::get(tested\_logger\_name));}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00055}00055\ \}}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00057}00057\ TEST\_CASE(\textcolor{stringliteral}{"{}drop-\/default"{}},\ \textcolor{stringliteral}{"{}[registry]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00058}00058\ \ \ \ \ spdlog::set\_default\_logger(spdlog::null\_logger\_st(tested\_logger\_name));}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00059}00059\ \ \ \ \ spdlog::drop(tested\_logger\_name);}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00060}00060\ \ \ \ \ REQUIRE\_FALSE(spdlog::default\_logger());}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00061}00061\ \ \ \ \ REQUIRE\_FALSE(spdlog::get(tested\_logger\_name));}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00062}00062\ \}}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00064}00064\ TEST\_CASE(\textcolor{stringliteral}{"{}drop\_all"{}},\ \textcolor{stringliteral}{"{}[registry]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00065}00065\ \ \ \ \ spdlog::drop\_all();}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00066}00066\ \ \ \ \ spdlog::create<spdlog::sinks::null\_sink\_mt>(tested\_logger\_name);}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00067}00067\ \ \ \ \ spdlog::create<spdlog::sinks::null\_sink\_mt>(tested\_logger\_name2);}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00068}00068\ \ \ \ \ spdlog::drop\_all();}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00069}00069\ \ \ \ \ REQUIRE\_FALSE(spdlog::get(tested\_logger\_name));}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00070}00070\ \ \ \ \ REQUIRE\_FALSE(spdlog::get(tested\_logger\_name2));}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00071}00071\ \ \ \ \ REQUIRE\_FALSE(spdlog::default\_logger());}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00072}00072\ \}}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00074}00074\ TEST\_CASE(\textcolor{stringliteral}{"{}drop\ non\ existing"{}},\ \textcolor{stringliteral}{"{}[registry]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00075}00075\ \ \ \ \ spdlog::drop\_all();}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00076}00076\ \ \ \ \ spdlog::create<spdlog::sinks::null\_sink\_mt>(tested\_logger\_name);}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00077}00077\ \ \ \ \ spdlog::drop(\textcolor{stringliteral}{"{}some\_name"{}});}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00078}00078\ \ \ \ \ REQUIRE\_FALSE(spdlog::get(\textcolor{stringliteral}{"{}some\_name"{}}));}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00079}00079\ \ \ \ \ REQUIRE(spdlog::get(tested\_logger\_name));}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00080}00080\ \ \ \ \ spdlog::drop\_all();}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00081}00081\ \}}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00083}00083\ TEST\_CASE(\textcolor{stringliteral}{"{}default\ logger"{}},\ \textcolor{stringliteral}{"{}[registry]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00084}00084\ \ \ \ \ spdlog::drop\_all();}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00085}00085\ \ \ \ \ spdlog::set\_default\_logger(spdlog::null\_logger\_st(tested\_logger\_name));}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00086}00086\ \ \ \ \ REQUIRE(spdlog::get(tested\_logger\_name)\ ==\ spdlog::default\_logger());}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00087}00087\ \ \ \ \ spdlog::drop\_all();}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00088}00088\ \}}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00090}00090\ TEST\_CASE(\textcolor{stringliteral}{"{}set\_default\_logger(nullptr)"{}},\ \textcolor{stringliteral}{"{}[registry]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00091}00091\ \ \ \ \ spdlog::set\_default\_logger(\textcolor{keyword}{nullptr});}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00092}00092\ \ \ \ \ REQUIRE\_FALSE(spdlog::default\_logger());}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00093}00093\ \}}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00095}00095\ TEST\_CASE(\textcolor{stringliteral}{"{}disable\ automatic\ registration"{}},\ \textcolor{stringliteral}{"{}[registry]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00096}00096\ \ \ \ \ \textcolor{comment}{//\ set\ some\ global\ parameters}}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00097}00097\ \ \ \ \ spdlog::level::level\_enum\ log\_level\ =\ spdlog::level::level\_enum::warn;}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00098}00098\ \ \ \ \ spdlog::set\_level(log\_level);}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00099}00099\ \ \ \ \ \textcolor{comment}{//\ but\ disable\ automatic\ registration}}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00100}00100\ \ \ \ \ spdlog::set\_automatic\_registration(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00101}00101\ \ \ \ \ \textcolor{keyword}{auto}\ logger1\ =\ spdlog::create<spdlog::sinks::daily\_file\_sink\_st>(}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00102}00102\ \ \ \ \ \ \ \ \ tested\_logger\_name,\ SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}filename"{}}),\ 11,\ 59);}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00103}00103\ \ \ \ \ \textcolor{keyword}{auto}\ logger2\ =\ spdlog::create\_async<spdlog::sinks::stdout\_color\_sink\_mt>(tested\_logger\_name2);}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00104}00104\ \ \ \ \ \textcolor{comment}{//\ loggers\ should\ not\ be\ part\ of\ the\ registry}}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00105}00105\ \ \ \ \ REQUIRE\_FALSE(spdlog::get(tested\_logger\_name));}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00106}00106\ \ \ \ \ REQUIRE\_FALSE(spdlog::get(tested\_logger\_name2));}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00107}00107\ \ \ \ \ \textcolor{comment}{//\ but\ make\ sure\ they\ are\ still\ initialized\ according\ to\ global\ defaults}}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00108}00108\ \ \ \ \ REQUIRE(logger1-\/>level()\ ==\ log\_level);}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00109}00109\ \ \ \ \ REQUIRE(logger2-\/>level()\ ==\ log\_level);}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00110}00110\ \ \ \ \ spdlog::set\_level(spdlog::level::info);}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00111}00111\ \ \ \ \ spdlog::set\_automatic\_registration(\textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{test__registry_8cpp_source_l00112}00112\ \}}
+
+\end{DoxyCode}

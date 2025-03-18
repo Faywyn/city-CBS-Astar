@@ -1,0 +1,170 @@
+\doxysubsection{alc.\+h}
+\hypertarget{alc_8h_source}{}\label{alc_8h_source}\index{alc.h@{alc.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ AL\_ALC\_H}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00002}00002\ \textcolor{preprocessor}{\#define\ AL\_ALC\_H}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00004}00004\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00005}00005\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00006}00006\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00008}00008\ \textcolor{preprocessor}{\#ifndef\ ALC\_API}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00009}00009\ \textcolor{preprocessor}{\ \#if\ defined(AL\_LIBTYPE\_STATIC)}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00010}00010\ \textcolor{preprocessor}{\ \ \#define\ ALC\_API}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00011}00011\ \textcolor{preprocessor}{\ \#elif\ defined(\_WIN32)}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00012}00012\ \textcolor{preprocessor}{\ \ \#define\ ALC\_API\ \_\_declspec(dllimport)}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00013}00013\ \textcolor{preprocessor}{\ \#else}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00014}00014\ \textcolor{preprocessor}{\ \ \#define\ ALC\_API\ extern}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00015}00015\ \textcolor{preprocessor}{\ \#endif}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00016}00016\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00018}00018\ \textcolor{preprocessor}{\#if\ defined(\_WIN32)}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00019}00019\ \textcolor{preprocessor}{\ \#define\ ALC\_APIENTRY\ \_\_cdecl}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00020}00020\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00021}00021\ \textcolor{preprocessor}{\ \#define\ ALC\_APIENTRY}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00022}00022\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00026}00026\ \textcolor{preprocessor}{\#define\ ALCAPI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ALC\_API}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00027}00027\ \textcolor{preprocessor}{\#define\ ALCAPIENTRY\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ALC\_APIENTRY}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00028}00028\ \textcolor{preprocessor}{\#define\ ALC\_INVALID\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00031}00031\ \textcolor{preprocessor}{\#define\ ALC\_VERSION\_0\_1\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00034}00034\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }ALCdevice\_struct\ ALCdevice;}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00036}00036\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }ALCcontext\_struct\ ALCcontext;}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00039}00039\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{char}\ ALCboolean;}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00042}00042\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{char}\ ALCchar;}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00045}00045\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{signed}\ \textcolor{keywordtype}{char}\ ALCbyte;}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00048}00048\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ ALCubyte;}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00051}00051\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{short}\ ALCshort;}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00054}00054\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ ALCushort;}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00057}00057\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{int}\ ALCint;}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00060}00060\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ ALCuint;}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00063}00063\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{int}\ ALCsizei;}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00066}00066\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{int}\ ALCenum;}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00069}00069\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{float}\ ALCfloat;}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00072}00072\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{double}\ ALCdouble;}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00075}00075\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{void}\ ALCvoid;}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00078}00078\ \textcolor{comment}{/*\ Enumerant\ values\ begin\ at\ column\ 50.\ No\ tabs.\ */}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00081}00081\ \textcolor{preprocessor}{\#define\ ALC\_FALSE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00084}00084\ \textcolor{preprocessor}{\#define\ ALC\_TRUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00087}00087\ \textcolor{preprocessor}{\#define\ ALC\_FREQUENCY\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x1007}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00090}00090\ \textcolor{preprocessor}{\#define\ ALC\_REFRESH\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x1008}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00093}00093\ \textcolor{preprocessor}{\#define\ ALC\_SYNC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x1009}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00096}00096\ \textcolor{preprocessor}{\#define\ ALC\_MONO\_SOURCES\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x1010}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00099}00099\ \textcolor{preprocessor}{\#define\ ALC\_STEREO\_SOURCES\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x1011}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00102}00102\ \textcolor{preprocessor}{\#define\ ALC\_NO\_ERROR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00105}00105\ \textcolor{preprocessor}{\#define\ ALC\_INVALID\_DEVICE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0xA001}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00108}00108\ \textcolor{preprocessor}{\#define\ ALC\_INVALID\_CONTEXT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0xA002}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00111}00111\ \textcolor{preprocessor}{\#define\ ALC\_INVALID\_ENUM\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0xA003}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00114}00114\ \textcolor{preprocessor}{\#define\ ALC\_INVALID\_VALUE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0xA004}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00117}00117\ \textcolor{preprocessor}{\#define\ ALC\_OUT\_OF\_MEMORY\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0xA005}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00119}00119\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00121}00121\ \textcolor{preprocessor}{\#define\ ALC\_MAJOR\_VERSION\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x1000}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00122}00122\ \textcolor{preprocessor}{\#define\ ALC\_MINOR\_VERSION\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x1001}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00125}00125\ \textcolor{preprocessor}{\#define\ ALC\_ATTRIBUTES\_SIZE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x1002}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00126}00126\ \textcolor{preprocessor}{\#define\ ALC\_ALL\_ATTRIBUTES\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x1003}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00129}00129\ \textcolor{preprocessor}{\#define\ ALC\_DEFAULT\_DEVICE\_SPECIFIER\ \ \ \ \ \ \ \ \ \ \ \ \ 0x1004}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00136}00136\ \textcolor{preprocessor}{\#define\ ALC\_DEVICE\_SPECIFIER\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x1005}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00138}00138\ \textcolor{preprocessor}{\#define\ ALC\_EXTENSIONS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x1006}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00139}00139\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00142}00142\ \textcolor{preprocessor}{\#define\ ALC\_EXT\_CAPTURE\ 1}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00149}00149\ \textcolor{preprocessor}{\#define\ ALC\_CAPTURE\_DEVICE\_SPECIFIER\ \ \ \ \ \ \ \ \ \ \ \ \ 0x310}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00151}00151\ \textcolor{preprocessor}{\#define\ ALC\_CAPTURE\_DEFAULT\_DEVICE\_SPECIFIER\ \ \ \ \ 0x311}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00153}00153\ \textcolor{preprocessor}{\#define\ ALC\_CAPTURE\_SAMPLES\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x312}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00155}00155\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00157}00157\ \textcolor{preprocessor}{\#define\ ALC\_ENUMERATE\_ALL\_EXT\ 1}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00159}00159\ \textcolor{preprocessor}{\#define\ ALC\_DEFAULT\_ALL\_DEVICES\_SPECIFIER\ \ \ \ \ \ \ \ 0x1012}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00166}00166\ \textcolor{preprocessor}{\#define\ ALC\_ALL\_DEVICES\_SPECIFIER\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x1013}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00167}00167\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00168}00168\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00170}00170\ ALC\_API\ ALCcontext*\ ALC\_APIENTRY\ alcCreateContext(ALCdevice\ *device,\ \textcolor{keyword}{const}\ ALCint*\ attrlist);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00171}00171\ ALC\_API\ ALCboolean\ \ ALC\_APIENTRY\ alcMakeContextCurrent(ALCcontext\ *context);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00172}00172\ ALC\_API\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ ALC\_APIENTRY\ alcProcessContext(ALCcontext\ *context);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00173}00173\ ALC\_API\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ ALC\_APIENTRY\ alcSuspendContext(ALCcontext\ *context);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00174}00174\ ALC\_API\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ ALC\_APIENTRY\ alcDestroyContext(ALCcontext\ *context);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00175}00175\ ALC\_API\ ALCcontext*\ ALC\_APIENTRY\ alcGetCurrentContext(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00176}00176\ ALC\_API\ ALCdevice*\ \ ALC\_APIENTRY\ alcGetContextsDevice(ALCcontext\ *context);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00177}00177\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00179}00179\ ALC\_API\ ALCdevice*\ ALC\_APIENTRY\ alcOpenDevice(\textcolor{keyword}{const}\ ALCchar\ *devicename);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00180}00180\ ALC\_API\ ALCboolean\ ALC\_APIENTRY\ alcCloseDevice(ALCdevice\ *device);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00181}00181\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00182}00182\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00188}00188\ ALC\_API\ ALCenum\ ALC\_APIENTRY\ alcGetError(ALCdevice\ *device);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00196}00196\ ALC\_API\ ALCboolean\ ALC\_APIENTRY\ alcIsExtensionPresent(ALCdevice\ *device,\ \textcolor{keyword}{const}\ ALCchar\ *extname);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00197}00197\ ALC\_API\ \textcolor{keywordtype}{void}*\ \ \ \ \ \ ALC\_APIENTRY\ alcGetProcAddress(ALCdevice\ *device,\ \textcolor{keyword}{const}\ ALCchar\ *funcname);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00198}00198\ ALC\_API\ ALCenum\ \ \ \ ALC\_APIENTRY\ alcGetEnumValue(ALCdevice\ *device,\ \textcolor{keyword}{const}\ ALCchar\ *enumname);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00199}00199\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00201}00201\ ALC\_API\ \textcolor{keyword}{const}\ ALCchar*\ ALC\_APIENTRY\ alcGetString(ALCdevice\ *device,\ ALCenum\ param);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00202}00202\ ALC\_API\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ ALC\_APIENTRY\ alcGetIntegerv(ALCdevice\ *device,\ ALCenum\ param,\ ALCsizei\ size,\ ALCint\ *values);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00203}00203\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00205}00205\ ALC\_API\ ALCdevice*\ ALC\_APIENTRY\ alcCaptureOpenDevice(\textcolor{keyword}{const}\ ALCchar\ *devicename,\ ALCuint\ frequency,\ ALCenum\ format,\ ALCsizei\ buffersize);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00206}00206\ ALC\_API\ ALCboolean\ ALC\_APIENTRY\ alcCaptureCloseDevice(ALCdevice\ *device);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00207}00207\ ALC\_API\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ ALC\_APIENTRY\ alcCaptureStart(ALCdevice\ *device);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00208}00208\ ALC\_API\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ ALC\_APIENTRY\ alcCaptureStop(ALCdevice\ *device);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00209}00209\ ALC\_API\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ ALC\_APIENTRY\ alcCaptureSamples(ALCdevice\ *device,\ ALCvoid\ *buffer,\ ALCsizei\ samples);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00210}00210\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00212}00212\ \textcolor{keyword}{typedef}\ ALCcontext*\ \ \ \ (ALC\_APIENTRY\ *LPALCCREATECONTEXT)(ALCdevice\ *device,\ \textcolor{keyword}{const}\ ALCint\ *attrlist);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00213}00213\ \textcolor{keyword}{typedef}\ ALCboolean\ \ \ \ \ (ALC\_APIENTRY\ *LPALCMAKECONTEXTCURRENT)(ALCcontext\ *context);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00214}00214\ \textcolor{keyword}{typedef}\ void\ \ \ \ \ \ \ \ \ \ \ (ALC\_APIENTRY\ *LPALCPROCESSCONTEXT)(ALCcontext\ *context);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00215}00215\ \textcolor{keyword}{typedef}\ void\ \ \ \ \ \ \ \ \ \ \ (ALC\_APIENTRY\ *LPALCSUSPENDCONTEXT)(ALCcontext\ *context);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00216}00216\ \textcolor{keyword}{typedef}\ void\ \ \ \ \ \ \ \ \ \ \ (ALC\_APIENTRY\ *LPALCDESTROYCONTEXT)(ALCcontext\ *context);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00217}00217\ \textcolor{keyword}{typedef}\ ALCcontext*\ \ \ \ (ALC\_APIENTRY\ *LPALCGETCURRENTCONTEXT)(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00218}00218\ \textcolor{keyword}{typedef}\ ALCdevice*\ \ \ \ \ (ALC\_APIENTRY\ *LPALCGETCONTEXTSDEVICE)(ALCcontext\ *context);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00219}00219\ \textcolor{keyword}{typedef}\ ALCdevice*\ \ \ \ \ (ALC\_APIENTRY\ *LPALCOPENDEVICE)(\textcolor{keyword}{const}\ ALCchar\ *devicename);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00220}00220\ \textcolor{keyword}{typedef}\ ALCboolean\ \ \ \ \ (ALC\_APIENTRY\ *LPALCCLOSEDEVICE)(ALCdevice\ *device);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00221}00221\ \textcolor{keyword}{typedef}\ ALCenum\ \ \ \ \ \ \ \ (ALC\_APIENTRY\ *LPALCGETERROR)(ALCdevice\ *device);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00222}00222\ \textcolor{keyword}{typedef}\ ALCboolean\ \ \ \ \ (ALC\_APIENTRY\ *LPALCISEXTENSIONPRESENT)(ALCdevice\ *device,\ \textcolor{keyword}{const}\ ALCchar\ *extname);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00223}00223\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{void}*\ \ \ \ \ \ \ \ \ \ (ALC\_APIENTRY\ *LPALCGETPROCADDRESS)(ALCdevice\ *device,\ \textcolor{keyword}{const}\ ALCchar\ *funcname);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00224}00224\ \textcolor{keyword}{typedef}\ ALCenum\ \ \ \ \ \ \ \ (ALC\_APIENTRY\ *LPALCGETENUMVALUE)(ALCdevice\ *device,\ \textcolor{keyword}{const}\ ALCchar\ *enumname);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00225}00225\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{const}\ ALCchar*\ (ALC\_APIENTRY\ *LPALCGETSTRING)(ALCdevice\ *device,\ ALCenum\ param);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00226}00226\ \textcolor{keyword}{typedef}\ void\ \ \ \ \ \ \ \ \ \ \ (ALC\_APIENTRY\ *LPALCGETINTEGERV)(ALCdevice\ *device,\ ALCenum\ param,\ ALCsizei\ size,\ ALCint\ *values);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00227}00227\ \textcolor{keyword}{typedef}\ ALCdevice*\ \ \ \ \ (ALC\_APIENTRY\ *LPALCCAPTUREOPENDEVICE)(\textcolor{keyword}{const}\ ALCchar\ *devicename,\ ALCuint\ frequency,\ ALCenum\ format,\ ALCsizei\ buffersize);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00228}00228\ \textcolor{keyword}{typedef}\ ALCboolean\ \ \ \ \ (ALC\_APIENTRY\ *LPALCCAPTURECLOSEDEVICE)(ALCdevice\ *device);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00229}00229\ \textcolor{keyword}{typedef}\ void\ \ \ \ \ \ \ \ \ \ \ (ALC\_APIENTRY\ *LPALCCAPTURESTART)(ALCdevice\ *device);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00230}00230\ \textcolor{keyword}{typedef}\ void\ \ \ \ \ \ \ \ \ \ \ (ALC\_APIENTRY\ *LPALCCAPTURESTOP)(ALCdevice\ *device);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00231}00231\ \textcolor{keyword}{typedef}\ void\ \ \ \ \ \ \ \ \ \ \ (ALC\_APIENTRY\ *LPALCCAPTURESAMPLES)(ALCdevice\ *device,\ ALCvoid\ *buffer,\ ALCsizei\ samples);}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00232}00232\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00233}00233\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00234}00234\ \}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00235}00235\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00236}00236\ }
+\DoxyCodeLine{\Hypertarget{alc_8h_source_l00237}00237\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ AL\_ALC\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

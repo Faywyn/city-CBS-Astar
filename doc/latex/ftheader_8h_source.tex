@@ -1,0 +1,838 @@
+\doxysubsection{ftheader.\+h}
+\hypertarget{ftheader_8h_source}{}\label{ftheader_8h_source}\index{ftheader.h@{ftheader.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00001}00001\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00002}00002\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00003}00003\ \textcolor{comment}{/*\ \ ftheader.h\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00004}00004\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00005}00005\ \textcolor{comment}{/*\ \ \ \ Build\ macros\ of\ the\ FreeType\ 2\ library.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00006}00006\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00007}00007\ \textcolor{comment}{/*\ \ Copyright\ 1996-\/2008,\ 2010,\ 2012,\ 2013\ by\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00008}00008\ \textcolor{comment}{/*\ \ David\ Turner,\ Robert\ Wilhelm,\ and\ Werner\ Lemberg.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00009}00009\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00010}00010\ \textcolor{comment}{/*\ \ This\ file\ is\ part\ of\ the\ FreeType\ project,\ and\ may\ only\ be\ used,\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00011}00011\ \textcolor{comment}{/*\ \ modified,\ and\ distributed\ under\ the\ terms\ of\ the\ FreeType\ project\ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00012}00012\ \textcolor{comment}{/*\ \ license,\ LICENSE.TXT.\ \ By\ continuing\ to\ use,\ modify,\ or\ distribute\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00013}00013\ \textcolor{comment}{/*\ \ this\ file\ you\ indicate\ that\ you\ have\ read\ the\ license\ and\ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00014}00014\ \textcolor{comment}{/*\ \ understand\ and\ accept\ it\ fully.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00015}00015\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00016}00016\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00018}00018\ \textcolor{preprocessor}{\#ifndef\ \_\_FT\_HEADER\_H\_\_}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00019}00019\ \textcolor{preprocessor}{\#define\ \_\_FT\_HEADER\_H\_\_}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00022}00022\ \ \ \textcolor{comment}{/*@***********************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00023}00023\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00024}00024\ \ \ \textcolor{comment}{/*\ <Macro>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00025}00025\ \ \ \textcolor{comment}{/*\ \ \ \ FT\_BEGIN\_HEADER\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00026}00026\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00027}00027\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00028}00028\ \ \ \textcolor{comment}{/*\ \ \ \ This\ macro\ is\ used\ in\ association\ with\ @FT\_END\_HEADER\ in\ header\ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00029}00029\ \ \ \textcolor{comment}{/*\ \ \ \ files\ to\ ensure\ that\ the\ declarations\ within\ are\ properly\ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00030}00030\ \ \ \textcolor{comment}{/*\ \ \ \ encapsulated\ in\ an\ \`{}extern\ "{}C"{}\ \{\ ..\ \}'\ block\ when\ included\ from\ a\ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00031}00031\ \ \ \textcolor{comment}{/*\ \ \ \ C++\ compiler.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00032}00032\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00033}00033\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00034}00034\ \textcolor{preprocessor}{\#define\ FT\_BEGIN\_HEADER\ \ extern\ "{}C"{}\ \{}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00035}00035\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00036}00036\ \textcolor{preprocessor}{\#define\ FT\_BEGIN\_HEADER\ \ }\textcolor{comment}{/*\ nothing\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00037}00037\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00040}00040\ \ \ \textcolor{comment}{/*@***********************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00041}00041\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00042}00042\ \ \ \textcolor{comment}{/*\ <Macro>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00043}00043\ \ \ \textcolor{comment}{/*\ \ \ \ FT\_END\_HEADER\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00044}00044\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00045}00045\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00046}00046\ \ \ \textcolor{comment}{/*\ \ \ \ This\ macro\ is\ used\ in\ association\ with\ @FT\_BEGIN\_HEADER\ in\ header\ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00047}00047\ \ \ \textcolor{comment}{/*\ \ \ \ files\ to\ ensure\ that\ the\ declarations\ within\ are\ properly\ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00048}00048\ \ \ \textcolor{comment}{/*\ \ \ \ encapsulated\ in\ an\ \`{}extern\ "{}C"{}\ \{\ ..\ \}'\ block\ when\ included\ from\ a\ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00049}00049\ \ \ \textcolor{comment}{/*\ \ \ \ C++\ compiler.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00050}00050\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00051}00051\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00052}00052\ \textcolor{preprocessor}{\#define\ FT\_END\_HEADER\ \ \}}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00053}00053\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00054}00054\ \textcolor{preprocessor}{\#define\ FT\_END\_HEADER\ \ }\textcolor{comment}{/*\ nothing\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00055}00055\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00058}00058\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00059}00059\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00060}00060\ \ \ \textcolor{comment}{/*\ Aliases\ for\ the\ FreeType\ 2\ public\ and\ configuration\ files.\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00061}00061\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00062}00062\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00064}00064\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00065}00065\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00066}00066\ \ \ \textcolor{comment}{/*\ <Section>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00067}00067\ \ \ \textcolor{comment}{/*\ \ \ \ header\_file\_macros\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00068}00068\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00069}00069\ \ \ \textcolor{comment}{/*\ <Title>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00070}00070\ \ \ \textcolor{comment}{/*\ \ \ \ Header\ File\ Macros\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00071}00071\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00072}00072\ \ \ \textcolor{comment}{/*\ <Abstract>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00073}00073\ \ \ \textcolor{comment}{/*\ \ \ \ Macro\ definitions\ used\ to\ \#include\ specific\ header\ files.\ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00074}00074\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00075}00075\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00076}00076\ \ \ \textcolor{comment}{/*\ \ \ \ The\ following\ macros\ are\ defined\ to\ the\ name\ of\ specific\ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00077}00077\ \ \ \textcolor{comment}{/*\ \ \ \ FreeType\string~2\ header\ files.\ \ They\ can\ be\ used\ directly\ in\ \#include\ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00078}00078\ \ \ \textcolor{comment}{/*\ \ \ \ statements\ as\ in:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00079}00079\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00080}00080\ \ \ \textcolor{comment}{/*\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00081}00081\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \#include\ FT\_FREETYPE\_H\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00082}00082\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \#include\ FT\_MULTIPLE\_MASTERS\_H\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00083}00083\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \#include\ FT\_GLYPH\_H\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00084}00084\ \ \ \textcolor{comment}{/*\ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00085}00085\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00086}00086\ \ \ \textcolor{comment}{/*\ \ \ \ There\ are\ several\ reasons\ why\ we\ are\ now\ using\ macros\ to\ name\ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00087}00087\ \ \ \textcolor{comment}{/*\ \ \ \ public\ header\ files.\ \ The\ first\ one\ is\ that\ such\ macros\ are\ not\ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00088}00088\ \ \ \textcolor{comment}{/*\ \ \ \ limited\ to\ the\ infamous\ 8.3\string~naming\ rule\ required\ by\ DOS\ (and\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00089}00089\ \ \ \textcolor{comment}{/*\ \ \ \ \`{}FT\_MULTIPLE\_MASTERS\_H'\ is\ a\ lot\ more\ meaningful\ than\ \`{}ftmm.h').\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00090}00090\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00091}00091\ \ \ \textcolor{comment}{/*\ \ \ \ The\ second\ reason\ is\ that\ it\ allows\ for\ more\ flexibility\ in\ the\ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00092}00092\ \ \ \textcolor{comment}{/*\ \ \ \ way\ FreeType\string~2\ is\ installed\ on\ a\ given\ system.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00093}00093\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00094}00094\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00097}00097\ \ \ \textcolor{comment}{/*\ configuration\ files\ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00099}00099\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00100}00100\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00101}00101\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00102}00102\ \textcolor{comment}{\ \ \ *\ \ \ FT\_CONFIG\_CONFIG\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00103}00103\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00104}00104\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00105}00105\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00106}00106\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\string~2\ configuration\ data.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00107}00107\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00108}00108\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00109}00109\ \textcolor{preprocessor}{\#ifndef\ FT\_CONFIG\_CONFIG\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00110}00110\ \textcolor{preprocessor}{\#define\ FT\_CONFIG\_CONFIG\_H\ \ <config/ftconfig.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00111}00111\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00114}00114\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00115}00115\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00116}00116\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00117}00117\ \textcolor{comment}{\ \ \ *\ \ \ FT\_CONFIG\_STANDARD\_LIBRARY\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00118}00118\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00119}00119\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00120}00120\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00121}00121\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\string~2\ interface\ to\ the\ standard\ C\ library\ functions.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00122}00122\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00123}00123\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00124}00124\ \textcolor{preprocessor}{\#ifndef\ FT\_CONFIG\_STANDARD\_LIBRARY\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00125}00125\ \textcolor{preprocessor}{\#define\ FT\_CONFIG\_STANDARD\_LIBRARY\_H\ \ <config/ftstdlib.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00126}00126\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00129}00129\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00130}00130\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00131}00131\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00132}00132\ \textcolor{comment}{\ \ \ *\ \ \ FT\_CONFIG\_OPTIONS\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00133}00133\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00134}00134\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00135}00135\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00136}00136\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\string~2\ project-\/specific\ configuration\ options.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00137}00137\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00138}00138\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00139}00139\ \textcolor{preprocessor}{\#ifndef\ FT\_CONFIG\_OPTIONS\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00140}00140\ \textcolor{preprocessor}{\#define\ FT\_CONFIG\_OPTIONS\_H\ \ <config/ftoption.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00141}00141\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00142}00142\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00143}00143\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00144}00144\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00145}00145\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00146}00146\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00147}00147\ \textcolor{comment}{\ \ \ *\ \ \ FT\_CONFIG\_MODULES\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00148}00148\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00149}00149\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00150}00150\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00151}00151\ \textcolor{comment}{\ \ \ *\ \ \ list\ of\ FreeType\string~2\ modules\ that\ are\ statically\ linked\ to\ new\ library}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00152}00152\ \textcolor{comment}{\ \ \ *\ \ \ instances\ in\ @FT\_Init\_FreeType.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00153}00153\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00154}00154\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00155}00155\ \textcolor{preprocessor}{\#ifndef\ FT\_CONFIG\_MODULES\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00156}00156\ \textcolor{preprocessor}{\#define\ FT\_CONFIG\_MODULES\_H\ \ <config/ftmodule.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00157}00157\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00159}00159\ \ \ \textcolor{comment}{/*\ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00160}00160\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00161}00161\ \ \ \textcolor{comment}{/*\ public\ headers\ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00162}00162\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00163}00163\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00164}00164\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00165}00165\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00166}00166\ \textcolor{comment}{\ \ \ *\ \ \ FT\_FREETYPE\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00167}00167\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00168}00168\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00169}00169\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00170}00170\ \textcolor{comment}{\ \ \ *\ \ \ base\ FreeType\string~2\ API.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00171}00171\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00172}00172\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00173}00173\ \textcolor{preprocessor}{\#define\ FT\_FREETYPE\_H\ \ <freetype.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00174}00174\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00175}00175\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00176}00176\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00177}00177\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00178}00178\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00179}00179\ \textcolor{comment}{\ \ \ *\ \ \ FT\_ERRORS\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00180}00180\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00181}00181\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00182}00182\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00183}00183\ \textcolor{comment}{\ \ \ *\ \ \ list\ of\ FreeType\string~2\ error\ codes\ (and\ messages).}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00184}00184\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00185}00185\ \textcolor{comment}{\ \ \ *\ \ \ It\ is\ included\ by\ @FT\_FREETYPE\_H.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00186}00186\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00187}00187\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00188}00188\ \textcolor{preprocessor}{\#define\ FT\_ERRORS\_H\ \ <fterrors.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00190}00190\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00191}00191\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00192}00192\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00193}00193\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00194}00194\ \textcolor{comment}{\ \ \ *\ \ \ FT\_MODULE\_ERRORS\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00195}00195\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00196}00196\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00197}00197\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00198}00198\ \textcolor{comment}{\ \ \ *\ \ \ list\ of\ FreeType\string~2\ module\ error\ offsets\ (and\ messages).}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00199}00199\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00200}00200\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00201}00201\ \textcolor{preprocessor}{\#define\ FT\_MODULE\_ERRORS\_H\ \ <ftmoderr.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00202}00202\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00203}00203\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00204}00204\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00205}00205\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00206}00206\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00207}00207\ \textcolor{comment}{\ \ \ *\ \ \ FT\_SYSTEM\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00208}00208\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00209}00209\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00210}00210\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00211}00211\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\string~2\ interface\ to\ low-\/level\ operations\ (i.e.,\ memory\ management}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00212}00212\ \textcolor{comment}{\ \ \ *\ \ \ and\ stream\ i/o).}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00213}00213\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00214}00214\ \textcolor{comment}{\ \ \ *\ \ \ It\ is\ included\ by\ @FT\_FREETYPE\_H.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00215}00215\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00216}00216\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00217}00217\ \textcolor{preprocessor}{\#define\ FT\_SYSTEM\_H\ \ <ftsystem.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00218}00218\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00219}00219\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00220}00220\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00221}00221\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00222}00222\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00223}00223\ \textcolor{comment}{\ \ \ *\ \ \ FT\_IMAGE\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00224}00224\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00225}00225\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00226}00226\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ type}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00227}00227\ \textcolor{comment}{\ \ \ *\ \ \ definitions\ related\ to\ glyph\ images\ (i.e.,\ bitmaps,\ outlines,}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00228}00228\ \textcolor{comment}{\ \ \ *\ \ \ scan-\/converter\ parameters).}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00229}00229\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00230}00230\ \textcolor{comment}{\ \ \ *\ \ \ It\ is\ included\ by\ @FT\_FREETYPE\_H.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00231}00231\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00232}00232\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00233}00233\ \textcolor{preprocessor}{\#define\ FT\_IMAGE\_H\ \ <ftimage.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00234}00234\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00235}00235\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00236}00236\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00237}00237\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00238}00238\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00239}00239\ \textcolor{comment}{\ \ \ *\ \ \ FT\_TYPES\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00240}00240\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00241}00241\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00242}00242\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00243}00243\ \textcolor{comment}{\ \ \ *\ \ \ basic\ data\ types\ defined\ by\ FreeType\string~2.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00244}00244\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00245}00245\ \textcolor{comment}{\ \ \ *\ \ \ It\ is\ included\ by\ @FT\_FREETYPE\_H.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00246}00246\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00247}00247\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00248}00248\ \textcolor{preprocessor}{\#define\ FT\_TYPES\_H\ \ <fttypes.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00249}00249\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00250}00250\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00251}00251\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00252}00252\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00253}00253\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00254}00254\ \textcolor{comment}{\ \ \ *\ \ \ FT\_LIST\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00255}00255\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00256}00256\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00257}00257\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00258}00258\ \textcolor{comment}{\ \ \ *\ \ \ list\ management\ API\ of\ FreeType\string~2.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00259}00259\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00260}00260\ \textcolor{comment}{\ \ \ *\ \ \ (Most\ applications\ will\ never\ need\ to\ include\ this\ file.)}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00261}00261\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00262}00262\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00263}00263\ \textcolor{preprocessor}{\#define\ FT\_LIST\_H\ \ <ftlist.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00264}00264\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00265}00265\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00266}00266\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00267}00267\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00268}00268\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00269}00269\ \textcolor{comment}{\ \ \ *\ \ \ FT\_OUTLINE\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00270}00270\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00271}00271\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00272}00272\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00273}00273\ \textcolor{comment}{\ \ \ *\ \ \ scalable\ outline\ management\ API\ of\ FreeType\string~2.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00274}00274\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00275}00275\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00276}00276\ \textcolor{preprocessor}{\#define\ FT\_OUTLINE\_H\ \ <ftoutln.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00277}00277\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00278}00278\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00279}00279\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00280}00280\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00281}00281\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00282}00282\ \textcolor{comment}{\ \ \ *\ \ \ FT\_SIZES\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00283}00283\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00284}00284\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00285}00285\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00286}00286\ \textcolor{comment}{\ \ \ *\ \ \ API\ which\ manages\ multiple\ @FT\_Size\ objects\ per\ face.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00287}00287\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00288}00288\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00289}00289\ \textcolor{preprocessor}{\#define\ FT\_SIZES\_H\ \ <ftsizes.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00290}00290\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00291}00291\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00292}00292\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00293}00293\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00294}00294\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00295}00295\ \textcolor{comment}{\ \ \ *\ \ \ FT\_MODULE\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00296}00296\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00297}00297\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00298}00298\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00299}00299\ \textcolor{comment}{\ \ \ *\ \ \ module\ management\ API\ of\ FreeType\string~2.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00300}00300\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00301}00301\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00302}00302\ \textcolor{preprocessor}{\#define\ FT\_MODULE\_H\ \ <ftmodapi.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00303}00303\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00304}00304\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00305}00305\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00306}00306\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00307}00307\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00308}00308\ \textcolor{comment}{\ \ \ *\ \ \ FT\_RENDER\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00309}00309\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00310}00310\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00311}00311\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00312}00312\ \textcolor{comment}{\ \ \ *\ \ \ renderer\ module\ management\ API\ of\ FreeType\string~2.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00313}00313\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00314}00314\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00315}00315\ \textcolor{preprocessor}{\#define\ FT\_RENDER\_H\ \ <ftrender.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00316}00316\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00317}00317\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00318}00318\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00319}00319\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00320}00320\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00321}00321\ \textcolor{comment}{\ \ \ *\ \ \ FT\_AUTOHINTER\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00322}00322\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00323}00323\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00324}00324\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00325}00325\ \textcolor{comment}{\ \ \ *\ \ \ structures\ and\ macros\ related\ to\ the\ auto-\/hinting\ module.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00326}00326\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00327}00327\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00328}00328\ \textcolor{preprocessor}{\#define\ FT\_AUTOHINTER\_H\ \ <ftautoh.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00329}00329\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00330}00330\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00331}00331\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00332}00332\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00333}00333\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00334}00334\ \textcolor{comment}{\ \ \ *\ \ \ FT\_CFF\_DRIVER\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00335}00335\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00336}00336\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00337}00337\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00338}00338\ \textcolor{comment}{\ \ \ *\ \ \ structures\ and\ macros\ related\ to\ the\ CFF\ driver\ module.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00339}00339\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00340}00340\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00341}00341\ \textcolor{preprocessor}{\#define\ FT\_CFF\_DRIVER\_H\ \ <ftcffdrv.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00342}00342\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00343}00343\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00344}00344\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00345}00345\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00346}00346\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00347}00347\ \textcolor{comment}{\ \ \ *\ \ \ FT\_TRUETYPE\_DRIVER\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00348}00348\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00349}00349\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00350}00350\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00351}00351\ \textcolor{comment}{\ \ \ *\ \ \ structures\ and\ macros\ related\ to\ the\ TrueType\ driver\ module.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00352}00352\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00353}00353\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00354}00354\ \textcolor{preprocessor}{\#define\ FT\_TRUETYPE\_DRIVER\_H\ \ <ftttdrv.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00355}00355\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00356}00356\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00357}00357\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00358}00358\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00359}00359\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00360}00360\ \textcolor{comment}{\ \ \ *\ \ \ FT\_TYPE1\_TABLES\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00361}00361\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00362}00362\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00363}00363\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00364}00364\ \textcolor{comment}{\ \ \ *\ \ \ types\ and\ API\ specific\ to\ the\ Type\string~1\ format.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00365}00365\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00366}00366\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00367}00367\ \textcolor{preprocessor}{\#define\ FT\_TYPE1\_TABLES\_H\ \ <t1tables.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00368}00368\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00369}00369\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00370}00370\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00371}00371\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00372}00372\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00373}00373\ \textcolor{comment}{\ \ \ *\ \ \ FT\_TRUETYPE\_IDS\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00374}00374\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00375}00375\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00376}00376\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00377}00377\ \textcolor{comment}{\ \ \ *\ \ \ enumeration\ values\ which\ identify\ name\ strings,\ languages,\ encodings,}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00378}00378\ \textcolor{comment}{\ \ \ *\ \ \ etc.\ \ This\ file\ really\ contains\ a\ \_large\_\ set\ of\ constant\ macro}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00379}00379\ \textcolor{comment}{\ \ \ *\ \ \ definitions,\ taken\ from\ the\ TrueType\ and\ OpenType\ specifications.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00380}00380\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00381}00381\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00382}00382\ \textcolor{preprocessor}{\#define\ FT\_TRUETYPE\_IDS\_H\ \ <ttnameid.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00383}00383\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00384}00384\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00385}00385\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00386}00386\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00387}00387\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00388}00388\ \textcolor{comment}{\ \ \ *\ \ \ FT\_TRUETYPE\_TABLES\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00389}00389\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00390}00390\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00391}00391\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00392}00392\ \textcolor{comment}{\ \ \ *\ \ \ types\ and\ API\ specific\ to\ the\ TrueType\ (as\ well\ as\ OpenType)\ format.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00393}00393\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00394}00394\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00395}00395\ \textcolor{preprocessor}{\#define\ FT\_TRUETYPE\_TABLES\_H\ \ <tttables.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00396}00396\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00397}00397\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00398}00398\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00399}00399\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00400}00400\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00401}00401\ \textcolor{comment}{\ \ \ *\ \ \ FT\_TRUETYPE\_TAGS\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00402}00402\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00403}00403\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00404}00404\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00405}00405\ \textcolor{comment}{\ \ \ *\ \ \ definitions\ of\ TrueType\ four-\/byte\ \`{}tags'\ which\ identify\ blocks\ in}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00406}00406\ \textcolor{comment}{\ \ \ *\ \ \ SFNT-\/based\ font\ formats\ (i.e.,\ TrueType\ and\ OpenType).}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00407}00407\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00408}00408\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00409}00409\ \textcolor{preprocessor}{\#define\ FT\_TRUETYPE\_TAGS\_H\ \ <tttags.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00410}00410\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00411}00411\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00412}00412\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00413}00413\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00414}00414\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00415}00415\ \textcolor{comment}{\ \ \ *\ \ \ FT\_BDF\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00416}00416\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00417}00417\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00418}00418\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00419}00419\ \textcolor{comment}{\ \ \ *\ \ \ definitions\ of\ an\ API\ which\ accesses\ BDF-\/specific\ strings\ from\ a}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00420}00420\ \textcolor{comment}{\ \ \ *\ \ \ face.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00421}00421\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00422}00422\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00423}00423\ \textcolor{preprocessor}{\#define\ FT\_BDF\_H\ \ <ftbdf.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00424}00424\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00425}00425\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00426}00426\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00427}00427\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00428}00428\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00429}00429\ \textcolor{comment}{\ \ \ *\ \ \ FT\_CID\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00430}00430\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00431}00431\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00432}00432\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00433}00433\ \textcolor{comment}{\ \ \ *\ \ \ definitions\ of\ an\ API\ which\ access\ CID\ font\ information\ from\ a}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00434}00434\ \textcolor{comment}{\ \ \ *\ \ \ face.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00435}00435\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00436}00436\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00437}00437\ \textcolor{preprocessor}{\#define\ FT\_CID\_H\ \ <ftcid.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00438}00438\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00439}00439\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00440}00440\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00441}00441\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00442}00442\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00443}00443\ \textcolor{comment}{\ \ \ *\ \ \ FT\_GZIP\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00444}00444\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00445}00445\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00446}00446\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00447}00447\ \textcolor{comment}{\ \ \ *\ \ \ definitions\ of\ an\ API\ which\ supports\ gzip-\/compressed\ files.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00448}00448\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00449}00449\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00450}00450\ \textcolor{preprocessor}{\#define\ FT\_GZIP\_H\ \ <ftgzip.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00451}00451\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00452}00452\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00453}00453\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00454}00454\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00455}00455\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00456}00456\ \textcolor{comment}{\ \ \ *\ \ \ FT\_LZW\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00457}00457\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00458}00458\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00459}00459\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00460}00460\ \textcolor{comment}{\ \ \ *\ \ \ definitions\ of\ an\ API\ which\ supports\ LZW-\/compressed\ files.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00461}00461\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00462}00462\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00463}00463\ \textcolor{preprocessor}{\#define\ FT\_LZW\_H\ \ <ftlzw.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00464}00464\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00465}00465\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00466}00466\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00467}00467\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00468}00468\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00469}00469\ \textcolor{comment}{\ \ \ *\ \ \ FT\_BZIP2\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00470}00470\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00471}00471\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00472}00472\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00473}00473\ \textcolor{comment}{\ \ \ *\ \ \ definitions\ of\ an\ API\ which\ supports\ bzip2-\/compressed\ files.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00474}00474\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00475}00475\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00476}00476\ \textcolor{preprocessor}{\#define\ FT\_BZIP2\_H\ \ <ftbzip2.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00477}00477\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00478}00478\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00479}00479\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00480}00480\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00481}00481\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00482}00482\ \textcolor{comment}{\ \ \ *\ \ \ FT\_WINFONTS\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00483}00483\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00484}00484\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00485}00485\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00486}00486\ \textcolor{comment}{\ \ \ *\ \ \ definitions\ of\ an\ API\ which\ supports\ Windows\ FNT\ files.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00487}00487\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00488}00488\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00489}00489\ \textcolor{preprocessor}{\#define\ FT\_WINFONTS\_H\ \ \ <ftwinfnt.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00490}00490\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00491}00491\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00492}00492\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00493}00493\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00494}00494\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00495}00495\ \textcolor{comment}{\ \ \ *\ \ \ FT\_GLYPH\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00496}00496\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00497}00497\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00498}00498\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00499}00499\ \textcolor{comment}{\ \ \ *\ \ \ API\ of\ the\ optional\ glyph\ management\ component.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00500}00500\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00501}00501\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00502}00502\ \textcolor{preprocessor}{\#define\ FT\_GLYPH\_H\ \ <ftglyph.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00503}00503\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00504}00504\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00505}00505\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00506}00506\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00507}00507\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00508}00508\ \textcolor{comment}{\ \ \ *\ \ \ FT\_BITMAP\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00509}00509\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00510}00510\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00511}00511\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00512}00512\ \textcolor{comment}{\ \ \ *\ \ \ API\ of\ the\ optional\ bitmap\ conversion\ component.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00513}00513\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00514}00514\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00515}00515\ \textcolor{preprocessor}{\#define\ FT\_BITMAP\_H\ \ <ftbitmap.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00516}00516\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00517}00517\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00518}00518\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00519}00519\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00520}00520\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00521}00521\ \textcolor{comment}{\ \ \ *\ \ \ FT\_BBOX\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00522}00522\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00523}00523\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00524}00524\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00525}00525\ \textcolor{comment}{\ \ \ *\ \ \ API\ of\ the\ optional\ exact\ bounding\ box\ computation\ routines.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00526}00526\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00527}00527\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00528}00528\ \textcolor{preprocessor}{\#define\ FT\_BBOX\_H\ \ <ftbbox.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00529}00529\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00530}00530\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00531}00531\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00532}00532\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00533}00533\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00534}00534\ \textcolor{comment}{\ \ \ *\ \ \ FT\_CACHE\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00535}00535\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00536}00536\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00537}00537\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00538}00538\ \textcolor{comment}{\ \ \ *\ \ \ API\ of\ the\ optional\ FreeType\string~2\ cache\ sub-\/system.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00539}00539\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00540}00540\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00541}00541\ \textcolor{preprocessor}{\#define\ FT\_CACHE\_H\ \ <ftcache.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00542}00542\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00543}00543\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00544}00544\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00545}00545\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00546}00546\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00547}00547\ \textcolor{comment}{\ \ \ *\ \ \ FT\_CACHE\_IMAGE\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00548}00548\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00549}00549\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00550}00550\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00551}00551\ \textcolor{comment}{\ \ \ *\ \ \ \`{}glyph\ image'\ API\ of\ the\ FreeType\string~2\ cache\ sub-\/system.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00552}00552\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00553}00553\ \textcolor{comment}{\ \ \ *\ \ \ It\ is\ used\ to\ define\ a\ cache\ for\ @FT\_Glyph\ elements.\ \ You\ can\ also}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00554}00554\ \textcolor{comment}{\ \ \ *\ \ \ use\ the\ API\ defined\ in\ @FT\_CACHE\_SMALL\_BITMAPS\_H\ if\ you\ only\ need\ to}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00555}00555\ \textcolor{comment}{\ \ \ *\ \ \ store\ small\ glyph\ bitmaps,\ as\ it\ will\ use\ less\ memory.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00556}00556\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00557}00557\ \textcolor{comment}{\ \ \ *\ \ \ This\ macro\ is\ deprecated.\ \ Simply\ include\ @FT\_CACHE\_H\ to\ have\ all}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00558}00558\ \textcolor{comment}{\ \ \ *\ \ \ glyph\ image-\/related\ cache\ declarations.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00559}00559\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00560}00560\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00561}00561\ \textcolor{preprocessor}{\#define\ FT\_CACHE\_IMAGE\_H\ \ FT\_CACHE\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00562}00562\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00563}00563\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00564}00564\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00565}00565\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00566}00566\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00567}00567\ \textcolor{comment}{\ \ \ *\ \ \ FT\_CACHE\_SMALL\_BITMAPS\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00568}00568\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00569}00569\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00570}00570\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00571}00571\ \textcolor{comment}{\ \ \ *\ \ \ \`{}small\ bitmaps'\ API\ of\ the\ FreeType\string~2\ cache\ sub-\/system.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00572}00572\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00573}00573\ \textcolor{comment}{\ \ \ *\ \ \ It\ is\ used\ to\ define\ a\ cache\ for\ small\ glyph\ bitmaps\ in\ a\ relatively}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00574}00574\ \textcolor{comment}{\ \ \ *\ \ \ memory-\/efficient\ way.\ \ You\ can\ also\ use\ the\ API\ defined\ in}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00575}00575\ \textcolor{comment}{\ \ \ *\ \ \ @FT\_CACHE\_IMAGE\_H\ if\ you\ want\ to\ cache\ arbitrary\ glyph\ images,}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00576}00576\ \textcolor{comment}{\ \ \ *\ \ \ including\ scalable\ outlines.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00577}00577\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00578}00578\ \textcolor{comment}{\ \ \ *\ \ \ This\ macro\ is\ deprecated.\ \ Simply\ include\ @FT\_CACHE\_H\ to\ have\ all}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00579}00579\ \textcolor{comment}{\ \ \ *\ \ \ small\ bitmaps-\/related\ cache\ declarations.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00580}00580\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00581}00581\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00582}00582\ \textcolor{preprocessor}{\#define\ FT\_CACHE\_SMALL\_BITMAPS\_H\ \ FT\_CACHE\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00583}00583\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00584}00584\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00585}00585\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00586}00586\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00587}00587\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00588}00588\ \textcolor{comment}{\ \ \ *\ \ \ FT\_CACHE\_CHARMAP\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00589}00589\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00590}00590\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00591}00591\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00592}00592\ \textcolor{comment}{\ \ \ *\ \ \ \`{}charmap'\ API\ of\ the\ FreeType\string~2\ cache\ sub-\/system.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00593}00593\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00594}00594\ \textcolor{comment}{\ \ \ *\ \ \ This\ macro\ is\ deprecated.\ \ Simply\ include\ @FT\_CACHE\_H\ to\ have\ all}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00595}00595\ \textcolor{comment}{\ \ \ *\ \ \ charmap-\/based\ cache\ declarations.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00596}00596\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00597}00597\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00598}00598\ \textcolor{preprocessor}{\#define\ FT\_CACHE\_CHARMAP\_H\ \ FT\_CACHE\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00599}00599\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00600}00600\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00601}00601\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00602}00602\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00603}00603\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00604}00604\ \textcolor{comment}{\ \ \ *\ \ \ FT\_MAC\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00605}00605\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00606}00606\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00607}00607\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00608}00608\ \textcolor{comment}{\ \ \ *\ \ \ Macintosh-\/specific\ FreeType\string~2\ API.\ \ The\ latter\ is\ used\ to\ access}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00609}00609\ \textcolor{comment}{\ \ \ *\ \ \ fonts\ embedded\ in\ resource\ forks.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00610}00610\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00611}00611\ \textcolor{comment}{\ \ \ *\ \ \ This\ header\ file\ must\ be\ explicitly\ included\ by\ client\ applications}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00612}00612\ \textcolor{comment}{\ \ \ *\ \ \ compiled\ on\ the\ Mac\ (note\ that\ the\ base\ API\ still\ works\ though).}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00613}00613\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00614}00614\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00615}00615\ \textcolor{preprocessor}{\#define\ FT\_MAC\_H\ \ <ftmac.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00616}00616\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00617}00617\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00618}00618\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00619}00619\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00620}00620\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00621}00621\ \textcolor{comment}{\ \ \ *\ \ \ FT\_MULTIPLE\_MASTERS\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00622}00622\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00623}00623\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00624}00624\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00625}00625\ \textcolor{comment}{\ \ \ *\ \ \ optional\ multiple-\/masters\ management\ API\ of\ FreeType\string~2.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00626}00626\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00627}00627\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00628}00628\ \textcolor{preprocessor}{\#define\ FT\_MULTIPLE\_MASTERS\_H\ \ <ftmm.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00629}00629\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00630}00630\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00631}00631\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00632}00632\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00633}00633\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00634}00634\ \textcolor{comment}{\ \ \ *\ \ \ FT\_SFNT\_NAMES\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00635}00635\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00636}00636\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00637}00637\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00638}00638\ \textcolor{comment}{\ \ \ *\ \ \ optional\ FreeType\string~2\ API\ which\ accesses\ embedded\ \`{}name'\ strings\ in}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00639}00639\ \textcolor{comment}{\ \ \ *\ \ \ SFNT-\/based\ font\ formats\ (i.e.,\ TrueType\ and\ OpenType).}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00640}00640\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00641}00641\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00642}00642\ \textcolor{preprocessor}{\#define\ FT\_SFNT\_NAMES\_H\ \ <ftsnames.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00643}00643\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00644}00644\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00645}00645\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00646}00646\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00647}00647\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00648}00648\ \textcolor{comment}{\ \ \ *\ \ \ FT\_OPENTYPE\_VALIDATE\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00649}00649\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00650}00650\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00651}00651\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00652}00652\ \textcolor{comment}{\ \ \ *\ \ \ optional\ FreeType\string~2\ API\ which\ validates\ OpenType\ tables\ (BASE,\ GDEF,}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00653}00653\ \textcolor{comment}{\ \ \ *\ \ \ GPOS,\ GSUB,\ JSTF).}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00654}00654\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00655}00655\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00656}00656\ \textcolor{preprocessor}{\#define\ FT\_OPENTYPE\_VALIDATE\_H\ \ <ftotval.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00657}00657\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00658}00658\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00659}00659\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00660}00660\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00661}00661\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00662}00662\ \textcolor{comment}{\ \ \ *\ \ \ FT\_GX\_VALIDATE\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00663}00663\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00664}00664\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00665}00665\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00666}00666\ \textcolor{comment}{\ \ \ *\ \ \ optional\ FreeType\string~2\ API\ which\ validates\ TrueTypeGX/AAT\ tables\ (feat,}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00667}00667\ \textcolor{comment}{\ \ \ *\ \ \ mort,\ morx,\ bsln,\ just,\ kern,\ opbd,\ trak,\ prop).}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00668}00668\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00669}00669\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00670}00670\ \textcolor{preprocessor}{\#define\ FT\_GX\_VALIDATE\_H\ \ <ftgxval.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00671}00671\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00672}00672\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00673}00673\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00674}00674\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00675}00675\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00676}00676\ \textcolor{comment}{\ \ \ *\ \ \ FT\_PFR\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00677}00677\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00678}00678\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00679}00679\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00680}00680\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\string~2\ API\ which\ accesses\ PFR-\/specific\ data.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00681}00681\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00682}00682\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00683}00683\ \textcolor{preprocessor}{\#define\ FT\_PFR\_H\ \ <ftpfr.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00684}00684\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00685}00685\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00686}00686\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00687}00687\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00688}00688\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00689}00689\ \textcolor{comment}{\ \ \ *\ \ \ FT\_STROKER\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00690}00690\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00691}00691\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00692}00692\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00693}00693\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\string~2\ API\ which\ provides\ functions\ to\ stroke\ outline\ paths.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00694}00694\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00695}00695\ \textcolor{preprocessor}{\#define\ FT\_STROKER\_H\ \ <ftstroke.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00696}00696\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00697}00697\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00698}00698\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00699}00699\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00700}00700\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00701}00701\ \textcolor{comment}{\ \ \ *\ \ \ FT\_SYNTHESIS\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00702}00702\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00703}00703\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00704}00704\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00705}00705\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\string~2\ API\ which\ performs\ artificial\ obliquing\ and\ emboldening.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00706}00706\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00707}00707\ \textcolor{preprocessor}{\#define\ FT\_SYNTHESIS\_H\ \ <ftsynth.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00708}00708\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00709}00709\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00710}00710\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00711}00711\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00712}00712\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00713}00713\ \textcolor{comment}{\ \ \ *\ \ \ FT\_XFREE86\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00714}00714\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00715}00715\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00716}00716\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00717}00717\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\string~2\ API\ which\ provides\ functions\ specific\ to\ the\ XFree86\ and}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00718}00718\ \textcolor{comment}{\ \ \ *\ \ \ X.Org\ X11\ servers.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00719}00719\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00720}00720\ \textcolor{preprocessor}{\#define\ FT\_XFREE86\_H\ \ <ftxf86.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00721}00721\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00722}00722\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00723}00723\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00724}00724\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00725}00725\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00726}00726\ \textcolor{comment}{\ \ \ *\ \ \ FT\_TRIGONOMETRY\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00727}00727\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00728}00728\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00729}00729\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00730}00730\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\string~2\ API\ which\ performs\ trigonometric\ computations\ (e.g.,}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00731}00731\ \textcolor{comment}{\ \ \ *\ \ \ cosines\ and\ arc\ tangents).}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00732}00732\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00733}00733\ \textcolor{preprocessor}{\#define\ FT\_TRIGONOMETRY\_H\ \ <fttrigon.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00734}00734\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00735}00735\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00736}00736\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00737}00737\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00738}00738\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00739}00739\ \textcolor{comment}{\ \ \ *\ \ \ FT\_LCD\_FILTER\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00740}00740\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00741}00741\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00742}00742\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00743}00743\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\string~2\ API\ which\ performs\ color\ filtering\ for\ subpixel\ rendering.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00744}00744\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00745}00745\ \textcolor{preprocessor}{\#define\ FT\_LCD\_FILTER\_H\ \ <ftlcdfil.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00746}00746\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00747}00747\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00748}00748\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00749}00749\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00750}00750\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00751}00751\ \textcolor{comment}{\ \ \ *\ \ \ FT\_UNPATENTED\_HINTING\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00752}00752\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00753}00753\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00754}00754\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00755}00755\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\string~2\ API\ which\ performs\ color\ filtering\ for\ subpixel\ rendering.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00756}00756\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00757}00757\ \textcolor{preprocessor}{\#define\ FT\_UNPATENTED\_HINTING\_H\ \ <ttunpat.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00758}00758\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00759}00759\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00760}00760\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00761}00761\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00762}00762\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00763}00763\ \textcolor{comment}{\ \ \ *\ \ \ FT\_INCREMENTAL\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00764}00764\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00765}00765\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00766}00766\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00767}00767\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\string~2\ API\ which\ performs\ color\ filtering\ for\ subpixel\ rendering.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00768}00768\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00769}00769\ \textcolor{preprocessor}{\#define\ FT\_INCREMENTAL\_H\ \ <ftincrem.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00770}00770\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00771}00771\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00772}00772\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00773}00773\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00774}00774\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00775}00775\ \textcolor{comment}{\ \ \ *\ \ \ FT\_GASP\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00776}00776\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00777}00777\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00778}00778\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00779}00779\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\string~2\ API\ which\ returns\ entries\ from\ the\ TrueType\ GASP\ table.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00780}00780\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00781}00781\ \textcolor{preprocessor}{\#define\ FT\_GASP\_H\ \ <ftgasp.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00782}00782\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00783}00783\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00784}00784\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00785}00785\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00786}00786\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00787}00787\ \textcolor{comment}{\ \ \ *\ \ \ FT\_ADVANCES\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00788}00788\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00789}00789\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00790}00790\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00791}00791\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\string~2\ API\ which\ returns\ individual\ and\ ranged\ glyph\ advances.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00792}00792\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00793}00793\ \textcolor{preprocessor}{\#define\ FT\_ADVANCES\_H\ \ <ftadvanc.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00794}00794\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00795}00795\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00796}00796\ \ \ \textcolor{comment}{/*\ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00797}00797\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00798}00798\ \textcolor{preprocessor}{\#define\ FT\_ERROR\_DEFINITIONS\_H\ \ <fterrdef.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00799}00799\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00800}00800\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00801}00801\ \ \ \textcolor{comment}{/*\ The\ internals\ of\ the\ cache\ sub-\/system\ are\ no\ longer\ exposed.\ \ We\ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00802}00802\ \ \ \textcolor{comment}{/*\ default\ to\ FT\_CACHE\_H\ at\ the\ moment\ just\ in\ case,\ but\ we\ know\ of\ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00803}00803\ \ \ \textcolor{comment}{/*\ no\ rogue\ client\ that\ uses\ them.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00804}00804\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00805}00805\ \textcolor{preprocessor}{\#define\ FT\_CACHE\_MANAGER\_H\ \ \ \ \ \ \ \ \ \ \ <ftcache.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00806}00806\ \textcolor{preprocessor}{\#define\ FT\_CACHE\_INTERNAL\_MRU\_H\ \ \ \ \ \ <ftcache.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00807}00807\ \textcolor{preprocessor}{\#define\ FT\_CACHE\_INTERNAL\_MANAGER\_H\ \ <ftcache.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00808}00808\ \textcolor{preprocessor}{\#define\ FT\_CACHE\_INTERNAL\_CACHE\_H\ \ \ \ <ftcache.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00809}00809\ \textcolor{preprocessor}{\#define\ FT\_CACHE\_INTERNAL\_GLYPH\_H\ \ \ \ <ftcache.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00810}00810\ \textcolor{preprocessor}{\#define\ FT\_CACHE\_INTERNAL\_IMAGE\_H\ \ \ \ <ftcache.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00811}00811\ \textcolor{preprocessor}{\#define\ FT\_CACHE\_INTERNAL\_SBITS\_H\ \ \ \ <ftcache.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00812}00812\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00813}00813\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00814}00814\ \textcolor{preprocessor}{\#define\ FT\_INCREMENTAL\_H\ \ \ \ \ \ \ \ \ \ <ftincrem.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00815}00815\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00816}00816\ \textcolor{preprocessor}{\#define\ FT\_TRUETYPE\_UNPATENTED\_H\ \ <ttunpat.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00817}00817\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00818}00818\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00819}00819\ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00820}00820\ \textcolor{comment}{\ \ \ *\ Include\ internal\ headers\ definitions\ from\ <internal/...>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00821}00821\ \textcolor{comment}{\ \ \ *\ only\ when\ building\ the\ library.}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00822}00822\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00823}00823\ \textcolor{preprocessor}{\#ifdef\ FT2\_BUILD\_LIBRARY}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00824}00824\ \textcolor{preprocessor}{\#define\ \ FT\_INTERNAL\_INTERNAL\_H\ \ <internal/internal.h>}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00825}00825\ \textcolor{preprocessor}{\#include\ FT\_INTERNAL\_INTERNAL\_H}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00826}00826\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FT2\_BUILD\_LIBRARY\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00827}00827\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00828}00828\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00829}00829\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_FT2\_BUILD\_H\_\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00830}00830\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00831}00831\ }
+\DoxyCodeLine{\Hypertarget{ftheader_8h_source_l00832}00832\ \textcolor{comment}{/*\ END\ */}}
+
+\end{DoxyCode}

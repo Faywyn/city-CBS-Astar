@@ -1,0 +1,230 @@
+\doxysubsection{Time.\+cpp}
+\hypertarget{_time_8cpp_source}{}\label{_time_8cpp_source}\index{Time.cpp@{Time.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00002}00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00003}00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00004}00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00005}00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00006}00006\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00007}00007\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00008}00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00009}00009\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00010}00010\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00011}00011\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00012}00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00013}00013\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00014}00014\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00015}00015\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00016}00016\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00017}00017\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00018}00018\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00019}00019\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00020}00020\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00021}00021\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00022}00022\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00026}00026\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00028}00028\ \textcolor{preprocessor}{\#include\ <SFML/System/Time.hpp>}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00031}00031\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00032}00032\ \{}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00034}00034\ \textcolor{keyword}{const}\ Time\ Time::Zero;}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00038}00038\ Time::Time()\ :}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00039}00039\ m\_microseconds(0)}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00040}00040\ \{}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00041}00041\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00045}00045\ \textcolor{keywordtype}{float}\ Time::asSeconds()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00046}00046\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00047}00047\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(m\_microseconds)\ /\ 1000000.0);}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00048}00048\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00052}00052\ Int32\ Time::asMilliseconds()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00053}00053\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00054}00054\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}Int32\textcolor{keyword}{>}(m\_microseconds\ /\ 1000);}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00055}00055\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00059}00059\ Int64\ Time::asMicroseconds()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00060}00060\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00061}00061\ \ \ \ \ \textcolor{keywordflow}{return}\ m\_microseconds;}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00062}00062\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00066}00066\ Time::Time(Int64\ microseconds)\ :}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00067}00067\ m\_microseconds(microseconds)}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00068}00068\ \{}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00069}00069\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00073}00073\ Time\ seconds(\textcolor{keywordtype}{float}\ amount)}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00074}00074\ \{}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00075}00075\ \ \ \ \ \textcolor{keywordflow}{return}\ Time(\textcolor{keyword}{static\_cast<}Int64\textcolor{keyword}{>}(amount\ *\ 1000000));}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00076}00076\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00080}00080\ Time\ milliseconds(Int32\ amount)}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00081}00081\ \{}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00082}00082\ \ \ \ \ \textcolor{keywordflow}{return}\ Time(\textcolor{keyword}{static\_cast<}Int64\textcolor{keyword}{>}(amount)\ *\ 1000);}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00083}00083\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00087}00087\ Time\ microseconds(Int64\ amount)}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00088}00088\ \{}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00089}00089\ \ \ \ \ \textcolor{keywordflow}{return}\ Time(amount);}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00090}00090\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00094}00094\ \textcolor{keywordtype}{bool}\ operator\ ==(Time\ left,\ Time\ right)}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00095}00095\ \{}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00096}00096\ \ \ \ \ \textcolor{keywordflow}{return}\ left.asMicroseconds()\ ==\ right.asMicroseconds();}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00097}00097\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00101}00101\ \textcolor{keywordtype}{bool}\ operator\ !=(Time\ left,\ Time\ right)}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00102}00102\ \{}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00103}00103\ \ \ \ \ \textcolor{keywordflow}{return}\ left.asMicroseconds()\ !=\ right.asMicroseconds();}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00104}00104\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00108}00108\ \textcolor{keywordtype}{bool}\ operator\ <(Time\ left,\ Time\ right)}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00109}00109\ \{}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00110}00110\ \ \ \ \ \textcolor{keywordflow}{return}\ left.asMicroseconds()\ <\ right.asMicroseconds();}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00111}00111\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00115}00115\ \textcolor{keywordtype}{bool}\ operator\ >(Time\ left,\ Time\ right)}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00116}00116\ \{}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00117}00117\ \ \ \ \ \textcolor{keywordflow}{return}\ left.asMicroseconds()\ >\ right.asMicroseconds();}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00118}00118\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00119}00119\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00122}00122\ \textcolor{keywordtype}{bool}\ operator\ <=(Time\ left,\ Time\ right)}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00123}00123\ \{}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00124}00124\ \ \ \ \ \textcolor{keywordflow}{return}\ left.asMicroseconds()\ <=\ right.asMicroseconds();}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00125}00125\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00129}00129\ \textcolor{keywordtype}{bool}\ operator\ >=(Time\ left,\ Time\ right)}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00130}00130\ \{}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00131}00131\ \ \ \ \ \textcolor{keywordflow}{return}\ left.asMicroseconds()\ >=\ right.asMicroseconds();}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00132}00132\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00133}00133\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00136}00136\ Time\ operator\ -\/(Time\ right)}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00137}00137\ \{}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00138}00138\ \ \ \ \ \textcolor{keywordflow}{return}\ microseconds(-\/right.asMicroseconds());}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00139}00139\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00143}00143\ Time\ operator\ +(Time\ left,\ Time\ right)}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00144}00144\ \{}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00145}00145\ \ \ \ \ \textcolor{keywordflow}{return}\ microseconds(left.asMicroseconds()\ +\ right.asMicroseconds());}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00146}00146\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00147}00147\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00150}00150\ Time\&\ operator\ +=(Time\&\ left,\ Time\ right)}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00151}00151\ \{}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00152}00152\ \ \ \ \ \textcolor{keywordflow}{return}\ left\ =\ left\ +\ right;}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00153}00153\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00155}00155\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00157}00157\ Time\ operator\ -\/(Time\ left,\ Time\ right)}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00158}00158\ \{}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00159}00159\ \ \ \ \ \textcolor{keywordflow}{return}\ microseconds(left.asMicroseconds()\ -\/\ right.asMicroseconds());}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00160}00160\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00162}00162\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00164}00164\ Time\&\ operator\ -\/=(Time\&\ left,\ Time\ right)}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00165}00165\ \{}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00166}00166\ \ \ \ \ \textcolor{keywordflow}{return}\ left\ =\ left\ -\/\ right;}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00167}00167\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00168}00168\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00169}00169\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00171}00171\ Time\ operator\ *(Time\ left,\ \textcolor{keywordtype}{float}\ right)}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00172}00172\ \{}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00173}00173\ \ \ \ \ \textcolor{keywordflow}{return}\ seconds(left.asSeconds()\ *\ right);}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00174}00174\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00175}00175\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00176}00176\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00178}00178\ Time\ operator\ *(Time\ left,\ Int64\ right)}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00179}00179\ \{}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00180}00180\ \ \ \ \ \textcolor{keywordflow}{return}\ microseconds(left.asMicroseconds()\ *\ right);}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00181}00181\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00182}00182\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00183}00183\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00185}00185\ Time\ operator\ *(\textcolor{keywordtype}{float}\ left,\ Time\ right)}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00186}00186\ \{}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00187}00187\ \ \ \ \ \textcolor{keywordflow}{return}\ right\ *\ left;}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00188}00188\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00190}00190\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00192}00192\ Time\ operator\ *(Int64\ left,\ Time\ right)}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00193}00193\ \{}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00194}00194\ \ \ \ \ \textcolor{keywordflow}{return}\ right\ *\ left;}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00195}00195\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00196}00196\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00197}00197\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00199}00199\ Time\&\ operator\ *=(Time\&\ left,\ \textcolor{keywordtype}{float}\ right)}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00200}00200\ \{}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00201}00201\ \ \ \ \ \textcolor{keywordflow}{return}\ left\ =\ left\ *\ right;}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00202}00202\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00203}00203\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00204}00204\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00206}00206\ Time\&\ operator\ *=(Time\&\ left,\ Int64\ right)}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00207}00207\ \{}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00208}00208\ \ \ \ \ \textcolor{keywordflow}{return}\ left\ =\ left\ *\ right;}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00209}00209\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00210}00210\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00211}00211\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00213}00213\ Time\ operator\ /(Time\ left,\ \textcolor{keywordtype}{float}\ right)}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00214}00214\ \{}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00215}00215\ \ \ \ \ \textcolor{keywordflow}{return}\ seconds(left.asSeconds()\ /\ right);}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00216}00216\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00217}00217\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00218}00218\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00220}00220\ Time\ operator\ /(Time\ left,\ Int64\ right)}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00221}00221\ \{}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00222}00222\ \ \ \ \ \textcolor{keywordflow}{return}\ microseconds(left.asMicroseconds()\ /\ right);}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00223}00223\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00224}00224\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00225}00225\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00227}00227\ Time\&\ operator\ /=(Time\&\ left,\ \textcolor{keywordtype}{float}\ right)}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00228}00228\ \{}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00229}00229\ \ \ \ \ \textcolor{keywordflow}{return}\ left\ =\ left\ /\ right;}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00230}00230\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00231}00231\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00232}00232\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00234}00234\ Time\&\ operator\ /=(Time\&\ left,\ Int64\ right)}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00235}00235\ \{}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00236}00236\ \ \ \ \ \textcolor{keywordflow}{return}\ left\ =\ left\ /\ right;}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00237}00237\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00238}00238\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00239}00239\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00241}00241\ \textcolor{keywordtype}{float}\ operator\ /(Time\ left,\ Time\ right)}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00242}00242\ \{}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00243}00243\ \ \ \ \ \textcolor{keywordflow}{return}\ left.asSeconds()\ /\ right.asSeconds();}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00244}00244\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00245}00245\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00246}00246\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00248}00248\ Time\ operator\ \%(Time\ left,\ Time\ right)}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00249}00249\ \{}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00250}00250\ \ \ \ \ \textcolor{keywordflow}{return}\ microseconds(left.asMicroseconds()\ \%\ right.asMicroseconds());}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00251}00251\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00252}00252\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00253}00253\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00255}00255\ Time\&\ operator\ \%=(Time\&\ left,\ Time\ right)}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00256}00256\ \{}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00257}00257\ \ \ \ \ \textcolor{keywordflow}{return}\ left\ =\ left\ \%\ right;}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00258}00258\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00259}00259\ }
+\DoxyCodeLine{\Hypertarget{_time_8cpp_source_l00260}00260\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+
+\end{DoxyCode}

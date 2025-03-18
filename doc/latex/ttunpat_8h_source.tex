@@ -1,0 +1,66 @@
+\doxysubsection{ttunpat.\+h}
+\hypertarget{ttunpat_8h_source}{}\label{ttunpat_8h_source}\index{ttunpat.h@{ttunpat.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00001}00001\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00002}00002\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00003}00003\ \textcolor{comment}{/*\ \ ttunpat.h\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00004}00004\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00005}00005\ \textcolor{comment}{/*\ \ \ \ Definitions\ for\ the\ unpatented\ TrueType\ hinting\ system\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00006}00006\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00007}00007\ \textcolor{comment}{/*\ \ Copyright\ 2003,\ 2006\ by\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00008}00008\ \textcolor{comment}{/*\ \ David\ Turner,\ Robert\ Wilhelm,\ and\ Werner\ Lemberg.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00009}00009\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00010}00010\ \textcolor{comment}{/*\ \ Written\ by\ Graham\ Asher\ <graham.asher@btinternet.com>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00011}00011\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00012}00012\ \textcolor{comment}{/*\ \ This\ file\ is\ part\ of\ the\ FreeType\ project,\ and\ may\ only\ be\ used,\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00013}00013\ \textcolor{comment}{/*\ \ modified,\ and\ distributed\ under\ the\ terms\ of\ the\ FreeType\ project\ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00014}00014\ \textcolor{comment}{/*\ \ license,\ LICENSE.TXT.\ \ By\ continuing\ to\ use,\ modify,\ or\ distribute\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00015}00015\ \textcolor{comment}{/*\ \ this\ file\ you\ indicate\ that\ you\ have\ read\ the\ license\ and\ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00016}00016\ \textcolor{comment}{/*\ \ understand\ and\ accept\ it\ fully.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00017}00017\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00018}00018\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00021}00021\ \textcolor{preprocessor}{\#ifndef\ \_\_TTUNPAT\_H\_\_}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00022}00022\ \textcolor{preprocessor}{\#define\ \_\_TTUNPAT\_H\_\_}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00025}00025\ \textcolor{preprocessor}{\#include\ <ft2build.h>}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00026}00026\ \textcolor{preprocessor}{\#include\ FT\_FREETYPE\_H}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00028}00028\ \textcolor{preprocessor}{\#ifdef\ FREETYPE\_H}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00029}00029\ \textcolor{preprocessor}{\#error\ "{}freetype.h\ of\ FreeType\ 1\ has\ been\ loaded!"{}}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00030}00030\ \textcolor{preprocessor}{\#error\ "{}Please\ fix\ the\ directory\ search\ order\ for\ header\ files"{}}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00031}00031\ \textcolor{preprocessor}{\#error\ "{}so\ that\ freetype.h\ of\ FreeType\ 2\ is\ found\ first."{}}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00032}00032\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00035}00035\ FT\_BEGIN\_HEADER}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00038}00038\ \textcolor{comment}{\ /***************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00039}00039\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00040}00040\ \textcolor{comment}{\ \ *\ @constant:}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00041}00041\ \textcolor{comment}{\ \ *\ \ \ FT\_PARAM\_TAG\_UNPATENTED\_HINTING}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00042}00042\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00043}00043\ \textcolor{comment}{\ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00044}00044\ \textcolor{comment}{\ \ *\ \ \ A\ constant\ used\ as\ the\ tag\ of\ an\ @FT\_Parameter\ structure\ to\ indicate}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00045}00045\ \textcolor{comment}{\ \ *\ \ \ that\ unpatented\ methods\ only\ should\ be\ used\ by\ the\ TrueType\ bytecode}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00046}00046\ \textcolor{comment}{\ \ *\ \ \ interpreter\ for\ a\ typeface\ opened\ by\ @FT\_Open\_Face.}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00047}00047\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00048}00048\ \textcolor{comment}{\ \ */}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00049}00049\ \textcolor{preprocessor}{\#define\ FT\_PARAM\_TAG\_UNPATENTED\_HINTING\ \ FT\_MAKE\_TAG(\ 'u',\ 'n',\ 'p',\ 'a'\ )}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00051}00051\ \ \ \textcolor{comment}{/*\ */}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00054}00054\ FT\_END\_HEADER}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00057}00057\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_TTUNPAT\_H\_\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{ttunpat_8h_source_l00060}00060\ \textcolor{comment}{/*\ END\ */}}
+
+\end{DoxyCode}

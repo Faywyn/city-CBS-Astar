@@ -1,0 +1,636 @@
+\doxysubsection{test\+\_\+pattern\+\_\+formatter.\+cpp}
+\hypertarget{test__pattern__formatter_8cpp_source}{}\label{test__pattern__formatter_8cpp_source}\index{test\_pattern\_formatter.cpp@{test\_pattern\_formatter.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}includes.h"{}}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}test\_sink.h"{}}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00004}00004\ \textcolor{keyword}{using\ }spdlog::memory\_buf\_t;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00005}00005\ \textcolor{keyword}{using\ }spdlog::details::to\_string\_view;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00007}00007\ \textcolor{comment}{//\ log\ to\ str\ and\ return\ it}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00008}00008\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00009}00009\ \textcolor{keyword}{static}\ std::string\ log\_to\_str(\textcolor{keyword}{const}\ std::string\ \&msg,\ \textcolor{keyword}{const}\ Args\ \&...args)\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00010}00010\ \ \ \ \ std::ostringstream\ oss;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00011}00011\ \ \ \ \ \textcolor{keyword}{auto}\ oss\_sink\ =\ std::make\_shared<spdlog::sinks::ostream\_sink\_mt>(oss);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00012}00012\ \ \ \ \ spdlog::logger\ oss\_logger(\textcolor{stringliteral}{"{}pattern\_tester"{}},\ oss\_sink);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00013}00013\ \ \ \ \ oss\_logger.set\_level(spdlog::level::info);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00015}00015\ \ \ \ \ oss\_logger.set\_formatter(}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00016}00016\ \ \ \ \ \ \ \ \ std::unique\_ptr<spdlog::formatter>(\textcolor{keyword}{new}\ spdlog::pattern\_formatter(args...)));}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00018}00018\ \ \ \ \ oss\_logger.info(msg);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00019}00019\ \ \ \ \ \textcolor{keywordflow}{return}\ oss.str();}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00020}00020\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00022}00022\ TEST\_CASE(\textcolor{stringliteral}{"{}custom\ eol"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00023}00023\ \ \ \ \ std::string\ msg\ =\ \textcolor{stringliteral}{"{}Hello\ custom\ eol\ test"{}};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00024}00024\ \ \ \ \ std::string\ eol\ =\ \textcolor{stringliteral}{"{};)"{}};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00025}00025\ \ \ \ \ REQUIRE(log\_to\_str(msg,\ \textcolor{stringliteral}{"{}\%v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{};)"{}})\ ==\ msg\ +\ eol);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00026}00026\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00028}00028\ TEST\_CASE(\textcolor{stringliteral}{"{}empty\ format"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00029}00029\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}Some\ message"{}},\ \textcolor{stringliteral}{"{}"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}"{}}).empty());}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00030}00030\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00032}00032\ TEST\_CASE(\textcolor{stringliteral}{"{}empty\ format2"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00033}00033\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}Some\ message"{}},\ \textcolor{stringliteral}{"{}"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00034}00034\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00036}00036\ TEST\_CASE(\textcolor{stringliteral}{"{}level"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00037}00037\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}Some\ message"{}},\ \textcolor{stringliteral}{"{}[\%l]\ \%v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[info]\ Some\ message\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00039}00039\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00041}00041\ TEST\_CASE(\textcolor{stringliteral}{"{}short\ level"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00042}00042\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}Some\ message"{}},\ \textcolor{stringliteral}{"{}[\%L]\ \%v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[I]\ Some\ message\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00044}00044\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00046}00046\ TEST\_CASE(\textcolor{stringliteral}{"{}name"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00047}00047\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}Some\ message"{}},\ \textcolor{stringliteral}{"{}[\%n]\ \%v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[pattern\_tester]\ Some\ message\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00049}00049\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00051}00051\ TEST\_CASE(\textcolor{stringliteral}{"{}date\ MM/DD/YY\ "{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00052}00052\ \ \ \ \ \textcolor{keyword}{auto}\ now\_tm\ =\ spdlog::details::os::localtime();}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00053}00053\ \ \ \ \ std::stringstream\ oss;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00054}00054\ \ \ \ \ oss\ <<\ std::setfill(\textcolor{charliteral}{'0'})\ <<\ std::setw(2)\ <<\ now\_tm.tm\_mon\ +\ 1\ <<\ \textcolor{stringliteral}{"{}/"{}}\ <<\ std::setw(2)}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00055}00055\ \ \ \ \ \ \ \ \ <<\ now\_tm.tm\_mday\ <<\ \textcolor{stringliteral}{"{}/"{}}\ <<\ std::setw(2)\ <<\ (now\_tm.tm\_year\ +\ 1900)\ \%\ 1000}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00056}00056\ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ Some\ message\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00057}00057\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}Some\ message"{}},\ \textcolor{stringliteral}{"{}\%D\ \%v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ oss.str());}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00059}00059\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00061}00061\ TEST\_CASE(\textcolor{stringliteral}{"{}color\ range\ test1"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00062}00062\ \ \ \ \ \textcolor{keyword}{auto}\ formatter\ =\ std::make\_shared<spdlog::pattern\_formatter>(}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00063}00063\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\%\string^\%v\%\$"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00065}00065\ \ \ \ \ memory\_buf\_t\ buf;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00066}00066\ \ \ \ \ spdlog::fmt\_lib::format\_to(std::back\_inserter(buf),\ \textcolor{stringliteral}{"{}Hello"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00067}00067\ \ \ \ \ memory\_buf\_t\ formatted;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00068}00068\ \ \ \ \ std::string\ logger\_name\ =\ \textcolor{stringliteral}{"{}test"{}};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00069}00069\ \ \ \ \ spdlog::details::log\_msg\ msg(logger\_name,\ spdlog::level::info,}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ spdlog::string\_view\_t(buf.data(),\ buf.size()));}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00071}00071\ \ \ \ \ formatter-\/>format(msg,\ formatted);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00072}00072\ \ \ \ \ REQUIRE(msg.color\_range\_start\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00073}00073\ \ \ \ \ REQUIRE(msg.color\_range\_end\ ==\ 5);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00074}00074\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}hello"{}},\ \textcolor{stringliteral}{"{}\%\string^\%v\%\$"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==\ \textcolor{stringliteral}{"{}hello\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00075}00075\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00077}00077\ TEST\_CASE(\textcolor{stringliteral}{"{}color\ range\ test2"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00078}00078\ \ \ \ \ \textcolor{keyword}{auto}\ formatter\ =}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00079}00079\ \ \ \ \ \ \ \ \ std::make\_shared<spdlog::pattern\_formatter>(\textcolor{stringliteral}{"{}\%\string^\%\$"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00080}00080\ \ \ \ \ std::string\ logger\_name\ =\ \textcolor{stringliteral}{"{}test"{}};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00081}00081\ \ \ \ \ spdlog::details::log\_msg\ msg(logger\_name,\ spdlog::level::info,\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00082}00082\ \ \ \ \ memory\_buf\_t\ formatted;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00083}00083\ \ \ \ \ formatter-\/>format(msg,\ formatted);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00084}00084\ \ \ \ \ REQUIRE(msg.color\_range\_start\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00085}00085\ \ \ \ \ REQUIRE(msg.color\_range\_end\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00086}00086\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}"{}},\ \textcolor{stringliteral}{"{}\%\string^\%\$"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00087}00087\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00089}00089\ TEST\_CASE(\textcolor{stringliteral}{"{}color\ range\ test3"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00090}00090\ \ \ \ \ \textcolor{keyword}{auto}\ formatter\ =\ std::make\_shared<spdlog::pattern\_formatter>(\textcolor{stringliteral}{"{}\%\string^***\%\$"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00091}00091\ \ \ \ \ std::string\ logger\_name\ =\ \textcolor{stringliteral}{"{}test"{}};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00092}00092\ \ \ \ \ spdlog::details::log\_msg\ msg(logger\_name,\ spdlog::level::info,\ \textcolor{stringliteral}{"{}ignored"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00093}00093\ \ \ \ \ memory\_buf\_t\ formatted;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00094}00094\ \ \ \ \ formatter-\/>format(msg,\ formatted);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00095}00095\ \ \ \ \ REQUIRE(msg.color\_range\_start\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00096}00096\ \ \ \ \ REQUIRE(msg.color\_range\_end\ ==\ 3);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00097}00097\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00099}00099\ TEST\_CASE(\textcolor{stringliteral}{"{}color\ range\ test4"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00100}00100\ \ \ \ \ \textcolor{keyword}{auto}\ formatter\ =\ std::make\_shared<spdlog::pattern\_formatter>(}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00101}00101\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}XX\%\string^YYY\%\$"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00102}00102\ \ \ \ \ std::string\ logger\_name\ =\ \textcolor{stringliteral}{"{}test"{}};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00103}00103\ \ \ \ \ spdlog::details::log\_msg\ msg(logger\_name,\ spdlog::level::info,\ \textcolor{stringliteral}{"{}ignored"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00105}00105\ \ \ \ \ memory\_buf\_t\ formatted;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00106}00106\ \ \ \ \ formatter-\/>format(msg,\ formatted);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00107}00107\ \ \ \ \ REQUIRE(msg.color\_range\_start\ ==\ 2);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00108}00108\ \ \ \ \ REQUIRE(msg.color\_range\_end\ ==\ 5);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00109}00109\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}ignored"{}},\ \textcolor{stringliteral}{"{}XX\%\string^YYY\%\$"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}XXYYY\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00111}00111\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00113}00113\ TEST\_CASE(\textcolor{stringliteral}{"{}color\ range\ test5"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00114}00114\ \ \ \ \ \textcolor{keyword}{auto}\ formatter\ =\ std::make\_shared<spdlog::pattern\_formatter>(\textcolor{stringliteral}{"{}**\%\string^"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00115}00115\ \ \ \ \ std::string\ logger\_name\ =\ \textcolor{stringliteral}{"{}test"{}};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00116}00116\ \ \ \ \ spdlog::details::log\_msg\ msg(logger\_name,\ spdlog::level::info,\ \textcolor{stringliteral}{"{}ignored"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00117}00117\ \ \ \ \ memory\_buf\_t\ formatted;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00118}00118\ \ \ \ \ formatter-\/>format(msg,\ formatted);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00119}00119\ \ \ \ \ REQUIRE(msg.color\_range\_start\ ==\ 2);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00120}00120\ \ \ \ \ REQUIRE(msg.color\_range\_end\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00121}00121\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00123}00123\ TEST\_CASE(\textcolor{stringliteral}{"{}color\ range\ test6"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00124}00124\ \ \ \ \ \textcolor{keyword}{auto}\ formatter\ =\ std::make\_shared<spdlog::pattern\_formatter>(\textcolor{stringliteral}{"{}**\%\$"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00125}00125\ \ \ \ \ std::string\ logger\_name\ =\ \textcolor{stringliteral}{"{}test"{}};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00126}00126\ \ \ \ \ spdlog::details::log\_msg\ msg(logger\_name,\ spdlog::level::info,\ \textcolor{stringliteral}{"{}ignored"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00127}00127\ \ \ \ \ memory\_buf\_t\ formatted;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00128}00128\ \ \ \ \ formatter-\/>format(msg,\ formatted);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00129}00129\ \ \ \ \ REQUIRE(msg.color\_range\_start\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00130}00130\ \ \ \ \ REQUIRE(msg.color\_range\_end\ ==\ 2);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00131}00131\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00132}00132\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00133}00133\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00134}00134\ \textcolor{comment}{//\ Test\ padding}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00135}00135\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00136}00136\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00137}00137\ TEST\_CASE(\textcolor{stringliteral}{"{}level\_left\_padded"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00138}00138\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}Some\ message"{}},\ \textcolor{stringliteral}{"{}[\%8l]\ \%v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[\ \ \ \ info]\ Some\ message\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00140}00140\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}Some\ message"{}},\ \textcolor{stringliteral}{"{}[\%8!l]\ \%v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[\ \ \ \ info]\ Some\ message\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00142}00142\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00143}00143\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00144}00144\ TEST\_CASE(\textcolor{stringliteral}{"{}level\_right\_padded"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00145}00145\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}Some\ message"{}},\ \textcolor{stringliteral}{"{}[\%-\/8l]\ \%v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[info\ \ \ \ ]\ Some\ message\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00147}00147\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}Some\ message"{}},\ \textcolor{stringliteral}{"{}[\%-\/8!l]\ \%v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[info\ \ \ \ ]\ Some\ message\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00149}00149\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00150}00150\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00151}00151\ TEST\_CASE(\textcolor{stringliteral}{"{}level\_center\_padded"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00152}00152\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}Some\ message"{}},\ \textcolor{stringliteral}{"{}[\%=8l]\ \%v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[\ \ info\ \ ]\ Some\ message\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00154}00154\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}Some\ message"{}},\ \textcolor{stringliteral}{"{}[\%=8!l]\ \%v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[\ \ info\ \ ]\ Some\ message\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00156}00156\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00157}00157\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00158}00158\ TEST\_CASE(\textcolor{stringliteral}{"{}short\ level\_left\_padded"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00159}00159\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}Some\ message"{}},\ \textcolor{stringliteral}{"{}[\%3L]\ \%v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[\ \ I]\ Some\ message\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00161}00161\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}Some\ message"{}},\ \textcolor{stringliteral}{"{}[\%3!L]\ \%v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[\ \ I]\ Some\ message\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00163}00163\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00164}00164\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00165}00165\ TEST\_CASE(\textcolor{stringliteral}{"{}short\ level\_right\_padded"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00166}00166\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}Some\ message"{}},\ \textcolor{stringliteral}{"{}[\%-\/3L]\ \%v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[I\ \ ]\ Some\ message\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00168}00168\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}Some\ message"{}},\ \textcolor{stringliteral}{"{}[\%-\/3!L]\ \%v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[I\ \ ]\ Some\ message\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00170}00170\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00171}00171\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00172}00172\ TEST\_CASE(\textcolor{stringliteral}{"{}short\ level\_center\_padded"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00173}00173\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}Some\ message"{}},\ \textcolor{stringliteral}{"{}[\%=3L]\ \%v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[\ I\ ]\ Some\ message\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00175}00175\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}Some\ message"{}},\ \textcolor{stringliteral}{"{}[\%=3!L]\ \%v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[\ I\ ]\ Some\ message\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00177}00177\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00178}00178\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00179}00179\ TEST\_CASE(\textcolor{stringliteral}{"{}left\_padded\_short"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00180}00180\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}Some\ message"{}},\ \textcolor{stringliteral}{"{}[\%3n]\ \%v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[pattern\_tester]\ Some\ message\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00182}00182\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}Some\ message"{}},\ \textcolor{stringliteral}{"{}[\%3!n]\ \%v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[pat]\ Some\ message\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00184}00184\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00185}00185\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00186}00186\ TEST\_CASE(\textcolor{stringliteral}{"{}right\_padded\_short"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00187}00187\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}Some\ message"{}},\ \textcolor{stringliteral}{"{}[\%-\/3n]\ \%v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[pattern\_tester]\ Some\ message\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00189}00189\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}Some\ message"{}},\ \textcolor{stringliteral}{"{}[\%-\/3!n]\ \%v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[pat]\ Some\ message\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00191}00191\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00192}00192\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00193}00193\ TEST\_CASE(\textcolor{stringliteral}{"{}center\_padded\_short"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00194}00194\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}Some\ message"{}},\ \textcolor{stringliteral}{"{}[\%=3n]\ \%v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[pattern\_tester]\ Some\ message\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00196}00196\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}Some\ message"{}},\ \textcolor{stringliteral}{"{}[\%=3!n]\ \%v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[pat]\ Some\ message\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00198}00198\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00199}00199\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00200}00200\ TEST\_CASE(\textcolor{stringliteral}{"{}left\_padded\_huge"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00201}00201\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}Some\ message"{}},\ \textcolor{stringliteral}{"{}[\%-\/300n]\ \%v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00202}00202\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[pattern\_tester\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ]\ Some\ message\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00203}00203\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00204}00204\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}Some\ message"{}},\ \textcolor{stringliteral}{"{}[\%-\/300!n]\ \%v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00205}00205\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[pattern\_tester\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ]\ Some\ message\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00206}00206\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00207}00207\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00208}00208\ TEST\_CASE(\textcolor{stringliteral}{"{}left\_padded\_max"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00209}00209\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}Some\ message"{}},\ \textcolor{stringliteral}{"{}[\%-\/64n]\ \%v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[pattern\_tester\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ]\ Some\ message\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00211}00211\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00212}00212\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}Some\ message"{}},\ \textcolor{stringliteral}{"{}[\%-\/64!n]\ \%v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[pattern\_tester\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ]\ Some\ message\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00214}00214\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00215}00215\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00216}00216\ \textcolor{comment}{//\ Test\ padding\ +\ truncate\ flag}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00217}00217\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00218}00218\ TEST\_CASE(\textcolor{stringliteral}{"{}paddinng\_truncate"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00219}00219\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}123456"{}},\ \textcolor{stringliteral}{"{}\%6!v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==\ \textcolor{stringliteral}{"{}123456\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00220}00220\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}123456"{}},\ \textcolor{stringliteral}{"{}\%5!v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==\ \textcolor{stringliteral}{"{}12345\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00221}00221\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}123456"{}},\ \textcolor{stringliteral}{"{}\%7!v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==\ \textcolor{stringliteral}{"{}\ 123456\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00222}00222\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00223}00223\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}123456"{}},\ \textcolor{stringliteral}{"{}\%-\/6!v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==\ \textcolor{stringliteral}{"{}123456\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00224}00224\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}123456"{}},\ \textcolor{stringliteral}{"{}\%-\/5!v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==\ \textcolor{stringliteral}{"{}12345\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00225}00225\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}123456"{}},\ \textcolor{stringliteral}{"{}\%-\/7!v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==\ \textcolor{stringliteral}{"{}123456\ \(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00226}00226\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00227}00227\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}123456"{}},\ \textcolor{stringliteral}{"{}\%=6!v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==\ \textcolor{stringliteral}{"{}123456\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00228}00228\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}123456"{}},\ \textcolor{stringliteral}{"{}\%=5!v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==\ \textcolor{stringliteral}{"{}12345\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00229}00229\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}123456"{}},\ \textcolor{stringliteral}{"{}\%=7!v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==\ \textcolor{stringliteral}{"{}123456\ \(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00230}00230\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00231}00231\ \ \ \ \ REQUIRE(log\_to\_str(\textcolor{stringliteral}{"{}123456"{}},\ \textcolor{stringliteral}{"{}\%0!v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}})\ ==\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00232}00232\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00233}00233\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00234}00234\ TEST\_CASE(\textcolor{stringliteral}{"{}padding\_truncate\_funcname"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00235}00235\ \ \ \ \ spdlog::sinks::test\_sink\_st\ test\_sink;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00236}00236\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00237}00237\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *pattern\ =\ \textcolor{stringliteral}{"{}\%v\ [\%5!!]"{}};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00238}00238\ \ \ \ \ \textcolor{keyword}{auto}\ formatter\ =\ std::unique\_ptr<spdlog::formatter>(\textcolor{keyword}{new}\ spdlog::pattern\_formatter(pattern));}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00239}00239\ \ \ \ \ test\_sink.set\_formatter(std::move(formatter));}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00240}00240\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00241}00241\ \ \ \ \ spdlog::details::log\_msg\ msg1\{spdlog::source\_loc\{\textcolor{stringliteral}{"{}ignored"{}},\ 1,\ \textcolor{stringliteral}{"{}func"{}}\},\ \textcolor{stringliteral}{"{}test\_logger"{}},}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00242}00242\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ spdlog::level::info,\ \textcolor{stringliteral}{"{}message"{}}\};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00243}00243\ \ \ \ \ test\_sink.log(msg1);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00244}00244\ \ \ \ \ REQUIRE(test\_sink.lines()[0]\ ==\ \textcolor{stringliteral}{"{}message\ [\ func]"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00245}00245\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00246}00246\ \ \ \ \ spdlog::details::log\_msg\ msg2\{spdlog::source\_loc\{\textcolor{stringliteral}{"{}ignored"{}},\ 1,\ \textcolor{stringliteral}{"{}function"{}}\},\ \textcolor{stringliteral}{"{}test\_logger"{}},}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00247}00247\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ spdlog::level::info,\ \textcolor{stringliteral}{"{}message"{}}\};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00248}00248\ \ \ \ \ test\_sink.log(msg2);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00249}00249\ \ \ \ \ REQUIRE(test\_sink.lines()[1]\ ==\ \textcolor{stringliteral}{"{}message\ [funct]"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00250}00250\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00251}00251\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00252}00252\ TEST\_CASE(\textcolor{stringliteral}{"{}padding\_funcname"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00253}00253\ \ \ \ \ spdlog::sinks::test\_sink\_st\ test\_sink;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00254}00254\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00255}00255\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *pattern\ =\ \textcolor{stringliteral}{"{}\%v\ [\%10!]"{}};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00256}00256\ \ \ \ \ \textcolor{keyword}{auto}\ formatter\ =\ std::unique\_ptr<spdlog::formatter>(\textcolor{keyword}{new}\ spdlog::pattern\_formatter(pattern));}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00257}00257\ \ \ \ \ test\_sink.set\_formatter(std::move(formatter));}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00258}00258\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00259}00259\ \ \ \ \ spdlog::details::log\_msg\ msg1\{spdlog::source\_loc\{\textcolor{stringliteral}{"{}ignored"{}},\ 1,\ \textcolor{stringliteral}{"{}func"{}}\},\ \textcolor{stringliteral}{"{}test\_logger"{}},}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00260}00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ spdlog::level::info,\ \textcolor{stringliteral}{"{}message"{}}\};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00261}00261\ \ \ \ \ test\_sink.log(msg1);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00262}00262\ \ \ \ \ REQUIRE(test\_sink.lines()[0]\ ==\ \textcolor{stringliteral}{"{}message\ [\ \ \ \ \ \ func]"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00263}00263\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00264}00264\ \ \ \ \ spdlog::details::log\_msg\ msg2\{spdlog::source\_loc\{\textcolor{stringliteral}{"{}ignored"{}},\ 1,\ \textcolor{stringliteral}{"{}func567890123"{}}\},\ \textcolor{stringliteral}{"{}test\_logger"{}},}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00265}00265\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ spdlog::level::info,\ \textcolor{stringliteral}{"{}message"{}}\};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00266}00266\ \ \ \ \ test\_sink.log(msg2);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00267}00267\ \ \ \ \ REQUIRE(test\_sink.lines()[1]\ ==\ \textcolor{stringliteral}{"{}message\ [func567890123]"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00268}00268\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00269}00269\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00270}00270\ TEST\_CASE(\textcolor{stringliteral}{"{}clone-\/default-\/formatter"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00271}00271\ \ \ \ \ \textcolor{keyword}{auto}\ formatter\_1\ =\ std::make\_shared<spdlog::pattern\_formatter>();}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00272}00272\ \ \ \ \ \textcolor{keyword}{auto}\ formatter\_2\ =\ formatter\_1-\/>clone();}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00273}00273\ \ \ \ \ std::string\ logger\_name\ =\ \textcolor{stringliteral}{"{}test"{}};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00274}00274\ \ \ \ \ spdlog::details::log\_msg\ msg(logger\_name,\ spdlog::level::info,\ \textcolor{stringliteral}{"{}some\ message"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00275}00275\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00276}00276\ \ \ \ \ memory\_buf\_t\ formatted\_1;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00277}00277\ \ \ \ \ memory\_buf\_t\ formatted\_2;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00278}00278\ \ \ \ \ formatter\_1-\/>format(msg,\ formatted\_1);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00279}00279\ \ \ \ \ formatter\_2-\/>format(msg,\ formatted\_2);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00280}00280\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00281}00281\ \ \ \ \ REQUIRE(to\_string\_view(formatted\_1)\ ==\ to\_string\_view(formatted\_2));}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00282}00282\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00283}00283\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00284}00284\ TEST\_CASE(\textcolor{stringliteral}{"{}clone-\/default-\/formatter2"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00285}00285\ \ \ \ \ \textcolor{keyword}{auto}\ formatter\_1\ =\ std::make\_shared<spdlog::pattern\_formatter>(\textcolor{stringliteral}{"{}\%+"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00286}00286\ \ \ \ \ \textcolor{keyword}{auto}\ formatter\_2\ =\ formatter\_1-\/>clone();}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00287}00287\ \ \ \ \ std::string\ logger\_name\ =\ \textcolor{stringliteral}{"{}test"{}};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00288}00288\ \ \ \ \ spdlog::details::log\_msg\ msg(logger\_name,\ spdlog::level::info,\ \textcolor{stringliteral}{"{}some\ message"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00289}00289\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00290}00290\ \ \ \ \ memory\_buf\_t\ formatted\_1;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00291}00291\ \ \ \ \ memory\_buf\_t\ formatted\_2;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00292}00292\ \ \ \ \ formatter\_1-\/>format(msg,\ formatted\_1);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00293}00293\ \ \ \ \ formatter\_2-\/>format(msg,\ formatted\_2);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00294}00294\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00295}00295\ \ \ \ \ REQUIRE(to\_string\_view(formatted\_1)\ ==\ to\_string\_view(formatted\_2));}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00296}00296\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00297}00297\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00298}00298\ TEST\_CASE(\textcolor{stringliteral}{"{}clone-\/formatter"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00299}00299\ \ \ \ \ \textcolor{keyword}{auto}\ formatter\_1\ =\ std::make\_shared<spdlog::pattern\_formatter>(\textcolor{stringliteral}{"{}\%D\ \%X\ [\%]\ [\%n]\ \%v"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00300}00300\ \ \ \ \ \textcolor{keyword}{auto}\ formatter\_2\ =\ formatter\_1-\/>clone();}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00301}00301\ \ \ \ \ std::string\ logger\_name\ =\ \textcolor{stringliteral}{"{}test"{}};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00302}00302\ \ \ \ \ spdlog::details::log\_msg\ msg(logger\_name,\ spdlog::level::info,\ \textcolor{stringliteral}{"{}some\ message"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00303}00303\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00304}00304\ \ \ \ \ memory\_buf\_t\ formatted\_1;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00305}00305\ \ \ \ \ memory\_buf\_t\ formatted\_2;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00306}00306\ \ \ \ \ formatter\_1-\/>format(msg,\ formatted\_1);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00307}00307\ \ \ \ \ formatter\_2-\/>format(msg,\ formatted\_2);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00308}00308\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00309}00309\ \ \ \ \ REQUIRE(to\_string\_view(formatted\_1)\ ==\ to\_string\_view(formatted\_2));}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00310}00310\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00311}00311\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00312}00312\ TEST\_CASE(\textcolor{stringliteral}{"{}clone-\/formatter-\/2"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00313}00313\ \ \ \ \ \textcolor{keyword}{using\ }spdlog::pattern\_time\_type;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00314}00314\ \ \ \ \ \textcolor{keyword}{auto}\ formatter\_1\ =\ std::make\_shared<spdlog::pattern\_formatter>(}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00315}00315\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\%D\ \%X\ [\%]\ [\%n]\ \%v"{}},\ pattern\_time\_type::utc,\ \textcolor{stringliteral}{"{}xxxxxx\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00316}00316\ \ \ \ \ \textcolor{keyword}{auto}\ formatter\_2\ =\ formatter\_1-\/>clone();}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00317}00317\ \ \ \ \ std::string\ logger\_name\ =\ \textcolor{stringliteral}{"{}test2"{}};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00318}00318\ \ \ \ \ spdlog::details::log\_msg\ msg(logger\_name,\ spdlog::level::info,\ \textcolor{stringliteral}{"{}some\ message"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00319}00319\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00320}00320\ \ \ \ \ memory\_buf\_t\ formatted\_1;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00321}00321\ \ \ \ \ memory\_buf\_t\ formatted\_2;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00322}00322\ \ \ \ \ formatter\_1-\/>format(msg,\ formatted\_1);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00323}00323\ \ \ \ \ formatter\_2-\/>format(msg,\ formatted\_2);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00324}00324\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00325}00325\ \ \ \ \ REQUIRE(to\_string\_view(formatted\_1)\ ==\ to\_string\_view(formatted\_2));}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00326}00326\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00327}00327\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00328}00328\ \textcolor{keyword}{class\ }custom\_test\_flag\ :\ \textcolor{keyword}{public}\ spdlog::custom\_flag\_formatter\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00329}00329\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00330}00330\ \ \ \ \ \textcolor{keyword}{explicit}\ custom\_test\_flag(std::string\ txt)}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00331}00331\ \ \ \ \ \ \ \ \ :\ some\_txt\{std::move(txt)\}\ \{\}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00332}00332\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00333}00333\ \ \ \ \ \textcolor{keywordtype}{void}\ format(\textcolor{keyword}{const}\ spdlog::details::log\_msg\ \&,}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00334}00334\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::tm\ \&tm,}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00335}00335\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ spdlog::memory\_buf\_t\ \&dest)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00336}00336\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (some\_txt\ ==\ \textcolor{stringliteral}{"{}throw\_me"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00337}00337\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ spdlog::spdlog\_ex(\textcolor{stringliteral}{"{}custom\_flag\_exception\_test"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00338}00338\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (some\_txt\ ==\ \textcolor{stringliteral}{"{}time"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00339}00339\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ formatted\ =\ spdlog::fmt\_lib::format(\textcolor{stringliteral}{"{}\{:d\}:\{:02d\}\{:s\}"{}},\ tm.tm\_hour\ \%\ 12,\ tm.tm\_min,}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00340}00340\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tm.tm\_hour\ /\ 12\ ?\ \textcolor{stringliteral}{"{}PM"{}}\ :\ \textcolor{stringliteral}{"{}AM"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00341}00341\ \ \ \ \ \ \ \ \ \ \ \ \ dest.append(formatted.data(),\ formatted.data()\ +\ formatted.size());}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00342}00342\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00343}00343\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00344}00344\ \ \ \ \ \ \ \ \ some\_txt\ =\ std::string(padinfo\_.width\_,\ \textcolor{charliteral}{'\ '})\ +\ some\_txt;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00345}00345\ \ \ \ \ \ \ \ \ dest.append(some\_txt.data(),\ some\_txt.data()\ +\ some\_txt.size());}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00346}00346\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00347}00347\ \ \ \ \ spdlog::details::padding\_info\ get\_padding\_info()\ \{\ \textcolor{keywordflow}{return}\ padinfo\_;\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00348}00348\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00349}00349\ \ \ \ \ std::string\ some\_txt;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00350}00350\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00351}00351\ \ \ \ \ std::unique\_ptr<custom\_flag\_formatter>\ clone()\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00352}00352\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ spdlog::details::make\_unique<custom\_test\_flag>(some\_txt);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00353}00353\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00354}00354\ \};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00355}00355\ \textcolor{comment}{//\ test\ clone\ with\ custom\ flag\ formatters}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00356}00356\ TEST\_CASE(\textcolor{stringliteral}{"{}clone-\/custom\_formatter"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00357}00357\ \ \ \ \ \textcolor{keyword}{auto}\ formatter\_1\ =\ std::make\_shared<spdlog::pattern\_formatter>();}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00358}00358\ \ \ \ \ formatter\_1-\/>add\_flag<custom\_test\_flag>(\textcolor{charliteral}{'t'},\ \textcolor{stringliteral}{"{}custom\_output"{}}).set\_pattern(\textcolor{stringliteral}{"{}[\%n]\ [\%t]\ \%v"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00359}00359\ \ \ \ \ \textcolor{keyword}{auto}\ formatter\_2\ =\ formatter\_1-\/>clone();}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00360}00360\ \ \ \ \ std::string\ logger\_name\ =\ \textcolor{stringliteral}{"{}logger-\/name"{}};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00361}00361\ \ \ \ \ spdlog::details::log\_msg\ msg(logger\_name,\ spdlog::level::info,\ \textcolor{stringliteral}{"{}some\ message"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00362}00362\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00363}00363\ \ \ \ \ memory\_buf\_t\ formatted\_1;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00364}00364\ \ \ \ \ memory\_buf\_t\ formatted\_2;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00365}00365\ \ \ \ \ formatter\_1-\/>format(msg,\ formatted\_1);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00366}00366\ \ \ \ \ formatter\_2-\/>format(msg,\ formatted\_2);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00367}00367\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00368}00368\ \ \ \ \ \textcolor{keyword}{auto}\ expected\ =\ spdlog::fmt\_lib::format(\textcolor{stringliteral}{"{}[logger-\/name]\ [custom\_output]\ some\ message\{\}"{}},}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00369}00369\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ spdlog::details::os::default\_eol);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00370}00370\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00371}00371\ \ \ \ \ REQUIRE(to\_string\_view(formatted\_1)\ ==\ expected);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00372}00372\ \ \ \ \ REQUIRE(to\_string\_view(formatted\_2)\ ==\ expected);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00373}00373\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00374}00374\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00375}00375\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00376}00376\ \textcolor{comment}{//\ Test\ source\ location\ formatting}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00377}00377\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00378}00378\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00379}00379\ \textcolor{preprocessor}{\#ifdef\ \_WIN32}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00380}00380\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\textcolor{keyword}{const}\ test\_path\ =\ \textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)a\(\backslash\)\(\backslash\)b\(\backslash\)\(\backslash\)c/myfile.cpp"{}};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00381}00381\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00382}00382\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\textcolor{keyword}{const}\ test\_path\ =\ \textcolor{stringliteral}{"{}/a/b//myfile.cpp"{}};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00383}00383\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00384}00384\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00385}00385\ TEST\_CASE(\textcolor{stringliteral}{"{}short\ filename\ formatter-\/1"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00386}00386\ \ \ \ \ spdlog::pattern\_formatter\ formatter(\textcolor{stringliteral}{"{}\%s"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00387}00387\ \ \ \ \ memory\_buf\_t\ formatted;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00388}00388\ \ \ \ \ std::string\ logger\_name\ =\ \textcolor{stringliteral}{"{}logger-\/name"{}};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00389}00389\ \ \ \ \ spdlog::source\_loc\ source\_loc\{test\_path,\ 123,\ \textcolor{stringliteral}{"{}some\_func()"{}}\};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00390}00390\ \ \ \ \ spdlog::details::log\_msg\ msg(source\_loc,\ \textcolor{stringliteral}{"{}logger-\/name"{}},\ spdlog::level::info,\ \textcolor{stringliteral}{"{}Hello"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00391}00391\ \ \ \ \ formatter.format(msg,\ formatted);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00392}00392\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00393}00393\ \ \ \ \ REQUIRE(to\_string\_view(formatted)\ ==\ \textcolor{stringliteral}{"{}myfile.cpp"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00394}00394\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00395}00395\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00396}00396\ TEST\_CASE(\textcolor{stringliteral}{"{}short\ filename\ formatter-\/2"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00397}00397\ \ \ \ \ spdlog::pattern\_formatter\ formatter(\textcolor{stringliteral}{"{}\%s:\%\#"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00398}00398\ \ \ \ \ memory\_buf\_t\ formatted;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00399}00399\ \ \ \ \ std::string\ logger\_name\ =\ \textcolor{stringliteral}{"{}logger-\/name"{}};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00400}00400\ \ \ \ \ spdlog::source\_loc\ source\_loc\{\textcolor{stringliteral}{"{}myfile.cpp"{}},\ 123,\ \textcolor{stringliteral}{"{}some\_func()"{}}\};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00401}00401\ \ \ \ \ spdlog::details::log\_msg\ msg(source\_loc,\ \textcolor{stringliteral}{"{}logger-\/name"{}},\ spdlog::level::info,\ \textcolor{stringliteral}{"{}Hello"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00402}00402\ \ \ \ \ formatter.format(msg,\ formatted);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00403}00403\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00404}00404\ \ \ \ \ REQUIRE(to\_string\_view(formatted)\ ==\ \textcolor{stringliteral}{"{}myfile.cpp:123"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00405}00405\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00406}00406\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00407}00407\ TEST\_CASE(\textcolor{stringliteral}{"{}short\ filename\ formatter-\/3"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00408}00408\ \ \ \ \ spdlog::pattern\_formatter\ formatter(\textcolor{stringliteral}{"{}\%s\ \%v"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00409}00409\ \ \ \ \ memory\_buf\_t\ formatted;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00410}00410\ \ \ \ \ std::string\ logger\_name\ =\ \textcolor{stringliteral}{"{}logger-\/name"{}};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00411}00411\ \ \ \ \ spdlog::source\_loc\ source\_loc\{\textcolor{stringliteral}{"{}"{}},\ 123,\ \textcolor{stringliteral}{"{}some\_func()"{}}\};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00412}00412\ \ \ \ \ spdlog::details::log\_msg\ msg(source\_loc,\ \textcolor{stringliteral}{"{}logger-\/name"{}},\ spdlog::level::info,\ \textcolor{stringliteral}{"{}Hello"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00413}00413\ \ \ \ \ formatter.format(msg,\ formatted);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00414}00414\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00415}00415\ \ \ \ \ REQUIRE(to\_string\_view(formatted)\ ==\ \textcolor{stringliteral}{"{}\ Hello"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00416}00416\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00417}00417\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00418}00418\ TEST\_CASE(\textcolor{stringliteral}{"{}full\ filename\ formatter"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00419}00419\ \ \ \ \ spdlog::pattern\_formatter\ formatter(\textcolor{stringliteral}{"{}\%g"{}},\ spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00420}00420\ \ \ \ \ memory\_buf\_t\ formatted;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00421}00421\ \ \ \ \ std::string\ logger\_name\ =\ \textcolor{stringliteral}{"{}logger-\/name"{}};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00422}00422\ \ \ \ \ spdlog::source\_loc\ source\_loc\{test\_path,\ 123,\ \textcolor{stringliteral}{"{}some\_func()"{}}\};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00423}00423\ \ \ \ \ spdlog::details::log\_msg\ msg(source\_loc,\ \textcolor{stringliteral}{"{}logger-\/name"{}},\ spdlog::level::info,\ \textcolor{stringliteral}{"{}Hello"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00424}00424\ \ \ \ \ formatter.format(msg,\ formatted);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00425}00425\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00426}00426\ \ \ \ \ REQUIRE(to\_string\_view(formatted)\ ==\ test\_path);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00427}00427\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00428}00428\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00429}00429\ TEST\_CASE(\textcolor{stringliteral}{"{}custom\ flags"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00430}00430\ \ \ \ \ \textcolor{keyword}{auto}\ formatter\ =\ std::make\_shared<spdlog::pattern\_formatter>();}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00431}00431\ \ \ \ \ formatter-\/>add\_flag<custom\_test\_flag>(\textcolor{charliteral}{'t'},\ \textcolor{stringliteral}{"{}custom1"{}})}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00432}00432\ \ \ \ \ \ \ \ \ .add\_flag<custom\_test\_flag>(\textcolor{charliteral}{'u'},\ \textcolor{stringliteral}{"{}custom2"{}})}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00433}00433\ \ \ \ \ \ \ \ \ .set\_pattern(\textcolor{stringliteral}{"{}[\%n]\ [\%t]\ [\%u]\ \%v"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00434}00434\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00435}00435\ \ \ \ \ memory\_buf\_t\ formatted;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00436}00436\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00437}00437\ \ \ \ \ spdlog::details::log\_msg\ msg(spdlog::source\_loc\{\},\ \textcolor{stringliteral}{"{}logger-\/name"{}},\ spdlog::level::info,}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00438}00438\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}some\ message"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00439}00439\ \ \ \ \ formatter-\/>format(msg,\ formatted);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00440}00440\ \ \ \ \ \textcolor{keyword}{auto}\ expected\ =\ spdlog::fmt\_lib::format(\textcolor{stringliteral}{"{}[logger-\/name]\ [custom1]\ [custom2]\ some\ message\{\}"{}},}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00441}00441\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ spdlog::details::os::default\_eol);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00442}00442\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00443}00443\ \ \ \ \ REQUIRE(to\_string\_view(formatted)\ ==\ expected);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00444}00444\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00445}00445\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00446}00446\ TEST\_CASE(\textcolor{stringliteral}{"{}custom\ flags-\/padding"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00447}00447\ \ \ \ \ \textcolor{keyword}{auto}\ formatter\ =\ std::make\_shared<spdlog::pattern\_formatter>();}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00448}00448\ \ \ \ \ formatter-\/>add\_flag<custom\_test\_flag>(\textcolor{charliteral}{'t'},\ \textcolor{stringliteral}{"{}custom1"{}})}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00449}00449\ \ \ \ \ \ \ \ \ .add\_flag<custom\_test\_flag>(\textcolor{charliteral}{'u'},\ \textcolor{stringliteral}{"{}custom2"{}})}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00450}00450\ \ \ \ \ \ \ \ \ .set\_pattern(\textcolor{stringliteral}{"{}[\%n]\ [\%t]\ [\%5u]\ \%v"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00451}00451\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00452}00452\ \ \ \ \ memory\_buf\_t\ formatted;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00453}00453\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00454}00454\ \ \ \ \ spdlog::details::log\_msg\ msg(spdlog::source\_loc\{\},\ \textcolor{stringliteral}{"{}logger-\/name"{}},\ spdlog::level::info,}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00455}00455\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}some\ message"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00456}00456\ \ \ \ \ formatter-\/>format(msg,\ formatted);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00457}00457\ \ \ \ \ \textcolor{keyword}{auto}\ expected\ =\ spdlog::fmt\_lib::format(\textcolor{stringliteral}{"{}[logger-\/name]\ [custom1]\ [\ \ \ \ \ custom2]\ some\ message\{\}"{}},}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00458}00458\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ spdlog::details::os::default\_eol);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00459}00459\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00460}00460\ \ \ \ \ REQUIRE(to\_string\_view(formatted)\ ==\ expected);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00461}00461\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00462}00462\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00463}00463\ TEST\_CASE(\textcolor{stringliteral}{"{}custom\ flags-\/exception"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00464}00464\ \ \ \ \ \textcolor{keyword}{auto}\ formatter\ =\ std::make\_shared<spdlog::pattern\_formatter>();}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00465}00465\ \ \ \ \ formatter-\/>add\_flag<custom\_test\_flag>(\textcolor{charliteral}{'t'},\ \textcolor{stringliteral}{"{}throw\_me"{}})}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00466}00466\ \ \ \ \ \ \ \ \ .add\_flag<custom\_test\_flag>(\textcolor{charliteral}{'u'},\ \textcolor{stringliteral}{"{}custom2"{}})}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00467}00467\ \ \ \ \ \ \ \ \ .set\_pattern(\textcolor{stringliteral}{"{}[\%n]\ [\%t]\ [\%u]\ \%v"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00468}00468\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00469}00469\ \ \ \ \ memory\_buf\_t\ formatted;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00470}00470\ \ \ \ \ spdlog::details::log\_msg\ msg(spdlog::source\_loc\{\},\ \textcolor{stringliteral}{"{}logger-\/name"{}},\ spdlog::level::info,}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00471}00471\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}some\ message"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00472}00472\ \ \ \ \ CHECK\_THROWS\_AS(formatter-\/>format(msg,\ formatted),\ spdlog::spdlog\_ex);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00473}00473\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00474}00474\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00475}00475\ TEST\_CASE(\textcolor{stringliteral}{"{}override\ need\_localtime"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00476}00476\ \ \ \ \ \textcolor{keyword}{auto}\ formatter\ =}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00477}00477\ \ \ \ \ \ \ \ \ std::make\_shared<spdlog::pattern\_formatter>(spdlog::pattern\_time\_type::local,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00478}00478\ \ \ \ \ formatter-\/>add\_flag<custom\_test\_flag>(\textcolor{charliteral}{'t'},\ \textcolor{stringliteral}{"{}time"{}}).set\_pattern(\textcolor{stringliteral}{"{}\%t>\ \%v"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00479}00479\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00480}00480\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00481}00481\ \ \ \ \ \ \ \ \ memory\_buf\_t\ formatted;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00482}00482\ \ \ \ \ \ \ \ \ spdlog::details::log\_msg\ msg(spdlog::source\_loc\{\},\ \textcolor{stringliteral}{"{}logger-\/name"{}},\ spdlog::level::info,}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00483}00483\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}some\ message"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00484}00484\ \ \ \ \ \ \ \ \ formatter-\/>format(msg,\ formatted);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00485}00485\ \ \ \ \ \ \ \ \ REQUIRE(to\_string\_view(formatted)\ ==\ \textcolor{stringliteral}{"{}0:00AM>\ some\ message\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00486}00486\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00487}00487\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00488}00488\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00489}00489\ \ \ \ \ \ \ \ \ formatter-\/>need\_localtime();}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00490}00490\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00491}00491\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ now\_tm\ =\ spdlog::details::os::localtime();}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00492}00492\ \ \ \ \ \ \ \ \ std::stringstream\ oss;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00493}00493\ \ \ \ \ \ \ \ \ oss\ <<\ (now\_tm.tm\_hour\ \%\ 12)\ <<\ \textcolor{stringliteral}{"{}:"{}}\ <<\ std::setfill(\textcolor{charliteral}{'0'})\ <<\ std::setw(2)\ <<\ now\_tm.tm\_min}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00494}00494\ \ \ \ \ \ \ \ \ \ \ \ \ <<\ (now\_tm.tm\_hour\ /\ 12\ ?\ \textcolor{stringliteral}{"{}PM"{}}\ :\ \textcolor{stringliteral}{"{}AM"{}})\ <<\ \textcolor{stringliteral}{"{}>\ some\ message\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00495}00495\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00496}00496\ \ \ \ \ \ \ \ \ memory\_buf\_t\ formatted;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00497}00497\ \ \ \ \ \ \ \ \ spdlog::details::log\_msg\ msg(spdlog::source\_loc\{\},\ \textcolor{stringliteral}{"{}logger-\/name"{}},\ spdlog::level::info,}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00498}00498\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}some\ message"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00499}00499\ \ \ \ \ \ \ \ \ formatter-\/>format(msg,\ formatted);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00500}00500\ \ \ \ \ \ \ \ \ REQUIRE(to\_string\_view(formatted)\ ==\ oss.str());}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00501}00501\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00502}00502\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00503}00503\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00504}00504\ TEST\_CASE(\textcolor{stringliteral}{"{}mdc\ formatter\ test-\/1"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00505}00505\ \ \ \ \ spdlog::mdc::put(\textcolor{stringliteral}{"{}mdc\_key\_1"{}},\ \textcolor{stringliteral}{"{}mdc\_value\_1"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00506}00506\ \ \ \ \ spdlog::mdc::put(\textcolor{stringliteral}{"{}mdc\_key\_2"{}},\ \textcolor{stringliteral}{"{}mdc\_value\_2"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00507}00507\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00508}00508\ \ \ \ \ \textcolor{keyword}{auto}\ formatter\ =\ std::make\_shared<spdlog::pattern\_formatter>();}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00509}00509\ \ \ \ \ formatter-\/>set\_pattern(\textcolor{stringliteral}{"{}[\%n]\ [\%l]\ [\%\&]\ \%v"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00510}00510\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00511}00511\ \ \ \ \ memory\_buf\_t\ formatted;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00512}00512\ \ \ \ \ spdlog::details::log\_msg\ msg(spdlog::source\_loc\{\},\ \textcolor{stringliteral}{"{}logger-\/name"{}},\ spdlog::level::info,}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00513}00513\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}some\ message"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00514}00514\ \ \ \ \ formatter-\/>format(msg,\ formatted);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00515}00515\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00516}00516\ \ \ \ \ \textcolor{keyword}{auto}\ expected\ =\ spdlog::fmt\_lib::format(}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00517}00517\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[logger-\/name]\ [info]\ [mdc\_key\_1:mdc\_value\_1\ mdc\_key\_2:mdc\_value\_2]\ some\ message\{\}"{}},}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00518}00518\ \ \ \ \ \ \ \ \ spdlog::details::os::default\_eol);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00519}00519\ \ \ \ \ REQUIRE(to\_string\_view(formatted)\ ==\ expected);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00520}00520\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00521}00521\ \ \ \ \ SECTION(\textcolor{stringliteral}{"{}Tear\ down"{}})\ \{\ spdlog::mdc::clear();\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00522}00522\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00523}00523\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00524}00524\ TEST\_CASE(\textcolor{stringliteral}{"{}mdc\ formatter\ value\ update"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00525}00525\ \ \ \ \ spdlog::mdc::put(\textcolor{stringliteral}{"{}mdc\_key\_1"{}},\ \textcolor{stringliteral}{"{}mdc\_value\_1"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00526}00526\ \ \ \ \ spdlog::mdc::put(\textcolor{stringliteral}{"{}mdc\_key\_2"{}},\ \textcolor{stringliteral}{"{}mdc\_value\_2"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00527}00527\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00528}00528\ \ \ \ \ \textcolor{keyword}{auto}\ formatter\ =\ std::make\_shared<spdlog::pattern\_formatter>();}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00529}00529\ \ \ \ \ formatter-\/>set\_pattern(\textcolor{stringliteral}{"{}[\%n]\ [\%l]\ [\%\&]\ \%v"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00530}00530\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00531}00531\ \ \ \ \ memory\_buf\_t\ formatted\_1;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00532}00532\ \ \ \ \ spdlog::details::log\_msg\ msg(spdlog::source\_loc\{\},\ \textcolor{stringliteral}{"{}logger-\/name"{}},\ spdlog::level::info,}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00533}00533\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}some\ message"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00534}00534\ \ \ \ \ formatter-\/>format(msg,\ formatted\_1);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00535}00535\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00536}00536\ \ \ \ \ \textcolor{keyword}{auto}\ expected\ =\ spdlog::fmt\_lib::format(}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00537}00537\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[logger-\/name]\ [info]\ [mdc\_key\_1:mdc\_value\_1\ mdc\_key\_2:mdc\_value\_2]\ some\ message\{\}"{}},}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00538}00538\ \ \ \ \ \ \ \ \ spdlog::details::os::default\_eol);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00539}00539\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00540}00540\ \ \ \ \ REQUIRE(to\_string\_view(formatted\_1)\ ==\ expected);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00541}00541\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00542}00542\ \ \ \ \ spdlog::mdc::put(\textcolor{stringliteral}{"{}mdc\_key\_1"{}},\ \textcolor{stringliteral}{"{}new\_mdc\_value\_1"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00543}00543\ \ \ \ \ memory\_buf\_t\ formatted\_2;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00544}00544\ \ \ \ \ formatter-\/>format(msg,\ formatted\_2);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00545}00545\ \ \ \ \ expected\ =\ spdlog::fmt\_lib::format(}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00546}00546\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[logger-\/name]\ [info]\ [mdc\_key\_1:new\_mdc\_value\_1\ mdc\_key\_2:mdc\_value\_2]\ some\ message\{\}"{}},}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00547}00547\ \ \ \ \ \ \ \ \ spdlog::details::os::default\_eol);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00548}00548\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00549}00549\ \ \ \ \ REQUIRE(to\_string\_view(formatted\_2)\ ==\ expected);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00550}00550\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00551}00551\ \ \ \ \ SECTION(\textcolor{stringliteral}{"{}Tear\ down"{}})\ \{\ spdlog::mdc::clear();\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00552}00552\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00553}00553\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00554}00554\ TEST\_CASE(\textcolor{stringliteral}{"{}mdc\ different\ threads"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00555}00555\ \ \ \ \ \textcolor{keyword}{auto}\ formatter\ =\ std::make\_shared<spdlog::pattern\_formatter>();}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00556}00556\ \ \ \ \ formatter-\/>set\_pattern(\textcolor{stringliteral}{"{}[\%n]\ [\%l]\ [\%\&]\ \%v"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00557}00557\ \ \ \ \ spdlog::details::log\_msg\ msg(spdlog::source\_loc\{\},\ \textcolor{stringliteral}{"{}logger-\/name"{}},\ spdlog::level::info,}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00558}00558\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}some\ message"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00559}00559\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00560}00560\ \ \ \ \ memory\_buf\_t\ formatted\_2;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00561}00561\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00562}00562\ \ \ \ \ \textcolor{keyword}{auto}\ lambda\_1\ =\ [formatter,\ msg]()\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00563}00563\ \ \ \ \ \ \ \ \ spdlog::mdc::put(\textcolor{stringliteral}{"{}mdc\_key"{}},\ \textcolor{stringliteral}{"{}thread\_1\_id"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00564}00564\ \ \ \ \ \ \ \ \ memory\_buf\_t\ formatted;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00565}00565\ \ \ \ \ \ \ \ \ formatter-\/>format(msg,\ formatted);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00566}00566\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00567}00567\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ expected\ =}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00568}00568\ \ \ \ \ \ \ \ \ \ \ \ \ spdlog::fmt\_lib::format(\textcolor{stringliteral}{"{}[logger-\/name]\ [info]\ [mdc\_key:thread\_1\_id]\ some\ message\{\}"{}},}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00569}00569\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ spdlog::details::os::default\_eol);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00570}00570\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00571}00571\ \ \ \ \ \ \ \ \ REQUIRE(to\_string\_view(formatted)\ ==\ expected);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00572}00572\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00573}00573\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00574}00574\ \ \ \ \ \textcolor{keyword}{auto}\ lambda\_2\ =\ [formatter,\ msg]()\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00575}00575\ \ \ \ \ \ \ \ \ spdlog::mdc::put(\textcolor{stringliteral}{"{}mdc\_key"{}},\ \textcolor{stringliteral}{"{}thread\_2\_id"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00576}00576\ \ \ \ \ \ \ \ \ memory\_buf\_t\ formatted;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00577}00577\ \ \ \ \ \ \ \ \ formatter-\/>format(msg,\ formatted);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00578}00578\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00579}00579\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ expected\ =}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00580}00580\ \ \ \ \ \ \ \ \ \ \ \ \ spdlog::fmt\_lib::format(\textcolor{stringliteral}{"{}[logger-\/name]\ [info]\ [mdc\_key:thread\_2\_id]\ some\ message\{\}"{}},}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00581}00581\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ spdlog::details::os::default\_eol);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00582}00582\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00583}00583\ \ \ \ \ \ \ \ \ REQUIRE(to\_string\_view(formatted)\ ==\ expected);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00584}00584\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00585}00585\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00586}00586\ \ \ \ \ std::thread\ thread\_1(lambda\_1);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00587}00587\ \ \ \ \ std::thread\ thread\_2(lambda\_2);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00588}00588\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00589}00589\ \ \ \ \ thread\_1.join();}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00590}00590\ \ \ \ \ thread\_2.join();}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00591}00591\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00592}00592\ \ \ \ \ SECTION(\textcolor{stringliteral}{"{}Tear\ down"{}})\ \{\ spdlog::mdc::clear();\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00593}00593\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00594}00594\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00595}00595\ TEST\_CASE(\textcolor{stringliteral}{"{}mdc\ remove\ key"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00596}00596\ \ \ \ \ spdlog::mdc::put(\textcolor{stringliteral}{"{}mdc\_key\_1"{}},\ \textcolor{stringliteral}{"{}mdc\_value\_1"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00597}00597\ \ \ \ \ spdlog::mdc::put(\textcolor{stringliteral}{"{}mdc\_key\_2"{}},\ \textcolor{stringliteral}{"{}mdc\_value\_2"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00598}00598\ \ \ \ \ spdlog::mdc::remove(\textcolor{stringliteral}{"{}mdc\_key\_1"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00599}00599\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00600}00600\ \ \ \ \ \textcolor{keyword}{auto}\ formatter\ =\ std::make\_shared<spdlog::pattern\_formatter>();}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00601}00601\ \ \ \ \ formatter-\/>set\_pattern(\textcolor{stringliteral}{"{}[\%n]\ [\%l]\ [\%\&]\ \%v"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00602}00602\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00603}00603\ \ \ \ \ memory\_buf\_t\ formatted;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00604}00604\ \ \ \ \ spdlog::details::log\_msg\ msg(spdlog::source\_loc\{\},\ \textcolor{stringliteral}{"{}logger-\/name"{}},\ spdlog::level::info,}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00605}00605\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}some\ message"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00606}00606\ \ \ \ \ formatter-\/>format(msg,\ formatted);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00607}00607\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00608}00608\ \ \ \ \ \textcolor{keyword}{auto}\ expected\ =}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00609}00609\ \ \ \ \ \ \ \ \ spdlog::fmt\_lib::format(\textcolor{stringliteral}{"{}[logger-\/name]\ [info]\ [mdc\_key\_2:mdc\_value\_2]\ some\ message\{\}"{}},}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00610}00610\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ spdlog::details::os::default\_eol);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00611}00611\ \ \ \ \ REQUIRE(to\_string\_view(formatted)\ ==\ expected);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00612}00612\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00613}00613\ \ \ \ \ SECTION(\textcolor{stringliteral}{"{}Tear\ down"{}})\ \{\ spdlog::mdc::clear();\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00614}00614\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00615}00615\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00616}00616\ TEST\_CASE(\textcolor{stringliteral}{"{}mdc\ empty"{}},\ \textcolor{stringliteral}{"{}[pattern\_formatter]"{}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00617}00617\ \ \ \ \ \textcolor{keyword}{auto}\ formatter\ =\ std::make\_shared<spdlog::pattern\_formatter>();}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00618}00618\ \ \ \ \ formatter-\/>set\_pattern(\textcolor{stringliteral}{"{}[\%n]\ [\%l]\ [\%\&]\ \%v"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00619}00619\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00620}00620\ \ \ \ \ memory\_buf\_t\ formatted;}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00621}00621\ \ \ \ \ spdlog::details::log\_msg\ msg(spdlog::source\_loc\{\},\ \textcolor{stringliteral}{"{}logger-\/name"{}},\ spdlog::level::info,}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00622}00622\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}some\ message"{}});}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00623}00623\ \ \ \ \ formatter-\/>format(msg,\ formatted);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00624}00624\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00625}00625\ \ \ \ \ \textcolor{keyword}{auto}\ expected\ =\ spdlog::fmt\_lib::format(\textcolor{stringliteral}{"{}[logger-\/name]\ [info]\ []\ some\ message\{\}"{}},}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00626}00626\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ spdlog::details::os::default\_eol);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00627}00627\ \ \ \ \ REQUIRE(to\_string\_view(formatted)\ ==\ expected);}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00628}00628\ }
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00629}00629\ \ \ \ \ SECTION(\textcolor{stringliteral}{"{}Tear\ down"{}})\ \{\ spdlog::mdc::clear();\ \}}
+\DoxyCodeLine{\Hypertarget{test__pattern__formatter_8cpp_source_l00630}00630\ \}}
+
+\end{DoxyCode}

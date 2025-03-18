@@ -1,0 +1,281 @@
+\doxysubsection{ftwinfnt.\+h}
+\hypertarget{ftwinfnt_8h_source}{}\label{ftwinfnt_8h_source}\index{ftwinfnt.h@{ftwinfnt.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00001}00001\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00002}00002\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00003}00003\ \textcolor{comment}{/*\ \ ftwinfnt.h\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00004}00004\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00005}00005\ \textcolor{comment}{/*\ \ \ \ FreeType\ API\ for\ accessing\ Windows\ fnt-\/specific\ data.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00006}00006\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00007}00007\ \textcolor{comment}{/*\ \ Copyright\ 2003,\ 2004,\ 2008\ by\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00008}00008\ \textcolor{comment}{/*\ \ David\ Turner,\ Robert\ Wilhelm,\ and\ Werner\ Lemberg.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00009}00009\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00010}00010\ \textcolor{comment}{/*\ \ This\ file\ is\ part\ of\ the\ FreeType\ project,\ and\ may\ only\ be\ used,\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00011}00011\ \textcolor{comment}{/*\ \ modified,\ and\ distributed\ under\ the\ terms\ of\ the\ FreeType\ project\ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00012}00012\ \textcolor{comment}{/*\ \ license,\ LICENSE.TXT.\ \ By\ continuing\ to\ use,\ modify,\ or\ distribute\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00013}00013\ \textcolor{comment}{/*\ \ this\ file\ you\ indicate\ that\ you\ have\ read\ the\ license\ and\ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00014}00014\ \textcolor{comment}{/*\ \ understand\ and\ accept\ it\ fully.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00015}00015\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00016}00016\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00019}00019\ \textcolor{preprocessor}{\#ifndef\ \_\_FTWINFNT\_H\_\_}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00020}00020\ \textcolor{preprocessor}{\#define\ \_\_FTWINFNT\_H\_\_}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00022}00022\ \textcolor{preprocessor}{\#include\ <ft2build.h>}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00023}00023\ \textcolor{preprocessor}{\#include\ FT\_FREETYPE\_H}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00025}00025\ \textcolor{preprocessor}{\#ifdef\ FREETYPE\_H}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00026}00026\ \textcolor{preprocessor}{\#error\ "{}freetype.h\ of\ FreeType\ 1\ has\ been\ loaded!"{}}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00027}00027\ \textcolor{preprocessor}{\#error\ "{}Please\ fix\ the\ directory\ search\ order\ for\ header\ files"{}}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00028}00028\ \textcolor{preprocessor}{\#error\ "{}so\ that\ freetype.h\ of\ FreeType\ 2\ is\ found\ first."{}}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00029}00029\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00032}00032\ FT\_BEGIN\_HEADER}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00035}00035\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00036}00036\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00037}00037\ \ \ \textcolor{comment}{/*\ <Section>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00038}00038\ \ \ \textcolor{comment}{/*\ \ \ \ winfnt\_fonts\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00039}00039\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00040}00040\ \ \ \textcolor{comment}{/*\ <Title>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00041}00041\ \ \ \textcolor{comment}{/*\ \ \ \ Window\ FNT\ Files\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00042}00042\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00043}00043\ \ \ \textcolor{comment}{/*\ <Abstract>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00044}00044\ \ \ \textcolor{comment}{/*\ \ \ \ Windows\ FNT\ specific\ API.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00045}00045\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00046}00046\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00047}00047\ \ \ \textcolor{comment}{/*\ \ \ \ This\ section\ contains\ the\ declaration\ of\ Windows\ FNT\ specific\ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00048}00048\ \ \ \textcolor{comment}{/*\ \ \ \ functions.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00049}00049\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00050}00050\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00053}00053\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00054}00054\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00055}00055\ \textcolor{comment}{\ \ \ *\ @enum:}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00056}00056\ \textcolor{comment}{\ \ \ *\ \ \ FT\_WinFNT\_ID\_XXX}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00057}00057\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00058}00058\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00059}00059\ \textcolor{comment}{\ \ \ *\ \ \ A\ list\ of\ valid\ values\ for\ the\ \`{}charset'\ byte\ in}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00060}00060\ \textcolor{comment}{\ \ \ *\ \ \ @FT\_WinFNT\_HeaderRec.\ \ Exact\ mapping\ tables\ for\ the\ various\ cpXXXX}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00061}00061\ \textcolor{comment}{\ \ \ *\ \ \ encodings\ (except\ for\ cp1361)\ can\ be\ found\ at}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00062}00062\ \textcolor{comment}{\ \ \ *\ \ \ ftp://ftp.unicode.org/public\ in\ the\ MAPPINGS/VENDORS/MICSFT/WINDOWS}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00063}00063\ \textcolor{comment}{\ \ \ *\ \ \ subdirectory.\ \ cp1361\ is\ roughly\ a\ superset\ of}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00064}00064\ \textcolor{comment}{\ \ \ *\ \ \ MAPPINGS/OBSOLETE/EASTASIA/KSC/JOHAB.TXT.}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00065}00065\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00066}00066\ \textcolor{comment}{\ \ \ *\ @values:}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00067}00067\ \textcolor{comment}{\ \ \ *\ \ \ FT\_WinFNT\_ID\_DEFAULT\ ::}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00068}00068\ \textcolor{comment}{\ \ \ *\ \ \ \ \ This\ is\ used\ for\ font\ enumeration\ and\ font\ creation\ as\ a}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00069}00069\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \`{}don't\ care'\ value.\ \ Valid\ font\ files\ don't\ contain\ this\ value.}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00070}00070\ \textcolor{comment}{\ \ \ *\ \ \ \ \ When\ querying\ for\ information\ about\ the\ character\ set\ of\ the\ font}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00071}00071\ \textcolor{comment}{\ \ \ *\ \ \ \ \ that\ is\ currently\ selected\ into\ a\ specified\ device\ context,\ this}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00072}00072\ \textcolor{comment}{\ \ \ *\ \ \ \ \ return\ value\ (of\ the\ related\ Windows\ API)\ simply\ denotes\ failure.}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00073}00073\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00074}00074\ \textcolor{comment}{\ \ \ *\ \ \ FT\_WinFNT\_ID\_SYMBOL\ ::}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00075}00075\ \textcolor{comment}{\ \ \ *\ \ \ \ \ There\ is\ no\ known\ mapping\ table\ available.}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00076}00076\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00077}00077\ \textcolor{comment}{\ \ \ *\ \ \ FT\_WinFNT\_ID\_MAC\ ::}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00078}00078\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Mac\ Roman\ encoding.}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00079}00079\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00080}00080\ \textcolor{comment}{\ \ \ *\ \ \ FT\_WinFNT\_ID\_OEM\ ::}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00081}00081\ \textcolor{comment}{\ \ \ *\ \ \ \ \ From\ Michael\ Pöttgen\ <michael@poettgen.de>:}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00082}00082\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00083}00083\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ The\ \`{}Windows\ Font\ Mapping'\ article\ says\ that\ FT\_WinFNT\_ID\_OEM}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00084}00084\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ is\ used\ for\ the\ charset\ of\ vector\ fonts,\ like\ \`{}modern.fon',}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00085}00085\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ \`{}roman.fon',\ and\ \`{}script.fon'\ on\ Windows.}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00086}00086\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00087}00087\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ The\ \`{}CreateFont'\ documentation\ says:\ The\ FT\_WinFNT\_ID\_OEM\ value}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00088}00088\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ specifies\ a\ character\ set\ that\ is\ operating-\/system\ dependent.}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00089}00089\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00090}00090\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ The\ \`{}IFIMETRICS'\ documentation\ from\ the\ \`{}Windows\ Driver}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00091}00091\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ Development\ Kit'\ says:\ This\ font\ supports\ an\ OEM-\/specific}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00092}00092\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ character\ set.\ \ The\ OEM\ character\ set\ is\ system\ dependent.}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00093}00093\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00094}00094\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ In\ general\ OEM,\ as\ opposed\ to\ ANSI\ (i.e.,\ cp1252),\ denotes\ the}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00095}00095\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ second\ default\ codepage\ that\ most\ international\ versions\ of}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00096}00096\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ Windows\ have.\ \ It\ is\ one\ of\ the\ OEM\ codepages\ from}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00097}00097\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00098}00098\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ \ \ http://www.microsoft.com/globaldev/reference/cphome.mspx,}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00099}00099\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00100}00100\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ and\ is\ used\ for\ the\ \`{}DOS\ boxes',\ to\ support\ legacy\ applications.}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00101}00101\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ A\ German\ Windows\ version\ for\ example\ usually\ uses\ ANSI\ codepage}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00102}00102\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ 1252\ and\ OEM\ codepage\ 850.}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00103}00103\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00104}00104\ \textcolor{comment}{\ \ \ *\ \ \ FT\_WinFNT\_ID\_CP874\ ::}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00105}00105\ \textcolor{comment}{\ \ \ *\ \ \ \ \ A\ superset\ of\ Thai\ TIS\ 620\ and\ ISO\ 8859-\/11.}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00106}00106\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00107}00107\ \textcolor{comment}{\ \ \ *\ \ \ FT\_WinFNT\_ID\_CP932\ ::}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00108}00108\ \textcolor{comment}{\ \ \ *\ \ \ \ \ A\ superset\ of\ Japanese\ Shift-\/JIS\ (with\ minor\ deviations).}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00109}00109\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00110}00110\ \textcolor{comment}{\ \ \ *\ \ \ FT\_WinFNT\_ID\_CP936\ ::}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00111}00111\ \textcolor{comment}{\ \ \ *\ \ \ \ \ A\ superset\ of\ simplified\ Chinese\ GB\ 2312-\/1980\ (with\ different}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00112}00112\ \textcolor{comment}{\ \ \ *\ \ \ \ \ ordering\ and\ minor\ deviations).}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00113}00113\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00114}00114\ \textcolor{comment}{\ \ \ *\ \ \ FT\_WinFNT\_ID\_CP949\ ::}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00115}00115\ \textcolor{comment}{\ \ \ *\ \ \ \ \ A\ superset\ of\ Korean\ Hangul\ KS\string~C\ 5601-\/1987\ (with\ different}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00116}00116\ \textcolor{comment}{\ \ \ *\ \ \ \ \ ordering\ and\ minor\ deviations).}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00117}00117\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00118}00118\ \textcolor{comment}{\ \ \ *\ \ \ FT\_WinFNT\_ID\_CP950\ ::}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00119}00119\ \textcolor{comment}{\ \ \ *\ \ \ \ \ A\ superset\ of\ traditional\ Chinese\ Big\string~5\ ETen\ (with\ different}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00120}00120\ \textcolor{comment}{\ \ \ *\ \ \ \ \ ordering\ and\ minor\ deviations).}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00121}00121\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00122}00122\ \textcolor{comment}{\ \ \ *\ \ \ FT\_WinFNT\_ID\_CP1250\ ::}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00123}00123\ \textcolor{comment}{\ \ \ *\ \ \ \ \ A\ superset\ of\ East\ European\ ISO\ 8859-\/2\ (with\ slightly\ different}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00124}00124\ \textcolor{comment}{\ \ \ *\ \ \ \ \ ordering).}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00125}00125\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00126}00126\ \textcolor{comment}{\ \ \ *\ \ \ FT\_WinFNT\_ID\_CP1251\ ::}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00127}00127\ \textcolor{comment}{\ \ \ *\ \ \ \ \ A\ superset\ of\ Russian\ ISO\ 8859-\/5\ (with\ different\ ordering).}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00128}00128\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00129}00129\ \textcolor{comment}{\ \ \ *\ \ \ FT\_WinFNT\_ID\_CP1252\ ::}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00130}00130\ \textcolor{comment}{\ \ \ *\ \ \ \ \ ANSI\ encoding.\ \ A\ superset\ of\ ISO\ 8859-\/1.}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00131}00131\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00132}00132\ \textcolor{comment}{\ \ \ *\ \ \ FT\_WinFNT\_ID\_CP1253\ ::}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00133}00133\ \textcolor{comment}{\ \ \ *\ \ \ \ \ A\ superset\ of\ Greek\ ISO\ 8859-\/7\ (with\ minor\ modifications).}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00134}00134\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00135}00135\ \textcolor{comment}{\ \ \ *\ \ \ FT\_WinFNT\_ID\_CP1254\ ::}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00136}00136\ \textcolor{comment}{\ \ \ *\ \ \ \ \ A\ superset\ of\ Turkish\ ISO\ 8859-\/9.}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00137}00137\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00138}00138\ \textcolor{comment}{\ \ \ *\ \ \ FT\_WinFNT\_ID\_CP1255\ ::}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00139}00139\ \textcolor{comment}{\ \ \ *\ \ \ \ \ A\ superset\ of\ Hebrew\ ISO\ 8859-\/8\ (with\ some\ modifications).}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00140}00140\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00141}00141\ \textcolor{comment}{\ \ \ *\ \ \ FT\_WinFNT\_ID\_CP1256\ ::}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00142}00142\ \textcolor{comment}{\ \ \ *\ \ \ \ \ A\ superset\ of\ Arabic\ ISO\ 8859-\/6\ (with\ different\ ordering).}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00143}00143\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00144}00144\ \textcolor{comment}{\ \ \ *\ \ \ FT\_WinFNT\_ID\_CP1257\ ::}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00145}00145\ \textcolor{comment}{\ \ \ *\ \ \ \ \ A\ superset\ of\ Baltic\ ISO\ 8859-\/13\ (with\ some\ deviations).}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00146}00146\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00147}00147\ \textcolor{comment}{\ \ \ *\ \ \ FT\_WinFNT\_ID\_CP1258\ ::}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00148}00148\ \textcolor{comment}{\ \ \ *\ \ \ \ \ For\ Vietnamese.\ \ This\ encoding\ doesn't\ cover\ all\ necessary}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00149}00149\ \textcolor{comment}{\ \ \ *\ \ \ \ \ characters.}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00150}00150\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00151}00151\ \textcolor{comment}{\ \ \ *\ \ \ FT\_WinFNT\_ID\_CP1361\ ::}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00152}00152\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Korean\ (Johab).}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00153}00153\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00155}00155\ \textcolor{preprocessor}{\#define\ FT\_WinFNT\_ID\_CP1252\ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00156}00156\ \textcolor{preprocessor}{\#define\ FT\_WinFNT\_ID\_DEFAULT\ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00157}00157\ \textcolor{preprocessor}{\#define\ FT\_WinFNT\_ID\_SYMBOL\ \ \ \ 2}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00158}00158\ \textcolor{preprocessor}{\#define\ FT\_WinFNT\_ID\_MAC\ \ \ \ \ \ 77}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00159}00159\ \textcolor{preprocessor}{\#define\ FT\_WinFNT\_ID\_CP932\ \ \ 128}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00160}00160\ \textcolor{preprocessor}{\#define\ FT\_WinFNT\_ID\_CP949\ \ \ 129}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00161}00161\ \textcolor{preprocessor}{\#define\ FT\_WinFNT\_ID\_CP1361\ \ 130}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00162}00162\ \textcolor{preprocessor}{\#define\ FT\_WinFNT\_ID\_CP936\ \ \ 134}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00163}00163\ \textcolor{preprocessor}{\#define\ FT\_WinFNT\_ID\_CP950\ \ \ 136}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00164}00164\ \textcolor{preprocessor}{\#define\ FT\_WinFNT\_ID\_CP1253\ \ 161}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00165}00165\ \textcolor{preprocessor}{\#define\ FT\_WinFNT\_ID\_CP1254\ \ 162}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00166}00166\ \textcolor{preprocessor}{\#define\ FT\_WinFNT\_ID\_CP1258\ \ 163}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00167}00167\ \textcolor{preprocessor}{\#define\ FT\_WinFNT\_ID\_CP1255\ \ 177}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00168}00168\ \textcolor{preprocessor}{\#define\ FT\_WinFNT\_ID\_CP1256\ \ 178}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00169}00169\ \textcolor{preprocessor}{\#define\ FT\_WinFNT\_ID\_CP1257\ \ 186}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00170}00170\ \textcolor{preprocessor}{\#define\ FT\_WinFNT\_ID\_CP1251\ \ 204}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00171}00171\ \textcolor{preprocessor}{\#define\ FT\_WinFNT\_ID\_CP874\ \ \ 222}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00172}00172\ \textcolor{preprocessor}{\#define\ FT\_WinFNT\_ID\_CP1250\ \ 238}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00173}00173\ \textcolor{preprocessor}{\#define\ FT\_WinFNT\_ID\_OEM\ \ \ \ \ 255}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00174}00174\ }
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00175}00175\ }
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00176}00176\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00177}00177\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00178}00178\ \ \ \textcolor{comment}{/*\ <Struct>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00179}00179\ \ \ \textcolor{comment}{/*\ \ \ \ FT\_WinFNT\_HeaderRec\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00180}00180\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00181}00181\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00182}00182\ \ \ \textcolor{comment}{/*\ \ \ \ Windows\ FNT\ Header\ info.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00183}00183\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00184}00184\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ \ }FT\_WinFNT\_HeaderRec\_}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00185}00185\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00186}00186\ \ \ \ \ FT\_UShort\ \ version;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00187}00187\ \ \ \ \ FT\_ULong\ \ \ file\_size;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00188}00188\ \ \ \ \ FT\_Byte\ \ \ \ copyright[60];}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00189}00189\ \ \ \ \ FT\_UShort\ \ file\_type;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00190}00190\ \ \ \ \ FT\_UShort\ \ nominal\_point\_size;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00191}00191\ \ \ \ \ FT\_UShort\ \ vertical\_resolution;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00192}00192\ \ \ \ \ FT\_UShort\ \ horizontal\_resolution;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00193}00193\ \ \ \ \ FT\_UShort\ \ ascent;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00194}00194\ \ \ \ \ FT\_UShort\ \ internal\_leading;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00195}00195\ \ \ \ \ FT\_UShort\ \ external\_leading;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00196}00196\ \ \ \ \ FT\_Byte\ \ \ \ italic;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00197}00197\ \ \ \ \ FT\_Byte\ \ \ \ underline;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00198}00198\ \ \ \ \ FT\_Byte\ \ \ \ strike\_out;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00199}00199\ \ \ \ \ FT\_UShort\ \ weight;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00200}00200\ \ \ \ \ FT\_Byte\ \ \ \ charset;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00201}00201\ \ \ \ \ FT\_UShort\ \ pixel\_width;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00202}00202\ \ \ \ \ FT\_UShort\ \ pixel\_height;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00203}00203\ \ \ \ \ FT\_Byte\ \ \ \ pitch\_and\_family;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00204}00204\ \ \ \ \ FT\_UShort\ \ avg\_width;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00205}00205\ \ \ \ \ FT\_UShort\ \ max\_width;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00206}00206\ \ \ \ \ FT\_Byte\ \ \ \ first\_char;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00207}00207\ \ \ \ \ FT\_Byte\ \ \ \ last\_char;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00208}00208\ \ \ \ \ FT\_Byte\ \ \ \ default\_char;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00209}00209\ \ \ \ \ FT\_Byte\ \ \ \ break\_char;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00210}00210\ \ \ \ \ FT\_UShort\ \ bytes\_per\_row;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00211}00211\ \ \ \ \ FT\_ULong\ \ \ device\_offset;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00212}00212\ \ \ \ \ FT\_ULong\ \ \ face\_name\_offset;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00213}00213\ \ \ \ \ FT\_ULong\ \ \ bits\_pointer;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00214}00214\ \ \ \ \ FT\_ULong\ \ \ bits\_offset;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00215}00215\ \ \ \ \ FT\_Byte\ \ \ \ reserved;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00216}00216\ \ \ \ \ FT\_ULong\ \ \ flags;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00217}00217\ \ \ \ \ FT\_UShort\ \ A\_space;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00218}00218\ \ \ \ \ FT\_UShort\ \ B\_space;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00219}00219\ \ \ \ \ FT\_UShort\ \ C\_space;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00220}00220\ \ \ \ \ FT\_UShort\ \ color\_table\_offset;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00221}00221\ \ \ \ \ FT\_ULong\ \ \ reserved1[4];}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00222}00222\ }
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00223}00223\ \ \ \}\ FT\_WinFNT\_HeaderRec;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00224}00224\ }
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00225}00225\ }
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00226}00226\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00227}00227\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00228}00228\ \ \ \textcolor{comment}{/*\ <Struct>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00229}00229\ \ \ \textcolor{comment}{/*\ \ \ \ FT\_WinFNT\_Header\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00230}00230\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00231}00231\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00232}00232\ \ \ \textcolor{comment}{/*\ \ \ \ A\ handle\ to\ an\ @FT\_WinFNT\_HeaderRec\ structure.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00233}00233\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00234}00234\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }FT\_WinFNT\_HeaderRec\_*\ \ FT\_WinFNT\_Header;}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00235}00235\ }
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00236}00236\ }
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00237}00237\ \textcolor{comment}{\ \ /**********************************************************************}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00238}00238\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00239}00239\ \textcolor{comment}{\ \ \ *\ @function:}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00240}00240\ \textcolor{comment}{\ \ \ *\ \ \ \ FT\_Get\_WinFNT\_Header}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00241}00241\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00242}00242\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00243}00243\ \textcolor{comment}{\ \ \ *\ \ \ \ Retrieve\ a\ Windows\ FNT\ font\ info\ header.}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00244}00244\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00245}00245\ \textcolor{comment}{\ \ \ *\ @input:}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00246}00246\ \textcolor{comment}{\ \ \ *\ \ \ \ face\ \ \ \ ::\ A\ handle\ to\ the\ input\ face.}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00247}00247\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00248}00248\ \textcolor{comment}{\ \ \ *\ @output:}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00249}00249\ \textcolor{comment}{\ \ \ *\ \ \ \ aheader\ ::\ The\ WinFNT\ header.}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00250}00250\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00251}00251\ \textcolor{comment}{\ \ \ *\ @return:}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00252}00252\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\ error\ code.\ \ 0\string~means\ success.}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00253}00253\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00254}00254\ \textcolor{comment}{\ \ \ *\ @note:}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00255}00255\ \textcolor{comment}{\ \ \ *\ \ \ This\ function\ only\ works\ with\ Windows\ FNT\ faces,\ returning\ an\ error}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00256}00256\ \textcolor{comment}{\ \ \ *\ \ \ otherwise.}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00257}00257\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00258}00258\ \ \ FT\_EXPORT(\ FT\_Error\ )}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00259}00259\ \ \ FT\_Get\_WinFNT\_Header(\ FT\_Face\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ face,}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00260}00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_WinFNT\_HeaderRec\ \ *aheader\ );}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00261}00261\ }
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00262}00262\ \ \ \textcolor{comment}{/*\ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00263}00263\ }
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00264}00264\ }
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00265}00265\ FT\_END\_HEADER}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00266}00266\ }
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00267}00267\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_FTWINFNT\_H\_\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00268}00268\ }
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00269}00269\ }
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00270}00270\ \textcolor{comment}{/*\ END\ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00271}00271\ }
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00272}00272\ }
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00273}00273\ \textcolor{comment}{/*\ Local\ Variables:\ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00274}00274\ \textcolor{comment}{/*\ coding:\ utf-\/8\ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{ftwinfnt_8h_source_l00275}00275\ \textcolor{comment}{/*\ End:\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+
+\end{DoxyCode}

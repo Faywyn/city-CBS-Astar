@@ -1,0 +1,106 @@
+\doxysubsection{Renderer Class Reference}
+\hypertarget{class_renderer}{}\label{class_renderer}\index{Renderer@{Renderer}}
+
+
+A renderer for the city.  
+
+
+
+
+{\ttfamily \#include $<$renderer.\+h$>$}
+
+\doxysubsubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_renderer_a06e1ac626c45949d6ff8be1ca6f6010e}\label{class_renderer_a06e1ac626c45949d6ff8be1ca6f6010e} 
+void {\bfseries start\+Render} (const \mbox{\hyperlink{class_city_map}{City\+Map}} \&city\+Map, const \mbox{\hyperlink{class_city_graph}{City\+Graph}} \&city\+Graph, \mbox{\hyperlink{class_manager}{Manager}} \&manager)
+\begin{DoxyCompactList}\small\item\em Start the rendering. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_renderer_a34bb81e30d74f2b69c6b392aed337736}{render\+City\+Map}} (const \mbox{\hyperlink{class_city_map}{City\+Map}} \&city\+Map)
+\begin{DoxyCompactList}\small\item\em Render the city map. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_renderer_a2e02d745834d0fcccce79e59c2a35b05}{render\+City\+Graph}} (const \mbox{\hyperlink{class_city_graph}{City\+Graph}} \&city\+Graph, const sf\+::\+View \&view)
+\begin{DoxyCompactList}\small\item\em Render the city graph. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_renderer_a5259498436598f71017e9d9cd104c854}{render\+Manager}} (\mbox{\hyperlink{class_manager}{Manager}} \&manager)
+\begin{DoxyCompactList}\small\item\em Render the cars. \end{DoxyCompactList}\item 
+\Hypertarget{class_renderer_a6d7a247fcd138592ded1e2ba7c7f0fce}\label{class_renderer_a6d7a247fcd138592ded1e2ba7c7f0fce} 
+void {\bfseries render\+Time} ()
+\begin{DoxyCompactList}\small\item\em Render the time. \end{DoxyCompactList}\item 
+\Hypertarget{class_renderer_ad375b497beca0192c9e4b5bed5421f1e}\label{class_renderer_ad375b497beca0192c9e4b5bed5421f1e} 
+void {\bfseries set\+Conflicts} (const std\+::vector$<$ \mbox{\hyperlink{struct__a_star_conflict}{AStar\+::conflict}} $>$ \&conflicts)
+\begin{DoxyCompactList}\small\item\em Render the conflicts. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+A renderer for the city. 
+
+The renderer class is used to render the city map, the city graph and the cars. 
+
+Definition at line \mbox{\hyperlink{renderer_8h_source_l00019}{19}} of file \mbox{\hyperlink{renderer_8h_source}{renderer.\+h}}.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\Hypertarget{class_renderer_a2e02d745834d0fcccce79e59c2a35b05}\index{Renderer@{Renderer}!renderCityGraph@{renderCityGraph}}
+\index{renderCityGraph@{renderCityGraph}!Renderer@{Renderer}}
+\doxyparagraph{\texorpdfstring{renderCityGraph()}{renderCityGraph()}}
+{\footnotesize\ttfamily \label{class_renderer_a2e02d745834d0fcccce79e59c2a35b05} 
+void Renderer\+::render\+City\+Graph (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_city_graph}{City\+Graph}} \&}]{city\+Graph}{, }\item[{const sf\+::\+View \&}]{view}{}\end{DoxyParamCaption})}
+
+
+
+Render the city graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em city\+Graph} & The city graph \\
+\hline
+{\em view} & The view \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{renderer_8cpp_source_l00250}{250}} of file \mbox{\hyperlink{renderer_8cpp_source}{renderer.\+cpp}}.
+
+\Hypertarget{class_renderer_a34bb81e30d74f2b69c6b392aed337736}\index{Renderer@{Renderer}!renderCityMap@{renderCityMap}}
+\index{renderCityMap@{renderCityMap}!Renderer@{Renderer}}
+\doxyparagraph{\texorpdfstring{renderCityMap()}{renderCityMap()}}
+{\footnotesize\ttfamily \label{class_renderer_a34bb81e30d74f2b69c6b392aed337736} 
+void Renderer\+::render\+City\+Map (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_city_map}{City\+Map}} \&}]{city\+Map}{}\end{DoxyParamCaption})}
+
+
+
+Render the city map. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em city\+Map} & The city map \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{renderer_8cpp_source_l00147}{147}} of file \mbox{\hyperlink{renderer_8cpp_source}{renderer.\+cpp}}.
+
+\Hypertarget{class_renderer_a5259498436598f71017e9d9cd104c854}\index{Renderer@{Renderer}!renderManager@{renderManager}}
+\index{renderManager@{renderManager}!Renderer@{Renderer}}
+\doxyparagraph{\texorpdfstring{renderManager()}{renderManager()}}
+{\footnotesize\ttfamily \label{class_renderer_a5259498436598f71017e9d9cd104c854} 
+void Renderer\+::render\+Manager (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_manager}{Manager}} \&}]{manager}{}\end{DoxyParamCaption})}
+
+
+
+Render the cars. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em manager} & The manager \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{renderer_8cpp_source_l00341}{341}} of file \mbox{\hyperlink{renderer_8cpp_source}{renderer.\+cpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{renderer_8h}{renderer.\+h}}\item 
+\mbox{\hyperlink{renderer_8cpp}{renderer.\+cpp}}\end{DoxyCompactItemize}
