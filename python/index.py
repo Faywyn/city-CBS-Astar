@@ -1,3 +1,16 @@
+##
+#@brief This script reads a CSV file containing data on the number of vehicles and their speeds, and generates a plot with different elements.
+#
+# The script reads a CSV file with the following format: numCar;density;speed1;speed2;...;speedN
+# - numCar: Number of vehicles (integer)
+# - density: Density value (float)
+# - speed1, speed2, ..., speedN: Speed values in m/s (float)
+# The script converts the speed values from m/s to km/h and generates a plot with the following elements:
+# - Vertical bars representing individual data points (speeds) for each numCar
+# - A red line representing the mean speed for each numCar
+# - A green line representing the trend line (interpolation) for the mean speed
+# - Purple dashed lines representing the standard deviation bands (±1 standard deviation)
+#- X-axis labels showing "numCar (density)" for each numCar
 import sys
 import os
 import matplotlib.pyplot as plt
