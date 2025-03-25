@@ -82,8 +82,8 @@ public:
   }
 
   /**
-   * @brief Get the element with the lowest priority
-   * @return The element
+   * @brief Return if the queue is empty
+   * @return True if the queue is empty
    */
   bool empty() { return count == 0; }
 
