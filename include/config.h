@@ -24,6 +24,7 @@ constexpr double MOVE_SPEED = 0.01;
 constexpr double SIM_STEP_TIME = 0.15;  // in seconds
 constexpr int CBS_PRECISION_FACTOR = 1; // CBS_PRECISION_FACTOR * SIM_STEP_TIME must not be to high
 constexpr double CBS_MAX_SUB_TIME = 30; // in seconds
+constexpr double CBS_MAX_OPENSET_SIZE = 5;
 
 // For hash functions (to reduce items that are really close to each other)
 constexpr double CELL_SIZE = 0.5;                 // in meters

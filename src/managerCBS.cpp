@@ -5,6 +5,7 @@
  * This file contains the implementation of the CBS algorithm. It is used to resolve conflicts between cars.
  */
 #include "manager.h"
+#include "priorityQueue.h"
 #include "renderer.h"
 #include "utils.h"
 
@@ -164,7 +165,7 @@ Manager::CBSNode Manager::createSubCBS(CBSNode &node, int subNodeDepth) {
 }
 
 Manager::CBSNode Manager::processCBS(ConstraintController constraints, int subNodeDepth) {
-  std::priority_queue<CBSNode> openSet;
+  PriorityQueue<CBSNode> openSet = PriorityQueue<CBSNode>(CBS_MAX_OPENSET_SIZE);
 
   CBSNode startNode;
   startNode.paths.resize(numCars);
@@ -192,7 +193,7 @@ Manager::CBSNode Manager::processCBS(ConstraintController constraints, int subNo
     maxCarCost = std::max(maxCarCost, carCost);
   }
 
-  openSet.push(startNode);
+  openSet.push(startNode, startNode.cost);
 
   // For logs
   std::vector<double> meanCosts;
@@ -209,15 +210,14 @@ Manager::CBSNode Manager::processCBS(ConstraintController constraints, int subNo
         1000.0;
 
     numNodeProcessed++;
-    CBSNode node = openSet.top();
-    openSet.pop();
+    CBSNode node = openSet.pop();
 
-    if (duration > CBS_MAX_SUB_TIME) {
-      CBSNode resSub = createSubCBS(node, subNodeDepth);
-      if (resSub.hasResolved) {
-        return resSub;
-      }
-    }
+    // if (duration > CBS_MAX_SUB_TIME) {
+    //   CBSNode resSub = createSubCBS(node, subNodeDepth);
+    //   if (resSub.hasResolved) {
+    //     return resSub;
+    //   }
+    // }
 
     std::vector<std::vector<sf::Vector2f>> paths = node.paths;
     double cost = node.cost;
@@ -315,7 +315,7 @@ Manager::CBSNode Manager::processCBS(ConstraintController constraints, int subNo
 
       // newNode.cost = 1 / (double)time;
 
-      openSet.push(newNode);
+      openSet.push(newNode, newNode.cost);
     }
   }
 
