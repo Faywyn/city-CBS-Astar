@@ -5,8 +5,6 @@ This project is part of the TIPE 2023-2024 preparatory course. It implements a C
 project integrates OpenStreetMap (OSM) data to load city maps, displays the map using SFML 2, uses
 Reed-Sheep curves to generate smooth trajectories, and constructs a city graph with one edge per road.
 
-https://github.com/user-attachments/assets/7b6f8dc0-6f69-4623-8046-ff09daf381dd
-
 ## Table of Contents
 1. [Overview](#overview)
 2. [Features](#features)
@@ -89,7 +87,6 @@ The CMake configuration ensures the following:
 ## Documentation
 The project includes Doxygen support for generating documentation. It's available [here](https://github.com/Faywyn/city-CBS-Astar/blob/main/doc/documentation.pdf).
 
-
 ## License
 This project is licensed under the MIT License. See the [LICENSE](https://github.com/Faywyn/city-CBS-Astar/blob/main/LICENSE) file for more information.
 
@@ -100,3 +97,6 @@ This project is licensed under the MIT License. See the [LICENSE](https://github
 - [OMPL](https://ompl.kavrakilab.org/): For motion planning.
 - [spdlog](https://github.com/gabime/spdlog): For logging purposes.
 - [tinyxml2](https://github.com/leethomason/tinyxml2): For XML parsing.
+
+## 
+https://github.com/user-attachments/assets/7b6f8dc0-6f69-4623-8046-ff09daf381dd
