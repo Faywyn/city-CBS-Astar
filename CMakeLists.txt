@@ -59,7 +59,7 @@ FetchContent_MakeAvailable(SFML)
 
 FetchContent_Declare(SPDLOG
     GIT_REPOSITORY https://github.com/gabime/spdlog.git
-    GIT_TAG v1.14.1
+    GIT_TAG v1.15.3
 )
 FetchContent_MakeAvailable(SPDLOG)
 

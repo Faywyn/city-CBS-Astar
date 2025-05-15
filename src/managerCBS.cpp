@@ -4,7 +4,7 @@
  *
  * This file contains the implementation of the CBS algorithm. It is used to resolve conflicts between cars.
  */
-#include "manager.h"
+#include "managerCBS.h"
 #include "priorityQueue.h"
 #include "renderer.h"
 #include "utils.h"
@@ -13,24 +13,16 @@
 #include <numeric>
 #include <spdlog/spdlog.h>
 
-std::pair<bool, DataManager::data> Manager::createCarsCBS(int numCars) {
-  this->createCarsAStar(numCars);
-  this->numCars = numCars;
+std::pair<bool, DataManager::data> ManagerCBS::createCarsCBS() {
+  ConstraintController constraints;
   bool valid = true;
 
-  ConstraintController constraints;
-
-  if (log)
-    spdlog::info("Creating {} CBS cars", numCars);
-
-  CBSNode node = processCBS(constraints, 0);
+  Node node = processCBS(constraints, 0);
   if (!node.hasResolved) {
-    if (log)
-      spdlog::error("CBS could not resolve all conflicts");
+    spdlog::error("CBS could not resolve all conflicts");
     return std::make_pair(false, DataManager::data());
   } else {
-    if (log)
-      spdlog::info("CBS resolved all conflicts");
+    spdlog::info("CBS resolved all conflicts");
   }
 
   // Check if conflicts remain
@@ -51,9 +43,8 @@ std::pair<bool, DataManager::data> Manager::createCarsCBS(int numCars) {
         }
 
         if (std::sqrt(diff.x * diff.x + diff.y * diff.y) < CAR_LENGTH * 1.1) {
-          if (log)
-            spdlog::error("Cars {} and {} still have a conflict at time {} ({}, {})", i, j, t * SIM_STEP_TIME,
-                          cars[i].getPath()[t].x, cars[i].getPath()[t].y);
+          spdlog::error("Cars {} and {} still have a conflict at time {} ({}, {})", i, j, t * SIM_STEP_TIME,
+                        cars[i].getPath()[t].x, cars[i].getPath()[t].y);
           valid = false;
         }
       }
@@ -87,7 +78,7 @@ std::pair<bool, DataManager::data> Manager::createCarsCBS(int numCars) {
 }
 
 // Split the node into 2 subnodes
-Manager::CBSNode Manager::createSubCBS(CBSNode &node, int subNodeDepth) {
+ManagerCBS::Node ManagerCBS::createSubCBS(Node &node, int subNodeDepth) {
   int numCars = (int)node.paths.size();
   int numCars1 = numCars / 2;
   int numCars2 = numCars - numCars1;
@@ -110,10 +101,10 @@ Manager::CBSNode Manager::createSubCBS(CBSNode &node, int subNodeDepth) {
   ConstraintController constraints1 = node.constraints.copy(cars1Index);
   ConstraintController constraints2 = node.constraints.copy(cars2Index);
 
-  Manager manager1(graph, map, cars1, log);
-  Manager manager2(graph, map, cars2, log);
+  ManagerCBS manager1(graph, map, cars1);
+  ManagerCBS manager2(graph, map, cars2);
 
-  CBSNode node1 = manager1.processCBS(constraints1, subNodeDepth + 1);
+  Node node1 = manager1.processCBS(constraints1, subNodeDepth + 1);
   if (!node1.hasResolved) {
     return node1;
   }
@@ -140,7 +131,7 @@ Manager::CBSNode Manager::createSubCBS(CBSNode &node, int subNodeDepth) {
     }
   }
 
-  CBSNode node2 = manager2.processCBS(constraints2, subNodeDepth + 1);
+  Node node2 = manager2.processCBS(constraints2, subNodeDepth + 1);
   if (!node2.hasResolved) {
     return node2;
   }
@@ -164,10 +155,10 @@ Manager::CBSNode Manager::createSubCBS(CBSNode &node, int subNodeDepth) {
   return node;
 }
 
-Manager::CBSNode Manager::processCBS(ConstraintController constraints, int subNodeDepth) {
-  PriorityQueue<CBSNode> openSet = PriorityQueue<CBSNode>(CBS_MAX_OPENSET_SIZE);
+ManagerCBS::Node ManagerCBS::processCBS(ConstraintController constraints, int subNodeDepth) {
+  PriorityQueue<Node> openSet = PriorityQueue<Node>(CBS_MAX_OPENSET_SIZE);
 
-  CBSNode startNode;
+  Node startNode;
   startNode.paths.resize(numCars);
   startNode.constraints = constraints;
   startNode.costs.clear();
@@ -210,10 +201,10 @@ Manager::CBSNode Manager::processCBS(ConstraintController constraints, int subNo
         1000.0;
 
     numNodeProcessed++;
-    CBSNode node = openSet.pop();
+    Node node = openSet.pop();
 
     // if (duration > CBS_MAX_SUB_TIME) {
-    //   CBSNode resSub = createSubCBS(node, subNodeDepth);
+    //   Node resSub = createSubCBS(node, subNodeDepth);
     //   if (resSub.hasResolved) {
     //     return resSub;
     //   }
@@ -242,7 +233,7 @@ Manager::CBSNode Manager::processCBS(ConstraintController constraints, int subNo
     meanDepths.push_back(depth);
     meanTimes.push_back(time);
 
-    if (log && clockLastRefresh + LOG_CBS_REFRESHRATE < duration) {
+    if (clockLastRefresh + LOG_CBS_REFRESHRATE < duration) {
       double meanCost = std::accumulate(meanCosts.begin(), meanCosts.end(), 0.0) / meanCosts.size();
       double meanDepth = std::accumulate(meanDepths.begin(), meanDepths.end(), 0.0) / meanDepths.size();
       double meanTime = std::accumulate(meanTimes.begin(), meanTimes.end(), 0.0) / meanTimes.size();
@@ -293,7 +284,7 @@ Manager::CBSNode Manager::processCBS(ConstraintController constraints, int subNo
       double carOldCost = node.costs[car];
       double carNewCost = cars[car].getPathTime();
 
-      CBSNode newNode;
+      Node newNode;
       newNode.paths = paths;
       newNode.paths[car] = cars[car].getPath();
       newNode.constraints = newConstraints;
@@ -315,8 +306,8 @@ Manager::CBSNode Manager::processCBS(ConstraintController constraints, int subNo
   return startNode;
 }
 
-bool Manager::hasConflict(std::vector<std::vector<sf::Vector2f>> paths, int *car1, int *car2, sf::Vector2f *p1,
-                          sf::Vector2f *p2, double *a1, double *a2, int *time) {
+bool ManagerCBS::hasConflict(std::vector<std::vector<sf::Vector2f>> paths, int *car1, int *car2, sf::Vector2f *p1,
+                             sf::Vector2f *p2, double *a1, double *a2, int *time) {
   int maxPathLength = 0;
   int numCars = (int)paths.size();
   for (int i = 0; i < numCars; i++) {

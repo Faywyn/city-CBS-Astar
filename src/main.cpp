@@ -11,7 +11,7 @@
 #include "config.h"
 #include "dataManager.h"
 #include "fileSelector.h"
-#include "manager.h"
+#include "managerCBS.h"
 #include "renderer.h"
 #include "test.h"
 
@@ -67,8 +67,8 @@ int main(int nArgs, char **args) {
     CityGraph cityGraph;
     cityGraph.createGraph(cityMap);
 
-    Manager manager(cityGraph, cityMap, true);
-    manager.createCarsCBS(runNumCars);
+    ManagerCBS manager(cityGraph, cityMap);
+    manager.initializeAgents(runNumCars);
 
     Renderer renderer;
     renderer.startRender(cityMap, cityGraph, manager);

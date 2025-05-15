@@ -45,6 +45,7 @@ void Renderer::startRender(const CityMap &cityMap, const CityGraph &cityGraph, M
   };
 
   resetView();
+  renderCityMap(cityMap);
   time = 0;
 
   sf::Clock clockCars;
@@ -61,46 +62,38 @@ void Renderer::startRender(const CityMap &cityMap, const CityGraph &cityGraph, M
       if (event->is<sf::Event::MouseButtonPressed>()) {
         if (event->getIf<sf::Event::MouseButtonPressed>()->button == sf::Mouse::Button::Left) {
           sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
-          manager.toggleCarDebug(mousePos);
+          spdlog::warn("Mouse clicked, event handler to implement");
+          // manager.toggleCarDebug(mousePos);
         }
       }
 
       if (event->is<sf::Event::KeyPressed>()) {
         if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::Escape) {
           window.close();
-          return;
-        }
-        if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::Up) {
+        } else if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::Up) {
           view.move({0, -(float)(height * MOVE_SPEED)});
-        }
-        if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::Down) {
+        } else if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::Down) {
           view.move({0, +(float)(height * MOVE_SPEED)});
-        }
-        if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::Left) {
+        } else if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::Left) {
           view.move({-(float)(width * MOVE_SPEED), 0});
-        }
-        if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::Right) {
+        } else if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::Right) {
           view.move({+(float)(width * MOVE_SPEED), 0});
-        }
-        if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::Equal) {
+        } else if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::Equal) {
           view.zoom(1.0f - ZOOM_SPEED);
-        }
-        if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::Subtract) {
+        } else if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::Subtract) {
           view.zoom(1.0f + ZOOM_SPEED);
-        }
-        if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::R) {
+        } else if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::R) {
           resetView();
           spdlog::debug("View reset");
-        }
-        if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::D) {
+        } else if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::D) {
           debug = !debug;
           spdlog::debug("Debug mode: {}", debug);
-        }
-        if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::S) {
+        } else if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::S) {
           speedUp = !speedUp;
-        }
-        if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::P) {
+        } else if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::P) {
           pause = !pause;
+        } else {
+          spdlog::warn("Key pressed, event handler to implement");
         }
       }
 
@@ -118,7 +111,7 @@ void Renderer::startRender(const CityMap &cityMap, const CityGraph &cityGraph, M
       if (clockCars.getElapsedTime().asSeconds() > SIM_STEP_TIME ||
           (speedUp && clockCars.getElapsedTime().asSeconds() > SIM_STEP_TIME / 5)) {
         time += SIM_STEP_TIME;
-        manager.moveCars();
+        manager.updateAgents();
         clockCars.restart();
       }
     }
@@ -335,7 +328,7 @@ void Renderer::renderCityGraph(const CityGraph &cityGraph, const sf::View &view)
   }
 }
 
-void Renderer::renderManager(Manager &manager) { manager.renderCars(window); }
+void Renderer::renderManager(Manager &manager) { manager.renderAgents(window); }
 
 void Renderer::renderTime() {
   // At the top right corner of the view (keep the same size even if the view is resized)

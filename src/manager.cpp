@@ -10,9 +10,9 @@
 #include <iostream>
 #include <spdlog/spdlog.h>
 
-void Manager::createCarsAStar(int numCars) {
-  if (log)
-    spdlog::info("Creating {} AStar cars", numCars);
+void Manager::initializeAgents(int numCars) {
+  spdlog::info("Initializing {} agent...", numCars);
+
   for (int i = 0; i < numCars; i++) {
     Car car;
     cars.push_back(car);
@@ -22,30 +22,19 @@ void Manager::createCarsAStar(int numCars) {
   for (int i = 0; i < numCars; i++) {
     bool valid = false;
     cars[i].chooseRandomStartEndPath(graph, map);
-
-    if (log)
-      spdlog::info("Car {} assigned path with {} points", i, cars[i].getPath().size());
   }
+
+  spdlog::info("Initialized {} agents", cars.size());
 }
 
-void Manager::moveCars() {
+void Manager::updateAgents() {
   for (Car &car : cars) {
     car.move();
   }
 }
 
-void Manager::renderCars(sf::RenderWindow &window) {
+void Manager::renderAgents(sf::RenderWindow &window) {
   for (Car &car : cars) {
     car.render(window);
-  }
-}
-
-void Manager::toggleCarDebug(sf::Vector2f mousePos) {
-  for (Car &car : cars) {
-    sf::Vector2f carPos = car.getPosition();
-    double distance = sqrt(pow(mousePos.x - carPos.x, 2) + pow(mousePos.y - carPos.y, 2));
-    if (distance < 5.0f) {
-      car.toggleDebug();
-    }
   }
 }

@@ -12,147 +12,70 @@
 
 #include "car.h"
 #include "cityGraph.h"
-#include "dataManager.h"
-
-/**
- * @struct _managerCBSNode
- * @brief A node for the CBS algorithm
- *
- * This struct represents a node for the CBS algorithm. It contains the paths for all agents, the constraints for all
- * agents, the individual path costs, the total cost, the depth in the CBS tree and if the node has resolved conflicts.
- */
-typedef struct _managerCBSNode {
-  std::vector<std::vector<sf::Vector2f>> paths; /**< \brief The paths for all agents */
-  ConstraintController constraints;             /**< \brief The constraints for all agents */
-  std::vector<double> costs;                    /**< \brief The individual path costs */
-  double cost;                                  /**< \brief The total cost */
-  int depth;                                    /**< \brief The depth in the CBS tree */
-  bool hasResolved;                             /**< \brief If the node has resolved conflicts */
-
-  bool operator<(const _managerCBSNode &other) const {
-    return cost > other.cost || (cost == other.cost && depth > other.depth);
-  }
-
-} _managerCBSNode;
 
 /**
  * @class Manager
  * @brief A manager for the cars
  *
- * The manager class is used to manage the cars during the CBS pathfinding. It creates the cars and resolves conflicts
- * using the CBS algorithm.
+ * The manager class is used to manage the cars during any pathfinding algorithm. It is used to create abstract managers
+ * like a CBS one.
  */
 class Manager {
 public:
-  using CBSNode = _managerCBSNode;
-
   /**
    * @brief Constructor
    * @param cityGraph The city graph
    * @param CityMap The city map
-   * @param log If the manager should log
    */
-  Manager(const CityGraph &cityGraph, const CityMap &CityMap, bool log) : graph(cityGraph), map(CityMap) {
-    this->log = log;
-  }
+  Manager(const CityGraph &cityGraph, const CityMap &CityMap) : graph(cityGraph), map(CityMap) {}
 
   /**
-   * @brief Constructor
-   * @param cityGraph The city graph
-   * @param CityMap The city map
-   * @param cars The cars
-   * @param log If the manager should log
+   * @brief Initialize agents and set up the system
+   * @param numCars The number of agents
    */
-  Manager(const CityGraph &cityGraph, const CityMap &CityMap, std::vector<Car> cars, bool log)
-      : graph(cityGraph), map(CityMap), cars(cars) {
-    this->numCars = cars.size();
-    this->log = log;
-  }
+  virtual void initializeAgents(int numAgents);
 
   /**
-   * @brief Create cars using A* pathfinding, no collision avoidance
-   * @param numCars The number of cars
-   */
-  void createCarsAStar(int numCars);
-
-  /**
-   * @brief Create cars using CBS pathfinding
-   * @param numCars The number of cars
-   * @return The data for the cars (success, data)
-   */
-  std::pair<bool, DataManager::data> createCarsCBS(int numCars);
-
-  /**
-   * @brief Create a sub-CBS node
-   * @param node The parent CBS node
-   * @param subNodeDepth The depth of the sub-CBS node
-   * @return The sub-CBS node
+   * @brief Using the created agents, create a path for each agent using an algorithm
    *
-   * This function creates a sub-CBS node from a parent CBS node. It creates a new node with the same paths and
-   * constraints as the parent node, but with less agents.
+   * This function is used to create a path for each agent using an algorithm. The algorithm is not specified in this
+   * class, but it is expected to be implemented in a derived class.
    */
-  CBSNode createSubCBS(CBSNode &node, int subNodeDepth);
+  virtual void planPaths() = 0;
 
   /**
-   * @brief Process a CBS node
-   * @param constraints The constraints
-   * @param subNodeDepth The depth of the sub-CBS node
-   * @return The processed CBS node
-   *
-   * This function processes a CBS node. It resolves conflicts and returns a new CBS node with the resolved conflicts.
+   * @brief Make a simulation step
    */
-  CBSNode processCBS(ConstraintController constraints, int subNodeDepth);
+  virtual void updateAgents();
 
   /**
-   * @brief Check if two cars have a conflict
-   * @param paths The paths of the cars
-   * @param car1 The first car
-   * @param car2 The second car
-   * @param p1 The position of the first car
-   * @param p2 The position of the second car
-   * @param a1 The angle of the first car using double
-   * @param a2 The angle of the second car using double
-   * @param time The time of the conflict
-   * @return If the cars have a conflict
-   */
-  bool hasConflict(std::vector<std::vector<sf::Vector2f>> paths, int *car1, int *car2, sf::Vector2f *p1,
-                   sf::Vector2f *p2, double *a1, double *a2, int *time);
-
-  /**
-   * @brief Move the cars to the next point in the path
-   */
-  void moveCars();
-
-  /**
-   * @brief Render the cars
+   * @brief Process user input
+   * @param event The event
    * @param window The window
    */
-  void renderCars(sf::RenderWindow &window);
+  virtual void userInput(sf::Event &event, sf::RenderWindow &window) {};
 
   /**
-   * @brief Toggle the debug of one car
-   * @param mousePos The mouse position
-   *
-   * This function toggles the debug of a car. If the mouse is over a car, the debug of the car is toggled.
+   * @brief Render the agents based on their current position
+   * @param window The window
    */
-  void toggleCarDebug(sf::Vector2f mousePos);
+  virtual void renderAgents(sf::RenderWindow &window) final;
 
   /**
-   * @brief Get the number of cars
-   * @return The number of cars
+   * @brief Get the number of agents
+   * @return The number of agents
    */
-  int getNumCars() { return numCars; }
+  virtual int getNumAgents() { return numCars; }
 
   /**
    * @brief Get the cars
    * @return The cars
    */
-  std::vector<Car> getCars() { return cars; }
+  virtual std::vector<Car> getCars() { return cars; }
 
-private:
+protected:
   int numCars;
   std::vector<Car> cars;
   CityGraph graph;
   CityMap map;
-  bool log;
 };
