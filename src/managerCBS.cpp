@@ -124,7 +124,7 @@ Manager::CBSNode Manager::createSubCBS(CBSNode &node, int subNodeDepth) {
     for (int j = 0; j < (int)path.size(); j += CBS_PRECISION_FACTOR) {
       AStar::conflict conflict;
       conflict.point.position = path[j];
-      conflict.point.angle = 0;
+      conflict.point.angle = sf::radians(0);
       conflict.time = j;
 
       if (conflict.point.position.x < -CAR_LENGTH || conflict.point.position.y < -CAR_LENGTH ||
@@ -193,7 +193,7 @@ Manager::CBSNode Manager::processCBS(ConstraintController constraints, int subNo
     maxCarCost = std::max(maxCarCost, carCost);
   }
 
-  openSet.push(startNode, startNode.cost);
+  openSet.push(startNode);
 
   // For logs
   std::vector<double> meanCosts;
@@ -242,7 +242,7 @@ Manager::CBSNode Manager::processCBS(ConstraintController constraints, int subNo
     meanDepths.push_back(depth);
     meanTimes.push_back(time);
 
-    if (clockLastRefresh + LOG_CBS_REFRESHRATE < duration) {
+    if (log && clockLastRefresh + LOG_CBS_REFRESHRATE < duration) {
       double meanCost = std::accumulate(meanCosts.begin(), meanCosts.end(), 0.0) / meanCosts.size();
       double meanDepth = std::accumulate(meanDepths.begin(), meanDepths.end(), 0.0) / meanDepths.size();
       double meanTime = std::accumulate(meanTimes.begin(), meanTimes.end(), 0.0) / meanTimes.size();
@@ -251,12 +251,10 @@ Manager::CBSNode Manager::processCBS(ConstraintController constraints, int subNo
       double remainingTime = (maxCarCost - meanTime) * (duration / meanTime);
       double processPerSecond = numNodeProcessed / (duration - clockLastRefresh);
 
-      if (log) {
-        spdlog::info("Node C: {:0>6.5} | D: {:0>6.5} | CT: {:0>6.5} | SD: {} | ET: {}s | "
-                     "ETR: ~{}s | Processed nodes: ~{:0>4.5}/s",
-                     meanCost, meanDepth, meanTime, subNodeDepth, (int)duration, (int)remainingTime, processPerSecond);
-        std::cout << "\033[A\033[2K\r";
-      }
+      spdlog::info("Node C: {:0>6.5} | D: {:0>6.5} | CT: {:0>6.5} | SD: {} | ET: {}s | "
+                   "ETR: ~{}s | Processed nodes: ~{:0>4.5}/s",
+                   meanCost, meanDepth, meanTime, subNodeDepth, (int)duration, (int)remainingTime, processPerSecond);
+      std::cout << "\033[A\033[2K\r";
 
       clockLastRefresh = duration;
       numNodeProcessed = 0;
@@ -272,7 +270,7 @@ Manager::CBSNode Manager::processCBS(ConstraintController constraints, int subNo
 
       AStar::conflict newConflict;
       newConflict.point.position = iCar == 0 ? p2 : p1;
-      newConflict.point.angle = iCar == 0 ? a2 : a1;
+      newConflict.point.angle = iCar == 0 ? sf::radians(a2) : sf::radians(a1);
       newConflict.time = time;
       newConflict.car = iCar == 0 ? car1 : car2;
 
@@ -310,12 +308,7 @@ Manager::CBSNode Manager::processCBS(ConstraintController constraints, int subNo
         newNode.cost += newNode.costs[i];
       }
 
-      // hasConflict(newNode.paths, &car1, &car2, &p1, &p2, &a1, &a2, &time);
-      // newNode.cost /= time;
-
-      // newNode.cost = 1 / (double)time;
-
-      openSet.push(newNode, newNode.cost);
+      openSet.push(newNode);
     }
   }
 

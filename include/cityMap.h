@@ -13,7 +13,7 @@ typedef struct {
   sf::Vector2f p2;        /**< \brief The second point of the segment */
   sf::Vector2f p1_offset; /**< \brief The offset of the first point, used for the intersection */
   sf::Vector2f p2_offset; /**< \brief The offset of the second point, used for the intersection */
-  double angle;           /**< \brief The angle of the segment */
+  sf::Angle angle;        /**< \brief The angle of the segment */
 } _cityMapSegment;
 
 /**

@@ -110,8 +110,8 @@ public:
    * @param car2 The second car
    * @param p1 The position of the first car
    * @param p2 The position of the second car
-   * @param a1 The angle of the first car
-   * @param a2 The angle of the second car
+   * @param a1 The angle of the first car using double
+   * @param a2 The angle of the second car using double
    * @param time The time of the conflict
    * @return If the cars have a conflict
    */

@@ -19,15 +19,15 @@
  */
 typedef struct _cityGraphPoint {
   sf::Vector2f position; /**< \brief The position of the point */
-  double angle;          /**< \brief The angle of the point */
+  sf::Angle angle;       /**< \brief The angle of the point */
 
   bool operator==(const _cityGraphPoint &other) const {
     int x = std::round(position.x / CELL_SIZE);
     int y = std::round(position.y / CELL_SIZE);
-    int a = std::round(normalizeAngle(angle) / ANGLE_RESOLUTION);
+    int a = std::round(angle.asRadians() / ANGLE_RESOLUTION);
     int oX = std::round(other.position.x / CELL_SIZE);
     int oY = std::round(other.position.y / CELL_SIZE);
-    int oA = std::round(normalizeAngle(other.angle) / ANGLE_RESOLUTION);
+    int oA = std::round(other.angle.asRadians() / ANGLE_RESOLUTION);
 
     return x == oX && y == oY && a == oA;
   }
@@ -59,7 +59,7 @@ template <> struct hash<_cityGraphPoint> {
   std::size_t operator()(const _cityGraphPoint &point) const {
     int x = std::round(point.position.x / CELL_SIZE);
     int y = std::round(point.position.y / CELL_SIZE);
-    int a = std::round(normalizeAngle(point.angle) / ANGLE_RESOLUTION);
+    int a = std::round(point.angle.asRadians() / ANGLE_RESOLUTION);
 
     return std::hash<int>()(x) ^ std::hash<int>()(y) ^ std::hash<int>()(a);
   }

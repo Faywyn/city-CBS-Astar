@@ -8,6 +8,8 @@
  */
 #pragma once
 #include <iostream>
+#include <spdlog/spdlog.h>
+#include <vector>
 
 /**
  * @brief Priority Queue
@@ -23,40 +25,35 @@ public:
    * @brief Constructor
    * @param size The size of the queue
    */
-  PriorityQueue(int size) {
-    this->size = size;
-    elements = (T *)malloc(size * sizeof(T));
-    priorities = (double *)malloc(size * sizeof(double));
-  }
+  PriorityQueue(int size) : size(size), count(0), elements(size) {}
+
   /**
    * @brief Destructor
    */
-  ~PriorityQueue() {
-    free(elements);
-    free(priorities);
-  }
+  ~PriorityQueue() = default;
 
   /**
    * @brief Push an element with a priority
    * @param e The element
    * @param p The priority
    */
-  void push(T e, double p) {
+  void push(T e) {
+    // If there is still space, add the element at the end.
     if (count < size) {
       elements[count] = e;
-      priorities[count] = p;
       count++;
       return;
     }
 
+    // Otherwise, find the correct position for the new element
+    // so that the elements remain sorted by priority.
     for (int i = 0; i < size; i++) {
-      if (p < priorities[i]) {
+      if (e < elements[i]) {
+        // Shift elements to make room for the new element.
         for (int j = size - 1; j > i; j--) {
           elements[j] = elements[j - 1];
-          priorities[j] = priorities[j - 1];
         }
         elements[i] = e;
-        priorities[i] = p;
         return;
       }
     }
@@ -68,14 +65,14 @@ public:
    */
   T pop() {
     if (count == 0) {
-      std::cerr << "PriorityQueue is empty" << std::endl;
-      exit(1);
+      spdlog::error("Trying to pop from an empty priority queue");
+      return T();
     }
 
     T e = elements[0];
-    for (int i = 1; i < size; i++) {
+    // Shift elements to fill the gap left by the removed element.
+    for (int i = 1; i < count; i++) {
       elements[i - 1] = elements[i];
-      priorities[i - 1] = priorities[i];
     }
     count--;
     return e;
@@ -88,8 +85,7 @@ public:
   bool empty() { return count == 0; }
 
 private:
-  T *elements;
-  double *priorities;
-  int size;
-  int count;
+  std::vector<T> elements; // Vector to store the elements.
+  int size;                // Maximum number of elements.
+  int count;               // Current number of elements.
 };

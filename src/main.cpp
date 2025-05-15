@@ -43,9 +43,8 @@ int main(int nArgs, char **args) {
 
   FileSelector fileSelector("assets/map");
   std::string mapFile = fileSelector.selectFile();
-  // std::string mapFile = "small01.osm";
 
-  if (ENVIRONMENT == 0 && false) {
+  if (ENVIRONMENT == 0) {
     spdlog::set_level(spdlog::level::debug);
     Test test;
     test.runTests();

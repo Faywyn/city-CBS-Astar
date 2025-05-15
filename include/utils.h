@@ -31,20 +31,6 @@ inline double distance(sf::Vector2f p1, sf::Vector2f p2) {
 }
 
 /**
- * @brief Normalize an angle to -PI to PI
- * @param angle The angle
- */
-inline double normalizeAngle(double angle) { // -PI to PI
-  while (angle > M_PI) {
-    angle -= 2 * M_PI;
-  }
-  while (angle <= -M_PI) {
-    angle += 2 * M_PI;
-  }
-  return angle;
-}
-
-/**
  * @brief Get the turning radius from the speed
  * @param speed The speed
  * @return The turning radius
@@ -73,7 +59,7 @@ bool carsCollided(Car car1, Car car2, int time);
  * @param confAngle The angle of the conflicting car
  * @return If the cars have a conflict
  */
-bool carConflict(sf::Vector2f carPos, double carAngle, sf::Vector2f confPos, double confAngle);
+bool carConflict(sf::Vector2f carPos, sf::Angle carAngle, sf::Vector2f confPos, sf::Angle confAngle);
 
 /**
  * @brief Load a font

@@ -219,7 +219,7 @@ void CityMap::loadFile(const std::string &filename) {
       s.p1_offset = s.p1;
       s.p2_offset = s.p2;
 
-      s.angle = std::atan2(s.p2.y - s.p1.y, s.p2.x - s.p1.x);
+      s.angle = sf::radians(std::atan2(s.p2.y - s.p1.y, s.p2.x - s.p1.x));
     }
   }
   for (auto &b : buildings) {

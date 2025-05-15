@@ -71,12 +71,12 @@ private:
  * @param color The color
  * @param outline If the arrow should have an outline
  */
-inline void drawArrow(sf::RenderWindow &window, sf::Vector2f position, double rotation, double length, double thickness,
-                      sf::Color color = sf::Color::Red, bool outline = false) {
+inline void drawArrow(sf::RenderWindow &window, sf::Vector2f position, sf::Angle rotation, double length,
+                      double thickness, sf::Color color = sf::Color::Red, bool outline = false) {
   sf::ConvexShape arrow;
 
   arrow.setFillColor(color);
-  arrow.setOrigin(-length / 2, 0);
+  arrow.setOrigin({-(float)length / 2, 0});
   arrow.setPosition(position);
   arrow.setRotation(rotation);
 

@@ -5,6 +5,8 @@
  * This file contains the implementation of the Car class.
  */
 #include "car.h"
+#include "SFML/Graphics/Text.hpp"
+#include "SFML/System/Angle.hpp"
 #include "config.h"
 #include "dubins.h"
 #include "utils.h"
@@ -33,9 +35,9 @@ void Car::render(sf::RenderWindow &window) {
   sf::Vector2f nextPoint = path[currentPoint + 1];
 
   sf::RectangleShape shape(sf::Vector2f(CAR_LENGTH, CAR_WIDTH));
-  shape.setOrigin(CAR_LENGTH / 2.0f, CAR_WIDTH / 2.0f);
+  shape.setOrigin({CAR_LENGTH / 2.0f, CAR_WIDTH / 2.0f});
   shape.setPosition(point);
-  shape.setRotation(atan2(nextPoint.y - point.y, nextPoint.x - point.x) * 180.0f / M_PI);
+  shape.setRotation(sf::radians(atan2(nextPoint.y - point.y, nextPoint.x - point.x)));
   if (debug)
     shape.setFillColor(sf::Color(255, 0, 0));
   else
@@ -49,8 +51,7 @@ void Car::render(sf::RenderWindow &window) {
   int speed = (int)(getSpeed() * 3.6f);
   int dSpeed = (getSpeed() * 3.6f - (double)speed) * 100;
   sf::Font font = loadFont();
-  sf::Text text;
-  text.setFont(font);
+  sf::Text text(font);
   text.setCharacterSize(24);
   text.setFillColor(sf::Color::White);
   text.setPosition(getPosition());
@@ -60,16 +61,16 @@ void Car::render(sf::RenderWindow &window) {
                  "m");
   text.setOutlineColor(sf::Color::Black);
   text.setOutlineThickness(1.0f);
-  text.scale(0.1f, 0.1f);
-  text.setOrigin(text.getLocalBounds().width / 2.0f, text.getLocalBounds().height / 2.0f);
+  text.scale({0.1f, 0.1f});
+  text.setOrigin({text.getLocalBounds().position.x / 2.0f, text.getLocalBounds().position.y / 2.0f});
   window.draw(text);
 
   // Render path
   for (int i = currentPoint; i < (int)path.size() - 1; i++) {
-    sf::Vertex line[] = {sf::Vertex(path[i]), sf::Vertex(path[i + 1])};
+    sf::Vertex line[] = {{path[i]}, {path[i + 1]}};
     line[0].color = sf::Color(255, 255, 255);
     line[1].color = sf::Color(255, 255, 255);
-    window.draw(line, 2, sf::Lines);
+    window.draw(line, 2, sf::PrimitiveType::Lines);
   }
 }
 

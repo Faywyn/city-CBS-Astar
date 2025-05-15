@@ -12,7 +12,7 @@ sf::Font font;
 
 sf::Font loadFont() {
   if (!fontLoaded) {
-    if (!font.loadFromFile("assets/fonts/arial.ttf")) {
+    if (!font.openFromFile("assets/fonts/arial.ttf")) {
       spdlog::error("Failed to load font");
     }
     fontLoaded = true;
@@ -46,14 +46,18 @@ bool carsCollided(Car car1, Car car2, int time) {
   return colides;
 }
 
-bool carConflict(sf::Vector2f carPos, double carAngle, sf::Vector2f confPos, double confAngle) {
+bool carConflict(sf::Vector2f carPos, sf::Angle carAngle, sf::Vector2f confPos, sf::Angle confAngle) {
   sf::Vector2f diff = carPos - confPos;
   return std::sqrt(diff.x * diff.x + diff.y * diff.y) < CAR_LENGTH * 1.1;
 
-  sf::Vector2f p11 = carPos + sf::Vector2f(CAR_LENGTH / 2.0f * cos(carAngle), CAR_LENGTH / 2.0f * sin(carAngle));
-  sf::Vector2f p12 = carPos - sf::Vector2f(CAR_LENGTH / 2.0f * cos(carAngle), CAR_LENGTH / 2.0f * sin(carAngle));
-  sf::Vector2f p21 = confPos + sf::Vector2f(CAR_LENGTH / 2.0f * cos(confAngle), CAR_LENGTH / 2.0f * sin(confAngle));
-  sf::Vector2f p22 = confPos - sf::Vector2f(CAR_LENGTH / 2.0f * cos(confAngle), CAR_LENGTH / 2.0f * sin(confAngle));
+  sf::Vector2f p11 = carPos + sf::Vector2f(CAR_LENGTH / 2.0f * cos(carAngle.asRadians()),
+                                           CAR_LENGTH / 2.0f * sin(carAngle.asRadians()));
+  sf::Vector2f p12 = carPos - sf::Vector2f(CAR_LENGTH / 2.0f * cos(carAngle.asRadians()),
+                                           CAR_LENGTH / 2.0f * sin(carAngle.asRadians()));
+  sf::Vector2f p21 = confPos + sf::Vector2f(CAR_LENGTH / 2.0f * cos(confAngle.asRadians()),
+                                            CAR_LENGTH / 2.0f * sin(confAngle.asRadians()));
+  sf::Vector2f p22 = confPos - sf::Vector2f(CAR_LENGTH / 2.0f * cos(confAngle.asRadians()),
+                                            CAR_LENGTH / 2.0f * sin(confAngle.asRadians()));
 
   bool colides = false;
   colides |= std::sqrt(std::pow(p11.x - p21.x, 2) + std::pow(p11.y - p21.y, 2)) < CAR_LENGTH * 1.1;

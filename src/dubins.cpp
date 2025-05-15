@@ -47,10 +47,10 @@ Dubins::Dubins(CityGraph::point start, CityGraph::neighbor end, double startSpee
   this->end = space->allocState();
 
   this->start->as<ob::DubinsStateSpace::StateType>()->setXY(start.position.x, start.position.y);
-  this->start->as<ob::DubinsStateSpace::StateType>()->setYaw(start.angle);
+  this->start->as<ob::DubinsStateSpace::StateType>()->setYaw(start.angle.asRadians());
 
   this->end->as<ob::DubinsStateSpace::StateType>()->setXY(end.point.position.x, end.point.position.y);
-  this->end->as<ob::DubinsStateSpace::StateType>()->setYaw(end.point.angle);
+  this->end->as<ob::DubinsStateSpace::StateType>()->setYaw(end.point.angle.asRadians());
 }
 
 Dubins::~Dubins() {
@@ -77,7 +77,7 @@ CityGraph::point Dubins::point(double time) {
 
   CityGraph::point point;
   point.position = {(float)x, (float)y};
-  point.angle = yaw;
+  point.angle = sf::radians(yaw);
 
   return point;
 }

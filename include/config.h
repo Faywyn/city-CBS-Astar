@@ -21,7 +21,7 @@ constexpr bool ROAD_ENABLE_RIGHT_HAND_TRAFFIC = false;
 constexpr double ZOOM_SPEED = 0.1;
 constexpr double MOVE_SPEED = 0.01;
 
-constexpr double SIM_STEP_TIME = 0.15;  // in seconds
+constexpr double SIM_STEP_TIME = 0.05;  // in seconds
 constexpr int CBS_PRECISION_FACTOR = 1; // CBS_PRECISION_FACTOR * SIM_STEP_TIME must not be to high
 constexpr double CBS_MAX_SUB_TIME = 30; // in seconds
 constexpr double CBS_MAX_OPENSET_SIZE = 5;

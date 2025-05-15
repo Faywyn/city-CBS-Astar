@@ -42,15 +42,15 @@ void CityGraph::createGraph(const CityMap &cityMap) {
 
           point point1;
           point1.angle = road.segments[numSeg - 1].angle;
-          point1.position =
-              sf::Vector2f(road.segments[numSeg - 1].p2_offset.x + offset * sin(road.segments[numSeg - 1].angle),
-                           road.segments[numSeg - 1].p2_offset.y + offset * -cos(road.segments[numSeg - 1].angle));
+          point1.position = sf::Vector2f(
+              road.segments[numSeg - 1].p2_offset.x + offset * sin(road.segments[numSeg - 1].angle.asRadians()),
+              road.segments[numSeg - 1].p2_offset.y + offset * -cos(road.segments[numSeg - 1].angle.asRadians()));
 
           point point2;
           point2.angle = road.segments[numSeg].angle;
           point2.position =
-              sf::Vector2f(road.segments[numSeg].p1_offset.x + offset * sin(road.segments[numSeg].angle),
-                           road.segments[numSeg].p1_offset.y + offset * -cos(road.segments[numSeg].angle));
+              sf::Vector2f(road.segments[numSeg].p1_offset.x + offset * sin(road.segments[numSeg].angle.asRadians()),
+                           road.segments[numSeg].p1_offset.y + offset * -cos(road.segments[numSeg].angle.asRadians()));
 
           linkPoints(point1, point2, 2, true);
         }
@@ -63,8 +63,8 @@ void CityGraph::createGraph(const CityMap &cityMap) {
       int numPoints = segmentLength / pointDistance;
       double dx_s = (segment.p2_offset.x - segment.p1_offset.x) / numPoints;
       double dy_s = (segment.p2_offset.y - segment.p1_offset.y) / numPoints;
-      double dx_a = sin(segment.angle);
-      double dy_a = -cos(segment.angle);
+      double dx_a = sin(segment.angle.asRadians());
+      double dy_a = -cos(segment.angle.asRadians());
 
       if (dx_a < 0) {
         dx_a = -dx_a;
@@ -105,7 +105,7 @@ void CityGraph::createGraph(const CityMap &cityMap) {
               point2.angle = segment.angle;
 
               int direction = 2;
-              double a = normalizeAngle(atan2(dy_a, dx_a));
+              double a = atan2(dy_a, dx_a);
               if (offset == offset2 || (offset >= 0 && offset2 >= 0)) {
                 if (dy_s >= 0) {
                   direction = offset > 0 ? 0 : 1;
@@ -157,13 +157,13 @@ void CityGraph::createGraph(const CityMap &cityMap) {
 
             point point1_offset;
             point1_offset.angle = segment1.angle;
-            point1_offset.position = sf::Vector2f(point1.position.x + offset1 * sin(segment1.angle),
-                                                  point1.position.y + offset1 * -cos(segment1.angle));
+            point1_offset.position = sf::Vector2f(point1.position.x + offset1 * sin(segment1.angle.asRadians()),
+                                                  point1.position.y + offset1 * -cos(segment1.angle.asRadians()));
 
             point point2_offset;
             point2_offset.angle = segment2.angle;
-            point2_offset.position = sf::Vector2f(point2.position.x + offset2 * sin(segment2.angle),
-                                                  point2.position.y + offset2 * -cos(segment2.angle));
+            point2_offset.position = sf::Vector2f(point2.position.x + offset2 * sin(segment2.angle.asRadians()),
+                                                  point2.position.y + offset2 * -cos(segment2.angle.asRadians()));
 
             linkPoints(point1_offset, point2_offset, 2, true);
           }
@@ -211,8 +211,8 @@ void CityGraph::createGraph(const CityMap &cityMap) {
 }
 
 void CityGraph::linkPoints(const point &p, const point &n, int direction, bool subPoints) {
-  std::vector<double> anglesPoint = {normalizeAngle(p.angle), normalizeAngle(p.angle + M_PI)};
-  std::vector<double> anglesNeighbor = {normalizeAngle(n.angle), normalizeAngle(n.angle + M_PI)};
+  std::vector<sf::Angle> anglesPoint = {p.angle, p.angle + sf::radians(M_PI)};
+  std::vector<sf::Angle> anglesNeighbor = {n.angle, n.angle + sf::radians(M_PI)};
 
   point copyPoint = p;
   point copyNeighbor = n;
@@ -298,10 +298,10 @@ bool CityGraph::canLink(const point &point1, const point &point2, double speed, 
   ob::State *end = space.allocState();
 
   start->as<ob::DubinsStateSpace::StateType>()->setXY(point1.position.x, point1.position.y);
-  start->as<ob::DubinsStateSpace::StateType>()->setYaw(point1.angle);
+  start->as<ob::DubinsStateSpace::StateType>()->setYaw(point1.angle.asRadians());
 
   end->as<ob::DubinsStateSpace::StateType>()->setXY(point2.position.x, point2.position.y);
-  end->as<ob::DubinsStateSpace::StateType>()->setYaw(point2.angle);
+  end->as<ob::DubinsStateSpace::StateType>()->setYaw(point2.angle.asRadians());
 
   double total = 0;
 

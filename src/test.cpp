@@ -3,8 +3,10 @@
  * @brief A file for testing the project
  */
 #include "test.h"
+#include "SFML/Window/VideoMode.hpp"
 #include "spdlog/spdlog.h"
 #include "tinyxml2.h"
+#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 
 void Test::runTests() {
@@ -41,7 +43,7 @@ void Test::testTinyXML2() {
 void Test::testSFML() {
   try {
     spdlog::debug("Testing SFML...");
-    sf::RenderWindow window(sf::VideoMode(100, 100), "Test");
+    sf::RenderWindow window(sf::VideoMode({100, 100}), "Test Window");
     if (!window.isOpen()) {
       spdlog::error("SFML is not working as expected.");
       throw std::runtime_error("SFML is not working as expected.");

@@ -29,7 +29,7 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} -fsanitize=address -g")
 set(CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS} -fsanitize=address")
 
 # Release flags: Optimize for speed, disable debugging symbols, and prioritize performance
-set(CMAKE_CXX_FLAGS_RELEASE "-Ofast -DNDEBUG")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -ffast-math -DNDEBUG")
 
 find_package(Boost REQUIRED)
 
@@ -54,7 +54,7 @@ include(FetchContent)
 
 FetchContent_Declare(SFML
     GIT_REPOSITORY https://github.com/SFML/SFML.git
-    GIT_TAG 2.6.x)
+    GIT_TAG 3.0.x)
 FetchContent_MakeAvailable(SFML)
 
 FetchContent_Declare(SPDLOG
