@@ -4,15 +4,10 @@
  *
  * This file contains the implementation of the CityMap class.
  */
-#include <iostream>
-#include <math.h>
-#include <set>
-
-#include "spdlog/spdlog.h"
-#include "tinyxml2.h"
-
 #include "cityMap.h"
 #include "utils.h"
+#include <set>
+#include <spdlog/spdlog.h>
 
 CityMap::CityMap() {
   roads.clear();

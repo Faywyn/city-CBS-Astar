@@ -77,26 +77,24 @@ add_executable(${PROJECT_NAME}
   src/car.cpp
   src/cityGraph.cpp
   src/cityMap.cpp
-  src/constraintController.cpp
   src/dataManager.cpp
-  src/dubins.cpp
   src/fileSelector.cpp
   src/main.cpp 
-  src/manager.cpp
-  src/managerCBS.cpp
   src/renderer.cpp
   src/test.cpp
-  src/timedAStar.cpp
   src/utils.cpp
+  src/managers/index.cpp
+  src/managers/ocbs.cpp
+  src/dubins/interpolator.cpp
 )
 
 # Include directories
-target_include_directories(${PROJECT_NAME} PRIVATE
+target_include_directories(${PROJECT_NAME} PUBLIC
   include
 )
 
 # Link libraries
-target_link_libraries(${PROJECT_NAME} PRIVATE
+target_link_libraries(${PROJECT_NAME} PUBLIC
   sfml-graphics
   spdlog::spdlog
   tinyxml2
@@ -104,4 +102,4 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 )
 
 # Ensure C++17 standard is used
-target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
+target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)

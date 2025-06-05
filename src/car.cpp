@@ -5,14 +5,11 @@
  * This file contains the implementation of the Car class.
  */
 #include "car.h"
-#include "SFML/Graphics/Text.hpp"
-#include "SFML/System/Angle.hpp"
 #include "config.h"
-#include "dubins.h"
 #include "utils.h"
-
-#include <iostream>
-#include <random>
+#include <SFML/Graphics/Text.hpp>
+#include <SFML/System/Angle.hpp>
+#include <spdlog/spdlog.h>
 
 Car::Car() {
   std::vector<sf::Color> colors = {sf::Color(50, 120, 190), sf::Color(183, 132, 144), sf::Color(105, 101, 89),
@@ -33,6 +30,16 @@ void Car::render(sf::RenderWindow &window) {
 
   sf::Vector2f point = path[currentPoint];
   sf::Vector2f nextPoint = path[currentPoint + 1];
+  sf::Vector2f diff = nextPoint - point;
+  double length = sqrt(diff.x * diff.x + diff.y * diff.y);
+  int fact = 1;
+
+  while (point == nextPoint && currentPoint + fact < (int)path.size()) {
+    fact++;
+    nextPoint = path[currentPoint + fact];
+    diff = nextPoint - point;
+    length = sqrt(diff.x * diff.x + diff.y * diff.y);
+  }
 
   sf::RectangleShape shape(sf::Vector2f(CAR_LENGTH, CAR_WIDTH));
   shape.setOrigin({CAR_LENGTH / 2.0f, CAR_WIDTH / 2.0f});
@@ -48,14 +55,15 @@ void Car::render(sf::RenderWindow &window) {
     return;
 
   // Render speed, elapsed time, remaining time, and distance
-  int speed = (int)(getSpeed() * 3.6f);
-  int dSpeed = (getSpeed() * 3.6f - (double)speed) * 100;
+  double speed = 3.6f * length / (fact * SIM_STEP_TIME);
+  int iSpeed = speed;
+  int dSpeed = (double)(speed - iSpeed) * 100.0;
   sf::Font font = loadFont();
   sf::Text text(font);
   text.setCharacterSize(24);
   text.setFillColor(sf::Color::White);
   text.setPosition(getPosition());
-  text.setString(std::to_string(speed) + "." + std::to_string(dSpeed) + " km/h" + "\n" +
+  text.setString(std::to_string(iSpeed) + "." + std::to_string(dSpeed) + " km/h" + "\n" +
                  std::to_string((int)getElapsedTime()) + "s / " + std::to_string((int)getRemainingTime()) + "s" + "\n" +
                  std::to_string((int)getElapsedDistance()) + "m / " + std::to_string((int)getRemainingDistance()) +
                  "m");
@@ -74,15 +82,35 @@ void Car::render(sf::RenderWindow &window) {
   }
 }
 
-void Car::assignPath(std::vector<AStar::node> path) {
+void Car::assignPath(std::vector<AStar::node> path, CityGraph &graph) {
   this->path.clear();
   this->aStarPath = path;
-  DubinsPath dubins(path);
-  std::vector<CityGraph::point> dubinsPath_ = dubins.path();
-  for (CityGraph::point point : dubinsPath_) {
-    this->path.push_back(point.position);
-  }
   currentPoint = 0;
+
+  double index = 0;
+  double t = 0;
+  double prevTime = 0;
+
+  for (int i = 1; i < (int)path.size(); i++) {
+    AStar::node prevNode = path[i - 1];
+    AStar::node node = path[i];
+
+    CityGraph::point start = node.arcFrom.first;
+    CityGraph::neighbor end = node.arcFrom.second;
+
+    DubinsInterpolator *interpolator = graph.getInterpolator(start, end);
+
+    double duration = interpolator->getDuration(prevNode.speed, node.speed);
+
+    while (t < prevTime + duration) {
+      double tt = t - prevTime;
+      CityGraph::point p = interpolator->get(tt, prevNode.speed, node.speed);
+
+      this->path.push_back(p.position);
+      t += SIM_STEP_TIME;
+    }
+    prevTime += duration;
+  }
 }
 
 void Car::assignExistingPath(std::vector<sf::Vector2f> path) {
@@ -160,14 +188,14 @@ void Car::chooseRandomStartEndPath(CityGraph &graph, CityMap &cityMap) {
     path = aStar.findPath();
 
     if (!path.empty() && (int)path.size() >= 3) {
-      TimedAStar timedAStar(start, end, graph, nullptr, 0);
+      AStar aStar(start, end, graph);
       path.clear();
-      path = timedAStar.findPath();
+      path = aStar.findPath();
     }
   } while (path.empty() || (int)path.size() < 3);
 
   this->assignStartEnd(start, end);
-  this->assignPath(path);
+  this->assignPath(path, graph);
 }
 
 double Car::getAverageSpeed(CityGraph &graph) {

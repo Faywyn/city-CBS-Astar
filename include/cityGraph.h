@@ -1,15 +1,16 @@
-/**
+/**city
  * @file cityGraph.h
  * @brief A graph representing the city's streets and intersections using a graph.
  *
  * This file contains the definition of the CityGraph class.
  */
 #pragma once
-#include <unordered_set>
 
 #include "cityMap.h"
 #include "config.h"
-#include "utils.h"
+#include <unordered_set>
+
+class DubinsInterpolator;
 
 /**
  * @struct _cityGraphPoint
@@ -17,7 +18,7 @@
  *
  * This struct represents a point in the city graph. It contains the position and the angle of the point.
  */
-typedef struct _cityGraphPoint {
+struct _cityGraphPoint {
   sf::Vector2f position; /**< \brief The position of the point */
   sf::Angle angle;       /**< \brief The angle of the point */
 
@@ -31,7 +32,7 @@ typedef struct _cityGraphPoint {
 
     return x == oX && y == oY && a == oA;
   }
-} _cityGraphPoint;
+};
 
 /**
  * @struct _cityGraphNeighbor
@@ -44,14 +45,12 @@ typedef struct _cityGraphNeighbor {
   _cityGraphPoint point; /**< \brief The neighbor point */
   double maxSpeed;       /**< \brief The maximum speed to reach the neighbor point */
   double turningRadius;  /**< \brief The turning radius to reach the neighbor point */
-  double distance;       /**< \brief The distance to reach the neighbor point */
   bool isRightWay;       /**< \brief If it is the right way */
 
   bool operator==(const _cityGraphNeighbor &other) const {
     return point == other.point && maxSpeed == other.maxSpeed && turningRadius == other.turningRadius &&
-           distance == other.distance && isRightWay == other.isRightWay;
+           isRightWay == other.isRightWay;
   }
-
 } _cityGraphNeighbor;
 
 namespace std {
@@ -67,8 +66,12 @@ template <> struct hash<_cityGraphPoint> {
 template <> struct hash<_cityGraphNeighbor> {
   std::size_t operator()(const _cityGraphNeighbor &neighbor) const {
     return std::hash<_cityGraphPoint>()(neighbor.point) ^ std::hash<double>()(neighbor.maxSpeed) ^
-           std::hash<double>()(neighbor.turningRadius) ^ std::hash<double>()(neighbor.distance) ^
-           std::hash<bool>()(neighbor.isRightWay);
+           std::hash<double>()(neighbor.turningRadius) ^ std::hash<bool>()(neighbor.isRightWay);
+  }
+};
+template <> struct hash<std::pair<_cityGraphPoint, _cityGraphNeighbor>> {
+  std::size_t operator()(const std::pair<_cityGraphPoint, _cityGraphNeighbor> &pair) const {
+    return std::hash<_cityGraphPoint>()(pair.first) ^ std::hash<_cityGraphNeighbor>()(pair.second);
   }
 };
 } // namespace std
@@ -123,9 +126,19 @@ public:
    */
   double getWidth() const { return width; }
 
+  DubinsInterpolator *getInterpolator(const point &point1, const neighbor &point2) {
+    std::pair<point, neighbor> key = {point1, point2};
+    if (interpolators.find(key) != interpolators.end()) {
+      return interpolators[key];
+    }
+    return nullptr;
+  }
+
 private:
   std::unordered_map<point, std::vector<neighbor>> neighbors;
   std::unordered_set<point> graphPoints;
+
+  std::unordered_map<std::pair<point, neighbor>, DubinsInterpolator *> interpolators;
 
   void linkPoints(const point &point1, const point &point2, int direction,
                   bool subPoints); // direction: 0 -> point1 to point2, 1 -> point2 to point1, 2 -> both

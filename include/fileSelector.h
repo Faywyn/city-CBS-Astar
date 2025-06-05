@@ -5,6 +5,7 @@
  * This file contains the FileSelector class. It is used to select a file from a folder.
  */
 #pragma once
+
 #include <iostream>
 #include <termios.h>
 #include <unistd.h>

@@ -3,10 +3,10 @@
  * @brief Utility functions
  */
 #pragma once
+
+#include "car.h"
 #include "config.h"
 #include <SFML/Graphics.hpp>
-
-class Car;
 
 /**
  * @brief Convert latitude and longitude to x and y
@@ -43,23 +43,6 @@ inline double turningRadius(double speed) { return speed * speed / CAR_MAX_G_FOR
  * @return The speed
  */
 inline double turningRadiusToSpeed(double radius) { return std::sqrt(radius * CAR_MAX_G_FORCE); }
-
-/**
- * @bref Check if two cars collided
- * @param car1 The first car
- * @param car2 The second car
- */
-bool carsCollided(Car car1, Car car2, int time);
-
-/**
- * @brief Check if two cars have a conflict
- * @param carPos The position of the car
- * @param carAngle The angle of the car
- * @param confPos The position of the conflicting car
- * @param confAngle The angle of the conflicting car
- * @return If the cars have a conflict
- */
-bool carConflict(sf::Vector2f carPos, sf::Angle carAngle, sf::Vector2f confPos, sf::Angle confAngle);
 
 /**
  * @brief Load a font

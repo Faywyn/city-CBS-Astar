@@ -4,16 +4,16 @@
  *
  * This file contains the main function of the project. It is used to run the simulation and create data.
  */
-#include "spdlog/spdlog.h"
-#include <SFML/Graphics.hpp>
-
 #include "cityMap.h"
 #include "config.h"
 #include "dataManager.h"
 #include "fileSelector.h"
-#include "managerCBS.h"
+#include "manager.h"
+#include "manager_ocbs.h"
 #include "renderer.h"
+#include "spdlog/spdlog.h"
 #include "test.h"
+#include <SFML/Graphics.hpp>
 
 int main(int nArgs, char **args) {
   srand(time(NULL));

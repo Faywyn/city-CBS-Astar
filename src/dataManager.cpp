@@ -4,18 +4,16 @@
  *
  * This file contains the implementation of the DataManager class.
  */
+#include "dataManager.h"
+#include "cityGraph.h"
+#include "cityMap.h"
+#include "config.h"
+#include "manager.h"
 #include <filesystem>
 #include <fstream>
 #include <iostream>
 #include <random>
-#include <string>
-
 #include <spdlog/spdlog.h>
-
-#include "cityGraph.h"
-#include "cityMap.h"
-#include "dataManager.h"
-#include "manager.h"
 
 DataManager::DataManager(std::string filename) {
   // Create /data folder if it doesn't exist
@@ -27,7 +25,7 @@ DataManager::DataManager(std::string filename) {
 
 void DataManager::createData(int numData, int numCarsMin, int numCarsMax, std::string mapName) {
 
-  spdlog::error("Deprecated: Use the new data manager class");
+  spdlog::error("Deprecated: Need to be updated to use the new manager system");
 
   return;
 

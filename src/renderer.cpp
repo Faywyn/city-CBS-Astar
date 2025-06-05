@@ -4,26 +4,22 @@
  *
  * This file contains the implementation of the Renderer class.
  */
-#include <algorithm>
-#include <iostream>
-#include <random>
-#include <vector>
-
+#include "renderer.h"
+#include "config.h"
+#include "utils.h"
 #include <ompl/base/State.h>
 #include <ompl/base/StateSpace.h>
 #include <ompl/base/spaces/DubinsStateSpace.h>
 #include <ompl/geometric/SimpleSetup.h>
 #include <ompl/geometric/planners/rrt/RRT.h>
 #include <spdlog/spdlog.h>
-
-#include "aStar.h"
-#include "config.h"
-#include "renderer.h"
-#include "utils.h"
+#include <vector>
 
 namespace ob = ompl::base;
 
 void Renderer::startRender(const CityMap &cityMap, const CityGraph &cityGraph, Manager &manager) {
+  manager.planPaths();
+
   window.create(sf::VideoMode({SCREEN_WIDTH, SCREEN_HEIGHT}), "City Map");
 
   // Set the view to the center of the city map, allowing some basic camera movement
@@ -46,6 +42,7 @@ void Renderer::startRender(const CityMap &cityMap, const CityGraph &cityGraph, M
 
   resetView();
   renderCityMap(cityMap);
+  window.display();
   time = 0;
 
   sf::Clock clockCars;
@@ -59,47 +56,41 @@ void Renderer::startRender(const CityMap &cityMap, const CityGraph &cityGraph, M
         return;
       }
 
-      if (event->is<sf::Event::MouseButtonPressed>()) {
-        if (event->getIf<sf::Event::MouseButtonPressed>()->button == sf::Mouse::Button::Left) {
-          sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
-          spdlog::warn("Mouse clicked, event handler to implement");
-          // manager.toggleCarDebug(mousePos);
-        }
+      if (event->is<sf::Event::KeyPressed>() || event->is<sf::Event::MouseButtonPressed>()) {
+        manager.userInput(event.value(), window);
       }
 
-      if (event->is<sf::Event::KeyPressed>()) {
-        if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::Escape) {
-          window.close();
-        } else if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::Up) {
-          view.move({0, -(float)(height * MOVE_SPEED)});
-        } else if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::Down) {
-          view.move({0, +(float)(height * MOVE_SPEED)});
-        } else if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::Left) {
-          view.move({-(float)(width * MOVE_SPEED), 0});
-        } else if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::Right) {
-          view.move({+(float)(width * MOVE_SPEED), 0});
-        } else if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::Equal) {
-          view.zoom(1.0f - ZOOM_SPEED);
-        } else if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::Subtract) {
-          view.zoom(1.0f + ZOOM_SPEED);
-        } else if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::R) {
-          resetView();
-          spdlog::debug("View reset");
-        } else if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::D) {
-          debug = !debug;
-          spdlog::debug("Debug mode: {}", debug);
-        } else if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::S) {
-          speedUp = !speedUp;
-        } else if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::P) {
-          pause = !pause;
-        } else {
-          spdlog::warn("Key pressed, event handler to implement");
-        }
-      }
-
-      // If resizing the window, reset the view
       if (const auto *resized = event->getIf<sf::Event::Resized>()) {
         resetView();
+      }
+
+      if (!event->is<sf::Event::KeyPressed>())
+        continue;
+
+      if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::Escape) {
+        window.close();
+      } else if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::Up) {
+        view.move({0, -(float)(height * MOVE_SPEED)});
+      } else if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::Down) {
+        view.move({0, +(float)(height * MOVE_SPEED)});
+      } else if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::Left) {
+        view.move({-(float)(width * MOVE_SPEED), 0});
+      } else if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::Right) {
+        view.move({+(float)(width * MOVE_SPEED), 0});
+      } else if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::Equal) {
+        view.zoom(1.0f - ZOOM_SPEED);
+      } else if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::Subtract) {
+        view.zoom(1.0f + ZOOM_SPEED);
+      } else if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::R) {
+        resetView();
+        spdlog::debug("View reset");
+      } else if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::D) {
+        debug = !debug;
+        spdlog::debug("Debug mode: {}", debug);
+      } else if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::S) {
+        speedUp = !speedUp;
+      } else if (event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::P) {
+        pause = !pause;
       }
     }
 
@@ -250,7 +241,7 @@ void Renderer::renderCityGraph(const CityGraph &cityGraph, const sf::View &view)
         continue;
 
       double radius = turningRadius(neighbor.maxSpeed);
-      auto space = ob::DubinsStateSpace(radius);
+      auto space = ob::DubinsStateSpace(radius, true);
       ob::RealVectorBounds bounds(2);
       space.setBounds(bounds);
 

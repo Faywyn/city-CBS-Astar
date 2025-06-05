@@ -3,11 +3,12 @@
  * @brief A file for testing the project
  */
 #include "test.h"
-#include "SFML/Window/VideoMode.hpp"
-#include "spdlog/spdlog.h"
-#include "tinyxml2.h"
+#include "config.h"
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
+#include <SFML/Window/VideoMode.hpp>
+#include <spdlog/spdlog.h>
+#include <tinyxml2.h>
 
 void Test::runTests() {
   testSpdlog();

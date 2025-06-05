@@ -1,7 +1,10 @@
 #pragma once
 
+#include "config.h"
 #include <SFML/Graphics.hpp>
+#include <math.h>
 #include <string>
+#include <tinyxml2.h>
 #include <vector>
 
 /**

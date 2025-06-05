@@ -7,11 +7,11 @@
  */
 #pragma once
 
-#include <SFML/Graphics.hpp>
-#include <vector>
-
 #include "car.h"
 #include "cityGraph.h"
+#include <SFML/Graphics.hpp>
+#include <spdlog/spdlog.h>
+#include <vector>
 
 /**
  * @class Manager
@@ -53,7 +53,7 @@ public:
    * @param event The event
    * @param window The window
    */
-  virtual void userInput(sf::Event &event, sf::RenderWindow &window) {};
+  virtual void userInput(sf::Event event, sf::RenderWindow &window) {};
 
   /**
    * @brief Render the agents based on their current position

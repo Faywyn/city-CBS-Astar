@@ -4,17 +4,17 @@ shift
 args="$@"
 if [ "$type" == "debug" ]; then
   cmake -DCMAKE_BUILD_TYPE=Debug -B build
-  cmake --build build -j
+  cmake --build build -j8
 elif [ "$type" == "debugRun" ]; then
   cmake -DCMAKE_BUILD_TYPE=Debug -B build
-  cmake --build build -j
+  cmake --build build -j8
   ./build/bin/city-cbs-astar $args
 elif [ "$type" == "release" ]; then
   cmake -DCMAKE_BUILD_TYPE=Release -B build
-  cmake --build build -j
+  cmake --build build -j8
 elif [ "$type" == "releaseRun" ]; then
   cmake -DCMAKE_BUILD_TYPE=Release -B build
-  cmake --build build -j
+  cmake --build build -j8
   ./build/bin/city-cbs-astar $args
 elif [ "$type" == "clean" ]; then
   rm -rf build

@@ -2,10 +2,8 @@
  * @file utils.cpp
  * @brief Utility functions implementation
  */
-#include <spdlog/spdlog.h>
-
-#include "car.h"
 #include "utils.h"
+#include <spdlog/spdlog.h>
 
 bool fontLoaded = false;
 sf::Font font;

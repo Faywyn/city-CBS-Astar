@@ -5,13 +5,9 @@
  * This file contains the implementation of the FileSelector class. It is used to select a file from a folder.
  */
 #include "fileSelector.h"
-
+#include "config.h"
 #include <filesystem>
-#include <iostream>
 #include <spdlog/spdlog.h>
-#include <termios.h>
-#include <unistd.h>
-#include <vector>
 
 namespace fs = std::filesystem;
 

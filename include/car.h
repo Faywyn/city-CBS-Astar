@@ -7,11 +7,10 @@
  */
 #pragma once
 
-#include <SFML/Graphics.hpp>
-#include <vector>
-
 #include "aStar.h"
 #include "cityGraph.h"
+#include "dubins.h"
+#include <vector>
 
 /**
  * @class Car
@@ -32,7 +31,7 @@ public:
    * @param start The start point
    * @param end The end point
    */
-  void assignStartEnd(CityGraph::point start, CityGraph::point end) {
+  void assignStartEnd(_cityGraphPoint start, _cityGraphPoint end) {
     this->start = start;
     this->end = end;
   }
@@ -48,7 +47,7 @@ public:
    * @brief Assign a path to the car
    * @param path The path
    */
-  void assignPath(std::vector<AStar::node> path);
+  void assignPath(std::vector<AStar::node> path, CityGraph &graph);
 
   /**
    * @brief Assign an existing path to the car
@@ -71,13 +70,13 @@ public:
    * @brief Get the start point
    * @return The start point
    */
-  CityGraph::point getStart() { return start; }
+  _cityGraphPoint getStart() { return start; }
 
   /**
    * @brief Get the end point
    * @return The end point
    */
-  CityGraph::point getEnd() { return end; }
+  _cityGraphPoint getEnd() { return end; }
 
   /**
    * @brief Get the current point in the path
@@ -160,11 +159,30 @@ public:
   void toggleDebug() { debug = !debug; }
 
 private:
-  CityGraph::point start;
-  CityGraph::point end;
+  _cityGraphPoint start;
+  _cityGraphPoint end;
   std::vector<sf::Vector2f> path;
   std::vector<AStar::node> aStarPath;
   int currentPoint = 0;
   bool debug = false;
   sf::Color color;
 };
+
+// Some utility fonctions
+
+/**
+ * @bref Check if two cars collided
+ * @param car1 The first car
+ * @param car2 The second car
+ */
+bool carsCollided(Car car1, Car car2, int time);
+
+/**
+ * @brief Check if two cars have a conflict
+ * @param carPos The position of the car
+ * @param carAngle The angle of the car
+ * @param confPos The position of the conflicting car
+ * @param confAngle The angle of the conflicting car
+ * @return If the cars have a conflict
+ */
+bool carConflict(sf::Vector2f carPos, sf::Angle carAngle, sf::Vector2f confPos, sf::Angle confAngle);

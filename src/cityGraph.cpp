@@ -5,7 +5,8 @@
  * This file contains the implementation of the CityGraph class. This class represents the graph of the city. It
  * contains the points of the graph and the neighbors of each point.
  */
-#include <iostream>
+#include "cityGraph.h"
+#include "utils.h"
 #include <ompl/base/State.h>
 #include <ompl/base/StateSpace.h>
 #include <ompl/base/spaces/DubinsStateSpace.h>
@@ -13,10 +14,6 @@
 #include <ompl/geometric/planners/rrt/RRT.h>
 #include <random>
 #include <spdlog/spdlog.h>
-
-#include "cityGraph.h"
-#include "config.h"
-#include "utils.h"
 
 namespace ob = ompl::base;
 
@@ -195,9 +192,6 @@ void CityGraph::createGraph(const CityMap &cityMap) {
 
       if (can) {
         neighbor.maxSpeed = speed - 0.1;
-        neighbor.distance = std::sqrt(std::pow(neighbor.point.position.x - point.position.x, 2) +
-                                      std::pow(neighbor.point.position.y - point.position.y, 2));
-
         neighbor.turningRadius = turningRadius(speed);
         newNeighbors.push_back(neighbor);
       }
@@ -208,6 +202,23 @@ void CityGraph::createGraph(const CityMap &cityMap) {
       neighbors[point].push_back(neighbor);
     }
   }
+
+  // Interpolate all the curves
+  spdlog::info("Interpolating curves ...");
+
+  interpolators.clear();
+
+  for (auto &point : graphPoints) {
+    for (const auto &neighbor : neighbors[point]) {
+      std::pair<_cityGraphPoint, _cityGraphNeighbor> key = {point, neighbor};
+      if (interpolators.find(key) == interpolators.end()) {
+        interpolators[key] = new DubinsInterpolator();
+        interpolators[key]->init(point, neighbor.point, neighbor.turningRadius);
+      }
+    }
+  }
+
+  spdlog::info("Curves interpolated");
 }
 
 void CityGraph::linkPoints(const point &p, const point &n, int direction, bool subPoints) {
@@ -230,8 +241,8 @@ void CityGraph::linkPoints(const point &p, const point &n, int direction, bool s
         copyPoint.angle = anglePoint;
         copyNeighbor.angle = angleNeighbor;
 
-        neighbors[copyPoint].push_back({copyNeighbor, 0, 0, 0, isRiP}); // This fields will be updated later
-        neighbors[copyNeighbor].push_back({copyPoint, 0, 0, 0, isRiN});
+        neighbors[copyPoint].push_back({copyNeighbor, 0, 0, isRiP}); // This fields will be updated later
+        neighbors[copyNeighbor].push_back({copyPoint, 0, 0, isRiN});
 
         graphPoints.insert(copyPoint);
         graphPoints.insert(copyNeighbor);
@@ -257,8 +268,8 @@ void CityGraph::linkPoints(const point &p, const point &n, int direction, bool s
         newPoint.position = sf::Vector2f(p.position.x + i * dx, p.position.y + i * dy);
         newPoint.angle = anglePoint;
 
-        neighbors[previousPoint].push_back({newPoint, 0, 0, 0, isRiP}); // This fields will be updated later
-        neighbors[newPoint].push_back({previousPoint, 0, 0, 0, isRiN});
+        neighbors[previousPoint].push_back({newPoint, 0, 0, isRiP}); // This fields will be updated later
+        neighbors[newPoint].push_back({previousPoint, 0, 0, isRiN});
 
         previousPoint = newPoint;
 
@@ -266,7 +277,7 @@ void CityGraph::linkPoints(const point &p, const point &n, int direction, bool s
       }
 
       // Add the last point
-      neighbors[previousPoint].push_back({n, 0, 0, 0, isRiP}); // This fields will be updated later
+      neighbors[previousPoint].push_back({n, 0, 0, isRiP}); // This fields will be updated later
     }
   }
 }
@@ -292,7 +303,7 @@ CityGraph::point CityGraph::getRandomPoint() const {
 bool CityGraph::canLink(const point &point1, const point &point2, double speed, double *distance) const {
   double radius = turningRadius(speed);
 
-  ob::DubinsStateSpace space(radius);
+  ob::DubinsStateSpace space(radius, true);
 
   ob::State *start = space.allocState();
   ob::State *end = space.allocState();
@@ -309,7 +320,7 @@ bool CityGraph::canLink(const point &point1, const point &point2, double speed, 
   ob::DubinsStateSpace::DubinsPath path = space.dubins(start, end);
   for (unsigned int i = 0; i < 3; ++i) // Dubins path has up to 3 segments
   {
-    auto type = path.type_[i];
+    auto type = (*path.type_)[i];
     if (type == ob::DubinsStateSpace::DubinsPathSegmentType::DUBINS_LEFT) {
       total += std::abs(path.length_[i]);
     } else if (type == ob::DubinsStateSpace::DubinsPathSegmentType::DUBINS_RIGHT) {

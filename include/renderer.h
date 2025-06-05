@@ -4,11 +4,11 @@
  */
 #pragma once
 
-#include <SFML/Graphics.hpp>
-
-#include "cityGraph.h"
 #include "cityMap.h"
 #include "manager.h"
+#include <SFML/Graphics.hpp>
+
+class CityGraph;
 
 /**
  * @class Renderer
@@ -47,16 +47,9 @@ public:
    */
   void renderTime();
 
-  /**
-   * @brief Render the conflicts
-   */
-  void setConflicts(const std::vector<AStar::conflict> &conflicts) { this->conflicts = conflicts; }
-
 private:
   sf::RenderWindow window;
   double time;
-
-  std::vector<AStar::conflict> conflicts;
 
   bool debug = false;
 };

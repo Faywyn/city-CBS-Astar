@@ -1,17 +1,14 @@
 /**
- * @file manager.cpp
+ * @file managers/index.cpp
  * @brief Implementation of the Manager class
  *
  * This file contains the implementation of the Manager class.
  */
 #include "manager.h"
-#include "aStar.h"
-
-#include <iostream>
-#include <spdlog/spdlog.h>
 
 void Manager::initializeAgents(int numCars) {
   spdlog::info("Initializing {} agent...", numCars);
+  this->numCars = numCars;
 
   for (int i = 0; i < numCars; i++) {
     Car car;
