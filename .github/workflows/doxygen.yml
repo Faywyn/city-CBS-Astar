@@ -1,25 +1,29 @@
-name: Génération Doxygen
+name: Generate and Deploy Doxygen Documentation
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main  # Change si ta branche principale a un autre nom
 
 jobs:
-  build-docs:
+  generate-docs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Cloner le dépôt
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: 📦 Installer Doxygen
-        run: sudo apt-get install -y doxygen
+      - name: Set up Doxygen
+        run: sudo apt-get install doxygen graphviz -y
 
-      - name: 📄 Générer la documentation
-        run: cd doc && doxygen Doxyfile
+      - name: Generate Doxygen documentation
+        run: doxygen doc/Doxyfile
 
-      - name: 🚀 Déployer sur GitHub Pages
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./doc/html
+          publish_branch: gh-pages
+          force_orphan: true
+          enable_jekyll: false
