@@ -3,7 +3,7 @@
 #--------------------------------------------------------------------------- 
 
 PROJECT_NAME           = "City Based CBS"
-OUTPUT_DIRECTORY       = ./html
+OUTPUT_DIRECTORY       = .
 CREATE_SUBDIRS         = NO
 
 #--------------------------------------------------------------------------- 
@@ -64,11 +64,3 @@ DOT_NUM_THREADS        = 2
 CLASS_DIAGRAMS         = YES
 UML_LOOK               = YES
 DOT_IMAGE_FORMAT       = svg
-
-#--------------------------------------------------------------------------- 
-# Logos et feuille de style (facultatif si tu les as)
-#--------------------------------------------------------------------------- 
-
-PROJECT_LOGO           = ./bc_s.png
-HTML_STYLESHEET        = ./stylesheet.tex
-
