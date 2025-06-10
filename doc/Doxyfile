@@ -1,15 +1,14 @@
 #--------------------------------------------------------------------------- 
 # Project configuration
 #--------------------------------------------------------------------------- 
-
-PROJECT_NAME           = "City Based CBS"
-OUTPUT_DIRECTORY       = ./html
+PROJECT_NAME           = "City CBS A*"
+# Place outputs (html/ et latex/) dans le même dossier que le Doxyfile
+OUTPUT_DIRECTORY       = .
 CREATE_SUBDIRS         = NO
 
 #--------------------------------------------------------------------------- 
 # Configuration des fichiers sources
 #--------------------------------------------------------------------------- 
-
 INPUT                  = ../src ../include
 FILE_PATTERNS          = *.cpp *.h
 RECURSIVE              = YES
@@ -20,9 +19,8 @@ EXCLUDE_SYMLINKS       = NO
 #--------------------------------------------------------------------------- 
 # Extraction de documentation
 #--------------------------------------------------------------------------- 
-
-EXTRACT_ALL            = YES
-EXTRACT_PRIVATE        = YES
+EXTRACT_ALL            = YES     # Extrait tout, mêmes entités non commentées
+EXTRACT_PRIVATE        = NO      # N’extrait PAS les membres privés
 EXTRACT_STATIC         = YES
 EXTRACT_LOCAL_CLASSES  = YES
 EXTRACT_ANON_NSPACES   = YES
@@ -30,33 +28,32 @@ EXTRACT_ANON_NSPACES   = YES
 #--------------------------------------------------------------------------- 
 # Génération HTML
 #--------------------------------------------------------------------------- 
-
 GENERATE_HTML          = YES
 HTML_OUTPUT            = html
 HTML_FILE_EXTENSION    = .html
-HTML_COLORSTYLE_HUE    = 220
-HTML_COLORSTYLE_SAT    = 100
-HTML_COLORSTYLE_GAMMA  = 80
-HTML_DYNAMIC_SECTIONS  = YES
-
-#--------------------------------------------------------------------------- 
-# Génération LaTeX (désactivée)
-#--------------------------------------------------------------------------- 
-
-GENERATE_LATEX         = NO
-
-#--------------------------------------------------------------------------- 
-# Configuration diverses
-#--------------------------------------------------------------------------- 
-
 GENERATE_TREEVIEW      = YES
 FULL_PATH_NAMES        = NO
 STRIP_FROM_PATH        = ../
 
 #--------------------------------------------------------------------------- 
-# Graphes (si tu as Graphviz)
+# Génération LaTeX (pour PDF)
 #--------------------------------------------------------------------------- 
+GENERATE_LATEX         = YES
+LATEX_OUTPUT           = latex
+PDF_HYPERLINKS         = YES     # hyperliens dans le PDF
+LATEX_BATCHMODE        = NO
+LATEX_HIDE_INDICES     = NO
 
+#--------------------------------------------------------------------------- 
+# Inclusion du code source dans le PDF
+#--------------------------------------------------------------------------- 
+SOURCE_BROWSER         = YES     # génère les listing de code
+INLINE_SOURCES         = YES     # inclut le code inline dans la doc
+LATEX_SOURCE_CODE      = YES     # inclut le code source dans le PDF
+
+#--------------------------------------------------------------------------- 
+# Graphes (si Graphviz est installé)
+#--------------------------------------------------------------------------- 
 HAVE_DOT               = YES
 CALL_GRAPH             = YES
 CALLER_GRAPH           = YES
@@ -64,3 +61,9 @@ DOT_NUM_THREADS        = 2
 CLASS_DIAGRAMS         = YES
 UML_LOOK               = YES
 DOT_IMAGE_FORMAT       = svg
+
+#--------------------------------------------------------------------------- 
+# Logos et feuille de style (facultatif)
+#--------------------------------------------------------------------------- 
+PROJECT_LOGO           = ./bc_s.png
+HTML_STYLESHEET        = ./stylesheet.tex

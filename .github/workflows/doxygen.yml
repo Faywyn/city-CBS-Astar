@@ -1,31 +1,42 @@
-name: Generate and Deploy Doxygen Documentation
+name: Generate & Deploy Doxygen Documentation
 
 on:
   push:
-    branches:
-      - main  # Change si ta branche principale a un autre nom
+    branches: [ main ]
 
 jobs:
-  generate-docs:
+  docs:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Doxygen
-        run: sudo apt-get install doxygen graphviz -y
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y doxygen graphviz make
 
-      - name: Generate Doxygen documentation
+      - name: Generate Doxygen docs
         run: |
           cd doc
           doxygen Doxyfile
+
+      - name: Build PDF from LaTeX
+        run: |
+          cd doc/latex
+          make
+
+      - name: Copy PDF into HTML folder
+        run: |
+          cp doc/latex/refman.pdf doc/html/
+
+      - name: Verify generated files
+        run: ls -R doc/html
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./doc/html
           publish_branch: gh-pages
+          publish_dir: ./doc/html
           force_orphan: true
           enable_jekyll: false
