@@ -15,14 +15,9 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          # Doxygen + Graphviz pour la doc HTML et les graphes
-          sudo apt-get install -y doxygen graphviz make
-          # Paquets LaTeX minimaux pour pdflatex
-          sudo apt-get install -y \
-            texlive-latex-base \
-            texlive-latex-recommended \
-            texlive-latex-extra \
-            texlive-fonts-recommended
+          sudo apt-get install -y doxygen graphviz make \
+            texlive-latex-base texlive-latex-recommended \
+            texlive-latex-extra texlive-fonts-recommended
 
       - name: Generate Doxygen docs
         run: |
@@ -34,18 +29,21 @@ jobs:
           cd doc/latex
           make
 
-      - name: Copy PDF into HTML folder
+      - name: Organize output
         run: |
-          cp doc/latex/refman.pdf doc/html/
+          # Crée le dossier pdf au même niveau qu'html
+          mkdir -p doc/pdf
+          cp doc/latex/refman.pdf doc/pdf/
 
       - name: Verify generated files
-        run: ls -R doc/html
+        run: ls -R doc
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: ./doc/html
+          publish_dir: ./doc
           force_orphan: true
           enable_jekyll: false
+          exclude_assets: latex
