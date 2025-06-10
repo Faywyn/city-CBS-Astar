@@ -2,7 +2,6 @@
 # Project configuration
 #--------------------------------------------------------------------------- 
 PROJECT_NAME           = "City CBS A*"
-# Place outputs (html/ et latex/) dans le même dossier que le Doxyfile
 OUTPUT_DIRECTORY       = .
 CREATE_SUBDIRS         = NO
 
@@ -19,8 +18,8 @@ EXCLUDE_SYMLINKS       = NO
 #--------------------------------------------------------------------------- 
 # Extraction de documentation
 #--------------------------------------------------------------------------- 
-EXTRACT_ALL            = YES     # Extrait tout, mêmes entités non commentées
-EXTRACT_PRIVATE        = NO      # N’extrait PAS les membres privés
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = NO
 EXTRACT_STATIC         = YES
 EXTRACT_LOCAL_CLASSES  = YES
 EXTRACT_ANON_NSPACES   = YES
@@ -35,35 +34,34 @@ GENERATE_TREEVIEW      = YES
 FULL_PATH_NAMES        = NO
 STRIP_FROM_PATH        = ../
 
+# N’injecte pas de thèmes externes, reprend le CSS généré par Doxygen
+HTML_STYLESHEET        = 
+
+# Désactivation des graphes
+HAVE_DOT               = NO
+DOT_IMAGE_FORMAT       = png
+CLASS_DIAGRAMS         = NO
+COLLABORATION_GRAPH    = NO
+CALL_GRAPH             = NO
+CALLER_GRAPH           = NO
+
 #--------------------------------------------------------------------------- 
 # Génération LaTeX (pour PDF)
 #--------------------------------------------------------------------------- 
 GENERATE_LATEX         = YES
 LATEX_OUTPUT           = latex
-PDF_HYPERLINKS         = YES     # hyperliens dans le PDF
+PDF_HYPERLINKS         = YES
 LATEX_BATCHMODE        = NO
 LATEX_HIDE_INDICES     = NO
 
 #--------------------------------------------------------------------------- 
 # Inclusion du code source dans le PDF
 #--------------------------------------------------------------------------- 
-SOURCE_BROWSER         = YES     # génère les listing de code
-INLINE_SOURCES         = YES     # inclut le code inline dans la doc
-LATEX_SOURCE_CODE      = YES     # inclut le code source dans le PDF
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = YES
+LATEX_SOURCE_CODE      = YES
 
 #--------------------------------------------------------------------------- 
-# Graphes (si Graphviz est installé)
+# Divers
 #--------------------------------------------------------------------------- 
-HAVE_DOT               = YES
-CALL_GRAPH             = YES
-CALLER_GRAPH           = YES
-DOT_NUM_THREADS        = 2
-CLASS_DIAGRAMS         = YES
-UML_LOOK               = YES
-DOT_IMAGE_FORMAT       = svg
-
-#--------------------------------------------------------------------------- 
-# Logos et feuille de style (facultatif)
-#--------------------------------------------------------------------------- 
-PROJECT_LOGO           = ./bc_s.png
-HTML_STYLESHEET        = ./stylesheet.tex
+GENERATE_TREEVIEW      = YES
