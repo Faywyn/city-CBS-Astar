@@ -85,7 +85,8 @@ The CMake configuration ensures the following:
 - Boost and OMPL are required and must be found on the system.
 
 ## Documentation
-The project includes Doxygen support for generating documentation. It's available [here](https://faywyn.github.io/city-CBS-Astar/html/index.html).
+The project includes Doxygen support for generating documentation. It's available [here](https://faywyn.github.io/city-CBS-Astar/html/index.html) for
+the html version, and the [pdf version](https://faywyn.github.io/city-CBS-Astar/pdf/refman.pdf) is also available.
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](https://github.com/Faywyn/city-CBS-Astar/blob/main/LICENSE) file for more information.
