@@ -1,3 +1,7 @@
+/**
+ * @file manager_ocbs.h
+ * @brief Manager for the CBS algorithm
+ */
 #pragma once
 
 #include "cityGraph.h"
@@ -63,6 +67,13 @@ typedef struct _managerOCBSNode {
   }
 } _managerOCBSNode;
 
+/**
+ * @class ManagerOCBS
+ * @brief Manager for the CBS algorithm
+ * This class is responsible for managing the agents and their paths using the Conflict-Based Search (CBS) algorithm.
+ * It inherits from the Manager class and implements the pathfinding logic specific to the CBS algorithm.
+ * This class initializes paths for agents, handles user input, and plans paths using the CBS algorithm.
+ */
 class ManagerOCBS : public Manager {
 public:
   using ConflictSituation = _managerOCBSConflictSituation;
@@ -76,7 +87,15 @@ public:
    */
   ManagerOCBS(const CityGraph &cityGraph, const CityMap &cityMap) : Manager(cityGraph, cityMap) {}
 
+  /**
+   * @brief Initialize agents and set up the system
+   * @param numCars The number of agents
+   */
   void initializePaths(Node *node);
+
+  /**
+   * @brief Make a simulation step
+   */
   void userInput(sf::Event event, sf::RenderWindow &window) override;
 
   /**

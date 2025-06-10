@@ -1,3 +1,10 @@
+/**
+ * @file aStar.h
+ * @brief A* algorithm
+ *
+ * This file contains the declaration of the AStar class. This class represents the A* algorithm, which is used to find
+ * the shortest path between two points in a graph.
+ */
 #pragma once
 
 #include "cityGraph.h"

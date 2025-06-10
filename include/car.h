@@ -168,8 +168,6 @@ private:
   sf::Color color;
 };
 
-// Some utility fonctions
-
 /**
  * @bref Check if two cars collided
  * @param car1 The first car

@@ -1,3 +1,10 @@
+/**
+ * @file cityMap.h
+ * @brief City map class definition
+ *
+ * This file contains the definition of the CityMap class, which represents a city map.
+ */
+
 #pragma once
 
 #include "config.h"

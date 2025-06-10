@@ -1,4 +1,4 @@
-/**city
+/**
  * @file cityGraph.h
  * @brief A graph representing the city's streets and intersections using a graph.
  *
@@ -126,6 +126,12 @@ public:
    */
   double getWidth() const { return width; }
 
+  /**
+   * @brief Get the interpolator for a Dubins path between two points
+   * @param point1 The first point
+   * @param point2 The second point
+   * @return The DubinsInterpolator for the path between the two points
+   */
   DubinsInterpolator *getInterpolator(const point &point1, const neighbor &point2) {
     std::pair<point, neighbor> key = {point1, point2};
     if (interpolators.find(key) != interpolators.end()) {
