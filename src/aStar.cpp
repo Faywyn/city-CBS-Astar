@@ -1,9 +1,14 @@
 /**
  * @file aStar.cpp
- * @brief A* algorithm implementation
+ * @brief A* algorithm implementation for single-agent pathfinding
  *
- * This file contains the implementation of the A* algorithm. It is used to find the shortest path between two points in
- * a graph.
+ * This file contains the implementation of the A* algorithm for finding the shortest path
+ * between two points in a graph for a single agent without considering conflicts with other agents.
+ * 
+ * @note A similar A* implementation exists in managers/ocbs.cpp with additional conflict checking
+ * for multi-agent scenarios. While there is code duplication, each serves a distinct purpose:
+ * @li This implementation: Fast single-agent pathfinding
+ * @li OCBS implementation: Multi-agent pathfinding with conflict resolution
  */
 #include "aStar.h"
 #include "config.h"
@@ -43,7 +48,7 @@ void AStar::process() {
   auto neighbors = graph.getNeighbors();
 
   int nbIterations = 0;
-  while (!openSetAstar.empty() && nbIterations++ < 1e5) {
+  while (!openSetAstar.empty() && nbIterations++ < ASTAR_MAX_ITERATIONS) {
     AStar::node current = openSetAstar.top();
     openSetAstar.pop();
     isInOpenSet.erase(current);
@@ -77,7 +82,7 @@ void AStar::process() {
       double nSpeedDec = std::sqrt(std::pow(current.speed, 2) - 2 * CAR_DECELERATION * distance);
 
       auto push = [&](double nSpeed) {
-        int numSpeedDiv = 5;
+        int numSpeedDiv = NUM_SPEED_DIVISIONS;
         for (int i = 1; i < numSpeedDiv + 1; i++) {
           double s = (current.speed + (nSpeed - current.speed) * i / numSpeedDiv);
           if (s < SPEED_RESOLUTION)

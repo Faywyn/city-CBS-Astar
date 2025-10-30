@@ -1,7 +1,19 @@
+/**
+ * @file managers/ocbs.cpp
+ * @brief Optimal Conflict-Based Search (OCBS) implementation
+ * 
+ * This file contains the OCBS algorithm for multi-agent pathfinding. The pathfinding
+ * method includes conflict checking, which differs from the basic A* in aStar.cpp.
+ * 
+ * @note The A* core logic is similar to aStar.cpp but includes additional conflict
+ * checking for multi-agent coordination. This is intentional to keep conflict-aware
+ * and conflict-free pathfinding separate.
+ */
 #include "aStar.h"
 #include "config.h"
 #include "dubins.h"
-#include "manager_ocbs.h" #include < spdlog / spdlog.h>
+#include "manager_ocbs.h"
+#include <spdlog/spdlog.h>
 
 void ManagerOCBS::userInput(sf::Event event, sf::RenderWindow &window) {
   // If left mouse click over a car, toggle debug for that car
@@ -69,7 +81,7 @@ bool ManagerOCBS::findConflict(int *car1, int *car2, int *time, Node *node) {
       for (int j = i + 1; j < numCars; j++) {
         sf::Vector2f diff = node->paths[i][t] - node->paths[j][t];
         double len = std::sqrt(diff.x * diff.x + diff.y * diff.y);
-        if (len < CAR_LENGTH * 1.1) {
+        if (len < CAR_LENGTH * COLLISION_SAFETY_FACTOR) {
           *car1 = i;
           *car2 = j;
           *time = t;
@@ -134,8 +146,8 @@ bool ManagerOCBS::findPaths() {
   conflict1.position = node.paths[car1Index][time];
 
   Conflict conflict2;
-  conflict2.car = car1Index;
-  conflict2.withCar = car2Index;
+  conflict2.car = car2Index;
+  conflict2.withCar = car1Index;
   conflict2.time = time * SIM_STEP_TIME;
   conflict2.position = node.paths[car2Index][time];
 
@@ -168,7 +180,6 @@ void ManagerOCBS::pathfinding(Node *node, int carIndex) {
   std::unordered_map<AStar::node, double> fScore;
 
   auto heuristic = [&](const AStar::node &a) {
-    return 0.0;
     sf::Vector2f diff = end.point.position - a.point.position;
     double distance = std::sqrt(diff.x * diff.x + diff.y * diff.y);
     return distance / CAR_MAX_SPEED_MS;
@@ -185,7 +196,7 @@ void ManagerOCBS::pathfinding(Node *node, int carIndex) {
   auto neighbors = graph.getNeighbors();
 
   int nbIterations = 0;
-  while (!openSetAstar.empty() && nbIterations++ < 1e5) {
+  while (!openSetAstar.empty() && nbIterations++ < ASTAR_MAX_ITERATIONS) {
     AStar::node current = openSetAstar.top();
     openSetAstar.pop();
     isInOpenSet.erase(current);
@@ -228,7 +239,7 @@ void ManagerOCBS::pathfinding(Node *node, int carIndex) {
       double nSpeedDec = std::sqrt(std::pow(current.speed, 2) - 2 * CAR_DECELERATION * distance);
 
       auto push = [&](double nSpeed) {
-        int numSpeedDiv = 5;
+        int numSpeedDiv = NUM_SPEED_DIVISIONS;
         for (int i = 1; i < numSpeedDiv + 1; i++) {
           double s = (current.speed + (nSpeed - current.speed) * i / numSpeedDiv);
           if (s < SPEED_RESOLUTION)
@@ -302,15 +313,12 @@ void ManagerOCBS::pathfinding(Node *node, int carIndex) {
             continue;
           }
 
-          conflictFree = true;
-          break;
-
           for (const auto &conf : *conflictSet) {
-            // Check durin all the duration if there is a conflict
+            // Check during all the duration if there is a conflict
             sf::Vector2f diff = confS.at - conf.position;
             double len = std::sqrt(diff.x * diff.x + diff.y * diff.y);
 
-            if (len < CAR_LENGTH * 1.1) {
+            if (len < CAR_LENGTH * COLLISION_SAFETY_FACTOR) {
               conflictFree = false;
               break;
             }
