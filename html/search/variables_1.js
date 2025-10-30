@@ -1,0 +1,23 @@
+var searchData=
+[
+  ['car_0',['car',['../struct__managerOCBSConflictSituation.html#a209d37e4fdbe06294b1916a29de402b3',1,'_managerOCBSConflictSituation::car'],['../struct__managerOCBSConflict.html#a2ee4a11cb5006850666fdd8a967fd418',1,'_managerOCBSConflict::car'],['../struct__aStarConflict.html#a0cc69d2515fd5c5ba43bb1d061a9d46b',1,'_aStarConflict::car']]],
+  ['car_5facceleration_1',['CAR_ACCELERATION',['../config_8h.html#a97b27f2911eaf9c63c07b81a0818ac3d',1,'config.h']]],
+  ['car_5fdeceleration_2',['CAR_DECELERATION',['../config_8h.html#aa3ea7c54e22a29f6c5b844358deef54b',1,'config.h']]],
+  ['car_5flength_3',['CAR_LENGTH',['../config_8h.html#a27eba02e3b8093fba3097eaf7b9223fb',1,'config.h']]],
+  ['car_5fmax_5fg_5fforce_4',['CAR_MAX_G_FORCE',['../config_8h.html#a4dba136dbb6848dc8fef84f203442c53',1,'config.h']]],
+  ['car_5fmax_5fspeed_5fkm_5',['CAR_MAX_SPEED_KM',['../config_8h.html#ac8862906f4ab4c0e278534cc2dc7148f',1,'config.h']]],
+  ['car_5fmax_5fspeed_5fms_6',['CAR_MAX_SPEED_MS',['../config_8h.html#a53abf96b00257ba1e1c8feaf09f94240',1,'config.h']]],
+  ['car_5fmin_5fturning_5fradius_7',['CAR_MIN_TURNING_RADIUS',['../config_8h.html#a18b355627d789640602a12b0a89a41ca',1,'config.h']]],
+  ['car_5fwidth_8',['CAR_WIDTH',['../config_8h.html#abc419308af4a742ef36026fe7bd38e9c',1,'config.h']]],
+  ['caravgspeed_9',['carAvgSpeed',['../struct__data.html#a131392c4f70118697a88a853646bccb2',1,'_data']]],
+  ['cardensity_10',['carDensity',['../struct__data.html#ae31a021edf5a45de193ca7d2b8c8891d',1,'_data']]],
+  ['cars_11',['cars',['../classManager.html#a983cbd3b6200bdde6345f99536430178',1,'Manager']]],
+  ['cbs_5fmax_5fopenset_5fsize_12',['CBS_MAX_OPENSET_SIZE',['../config_8h.html#a36dfe09118352cf00d70b5baebde317b',1,'config.h']]],
+  ['cbs_5fmax_5fsub_5ftime_13',['CBS_MAX_SUB_TIME',['../config_8h.html#a573b9c83358f3e817a2eaad54326ceb8',1,'config.h']]],
+  ['cbs_5fprecision_5ffactor_14',['CBS_PRECISION_FACTOR',['../config_8h.html#a87aee9394e10d2ca95d9d659f3a71700',1,'config.h']]],
+  ['cell_5fsize_15',['CELL_SIZE',['../config_8h.html#aa8cb9fa829013e324225d58f6476d0aa',1,'config.h']]],
+  ['center_16',['center',['../struct__cityMapIntersection.html#a2071000ce240787c16ebc40e34dea6a5',1,'_cityMapIntersection']]],
+  ['collision_5fsafety_5ffactor_17',['COLLISION_SAFETY_FACTOR',['../config_8h.html#aafa9207e3ed0983dd9468acb7cd23620',1,'config.h']]],
+  ['cost_18',['cost',['../struct__managerOCBSNode.html#a46f1c5f63be879e3b347487cf69f8a62',1,'_managerOCBSNode']]],
+  ['costs_19',['costs',['../struct__managerOCBSNode.html#a049d0d86fe4700bd4613b1f00661e64d',1,'_managerOCBSNode']]]
+];

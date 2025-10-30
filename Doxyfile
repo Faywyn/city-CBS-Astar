@@ -1,0 +1,67 @@
+#--------------------------------------------------------------------------- 
+# Project configuration
+#--------------------------------------------------------------------------- 
+PROJECT_NAME           = "City CBS A*"
+OUTPUT_DIRECTORY       = .
+CREATE_SUBDIRS         = NO
+
+#--------------------------------------------------------------------------- 
+# Configuration des fichiers sources
+#--------------------------------------------------------------------------- 
+INPUT                  = ../src ../include
+FILE_PATTERNS          = *.cpp *.h
+RECURSIVE              = YES
+EXCLUDE                = 
+EXCLUDE_PATTERNS       = 
+EXCLUDE_SYMLINKS       = NO
+
+#--------------------------------------------------------------------------- 
+# Extraction de documentation
+#--------------------------------------------------------------------------- 
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = YES
+EXTRACT_LOCAL_CLASSES  = YES
+EXTRACT_ANON_NSPACES   = YES
+
+#--------------------------------------------------------------------------- 
+# Génération HTML
+#--------------------------------------------------------------------------- 
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+HTML_FILE_EXTENSION    = .html
+GENERATE_TREEVIEW      = YES
+FULL_PATH_NAMES        = NO
+STRIP_FROM_PATH        = ../
+
+# N’injecte pas de thèmes externes, reprend le CSS généré par Doxygen
+HTML_STYLESHEET        = 
+
+# Désactivation des graphes
+HAVE_DOT               = NO
+DOT_IMAGE_FORMAT       = png
+CLASS_DIAGRAMS         = NO
+COLLABORATION_GRAPH    = NO
+CALL_GRAPH             = NO
+CALLER_GRAPH           = NO
+
+#--------------------------------------------------------------------------- 
+# Génération LaTeX (pour PDF)
+#--------------------------------------------------------------------------- 
+GENERATE_LATEX         = YES
+LATEX_OUTPUT           = latex
+PDF_HYPERLINKS         = YES
+LATEX_BATCHMODE        = NO
+LATEX_HIDE_INDICES     = NO
+
+#--------------------------------------------------------------------------- 
+# Inclusion du code source dans le PDF
+#--------------------------------------------------------------------------- 
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = YES
+LATEX_SOURCE_CODE      = YES
+
+#--------------------------------------------------------------------------- 
+# Divers
+#--------------------------------------------------------------------------- 
+GENERATE_TREEVIEW      = YES
