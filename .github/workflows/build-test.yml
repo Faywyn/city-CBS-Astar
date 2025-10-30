@@ -1,0 +1,113 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+
+jobs:
+  build-linux:
+    name: Build on Linux
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            cmake \
+            build-essential \
+            libboost-all-dev \
+            libompl-dev \
+            ninja-build
+      
+      - name: Build (Debug)
+        run: python manage.py build --debug
+      
+      - name: Build (Release)
+        run: python manage.py build --release
+      
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-build
+          path: build/bin/city-cbs-astar
+          retention-days: 7
+
+  build-macos:
+    name: Build on macOS
+    runs-on: macos-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      
+      - name: Install dependencies
+        run: |
+          brew update
+          brew install cmake boost ompl ninja
+      
+      - name: Build (Debug)
+        run: python manage.py build --debug
+      
+      - name: Build (Release)
+        run: python manage.py build --release
+      
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-build
+          path: build/bin/city-cbs-astar
+          retention-days: 7
+
+  build-windows:
+    name: Build on Windows
+    runs-on: windows-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      
+      - name: Install dependencies with vcpkg
+        run: |
+          git clone https://github.com/microsoft/vcpkg.git
+          .\vcpkg\bootstrap-vcpkg.bat
+          .\vcpkg\vcpkg install boost-system boost-filesystem ompl
+      
+      - name: Install Ninja
+        run: choco install ninja
+      
+      - name: Set up MSVC
+        uses: ilammy/msvc-dev-cmd@v1
+      
+      - name: Build (Release)
+        run: |
+          $env:CMAKE_TOOLCHAIN_FILE = "$PWD\vcpkg\scripts\buildsystems\vcpkg.cmake"
+          python manage.py build --release
+      
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-build
+          path: build/bin/city-cbs-astar.exe
+          retention-days: 7
