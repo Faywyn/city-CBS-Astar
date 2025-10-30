@@ -5,7 +5,7 @@
  * This file contains the OCBS algorithm for multi-agent pathfinding. The pathfinding
  * method includes conflict checking, which differs from the basic A* in aStar.cpp.
  * 
- * Note: The A* core logic is similar to aStar.cpp but includes additional conflict
+ * @note The A* core logic is similar to aStar.cpp but includes additional conflict
  * checking for multi-agent coordination. This is intentional to keep conflict-aware
  * and conflict-free pathfinding separate.
  */

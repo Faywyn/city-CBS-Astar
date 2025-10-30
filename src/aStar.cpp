@@ -5,10 +5,10 @@
  * This file contains the implementation of the A* algorithm for finding the shortest path
  * between two points in a graph for a single agent without considering conflicts with other agents.
  * 
- * Note: A similar A* implementation exists in managers/ocbs.cpp with additional conflict checking
+ * @note A similar A* implementation exists in managers/ocbs.cpp with additional conflict checking
  * for multi-agent scenarios. While there is code duplication, each serves a distinct purpose:
- * - This implementation: Fast single-agent pathfinding
- * - OCBS implementation: Multi-agent pathfinding with conflict resolution
+ * @li This implementation: Fast single-agent pathfinding
+ * @li OCBS implementation: Multi-agent pathfinding with conflict resolution
  */
 #include "aStar.h"
 #include "config.h"
