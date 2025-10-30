@@ -13,12 +13,33 @@ namespace fs = std::filesystem;
 
 void FileSelector::loadFiles() {
   files.clear();
-  for (const auto &entry : fs::directory_iterator(folderPath)) {
-    if (entry.is_regular_file() && entry.path().extension() == ".osm") {
-      files.push_back(entry.path().filename().string());
-    }
+  
+  // Check if directory exists
+  if (!fs::exists(folderPath)) {
+    spdlog::error("Directory does not exist: {}", folderPath);
+    return;
   }
-  std::sort(files.begin(), files.end());
+  
+  if (!fs::is_directory(folderPath)) {
+    spdlog::error("Path is not a directory: {}", folderPath);
+    return;
+  }
+  
+  // Load all .osm files from directory
+  try {
+    for (const auto &entry : fs::directory_iterator(folderPath)) {
+      if (entry.is_regular_file() && entry.path().extension() == ".osm") {
+        files.push_back(entry.path().filename().string());
+      }
+    }
+    std::sort(files.begin(), files.end());
+    
+    if (files.empty()) {
+      spdlog::warn("No .osm files found in directory: {}", folderPath);
+    }
+  } catch (const fs::filesystem_error &e) {
+    spdlog::error("Error reading directory {}: {}", folderPath, e.what());
+  }
 }
 
 char FileSelector::getKeyPress() {
