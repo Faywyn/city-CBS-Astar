@@ -33,41 +33,86 @@ the city with one edge per road segment.
 - **Flexible Build System**: Managed using CMake with debug and release configurations.
 
 ## Dependencies
-Before building the project, ensure you have the following dependencies installed:
-- **C++ 17** Compiler
-- **Boost**: Required for various functionalities.
-- **OMPL** (Open Motion Planning Library).
-- **SFML 2**: For graphics and window management.
-- **spdlog**: For logging (fetched via FetchContent).
-- **tinyxml2**: For XML parsing (fetched via FetchContent).
-- **Doxygen (Optional)**: For generating documentation.
 
-The project fetches SFML, spdlog, and tinyxml2 automatically using CMake's FetchContent module.
+### Required (must be installed)
+- **C++17 Compiler**: GCC, Clang, or MSVC
+- **CMake** (3.16 or higher): Build system
+- **Python 3**: For the build management script
+- **Boost**: Required for various functionalities
+- **OMPL** (Open Motion Planning Library): Path planning algorithms
+
+### Auto-fetched by CMake
+The following are automatically downloaded during build:
+- **SFML 2**: Graphics and window management
+- **spdlog**: Logging library
+- **tinyxml2**: XML parsing
+
+### Optional
+- **Doxygen**: For generating documentation
+- **Ninja**: Faster build system (recommended for Windows)
+
+**Installation:** See [INSTALL.md](INSTALL.md) for platform-specific installation instructions.
 
 ## Building and Running the Project
-The project uses CMake as its build system and includes a convenient shell script (build.sh) to streamline the build and run process.
 
-### Using `build.sh`
-Run the shell script with the following options:
-- `./build.sh debug`: Builds the project in debug mode.
-- `./build.sh release`: Builds the project in release mode.
-- `./build.sh run data [num_agents_min] [num_agents_max] [num_data]`: Creates data files for the given number of agents (see below for more details).
-- `./build.sh run run [num_agents]`: Runs the project with the given number of agents.
-- `./build.sh help`: For more information on the available options.
+The project uses CMake as its build system and includes a cross-platform Python script (`manage.py`) for building, running, and managing the project on Linux, macOS, and Windows.
+
+### Quick Start
+
+**First time setup:** See [INSTALL.md](INSTALL.md) for detailed installation instructions for your platform.
+
+**Build the project:**
+```bash
+python manage.py build --release
+```
+
+**Run the project:**
+```bash
+python manage.py run -- data [num_agents_min] [num_agents_max] [num_data]
+python manage.py run -- run [num_agents]
+```
+
+### Using `manage.py` (Recommended)
+
+The Python script works on all platforms:
+- `python manage.py build --debug`: Build in debug mode
+- `python manage.py build --release`: Build in release mode (optimized)
+- `python manage.py run -- [args]`: Run the executable with arguments
+- `python manage.py clean`: Clean build artifacts
+- `python manage.py doc`: Generate documentation
+- `python manage.py sign`: Sign the binary (macOS only)
+- `python manage.py help`: Show all available commands
+
+**Examples:**
+```bash
+# Build in release mode
+python manage.py build --release
+
+# Run data generation
+python manage.py run -- data 1 10 5
+
+# Run simulation
+python manage.py run -- run 5
+```
+
+### Using `build.sh` (Legacy, Linux/macOS only)
+
+The legacy shell script is still available for backward compatibility:
+```bash
+./build.sh release
+./build.sh run data 1 10 5
+```
 
 ### Manual CMake Build
-Alternatively, you can build the project manually using CMake:
+
+You can also build manually using CMake:
 ```bash
 cmake -DCMAKE_BUILD_TYPE=Release -B build
 cmake --build build -j
+./build/bin/city-cbs-astar [args]
 ```
 
-To run the project, execute the following command (same as the `build.sh` script):
-```bash 
-./bin/city-cbs-astar data [num_agents_min] [num_agents_max] [num_data]
-# or
-./bin/city-cbs-astar run [num_agents]
-```
+For detailed installation and troubleshooting instructions, see [INSTALL.md](INSTALL.md).
 
 ## Project Structure
 - **src/**: Contains source files including modules for A*, car dynamics, city graph and map management, constraint control, and more.

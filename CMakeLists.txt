@@ -6,8 +6,12 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-# Ensure arm64
-set(CMAKE_OSX_ARCHITECTURES "arm64")
+# Note: On Windows with vcpkg, use: -DCMAKE_TOOLCHAIN_FILE=path/to/vcpkg/scripts/buildsystems/vcpkg.cmake
+
+# Ensure arm64 on macOS (only if on macOS and not already set)
+if(APPLE AND NOT CMAKE_OSX_ARCHITECTURES)
+  set(CMAKE_OSX_ARCHITECTURES "arm64" CACHE STRING "Build architecture" FORCE)
+endif()
 
 # Ensure compile commands are generated
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -23,30 +27,45 @@ if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release)
 endif()
 
-# Debug flags: Include debugging symbols, profiling tools, and sanitizers for memory checks
-set(CMAKE_CXX_FLAGS_DEBUG "-g -Wall -Wextra")
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} -fsanitize=address -g")
-set(CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS} -fsanitize=address")
+# Compiler flags for different platforms and build types
+if(MSVC)
+  # MSVC (Windows)
+  set(CMAKE_CXX_FLAGS_DEBUG "/W4 /Zi /Od /MDd")
+  set(CMAKE_CXX_FLAGS_RELEASE "/O2 /DNDEBUG /MD")
+else()
+  # GCC/Clang (Linux/macOS)
+  set(CMAKE_CXX_FLAGS_DEBUG "-g -Wall -Wextra")
+  # Only add sanitizers if supported (not all platforms support them)
+  if(NOT WIN32)
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fsanitize=address")
+    set(CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fsanitize=address")
+  endif()
+  set(CMAKE_CXX_FLAGS_RELEASE "-O3 -ffast-math -DNDEBUG")
+endif()
 
-# Release flags: Optimize for speed, disable debugging symbols, and prioritize performance
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -ffast-math -DNDEBUG")
+# Set policy for FindBoost module (CMake 3.30+)
+if(POLICY CMP0167)
+  cmake_policy(SET CMP0167 NEW)
+endif()
 
-find_package(Boost REQUIRED)
-
+# Find Boost with better error handling
+find_package(Boost QUIET)
 if(Boost_FOUND)
     message(STATUS "Boost found: ${Boost_INCLUDE_DIRS}")
     include_directories(${Boost_INCLUDE_DIRS})
 else()
-    message(FATAL_ERROR "Boost not found!")
+    message(WARNING "Boost not found! Install it with: sudo apt-get install libboost-all-dev (Linux) or brew install boost (macOS)")
+    message(FATAL_ERROR "Boost is required to build this project")
 endif()
 
-find_package(ompl REQUIRED)
-
-if(OMPL_FOUND)
+# Find OMPL with better error handling
+find_package(ompl QUIET)
+if(OMPL_FOUND OR ompl_FOUND)
     message(STATUS "OMPL found: ${OMPL_INCLUDE_DIRS}")
     include_directories(${OMPL_INCLUDE_DIRS})
 else()
-    message(FATAL_ERROR "OMPL not found!")
+    message(WARNING "OMPL not found! Install it with: sudo apt-get install libompl-dev (Linux) or brew install ompl (macOS)")
+    message(FATAL_ERROR "OMPL is required to build this project")
 endif()
 
 # Fetch external dependencies using FetchContent
