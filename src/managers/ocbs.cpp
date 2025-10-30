@@ -1,7 +1,8 @@
 #include "aStar.h"
 #include "config.h"
 #include "dubins.h"
-#include "manager_ocbs.h" #include < spdlog / spdlog.h>
+#include "manager_ocbs.h"
+#include <spdlog/spdlog.h>
 
 void ManagerOCBS::userInput(sf::Event event, sf::RenderWindow &window) {
   // If left mouse click over a car, toggle debug for that car
@@ -134,8 +135,8 @@ bool ManagerOCBS::findPaths() {
   conflict1.position = node.paths[car1Index][time];
 
   Conflict conflict2;
-  conflict2.car = car1Index;
-  conflict2.withCar = car2Index;
+  conflict2.car = car2Index;
+  conflict2.withCar = car1Index;
   conflict2.time = time * SIM_STEP_TIME;
   conflict2.position = node.paths[car2Index][time];
 
@@ -168,7 +169,6 @@ void ManagerOCBS::pathfinding(Node *node, int carIndex) {
   std::unordered_map<AStar::node, double> fScore;
 
   auto heuristic = [&](const AStar::node &a) {
-    return 0.0;
     sf::Vector2f diff = end.point.position - a.point.position;
     double distance = std::sqrt(diff.x * diff.x + diff.y * diff.y);
     return distance / CAR_MAX_SPEED_MS;
@@ -302,11 +302,8 @@ void ManagerOCBS::pathfinding(Node *node, int carIndex) {
             continue;
           }
 
-          conflictFree = true;
-          break;
-
           for (const auto &conf : *conflictSet) {
-            // Check durin all the duration if there is a conflict
+            // Check during all the duration if there is a conflict
             sf::Vector2f diff = confS.at - conf.position;
             double len = std::sqrt(diff.x * diff.x + diff.y * diff.y);
 
