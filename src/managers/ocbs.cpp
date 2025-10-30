@@ -70,7 +70,7 @@ bool ManagerOCBS::findConflict(int *car1, int *car2, int *time, Node *node) {
       for (int j = i + 1; j < numCars; j++) {
         sf::Vector2f diff = node->paths[i][t] - node->paths[j][t];
         double len = std::sqrt(diff.x * diff.x + diff.y * diff.y);
-        if (len < CAR_LENGTH * 1.1) {
+        if (len < CAR_LENGTH * COLLISION_SAFETY_FACTOR) {
           *car1 = i;
           *car2 = j;
           *time = t;
@@ -185,7 +185,7 @@ void ManagerOCBS::pathfinding(Node *node, int carIndex) {
   auto neighbors = graph.getNeighbors();
 
   int nbIterations = 0;
-  while (!openSetAstar.empty() && nbIterations++ < 1e5) {
+  while (!openSetAstar.empty() && nbIterations++ < ASTAR_MAX_ITERATIONS) {
     AStar::node current = openSetAstar.top();
     openSetAstar.pop();
     isInOpenSet.erase(current);
@@ -228,7 +228,7 @@ void ManagerOCBS::pathfinding(Node *node, int carIndex) {
       double nSpeedDec = std::sqrt(std::pow(current.speed, 2) - 2 * CAR_DECELERATION * distance);
 
       auto push = [&](double nSpeed) {
-        int numSpeedDiv = 5;
+        int numSpeedDiv = NUM_SPEED_DIVISIONS;
         for (int i = 1; i < numSpeedDiv + 1; i++) {
           double s = (current.speed + (nSpeed - current.speed) * i / numSpeedDiv);
           if (s < SPEED_RESOLUTION)
@@ -307,7 +307,7 @@ void ManagerOCBS::pathfinding(Node *node, int carIndex) {
             sf::Vector2f diff = confS.at - conf.position;
             double len = std::sqrt(diff.x * diff.x + diff.y * diff.y);
 
-            if (len < CAR_LENGTH * 1.1) {
+            if (len < CAR_LENGTH * COLLISION_SAFETY_FACTOR) {
               conflictFree = false;
               break;
             }

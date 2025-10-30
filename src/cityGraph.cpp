@@ -56,7 +56,7 @@ void CityGraph::createGraph(const CityMap &cityMap) {
 
       double segmentLength =
           sqrt(pow(segment.p2_offset.x - segment.p1_offset.x, 2) + pow(segment.p2_offset.y - segment.p1_offset.y, 2));
-      double pointDistance = 15;
+      double pointDistance = GRAPH_POINT_DISTANCE;
       int numPoints = segmentLength / pointDistance;
       double dx_s = (segment.p2_offset.x - segment.p1_offset.x) / numPoints;
       double dy_s = (segment.p2_offset.y - segment.p1_offset.y) / numPoints;

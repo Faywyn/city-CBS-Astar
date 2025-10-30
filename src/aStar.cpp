@@ -43,7 +43,7 @@ void AStar::process() {
   auto neighbors = graph.getNeighbors();
 
   int nbIterations = 0;
-  while (!openSetAstar.empty() && nbIterations++ < 1e5) {
+  while (!openSetAstar.empty() && nbIterations++ < ASTAR_MAX_ITERATIONS) {
     AStar::node current = openSetAstar.top();
     openSetAstar.pop();
     isInOpenSet.erase(current);
@@ -77,7 +77,7 @@ void AStar::process() {
       double nSpeedDec = std::sqrt(std::pow(current.speed, 2) - 2 * CAR_DECELERATION * distance);
 
       auto push = [&](double nSpeed) {
-        int numSpeedDiv = 5;
+        int numSpeedDiv = NUM_SPEED_DIVISIONS;
         for (int i = 1; i < numSpeedDiv + 1; i++) {
           double s = (current.speed + (nSpeed - current.speed) * i / numSpeedDiv);
           if (s < SPEED_RESOLUTION)

@@ -44,3 +44,7 @@ constexpr double CAR_ACCELERATION = 1;                      // in m/s^2
 constexpr double CAR_DECELERATION = 1;                      // in m/s^2
 constexpr double CAR_LENGTH = 4.2;                          // in meters
 constexpr double CAR_WIDTH = 1.6;                           // in meters
+constexpr double COLLISION_SAFETY_FACTOR = 1.1;             // Safety margin for collision detection
+constexpr int ASTAR_MAX_ITERATIONS = 100000;                // Maximum iterations for A* algorithm
+constexpr int NUM_SPEED_DIVISIONS = 5;                      // Number of speed divisions for path planning
+constexpr double GRAPH_POINT_DISTANCE = 15.0;               // Distance between points in city graph (meters)
